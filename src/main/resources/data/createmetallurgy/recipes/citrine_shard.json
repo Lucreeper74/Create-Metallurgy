@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "citrine_shard",
+  "ingredients": [
+    {
+      "item": "moddingtest:citrine_shard"
+    },
+    {
+      "item": "moddingtest:citrine_shard"
+    },
+    {
+      "item": "moddingtest:citrine_shard"
+    },
+    {
+      "item": "moddingtest:citrine_shard"
+    }
+  ],
+  "result": {
+    "item": "moddingtest:polished_citrine"
+  }
+}

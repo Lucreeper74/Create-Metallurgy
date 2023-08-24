@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "polished_citrine",
+  "ingredients": [
+    {
+      "item": "moddingtest:polished_citrine_block"
+    }
+  ],
+  "result": {
+    "item": "moddingtest:polished_citrine",
+    "count": 9
+  }
+}

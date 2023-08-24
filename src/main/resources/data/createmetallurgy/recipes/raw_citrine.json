@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "raw_citrine",
+  "ingredients": [
+    {
+      "item": "moddingtest:raw_citrine_block"
+    }
+  ],
+  "result": {
+    "item": "moddingtest:raw_citrine",
+    "count": 9
+  }
+}

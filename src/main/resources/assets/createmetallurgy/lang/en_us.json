@@ -1,0 +1,23 @@
+{
+  "item.createmetallurgy.citrine_shard": "Citrine Shard",
+  "item.createmetallurgy.raw_citrine": "Raw Citrine",
+  "item.createmetallurgy.polished_citrine": "Polished Citrine",
+  "item.createmetallurgy.molten_iron_bucket": "Molten Iron Bucket",
+  "item.createmetallurgy.molten_gold_bucket": "Molten Gold Bucket",
+
+  "block.createmetallurgy.polished_citrine_block": "Polished Citrine Block",
+  "block.createmetallurgy.raw_citrine_block": "Raw Citrine Block",
+  "block.createmetallurgy.citrine_ore": "Citrine Ore",
+
+
+  "fluid.createmetallurgy.molten_iron": "Molten Iron",
+  "fluid.createmetallurgy.molten_gold": "Molten Gold",
+
+  "itemGroup.moddingtab": "Create Metallurgy",
+
+  "sounds.createmetallurgy.block.polished_citrine_block.place": "Polished Citrine Place",
+  "sounds.createmetallurgy.block.polished_citrine_block.break": "Polished Citrine Break",
+  "sounds.createmetallurgy.block.polished_citrine_block.step": "Polished Citrine Step",
+  "sounds.createmetallurgy.block.polished_citrine_block.hit": "Polished Citrine Hit",
+  "sounds.createmetallurgy.block.polished_citrine_block.fall": "Polished Citrine Fall"
+}

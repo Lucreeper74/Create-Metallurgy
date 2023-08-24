@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "moddingtest:molten_gold",
+      "amount": 100
+    }
+  ],
+  "heatRequirement": "superheated"
+}
