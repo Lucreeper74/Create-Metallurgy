@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "create:andesite_alloy"
+    },
+    "P": {
+      "item": "createmetallurgy:refractory_mortar_block"
+    }
+  },
+  "pattern": [
+    "   ",
+    "APA",
+    "AAA"
+  ],
+  "result": {
+    "item": "createmetallurgy:casting_basin"
+  }
+}

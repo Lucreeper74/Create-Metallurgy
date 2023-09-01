@@ -1,32 +1,32 @@
 {
   "block.polished_citrine_block.place": {
-    "subtitle": "sounds.moddingtest.block.polished_citrine_block.place",
+    "subtitle": "sounds.createmetallurgy.block.polished_citrine_block.place",
     "sounds": [
-      "moddingtest:polished_citrine_block_place"
+      "createmetallurgy:polished_citrine_block_place"
     ]
   },
   "block.polished_citrine_block.break": {
-    "subtitle": "sounds.moddingtest.block.polished_citrine_block.break",
+    "subtitle": "sounds.createmetallurgy.block.polished_citrine_block.break",
     "sounds": [
-      "moddingtest:polished_citrine_block_break"
+      "createmetallurgy:polished_citrine_block_break"
     ]
   },
   "block.polished_citrine_block.step": {
-    "subtitle": "sounds.moddingtest.block.polished_citrine_block.step",
+    "subtitle": "sounds.createmetallurgy.block.polished_citrine_block.step",
     "sounds": [
-      "moddingtest:polished_citrine_block_step"
+      "createmetallurgy:polished_citrine_block_step"
     ]
   },
   "block.polished_citrine_block.hit": {
-    "subtitle": "sounds.moddingtest.block.polished_citrine_block.hit",
+    "subtitle": "sounds.createmetallurgy.block.polished_citrine_block.hit",
     "sounds": [
-      "moddingtest:polished_citrine_block_hit"
+      "createmetallurgy:polished_citrine_block_hit"
     ]
   },
   "block.polished_citrine_block.fall": {
-    "subtitle": "sounds.moddingtest.block.polished_citrine_block.fall",
+    "subtitle": "sounds.createmetallurgy.block.polished_citrine_block.fall",
     "sounds": [
-      "moddingtest:polished_citrine_block_fall"
+      "createmetallurgy:polished_citrine_block_fall"
     ]
   }
 }

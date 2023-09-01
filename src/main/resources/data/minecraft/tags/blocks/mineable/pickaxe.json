@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "moddingtest:citrine_ore",
-    "moddingtest:polished_citrine_block",
-    "moddingtest:raw_citrine_block"
+    "createmetallurgy:citrine_ore",
+    "createmetallurgy:polished_citrine_block",
+    "createmetallurgy:raw_citrine_block"
   ]
 }

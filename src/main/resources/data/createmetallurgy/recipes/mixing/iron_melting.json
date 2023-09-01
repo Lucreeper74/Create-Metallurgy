@@ -7,7 +7,7 @@
   ],
   "results": [
     {
-      "fluid": "moddingtest:molten_iron",
+      "fluid": "createmetallurgy:molten_iron",
       "amount": 100
     }
   ],

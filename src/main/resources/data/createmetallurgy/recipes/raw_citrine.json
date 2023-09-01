@@ -3,11 +3,11 @@
   "group": "raw_citrine",
   "ingredients": [
     {
-      "item": "moddingtest:raw_citrine_block"
+      "item": "createmetallurgy:raw_citrine_block"
     }
   ],
   "result": {
-    "item": "moddingtest:raw_citrine",
+    "item": "createmetallurgy:raw_citrine",
     "count": 9
   }
 }

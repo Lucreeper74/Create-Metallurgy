@@ -2,9 +2,9 @@
   "type": "minecraft:smelting",
   "group": "polished_citrine",
   "ingredient": {
-    "item": "moddingtest:raw_citrine"
+    "item": "createmetallurgy:raw_citrine"
   },
-  "result": "moddingtest:citrine_shard",
+  "result": "createmetallurgy:citrine_shard",
   "experience": 0.7,
   "cookingtime": 200
 }

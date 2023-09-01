@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "moddingtest:block/citrine_ore" }
+    "": { "model": "createmetallurgy:block/citrine_ore" }
   }
 }

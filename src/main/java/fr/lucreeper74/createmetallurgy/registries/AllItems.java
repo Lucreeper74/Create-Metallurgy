@@ -1,0 +1,22 @@
+package fr.lucreeper74.createmetallurgy.registries;
+
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.util.entry.ItemEntry;
+import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import fr.lucreeper74.createmetallurgy.tabs.CreateMetallurgyTab;
+import net.minecraft.world.item.Item;
+
+@SuppressWarnings("unused")
+public class AllItems {
+
+    private static final CreateRegistrate REGISTRATE = CreateMetallurgy.REGISTRATE.creativeModeTab(() -> CreateMetallurgyTab.MAIN_GROUP);
+
+    public static final ItemEntry<Item> CITRINE_SHARD = REGISTRATE.item("citrine_shard", Item::new)
+            .register();
+    public static final ItemEntry<Item> POLISHED_CITRINE = REGISTRATE.item("polished_citrine", Item::new)
+            .register();
+    public static final ItemEntry<Item> RAW_CITRINE = REGISTRATE.item("raw_citrine", Item::new)
+            .register();
+
+    public static void register() {}
+}

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "moddingtest:item/raw_citrine"
+    "layer0": "createmetallurgy:item/raw_citrine"
   }
 }

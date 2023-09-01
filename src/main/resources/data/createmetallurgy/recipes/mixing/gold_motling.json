@@ -7,7 +7,7 @@
   ],
   "results": [
     {
-      "fluid": "moddingtest:molten_gold",
+      "fluid": "createmetallurgy:molten_gold",
       "amount": 100
     }
   ],

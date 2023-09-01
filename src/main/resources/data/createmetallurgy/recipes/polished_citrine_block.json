@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "moddingtest:polished_citrine"
+      "item": "createmetallurgy:polished_citrine"
     }
   },
   "result": {
-    "item": "moddingtest:polished_citrine_block"
+    "item": "createmetallurgy:polished_citrine_block"
   }
 }

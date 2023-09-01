@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "moddingtest:raw_citrine"
+      "item": "createmetallurgy:raw_citrine"
     }
   },
   "result": {
-    "item": "moddingtest:raw_citrine_block"
+    "item": "createmetallurgy:raw_citrine_block"
   }
 }

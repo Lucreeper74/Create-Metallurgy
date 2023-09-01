@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "moddingtest:polished_citrine_block"
+          "name": "createmetallurgy:polished_citrine_block"
         }
       ],
       "conditions": [

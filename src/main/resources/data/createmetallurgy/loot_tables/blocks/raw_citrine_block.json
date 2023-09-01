@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "moddingtest:raw_citrine_block"
+          "name": "createmetallurgy:raw_citrine_block"
         }
       ],
       "conditions": [

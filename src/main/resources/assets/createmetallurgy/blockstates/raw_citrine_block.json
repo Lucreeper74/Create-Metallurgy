@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "moddingtest:block/raw_citrine_block" }
+    "": { "model": "createmetallurgy:block/raw_citrine_block" }
   }
 }
