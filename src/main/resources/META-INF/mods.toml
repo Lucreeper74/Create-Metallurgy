@@ -51,7 +51,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.createmetallurgy]] #optional
     # the modid of the dependency
-    modId="createmetallurgy" #mandatory
+    modId="forge" #mandatory
     # Does this dependency have to exist - if not, ordering below must be specified
     mandatory=true #mandatory
     # The version range of the dependency
@@ -69,8 +69,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
     ordering="NONE"
     side="BOTH"
 [[dependencies.createmetallurgy]]
-modId="create"
-mandatory=true
-versionRange="[0.5.1.c,)"
-ordering="NONE"
-side="BOTH"
+    modId="create"
+    mandatory=true
+    versionRange="[0.5.1.c,)"
+    ordering="NONE"
+    side="BOTH"
