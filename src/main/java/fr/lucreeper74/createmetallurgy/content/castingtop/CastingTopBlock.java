@@ -39,20 +39,8 @@ public class CastingTopBlock extends Block implements IBE<CastingTopBlockEntity>
     }
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        if(!pState.getValue(OPEN))
-            return Shapes.or(Block.box(0,0,0,16,2,16),
-                    Block.box(5,2,5,11,4,11));
-        if(pState.getValue(FACING) == Direction.SOUTH)
-            return Shapes.or(Block.box(0, 0, 14, 16, 16, 16),
-                    Block.box(5, 5, 16, 11, 11, 18));
-        if(pState.getValue(FACING) == Direction.WEST)
-            return Shapes.or(Block.box(0, 0, 0, 2, 16, 16),
-                    Block.box(-2, 5, 5, 0, 11, 11));
-        if(pState.getValue(FACING) == Direction.NORTH)
-            return Shapes.or(Block.box(0, 0, 0, 16, 16, 2),
-                    Block.box(5, 5, -2, 11, 11, 0));
-        return Shapes.or(Block.box(14, 0, 0, 16, 16, 16),
-                Block.box(16, 5, 5, 18, 11, 11));
+        return Shapes.or(Block.box(1,0,1,15,14,15),
+                Block.box(3,13,3,13,15,13));
 
     }
 
