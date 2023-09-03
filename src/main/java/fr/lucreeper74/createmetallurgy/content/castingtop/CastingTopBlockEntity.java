@@ -87,7 +87,7 @@ public class CastingTopBlockEntity extends CastingBasinOperatingBlockEntity {
 
     public void animateTick(Level pLevel, BlockPos pPos) {
         Vec3 center = VecHelper.getCenterOf(pPos);
-        pLevel.addParticle(ParticleTypes.SMOKE, center.x, center.y + .45, center.z, 0, 0, 0);
+        pLevel.addParticle(ParticleTypes.SMOKE, center.x, center.y + .45, center.z, 0D, 0.02D, 0D);
     }
 
     @Override
