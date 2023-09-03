@@ -4,16 +4,21 @@ import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
+import com.simibubi.create.foundation.utility.VecHelper;
 import fr.lucreeper74.createmetallurgy.content.castingbasin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.castingbasin.CastingBasinOperatingBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -71,9 +76,20 @@ public class CastingTopBlockEntity extends CastingBasinOperatingBlockEntity {
                 level.playSound(null, worldPosition, SoundEvents.LAVA_AMBIENT,
                         SoundSource.BLOCKS, .5f, .75f);
             }
+
+            if(this.level.isClientSide && processingTime % 2 == 0) {
+                animateTick(this.level, worldPosition);
+            }
+
             if (this.processingTime > 0) --this.processingTime;
         }
     }
+
+    public void animateTick(Level pLevel, BlockPos pPos) {
+        Vec3 center = VecHelper.getCenterOf(pPos);
+        pLevel.addParticle(ParticleTypes.SMOKE, center.x, center.y + .45, center.z, 0, 0, 0);
+    }
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void tickAudio() {
