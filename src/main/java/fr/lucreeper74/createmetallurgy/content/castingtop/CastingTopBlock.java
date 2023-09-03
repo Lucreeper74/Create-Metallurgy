@@ -5,7 +5,6 @@ import com.simibubi.create.foundation.block.IBE;
 import fr.lucreeper74.createmetallurgy.content.castingbasin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.AllBlockEntityTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
