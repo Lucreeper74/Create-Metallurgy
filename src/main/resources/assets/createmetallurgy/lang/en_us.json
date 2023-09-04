@@ -24,9 +24,7 @@
 
   "itemGroup.createmetallurgy.main_group": "Create: Metallurgy",
 
-  "sounds.createmetallurgy.block.polished_citrine_block.place": "Polished Citrine Place",
-  "sounds.createmetallurgy.block.polished_citrine_block.break": "Polished Citrine Break",
-  "sounds.createmetallurgy.block.polished_citrine_block.step": "Polished Citrine Step",
-  "sounds.createmetallurgy.block.polished_citrine_block.hit": "Polished Citrine Hit",
-  "sounds.createmetallurgy.block.polished_citrine_block.fall": "Polished Citrine Fall"
+  "createmetallurgy.generic.unit.millibuckets": "mB",
+
+  "createmetallurgy.gui.goggles.castingbasin_contents": "Casting Basin Contents"
 }
