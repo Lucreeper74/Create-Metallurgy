@@ -1,6 +1,7 @@
 package fr.lucreeper74.createmetallurgy.content.castingbasin;
 
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
+import com.simibubi.create.content.processing.basin.BasinInventory;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.LangBuilder;
@@ -23,12 +24,13 @@ public class CastingBasinBlockEntity extends BasinBlockEntity {
 
     public CastingBasinBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        inputInventory = (BasinInventory) new BasinInventory(1, this).withMaxStackSize(10);
+        outputInventory = new BasinInventory(1, this).forbidInsertion().withMaxStackSize(10);
     }
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
     }
-
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         LANG.translate("gui.goggles.castingbasin_contents")
