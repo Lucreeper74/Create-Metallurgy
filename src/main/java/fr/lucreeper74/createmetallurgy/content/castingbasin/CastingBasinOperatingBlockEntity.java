@@ -28,7 +28,6 @@ public class CastingBasinOperatingBlockEntity extends BasinOperatingBlockEntity 
         this.running = false;
     }
 
-
     @Override
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> recipe) {
         return recipe.getType() == AllRecipeTypes.MELTING.getType();

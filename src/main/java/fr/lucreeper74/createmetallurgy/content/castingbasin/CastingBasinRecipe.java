@@ -6,7 +6,7 @@ import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
 
 public class CastingBasinRecipe extends BasinRecipe {
 
-        public CastingBasinRecipe(ProcessingRecipeParams params) {
+    public CastingBasinRecipe(ProcessingRecipeParams params) {
             super(AllRecipeTypes.MELTING, params);
         }
-    }
+}
