@@ -5,7 +5,7 @@
       "tag": "forge:ingots/copper"
     }
   ],
-  "processingTime": 100,
+  "processingTime": 40,
   "results": [
     {
       "fluid": "createmetallurgy:molten_copper",
