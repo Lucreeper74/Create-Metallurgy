@@ -13,7 +13,7 @@
   "block.createmetallurgy.citrine_ore": "Citrine Ore",
   "block.createmetallurgy.refractory_mortar_block": "Refractory Mortar Block",
   "block.createmetallurgy.casting_basin": "Casting Basin",
-  "block.createmetallurgy.basin_top": "Basin Top",
+  "block.createmetallurgy.casting_top": "Casting Top",
 
 
   "fluid.createmetallurgy.molten_iron": "Molten Iron",
@@ -23,6 +23,7 @@
   "fluid.createmetallurgy.molten_brass": "Molten Brass",
 
   "itemGroup.createmetallurgy.main_group": "Create: Metallurgy",
+  "createmetallurgy.recipe.castingbasin_melting": "Casting Basin Melting",
 
   "createmetallurgy.generic.unit.millibuckets": "mB",
 
