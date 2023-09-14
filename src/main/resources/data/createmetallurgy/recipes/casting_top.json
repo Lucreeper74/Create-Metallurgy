@@ -3,17 +3,14 @@
   "key": {
     "A": {
       "item": "create:andesite_alloy"
-    },
-    "P": {
-      "item": "createmetallurgy:refractory_mortar_block"
     }
   },
   "pattern": [
+    "AAA",
     "A A",
-    "APA",
-    "AAA"
+    "   "
   ],
   "result": {
-    "item": "createmetallurgy:casting_basin"
+    "item": "createmetallurgy:casting_top"
   }
 }

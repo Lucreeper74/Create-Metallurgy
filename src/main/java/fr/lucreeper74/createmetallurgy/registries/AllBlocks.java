@@ -68,7 +68,7 @@ public class AllBlocks {
             .register();
 
     public static final BlockEntry<CastingTopBlock> CASTING_TOP_BLOCK = REGISTRATE
-            .block("basin_top", CastingTopBlock::new)
+            .block("casting_top", CastingTopBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
