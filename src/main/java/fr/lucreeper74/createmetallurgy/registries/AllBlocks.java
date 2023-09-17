@@ -8,6 +8,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.castingbasin.CastingBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.castingtop.CastingTopBlock;
+import fr.lucreeper74.createmetallurgy.content.glassedcastingtop.GlassedCastingTopBlock;
 import fr.lucreeper74.createmetallurgy.tabs.CreateMetallurgyTab;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
@@ -54,8 +55,8 @@ public class AllBlocks {
             .simpleItem()
             .register();
 
-    public static final BlockEntry<CastingBasinBlock> CASTING_BASIN_BLOCK = REGISTRATE
-            .block("casting_basin", CastingBasinBlock::new)
+    public static final BlockEntry<CastingBasinBlock> FOUNDRY_BASIN_BLOCK = REGISTRATE
+            .block("foundry_basin", CastingBasinBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
@@ -67,8 +68,21 @@ public class AllBlocks {
             .transform(customItemModel("_", "block"))
             .register();
 
-    public static final BlockEntry<CastingTopBlock> CASTING_TOP_BLOCK = REGISTRATE
-            .block("casting_top", CastingTopBlock::new)
+    public static final BlockEntry<CastingTopBlock> FOUNDRY_TOP_BLOCK = REGISTRATE
+            .block("foundry_top", CastingTopBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .blockstate(new BasinGenerator()::generate)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .onRegister(movementBehaviour(new BasinMovementBehaviour()))
+            .item()
+            .transform(customItemModel("_", "block"))
+            .register();
+
+    public static final BlockEntry<GlassedCastingTopBlock> GLASSED_FOUNDRY_TOP_BLOCK = REGISTRATE
+            .block("glassed_foundry_top", GlassedCastingTopBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
