@@ -7,10 +7,10 @@
   },
   "pattern": [
     "AAA",
-    "A A",
+    "AAA",
     "   "
   ],
   "result": {
-    "item": "createmetallurgy:casting_top"
+    "item": "createmetallurgy:glassed_foundry_top"
   }
 }

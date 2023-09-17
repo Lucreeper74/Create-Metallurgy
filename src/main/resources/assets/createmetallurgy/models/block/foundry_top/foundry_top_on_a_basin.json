@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "createmetallurgy:block/casting_basin_top_trap",
-		"3": "createmetallurgy:block/basin_lid_top",
-		"particle": "createmetallurgy:block/casting_basin_top_trap"
+		"1": "createmetallurgy:block/foundry_top_trap",
+		"3": "createmetallurgy:block/foundry_top",
+		"particle": "createmetallurgy:block/foundry_top_trap"
 	},
 	"elements": [
 		{
@@ -38,8 +38,8 @@
 				"east": {"uv": [0, 11, 1, 13], "texture": "#3"},
 				"south": {"uv": [12, 4, 13, 6], "texture": "#1"},
 				"west": {"uv": [1, 2.5, 2, 4.5], "texture": "#3"},
-				"up": {"uv": [0, 0, 2, 2], "texture": "#missing"},
-				"down": {"uv": [0, 0, 2, 2], "texture": "#missing"}
+				"up": {"uv": [0, 0, 0, 0], "texture": "#3"},
+				"down": {"uv": [0, 0, 0, 0], "texture": "#3"}
 			}
 		},
 		{
@@ -50,8 +50,8 @@
 				"east": {"uv": [0, 0, 1, 4], "texture": "#missing"},
 				"south": {"uv": [9, 4, 12, 6], "texture": "#1"},
 				"west": {"uv": [0, 0, 1, 4], "texture": "#missing"},
-				"up": {"uv": [0, 0, 6, 1], "texture": "#missing"},
-				"down": {"uv": [0, 0, 6, 1], "texture": "#missing"}
+				"up": {"uv": [0, 0, 0, 0], "texture": "#1"},
+				"down": {"uv": [0, 0, 0, 0], "texture": "#1"}
 			}
 		},
 		{
@@ -74,8 +74,8 @@
 				"east": {"uv": [5, 2.5, 6, 4.5], "texture": "#3"},
 				"south": {"uv": [8, 4, 9, 6], "texture": "#1"},
 				"west": {"uv": [6, 10.5, 7, 12.5], "texture": "#3"},
-				"up": {"uv": [0, 0, 2, 2], "texture": "#missing"},
-				"down": {"uv": [0, 0, 2, 2], "texture": "#missing"}
+				"up": {"uv": [0, 0, 0, 0], "texture": "#3"},
+				"down": {"uv": [0, 0, 0, 0], "texture": "#3"}
 			}
 		},
 		{
@@ -144,9 +144,9 @@
 			"to": [11, 15, 5],
 			"faces": {
 				"north": {"uv": [2, 5, 5, 6], "texture": "#3"},
-				"east": {"uv": [0, 0, 4, 2], "texture": "#missing"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#3"},
 				"south": {"uv": [2, 5, 5, 6], "texture": "#3"},
-				"west": {"uv": [0, 0, 4, 2], "texture": "#missing"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#3"},
 				"up": {"uv": [2, 1, 5, 2], "texture": "#3"},
 				"down": {"uv": [2, 5, 5, 6], "texture": "#3"}
 			}
@@ -156,9 +156,9 @@
 			"to": [11, 15, 13],
 			"faces": {
 				"north": {"uv": [2, 5, 5, 6], "texture": "#3"},
-				"east": {"uv": [0, 0, 4, 2], "texture": "#missing"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#3"},
 				"south": {"uv": [2, 5, 5, 6], "texture": "#3"},
-				"west": {"uv": [0, 0, 4, 2], "texture": "#missing"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#3"},
 				"up": {"uv": [2, 5, 5, 6], "texture": "#3"},
 				"down": {"uv": [2, 1, 5, 2], "texture": "#3"}
 			}

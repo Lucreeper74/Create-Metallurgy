@@ -3,7 +3,7 @@
 	"parent": "block/block",
 	"textures": {
 		"2": "createmetallurgy:block/refractory_mortar_block",
-		"12": "createmetallurgy:block/casting_basin",
+		"12": "createmetallurgy:block/foundry_basin",
 		"particle": "createmetallurgy:block/industrial_iron_block"
 	},
 	"elements": [

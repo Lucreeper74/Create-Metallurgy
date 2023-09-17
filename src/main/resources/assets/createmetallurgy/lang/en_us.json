@@ -12,8 +12,9 @@
   "block.createmetallurgy.raw_citrine_block": "Raw Citrine Block",
   "block.createmetallurgy.citrine_ore": "Citrine Ore",
   "block.createmetallurgy.refractory_mortar_block": "Refractory Mortar Block",
-  "block.createmetallurgy.casting_basin": "Casting Basin",
-  "block.createmetallurgy.casting_top": "Casting Top",
+  "block.createmetallurgy.foundry_basin": "Foundry Basin",
+  "block.createmetallurgy.foundry_top": "Foundry Top",
+  "block.createmetallurgy.glassed_foundry_top": "Glassed Foundry Top",
 
 
   "fluid.createmetallurgy.molten_iron": "Molten Iron",
@@ -23,9 +24,9 @@
   "fluid.createmetallurgy.molten_brass": "Molten Brass",
 
   "itemGroup.createmetallurgy.main_group": "Create: Metallurgy",
-  "createmetallurgy.recipe.castingbasin_melting": "Casting Basin Melting",
+  "createmetallurgy.recipe.foundrybasin_melting": "Casting Foundry Melting",
 
   "createmetallurgy.generic.unit.millibuckets": "mB",
 
-  "createmetallurgy.gui.goggles.castingbasin_contents": "Casting Basin Contents"
+  "createmetallurgy.gui.goggles.foundrybasin_contents": "Casting Foundry Contents"
 }

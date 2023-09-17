@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"1": "createmetallurgy:block/casting_basin",
-		"2": "createmetallurgy:block/casting_basin_canal",
+		"1": "createmetallurgy:block/foundry_basin",
+		"2": "createmetallurgy:block/foundry_basin_canal",
 		"3": "createmetallurgy:block/refractory_mortar_block",
 		"particle": "createmetallurgy:block/industrial_iron_block"
 	},
