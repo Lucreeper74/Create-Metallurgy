@@ -25,12 +25,12 @@ public class CastingBasinMeltingElement implements IDrawable {
         poseStack.mulPose(Vector3f.YP.rotationDegrees(22.5f));
         int scale = 23;
 
-        GuiGameElement.of(AllBlocks.CASTING_TOP_BLOCK.getDefaultState())
+        GuiGameElement.of(AllBlocks.FOUNDRY_TOP_BLOCK.getDefaultState())
                     .atLocal(0, 0, 0)
                     .scale(scale)
                     .render(poseStack);
 
-        GuiGameElement.of(AllBlocks.CASTING_BASIN_BLOCK.getDefaultState())
+        GuiGameElement.of(AllBlocks.FOUNDRY_BASIN_BLOCK.getDefaultState())
                     .atLocal(0, 1, 0)
                     .scale(scale)
                     .render(poseStack);

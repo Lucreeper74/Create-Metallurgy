@@ -33,7 +33,7 @@ public class CastingBasinBlockEntity extends BasinBlockEntity {
     }
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        LANG.translate("gui.goggles.castingbasin_contents")
+        LANG.translate("gui.goggles.foundrybasin_contents")
                 .forGoggles(tooltip);
 
         IItemHandlerModifiable items = itemCapability.orElse(new ItemStackHandler());

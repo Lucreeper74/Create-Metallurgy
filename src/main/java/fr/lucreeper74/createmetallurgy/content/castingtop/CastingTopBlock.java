@@ -106,6 +106,6 @@ public class CastingTopBlock extends Block implements IBE<CastingTopBlockEntity>
 
     @Override
     public BlockEntityType<? extends CastingTopBlockEntity> getBlockEntityType() {
-        return AllBlockEntityTypes.CASTING_TOP.get();
+        return AllBlockEntityTypes.FOUNDRY_TOP.get();
     }
 }

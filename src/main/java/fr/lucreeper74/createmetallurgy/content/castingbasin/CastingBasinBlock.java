@@ -17,13 +17,13 @@ public class CastingBasinBlock extends BasinBlock implements IWrenchable {
     }
     @Override
     public BlockEntityType<? extends CastingBasinBlockEntity> getBlockEntityType() {
-        return AllBlockEntityTypes.CASTING_BASIN.get();
+        return AllBlockEntityTypes.FOUNDRY_BASIN.get();
     }
 
     @Override
     public void updateEntityAfterFallOn(BlockGetter worldIn, Entity entityIn) {
         super.updateEntityAfterFallOn(worldIn, entityIn);
-        if (!AllBlocks.CASTING_BASIN_BLOCK.has(worldIn.getBlockState(entityIn.blockPosition())))
+        if (!AllBlocks.FOUNDRY_BASIN_BLOCK.has(worldIn.getBlockState(entityIn.blockPosition())))
             return;
         if (!(entityIn instanceof ItemEntity itemEntity))
             return;

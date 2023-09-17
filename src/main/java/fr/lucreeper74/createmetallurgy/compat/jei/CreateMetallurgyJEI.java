@@ -52,11 +52,11 @@ public class CreateMetallurgyJEI implements IModPlugin {
         CreateRecipeCategory<?>
                 melting = builder(CastingBasinRecipe.class)
                 .addTypedRecipes(AllRecipeTypes.MELTING)
-                .catalyst(AllBlocks.CASTING_TOP_BLOCK::get)
-                .catalyst(AllBlocks.CASTING_BASIN_BLOCK::get)
-                .doubleItemIcon(AllBlocks.CASTING_BASIN_BLOCK.get(), AllBlocks.CASTING_TOP_BLOCK.get())
+                .catalyst(AllBlocks.FOUNDRY_TOP_BLOCK::get)
+                .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
+                .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_TOP_BLOCK.get())
                 .emptyBackground(177, 100)
-                .build("castingbasin_melting", CastingBasinMeltingCategory::new);
+                .build("foundrybasin_melting", CastingBasinMeltingCategory::new);
     }
 
     private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {
