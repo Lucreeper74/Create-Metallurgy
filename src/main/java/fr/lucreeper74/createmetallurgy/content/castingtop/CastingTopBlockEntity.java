@@ -12,8 +12,8 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -77,16 +77,20 @@ public class CastingTopBlockEntity extends CastingBasinOperatingBlockEntity {
             }
 
             if(this.level.isClientSide && processingTime % 2 == 0) {
-                animateTick(this.level, worldPosition);
+                spawnParticles();
             }
 
             if (this.processingTime > 0) --this.processingTime;
         }
     }
+    protected void spawnParticles() {
+        RandomSource r = level.getRandom();
+        Vec3 c = VecHelper.getCenterOf(worldPosition);
+        Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .125f)
+                .multiply(1, 0, 1));
 
-    public void animateTick(Level pLevel, BlockPos pPos) {
-        Vec3 center = VecHelper.getCenterOf(pPos);
-        pLevel.addParticle(ParticleTypes.SMOKE, center.x, center.y + .45, center.z, 0D, 0.02D, 0D);
+        if (r.nextInt(8) == 0)
+            level.addParticle(ParticleTypes.LARGE_SMOKE, v.x, v.y + .45, v.z, 0, 0, 0);
     }
 
     @Override
