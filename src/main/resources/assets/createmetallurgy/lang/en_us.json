@@ -24,9 +24,9 @@
   "fluid.createmetallurgy.molten_brass": "Molten Brass",
 
   "itemGroup.createmetallurgy.main_group": "Create: Metallurgy",
-  "createmetallurgy.recipe.foundrybasin_melting": "Casting Foundry Melting",
+  "createmetallurgy.recipe.foundrybasin_melting": "Foundry Melting",
 
   "createmetallurgy.generic.unit.millibuckets": "mB",
 
-  "createmetallurgy.gui.goggles.foundrybasin_contents": "Casting Foundry Contents"
+  "createmetallurgy.gui.goggles.foundrybasin_contents": "Foundry Baisn Contents"
 }
