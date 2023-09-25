@@ -15,6 +15,7 @@
   "block.createmetallurgy.foundry_basin": "Foundry Basin",
   "block.createmetallurgy.foundry_top": "Foundry Top",
   "block.createmetallurgy.glassed_foundry_top": "Glassed Foundry Top",
+  "block.createmetallurgy.foundry_mixer": "Foundry Mixer",
 
 
   "fluid.createmetallurgy.molten_iron": "Molten Iron",
@@ -28,5 +29,5 @@
 
   "createmetallurgy.generic.unit.millibuckets": "mB",
 
-  "createmetallurgy.gui.goggles.foundrybasin_contents": "Foundry Baisn Contents"
+  "createmetallurgy.gui.goggles.foundrybasin_contents": "Foundry Basin Contents"
 }
