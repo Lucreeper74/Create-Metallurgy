@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createmetallurgy:casting_basin"
+          "name": "createmetallurgy:foundry_basin"
         }
       ],
       "rolls": 1.0
