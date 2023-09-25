@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.castingbasin;
+package fr.lucreeper74.createmetallurgy.content.processing.castingbasin;
 
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.processing.basin.BasinBlock;

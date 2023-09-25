@@ -13,7 +13,7 @@ import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.Pair;
-import fr.lucreeper74.createmetallurgy.content.castingbasin.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.castingtop.MeltingRecipe;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -30,14 +30,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public class CastingBasinMeltingCategory extends CreateRecipeCategory<CastingBasinRecipe> {
+public class CastingBasinMeltingCategory extends CreateRecipeCategory<MeltingRecipe> {
     private final CastingBasinMeltingElement CastingBasinMelting = new CastingBasinMeltingElement();
     private final AnimatedBlazeBurner heater = new AnimatedBlazeBurner();
-    public CastingBasinMeltingCategory(Info<CastingBasinRecipe> info) {
+    public CastingBasinMeltingCategory(Info<MeltingRecipe> info) {
         super(info);
     }
 
-    public void setRecipe(IRecipeLayoutBuilder builder, CastingBasinRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, MeltingRecipe recipe, IFocusGroup focuses) {
         List<Pair<Ingredient, MutableInt>> condensedIngredients = ItemHelper.condenseIngredients(recipe.getIngredients());
 
         int size = condensedIngredients.size() + recipe.getFluidIngredients().size();
@@ -107,7 +107,7 @@ public class CastingBasinMeltingCategory extends CreateRecipeCategory<CastingBas
         }
     }
 
-    public void draw(CastingBasinRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+    public void draw(MeltingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
         AllGuiTextures.JEI_DOWN_ARROW.render(matrixStack, 136, 20);
 
 

@@ -11,7 +11,7 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.content.castingbasin.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.castingtop.MeltingRecipe;
 import fr.lucreeper74.createmetallurgy.registries.AllBlocks;
 import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
 import mezz.jei.api.IModPlugin;
@@ -50,7 +50,7 @@ public class CreateMetallurgyJEI implements IModPlugin {
         allCategories.clear();
 
         CreateRecipeCategory<?>
-                melting = builder(CastingBasinRecipe.class)
+                melting = builder(MeltingRecipe.class)
                 .addTypedRecipes(AllRecipeTypes.MELTING)
                 .catalyst(AllBlocks.FOUNDRY_TOP_BLOCK::get)
                 .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
