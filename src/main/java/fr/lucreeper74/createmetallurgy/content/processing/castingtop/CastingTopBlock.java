@@ -1,8 +1,8 @@
-package fr.lucreeper74.createmetallurgy.content.castingtop;
+package fr.lucreeper74.createmetallurgy.content.processing.castingtop;
 
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
-import fr.lucreeper74.createmetallurgy.content.castingbasin.CastingBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.AllBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -26,13 +26,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class CastingTopBlock extends Block implements IBE<CastingTopBlockEntity>, IWrenchable {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty ON_A_BASIN = BooleanProperty.create("on_a_basin");
+    public static final BooleanProperty ON_FOUNDRY_BASIN = BooleanProperty.create("on_foundry_basin");
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     public CastingTopBlock(Properties properties) {
         super(properties);
-        registerDefaultState(super.defaultBlockState().setValue(ON_A_BASIN, false));
+        registerDefaultState(super.defaultBlockState().setValue(ON_FOUNDRY_BASIN, false));
         registerDefaultState(super.defaultBlockState().setValue(OPEN, false));
         registerDefaultState(super.defaultBlockState().setValue(POWERED, false));
     }
@@ -48,23 +48,24 @@ public class CastingTopBlock extends Block implements IBE<CastingTopBlockEntity>
         super.onPlace(state, level, pos, p_60569_, p_60570_);
 
         if(level.getBlockEntity(pos.below()) instanceof CastingBasinBlockEntity)
-            level.setBlock(pos, state.setValue(ON_A_BASIN, true), 2);
+            level.setBlock(pos, state.setValue(ON_FOUNDRY_BASIN, true), 1) ;
         else
-            level.setBlock(pos, state.setValue(ON_A_BASIN, false), 2);
+            level.setBlock(pos, state.setValue(ON_FOUNDRY_BASIN, false), 1);
+
     }
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos p_57551_, boolean p_57552_) {
         boolean flag = level.hasNeighborSignal(pos);
         if(level.getBlockEntity(pos.below()) instanceof CastingBasinBlockEntity)
-            state = state.setValue(ON_A_BASIN, true);
+            state = state.setValue(ON_FOUNDRY_BASIN, true);
         else
-            state = state.setValue(ON_A_BASIN, false);
+            state = state.setValue(ON_FOUNDRY_BASIN, false);
         if (flag != state.getValue(POWERED)) {
             if(flag != state.getValue(OPEN))
                 level.levelEvent(null, flag ? 1037:1036, pos, 0);
             level.setBlock(pos, state.setValue(POWERED, flag).setValue(OPEN, flag), 2);
-        }else {
+        } else {
             level.setBlock(pos, state, 2);
         }
     }
@@ -83,7 +84,7 @@ public class CastingTopBlock extends Block implements IBE<CastingTopBlockEntity>
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(ON_A_BASIN);
+        builder.add(ON_FOUNDRY_BASIN);
         builder.add(FACING);
         builder.add(OPEN);
         builder.add(POWERED);
