@@ -1,0 +1,21 @@
+{
+  "type": "createmetallurgy:alloying",
+  "ingredients": [
+    {
+      "fluid": "createmetallurgy:molten_copper",
+      "amount": 10
+    },
+    {
+      "fluid": "createmetallurgy:molten_zinc",
+      "amount": 10
+    }
+  ],
+  "processingTime": 40,
+  "results": [
+    {
+      "fluid": "createmetallurgy:molten_brass",
+      "amount": 10
+    }
+  ],
+  "heatRequirement": "superheated"
+}
