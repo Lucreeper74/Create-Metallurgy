@@ -6,9 +6,10 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.content.castingbasin.CastingBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.castingtop.CastingTopBlock;
-import fr.lucreeper74.createmetallurgy.content.glassedcastingtop.GlassedCastingTopBlock;
+import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.castingtop.CastingTopBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.glassedcastingtop.GlassedCastingTopBlock;
 import fr.lucreeper74.createmetallurgy.tabs.CreateMetallurgyTab;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
@@ -94,6 +95,17 @@ public class AllBlocks {
             .transform(customItemModel("_", "block"))
             .register();
 
-
+    public static final BlockEntry<FoundryMixerBlock> FOUNDRY_MIXER_BLOCK = REGISTRATE
+            .block("foundry_mixer", FoundryMixerBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .blockstate(new BasinGenerator()::generate)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .onRegister(movementBehaviour(new BasinMovementBehaviour()))
+            .item()
+            .transform(customItemModel("_", "block"))
+            .register();
     public static void register() {}
 }
