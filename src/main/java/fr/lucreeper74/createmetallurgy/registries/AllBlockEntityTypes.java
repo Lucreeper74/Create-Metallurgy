@@ -2,6 +2,8 @@ package fr.lucreeper74.createmetallurgy.registries;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerInstance;
+import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerRenderer;
 import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinRenderer;
 import fr.lucreeper74.createmetallurgy.content.processing.castingtop.CastingTopBlockEntity;
@@ -29,7 +31,9 @@ public class AllBlockEntityTypes {
 
     public static final BlockEntityEntry<FoundryMixerBlockEntity> FOUNDRY_MIXER = REGISTRATE
             .blockEntity("foundry_mixer", FoundryMixerBlockEntity::new)
+            .instance(() -> FoundryMixerInstance::new)
             .validBlocks(AllBlocks.FOUNDRY_MIXER_BLOCK)
+            .renderer(() -> FoundryMixerRenderer::new)
             .register();
 
     public static void register() {}

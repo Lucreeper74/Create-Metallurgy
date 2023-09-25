@@ -29,6 +29,7 @@ public class CreateMetallurgy {
         AllBlocks.register();
         AllFluids.register();
         AllItems.register();
+        AllPModels.init();
         AllBlockEntityTypes.register();
         AllRecipeTypes.register(eventBus);
 
@@ -51,7 +52,7 @@ public class CreateMetallurgy {
 
     }
 
-    public static ResourceLocation genRL(String name) {
-        return new ResourceLocation(MOD_ID, name);
+    public static ResourceLocation genRL(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 }
