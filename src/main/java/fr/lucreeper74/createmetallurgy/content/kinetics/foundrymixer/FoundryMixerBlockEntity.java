@@ -37,8 +37,10 @@ public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
     public void tick() {
         super.tick();
 
-        if (!level.isClientSide && !running) {
-            basinChecker.scheduleUpdate();
+        if(level != null && !running) {
+            if (!level.isClientSide) {
+                basinChecker.scheduleUpdate();
+            }
         }
     }
 
