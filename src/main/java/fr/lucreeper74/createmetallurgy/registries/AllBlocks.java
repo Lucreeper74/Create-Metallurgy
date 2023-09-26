@@ -1,5 +1,6 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -16,6 +17,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
@@ -75,9 +77,7 @@ public class AllBlocks {
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .blockstate(new BasinGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
-            .onRegister(movementBehaviour(new BasinMovementBehaviour()))
             .item()
             .transform(customItemModel("_", "block"))
             .register();
@@ -88,9 +88,7 @@ public class AllBlocks {
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .blockstate(new BasinGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
-            .onRegister(movementBehaviour(new BasinMovementBehaviour()))
             .item()
             .transform(customItemModel("_", "block"))
             .register();
@@ -98,12 +96,11 @@ public class AllBlocks {
     public static final BlockEntry<FoundryMixerBlock> FOUNDRY_MIXER_BLOCK = REGISTRATE
             .block("foundry_mixer", FoundryMixerBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
-            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+            .properties(p -> p.color(MaterialColor.STONE))
+            .properties(BlockBehaviour.Properties::noOcclusion)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .blockstate(new BasinGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
-            .onRegister(movementBehaviour(new BasinMovementBehaviour()))
+            .transform(BlockStressDefaults.setImpact(8.0))
             .item()
             .transform(customItemModel("_", "block"))
             .register();
