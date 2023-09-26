@@ -4,6 +4,7 @@ import com.simibubi.create.compat.jei.*;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.equipment.blueprint.BlueprintScreen;
 import com.simibubi.create.content.logistics.filter.AbstractFilterScreen;
+import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.redstone.link.controller.LinkedControllerScreen;
 import com.simibubi.create.content.trains.schedule.ScheduleScreen;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
@@ -11,7 +12,8 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.content.processing.castingtop.MeltingRecipe;
+import fr.lucreeper74.createmetallurgy.compat.jei.category.AlloyingCategory;
+import fr.lucreeper74.createmetallurgy.compat.jei.category.MeltingCategory;
 import fr.lucreeper74.createmetallurgy.registries.AllBlocks;
 import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
 import mezz.jei.api.IModPlugin;
@@ -50,13 +52,22 @@ public class CreateMetallurgyJEI implements IModPlugin {
         allCategories.clear();
 
         CreateRecipeCategory<?>
-                melting = builder(MeltingRecipe.class)
-                .addTypedRecipes(AllRecipeTypes.MELTING)
-                .catalyst(AllBlocks.FOUNDRY_TOP_BLOCK::get)
-                .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
-                .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_TOP_BLOCK.get())
-                .emptyBackground(177, 100)
-                .build("foundrybasin_melting", CastingBasinMeltingCategory::new);
+                melting = builder(BasinRecipe.class)
+                    .addTypedRecipes(AllRecipeTypes.MELTING)
+                    .catalyst(AllBlocks.FOUNDRY_TOP_BLOCK::get)
+                    .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
+                    .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_TOP_BLOCK.get())
+                    .emptyBackground(177, 100)
+                    .build("melting", MeltingCategory::new),
+
+                alloying = builder(BasinRecipe.class)
+                        .addTypedRecipes(AllRecipeTypes.ALLOYING)
+                        .catalyst(AllBlocks.FOUNDRY_MIXER_BLOCK::get)
+                        .catalyst(AllBlocks.GLASSED_FOUNDRY_TOP_BLOCK::get)
+                        .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
+                        .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_MIXER_BLOCK.get())
+                        .emptyBackground(177, 100)
+                        .build("alloying", AlloyingCategory::new);
     }
 
     private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {

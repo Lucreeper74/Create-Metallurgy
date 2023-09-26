@@ -25,7 +25,8 @@
   "fluid.createmetallurgy.molten_brass": "Molten Brass",
 
   "itemGroup.createmetallurgy.main_group": "Create: Metallurgy",
-  "createmetallurgy.recipe.foundrybasin_melting": "Foundry Melting",
+  "createmetallurgy.recipe.melting": "Foundry Melting",
+  "createmetallurgy.recipe.alloying": "Foundry Alloying",
 
   "createmetallurgy.generic.unit.millibuckets": "mB",
 
