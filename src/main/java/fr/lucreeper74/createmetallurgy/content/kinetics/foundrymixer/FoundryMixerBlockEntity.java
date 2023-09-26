@@ -22,8 +22,6 @@ import static fr.lucreeper74.createmetallurgy.content.processing.castingtop.Cast
 
 public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
 
-    public final int stressImpact = 8;
-
     public FoundryMixerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
@@ -69,11 +67,6 @@ public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
         return Optional.of((CastingBasinBlockEntity) basinBE);
     }
 
-
-    public float calculateStressApplied() {
-        this.lastStressApplied = stressImpact;
-        return stressImpact;
-    }
     private static final Object AlloyingRecipesKey = new Object();
     @Override
     protected Object getRecipeCacheKey() {
