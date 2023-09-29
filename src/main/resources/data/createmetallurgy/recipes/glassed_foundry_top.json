@@ -3,11 +3,14 @@
   "key": {
     "A": {
       "item": "create:andesite_alloy"
+    },
+    "B": {
+      "item": "minecraft:glass"
     }
   },
   "pattern": [
-    "AAA",
-    "AAA",
+    "ABA",
+    "B B",
     "   "
   ],
   "result": {
