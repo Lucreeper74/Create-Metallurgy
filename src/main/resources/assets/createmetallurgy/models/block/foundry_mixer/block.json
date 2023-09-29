@@ -3,9 +3,9 @@
 	"parent": "block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"2": "block/spruce_log_top",
+		"2": "createmetallurgy:block/foundry_mixer_inside",
+		"3": "createmetallurgy:block/foundry_mixer_top",
 		"4": "createmetallurgy:block/foundry_mixer_base_side",
-		"11": "createmetallurgy:block/foundry_mixer_top",
 		"particle": "createmetallurgy:block/foundry_mixer_base_side"
 	},
 	"elements": [
@@ -18,7 +18,7 @@
 				"east": {"uv": [0, 0, 16, 6], "texture": "#4"},
 				"south": {"uv": [0, 0, 16, 6], "texture": "#4"},
 				"west": {"uv": [0, 0, 16, 6], "texture": "#4"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#11"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#3"},
 				"down": {"uv": [0, 0, 16, 16], "texture": "#2"}
 			}
 		},
@@ -32,7 +32,7 @@
 				"south": {"uv": [0, 10, 16, 14], "texture": "#4"},
 				"west": {"uv": [0, 10, 16, 14], "texture": "#4"},
 				"up": {"uv": [0, 0, 16, 16], "texture": "#2"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#11"}
+				"down": {"uv": [0, 0, 16, 16], "texture": "#3"}
 			}
 		},
 		{

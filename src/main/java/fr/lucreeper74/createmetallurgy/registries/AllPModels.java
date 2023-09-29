@@ -8,7 +8,8 @@ public class AllPModels {
     public static final PartialModel
 
             FOUNDRY_MIXER_POLE = block("foundry_mixer/pole"),
-            FOUNDRY_MIXER_HEAD = block("foundry_mixer/head");
+            FOUNDRY_MIXER_HEAD = block("foundry_mixer/head"),
+            SHAFTLESS_STONE_COGWHEEL = block("foundry_mixer/cog");
 
     private static PartialModel block(String path) {
         return new PartialModel(CreateMetallurgy.genRL("block/" + path));
