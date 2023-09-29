@@ -18,5 +18,8 @@ public class AllItems {
     public static final ItemEntry<Item> RAW_CITRINE = REGISTRATE.item("raw_citrine", Item::new)
             .register();
 
+    public static final ItemEntry<Item> STURDY_WHISK = REGISTRATE.item("sturdy_whisk", Item::new)
+            .register();
+
     public static void register() {}
 }
