@@ -31,7 +31,7 @@ public class FoundryMixerRenderer extends MechanicalMixerRenderer {
 
         VertexConsumer vb = buffer.getBuffer(RenderType.solid());
 
-        SuperByteBuffer superBuffer = CachedBufferer.partial(AllPartialModels.SHAFTLESS_COGWHEEL, blockState);
+        SuperByteBuffer superBuffer = CachedBufferer.partial(AllPModels.SHAFTLESS_STONE_COGWHEEL, blockState);
         standardKineticRotationTransform(superBuffer, be, light).renderInto(ms, vb);
 
         float renderedHeadOffset = be.getRenderedHeadOffset(partialTicks);

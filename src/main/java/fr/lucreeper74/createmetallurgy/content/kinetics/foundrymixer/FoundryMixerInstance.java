@@ -45,7 +45,7 @@ public class FoundryMixerInstance extends EncasedCogInstance implements DynamicI
     protected Instancer<RotatingData> getCogModel() {
         return materialManager.defaultSolid()
                 .material(AllMaterialSpecs.ROTATING)
-                .getModel(AllPartialModels.SHAFTLESS_COGWHEEL, blockEntity.getBlockState());
+                .getModel(AllPModels.SHAFTLESS_STONE_COGWHEEL, blockEntity.getBlockState());
     }
 
     @Override
