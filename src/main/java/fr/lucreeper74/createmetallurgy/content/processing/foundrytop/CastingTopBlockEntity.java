@@ -1,10 +1,10 @@
-package fr.lucreeper74.createmetallurgy.content.processing.castingtop;
+package fr.lucreeper74.createmetallurgy.content.processing.foundrytop;
 
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.utility.VecHelper;
-import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -22,7 +22,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 import java.util.Optional;
 
-import static fr.lucreeper74.createmetallurgy.content.processing.castingtop.CastingTopBlock.OPEN;
+import static fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlock.OPEN;
 
 public class CastingTopBlockEntity extends BasinOperatingBlockEntity {
     public int processingTime;
@@ -101,11 +101,11 @@ public class CastingTopBlockEntity extends BasinOperatingBlockEntity {
         if (level == null)
             return Optional.empty();
         BlockEntity basinBE = level.getBlockEntity(worldPosition.below());
-        if (!(basinBE instanceof CastingBasinBlockEntity))
+        if (!(basinBE instanceof FoundryBasinBlockEntity))
             return Optional.empty();
         if(getBlockState().getValue(OPEN))
             return Optional.empty();
-        return Optional.of((CastingBasinBlockEntity) basinBE);
+        return Optional.of((FoundryBasinBlockEntity) basinBE);
     }
 
     @Override

@@ -1,0 +1,122 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"1": "createmetallurgy:block/foundry_basin",
+		"particle": "createmetallurgy:block/industrial_iron_block"
+	},
+	"elements": [
+		{
+			"name": "Basin Base",
+			"from": [2, 0, 2],
+			"to": [14, 2, 14],
+			"faces": {
+				"north": {"uv": [1, 7, 7, 8], "texture": "#1"},
+				"east": {"uv": [1, 7, 7, 8], "texture": "#1"},
+				"south": {"uv": [1, 7, 7, 8], "texture": "#1"},
+				"west": {"uv": [1, 7, 7, 8], "texture": "#1"},
+				"up": {"uv": [9, 9, 15, 15], "texture": "#1"},
+				"down": {"uv": [9, 9, 15, 15], "texture": "#1"}
+			}
+		},
+		{
+			"from": [2, 2, 0],
+			"to": [14, 16, 2],
+			"faces": {
+				"north": {"uv": [1, 0, 7, 7], "texture": "#1"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#1"},
+				"south": {"uv": [9, 0, 15, 7], "texture": "#1"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#1"},
+				"up": {"uv": [1, 8, 7, 9], "texture": "#1"},
+				"down": {"uv": [1, 15, 7, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [2, 2, 14],
+			"to": [14, 16, 16],
+			"faces": {
+				"north": {"uv": [9, 0, 15, 7], "texture": "#1"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#1"},
+				"south": {"uv": [1, 0, 7, 7], "texture": "#1"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#1"},
+				"up": {"uv": [1, 15, 7, 16], "texture": "#1"},
+				"down": {"uv": [1, 8, 7, 9], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 2, 0],
+			"to": [2, 16, 16],
+			"faces": {
+				"north": {"uv": [7, 0, 8, 7], "texture": "#1"},
+				"east": {"uv": [8, 0, 16, 7], "texture": "#1"},
+				"south": {"uv": [0, 0, 1, 7], "texture": "#1"},
+				"west": {"uv": [0, 0, 8, 7], "texture": "#1"},
+				"up": {"uv": [0, 8, 1, 16], "texture": "#1"},
+				"down": {"uv": [0, 8, 1, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [14, 2, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 7], "texture": "#1"},
+				"east": {"uv": [0, 0, 8, 7], "texture": "#1"},
+				"south": {"uv": [7, 0, 8, 7], "texture": "#1"},
+				"west": {"uv": [8, 0, 16, 7], "texture": "#1"},
+				"up": {"uv": [7, 8, 8, 16], "texture": "#1"},
+				"down": {"uv": [7, 8, 8, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [-0.5, 10, 6],
+			"to": [0, 14, 10],
+			"faces": {
+				"north": {"uv": [2.5, 1, 3, 3], "texture": "#1"},
+				"east": {"uv": [0, 0, 4, 4], "texture": "#1"},
+				"south": {"uv": [5.5, 1, 5, 3], "texture": "#1"},
+				"west": {"uv": [3, 1, 5, 3], "texture": "#1"},
+				"up": {"uv": [3, 0.5, 5, 1], "texture": "#1"},
+				"down": {"uv": [3, 3, 5, 3.5], "texture": "#1"}
+			}
+		},
+		{
+			"from": [6, 10, 16],
+			"to": [10, 14, 16.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-5.25, 12, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 4], "texture": "#1"},
+				"east": {"uv": [5.5, 1, 5, 3], "texture": "#1"},
+				"south": {"uv": [3, 1, 5, 3], "texture": "#1"},
+				"west": {"uv": [2.5, 1, 3, 3], "texture": "#1"},
+				"up": {"uv": [3, 0.5, 5, 1], "rotation": 270, "texture": "#1"},
+				"down": {"uv": [3, 3, 5, 3.5], "rotation": 90, "texture": "#1"}
+			}
+		},
+		{
+			"from": [16, 10, 6],
+			"to": [16.5, 14, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 12, 16.25]},
+			"faces": {
+				"north": {"uv": [5.5, 1, 5, 3], "texture": "#1"},
+				"east": {"uv": [3, 1, 5, 3], "texture": "#1"},
+				"south": {"uv": [2.5, 1, 3, 3], "texture": "#1"},
+				"west": {"uv": [0, 0, 4, 4], "texture": "#1"},
+				"up": {"uv": [3, 0.5, 5, 1], "rotation": 180, "texture": "#1"},
+				"down": {"uv": [3, 3, 5, 3.5], "rotation": 180, "texture": "#1"}
+			}
+		},
+		{
+			"from": [6, 10, -0.5],
+			"to": [10, 14, 0],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16.25, 12, 8]},
+			"faces": {
+				"north": {"uv": [3, 1, 5, 3], "texture": "#1"},
+				"east": {"uv": [2.5, 1, 3, 3], "texture": "#1"},
+				"south": {"uv": [0, 0, 4, 4], "texture": "#1"},
+				"west": {"uv": [5.5, 1, 5, 3], "texture": "#1"},
+				"up": {"uv": [3, 0.5, 5, 1], "rotation": 90, "texture": "#1"},
+				"down": {"uv": [3, 3, 5, 3.5], "rotation": 270, "texture": "#1"}
+			}
+		}
+	]
+}

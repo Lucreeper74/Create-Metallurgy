@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.processing.glassedcastingtop;
+package fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
