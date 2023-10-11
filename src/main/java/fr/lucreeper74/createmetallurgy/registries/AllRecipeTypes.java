@@ -6,23 +6,29 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.Lang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.AlloyingRecipe;
-import fr.lucreeper74.createmetallurgy.content.processing.castingtop.MeltingRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.MeltingRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum AllRecipeTypes implements IRecipeTypeInfo {
 
     MELTING(MeltingRecipe::new),
-    ALLOYING(AlloyingRecipe::new);
+    ALLOYING(AlloyingRecipe::new),
+    CASTING_IN_BASIN(CastingBasinRecipe::new);
     private final ResourceLocation id = new ResourceLocation(CreateMetallurgy.MOD_ID);
     private final RegistryObject<RecipeSerializer<?>> serializerObject;
     @Nullable
@@ -38,6 +44,7 @@ public enum AllRecipeTypes implements IRecipeTypeInfo {
     AllRecipeTypes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {
         this(() -> new ProcessingRecipeSerializer<>(processingFactory));
     }
+
     public static void register(IEventBus modEventBus) {
         Registers.SERIALIZER_REGISTER.register(modEventBus);
         Registers.TYPE_REGISTER.register(modEventBus);

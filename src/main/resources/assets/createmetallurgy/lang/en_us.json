@@ -15,9 +15,9 @@
   "block.createmetallurgy.refractory_mortar_block": "Refractory Mortar Block",
   "block.createmetallurgy.foundry_basin": "Foundry Basin",
   "block.createmetallurgy.foundry_top": "Foundry Top",
-  "block.createmetallurgy.glassed_foundry_top": "Glassed Foundry Top",
+  "block.createmetallurgy.glassed_alloyer_top": "Glassed Alloyer Top",
   "block.createmetallurgy.foundry_mixer": "Foundry Mixer",
-
+  "block.createmetallurgy.casting_basin": "Casting Basin",
 
   "fluid.createmetallurgy.molten_iron": "Molten Iron",
   "fluid.createmetallurgy.molten_gold": "Molten Gold",
@@ -31,5 +31,6 @@
 
   "createmetallurgy.generic.unit.millibuckets": "mB",
 
-  "createmetallurgy.gui.goggles.foundrybasin_contents": "Foundry Basin Contents"
+  "createmetallurgy.gui.goggles.foundrybasin_contents": "Foundry Basin Contents",
+  "createmetallurgy.gui.goggles.castingbasin_contents": "Casting Basin Contents"
 }
