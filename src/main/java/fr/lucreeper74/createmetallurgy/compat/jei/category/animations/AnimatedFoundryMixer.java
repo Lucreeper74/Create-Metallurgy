@@ -19,7 +19,7 @@ public class AnimatedFoundryMixer extends AnimatedKinetics {
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(22.5f));
         int scale = 23;
 
-        blockElement(cogwheel())
+        blockElement(AllPModels.SHAFTLESS_STONE_COGWHEEL)
                 .rotateBlock(0, getCurrentAngle() * 2, 0)
                 .atLocal(0, 0, 0)
                 .scale(scale)
