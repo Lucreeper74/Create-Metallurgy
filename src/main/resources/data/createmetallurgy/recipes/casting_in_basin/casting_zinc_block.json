@@ -1,0 +1,16 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "fluid": "createmetallurgy:molten_zinc",
+      "amount": 900
+    }
+  ],
+  "processingTime": 150,
+  "results": [
+    {
+      "item": "create:zinc_block",
+      "amount": 1
+    }
+  ]
+}
