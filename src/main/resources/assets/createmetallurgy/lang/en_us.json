@@ -28,6 +28,7 @@
   "itemGroup.createmetallurgy.main_group": "Create: Metallurgy",
   "createmetallurgy.recipe.melting": "Foundry Melting",
   "createmetallurgy.recipe.alloying": "Foundry Alloying",
+  "createmetallurgy.recipe.casting_in_basin": "Casting In Basin",
 
   "createmetallurgy.generic.unit.millibuckets": "mB",
 

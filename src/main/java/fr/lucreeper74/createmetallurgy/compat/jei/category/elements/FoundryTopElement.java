@@ -6,7 +6,7 @@ import com.simibubi.create.foundation.gui.element.GuiGameElement;
 import fr.lucreeper74.createmetallurgy.registries.AllBlocks;
 import mezz.jei.api.gui.drawable.IDrawable;
 
-public class CastingTopElement implements IDrawable {
+public class FoundryTopElement implements IDrawable {
     @Override
     public int getWidth() {
         return 50;

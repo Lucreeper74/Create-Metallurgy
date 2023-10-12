@@ -13,7 +13,9 @@ import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.AlloyingCategory;
+import fr.lucreeper74.createmetallurgy.compat.jei.category.CastingInBasinCategory;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.MeltingCategory;
+import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinRecipe;
 import fr.lucreeper74.createmetallurgy.registries.AllBlocks;
 import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
 import mezz.jei.api.IModPlugin;
@@ -67,7 +69,14 @@ public class CreateMetallurgyJEI implements IModPlugin {
                         .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
                         .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_MIXER_BLOCK.get())
                         .emptyBackground(177, 100)
-                        .build("alloying", AlloyingCategory::new);
+                        .build("alloying", AlloyingCategory::new),
+
+                casting_in_basin = builder(CastingBasinRecipe.class)
+                        .addTypedRecipes(AllRecipeTypes.CASTING_IN_BASIN)
+                        .catalyst(AllBlocks.CASTING_BASIN_BLOCK::get)
+                        .itemIcon(AllBlocks.CASTING_BASIN_BLOCK.get())
+                        .emptyBackground(177, 100)
+                        .build("casting_in_basin", CastingInBasinCategory::new);
     }
 
     private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {
@@ -141,6 +150,11 @@ public class CreateMetallurgyJEI implements IModPlugin {
 
         public CategoryBuilder<T> icon(IDrawable icon) {
             this.icon = icon;
+            return this;
+        }
+
+        public CategoryBuilder<T> itemIcon(ItemLike item) {
+            icon(new ItemIcon(() -> new ItemStack(item)));
             return this;
         }
 
