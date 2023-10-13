@@ -3,6 +3,7 @@ package fr.lucreeper74.createmetallurgy.compat.jei.category;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import com.simibubi.create.Create;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
@@ -11,10 +12,12 @@ import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.item.ItemHelper;
+import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.Pair;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.elements.CastingInBasinElement;
 import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.utils.LANG;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -29,7 +32,7 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastingInBasinCategory extends CreateRecipeCategory<CastingBasinRecipe> {
+public class  CastingInBasinCategory extends CreateRecipeCategory<CastingBasinRecipe> {
         private final CastingInBasinElement castingBasin = new CastingInBasinElement();
         private final AnimatedBlazeBurner heater = new AnimatedBlazeBurner();
 
@@ -132,6 +135,10 @@ public class CastingInBasinCategory extends CreateRecipeCategory<CastingBasinRec
             heatBar.render(matrixStack, 4, 80);
             Minecraft.getInstance().font.draw(matrixStack, Lang.translateDirect(requiredHeat.getTranslationKey()), 9,
                     86, requiredHeat.getColor());
+
+            Minecraft.getInstance().font.draw(matrixStack, Components.translatable(((float) recipe.getProcessingDuration() / 20.0F) + "s"),
+                    getBackground().getWidth() / 2 + 9,
+                    30, 0xffffff);
         }
 
 }
