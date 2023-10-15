@@ -2,6 +2,7 @@ package fr.lucreeper74.createmetallurgy.content.processing.castingbasin;
 
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
@@ -41,7 +42,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CastingBasinBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
+public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
     protected LazyOptional<IItemHandler> itemCapability;
     public SmartFluidTankBehaviour inputTank;
     public SmartInventory inv;
@@ -58,7 +59,6 @@ public class CastingBasinBlockEntity extends SmartBlockEntity implements IHaveGo
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         behaviours.add(new DirectBeltInputBehaviour(this));
-
 
         inputTank = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 900, true);
         behaviours.add(inputTank);
@@ -79,7 +79,6 @@ public class CastingBasinBlockEntity extends SmartBlockEntity implements IHaveGo
         running = compound.getBoolean("Running");
         super.read(compound, clientPacket);
     }
-
 
     @Nonnull
     @Override
@@ -123,10 +122,10 @@ public class CastingBasinBlockEntity extends SmartBlockEntity implements IHaveGo
         }
     }
 
-
     public boolean canProcess() {
         FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
-        return currentRecipe.getFluidIngredients().get(0).test(fluidInTank) && currentRecipe.getFluidIngredients().get(0).getRequiredAmount() == fluidInTank.getAmount();
+        return currentRecipe.getFluidIngredients().get(0).test(fluidInTank)
+                && currentRecipe.getFluidIngredients().get(0).getRequiredAmount() >= fluidInTank.getAmount();
     }
 
     public void startProcess() {
@@ -141,7 +140,7 @@ public class CastingBasinBlockEntity extends SmartBlockEntity implements IHaveGo
 
     public void process() {
         FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
-        getInv().insertItem(0, currentRecipe.getResultItem().copy(), false);
+        inv.insertItem(0, currentRecipe.getResultItem().copy(), false);
         fluidInTank.shrink(currentRecipe.getFluidIngredients().get(0).getRequiredAmount());
         getBehaviour(SmartFluidTankBehaviour.INPUT)
                 .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
@@ -189,10 +188,6 @@ public class CastingBasinBlockEntity extends SmartBlockEntity implements IHaveGo
 
     public IFluidHandler getFluidTank() {
         return inputTank.getCapability().orElse(null);
-    }
-
-    public IItemHandler getInv() {
-        return inv;
     }
 
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {

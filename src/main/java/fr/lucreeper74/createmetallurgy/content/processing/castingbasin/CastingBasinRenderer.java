@@ -1,7 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.processing.castingbasin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
@@ -9,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -33,7 +31,7 @@ public class CastingBasinRenderer extends SmartBlockEntityRenderer<CastingBasinB
         float level = primaryTank.getFluidLevel()
                 .getValue(partialTicks);
 
-        if (!fluidStack.isEmpty() && level > 0.175F) {
+        if (!fluidStack.isEmpty() && level > 0.01F) {
 
             float min = 2f / 16f;
             float max = min + (12f / 16f);
@@ -65,5 +63,4 @@ public class CastingBasinRenderer extends SmartBlockEntityRenderer<CastingBasinB
                 .getItemRenderer()
                 .renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, ms, buffer, 0);
     }
-
 }
