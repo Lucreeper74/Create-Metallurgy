@@ -7,6 +7,7 @@ import com.simibubi.create.foundation.utility.Lang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.AlloyingRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.castingtable.CastingTableRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.MeltingRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +29,8 @@ public enum AllRecipeTypes implements IRecipeTypeInfo {
 
     MELTING(MeltingRecipe::new),
     ALLOYING(AlloyingRecipe::new),
-    CASTING_IN_BASIN(CastingBasinRecipe::new);
+    CASTING_IN_BASIN(CastingBasinRecipe::new),
+    CASTING_IN_TABLE(CastingTableRecipe::new);
     private final ResourceLocation id = new ResourceLocation(CreateMetallurgy.MOD_ID);
     private final RegistryObject<RecipeSerializer<?>> serializerObject;
     @Nullable

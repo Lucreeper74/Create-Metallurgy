@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "createmetallurgy:block/casting_table/block",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "createmetallurgy:block/casting_table/block",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "createmetallurgy:block/casting_table/block"
+    },
+    "facing=west": {
+      "model": "createmetallurgy:block/casting_table/block",
+      "y": 90
+    }
+  }
+}
