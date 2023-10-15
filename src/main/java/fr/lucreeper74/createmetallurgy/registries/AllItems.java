@@ -17,9 +17,11 @@ public class AllItems {
             .register();
     public static final ItemEntry<Item> RAW_CITRINE = REGISTRATE.item("raw_citrine", Item::new)
             .register();
-
     public static final ItemEntry<Item> STURDY_WHISK = REGISTRATE.item("sturdy_whisk", Item::new)
             .register();
+    public static final ItemEntry<Item> GRAPHITE_INGOT_MOLD = REGISTRATE.item("graphite_ingot_mold", Item::new)
+            .register();
+
 
     public static void register() {}
 }
