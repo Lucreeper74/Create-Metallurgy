@@ -9,6 +9,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.castingtable.CastingTableBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop.GlassedCastingTopBlock;
@@ -75,6 +76,20 @@ public class AllBlocks {
     public static final BlockEntry<CastingBasinBlock> CASTING_BASIN_BLOCK = REGISTRATE
             .block("casting_basin", CastingBasinBlock::new)
             .initialProperties(SharedProperties::stone)
+            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .blockstate(new BasinGenerator()::generate)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .onRegister(movementBehaviour(new BasinMovementBehaviour()))
+            .item()
+            .transform(customItemModel("_", "block"))
+            .register();
+
+    public static final BlockEntry<CastingTableBlock> CASTING_TABLE_BLOCK = REGISTRATE
+            .block("casting_table", CastingTableBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(BlockBehaviour.Properties::noOcclusion)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)

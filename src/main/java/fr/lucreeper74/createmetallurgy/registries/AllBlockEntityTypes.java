@@ -1,12 +1,13 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.content.processing.basin.BasinRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerInstance;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerRenderer;
 import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinRenderer;
+import fr.lucreeper74.createmetallurgy.content.processing.castingtable.CastingTableBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.processing.castingtable.CastingTableRenderer;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinRenderer;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlockEntity;
@@ -26,6 +27,12 @@ public class AllBlockEntityTypes {
             .blockEntity("casting_basin", CastingBasinBlockEntity::new)
             .validBlocks(AllBlocks.CASTING_BASIN_BLOCK)
             .renderer(() -> CastingBasinRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<CastingTableBlockEntity> CASTING_TABLE = REGISTRATE
+            .blockEntity("casting_table", CastingTableBlockEntity::new)
+            .validBlocks(AllBlocks.CASTING_TABLE_BLOCK)
+            .renderer(() -> CastingTableRenderer::new)
             .register();
 
     public static final BlockEntityEntry<CastingTopBlockEntity> FOUNDRY_TOP = REGISTRATE

@@ -3,6 +3,7 @@
   "item.createmetallurgy.raw_citrine": "Raw Citrine",
   "item.createmetallurgy.sturdy_whisk": "Sturdy Whisk",
   "item.createmetallurgy.polished_citrine": "Polished Citrine",
+  "item.createmetallurgy.graphite_ingot_mold": "Graphite Ingot Mold",
   "item.createmetallurgy.molten_iron_bucket": "Molten Iron Bucket",
   "item.createmetallurgy.molten_gold_bucket": "Molten Gold Bucket",
   "item.createmetallurgy.molten_copper_bucket": "Molten Copper Bucket",
@@ -18,6 +19,7 @@
   "block.createmetallurgy.glassed_alloyer_top": "Glassed Alloyer Top",
   "block.createmetallurgy.foundry_mixer": "Foundry Mixer",
   "block.createmetallurgy.casting_basin": "Casting Basin",
+  "block.createmetallurgy.casting_table": "Casting Table",
 
   "fluid.createmetallurgy.molten_iron": "Molten Iron",
   "fluid.createmetallurgy.molten_gold": "Molten Gold",
@@ -33,5 +35,6 @@
   "createmetallurgy.generic.unit.millibuckets": "mB",
 
   "createmetallurgy.gui.goggles.foundrybasin_contents": "Foundry Basin Contents",
-  "createmetallurgy.gui.goggles.castingbasin_contents": "Casting Basin Contents"
+  "createmetallurgy.gui.goggles.castingbasin_contents": "Casting Basin Contents",
+  "createmetallurgy.gui.goggles.castingtable_contents": "Casting Table Contents"
 }
