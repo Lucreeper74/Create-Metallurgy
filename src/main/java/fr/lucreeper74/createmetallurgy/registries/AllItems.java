@@ -19,9 +19,12 @@ public class AllItems {
             .register();
     public static final ItemEntry<Item> STURDY_WHISK = REGISTRATE.item("sturdy_whisk", Item::new)
             .register();
+    public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = REGISTRATE.item("graphite_blank_mold", Item::new)
+            .register();
     public static final ItemEntry<Item> GRAPHITE_INGOT_MOLD = REGISTRATE.item("graphite_ingot_mold", Item::new)
             .register();
-
+    public static final ItemEntry<Item> GRAPHITE = REGISTRATE.item("graphite", Item::new)
+            .register();
 
     public static void register() {}
 }
