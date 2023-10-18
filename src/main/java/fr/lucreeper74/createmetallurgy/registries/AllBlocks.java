@@ -9,6 +9,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinMovementBehaviour;
 import fr.lucreeper74.createmetallurgy.content.processing.castingtable.CastingTableBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlock;
@@ -81,7 +82,7 @@ public class AllBlocks {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate(new BasinGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
-            .onRegister(movementBehaviour(new BasinMovementBehaviour()))
+            .onRegister(movementBehaviour(new CastingBasinMovementBehaviour()))
             .item()
             .transform(customItemModel("_", "block"))
             .register();

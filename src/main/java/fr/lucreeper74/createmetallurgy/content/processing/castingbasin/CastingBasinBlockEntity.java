@@ -2,10 +2,10 @@ package fr.lucreeper74.createmetallurgy.content.processing.castingbasin;
 
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
+import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.Components;
@@ -80,6 +80,10 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
         super.read(compound, clientPacket);
     }
 
+    public void readOnlyItems(CompoundTag compound) {
+        inv.deserializeNBT(compound.getCompound("inv"));
+    }
+
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
@@ -88,6 +92,12 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
         if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
             return inputTank.getCapability().cast();
         return super.getCapability(cap, side);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        ItemHelper.dropContents(level, worldPosition, inv);
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehavi
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
-import com.simibubi.create.foundation.fluid.FluidHelper;
+import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.Components;
@@ -93,6 +93,13 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
         if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
             return inputTank.getCapability().cast();
         return super.getCapability(cap, side);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        ItemHelper.dropContents(level, worldPosition, inv);
+        ItemHelper.dropContents(level, worldPosition, moldInv);
     }
 
     @Override
