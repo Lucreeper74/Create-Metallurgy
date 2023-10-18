@@ -3,6 +3,12 @@
   "values": [
     "createmetallurgy:citrine_ore",
     "createmetallurgy:polished_citrine_block",
-    "createmetallurgy:raw_citrine_block"
+    "createmetallurgy:raw_citrine_block",
+    "createmetallurgy:foundry_basin",
+    "createmetallurgy:foundry_mixer",
+    "createmetallurgy:foundry_top",
+    "createmetallurgy:glassed_alloyer_top",
+    "createmetallurgy:casting_basin",
+    "createmetallurgy:casting_table"
   ]
 }
