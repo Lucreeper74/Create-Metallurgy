@@ -1,0 +1,14 @@
+{
+  "type": "create:cutting",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_blank_mold"
+    }
+  ],
+  "processingTime": 300,
+  "results": [
+    {
+      "item": "createmetallurgy:graphite_ingot_mold"
+    }
+  ]
+}
