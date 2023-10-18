@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createmetallurgy:casting_basin"
+          "name": "createmetallurgy:casting_table"
         }
       ],
       "conditions": [
