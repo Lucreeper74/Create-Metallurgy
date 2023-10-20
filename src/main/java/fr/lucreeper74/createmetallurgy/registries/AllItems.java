@@ -4,7 +4,10 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.tabs.CreateMetallurgyTab;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+
+import static com.simibubi.create.AllTags.forgeItemTag;
 
 @SuppressWarnings("unused")
 public class AllItems {
@@ -20,8 +23,10 @@ public class AllItems {
     public static final ItemEntry<Item> STURDY_WHISK = REGISTRATE.item("sturdy_whisk", Item::new)
             .register();
     public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = REGISTRATE.item("graphite_blank_mold", Item::new)
+            .tag(forgeItemTag("graphite_molds/blank"))
             .register();
     public static final ItemEntry<Item> GRAPHITE_INGOT_MOLD = REGISTRATE.item("graphite_ingot_mold", Item::new)
+            .tag(forgeItemTag("graphite_molds/ingot"))
             .register();
     public static final ItemEntry<Item> GRAPHITE = REGISTRATE.item("graphite", Item::new)
             .register();
