@@ -174,7 +174,7 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
     protected void spawnParticles() {
         RandomSource r = level.getRandom();
         Vec3 c = VecHelper.getCenterOf(worldPosition);
-        Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .125f)
+        Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .25f)
                 .multiply(1, 0, 1));
         if (r.nextInt(8) == 0)
             level.addParticle(ParticleTypes.LARGE_SMOKE, v.x, v.y + .45, v.z, 0, 0, 0);
