@@ -33,6 +33,7 @@
   "createmetallurgy.recipe.melting": "Foundry Melting",
   "createmetallurgy.recipe.alloying": "Foundry Alloying",
   "createmetallurgy.recipe.casting_in_basin": "Casting In Basin",
+  "createmetallurgy.recipe.casting_in_table": "Casting In Table",
 
   "createmetallurgy.generic.unit.millibuckets": "mB",
 

@@ -14,8 +14,10 @@ import com.simibubi.create.infrastructure.config.CRecipes;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.AlloyingCategory;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.CastingInBasinCategory;
+import fr.lucreeper74.createmetallurgy.compat.jei.category.CastingInTableCategory;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.MeltingCategory;
-import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRecipe;
 import fr.lucreeper74.createmetallurgy.registries.AllBlocks;
 import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
 import mezz.jei.api.IModPlugin;
@@ -76,7 +78,14 @@ public class CreateMetallurgyJEI implements IModPlugin {
                         .catalyst(AllBlocks.CASTING_BASIN_BLOCK::get)
                         .itemIcon(AllBlocks.CASTING_BASIN_BLOCK.get())
                         .emptyBackground(177, 100)
-                        .build("casting_in_basin", CastingInBasinCategory::new);
+                        .build("casting_in_basin", CastingInBasinCategory::new),
+
+                casting_in_table = builder(CastingTableRecipe.class)
+                    .addTypedRecipes(AllRecipeTypes.CASTING_IN_TABLE)
+                    .catalyst(AllBlocks.CASTING_TABLE_BLOCK::get)
+                    .itemIcon(AllBlocks.CASTING_TABLE_BLOCK.get())
+                    .emptyBackground(177, 100)
+                    .build("casting_in_table", CastingInTableCategory::new);
     }
 
     private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {

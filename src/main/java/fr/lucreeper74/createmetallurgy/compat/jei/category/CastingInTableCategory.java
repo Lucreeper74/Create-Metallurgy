@@ -14,8 +14,8 @@ import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.Pair;
-import fr.lucreeper74.createmetallurgy.compat.jei.category.elements.CastingInBasinElement;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.compat.jei.category.elements.CastingInTableElement;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRecipe;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -30,16 +30,15 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  CastingInBasinCategory extends CreateRecipeCategory<CastingBasinRecipe> {
-        private final CastingInBasinElement castingBasin = new CastingInBasinElement();
+public class CastingInTableCategory extends CreateRecipeCategory<CastingTableRecipe> {
+        private final CastingInTableElement castingTable = new CastingInTableElement();
         private final AnimatedBlazeBurner heater = new AnimatedBlazeBurner();
 
-        public CastingInBasinCategory(CreateRecipeCategory.Info<CastingBasinRecipe> info) {
+        public CastingInTableCategory(Info<CastingTableRecipe> info) {
             super(info);
         }
-
     @Override
-        public void setRecipe(IRecipeLayoutBuilder builder, CastingBasinRecipe recipe, IFocusGroup focuses) {
+        public void setRecipe(IRecipeLayoutBuilder builder, CastingTableRecipe recipe, IFocusGroup focuses) {
             List<Pair<Ingredient, MutableInt>> condensedIngredients = ItemHelper.condenseIngredients(recipe.getIngredients());
 
             int size = condensedIngredients.size() + recipe.getFluidIngredients().size();
@@ -110,7 +109,7 @@ public class  CastingInBasinCategory extends CreateRecipeCategory<CastingBasinRe
         }
 
         @Override
-        public void draw(CastingBasinRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+        public void draw(CastingTableRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
             HeatCondition requiredHeat = recipe.getRequiredHeat();
 
             boolean noHeat = requiredHeat == HeatCondition.NONE;
@@ -123,7 +122,7 @@ public class  CastingInBasinCategory extends CreateRecipeCategory<CastingBasinRe
             AllGuiTextures shadow = noHeat ? AllGuiTextures.JEI_SHADOW : AllGuiTextures.JEI_LIGHT;
             shadow.render(matrixStack, 81, 58 + (noHeat ? 10 : 30));
 
-            castingBasin.draw(matrixStack, getBackground().getWidth() / 2 + 3, 34);
+            castingTable.draw(matrixStack, getBackground().getWidth() / 2 + 3, 34);
 
             if (requiredHeat != HeatCondition.NONE)
                 heater.withHeat(requiredHeat.visualizeAsBlazeBurner())
