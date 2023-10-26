@@ -6,23 +6,19 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.Lang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.AlloyingRecipe;
-import fr.lucreeper74.createmetallurgy.content.processing.castingbasin.CastingBasinRecipe;
-import fr.lucreeper74.createmetallurgy.content.processing.castingtable.CastingTableRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.MeltingRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum AllRecipeTypes implements IRecipeTypeInfo {

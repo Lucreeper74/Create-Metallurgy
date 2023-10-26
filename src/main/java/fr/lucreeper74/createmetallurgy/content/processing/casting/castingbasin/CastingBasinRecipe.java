@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.processing.castingbasin;
+package fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;

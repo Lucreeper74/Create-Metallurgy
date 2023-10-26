@@ -1,8 +1,7 @@
-package fr.lucreeper74.createmetallurgy.content.processing.castingbasin;
+package fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin;
 
 import com.simibubi.create.content.contraptions.behaviour.MovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
-import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;

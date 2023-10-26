@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.processing.castingtable;
+package fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
@@ -13,7 +13,7 @@ public class CastingTableRecipe extends ProcessingRecipe<SmartInventory> {
 
     @Override
     protected int getMaxInputCount() {
-        return 0;
+        return 1;
     }
 
     @Override

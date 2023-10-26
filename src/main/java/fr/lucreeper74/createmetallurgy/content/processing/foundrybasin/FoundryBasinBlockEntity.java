@@ -23,8 +23,8 @@ public class FoundryBasinBlockEntity extends BasinBlockEntity {
 
     public FoundryBasinBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        inputInventory = (BasinInventory) new BasinInventory(1, this).withMaxStackSize(10);
-        outputInventory = new BasinInventory(1, this).forbidInsertion().withMaxStackSize(10);
+        inputInventory = (BasinInventory) new BasinInventory(1, this).withMaxStackSize(9);
+        outputInventory = new BasinInventory(1, this).forbidInsertion().withMaxStackSize(9);
     }
 
     // CLIENT THINGS -----------------

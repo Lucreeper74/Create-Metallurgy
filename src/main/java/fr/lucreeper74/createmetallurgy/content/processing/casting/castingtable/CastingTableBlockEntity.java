@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.processing.castingbasin;
+package fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable;
 
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
@@ -35,53 +35,54 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
-    protected LazyOptional<IItemHandler> itemCapability;
+public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
+    protected LazyOptional<IItemHandlerModifiable> itemCapability;
     public SmartFluidTankBehaviour inputTank;
     public SmartInventory inv;
-    public CastingBasinRecipe currentRecipe;
+    public SmartInventory moldInv;
+    public CastingTableRecipe currentRecipe;
     public boolean running;
     public int processingTick;
 
-    public CastingBasinBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public CastingTableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        inv = new SmartInventory(1, this, 1, true);
-        itemCapability = LazyOptional.of(() -> inv);
+        inv = new SmartInventory(1, this, 1, true).forbidInsertion();
+        moldInv = new SmartInventory(1, this, 1, true);
+        itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(inv, moldInv));
     }
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         behaviours.add(new DirectBeltInputBehaviour(this));
 
-        inputTank = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 900, true);
+        inputTank = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 100, true);
         behaviours.add(inputTank);
     }
 
     @Override
     public void write(CompoundTag compound, boolean clientPacket) {
+        compound.put("moldInv", moldInv.serializeNBT());
         compound.put("inv", inv.serializeNBT());
-        compound.putInt("CastingTime", processingTick);
-        compound.putBoolean("Running", running);
+        compound.putInt("castingTime", processingTick);
+        compound.putBoolean("running", running);
         super.write(compound, clientPacket);
     }
 
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
+        moldInv.deserializeNBT(compound.getCompound("moldInv"));
         inv.deserializeNBT(compound.getCompound("inv"));
-        processingTick = compound.getInt("CastingTime");
-        running = compound.getBoolean("Running");
+        processingTick = compound.getInt("castingTime");
+        running = compound.getBoolean("running");
         super.read(compound, clientPacket);
-    }
-
-    public void readOnlyItems(CompoundTag compound) {
-        inv.deserializeNBT(compound.getCompound("inv"));
     }
 
     @Nonnull
@@ -98,6 +99,7 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
     public void destroy() {
         super.destroy();
         ItemHelper.dropContents(level, worldPosition, inv);
+        ItemHelper.dropContents(level, worldPosition, moldInv);
     }
 
     @Override
@@ -113,20 +115,21 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
         }
 
         if (running) {
-            if (!level.isClientSide && processingTick <= 0) {
+            if (!level.isClientSide) {
                 if (canProcess()) {
-                    process();
-                    level.playSound(null, worldPosition, SoundEvents.LAVA_EXTINGUISH,
-                            SoundSource.BLOCKS, .5f, .5f);
+                    if(processingTick <= 0) {
+                        process();
+                        level.playSound(null, worldPosition, SoundEvents.LAVA_EXTINGUISH,
+                                SoundSource.BLOCKS, .2f, .5f);
+                    }
                 } else {
                     processFailed();
-                    level.playSound(null, worldPosition, SoundEvents.BUCKET_EMPTY_LAVA,
-                            SoundSource.BLOCKS, .5f, .5f);
                 }
+                sendData();
             }
             if (level.isClientSide) spawnParticles();
 
-            if (processingTick > 0) {
+            if (processingTick >= 0) {
                 --processingTick;
             }
         }
@@ -135,7 +138,9 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
     public boolean canProcess() {
         FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
         return currentRecipe.getFluidIngredients().get(0).test(fluidInTank)
-                && currentRecipe.getFluidIngredients().get(0).getRequiredAmount() >= fluidInTank.getAmount();
+                && fluidInTank.getAmount() >= currentRecipe.getFluidIngredients().get(0).getRequiredAmount()
+                && currentRecipe.getIngredients().get(0).test(moldInv.getStackInSlot(0))
+                && inv.isEmpty();
     }
 
     public void startProcess() {
@@ -143,14 +148,18 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
         List<Recipe<?>> recipes = getMatchingRecipes();
         if (recipes.isEmpty()) return;
 
-        currentRecipe = (CastingBasinRecipe) recipes.get(0);
-        running = true;
-        processingTick = currentRecipe.getProcessingDuration();
+        currentRecipe = (CastingTableRecipe) recipes.get(0);
+
+        if(canProcess()) {
+            processingTick = currentRecipe.getProcessingDuration();
+            running = true;
+            sendData();
+        }
     }
 
     public void process() {
         FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
-        inv.insertItem(0, currentRecipe.getResultItem().copy(), false);
+        inv.setStackInSlot(0, currentRecipe.getResultItem().copy());
         fluidInTank.shrink(currentRecipe.getFluidIngredients().get(0).getRequiredAmount());
         getBehaviour(SmartFluidTankBehaviour.INPUT)
                 .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
@@ -161,11 +170,6 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
     }
 
     public void processFailed() {
-        FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
-        fluidInTank.shrink(currentRecipe.getFluidIngredients().get(0).getRequiredAmount());
-        getBehaviour(SmartFluidTankBehaviour.INPUT)
-                .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
-
         processingTick = -1;
         currentRecipe = null;
         running = false;
@@ -177,14 +181,14 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
         Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .25f)
                 .multiply(1, 0, 1));
         if (r.nextInt(8) == 0)
-            level.addParticle(ParticleTypes.LARGE_SMOKE, v.x, v.y + .45, v.z, 0, 0, 0);
+            level.addParticle(ParticleTypes.SMOKE, v.x, v.y + .45, v.z, 0, 0, 0);
     }
 
     protected List<Recipe<?>> getMatchingRecipes() {
         List<Recipe<?>> list = RecipeFinder.get(getRecipeCacheKey(), level, this::matchStaticFilters);
         return list.stream()
                 .filter(recipe -> {
-                    if (recipe instanceof CastingBasinRecipe castingRecipe) {
+                    if (recipe instanceof CastingTableRecipe castingRecipe) {
                         return castingRecipe.getFluidIngredients().get(0).test(getFluidTank().getFluidInTank(0));
                     }
                     return false;
@@ -197,28 +201,28 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
     }
 
     public IFluidHandler getFluidTank() {
-        return inputTank.getCapability().orElse(null);
+        return getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).orElse(new FluidTank(1));
     }
 
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
-        return r.getType() == AllRecipeTypes.CASTING_IN_BASIN.getType();
+        return r.getType() == AllRecipeTypes.CASTING_IN_TABLE.getType();
     }
 
-    private static final Object CastingInBasinRecipesKey = new Object();
+    private static final Object CastingInTableRecipesKey = new Object();
 
     protected Object getRecipeCacheKey() {
-        return CastingInBasinRecipesKey;
+        return CastingInTableRecipesKey;
     }
 
 
     // CLIENT THINGS -----------------
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        LANG.translate("gui.goggles.castingbasin_contents")
+        LANG.translate("gui.goggles.castingtable_contents")
                 .forGoggles(tooltip);
 
-        IItemHandler items = itemCapability.orElse(new ItemStackHandler());
-        IFluidHandler fluids = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).orElse(new FluidTank(1));
+        IItemHandlerModifiable items = itemCapability.orElse(new ItemStackHandler());
+        IFluidHandler fluids = getFluidTank();
         boolean isEmpty = true;
 
         for (int i = 0; i < items.getSlots(); i++) {

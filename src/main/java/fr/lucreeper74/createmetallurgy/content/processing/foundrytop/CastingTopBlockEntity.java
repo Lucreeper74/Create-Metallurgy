@@ -79,9 +79,8 @@ public class CastingTopBlockEntity extends BasinOperatingBlockEntity {
                         SoundSource.BLOCKS, .5f, .75f);
             }
 
-            if(level.isClientSide && processingTime % 2 == 0) {
+            if(level.isClientSide && processingTime % 2 == 0)
                 spawnParticles();
-            }
 
             if (processingTime > 0) --processingTime;
         }
