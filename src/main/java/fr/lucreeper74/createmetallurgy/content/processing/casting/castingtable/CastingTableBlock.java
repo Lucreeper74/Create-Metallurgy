@@ -71,8 +71,8 @@ public class CastingTableBlock extends Block implements IBE<CastingTableBlockEnt
                 if(be.moldInv.isEmpty()) {
                     be.moldInv.insertItem(0, heldItem, false);
                     player.setItemInHand(handIn, heldItem.split(heldItem.getCount() - 1));
-                    worldIn.playSound(null, pos, SoundEvents.ITEM_FRAME_ROTATE_ITEM,
-                            SoundSource.PLAYERS, .2f, 1f + Create.RANDOM.nextFloat());
+                    worldIn.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM,
+                            SoundSource.PLAYERS, 1f, 1f + Create.RANDOM.nextFloat());
                     return InteractionResult.SUCCESS;
                 }
             }

@@ -28,7 +28,6 @@ public class TintedVertexBuilder implements VertexConsumer {
 
     @Override
     public void defaultColor(int red, int green, int blue, int alpha) {
-        // TODO: is setting the default color here correct?
         inner.defaultColor((red * tintRed) / 0xFF, (green * tintGreen) / 0xFF, (blue * tintBlue) / 0xFF, (alpha * tintAlpha) / 0xFF);
     }
 

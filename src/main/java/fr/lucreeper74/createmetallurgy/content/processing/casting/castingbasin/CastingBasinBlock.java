@@ -58,14 +58,6 @@ public class CastingBasinBlock extends Block implements IBE<CastingBasinBlockEnt
 
         return onBlockEntityUse(worldIn, pos, be -> {
             if (!heldItem.isEmpty()) {
-                if (FluidHelper.tryEmptyItemIntoBE(worldIn, player, handIn, heldItem, be))
-                    return InteractionResult.SUCCESS;
-                if (FluidHelper.tryFillItemFromBE(worldIn, player, handIn, heldItem, be))
-                    return InteractionResult.SUCCESS;
-
-                if (GenericItemEmptying.canItemBeEmptied(worldIn, heldItem)
-                        || GenericItemFilling.canItemBeFilled(worldIn, heldItem))
-                    return InteractionResult.SUCCESS;
                 if (heldItem.getItem()
                         .equals(Items.SPONGE)
                         && !be.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
@@ -74,11 +66,16 @@ public class CastingBasinBlock extends Block implements IBE<CastingBasinBlockEnt
                         .isEmpty()) {
                     return InteractionResult.SUCCESS;
                 }
-                return InteractionResult.PASS;
+                    if(be.inv.isEmpty()) {
+                        be.inv.insertItem(0, heldItem, false);
+                        player.setItemInHand(handIn, heldItem.split(heldItem.getCount() - 1));
+                        worldIn.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM,
+                                SoundSource.PLAYERS, 1f, 1f + Create.RANDOM.nextFloat());
+                        return InteractionResult.SUCCESS;
+                }
             }
 
             IItemHandlerModifiable inv = be.itemCapability.orElse(new ItemStackHandler());
-            boolean wasEmptyHanded = heldItem.isEmpty();
             boolean success = false;
 
             for (int slot = 0; slot < inv.getSlots(); slot++) {
@@ -93,14 +90,6 @@ public class CastingBasinBlock extends Block implements IBE<CastingBasinBlockEnt
             if (success)
                 worldIn.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, .2f,
                         1f + Create.RANDOM.nextFloat());
-
-            //TODO: POUVOIR POSER DES ITEMS A LA MAIN
-
-            /*if (!wasEmptyHanded) {
-                player.setItemInHand(handIn, ItemStack.EMPTY);
-                AllSoundEvents.DEPOT_SLIDE.playOnServer(worldIn, pos);
-            }*/
-
             return InteractionResult.SUCCESS;
         });
     }
