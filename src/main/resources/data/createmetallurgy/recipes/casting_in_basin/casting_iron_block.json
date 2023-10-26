@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "fluid": "createmetallurgy:molten_iron",
-      "amount": 900
+      "amount": 810
     }
   ],
   "processingTime": 150,

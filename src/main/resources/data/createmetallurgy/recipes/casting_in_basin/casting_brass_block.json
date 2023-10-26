@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "fluid": "createmetallurgy:molten_brass",
-      "amount": 900
+      "amount": 810
     }
   ],
   "processingTime": 150,

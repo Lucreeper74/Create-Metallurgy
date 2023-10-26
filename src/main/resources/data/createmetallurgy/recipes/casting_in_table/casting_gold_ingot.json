@@ -6,7 +6,7 @@
     },
     {
       "fluid": "createmetallurgy:molten_gold",
-      "amount": 100
+      "amount": 90
     }
   ],
   "processingTime": 80,

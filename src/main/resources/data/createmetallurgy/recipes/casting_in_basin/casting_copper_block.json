@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "fluid": "createmetallurgy:molten_copper",
-      "amount": 900
+      "amount": 810
     }
   ],
   "processingTime": 150,
