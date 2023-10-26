@@ -85,6 +85,8 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
         super.read(compound, clientPacket);
     }
 
+    public void readOnlyItems(CompoundTag compound) {inv.deserializeNBT(compound.getCompound("inv"));}
+
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {

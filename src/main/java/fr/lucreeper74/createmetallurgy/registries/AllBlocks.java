@@ -11,6 +11,7 @@ import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixe
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinMovementBehaviour;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableMovementBehaviour;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop.GlassedCastingTopBlock;
@@ -96,7 +97,7 @@ public class AllBlocks {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate(new BasinGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
-            .onRegister(movementBehaviour(new BasinMovementBehaviour()))
+            .onRegister(movementBehaviour(new CastingTableMovementBehaviour()))
             .item()
             .transform(customItemModel("_", "block"))
             .register();
