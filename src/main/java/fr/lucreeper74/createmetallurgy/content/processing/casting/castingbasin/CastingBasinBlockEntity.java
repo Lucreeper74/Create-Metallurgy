@@ -123,7 +123,6 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
                 } else {
                     processFailed();
                 }
-                sendData();
             }
             if (level.isClientSide) spawnParticles();
 
@@ -164,12 +163,14 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
         processingTick = -1;
         currentRecipe = null;
         running = false;
+        sendData();
     }
 
     public void processFailed() {
         processingTick = -1;
         currentRecipe = null;
         running = false;
+        sendData();
     }
 
     protected void spawnParticles() {

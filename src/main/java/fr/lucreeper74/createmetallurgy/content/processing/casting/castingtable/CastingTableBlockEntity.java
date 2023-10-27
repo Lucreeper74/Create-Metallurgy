@@ -127,7 +127,6 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
                 } else {
                     processFailed();
                 }
-                sendData();
             }
             if (level.isClientSide) spawnParticles();
 
@@ -169,12 +168,14 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
         processingTick = -1;
         currentRecipe = null;
         running = false;
+        sendData();
     }
 
     public void processFailed() {
         processingTick = -1;
         currentRecipe = null;
         running = false;
+        sendData();
     }
 
     protected void spawnParticles() {
