@@ -1,12 +1,12 @@
 package fr.lucreeper74.createmetallurgy;
 
-import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPointTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import fr.lucreeper74.createmetallurgy.content.kinetics.mechanicalArm.AllArmInteract;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingWithSpout;
 import fr.lucreeper74.createmetallurgy.registries.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -44,6 +44,7 @@ public class CreateMetallurgy {
         AllBlockEntityTypes.register();
         AllRecipeTypes.register(eventBus);
 
+        CastingWithSpout.registerDefaults();
 
         eventBus.addListener(this::commonSetup);
 
