@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"2": "createmetallurgy:block/refractory_mortar_block",
+		"2": "createmetallurgy:block/refractory_mortar",
 		"12": "createmetallurgy:block/foundry_basin",
 		"particle": "createmetallurgy:block/industrial_iron_block"
 	},

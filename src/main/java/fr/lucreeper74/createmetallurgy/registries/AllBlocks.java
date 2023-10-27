@@ -55,8 +55,8 @@ public class AllBlocks {
             .simpleItem()
             .register();
 
-    public static final BlockEntry<Block> REFRACTORY_MORTAR_BLOCK = REGISTRATE
-            .block("refractory_mortar_block", Block::new)
+    public static final BlockEntry<Block> REFRACTORY_MORTAR = REGISTRATE
+            .block("refractory_mortar", Block::new)
             .initialProperties(() -> Blocks.CLAY)
             .tag(BlockTags.MINEABLE_WITH_SHOVEL)
             .simpleItem()
