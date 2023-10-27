@@ -31,6 +31,7 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
@@ -44,6 +45,7 @@ import java.util.function.Supplier;
 public class CreateMetallurgyJEI implements IModPlugin {
 
     private static final ResourceLocation ID = new ResourceLocation(CreateMetallurgy.MOD_ID, "jei_plugin");
+
     @Override
     public ResourceLocation getPluginUid() {
         return ID;
@@ -57,12 +59,11 @@ public class CreateMetallurgyJEI implements IModPlugin {
 
         CreateRecipeCategory<?>
                 melting = builder(BasinRecipe.class)
-                    .addTypedRecipes(AllRecipeTypes.MELTING)
-                    .catalyst(AllBlocks.FOUNDRY_TOP_BLOCK::get)
-                    .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
-                    .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_TOP_BLOCK.get())
-                    .emptyBackground(177, 100)
-                    .build("melting", MeltingCategory::new),
+                .addTypedRecipes(AllRecipeTypes.MELTING).catalyst(AllBlocks.FOUNDRY_TOP_BLOCK::get)
+                .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
+                .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_TOP_BLOCK.get())
+                .emptyBackground(177, 100)
+                .build("melting", MeltingCategory::new),
 
                 alloying = builder(BasinRecipe.class)
                         .addTypedRecipes(AllRecipeTypes.ALLOYING)
@@ -75,17 +76,19 @@ public class CreateMetallurgyJEI implements IModPlugin {
 
                 casting_in_basin = builder(CastingBasinRecipe.class)
                         .addTypedRecipes(AllRecipeTypes.CASTING_IN_BASIN)
+                        .catalyst(com.simibubi.create.AllBlocks.SPOUT::get)
                         .catalyst(AllBlocks.CASTING_BASIN_BLOCK::get)
-                        .itemIcon(AllBlocks.CASTING_BASIN_BLOCK.get())
-                        .emptyBackground(177, 100)
+                        .doubleItemIcon(AllBlocks.CASTING_BASIN_BLOCK.get(), Items.CLOCK)
+                        .emptyBackground(177, 53)
                         .build("casting_in_basin", CastingInBasinCategory::new),
 
                 casting_in_table = builder(CastingTableRecipe.class)
-                    .addTypedRecipes(AllRecipeTypes.CASTING_IN_TABLE)
-                    .catalyst(AllBlocks.CASTING_TABLE_BLOCK::get)
-                    .itemIcon(AllBlocks.CASTING_TABLE_BLOCK.get())
-                    .emptyBackground(177, 100)
-                    .build("casting_in_table", CastingInTableCategory::new);
+                        .addTypedRecipes(AllRecipeTypes.CASTING_IN_TABLE)
+                        .catalyst(com.simibubi.create.AllBlocks.SPOUT::get)
+                        .catalyst(AllBlocks.CASTING_TABLE_BLOCK::get)
+                        .doubleItemIcon(AllBlocks.CASTING_TABLE_BLOCK.get(), Items.CLOCK)
+                        .emptyBackground(177, 53)
+                        .build("casting_in_table", CastingInTableCategory::new);
     }
 
     private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {
