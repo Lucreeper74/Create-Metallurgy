@@ -1,7 +1,7 @@
 package fr.lucreeper74.createmetallurgy.tabs;
 
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.registries.AllItems;
+import fr.lucreeper74.createmetallurgy.registries.AllFluids;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
@@ -11,7 +11,7 @@ public class CreateMetallurgyTab {
         @Override
         public ItemStack makeIcon()
         {
-            return new ItemStack(AllItems.CITRINE_SHARD.get());
+            return new ItemStack(AllFluids.MOLTEN_IRON.getBucket().get());
         }
     };
 }
