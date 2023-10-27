@@ -42,7 +42,7 @@ authors="Luc_Creeper74" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Simple mod adding metallurgy items and blocks to Minecraft & Create Mod
+Create Metallurgy is a Create Mod Addon developped by Luc_Creeper74, that allow to melt minerals wich make your ore processing factory more efficient and stylish.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.createmetallurgy]] #optional
