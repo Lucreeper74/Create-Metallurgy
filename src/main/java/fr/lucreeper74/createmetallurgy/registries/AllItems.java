@@ -6,7 +6,9 @@ import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.tabs.CreateMetallurgyTab;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.Tags;
 
+import static com.simibubi.create.AllTags.AllItemTags.CREATE_INGOTS;
 import static com.simibubi.create.AllTags.forgeItemTag;
 
 @SuppressWarnings("unused")
@@ -14,22 +16,28 @@ public class AllItems {
 
     private static final CreateRegistrate REGISTRATE = CreateMetallurgy.REGISTRATE.creativeModeTab(() -> CreateMetallurgyTab.MAIN_GROUP);
 
-    public static final ItemEntry<Item> CITRINE_SHARD = REGISTRATE.item("citrine_shard", Item::new)
-            .register();
-    public static final ItemEntry<Item> POLISHED_CITRINE = REGISTRATE.item("polished_citrine", Item::new)
-            .register();
-    public static final ItemEntry<Item> RAW_CITRINE = REGISTRATE.item("raw_citrine", Item::new)
-            .register();
-    public static final ItemEntry<Item> STURDY_WHISK = REGISTRATE.item("sturdy_whisk", Item::new)
-            .register();
-    public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = REGISTRATE.item("graphite_blank_mold", Item::new)
-            .tag(forgeItemTag("graphite_molds/blank"))
-            .register();
-    public static final ItemEntry<Item> GRAPHITE_INGOT_MOLD = REGISTRATE.item("graphite_ingot_mold", Item::new)
-            .tag(forgeItemTag("graphite_molds/ingot"))
-            .register();
-    public static final ItemEntry<Item> GRAPHITE = REGISTRATE.item("graphite", Item::new)
-            .register();
+    public static final ItemEntry<Item> RAW_COBALT = taggedIngredient("raw_cobalt", forgeItemTag("raw_materials/cobalt"), forgeItemTag("raw_materials")),
+            COBALT_INGOT = taggedIngredient("cobalt_ingot", forgeItemTag("ingots/cobalt"), Tags.Items.INGOTS),
+            COBALT_PLATE = taggedIngredient("cobalt_plate", forgeItemTag("plates/cobalt"), forgeItemTag("plates")),
+            COBALT_NUGGET = taggedIngredient("cobalt_nugget", forgeItemTag("nuggets/cobalt"), Tags.Items.NUGGETS);
 
-    public static void register() {}
+    public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = taggedIngredient("graphite_blank_mold", forgeItemTag("graphite_molds/blank"), forgeItemTag("graphite_molds")),
+            GRAPHITE_INGOT_MOLD = taggedIngredient("graphite_ingot_mold", forgeItemTag("graphite_molds/ingot"), forgeItemTag("graphite_molds")),
+            GRAPHITE_NUGGET_MOLD = taggedIngredient("graphite_nugget_mold", forgeItemTag("graphite_molds/nugget"), forgeItemTag("graphite_molds")),
+            GRAPHITE_PLATE_MOLD = taggedIngredient("graphite_plate_mold", forgeItemTag("graphite_molds/plate"), forgeItemTag("graphite_molds"));
+
+    public static final ItemEntry<Item> GRAPHITE = taggedIngredient("graphite", forgeItemTag("graphite"));
+    public static final ItemEntry<Item> STURDY_WHISK = REGISTRATE.item("sturdy_whisk", Item::new).register();
+
+    //Shortcut
+
+    @SafeVarargs
+    private static ItemEntry<Item> taggedIngredient(String name, TagKey<Item>... tags) {
+        return REGISTRATE.item(name, Item::new)
+                .tag(tags)
+                .register();
+    }
+
+    public static void register() {
+    }
 }

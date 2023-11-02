@@ -1,0 +1,16 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "fluid": "createmetallurgy:molten_cobalt",
+      "amount": 810
+    }
+  ],
+  "processingTime": 150,
+  "results": [
+    {
+      "item": "createmetallurgy:cobalt_block",
+      "amount": 1
+    }
+  ]
+}

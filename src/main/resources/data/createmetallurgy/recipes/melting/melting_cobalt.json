@@ -1,0 +1,16 @@
+{
+  "type": "createmetallurgy:melting",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/cobalt"
+    }
+  ],
+  "processingTime": 40,
+  "results": [
+    {
+      "fluid": "createmetallurgy:molten_cobalt",
+      "amount": 90
+    }
+  ],
+  "heatRequirement": "superheated"
+}

@@ -25,18 +25,14 @@
                   }
                 }
               ],
-              "name": "createmetallurgy:citrine_ore"
+              "name": "createmetallurgy:cobalt_ore"
             },
             {
               "type": "minecraft:item",
               "functions": [
                 {
                   "function": "minecraft:set_count",
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "min": 2.0,
-                    "max": 5.0
-                  },
+                  "count": 1,
                   "add": false
                 },
                 {
@@ -48,7 +44,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "createmetallurgy:raw_citrine"
+              "name": "createmetallurgy:raw_cobalt"
             }
           ]
         }

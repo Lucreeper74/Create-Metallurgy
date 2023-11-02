@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "createmetallurgy:block/polished_citrine_block"
-  }
-}

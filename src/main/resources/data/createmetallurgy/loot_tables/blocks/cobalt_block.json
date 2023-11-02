@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createmetallurgy:raw_citrine_block"
+          "name": "createmetallurgy:cobalt_block"
         }
       ],
       "conditions": [

@@ -23,36 +23,41 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.common.Tags;
 
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
+import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
 
 @SuppressWarnings("unused")
 public class AllBlocks {
     private static final CreateRegistrate REGISTRATE = CreateMetallurgy.REGISTRATE.creativeModeTab(() -> CreateMetallurgyTab.MAIN_GROUP);
 
-    public static final BlockEntry<Block> RAW_CITRINE_BLOCK = REGISTRATE
-            .block("raw_citrine_block", Block::new)
+    public static final BlockEntry<Block> RAW_COBALT_BLOCK = REGISTRATE
+            .block("raw_cobalt_block", Block::new)
             .initialProperties(() -> Blocks.RAW_COPPER_BLOCK)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .tag(BlockTags.NEEDS_STONE_TOOL)
+            .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .simpleItem()
             .register();
 
-    public static final BlockEntry<Block> POLISHED_CITRINE_BLOCK = REGISTRATE
-            .block("polished_citrine_block", Block::new)
+    public static final BlockEntry<Block> COBALT_BLOCK = REGISTRATE
+            .block("cobalt_block", Block::new)
             .initialProperties(() -> Blocks.EMERALD_BLOCK)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .tag(BlockTags.NEEDS_STONE_TOOL)
+            .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .simpleItem()
             .register();
 
-    public static final BlockEntry<Block> CITRINE_ORE = REGISTRATE
-            .block("citrine_ore", Block::new)
+    public static final BlockEntry<Block> COBALT_ORE = REGISTRATE
+            .block("cobalt_ore", Block::new)
             .initialProperties(() -> Blocks.COPPER_ORE)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .tag(BlockTags.NEEDS_STONE_TOOL)
-            .simpleItem()
+            .tag(BlockTags.NEEDS_DIAMOND_TOOL)
+            .tag(Tags.Blocks.ORES)
+            .transform(tagBlockAndItem("ores/cobalt"))
+            .tag(Tags.Items.ORES)
+            .build()
             .register();
 
     public static final BlockEntry<Block> REFRACTORY_MORTAR = REGISTRATE

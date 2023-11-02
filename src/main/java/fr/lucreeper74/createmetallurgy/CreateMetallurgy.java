@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.item.TooltipModifier;
 import fr.lucreeper74.createmetallurgy.content.kinetics.mechanicalArm.AllArmInteract;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingWithSpout;
 import fr.lucreeper74.createmetallurgy.registries.*;
+import fr.lucreeper74.createmetallurgy.worldgen.OresFeaturesRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,6 +46,8 @@ public class CreateMetallurgy {
         AllRecipeTypes.register(eventBus);
 
         CastingWithSpout.registerDefaults();
+
+        OresFeaturesRegistry.init();
 
         eventBus.addListener(this::commonSetup);
 

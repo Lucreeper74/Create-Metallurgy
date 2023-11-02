@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "createmetallurgy:raw_citrine"
+      "item": "createmetallurgy:cobalt_ingot"
     }
   },
   "result": {
-    "item": "createmetallurgy:raw_citrine_block"
+    "item": "createmetallurgy:cobalt_block"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "createmetallurgy:block/citrine_ore"
+    "all": "createmetallurgy:block/cobalt_block"
   }
 }
