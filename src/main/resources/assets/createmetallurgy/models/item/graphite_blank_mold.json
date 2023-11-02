@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "createmetallurgy:item/graphite_blank_mold"
+    "layer0": "createmetallurgy:item/molds/graphite_blank_mold"
   }
 }

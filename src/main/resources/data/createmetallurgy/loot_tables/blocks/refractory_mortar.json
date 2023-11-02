@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createmetallurgy:refractory_mortar_block"
+          "name": "createmetallurgy:refractory_mortar"
         }
       ],
       "conditions": [

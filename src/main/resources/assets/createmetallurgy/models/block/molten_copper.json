@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "createmetallurgy:fluid/molten_copper_still"
+    "particle": "createmetallurgy:fluid/copper/molten_copper_still"
   }
 }

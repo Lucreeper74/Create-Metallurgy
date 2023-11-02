@@ -192,7 +192,8 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
         return list.stream()
                 .filter(recipe -> {
                     if (recipe instanceof CastingTableRecipe castingRecipe) {
-                        return castingRecipe.getFluidIngredients().get(0).test(getFluidTank().getFluidInTank(0));
+                        return castingRecipe.getFluidIngredients().get(0).test(getFluidTank().getFluidInTank(0))
+                                && castingRecipe.getIngredients().get(0).test(moldInv.getStackInSlot(0));
                     }
                     return false;
                 })

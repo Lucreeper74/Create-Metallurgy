@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "createmetallurgy:fluid/molten_zinc_still"
+    "particle": "createmetallurgy:fluid/zinc/molten_zinc_still"
   }
 }

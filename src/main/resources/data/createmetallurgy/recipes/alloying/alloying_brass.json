@@ -14,7 +14,7 @@
   "results": [
     {
       "fluid": "createmetallurgy:molten_brass",
-      "amount": 10
+      "amount": 20
     }
   ],
   "heatRequirement": "superheated"

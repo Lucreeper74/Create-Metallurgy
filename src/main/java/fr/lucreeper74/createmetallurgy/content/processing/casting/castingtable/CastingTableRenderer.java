@@ -70,12 +70,12 @@ public class CastingTableRenderer extends SmartBlockEntityRenderer<CastingTableB
         ms.pushPose();
 
         ms.translate(.5f, 0, .5f);
-        ms.mulPose(Vector3f.YP.rotationDegrees(90f * (be.getBlockState().getValue(FACING).get2DDataValue())));
+        ms.mulPose(Vector3f.YP.rotationDegrees(-90f * (be.getBlockState().getValue(FACING).get2DDataValue())));
         ms.translate(-.5f, 0, -.5f);
 
-        ms.translate(.5f, 13.5f / 16f, 5 / 16f);
+        ms.translate(.5f, 13.5f / 16f, 11 / 16f);
         ms.scale(1.5f, 1.5f, 1.5f);
-        ms.mulPose(Vector3f.XP.rotationDegrees(90f));
+        ms.mulPose(Vector3f.XP.rotationDegrees(-90f));
 
         if (be.running) {
             MultiBufferSource bufferOut = new CastingItemRenderTypeBuffer(buffer, 255 - fluidOpacity, fluidOpacity);
