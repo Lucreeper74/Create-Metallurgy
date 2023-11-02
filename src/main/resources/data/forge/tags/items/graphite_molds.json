@@ -1,0 +1,8 @@
+{
+  "values": [
+    "createmetallurgy:graphite_blank_mold",
+    "createmetallurgy:graphite_ingot_mold",
+    "createmetallurgy:graphite_nugget_mold",
+    "createmetallurgy:graphite_plate_mold"
+  ]
+}

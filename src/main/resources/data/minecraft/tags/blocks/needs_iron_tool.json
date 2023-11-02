@@ -1,8 +1,5 @@
 {
   "replace": false,
   "values": [
-    "createmetallurgy:citrine_ore",
-    "createmetallurgy:polished_citrine_block",
-    "createmetallurgy:raw_citrine_block"
   ]
 }

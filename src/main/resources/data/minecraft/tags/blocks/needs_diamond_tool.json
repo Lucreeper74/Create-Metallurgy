@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-
+    "createmetallurgy:cobalt_ore",
+    "createmetallurgy:cobalt_block",
+    "createmetallurgy:raw_cobalt_block"
   ]
 }
