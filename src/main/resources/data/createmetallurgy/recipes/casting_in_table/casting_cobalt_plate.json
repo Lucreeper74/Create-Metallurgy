@@ -1,0 +1,19 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_plate_mold"
+    },
+    {
+      "fluid": "createmetallurgy:molten_cobalt",
+      "amount": 90
+    }
+  ],
+  "processingTime": 80,
+  "results": [
+    {
+      "item": "createmetallurgy:cobalt_plate",
+      "amount": 1
+    }
+  ]
+}
