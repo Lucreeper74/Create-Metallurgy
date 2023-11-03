@@ -1,20 +1,20 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.tabs.CreateMetallurgyTab;
+import fr.lucreeper74.createmetallurgy.tabs.AllCreativeTabs;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 
-import static com.simibubi.create.AllTags.AllItemTags.CREATE_INGOTS;
 import static com.simibubi.create.AllTags.forgeItemTag;
+import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
 @SuppressWarnings("unused")
 public class AllItems {
 
-    private static final CreateRegistrate REGISTRATE = CreateMetallurgy.REGISTRATE.creativeModeTab(() -> CreateMetallurgyTab.MAIN_GROUP);
+    static {
+        REGISTRATE.creativeModeTab(() -> AllCreativeTabs.MAIN_CREATIVE_TAB);
+    }
 
     public static final ItemEntry<Item> RAW_COBALT = taggedIngredient("raw_cobalt", forgeItemTag("raw_materials/cobalt"), forgeItemTag("raw_materials")),
             COBALT_INGOT = taggedIngredient("cobalt_ingot", forgeItemTag("ingots/cobalt"), Tags.Items.INGOTS),

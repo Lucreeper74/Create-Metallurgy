@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.item.TooltipModifier;
 import fr.lucreeper74.createmetallurgy.content.kinetics.mechanicalArm.AllArmInteract;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingWithSpout;
 import fr.lucreeper74.createmetallurgy.registries.*;
+import fr.lucreeper74.createmetallurgy.tabs.AllCreativeTabs;
 import fr.lucreeper74.createmetallurgy.worldgen.OresFeaturesRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,7 +27,7 @@ public class CreateMetallurgy {
     public static final String MOD_ID = "createmetallurgy";
     //private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
     static {
         REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE)
@@ -37,9 +38,10 @@ public class CreateMetallurgy {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         REGISTRATE.registerEventListeners(eventBus);
 
+        AllCreativeTabs.init();
         AllBlocks.register();
-        AllFluids.register();
         AllItems.register();
+        AllFluids.register();
         AllArmInteract.register();
         AllPModels.init();
         AllBlockEntityTypes.register();

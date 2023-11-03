@@ -3,10 +3,8 @@ package fr.lucreeper74.createmetallurgy.registries;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinMovementBehaviour;
@@ -15,7 +13,7 @@ import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.C
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop.GlassedCastingTopBlock;
-import fr.lucreeper74.createmetallurgy.tabs.CreateMetallurgyTab;
+import fr.lucreeper74.createmetallurgy.tabs.AllCreativeTabs;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -28,10 +26,14 @@ import net.minecraftforge.common.Tags;
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
+import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
 @SuppressWarnings("unused")
 public class AllBlocks {
-    private static final CreateRegistrate REGISTRATE = CreateMetallurgy.REGISTRATE.creativeModeTab(() -> CreateMetallurgyTab.MAIN_GROUP);
+
+    static {
+        REGISTRATE.creativeModeTab(() -> AllCreativeTabs.MAIN_CREATIVE_TAB);
+    }
 
     public static final BlockEntry<Block> RAW_COBALT_BLOCK = REGISTRATE
             .block("raw_cobalt_block", Block::new)
