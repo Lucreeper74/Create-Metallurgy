@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "createmetallurgy:block/coke_block" }
+  }
+}

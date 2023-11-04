@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "coke",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:coke_block"
+    }
+  ],
+  "result": {
+    "item": "createmetallurgy:coke",
+    "count": 9
+  }
+}
