@@ -62,6 +62,23 @@ public class AllBlocks {
             .build()
             .register();
 
+    public static final BlockEntry<Block> COKE_BLOCK = REGISTRATE
+            .block("coke_block", Block::new)
+            .initialProperties(() -> Blocks.COAL_BLOCK)
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .tag(BlockTags.NEEDS_STONE_TOOL)
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<Block> STEEL_BLOCK = REGISTRATE
+            .block("steel_block", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .tag(BlockTags.NEEDS_DIAMOND_TOOL)
+            .simpleItem()
+            .register();
+
+
     public static final BlockEntry<Block> REFRACTORY_MORTAR = REGISTRATE
             .block("refractory_mortar", Block::new)
             .initialProperties(() -> Blocks.CLAY)
@@ -142,5 +159,6 @@ public class AllBlocks {
             .item()
             .transform(customItemModel("_", "block"))
             .register();
+
     public static void register() {}
 }

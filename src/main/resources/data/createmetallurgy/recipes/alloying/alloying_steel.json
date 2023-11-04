@@ -1,0 +1,20 @@
+{
+  "type": "createmetallurgy:alloying",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:coke"
+    },
+    {
+      "fluid": "createmetallurgy:molten_iron",
+      "amount": 270
+    }
+  ],
+  "processingTime": 40,
+  "results": [
+    {
+      "fluid": "createmetallurgy:molten_steel",
+      "amount": 270
+    }
+  ],
+  "heatRequirement": "superheated"
+}

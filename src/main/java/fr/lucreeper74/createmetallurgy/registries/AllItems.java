@@ -1,5 +1,6 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.simibubi.create.foundation.item.CombustibleItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.lucreeper74.createmetallurgy.tabs.AllCreativeTabs;
 import net.minecraft.tags.TagKey;
@@ -26,7 +27,12 @@ public class AllItems {
             GRAPHITE_NUGGET_MOLD = taggedIngredient("graphite_nugget_mold", forgeItemTag("graphite_molds/nugget"), forgeItemTag("graphite_molds")),
             GRAPHITE_PLATE_MOLD = taggedIngredient("graphite_plate_mold", forgeItemTag("graphite_molds/plate"), forgeItemTag("graphite_molds"));
 
+    public static final ItemEntry<CombustibleItem> COKE = REGISTRATE.item("coke", CombustibleItem::new)
+            .tag(forgeItemTag("coke"))
+            .onRegister(i -> i.setBurnTime(2000))
+            .register();
     public static final ItemEntry<Item> GRAPHITE = taggedIngredient("graphite", forgeItemTag("graphite"));
+    public static final ItemEntry<Item> STEEL_INGOT = taggedIngredient("steel_ingot", forgeItemTag("ingots/steel"), Tags.Items.INGOTS);
     public static final ItemEntry<Item> STURDY_WHISK = REGISTRATE.item("sturdy_whisk", Item::new).register();
 
     //Shortcut

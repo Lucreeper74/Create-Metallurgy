@@ -9,6 +9,8 @@
     "createmetallurgy:foundry_top",
     "createmetallurgy:glassed_alloyer_top",
     "createmetallurgy:casting_basin",
-    "createmetallurgy:casting_table"
+    "createmetallurgy:casting_table",
+    "createmetallurgy:coke_block",
+    "createmetallurgy:steel_block"
   ]
 }

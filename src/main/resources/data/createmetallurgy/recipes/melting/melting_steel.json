@@ -1,0 +1,16 @@
+{
+  "type": "createmetallurgy:melting",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/steel"
+    }
+  ],
+  "processingTime": 40,
+  "results": [
+    {
+      "fluid": "createmetallurgy:molten_steel",
+      "amount": 90
+    }
+  ],
+  "heatRequirement": "superheated"
+}

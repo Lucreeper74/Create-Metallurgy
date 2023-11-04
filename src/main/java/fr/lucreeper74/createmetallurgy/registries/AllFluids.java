@@ -127,5 +127,24 @@ public class AllFluids {
             .build()
             .register();
 
+    // Molten Steel
+    public static final ResourceLocation MOLTEN_STEEL_STILL_RL = CreateMetallurgy.genRL("fluid/steel/molten_steel_still");
+    public static final ResourceLocation MOLTEN_STEEL_FLOW_RL = CreateMetallurgy.genRL("fluid/steel/molten_steel_flow");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_STEEL = REGISTRATE.fluid("molten_steel", MOLTEN_STEEL_STILL_RL, MOLTEN_STEEL_FLOW_RL)
+            .properties(b -> b.viscosity(2000)
+                    .density(1400)
+                    .lightLevel(10)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA))
+            .fluidProperties(p -> p.levelDecreasePerBlock(2)
+                    .tickRate(25)
+                    .slopeFindDistance(3)
+                    .explosionResistance(100f))
+            .tag(FluidTags.LAVA)
+            .source(ForgeFlowingFluid.Source::new)
+            .bucket()
+            .build()
+            .register();
+
     public static void register() {}
 }
