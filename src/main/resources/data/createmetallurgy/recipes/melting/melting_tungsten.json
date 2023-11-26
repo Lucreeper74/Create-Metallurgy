@@ -2,13 +2,13 @@
   "type": "createmetallurgy:melting",
   "ingredients": [
     {
-      "tag": "forge:ingots/cobalt"
+      "tag": "forge:ingots/tungsten"
     }
   ],
   "processingTime": 40,
   "results": [
     {
-      "fluid": "createmetallurgy:molten_cobalt",
+      "fluid": "createmetallurgy:molten_tungsten",
       "amount": 90
     }
   ],

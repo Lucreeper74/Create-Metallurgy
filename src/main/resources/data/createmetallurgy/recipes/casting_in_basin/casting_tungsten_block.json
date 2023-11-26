@@ -2,14 +2,14 @@
   "type": "createmetallurgy:casting_in_basin",
   "ingredients": [
     {
-      "fluid": "createmetallurgy:molten_cobalt",
+      "fluid": "createmetallurgy:molten_tungsten",
       "amount": 810
     }
   ],
   "processingTime": 150,
   "results": [
     {
-      "item": "createmetallurgy:cobalt_block",
+      "item": "createmetallurgy:tungsten_block",
       "amount": 1
     }
   ]

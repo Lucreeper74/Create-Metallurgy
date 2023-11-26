@@ -5,14 +5,14 @@
       "item": "createmetallurgy:graphite_ingot_mold"
     },
     {
-      "fluid": "createmetallurgy:molten_cobalt",
+      "fluid": "createmetallurgy:molten_tungsten",
       "amount": 90
     }
   ],
   "processingTime": 80,
   "results": [
     {
-      "item": "createmetallurgy:cobalt_ingot",
+      "item": "createmetallurgy:tungsten_ingot",
       "amount": 1
     }
   ]

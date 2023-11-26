@@ -5,14 +5,14 @@
       "item": "createmetallurgy:graphite_nugget_mold"
     },
     {
-      "fluid": "createmetallurgy:molten_cobalt",
+      "fluid": "createmetallurgy:molten_tungsten",
       "amount": 10
     }
   ],
   "processingTime": 40,
   "results": [
     {
-      "item": "createmetallurgy:cobalt_nugget",
+      "item": "createmetallurgy:tungsten_nugget",
       "amount": 1
     }
   ]
