@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "createmetallurgy:cobalt_ore",
-    "createmetallurgy:cobalt_block",
-    "createmetallurgy:raw_cobalt_block",
+    "createmetallurgy:wolfarmite_ore",
+    "createmetallurgy:tungsten_block",
+    "createmetallurgy:raw_wolfarmite_block",
     "createmetallurgy:foundry_basin",
     "createmetallurgy:foundry_mixer",
     "createmetallurgy:foundry_top",
