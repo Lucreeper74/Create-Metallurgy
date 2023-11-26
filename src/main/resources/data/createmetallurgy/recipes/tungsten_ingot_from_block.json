@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "tungsten_ingot",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:tungsten_block"
+    }
+  ],
+  "result": {
+    "item": "createmetallurgy:tungsten_ingot",
+    "count": 9
+  }
+}

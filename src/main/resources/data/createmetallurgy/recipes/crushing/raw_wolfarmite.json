@@ -1,0 +1,18 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:raw_wolfarmite"
+    }
+  ],
+  "processingTime": 400,
+  "results": [
+    {
+      "item": "createmetallurgy:crushed_raw_wolfarmite"
+    },
+    {
+      "chance": 0.75,
+      "item": "create:experience_nugget"
+    }
+  ]
+}

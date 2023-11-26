@@ -25,7 +25,7 @@
                   }
                 }
               ],
-              "name": "createmetallurgy:cobalt_ore"
+              "name": "createmetallurgy:wolfarmite_ore"
             },
             {
               "type": "minecraft:item",
@@ -39,7 +39,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "createmetallurgy:raw_cobalt"
+              "name": "createmetallurgy:raw_wolfarmite"
             }
           ]
         }

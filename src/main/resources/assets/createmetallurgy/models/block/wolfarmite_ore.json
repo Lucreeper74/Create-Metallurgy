@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "createmetallurgy:block/cobalt_block"
+    "all": "createmetallurgy:block/wolfarmite_ore"
   }
 }

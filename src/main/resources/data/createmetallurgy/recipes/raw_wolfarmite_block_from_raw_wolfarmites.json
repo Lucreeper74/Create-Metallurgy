@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "createmetallurgy:raw_cobalt"
+      "item": "createmetallurgy:raw_wolfarmite"
     }
   },
   "result": {
-    "item": "createmetallurgy:raw_cobalt_block"
+    "item": "createmetallurgy:raw_wolfarmite_block"
   }
 }

@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "createmetallurgy:cobalt_ingot"
+      "item": "createmetallurgy:tungsten_ingot"
     }
   },
   "result": {
-    "item": "createmetallurgy:cobalt_block"
+    "item": "createmetallurgy:tungsten_block"
   }
 }

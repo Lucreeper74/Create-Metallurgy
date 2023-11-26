@@ -1,0 +1,26 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:wolfarmite_ore"
+    }
+  ],
+  "processingTime": 350,
+  "results": [
+    {
+      "item": "createmetallurgy:crushed_raw_wolfarmite"
+    },
+    {
+      "chance": 0.75,
+      "item": "createmetallurgy:crushed_raw_wolfarmite"
+    },
+    {
+      "chance": 0.75,
+      "item": "create:experience_nugget"
+    },
+    {
+      "chance": 0.125,
+      "item": "minecraft:netherrack"
+    }
+  ]
+}
