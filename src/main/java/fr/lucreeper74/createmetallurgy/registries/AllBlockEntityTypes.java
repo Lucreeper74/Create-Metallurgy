@@ -51,6 +51,5 @@ public class AllBlockEntityTypes {
             .validBlocks(AllBlocks.FOUNDRY_MIXER_BLOCK)
             .renderer(() -> FoundryMixerRenderer::new)
             .register();
-
     public static void register() {}
 }

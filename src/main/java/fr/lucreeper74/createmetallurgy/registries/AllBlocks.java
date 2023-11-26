@@ -35,29 +35,29 @@ public class AllBlocks {
         REGISTRATE.creativeModeTab(() -> AllCreativeTabs.MAIN_CREATIVE_TAB);
     }
 
-    public static final BlockEntry<Block> RAW_COBALT_BLOCK = REGISTRATE
-            .block("raw_cobalt_block", Block::new)
+    public static final BlockEntry<Block> RAW_WOLFARMITE_BLOCK = REGISTRATE
+            .block("raw_wolfarmite_block", Block::new)
             .initialProperties(() -> Blocks.RAW_COPPER_BLOCK)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .simpleItem()
             .register();
 
-    public static final BlockEntry<Block> COBALT_BLOCK = REGISTRATE
-            .block("cobalt_block", Block::new)
+    public static final BlockEntry<Block> TUNGSTEN_BLOCK = REGISTRATE
+            .block("tungsten_block", Block::new)
             .initialProperties(() -> Blocks.EMERALD_BLOCK)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .simpleItem()
             .register();
 
-    public static final BlockEntry<Block> COBALT_ORE = REGISTRATE
-            .block("cobalt_ore", Block::new)
+    public static final BlockEntry<Block> WOLFARMITE_ORE = REGISTRATE
+            .block("wolfarmite_ore", Block::new)
             .initialProperties(() -> Blocks.COPPER_ORE)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.ORES)
-            .transform(tagBlockAndItem("ores/cobalt"))
+            .transform(tagBlockAndItem("ores/wolfarmite"))
             .tag(Tags.Items.ORES)
             .build()
             .register();

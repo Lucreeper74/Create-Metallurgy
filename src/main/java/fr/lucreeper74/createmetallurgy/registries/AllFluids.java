@@ -1,5 +1,6 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import net.minecraft.resources.ResourceLocation;
@@ -108,10 +109,10 @@ public class AllFluids {
             .build()
             .register();
 
-    // Molten Cobalt
-    public static final ResourceLocation MOLTEN_COBALT_STILL_RL = CreateMetallurgy.genRL("fluid/cobalt/molten_cobalt_still");
-    public static final ResourceLocation MOLTEN_COBALT_FLOW_RL = CreateMetallurgy.genRL("fluid/cobalt/molten_cobalt_flow");
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_COBALT = REGISTRATE.fluid("molten_cobalt", MOLTEN_COBALT_STILL_RL, MOLTEN_COBALT_FLOW_RL)
+    // Molten Tungsten
+    public static final ResourceLocation MOLTEN_TUNGSTEN_STILL_RL = CreateMetallurgy.genRL("fluid/tungsten/molten_tungsten_still");
+    public static final ResourceLocation MOLTEN_TUNGSTEN_FLOW_RL = CreateMetallurgy.genRL("fluid/tungsten/molten_tungsten_flow");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TUNGSTEN = REGISTRATE.fluid("molten_tungsten", MOLTEN_TUNGSTEN_STILL_RL, MOLTEN_TUNGSTEN_FLOW_RL)
             .properties(b -> b.viscosity(2000)
                     .density(1400)
                     .lightLevel(10)
