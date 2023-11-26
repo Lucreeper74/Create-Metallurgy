@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createmetallurgy:cobalt_block"
+          "name": "createmetallurgy:tungsten_block"
         }
       ],
       "conditions": [
