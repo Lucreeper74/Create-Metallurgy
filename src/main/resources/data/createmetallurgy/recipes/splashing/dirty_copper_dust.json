@@ -1,0 +1,17 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:dirty_copper_dust"
+    }
+  ],
+  "results": [
+    {
+      "item": "createmetallurgy:copper_dust"
+    },
+    {
+      "chance": 0.5,
+      "item": "minecraft:clay_ball"
+    }
+  ]
+}

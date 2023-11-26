@@ -1,0 +1,17 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:dirty_gold_dust"
+    }
+  ],
+  "results": [
+    {
+      "item": "createmetallurgy:gold_dust"
+    },
+    {
+      "chance": 0.5,
+      "item": "minecraft:quartz"
+    }
+  ]
+}

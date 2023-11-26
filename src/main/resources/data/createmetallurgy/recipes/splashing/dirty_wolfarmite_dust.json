@@ -1,0 +1,18 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:dirty_wolfarmite_dust"
+    }
+  ],
+  "results": [
+    {
+      "item": "createmetallurgy:wolfarmite_dust"
+    },
+    {
+      "chance": 0.5,
+      "item": "minecraft:gold_nugget",
+      "count": 2
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:dirty_iron_dust"
+    }
+  ],
+  "results": [
+    {
+      "item": "createmetallurgy:iron_dust"
+    },
+    {
+      "chance": 0.5,
+      "item": "minecraft:redstone"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "createmetallurgy:melting",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:zinc_dust"
+    }
+  ],
+  "processingTime": 30,
+  "results": [
+    {
+      "fluid": "createmetallurgy:molten_zinc",
+      "amount": 120
+    }
+  ],
+  "heatRequirement": "superheated"
+}

@@ -1,0 +1,19 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_copper"
+    }
+  ],
+  "processingTime": 150,
+  "results": [
+    {
+      "item": "createmetallurgy:dirty_copper_dust"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
+      "item": "createmetallurgy:dirty_copper_dust"
+    }
+  ]
+}

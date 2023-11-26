@@ -1,0 +1,16 @@
+{
+  "type": "createmetallurgy:melting",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:wolfarmite_dust"
+    }
+  ],
+  "processingTime": 30,
+  "results": [
+    {
+      "fluid": "createmetallurgy:molten_tungsten",
+      "amount": 120
+    }
+  ],
+  "heatRequirement": "superheated"
+}
