@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "createmetallurgy:block/wolfarmite_ore" }
+    "": { "model": "createmetallurgy:block/wolframite_ore" }
   }
 }

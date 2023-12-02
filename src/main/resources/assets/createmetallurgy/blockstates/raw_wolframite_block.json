@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "createmetallurgy:block/raw_wolfarmite_block" }
+    "": { "model": "createmetallurgy:block/raw_wolframite_block" }
   }
 }
