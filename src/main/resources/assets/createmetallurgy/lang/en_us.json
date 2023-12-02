@@ -1,6 +1,6 @@
 {
-  "item.createmetallurgy.raw_wolfarmite": "Raw Wolfarmite",
-  "item.createmetallurgy.crushed_raw_wolfarmite": "Crushed Raw Wolfarmite",
+  "item.createmetallurgy.raw_wolframite": "Raw Wolframite",
+  "item.createmetallurgy.crushed_raw_wolframite": "Crushed Raw Wolframite",
   "item.createmetallurgy.tungsten_ingot": "Tungsten Ingot",
   "item.createmetallurgy.tungsten_sheet": "Tungsten Sheet",
   "item.createmetallurgy.tungsten_nugget": "Tungsten Nugget",
@@ -13,8 +13,8 @@
   "item.createmetallurgy.graphite_plate_mold": "Graphite Plate Mold",
   "item.createmetallurgy.graphite": "Graphite",
 
-  "item.createmetallurgy.dirty_wolfarmite_dust": "Dirty Wolfarmite Dust",
-  "item.createmetallurgy.wolfarmite_dust": "Wolfarmite Dust",
+  "item.createmetallurgy.dirty_wolframite_dust": "Dirty Wolframite Dust",
+  "item.createmetallurgy.wolframite_dust": "Wolframite Dust",
   "item.createmetallurgy.dirty_gold_dust": "Dirty Gold Dust",
   "item.createmetallurgy.gold_dust": "Gold Dust",
   "item.createmetallurgy.dirty_iron_dust": "Dirty Iron Dust",
@@ -33,8 +33,8 @@
   "item.createmetallurgy.molten_steel_bucket": "Molten Steel Bucket",
 
   "block.createmetallurgy.tungsten_block": "Tungsten Block",
-  "block.createmetallurgy.raw_wolfarmite_block": "Raw Wolfarmite Block",
-  "block.createmetallurgy.wolfarmite_ore": "Wolfarmite Ore",
+  "block.createmetallurgy.raw_wolframite_block": "Raw Wolframite Block",
+  "block.createmetallurgy.wolframite_ore": "Wolframite Ore",
   "block.createmetallurgy.coke_block": "Coke Block",
   "block.createmetallurgy.steel_block": "Steel Block",
   "block.createmetallurgy.refractory_mortar": "Refractory Mortar",

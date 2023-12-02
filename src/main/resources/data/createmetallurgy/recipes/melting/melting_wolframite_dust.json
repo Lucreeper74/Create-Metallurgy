@@ -2,7 +2,7 @@
   "type": "createmetallurgy:melting",
   "ingredients": [
     {
-      "item": "createmetallurgy:wolfarmite_dust"
+      "item": "createmetallurgy:wolframite_dust"
     }
   ],
   "processingTime": 30,

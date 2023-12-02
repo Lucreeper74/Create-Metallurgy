@@ -2,16 +2,18 @@
   "type": "create:crushing",
   "ingredients": [
     {
-      "item": "createmetallurgy:raw_wolfarmite"
+      "item": "createmetallurgy:raw_wolframite_block"
     }
   ],
   "processingTime": 400,
   "results": [
     {
-      "item": "createmetallurgy:crushed_raw_wolfarmite"
+      "count": 9,
+      "item": "createmetallurgy:crushed_raw_wolframite"
     },
     {
       "chance": 0.75,
+      "count": 9,
       "item": "create:experience_nugget"
     }
   ]

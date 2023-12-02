@@ -35,8 +35,8 @@ public class AllBlocks {
         REGISTRATE.creativeModeTab(() -> AllCreativeTabs.MAIN_CREATIVE_TAB);
     }
 
-    public static final BlockEntry<Block> RAW_WOLFARMITE_BLOCK = REGISTRATE
-            .block("raw_wolfarmite_block", Block::new)
+    public static final BlockEntry<Block> RAW_WOLFRAMITE_BLOCK = REGISTRATE
+            .block("raw_wolframite_block", Block::new)
             .initialProperties(() -> Blocks.RAW_COPPER_BLOCK)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
@@ -51,8 +51,8 @@ public class AllBlocks {
             .simpleItem()
             .register();
 
-    public static final BlockEntry<Block> WOLFARMITE_ORE = REGISTRATE
-            .block("wolfarmite_ore", Block::new)
+    public static final BlockEntry<Block> WOLFRAMITE_ORE = REGISTRATE
+            .block("wolframite_ore", Block::new)
             .initialProperties(() -> Blocks.COPPER_ORE)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)

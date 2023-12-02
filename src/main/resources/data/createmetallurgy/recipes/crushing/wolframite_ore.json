@@ -2,17 +2,17 @@
   "type": "create:crushing",
   "ingredients": [
     {
-      "item": "createmetallurgy:wolfarmite_ore"
+      "item": "createmetallurgy:wolframite_ore"
     }
   ],
   "processingTime": 350,
   "results": [
     {
-      "item": "createmetallurgy:crushed_raw_wolfarmite"
+      "item": "createmetallurgy:crushed_raw_wolframite"
     },
     {
       "chance": 0.75,
-      "item": "createmetallurgy:crushed_raw_wolfarmite"
+      "item": "createmetallurgy:crushed_raw_wolframite"
     },
     {
       "chance": 0.75,

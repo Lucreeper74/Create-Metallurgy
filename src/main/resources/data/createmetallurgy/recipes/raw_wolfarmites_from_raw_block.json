@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "raw_wolfarmite",
+  "group": "raw_wolframite",
   "ingredients": [
     {
-      "item": "createmetallurgy:raw_wolfarmite_block"
+      "item": "createmetallurgy:raw_wolframite_block"
     }
   ],
   "result": {
-    "item": "createmetallurgy:raw_wolfarmite",
+    "item": "createmetallurgy:raw_wolframite",
     "count": 9
   }
 }

@@ -2,18 +2,18 @@
   "type": "create:milling",
   "ingredients": [
     {
-      "item": "createmetallurgy:crushed_raw_wolfarmite"
+      "item": "createmetallurgy:crushed_raw_wolframite"
     }
   ],
   "processingTime": 150,
   "results": [
     {
-      "item": "createmetallurgy:dirty_wolfarmite_dust"
+      "item": "createmetallurgy:dirty_wolframite_dust"
     },
     {
       "chance": 0.25,
       "count": 1,
-      "item": "createmetallurgy:dirty_wolfarmite_dust"
+      "item": "createmetallurgy:dirty_wolframite_dust"
     }
   ]
 }

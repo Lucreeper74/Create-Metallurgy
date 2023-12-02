@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createmetallurgy:raw_wolfarmite_block"
+          "name": "createmetallurgy:raw_wolframite_block"
         }
       ],
       "conditions": [

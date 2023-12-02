@@ -17,14 +17,14 @@ public class AllItems {
         REGISTRATE.creativeModeTab(() -> AllCreativeTabs.MAIN_CREATIVE_TAB);
     }
 
-    public static final ItemEntry<Item> RAW_WOLFARMITE = taggedIngredient("raw_wolfarmite", forgeItemTag("raw_materials/wolfarmite"), forgeItemTag("raw_materials")),
-            CRUSHED_RAW_WOLFARMITE = taggedIngredient("crushed_raw_wolfarmite", forgeItemTag("crushed_raw_materials/wolfarmite")),
+    public static final ItemEntry<Item> RAW_WOLFRAMITE = taggedIngredient("raw_wolframite", forgeItemTag("raw_materials/wolframite"), forgeItemTag("raw_materials")),
+            CRUSHED_RAW_WOLFRAMITE = taggedIngredient("crushed_raw_wolframite", forgeItemTag("crushed_raw_materials/wolframite")),
             TUNGSTEN_INGOT = taggedIngredient("tungsten_ingot", forgeItemTag("ingots/tungsten"), Tags.Items.INGOTS),
             TUNGSTEN_SHEET = taggedIngredient("tungsten_sheet", forgeItemTag("plates/tungsten"), forgeItemTag("plates")),
             TUNGSTEN_NUGGET = taggedIngredient("tungsten_nugget", forgeItemTag("nuggets/tungsten"), Tags.Items.NUGGETS);
 
-    public static final ItemEntry<Item> DIRTY_WOLFARMITE_DUST = taggedIngredient("dirty_wolfarmite_dust", forgeItemTag("dusts/dirty_wolfarmite"), forgeItemTag("dusts")),
-            WOLFARMITE_DUST = taggedIngredient("wolfarmite_dust", forgeItemTag("dusts/wolfarmite"), forgeItemTag("dusts")),
+    public static final ItemEntry<Item> DIRTY_WOLFRAMITE_DUST = taggedIngredient("dirty_wolframite_dust", forgeItemTag("dusts/dirty_wolframite"), forgeItemTag("dusts")),
+            WOLFRAMITE_DUST = taggedIngredient("wolframite_dust", forgeItemTag("dusts/wolframite"), forgeItemTag("dusts")),
     // Gold
     DIRTY_GOLD_DUST = taggedIngredient("dirty_gold_dust", forgeItemTag("dusts/dirty_gold"), forgeItemTag("dusts")),
             GOLD_DUST = taggedIngredient("gold_dust", forgeItemTag("dusts/gold"), forgeItemTag("dusts")),

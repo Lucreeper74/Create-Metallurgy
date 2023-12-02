@@ -2,12 +2,12 @@
   "type": "create:splashing",
   "ingredients": [
     {
-      "item": "createmetallurgy:dirty_wolfarmite_dust"
+      "item": "createmetallurgy:dirty_wolframite_dust"
     }
   ],
   "results": [
     {
-      "item": "createmetallurgy:wolfarmite_dust"
+      "item": "createmetallurgy:wolframite_dust"
     },
     {
       "chance": 0.5,
