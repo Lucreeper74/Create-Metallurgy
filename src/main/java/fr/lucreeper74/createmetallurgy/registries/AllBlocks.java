@@ -1,8 +1,11 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
+import com.simibubi.create.content.redstone.RoseQuartzLampBlock;
+import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlock;
@@ -13,6 +16,7 @@ import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.C
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop.GlassedCastingTopBlock;
+import fr.lucreeper74.createmetallurgy.content.redstone.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.tabs.AllCreativeTabs;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
@@ -25,6 +29,7 @@ import net.minecraftforge.common.Tags;
 
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -158,6 +163,17 @@ public class AllBlocks {
             .transform(BlockStressDefaults.setImpact(8.0))
             .item()
             .transform(customItemModel("_", "block"))
+            .register();
+
+    public static final BlockEntry<LightBulbBlock> LIGHT_BULB = REGISTRATE
+            .block("light_bulb", LightBulbBlock::new)
+            .initialProperties(() -> Blocks.REDSTONE_LAMP)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN)
+                    .lightLevel(s -> s.getValue(LightBulbBlock.LEVEL)))
+            .addLayer(() -> RenderType::translucent)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(pickaxeOnly())
+            .simpleItem()
             .register();
 
     public static void register() {}
