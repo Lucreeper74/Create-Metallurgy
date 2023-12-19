@@ -1,0 +1,16 @@
+{
+  "type": "createmetallurgy:melting",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:dirty_wolframite_dust"
+    }
+  ],
+  "processingTime": 35,
+  "results": [
+    {
+      "fluid": "createmetallurgy:molten_tungsten",
+      "amount": 90
+    }
+  ],
+  "heatRequirement": "superheated"
+}
