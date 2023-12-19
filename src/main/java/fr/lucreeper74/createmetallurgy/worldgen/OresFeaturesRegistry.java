@@ -8,7 +8,7 @@ import net.minecraft.tags.BiomeTags;
 
 public class OresFeaturesRegistry {
     public static final OreFeatureConfigEntry WOLFRAMITE_ORE =
-            create("wolfarmite_ore", 12, 8, -63, 70)
+            create("wolfarmite_ore", 5, 6, 1, 45)
                     .standardDatagenExt()
                     .withNetherBlock(AllBlocks.WOLFRAMITE_ORE)
                     .biomeTag(BiomeTags.IS_NETHER)
