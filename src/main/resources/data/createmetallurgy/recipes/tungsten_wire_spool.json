@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "I": {
+      "item": "createmetallurgy:tungsten_ingot"
+    }
+  },
+  "pattern": [
+    " I ",
+    "ISI",
+    " I "
+  ],
+  "result": {
+    "item": "createmetallurgy:tungsten_wire_spool",
+    "count": 4
+  }
+}

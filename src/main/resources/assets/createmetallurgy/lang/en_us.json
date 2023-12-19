@@ -12,6 +12,7 @@
   "item.createmetallurgy.graphite_nugget_mold": "Graphite Nugget Mold",
   "item.createmetallurgy.graphite_plate_mold": "Graphite Plate Mold",
   "item.createmetallurgy.graphite": "Graphite",
+  "item.createmetallurgy.tungsten_wire_spool": "Tungsten Wire Spool",
 
   "item.createmetallurgy.dirty_wolframite_dust": "Dirty Wolframite Dust",
   "item.createmetallurgy.wolframite_dust": "Wolframite Dust",
@@ -44,6 +45,7 @@
   "block.createmetallurgy.foundry_mixer": "Foundry Mixer",
   "block.createmetallurgy.casting_basin": "Casting Basin",
   "block.createmetallurgy.casting_table": "Casting Table",
+  "block.createmetallurgy.light_bulb": "Light Bulb",
 
   "fluid.createmetallurgy.molten_iron": "Molten Iron",
   "fluid.createmetallurgy.molten_gold": "Molten Gold",

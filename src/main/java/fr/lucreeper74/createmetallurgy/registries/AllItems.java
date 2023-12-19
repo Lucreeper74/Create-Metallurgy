@@ -50,6 +50,7 @@ public class AllItems {
     public static final ItemEntry<Item> GRAPHITE = taggedIngredient("graphite", forgeItemTag("graphite"));
     public static final ItemEntry<Item> STEEL_INGOT = taggedIngredient("steel_ingot", forgeItemTag("ingots/steel"), Tags.Items.INGOTS);
     public static final ItemEntry<Item> STURDY_WHISK = REGISTRATE.item("sturdy_whisk", Item::new).register();
+    public static final ItemEntry<Item> TUNGSTEN_WIRE_SPOOL = REGISTRATE.item("tungsten_wire_spool", Item::new).register();
 
     //Shortcut
     @SafeVarargs
