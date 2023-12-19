@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "createmetallurgy:fluid/molten_brass_still"
+    "particle": "createmetallurgy:fluid/brass/molten_brass_still"
   }
 }

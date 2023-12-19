@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "createmetallurgy:block/molten_cobalt"
+      "model": "createmetallurgy:block/molten_steel"
     }
   }
 }
