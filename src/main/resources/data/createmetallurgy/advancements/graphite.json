@@ -1,0 +1,38 @@
+{
+  "parent": "createmetallurgy:casting_blocks",
+  "criteria": {
+    "have_casting_basin": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:graphite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createmetallurgy.graphite.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "createmetallurgy:graphite"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createmetallurgy.graphite"
+    }
+  },
+  "requirements": [
+    [
+      "have_casting_basin"
+    ]
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "createmetallurgy:foundry_mixer",
+  "criteria": {
+    "have_steel_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:steel_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createmetallurgy.steel_age.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "createmetallurgy:steel_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createmetallurgy.steel_age"
+    }
+  },
+  "requirements": [
+    [
+      "have_steel_ingot"
+    ]
+  ]
+}

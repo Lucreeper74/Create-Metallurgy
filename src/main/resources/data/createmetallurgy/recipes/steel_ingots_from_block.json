@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "coke",
+  "group": "steel_block",
   "ingredients": [
     {
       "item": "createmetallurgy:steel_block"

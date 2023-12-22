@@ -1,4 +1,6 @@
 {
+  "_": "->------------------------]  Items & Blocks  [------------------------<-",
+
   "item.createmetallurgy.raw_wolframite": "Raw Wolframite",
   "item.createmetallurgy.crushed_raw_wolframite": "Crushed Raw Wolframite",
   "item.createmetallurgy.tungsten_ingot": "Tungsten Ingot",
@@ -55,15 +57,55 @@
   "fluid.createmetallurgy.molten_tungsten": "Molten Tungsten",
   "fluid.createmetallurgy.molten_steel": "Molten Steel",
 
-  "itemGroup.createmetallurgy.main_group": "Create: Metallurgy",
+
+
+  "_": "->------------------------]  JEI  [------------------------<-",
+
   "createmetallurgy.recipe.melting": "Foundry Melting",
   "createmetallurgy.recipe.alloying": "Foundry Alloying",
   "createmetallurgy.recipe.casting_in_basin": "Casting In Basin",
   "createmetallurgy.recipe.casting_in_table": "Casting In Table",
 
+
+
+  "_": "->------------------------]  Units  [------------------------<-",
+
   "createmetallurgy.generic.unit.millibuckets": "mB",
+
+
+
+  "_": "->------------------------]  GUI & Tooltips  [------------------------<-",
+
+  "itemGroup.createmetallurgy.main_group": "Create: Metallurgy",
 
   "createmetallurgy.gui.goggles.foundrybasin_contents": "Foundry Basin Contents",
   "createmetallurgy.gui.goggles.castingbasin_contents": "Casting Basin Contents",
-  "createmetallurgy.gui.goggles.castingtable_contents": "Casting Table Contents"
+  "createmetallurgy.gui.goggles.castingtable_contents": "Casting Table Contents",
+
+  "createmetallurgy.light_bulb.tooltip.summary": "Emits _light_ proportionally to the _redstone_ signal received.",
+
+
+
+  "_": "->------------------------]  Advancements  [------------------------<-",
+
+  "advancement.createmetallurgy.root":  "Metallurgy Expert",
+  "advancement.createmetallurgy.root.desc": "Take some blaze cakes, it’s going to heat up!",
+  "advancement.createmetallurgy.foundry_basin":  "Better Blast Furnace",
+  "advancement.createmetallurgy.foundry_basin.desc": "Craft a Foundry Basin & Foundry Top",
+  "advancement.createmetallurgy.casting_blocks":  "Don't Try To Blow on It!",
+  "advancement.createmetallurgy.casting_blocks.desc": "Craft a Casting Basin or Casting Table",
+  "advancement.createmetallurgy.tungsten_age":  "The Tungsten Age",
+  "advancement.createmetallurgy.tungsten_age.desc": "Obtain a Tungsten Ingot from Wolframite Ore",
+  "advancement.createmetallurgy.foundry_mixer":  "You Spin Me Round!",
+  "advancement.createmetallurgy.foundry_mixer.desc": "Obtain a Foundry Mixer",
+  "advancement.createmetallurgy.graphite":  "High Carbon Density",
+  "advancement.createmetallurgy.graphite.desc": "Craft a Graphite",
+  "advancement.createmetallurgy.graphite_molds":  "Graphite Molds",
+  "advancement.createmetallurgy.graphite_molds.desc": "Obtain any Graphite Molds",
+  "advancement.createmetallurgy.light_bulb":  "Edison would be proud!",
+  "advancement.createmetallurgy.light_bulb.desc": "Craft a Light Bulb",
+  "advancement.createmetallurgy.steel_age":  "The Steel Age",
+  "advancement.createmetallurgy.steel_age.desc": "Alloy Iron and Coke",
+  "advancement.createmetallurgy.melting_dusts":  "Effective Factory!",
+  "advancement.createmetallurgy.melting_dusts.desc": "Get any non-dirty minerals dusts"
 }

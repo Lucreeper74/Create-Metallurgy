@@ -1,0 +1,38 @@
+{
+  "parent": "createmetallurgy:casting_blocks",
+  "criteria": {
+    "have_tungsten_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:tungsten_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createmetallurgy.tungsten_age.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "createmetallurgy:tungsten_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createmetallurgy.tungsten_age"
+    }
+  },
+  "requirements": [
+    [
+      "have_tungsten_ingot"
+    ]
+  ]
+}

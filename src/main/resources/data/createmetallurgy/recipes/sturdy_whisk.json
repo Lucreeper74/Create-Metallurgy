@@ -6,12 +6,15 @@
     },
     "B": {
       "item": "create:sturdy_sheet"
+    },
+    "T": {
+      "item": "createmetallurgy:tungsten_sheet"
     }
   },
   "pattern": [
     " A ",
     "BAB",
-    "BBB"
+    "TBT"
   ],
   "result": {
     "item": "createmetallurgy:sturdy_whisk"
