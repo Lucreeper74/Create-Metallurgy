@@ -62,7 +62,7 @@ public class AllBlocks {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.ORES)
-            .transform(tagBlockAndItem("ores/wolfarmite"))
+            .transform(tagBlockAndItem("ores/wolframite"))
             .tag(Tags.Items.ORES)
             .build()
             .register();
