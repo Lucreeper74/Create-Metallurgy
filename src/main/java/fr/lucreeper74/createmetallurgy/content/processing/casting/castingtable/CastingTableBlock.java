@@ -42,6 +42,7 @@ public class CastingTableBlock extends Block implements IBE<CastingTableBlockEnt
     public CastingTableBlock(Properties pProperties) {
         super(pProperties);
     }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
@@ -68,7 +69,7 @@ public class CastingTableBlock extends Block implements IBE<CastingTableBlockEnt
                         .isEmpty()) {
                     return InteractionResult.SUCCESS;
                 }
-                if(be.moldInv.isEmpty()) {
+                if (be.moldInv.isEmpty()) {
                     be.moldInv.insertItem(0, heldItem, false);
                     player.setItemInHand(handIn, heldItem.split(heldItem.getCount() - 1));
                     worldIn.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM,
@@ -78,7 +79,6 @@ public class CastingTableBlock extends Block implements IBE<CastingTableBlockEnt
             }
 
             IItemHandlerModifiable inv = be.itemCapability.orElse(new ItemStackHandler());
-            boolean success = false;
 
             for (int slot = 0; slot < inv.getSlots(); slot++) {
                 ItemStack stackInSlot = inv.getStackInSlot(slot);
@@ -87,12 +87,11 @@ public class CastingTableBlock extends Block implements IBE<CastingTableBlockEnt
                 player.getInventory()
                         .placeItemBackInInventory(stackInSlot);
                 inv.setStackInSlot(slot, ItemStack.EMPTY);
-                success = true;
-            }
-            if (success)
                 worldIn.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, .2f,
                         1f + Create.RANDOM.nextFloat());
-            return InteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
+            }
+            return InteractionResult.FAIL;
         });
     }
 
@@ -115,6 +114,7 @@ public class CastingTableBlock extends Block implements IBE<CastingTableBlockEnt
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return AllShapes.CASING_14PX.get(Direction.UP);
     }
+
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         IBE.onRemove(state, worldIn, pos, newState);
