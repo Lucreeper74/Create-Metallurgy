@@ -23,19 +23,20 @@ public class AllItems {
             TUNGSTEN_SHEET = taggedIngredient("tungsten_sheet", forgeItemTag("plates/tungsten"), forgeItemTag("plates")),
             TUNGSTEN_NUGGET = taggedIngredient("tungsten_nugget", forgeItemTag("nuggets/tungsten"), Tags.Items.NUGGETS);
 
-    public static final ItemEntry<Item> DIRTY_WOLFRAMITE_DUST = taggedIngredient("dirty_wolframite_dust", forgeItemTag("dusts/dirty_wolframite"), forgeItemTag("dusts")),
+    // Wolframite
+    public static final ItemEntry<Item> DIRTY_WOLFRAMITE_DUST = taggedIngredient("dirty_wolframite_dust", forgeItemTag("dirty_dusts/dirty_wolframite"), forgeItemTag("dirty_dusts")),
             WOLFRAMITE_DUST = taggedIngredient("wolframite_dust", forgeItemTag("dusts/wolframite"), forgeItemTag("dusts")),
     // Gold
-    DIRTY_GOLD_DUST = taggedIngredient("dirty_gold_dust", forgeItemTag("dusts/dirty_gold"), forgeItemTag("dusts")),
+    DIRTY_GOLD_DUST = taggedIngredient("dirty_gold_dust", forgeItemTag("dirty_dusts/dirty_gold"), forgeItemTag("dirty_dusts")),
             GOLD_DUST = taggedIngredient("gold_dust", forgeItemTag("dusts/gold"), forgeItemTag("dusts")),
     // Iron
-    DIRTY_IRON_DUST = taggedIngredient("dirty_iron_dust", forgeItemTag("dusts/dirty_iron"), forgeItemTag("dusts")),
+    DIRTY_IRON_DUST = taggedIngredient("dirty_iron_dust", forgeItemTag("dirty_dusts/dirty_iron"), forgeItemTag("dirty_dusts")),
             IRON_DUST = taggedIngredient("iron_dust", forgeItemTag("dusts/iron"), forgeItemTag("dusts")),
     // Copper
-    DIRTY_COPPER_DUST = taggedIngredient("dirty_copper_dust", forgeItemTag("dusts/dirty_copper"), forgeItemTag("dusts")),
+    DIRTY_COPPER_DUST = taggedIngredient("dirty_copper_dust", forgeItemTag("dirty_dusts/dirty_copper"), forgeItemTag("dirty_dusts")),
             COPPER_DUST = taggedIngredient("copper_dust", forgeItemTag("dusts/copper"), forgeItemTag("dusts")),
     // Zinc
-    DIRTY_ZINC_DUST = taggedIngredient("dirty_zinc_dust", forgeItemTag("dusts/dirty_zinc"), forgeItemTag("dusts")),
+    DIRTY_ZINC_DUST = taggedIngredient("dirty_zinc_dust", forgeItemTag("dirty_dusts/dirty_zinc"), forgeItemTag("dirty_dusts")),
             ZINC_DUST = taggedIngredient("zinc_dust", forgeItemTag("dusts/zinc"), forgeItemTag("dusts"));
 
     public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = taggedIngredient("graphite_blank_mold", forgeItemTag("graphite_molds/blank"), forgeItemTag("graphite_molds")),

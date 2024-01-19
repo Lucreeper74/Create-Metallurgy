@@ -1,14 +1,9 @@
 {
   "values": [
-    "createmetallurgy:dirty_wolframite_dust",
     "createmetallurgy:wolframite_dust",
-    "createmetallurgy:dirty_gold_dust",
     "createmetallurgy:gold_dust",
-    "createmetallurgy:dirty_iron_dust",
     "createmetallurgy:iron_dust",
-    "createmetallurgy:dirty_copper_dust",
     "createmetallurgy:copper_dust",
-    "createmetallurgy:dirty_zinc_dust",
     "createmetallurgy:zinc_dust"
   ]
 }

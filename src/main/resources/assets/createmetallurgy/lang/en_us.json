@@ -107,5 +107,16 @@
   "advancement.createmetallurgy.steel_age":  "The Steel Age",
   "advancement.createmetallurgy.steel_age.desc": "Alloy Iron and Coke",
   "advancement.createmetallurgy.melting_dusts":  "Effective Factory!",
-  "advancement.createmetallurgy.melting_dusts.desc": "Get any non-dirty minerals dusts"
+  "advancement.createmetallurgy.melting_dusts.desc": "Get any non-dirty minerals dusts",
+
+
+  "_": "->------------------------]  Ponders  [------------------------<-",
+
+  "createmetallurgy.ponder.foundrybasin.header": "Melting metals with Foundry Basin",
+  "createmetallurgy.ponder.foundrybasin.text_1": "This block act as a regular Basin!",
+  "createmetallurgy.ponder.foundrybasin.text_2": "However, it can only hold 9 Items of the same type",
+  "createmetallurgy.ponder.foundrybasin.text_3": "To complete your foundry, you need a Foundry Top above it",
+  "createmetallurgy.ponder.foundrybasin.text_4": "Also like the Basin, the faucet can extract recipes items",
+  "createmetallurgy.ponder.foundrybasin.text_5": "And fluids with Item Drain",
+  "createmetallurgy.ponder.foundrybasin.text_6": "Or directly with Fluid Pipe and Mechanical Pump"
 }
