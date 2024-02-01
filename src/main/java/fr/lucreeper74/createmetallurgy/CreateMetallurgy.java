@@ -44,6 +44,7 @@ public class CreateMetallurgy {
         AllFluids.register();
         AllArmInteract.register();
         AllPModels.init();
+        AllPonders.register();
         AllBlockEntityTypes.register();
         AllRecipeTypes.register(eventBus);
 
