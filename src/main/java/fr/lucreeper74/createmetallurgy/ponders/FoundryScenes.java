@@ -122,7 +122,7 @@ public class FoundryScenes {
                 .withItem(fr.lucreeper74.createmetallurgy.registries.AllItems.GOLD_DUST.asStack()), 20);
         scene.idle(30);
 
-        //TODO: Closing Lid trap
+        //Closing Lid trap
         scene.overlay.showText(80)
                 .attachKeyFrame()
                 .colored(PonderPalette.RED)
