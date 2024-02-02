@@ -4,7 +4,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"5": "createmetallurgy:block/shaftless_stone_cog",
-		"particle": "createmetallurgy:block/andesite_cut"
+		"particle": "create:block/palettes/stone_types/cut/andesite_cut"
 	},
 	"elements": [
 		{
