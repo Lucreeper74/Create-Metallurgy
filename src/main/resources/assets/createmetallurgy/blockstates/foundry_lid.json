@@ -5,6 +5,7 @@
       "y": 180
     },
     "on_foundry_basin=false,facing=south,open=false": {
+      "model": "createmetallurgy:block/foundry_lid/foundry_lid"
     },
     "on_foundry_basin=false,facing=west,open=false": {
       "model": "createmetallurgy:block/foundry_lid/foundry_lid",
@@ -14,7 +15,6 @@
       "model": "createmetallurgy:block/foundry_lid/foundry_lid",
       "y": 270
     },
-
     "on_foundry_basin=true,facing=north,open=false": {
       "model": "createmetallurgy:block/foundry_lid/foundry_lid_on_a_basin",
       "y": 180
@@ -30,7 +30,6 @@
       "model": "createmetallurgy:block/foundry_lid/foundry_lid_on_a_basin",
       "y": 270
     },
-
     "on_foundry_basin=false,facing=north,open=true": {
       "model": "createmetallurgy:block/foundry_lid/foundry_lid_open",
       "y": 180
@@ -46,7 +45,6 @@
       "model": "createmetallurgy:block/foundry_lid/foundry_lid_open",
       "y": 270
     },
-
     "on_foundry_basin=true,facing=north,open=true": {
       "model": "createmetallurgy:block/foundry_lid/foundry_lid_on_a_basin_open",
       "y": 180
