@@ -42,8 +42,8 @@
   "block.createmetallurgy.steel_block": "Steel Block",
   "block.createmetallurgy.refractory_mortar": "Refractory Mortar",
   "block.createmetallurgy.foundry_basin": "Foundry Basin",
-  "block.createmetallurgy.foundry_top": "Foundry Top",
-  "block.createmetallurgy.glassed_alloyer_top": "Glassed Alloyer Top",
+  "block.createmetallurgy.foundry_lid": "Foundry Lid",
+  "block.createmetallurgy.glassed_foundry_lid": "Glassed Foundry Lid",
   "block.createmetallurgy.foundry_mixer": "Foundry Mixer",
   "block.createmetallurgy.casting_basin": "Casting Basin",
   "block.createmetallurgy.casting_table": "Casting Table",
@@ -130,5 +130,7 @@
   "createmetallurgy.ponder.foundry_mixer.text_7": "If you are using Fluid Pipes instead of a Item Drain...",
   "createmetallurgy.ponder.foundry_mixer.text_8": "...you might use a Smart Fluid Pipe, to avoid pumping out un-processed Fluids",
 
-  "createmetallurgy.ponder.casting_blocks.header": "Casting Molten Metals"
+  "createmetallurgy.ponder.casting_blocks.header": "Casting Molten Metals",
+  "createmetallurgy.ponder.casting_blocks.text_1": "Casting Blocks can be used to cool down Molten Metals into a specific shape",
+  "createmetallurgy.ponder.casting_blocks.text_2": "Casting Blocks can be used to cool down Molten Metals into a specific shape"
 }

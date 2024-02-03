@@ -1,8 +1,8 @@
-package fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop;
+package fr.lucreeper74.createmetallurgy.content.processing.foundrylid;
 
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
-import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.AllBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -24,15 +24,15 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-public class GlassedCastingTopBlock extends Block implements IBE<GlassedCastingTopBlockEntity>, IWrenchable {
+public class FoundryLidBlock extends Block implements IBE<FoundryLidBlockEntity>, IWrenchable {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty UNDER_FOUNDRY_MIXER = BooleanProperty.create("under_foundry_mixer");
+    public static final BooleanProperty ON_FOUNDRY_BASIN = BooleanProperty.create("on_foundry_basin");
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    public GlassedCastingTopBlock(Properties properties) {
+    public FoundryLidBlock(Properties properties) {
         super(properties);
-        registerDefaultState(super.defaultBlockState().setValue(UNDER_FOUNDRY_MIXER, false));
+        registerDefaultState(super.defaultBlockState().setValue(ON_FOUNDRY_BASIN, false));
         registerDefaultState(super.defaultBlockState().setValue(OPEN, false));
         registerDefaultState(super.defaultBlockState().setValue(POWERED, false));
     }
@@ -47,20 +47,20 @@ public class GlassedCastingTopBlock extends Block implements IBE<GlassedCastingT
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState p_60569_, boolean p_60570_) {
         super.onPlace(state, level, pos, p_60569_, p_60570_);
 
-        if(level.getBlockEntity(pos.above()) instanceof FoundryMixerBlockEntity)
-            level.setBlock(pos, state.setValue(UNDER_FOUNDRY_MIXER, true), 1) ;
+        if(level.getBlockEntity(pos.below()) instanceof FoundryBasinBlockEntity)
+            level.setBlock(pos, state.setValue(ON_FOUNDRY_BASIN, true), 1) ;
         else
-            level.setBlock(pos, state.setValue(UNDER_FOUNDRY_MIXER, false), 1);
+            level.setBlock(pos, state.setValue(ON_FOUNDRY_BASIN, false), 1);
 
     }
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos p_57551_, boolean p_57552_) {
         boolean flag = level.hasNeighborSignal(pos);
-        if(level.getBlockEntity(pos.above()) instanceof FoundryMixerBlockEntity)
-            state = state.setValue(UNDER_FOUNDRY_MIXER, true);
+        if(level.getBlockEntity(pos.below()) instanceof FoundryBasinBlockEntity)
+            state = state.setValue(ON_FOUNDRY_BASIN, true);
         else
-            state = state.setValue(UNDER_FOUNDRY_MIXER, false);
+            state = state.setValue(ON_FOUNDRY_BASIN, false);
         if (flag != state.getValue(POWERED)) {
             if(flag != state.getValue(OPEN))
                 level.levelEvent(null, flag ? 1037:1036, pos, 0);
@@ -84,7 +84,7 @@ public class GlassedCastingTopBlock extends Block implements IBE<GlassedCastingT
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(UNDER_FOUNDRY_MIXER);
+        builder.add(ON_FOUNDRY_BASIN);
         builder.add(FACING);
         builder.add(OPEN);
         builder.add(POWERED);
@@ -101,12 +101,12 @@ public class GlassedCastingTopBlock extends Block implements IBE<GlassedCastingT
     }
 
     @Override
-    public Class<GlassedCastingTopBlockEntity> getBlockEntityClass() {
-        return GlassedCastingTopBlockEntity.class;
+    public Class<FoundryLidBlockEntity> getBlockEntityClass() {
+        return FoundryLidBlockEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends GlassedCastingTopBlockEntity> getBlockEntityType() {
-        return AllBlockEntityTypes.GLASSED_ALLOYER_TOP.get();
+    public BlockEntityType<? extends FoundryLidBlockEntity> getBlockEntityType() {
+        return AllBlockEntityTypes.FOUNDRY_TOP.get();
     }
 }

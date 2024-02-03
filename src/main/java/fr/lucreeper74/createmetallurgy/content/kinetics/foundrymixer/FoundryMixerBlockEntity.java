@@ -4,7 +4,7 @@ import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.foundation.utility.VecHelper;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop.GlassedCastingTopBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,7 +18,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
 
-import static fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlock.OPEN;
+import static fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlock.OPEN;
 
 public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
 
@@ -60,7 +60,7 @@ public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
             return Optional.empty();
         BlockEntity basinBE = level.getBlockEntity(worldPosition.below(2));
         BlockEntity topBE = level.getBlockEntity(worldPosition.below());
-        if (!(basinBE instanceof FoundryBasinBlockEntity && topBE instanceof GlassedCastingTopBlockEntity))
+        if (!(basinBE instanceof FoundryBasinBlockEntity && topBE instanceof GlassedFoundryLidBlockEntity))
             return Optional.empty();
         if(topBE.getBlockState().getValue(OPEN))
                 return Optional.empty();

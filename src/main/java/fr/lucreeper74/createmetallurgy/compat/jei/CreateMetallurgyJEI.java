@@ -59,16 +59,16 @@ public class CreateMetallurgyJEI implements IModPlugin {
 
         CreateRecipeCategory<?>
                 melting = builder(BasinRecipe.class)
-                .addTypedRecipes(AllRecipeTypes.MELTING).catalyst(AllBlocks.FOUNDRY_TOP_BLOCK::get)
+                .addTypedRecipes(AllRecipeTypes.MELTING).catalyst(AllBlocks.FOUNDRY_LID_BLOCK::get)
                 .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
-                .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_TOP_BLOCK.get())
+                .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_LID_BLOCK.get())
                 .emptyBackground(177, 100)
                 .build("melting", MeltingCategory::new),
 
                 alloying = builder(BasinRecipe.class)
                         .addTypedRecipes(AllRecipeTypes.ALLOYING)
                         .catalyst(AllBlocks.FOUNDRY_MIXER_BLOCK::get)
-                        .catalyst(AllBlocks.GLASSED_ALLOYER_TOP_BLOCK::get)
+                        .catalyst(AllBlocks.GLASSED_FOUNDRY_LID_BLOCK::get)
                         .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
                         .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_MIXER_BLOCK.get())
                         .emptyBackground(177, 100)

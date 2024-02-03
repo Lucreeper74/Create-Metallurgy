@@ -8,7 +8,7 @@ import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.AlloyingRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRecipe;
-import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.MeltingRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.MeltingRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;

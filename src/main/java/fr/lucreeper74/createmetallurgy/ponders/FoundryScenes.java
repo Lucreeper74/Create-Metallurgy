@@ -16,8 +16,8 @@ import com.simibubi.create.foundation.ponder.element.WorldSectionElement;
 import com.simibubi.create.foundation.ponder.instruction.EmitParticlesInstruction;
 import com.simibubi.create.foundation.utility.Pointing;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop.GlassedCastingTopBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.registries.AllFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -66,7 +66,7 @@ public class FoundryScenes {
                 .placeNearTarget();
         scene.idle(90);
 
-        scene.world.modifyBlock(lidPos, s -> s.setValue(GlassedCastingTopBlock.OPEN, true), false);
+        scene.world.modifyBlock(lidPos, s -> s.setValue(GlassedFoundryLidBlock.OPEN, true), false);
         scene.world.showSection(util.select.position(lidPos), Direction.DOWN);
         scene.idle(10);
         scene.overlay.showText(80)
@@ -132,10 +132,10 @@ public class FoundryScenes {
         scene.idle(90);
         scene.overlay.showControls(new InputWindowElement(lidTrap, Pointing.LEFT).rightClick(), 30);
         scene.idle(7);
-        scene.world.modifyBlock(lidPos, s -> s.setValue(GlassedCastingTopBlock.OPEN, false), false);
+        scene.world.modifyBlock(lidPos, s -> s.setValue(GlassedFoundryLidBlock.OPEN, false), false);
 
         //Start Recipe & Spoutout fluids
-        scene.world.modifyBlockEntity(lidPos, CastingTopBlockEntity.class, CastingTopBlockEntity::startProcessingBasin);
+        scene.world.modifyBlockEntity(lidPos, FoundryLidBlockEntity.class, FoundryLidBlockEntity::startProcessingBasin);
         scene.idle(40);
 
         FluidStack gold = new FluidStack(FluidHelper.convertToStill(AllFluids.MOLTEN_GOLD.get()), 1000);
@@ -177,23 +177,18 @@ public class FoundryScenes {
         scene.idle(5);
         scene.world.showSection(util.select.position(2, 1, 4), Direction.DOWN);
         scene.idle(5);
-        scene.world.showSection(util.select.position(1, 1, 3), Direction.DOWN);
-        scene.world.showSection(util.select.position(1, 2, 3), Direction.DOWN);
-        scene.world.showSection(util.select.position(1, 3, 3), Direction.DOWN);
-        scene.world.showSection(util.select.position(1, 4, 3), Direction.DOWN);
+        scene.world.showSection(util.select.fromTo(1, 1, 3, 1, 4, 3), Direction.DOWN);
         scene.idle(5);
         scene.world.showSection(util.select.position(1, 1, 2), Direction.DOWN);
         scene.idle(5);
         scene.world.modifyBlock(basinPos, s -> s.setValue(BasinBlock.FACING, Direction.DOWN), false);
         scene.world.showSection(util.select.position(basinPos), Direction.DOWN);
         scene.idle(5);
-        scene.world.modifyBlock(topPos, s -> s.setValue(GlassedCastingTopBlock.OPEN, true), false);
+        scene.world.modifyBlock(topPos, s -> s.setValue(GlassedFoundryLidBlock.OPEN, true), false);
         scene.world.showSection(util.select.position(topPos), Direction.DOWN);
         scene.idle(5);
         scene.world.showSection(util.select.position(mixer), Direction.DOWN);
 
-
-        //Brass Automation
         scene.idle(10);
         scene.overlay.showText(80)
                 .attachKeyFrame()
@@ -238,16 +233,11 @@ public class FoundryScenes {
         scene.idle(20);
 
         //Adding Molten Iron
-        scene.world.showSection(util.select.position(0, 0, 5), Direction.DOWN);
-        scene.world.showSection(util.select.position(0, 1, 5), Direction.DOWN);
-        scene.world.showSection(util.select.position(0, 2, 5), Direction.DOWN);
-        scene.world.showSection(util.select.position(0, 3, 5), Direction.DOWN);
+        scene.world.showSection(util.select.fromTo(0, 0, 5, 0, 3, 5), Direction.DOWN);
         scene.idle(5);
         scene.world.showSection(util.select.position(1, 2, 4), Direction.NORTH);
         scene.idle(5);
-        scene.world.showSection(util.select.position(0, 2, 2), Direction.EAST);
-        scene.world.showSection(util.select.position(0, 2, 3), Direction.EAST);
-        scene.world.showSection(util.select.position(0, 2, 4), Direction.EAST);
+        scene.world.showSection(util.select.fromTo(0, 2, 2, 0, 2, 4), Direction.DOWN);
         scene.idle(10);
         FluidStack iron = new FluidStack(FluidHelper.convertToStill(AllFluids.MOLTEN_IRON.get()), 32000);
 
@@ -268,7 +258,7 @@ public class FoundryScenes {
         scene.idle(90);
         scene.overlay.showControls(new InputWindowElement(lidTrap, Pointing.LEFT).rightClick(), 30);
         scene.idle(7);
-        scene.world.modifyBlock(topPos, s -> s.setValue(GlassedCastingTopBlock.OPEN, false), false);
+        scene.world.modifyBlock(topPos, s -> s.setValue(GlassedFoundryLidBlock.OPEN, false), false);
         scene.idle(40);
 
         scene.rotateCameraY(70);

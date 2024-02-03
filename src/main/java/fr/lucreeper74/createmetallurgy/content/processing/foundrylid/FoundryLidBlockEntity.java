@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.processing.foundrytop;
+package fr.lucreeper74.createmetallurgy.content.processing.foundrylid;
 
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
@@ -22,12 +22,12 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 import java.util.Optional;
 
-import static fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlock.OPEN;
+import static fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlock.OPEN;
 
-public class CastingTopBlockEntity extends BasinOperatingBlockEntity {
+public class FoundryLidBlockEntity extends BasinOperatingBlockEntity {
     public int processingTime;
     public boolean running;
-    public CastingTopBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public FoundryLidBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 

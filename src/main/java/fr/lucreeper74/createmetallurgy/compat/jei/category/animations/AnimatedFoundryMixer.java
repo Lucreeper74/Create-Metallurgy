@@ -8,7 +8,7 @@ import fr.lucreeper74.createmetallurgy.registries.AllBlocks;
 import fr.lucreeper74.createmetallurgy.registries.AllPModels;
 import net.minecraft.util.Mth;
 
-import static fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop.GlassedCastingTopBlock.UNDER_FOUNDRY_MIXER;
+import static fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlock.UNDER_FOUNDRY_MIXER;
 
 public class AnimatedFoundryMixer extends AnimatedKinetics {
     @Override
@@ -43,7 +43,7 @@ public class AnimatedFoundryMixer extends AnimatedKinetics {
                 .scale(scale)
                 .render(matrixStack);
 
-        blockElement(AllBlocks.GLASSED_ALLOYER_TOP_BLOCK.getDefaultState().setValue(UNDER_FOUNDRY_MIXER, true))
+        blockElement(AllBlocks.GLASSED_FOUNDRY_LID_BLOCK.getDefaultState().setValue(UNDER_FOUNDRY_MIXER, true))
                 .atLocal(0, .65, 0)
                 .scale(scale)
                 .render(matrixStack);

@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "createmetallurgy:block/foundry_top",
-		"1": "createmetallurgy:block/foundry_top_trap",
-		"particle": "createmetallurgy:block/foundry_top"
+		"0": "createmetallurgy:block/foundry_lid",
+		"1": "createmetallurgy:block/foundry_lid_trap",
+		"particle": "createmetallurgy:block/foundry_lid"
 	},
 	"elements": [
 		{

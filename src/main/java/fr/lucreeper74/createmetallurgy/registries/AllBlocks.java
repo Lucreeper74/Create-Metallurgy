@@ -1,11 +1,8 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
-import com.simibubi.create.content.redstone.RoseQuartzLampBlock;
-import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlock;
@@ -14,8 +11,8 @@ import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.C
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableMovementBehaviour;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlock;
-import fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop.GlassedCastingTopBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.redstone.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.tabs.AllCreativeTabs;
 import net.minecraft.client.renderer.RenderType;
@@ -131,8 +128,8 @@ public class AllBlocks {
             .transform(customItemModel("_", "block"))
             .register();
 
-    public static final BlockEntry<CastingTopBlock> FOUNDRY_TOP_BLOCK = REGISTRATE
-            .block("foundry_top", CastingTopBlock::new)
+    public static final BlockEntry<FoundryLidBlock> FOUNDRY_LID_BLOCK = REGISTRATE
+            .block("foundry_lid", FoundryLidBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
@@ -142,8 +139,8 @@ public class AllBlocks {
             .transform(customItemModel("_", "block"))
             .register();
 
-    public static final BlockEntry<GlassedCastingTopBlock> GLASSED_ALLOYER_TOP_BLOCK = REGISTRATE
-            .block("glassed_alloyer_top", GlassedCastingTopBlock::new)
+    public static final BlockEntry<GlassedFoundryLidBlock> GLASSED_FOUNDRY_LID_BLOCK = REGISTRATE
+            .block("glassed_foundry_lid", GlassedFoundryLidBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))

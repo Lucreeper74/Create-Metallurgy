@@ -10,8 +10,8 @@ import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.C
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRenderer;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinRenderer;
-import fr.lucreeper74.createmetallurgy.content.processing.foundrytop.CastingTopBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.processing.glassedalloyertop.GlassedCastingTopBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlockEntity;
 
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -35,14 +35,14 @@ public class AllBlockEntityTypes {
             .renderer(() -> CastingTableRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<CastingTopBlockEntity> FOUNDRY_TOP = REGISTRATE
-            .blockEntity("foundry_top", CastingTopBlockEntity::new)
-            .validBlocks(AllBlocks.FOUNDRY_TOP_BLOCK)
+    public static final BlockEntityEntry<FoundryLidBlockEntity> FOUNDRY_TOP = REGISTRATE
+            .blockEntity("foundry_top", FoundryLidBlockEntity::new)
+            .validBlocks(AllBlocks.FOUNDRY_LID_BLOCK)
             .register();
 
-    public static final BlockEntityEntry<GlassedCastingTopBlockEntity> GLASSED_ALLOYER_TOP = REGISTRATE
-            .blockEntity("glassed_alloyer_top", GlassedCastingTopBlockEntity::new)
-            .validBlocks(AllBlocks.GLASSED_ALLOYER_TOP_BLOCK)
+    public static final BlockEntityEntry<GlassedFoundryLidBlockEntity> GLASSED_ALLOYER_TOP = REGISTRATE
+            .blockEntity("glassed_alloyer_top", GlassedFoundryLidBlockEntity::new)
+            .validBlocks(AllBlocks.GLASSED_FOUNDRY_LID_BLOCK)
             .register();
 
     public static final BlockEntityEntry<FoundryMixerBlockEntity> FOUNDRY_MIXER = REGISTRATE

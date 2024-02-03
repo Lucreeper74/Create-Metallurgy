@@ -25,7 +25,7 @@ public class FoundryTopElement implements IDrawable {
         poseStack.mulPose(Vector3f.YP.rotationDegrees(22.5f));
         int scale = 23;
 
-        GuiGameElement.of(AllBlocks.FOUNDRY_TOP_BLOCK.getDefaultState())
+        GuiGameElement.of(AllBlocks.FOUNDRY_LID_BLOCK.getDefaultState())
                 .atLocal(0, .65, 0)
                 .scale(scale)
                 .render(poseStack);

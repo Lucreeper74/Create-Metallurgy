@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "createmetallurgy:block/glassed_alloyer_top_trap",
-		"3": "createmetallurgy:block/glassed_alloyer_top",
-		"particle": "createmetallurgy:block/glassed_alloyer_top_trap"
+		"1": "createmetallurgy:block/glassed_foundry_lid_trap",
+		"3": "createmetallurgy:block/glassed_foundry_lid",
+		"particle": "createmetallurgy:block/glassed_foundry_lid_trap"
 	},
 	"elements": [
 		{
