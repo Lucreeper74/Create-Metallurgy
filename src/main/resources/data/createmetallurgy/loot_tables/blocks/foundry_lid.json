@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createmetallurgy:glassed_alloyer_top"
+          "name": "createmetallurgy:foundry_lid"
         }
       ],
       "conditions": [

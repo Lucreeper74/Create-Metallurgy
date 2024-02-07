@@ -5,7 +5,7 @@
       "item": "create:andesite_alloy"
     },
     "B": {
-      "item": "minecraft:glass"
+      "item": "create:framed_glass"
     }
   },
   "pattern": [
@@ -14,6 +14,6 @@
     "   "
   ],
   "result": {
-    "item": "createmetallurgy:glassed_alloyer_top"
+    "item": "createmetallurgy:glassed_foundry_lid"
   }
 }
