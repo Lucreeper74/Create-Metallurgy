@@ -1,7 +1,6 @@
 package fr.lucreeper74.createmetallurgy.ponders;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlockEntity;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.content.logistics.funnel.FunnelBlock;
 import com.simibubi.create.content.logistics.funnel.FunnelBlockEntity;
