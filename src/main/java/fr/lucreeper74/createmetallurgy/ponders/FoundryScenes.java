@@ -318,5 +318,7 @@ public class FoundryScenes {
         scene.idle(7);
         scene.world.setFilterData(util.select.position(1, 2, 1), SmartFluidPipeBlockEntity.class, steelBucket);
         scene.idle(10);
+
+        scene.markAsFinished();
     }
 }
