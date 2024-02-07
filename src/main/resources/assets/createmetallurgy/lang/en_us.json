@@ -132,5 +132,8 @@
 
   "createmetallurgy.ponder.casting_blocks.header": "Casting Molten Metals",
   "createmetallurgy.ponder.casting_blocks.text_1": "Casting Blocks can be used to cool down Molten Metals into a specific shape",
-  "createmetallurgy.ponder.casting_blocks.text_2": "Casting Blocks can be used to cool down Molten Metals into a specific shape"
+  "createmetallurgy.ponder.casting_blocks.text_2": "The Casting Basin is used to cast up to a entire block",
+  "createmetallurgy.ponder.casting_blocks.text_3": "While the Casting Table is used to cast Items using Graphite Molds",
+  "createmetallurgy.ponder.casting_blocks.text_4": "If you are using Funnels instead of manually...",
+  "createmetallurgy.ponder.casting_blocks.text_5": "...you might need a Brass Funnel to not extract Molds"
 }
