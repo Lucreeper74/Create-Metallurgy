@@ -117,7 +117,7 @@
   "createmetallurgy.ponder.foundry_basin.text_2": "...However, it can only hold 9 Items of the same type",
   "createmetallurgy.ponder.foundry_basin.text_3": "Put a Foundry Lid on top, and your Foundry is now ready!",
   "createmetallurgy.ponder.foundry_basin.text_4": "Like the Basin, a Faucet can extract recipes Items...",
-  "createmetallurgy.ponder.foundry_basin.text_5": "...and Fluids with a Item Drain",
+  "createmetallurgy.ponder.foundry_basin.text_5": "...and Fluids with an Item Drain",
   "createmetallurgy.ponder.foundry_basin.text_6": "Make sure to close the Foundry Top else the recipe won't start",
 
   "createmetallurgy.ponder.foundry_mixer.header": "Making Alloys with Foundry Mixer",
@@ -127,12 +127,12 @@
   "createmetallurgy.ponder.foundry_mixer.text_4": "In order to keep molten metals warm enough...",
   "createmetallurgy.ponder.foundry_mixer.text_5": "...you will need a Super Heated Blaze Burner",
   "createmetallurgy.ponder.foundry_mixer.text_6": "Make sure to close the Foundry Top else the recipe won't start!",
-  "createmetallurgy.ponder.foundry_mixer.text_7": "If you are using Fluid Pipes instead of a Item Drain...",
+  "createmetallurgy.ponder.foundry_mixer.text_7": "If you are using Fluid Pipes instead of an Item Drain...",
   "createmetallurgy.ponder.foundry_mixer.text_8": "...you might use a Smart Fluid Pipe, to avoid pumping out un-processed Fluids",
 
   "createmetallurgy.ponder.casting_blocks.header": "Casting Molten Metals",
   "createmetallurgy.ponder.casting_blocks.text_1": "Casting Blocks can be used to cool down Molten Metals into a specific shape",
-  "createmetallurgy.ponder.casting_blocks.text_2": "The Casting Basin is used to cast up to a entire block",
+  "createmetallurgy.ponder.casting_blocks.text_2": "The Casting Basin is used to cast up to an entire block",
   "createmetallurgy.ponder.casting_blocks.text_3": "While the Casting Table is used to cast Items using Graphite Molds",
   "createmetallurgy.ponder.casting_blocks.text_4": "If you are using Funnels instead of manually...",
   "createmetallurgy.ponder.casting_blocks.text_5": "...you might need a Brass Funnel to not extract Molds"
