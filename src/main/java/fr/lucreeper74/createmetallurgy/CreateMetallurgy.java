@@ -9,7 +9,8 @@ import fr.lucreeper74.createmetallurgy.content.kinetics.mechanicalArm.AllArmInte
 import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingWithSpout;
 import fr.lucreeper74.createmetallurgy.registries.*;
 import fr.lucreeper74.createmetallurgy.tabs.AllCreativeTabs;
-import fr.lucreeper74.createmetallurgy.worldgen.OresFeaturesRegistry;
+import fr.lucreeper74.createmetallurgy.worldgen.ConfiguredFeatures;
+import fr.lucreeper74.createmetallurgy.worldgen.PlacedFeatures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -50,7 +51,8 @@ public class CreateMetallurgy {
 
         CastingWithSpout.registerDefaults();
 
-        OresFeaturesRegistry.init();
+        ConfiguredFeatures.register(eventBus);
+        PlacedFeatures.register(eventBus);
 
         eventBus.addListener(this::commonSetup);
 
@@ -60,7 +62,6 @@ public class CreateMetallurgy {
     private void commonSetup(final FMLCommonSetupEvent event) {
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
