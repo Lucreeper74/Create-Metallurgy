@@ -6,6 +6,7 @@ import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlock;
+import fr.lucreeper74.createmetallurgy.content.kinetics.mechanicalBeltGrinder.MechanicalBeltGrinderBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinMovementBehaviour;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableBlock;
@@ -158,6 +159,18 @@ public class AllBlocks {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(8.0))
+            .item()
+            .transform(customItemModel("_", "block"))
+            .register();
+
+    public static final BlockEntry<MechanicalBeltGrinderBlock> MECHANICAL_BELT_GRINDER_BLOCK = REGISTRATE
+            .block("mechanical_belt_grinder", MechanicalBeltGrinderBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.color(MaterialColor.STONE))
+            .properties(BlockBehaviour.Properties::noOcclusion)
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(BlockStressDefaults.setImpact(6.0))
             .item()
             .transform(customItemModel("_", "block"))
             .register();

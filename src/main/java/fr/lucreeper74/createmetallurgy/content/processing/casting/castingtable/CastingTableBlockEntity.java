@@ -2,6 +2,9 @@ package fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable;
 
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
+import com.simibubi.create.content.kinetics.fan.AirCurrent;
+import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
+import com.simibubi.create.content.kinetics.fan.EncasedFanBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
@@ -25,6 +28,9 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -85,7 +91,9 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
         super.read(compound, clientPacket);
     }
 
-    public void readOnlyItems(CompoundTag compound) {inv.deserializeNBT(compound.getCompound("inv"));}
+    public void readOnlyItems(CompoundTag compound) {
+        inv.deserializeNBT(compound.getCompound("inv"));
+    }
 
     @Nonnull
     @Override
@@ -119,7 +127,7 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
         if (running) {
             if (!level.isClientSide) {
                 if (canProcess()) {
-                    if(processingTick <= 0) {
+                    if (processingTick <= 0) {
                         process();
                         level.playSound(null, worldPosition, SoundEvents.LAVA_EXTINGUISH,
                                 SoundSource.BLOCKS, .2f, .5f);
@@ -151,8 +159,9 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
 
         currentRecipe = (CastingTableRecipe) recipes.get(0);
 
-        if(canProcess()) {
-            processingTick = currentRecipe.getProcessingDuration();
+        if (canProcess()) {
+            processingTick = isInFanAirCurrent(this.getLevel(), this.getBlockPos()) ?
+                    currentRecipe.getProcessingDuration() / 2 : currentRecipe.getProcessingDuration();
             running = true;
             sendData();
         }
@@ -216,6 +225,28 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
 
     protected Object getRecipeCacheKey() {
         return CastingInTableRecipesKey;
+    }
+
+
+    private boolean isInFanAirCurrent(Level level, BlockPos pos) {
+        int range = 3;
+
+        for (Direction direction : Direction.values()) {
+            for (int i = 0; i <= range; i++) {
+                BlockPos nearbyPos = pos.relative(direction, i);
+                BlockState nearbyState = level.getBlockState(nearbyPos);
+
+                if (nearbyState.getBlock() instanceof EncasedFanBlock) {
+                    EncasedFanBlockEntity fanBe = (EncasedFanBlockEntity) level.getBlockEntity(nearbyPos);
+                    Direction facing = nearbyState.getValue(EncasedFanBlock.FACING);
+                    BlockEntity facingBe = level.getBlockEntity(nearbyPos.relative(facing, i));
+                    float flowDist = fanBe.airCurrent.maxDistance;
+
+                    if (this == facingBe && flowDist != 0 && flowDist >= i - 1) return true;
+                }
+            }
+        }
+        return false;
     }
 
 

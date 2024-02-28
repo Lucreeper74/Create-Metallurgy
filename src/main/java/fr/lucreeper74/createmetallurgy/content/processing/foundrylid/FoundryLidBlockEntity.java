@@ -25,8 +25,10 @@ import java.util.Optional;
 import static fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlock.OPEN;
 
 public class FoundryLidBlockEntity extends BasinOperatingBlockEntity {
+
     public int processingTime;
     public boolean running;
+
     public FoundryLidBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }

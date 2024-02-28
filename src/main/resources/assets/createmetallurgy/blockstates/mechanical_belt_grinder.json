@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "createmetallurgy:block/mechanical_belt_grinder/block",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "createmetallurgy:block/mechanical_belt_grinder/block",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "createmetallurgy:block/mechanical_belt_grinder/block"
+    },
+    "facing=west": {
+      "model": "createmetallurgy:block/mechanical_belt_grinder/block",
+      "y": 90
+    }
+  }
+}

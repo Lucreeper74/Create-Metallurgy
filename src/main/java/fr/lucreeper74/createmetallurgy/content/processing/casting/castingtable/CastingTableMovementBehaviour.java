@@ -42,7 +42,7 @@ public class CastingTableMovementBehaviour implements MovementBehaviour {
                 if (itemStackHandler.getStackInSlot(i)
                         .isEmpty())
                     continue;
-                ItemEntity itemEntity = new ItemEntity(context.world, context.position.x, context.position.y - .35f,
+                ItemEntity itemEntity = new ItemEntity(context.world, context.position.x, context.position.y - .45f,
                         context.position.z, itemStackHandler.getStackInSlot(i));
                 itemEntity.setDeltaMovement(facingVec.scale(.05));
                 context.world.addFreshEntity(itemEntity);

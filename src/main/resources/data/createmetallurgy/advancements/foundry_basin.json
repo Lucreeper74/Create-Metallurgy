@@ -13,12 +13,12 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "have_foundry_top": {
+    "have_foundry_lid": {
       "conditions": {
         "items": [
           {
             "items": [
-              "createmetallurgy:foundry_top"
+              "createmetallurgy:foundry_lid"
             ]
           }
         ]
@@ -45,7 +45,7 @@
   "requirements": [
     [
       "have_blast_furnace",
-      "have_foundry_top"
+      "have_foundry_lid"
     ]
   ]
 }

@@ -107,6 +107,6 @@ public class FoundryLidBlock extends Block implements IBE<FoundryLidBlockEntity>
 
     @Override
     public BlockEntityType<? extends FoundryLidBlockEntity> getBlockEntityType() {
-        return AllBlockEntityTypes.FOUNDRY_TOP.get();
+        return AllBlockEntityTypes.FOUNDRY_LID.get();
     }
 }

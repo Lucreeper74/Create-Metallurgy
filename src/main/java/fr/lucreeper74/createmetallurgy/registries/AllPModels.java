@@ -9,7 +9,9 @@ public class AllPModels {
 
             FOUNDRY_MIXER_POLE = block("foundry_mixer/pole"),
             FOUNDRY_MIXER_HEAD = block("foundry_mixer/head"),
-            SHAFTLESS_STONE_COGWHEEL = block("foundry_mixer/cog");
+            SHAFTLESS_STONE_COGWHEEL = block("foundry_mixer/cog"),
+
+            THERMOMETER_GAUGE = block("gauges/thermometer");
 
     private static PartialModel block(String path) {
         return new PartialModel(CreateMetallurgy.genRL("block/" + path));

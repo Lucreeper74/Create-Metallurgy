@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "createmetallurgy:wolframite_ore",
     "createmetallurgy:tungsten_block",
@@ -7,7 +6,7 @@
     "createmetallurgy:foundry_basin",
     "createmetallurgy:foundry_mixer",
     "createmetallurgy:foundry_lid",
-    "createmetallurgy:glassed_alloyer_lid",
+    "createmetallurgy:glassed_foundry_lid",
     "createmetallurgy:casting_basin",
     "createmetallurgy:casting_table",
     "createmetallurgy:coke_block",
