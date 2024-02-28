@@ -14,6 +14,7 @@ import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import com.simibubi.create.foundation.utility.VecHelper;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingUtils;
 import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
 import fr.lucreeper74.createmetallurgy.utils.LANG;
 import net.minecraft.ChatFormatting;
@@ -160,7 +161,7 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
         currentRecipe = (CastingTableRecipe) recipes.get(0);
 
         if (canProcess()) {
-            processingTick = isInFanAirCurrent(this.getLevel(), this.getBlockPos()) ?
+            processingTick = CastingUtils.isInAirCurrent(this.getLevel(), this.getBlockPos(), this) ?
                     currentRecipe.getProcessingDuration() / 2 : currentRecipe.getProcessingDuration();
             running = true;
             sendData();
@@ -226,29 +227,6 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
     protected Object getRecipeCacheKey() {
         return CastingInTableRecipesKey;
     }
-
-
-    private boolean isInFanAirCurrent(Level level, BlockPos pos) {
-        int range = 3;
-
-        for (Direction direction : Direction.values()) {
-            for (int i = 0; i <= range; i++) {
-                BlockPos nearbyPos = pos.relative(direction, i);
-                BlockState nearbyState = level.getBlockState(nearbyPos);
-
-                if (nearbyState.getBlock() instanceof EncasedFanBlock) {
-                    EncasedFanBlockEntity fanBe = (EncasedFanBlockEntity) level.getBlockEntity(nearbyPos);
-                    Direction facing = nearbyState.getValue(EncasedFanBlock.FACING);
-                    BlockEntity facingBe = level.getBlockEntity(nearbyPos.relative(facing, i));
-                    float flowDist = fanBe.airCurrent.maxDistance;
-
-                    if (this == facingBe && flowDist != 0 && flowDist >= i - 1) return true;
-                }
-            }
-        }
-        return false;
-    }
-
 
     // CLIENT THINGS -----------------
     @Override

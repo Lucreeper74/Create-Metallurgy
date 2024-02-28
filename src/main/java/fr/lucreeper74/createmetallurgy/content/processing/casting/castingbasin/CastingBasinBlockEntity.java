@@ -11,6 +11,7 @@ import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import com.simibubi.create.foundation.utility.VecHelper;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingUtils;
 import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
 import fr.lucreeper74.createmetallurgy.utils.LANG;
 import net.minecraft.ChatFormatting;
@@ -147,7 +148,8 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
         currentRecipe = (CastingBasinRecipe) recipes.get(0);
 
         if(canProcess()) {
-            processingTick = currentRecipe.getProcessingDuration();
+            processingTick = CastingUtils.isInAirCurrent(this.getLevel(), this.getBlockPos(), this) ?
+                    currentRecipe.getProcessingDuration() / 2 : currentRecipe.getProcessingDuration();
             running = true;
             sendData();
         }
