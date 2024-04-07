@@ -109,8 +109,6 @@ public class LightBulbBlock extends RodBlock implements IBE<LightBulbBlockEntity
         if (state.getValue(LEVEL) == level.getBestNeighborSignal(pos))
             return;
         updateLevelState(level, pos);
-
-        //TODO: regarder pk ca appelle 2 fois et regarder les vérif de NeighborChange du RoseQuartzLampBlock pour éviter
     }
 
     @Override
