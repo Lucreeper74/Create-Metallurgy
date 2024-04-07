@@ -3,7 +3,7 @@ package fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlockEntity;
-import fr.lucreeper74.createmetallurgy.registries.AllBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -107,6 +107,6 @@ public class GlassedFoundryLidBlock extends Block implements IBE<GlassedFoundryL
 
     @Override
     public BlockEntityType<? extends GlassedFoundryLidBlockEntity> getBlockEntityType() {
-        return AllBlockEntityTypes.GLASSED_ALLOYER_TOP.get();
+        return CMBlockEntityTypes.GLASSED_ALLOYER_TOP.get();
     }
 }

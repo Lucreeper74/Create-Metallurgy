@@ -7,7 +7,7 @@ import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
-import fr.lucreeper74.createmetallurgy.registries.AllPModels;
+import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -49,7 +49,7 @@ public class FoundryLidRenderer extends SafeBlockEntityRenderer<FoundryLidBlockE
         progress.chase((double) temp.get(heat) / 2000, .02f, LerpedFloat.Chaser.EXP);
 
 
-        CachedBufferer.partial(AllPModels.THERMOMETER_GAUGE, be.getBlockState())
+        CachedBufferer.partial(CMPartialModels.THERMOMETER_GAUGE, be.getBlockState())
                 .centre()
                 .rotateY(-facing.toYRot())
                 .unCentre()

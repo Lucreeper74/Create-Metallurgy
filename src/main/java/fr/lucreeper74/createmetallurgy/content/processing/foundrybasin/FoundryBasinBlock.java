@@ -2,8 +2,8 @@ package fr.lucreeper74.createmetallurgy.content.processing.foundrybasin;
 
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.processing.basin.BasinBlock;
-import fr.lucreeper74.createmetallurgy.registries.AllBlockEntityTypes;
-import fr.lucreeper74.createmetallurgy.registries.AllBlocks;
+import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -17,13 +17,13 @@ public class FoundryBasinBlock extends BasinBlock implements IWrenchable {
     }
     @Override
     public BlockEntityType<? extends FoundryBasinBlockEntity> getBlockEntityType() {
-        return AllBlockEntityTypes.FOUNDRY_BASIN.get();
+        return CMBlockEntityTypes.FOUNDRY_BASIN.get();
     }
 
     @Override
     public void updateEntityAfterFallOn(BlockGetter worldIn, Entity entityIn) {
         super.updateEntityAfterFallOn(worldIn, entityIn);
-        if (!AllBlocks.FOUNDRY_BASIN_BLOCK.has(worldIn.getBlockState(entityIn.blockPosition())))
+        if (!CMBlocks.FOUNDRY_BASIN_BLOCK.has(worldIn.getBlockState(entityIn.blockPosition())))
             return;
         if (!(entityIn instanceof ItemEntity itemEntity))
             return;

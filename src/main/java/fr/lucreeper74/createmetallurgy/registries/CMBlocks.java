@@ -6,16 +6,16 @@ import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlock;
-import fr.lucreeper74.createmetallurgy.content.kinetics.mechanicalBeltGrinder.MechanicalBeltGrinderBlock;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinMovementBehaviour;
+import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.BeltGrinderBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinMovementBehaviour;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableMovementBehaviour;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.content.redstone.LightBulbBlock;
-import fr.lucreeper74.createmetallurgy.tabs.AllCreativeTabs;
+import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlock;
+import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -32,10 +32,10 @@ import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
 @SuppressWarnings("unused")
-public class AllBlocks {
+public class CMBlocks {
 
     static {
-        REGISTRATE.creativeModeTab(() -> AllCreativeTabs.MAIN_CREATIVE_TAB);
+        REGISTRATE.creativeModeTab(() -> CMCreativeTabs.MAIN_CREATIVE_TAB);
     }
 
     public static final BlockEntry<Block> RAW_WOLFRAMITE_BLOCK = REGISTRATE
@@ -163,8 +163,8 @@ public class AllBlocks {
             .transform(customItemModel("_", "block"))
             .register();
 
-    public static final BlockEntry<MechanicalBeltGrinderBlock> MECHANICAL_BELT_GRINDER_BLOCK = REGISTRATE
-            .block("mechanical_belt_grinder", MechanicalBeltGrinderBlock::new)
+    public static final BlockEntry<BeltGrinderBlock> BELT_GRINDER_BLOCK = REGISTRATE
+            .block("mechanical_belt_grinder", BeltGrinderBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.STONE))
             .properties(BlockBehaviour.Properties::noOcclusion)

@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin;
+package fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin;
 
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
@@ -12,7 +12,7 @@ import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import com.simibubi.create.foundation.utility.VecHelper;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingUtils;
-import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import fr.lucreeper74.createmetallurgy.utils.LANG;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -205,7 +205,7 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
     }
 
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
-        return r.getType() == AllRecipeTypes.CASTING_IN_BASIN.getType();
+        return r.getType() == CMRecipeTypes.CASTING_IN_BASIN.getType();
     }
 
     private static final Object CastingInBasinRecipesKey = new Object();

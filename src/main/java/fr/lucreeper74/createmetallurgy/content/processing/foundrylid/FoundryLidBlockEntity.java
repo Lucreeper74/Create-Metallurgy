@@ -5,7 +5,7 @@ import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.utility.VecHelper;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -57,7 +57,7 @@ public class FoundryLidBlockEntity extends BasinOperatingBlockEntity {
 
     @Override
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> recipe) {
-        return recipe.getType() == AllRecipeTypes.MELTING.getType();
+        return recipe.getType() == CMRecipeTypes.MELTING.getType();
     }
 
     @Override

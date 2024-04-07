@@ -3,8 +3,8 @@ package fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
-import fr.lucreeper74.createmetallurgy.registries.AllBlockEntityTypes;
-import fr.lucreeper74.createmetallurgy.registries.AllBlocks;
+import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +22,7 @@ public class FoundryMixerBlock extends MechanicalMixerBlock implements ICogWheel
     }
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-        return !AllBlocks.FOUNDRY_BASIN_BLOCK.has(worldIn.getBlockState(pos.below()));
+        return !CMBlocks.FOUNDRY_BASIN_BLOCK.has(worldIn.getBlockState(pos.below()));
     }
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
@@ -34,6 +34,6 @@ public class FoundryMixerBlock extends MechanicalMixerBlock implements ICogWheel
     }
 
     public BlockEntityType<? extends FoundryMixerBlockEntity> getBlockEntityType() {
-        return AllBlockEntityTypes.FOUNDRY_MIXER.get();
+        return CMBlockEntityTypes.FOUNDRY_MIXER.get();
     }
 }

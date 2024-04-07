@@ -3,7 +3,7 @@ package fr.lucreeper74.createmetallurgy.content.processing.foundrylid;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.registries.AllBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -32,9 +32,10 @@ public class FoundryLidBlock extends Block implements IBE<FoundryLidBlockEntity>
 
     public FoundryLidBlock(Properties properties) {
         super(properties);
-        registerDefaultState(super.defaultBlockState().setValue(ON_FOUNDRY_BASIN, false));
-        registerDefaultState(super.defaultBlockState().setValue(OPEN, false));
-        registerDefaultState(super.defaultBlockState().setValue(POWERED, false));
+        registerDefaultState(super.defaultBlockState()
+                .setValue(ON_FOUNDRY_BASIN, false)
+                .setValue(OPEN, false)
+                .setValue(POWERED, false));
     }
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
@@ -84,10 +85,10 @@ public class FoundryLidBlock extends Block implements IBE<FoundryLidBlockEntity>
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(ON_FOUNDRY_BASIN);
-        builder.add(FACING);
-        builder.add(OPEN);
-        builder.add(POWERED);
+        builder.add(ON_FOUNDRY_BASIN)
+                .add(FACING)
+                .add(OPEN)
+                .add(POWERED);
         super.createBlockStateDefinition(builder);
     }
 
@@ -107,6 +108,6 @@ public class FoundryLidBlock extends Block implements IBE<FoundryLidBlockEntity>
 
     @Override
     public BlockEntityType<? extends FoundryLidBlockEntity> getBlockEntityType() {
-        return AllBlockEntityTypes.FOUNDRY_LID.get();
+        return CMBlockEntityTypes.FOUNDRY_LID.get();
     }
 }

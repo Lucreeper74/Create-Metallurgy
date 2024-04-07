@@ -1,13 +1,10 @@
-package fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin;
+package fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin;
 
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
-import com.simibubi.create.content.fluids.transfer.GenericItemFilling;
 import com.simibubi.create.foundation.block.IBE;
-import com.simibubi.create.foundation.fluid.FluidHelper;
-import fr.lucreeper74.createmetallurgy.registries.AllBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -125,6 +122,6 @@ public class CastingBasinBlock extends Block implements IBE<CastingBasinBlockEnt
     }
 
     public BlockEntityType<? extends CastingBasinBlockEntity> getBlockEntityType() {
-        return AllBlockEntityTypes.CASTING_BASIN.get();
+        return CMBlockEntityTypes.CASTING_BASIN.get();
     }
 }

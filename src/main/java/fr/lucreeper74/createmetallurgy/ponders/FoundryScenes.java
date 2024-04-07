@@ -18,7 +18,8 @@ import com.simibubi.create.foundation.utility.Pointing;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.registries.AllFluids;
+import fr.lucreeper74.createmetallurgy.registries.CMFluids;
+import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -115,11 +116,11 @@ public class FoundryScenes {
         scene.idle(5);
         scene.world.showSection(util.select.position(2, 0, 5), Direction.NORTH);
         scene.idle(5);
-        ItemStack goldDust = fr.lucreeper74.createmetallurgy.registries.AllItems.GOLD_DUST.asStack();
+        ItemStack goldDust = CMItems.GOLD_DUST.asStack();
         scene.world.createItemOnBelt(util.grid.at(4, 1, 2), Direction.UP, goldDust);
         scene.idle(40);
         scene.overlay.showControls(new InputWindowElement(basinSide, Pointing.LEFT)
-                .withItem(fr.lucreeper74.createmetallurgy.registries.AllItems.GOLD_DUST.asStack()), 20);
+                .withItem(CMItems.GOLD_DUST.asStack()), 20);
         scene.idle(30);
 
         //Closing Lid trap
@@ -138,7 +139,7 @@ public class FoundryScenes {
         scene.world.modifyBlockEntity(lidPos, FoundryLidBlockEntity.class, FoundryLidBlockEntity::startProcessingBasin);
         scene.idle(40);
 
-        FluidStack gold = new FluidStack(FluidHelper.convertToStill(AllFluids.MOLTEN_GOLD.get()), 1000);
+        FluidStack gold = new FluidStack(FluidHelper.convertToStill(CMFluids.MOLTEN_GOLD.get()), 1000);
         scene.effects.emitParticles(util.vector.centerOf(drainPos),
                 EmitParticlesInstruction.Emitter.withinBlockSpace(FluidFX.getFluidParticle(gold), Vec3.ZERO), 3, 20);
         scene.world.modifyBlockEntity(drainPos, ItemDrainBlockEntity.class, be -> {
@@ -149,7 +150,7 @@ public class FoundryScenes {
         });
         scene.idle(10);
         scene.overlay.showControls(new InputWindowElement(drainTop, Pointing.RIGHT)
-                .withItem(AllFluids.MOLTEN_GOLD.get().getFluidType().getBucket(gold)), 30);
+                .withItem(CMFluids.MOLTEN_GOLD.get().getFluidType().getBucket(gold)), 30);
         scene.idle(10);
     }
 
@@ -239,13 +240,13 @@ public class FoundryScenes {
         scene.idle(5);
         scene.world.showSection(util.select.fromTo(0, 2, 2, 0, 2, 4), Direction.DOWN);
         scene.idle(10);
-        FluidStack iron = new FluidStack(FluidHelper.convertToStill(AllFluids.MOLTEN_IRON.get()), 32000);
+        FluidStack iron = new FluidStack(FluidHelper.convertToStill(CMFluids.MOLTEN_IRON.get()), 32000);
 
         scene.world.modifyBlockEntity(tankPos, FluidTankBlockEntity.class, be -> be.getTankInventory()
                 .fill(iron, IFluidHandler.FluidAction.EXECUTE));
         scene.idle(5);
         scene.overlay.showControls(new InputWindowElement(basinSide, Pointing.RIGHT)
-                .withItem(AllFluids.MOLTEN_IRON.get().getFluidType().getBucket(iron)), 30);
+                .withItem(CMFluids.MOLTEN_IRON.get().getFluidType().getBucket(iron)), 30);
         scene.idle(40);
 
         //Closing Lid trap
@@ -271,7 +272,7 @@ public class FoundryScenes {
         scene.world.showSection(util.select.position(inputDepot), Direction.DOWN);
         scene.idle(5);
 
-        ItemStack coke = fr.lucreeper74.createmetallurgy.registries.AllItems.COKE.asStack();
+        ItemStack coke = CMItems.COKE.asStack();
 
         scene.world.setKineticSpeed(util.select.position(armPos), -96);
         scene.idle(10);
@@ -311,8 +312,8 @@ public class FoundryScenes {
                 .placeNearTarget();
         scene.idle(90);
 
-        FluidStack steel = new FluidStack(FluidHelper.convertToStill(AllFluids.MOLTEN_STEEL.get()), 1000);
-        ItemStack steelBucket = AllFluids.MOLTEN_STEEL.get().getFluidType().getBucket(steel);
+        FluidStack steel = new FluidStack(FluidHelper.convertToStill(CMFluids.MOLTEN_STEEL.get()), 1000);
+        ItemStack steelBucket = CMFluids.MOLTEN_STEEL.get().getFluidType().getBucket(steel);
         scene.overlay.showControls(new InputWindowElement(smartPipeFilter, Pointing.DOWN).rightClick()
                 .withItem(steelBucket), 30);
         scene.idle(7);

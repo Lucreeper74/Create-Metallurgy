@@ -4,7 +4,7 @@ import com.simibubi.create.api.behaviour.BlockSpoutingBehaviour;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

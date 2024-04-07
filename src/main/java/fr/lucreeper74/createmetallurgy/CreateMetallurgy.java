@@ -7,8 +7,9 @@ import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import fr.lucreeper74.createmetallurgy.content.kinetics.mechanicalArm.AllArmInteract;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingWithSpout;
+import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network.SavingData;
 import fr.lucreeper74.createmetallurgy.registries.*;
-import fr.lucreeper74.createmetallurgy.tabs.AllCreativeTabs;
+import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.worldgen.ConfiguredFeatures;
 import fr.lucreeper74.createmetallurgy.worldgen.PlacedFeatures;
 import net.minecraft.resources.ResourceLocation;
@@ -39,15 +40,16 @@ public class CreateMetallurgy {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         REGISTRATE.registerEventListeners(eventBus);
 
-        AllCreativeTabs.init();
-        AllBlocks.register();
-        AllItems.register();
-        AllFluids.register();
+        CMCreativeTabs.init();
+        CMBlocks.register();
+        CMItems.register();
+        CMFluids.register();
         AllArmInteract.register();
-        AllPModels.init();
-        AllPonders.register();
-        AllBlockEntityTypes.register();
-        AllRecipeTypes.register(eventBus);
+        CMPartialModels.init();
+        CMSpriteShifts.init();
+        CMPonders.register();
+        CMBlockEntityTypes.register();
+        CMRecipeTypes.register(eventBus);
 
         CastingWithSpout.registerDefaults();
 
@@ -57,6 +59,7 @@ public class CreateMetallurgy {
         eventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.addListener(SavingData::onWorldLoad);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

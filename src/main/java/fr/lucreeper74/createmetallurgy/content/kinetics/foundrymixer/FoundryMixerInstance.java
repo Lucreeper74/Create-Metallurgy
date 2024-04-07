@@ -4,13 +4,12 @@ import com.jozufozu.flywheel.api.Instancer;
 import com.jozufozu.flywheel.api.MaterialManager;
 import com.jozufozu.flywheel.api.instance.DynamicInstance;
 import com.jozufozu.flywheel.core.materials.oriented.OrientedData;
-import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogInstance;
 import com.simibubi.create.foundation.render.AllMaterialSpecs;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
-import fr.lucreeper74.createmetallurgy.registries.AllPModels;
+import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
 import net.minecraft.core.Direction;
 
 public class FoundryMixerInstance extends EncasedCogInstance implements DynamicInstance {
@@ -25,13 +24,13 @@ public class FoundryMixerInstance extends EncasedCogInstance implements DynamicI
 
         mixerHead = materialManager.defaultCutout()
                 .material(AllMaterialSpecs.ROTATING)
-                .getModel(AllPModels.FOUNDRY_MIXER_HEAD, blockState)
+                .getModel(CMPartialModels.FOUNDRY_MIXER_HEAD, blockState)
                 .createInstance();
 
         mixerHead.setRotationAxis(Direction.Axis.Y);
 
         mixerPole = getOrientedMaterial()
-                .getModel(AllPModels.FOUNDRY_MIXER_POLE, blockState)
+                .getModel(CMPartialModels.FOUNDRY_MIXER_POLE, blockState)
                 .createInstance();
 
 
@@ -45,7 +44,7 @@ public class FoundryMixerInstance extends EncasedCogInstance implements DynamicI
     protected Instancer<RotatingData> getCogModel() {
         return materialManager.defaultSolid()
                 .material(AllMaterialSpecs.ROTATING)
-                .getModel(AllPModels.SHAFTLESS_STONE_COGWHEEL, blockEntity.getBlockState());
+                .getModel(CMPartialModels.SHAFTLESS_STONE_COGWHEEL, blockEntity.getBlockState());
     }
 
     @Override

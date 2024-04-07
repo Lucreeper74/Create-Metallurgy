@@ -4,7 +4,7 @@ import com.simibubi.create.AllShapes;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
-import fr.lucreeper74.createmetallurgy.registries.AllBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -126,6 +126,6 @@ public class CastingTableBlock extends Block implements IBE<CastingTableBlockEnt
     }
 
     public BlockEntityType<? extends CastingTableBlockEntity> getBlockEntityType() {
-        return AllBlockEntityTypes.CASTING_TABLE.get();
+        return CMBlockEntityTypes.CASTING_TABLE.get();
     }
 }

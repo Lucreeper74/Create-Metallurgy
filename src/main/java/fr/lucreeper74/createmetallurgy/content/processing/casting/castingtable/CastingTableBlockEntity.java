@@ -2,9 +2,6 @@ package fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable;
 
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
-import com.simibubi.create.content.kinetics.fan.AirCurrent;
-import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
-import com.simibubi.create.content.kinetics.fan.EncasedFanBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
@@ -15,7 +12,7 @@ import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import com.simibubi.create.foundation.utility.VecHelper;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingUtils;
-import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import fr.lucreeper74.createmetallurgy.utils.LANG;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -29,9 +26,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -219,7 +213,7 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
     }
 
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
-        return r.getType() == AllRecipeTypes.CASTING_IN_TABLE.getType();
+        return r.getType() == CMRecipeTypes.CASTING_IN_TABLE.getType();
     }
 
     private static final Object CastingInTableRecipesKey = new Object();

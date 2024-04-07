@@ -5,7 +5,7 @@ import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.foundation.utility.VecHelper;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlockEntity;
-import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -28,7 +28,7 @@ public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
 
     @Override
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> recipe) {
-        return recipe.getType() == AllRecipeTypes.ALLOYING.getType();
+        return recipe.getType() == CMRecipeTypes.ALLOYING.getType();
     }
 
     @Override

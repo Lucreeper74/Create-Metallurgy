@@ -11,10 +11,10 @@ import com.simibubi.create.foundation.ponder.SceneBuildingUtil;
 import com.simibubi.create.foundation.ponder.Selection;
 import com.simibubi.create.foundation.ponder.element.InputWindowElement;
 import com.simibubi.create.foundation.utility.Pointing;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableBlockEntity;
-import fr.lucreeper74.createmetallurgy.registries.AllFluids;
-import fr.lucreeper74.createmetallurgy.registries.AllItems;
+import fr.lucreeper74.createmetallurgy.registries.CMFluids;
+import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -84,14 +84,14 @@ public class CastingScenes {
 
         //Add Ingot Mold
         scene.overlay.showControls(new InputWindowElement(tableTop, Pointing.LEFT).rightClick()
-                .withItem(AllItems.GRAPHITE_INGOT_MOLD.asStack()), 30);
+                .withItem(CMItems.GRAPHITE_INGOT_MOLD.asStack()), 30);
         scene.idle(7);
         scene.world.modifyBlockEntity(tablePos, CastingTableBlockEntity.class, be ->
-                be.moldInv.insertItem(0, AllItems.GRAPHITE_INGOT_MOLD.asStack(), false));
+                be.moldInv.insertItem(0, CMItems.GRAPHITE_INGOT_MOLD.asStack(), false));
         scene.idle(20);
 
         //Add Brass & start recipes
-        FluidStack brass = new FluidStack(FluidHelper.convertToStill(AllFluids.MOLTEN_BRASS.get()), 24000);
+        FluidStack brass = new FluidStack(FluidHelper.convertToStill(CMFluids.MOLTEN_BRASS.get()), 24000);
         ItemStack ingot = com.simibubi.create.AllItems.BRASS_INGOT.asStack();
         ItemStack block = AllBlocks.BRASS_BLOCK.asStack();
 
