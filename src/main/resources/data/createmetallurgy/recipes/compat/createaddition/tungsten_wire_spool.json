@@ -1,0 +1,16 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
+  "type":"createaddition:rolling",
+  "input": {
+    "tag": "forge:plates/tungsten"
+  },
+  "result": {
+    "item": "createmetallurgy:tungsten_wire",
+    "count": 2
+  }
+}
