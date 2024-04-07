@@ -6,9 +6,11 @@
   "item.createmetallurgy.tungsten_ingot": "Tungsten Ingot",
   "item.createmetallurgy.tungsten_sheet": "Tungsten Sheet",
   "item.createmetallurgy.tungsten_nugget": "Tungsten Nugget",
+  "item.createmetallurgy.tungsten_wire": "Tungsten Wire",
   "item.createmetallurgy.coke": "Coke",
   "item.createmetallurgy.steel_ingot": "Steel Ingot",
   "item.createmetallurgy.sturdy_whisk": "Sturdy Whisk",
+  "item.createmetallurgy.sandpaper_belt": "Sandpaper Belt",
   "item.createmetallurgy.graphite_blank_mold": "Graphite Blank Mold",
   "item.createmetallurgy.graphite_ingot_mold": "Graphite Ingot Mold",
   "item.createmetallurgy.graphite_nugget_mold": "Graphite Nugget Mold",
@@ -66,6 +68,8 @@
   "createmetallurgy.recipe.alloying": "Foundry Alloying",
   "createmetallurgy.recipe.casting_in_basin": "Casting In Basin",
   "createmetallurgy.recipe.casting_in_table": "Casting In Table",
+  "createmetallurgy.recipe.grinding": "Grinding",
+  "createmetallurgy.recipe.polishing_with_grinder": "Polishing With Grinder",
 
 
 
@@ -136,5 +140,11 @@
   "createmetallurgy.ponder.casting_blocks.text_2": "The Casting Basin is used to cast up to an entire block",
   "createmetallurgy.ponder.casting_blocks.text_3": "While the Casting Table is used to cast Items using Graphite Molds",
   "createmetallurgy.ponder.casting_blocks.text_4": "If you are using Funnels instead of manually...",
-  "createmetallurgy.ponder.casting_blocks.text_5": "...you might need a Brass Funnel to not extract Molds"
+  "createmetallurgy.ponder.casting_blocks.text_5": "...you might need a Brass Funnel to not extract Molds",
+
+
+  "_": "->------------------------]  Chat  [------------------------<-",
+
+  "death.attack.createmetallurgy.mechanical_grinder": "%1$s's foots has been transformed into grated cheese",
+  "death.attack.createmetallurgy.mechanical_grinder.player": "%2$s has use %1$s like a cheese for his pasta"
 }

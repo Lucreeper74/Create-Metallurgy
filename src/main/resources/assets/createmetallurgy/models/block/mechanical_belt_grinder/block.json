@@ -33,11 +33,12 @@
 			"name": "Side",
 			"from": [0, 2, 0],
 			"to": [2, 12, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 8]},
 			"faces": {
-				"north": {"uv": [7, 11, 8, 15], "texture": "#4"},
+				"north": {"uv": [7, 10, 8, 15], "texture": "#4"},
 				"east": {"uv": [8, 8, 16, 13], "texture": "#4"},
-				"south": {"uv": [0, 11, 1, 15], "texture": "#4"},
-				"west": {"uv": [0, 11, 8, 15], "texture": "#4"},
+				"south": {"uv": [0, 10, 1, 15], "texture": "#4"},
+				"west": {"uv": [0, 10, 8, 15], "texture": "#4"},
 				"up": {"uv": [8, 8, 16, 9], "rotation": 270, "texture": "#4"}
 			}
 		},
@@ -54,15 +55,31 @@
 			}
 		},
 		{
-			"name": "Top",
-			"from": [0, 12, 1.95],
-			"to": [16, 13, 14.05],
+			"name": "TopSide",
+			"from": [0, 12, 14],
+			"to": [16, 14, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 8]},
 			"faces": {
-				"north": {"uv": [8, 1, 0, 1.5], "texture": "#4"},
-				"east": {"uv": [0, 1, 0.5, 7], "rotation": 90, "texture": "#4"},
-				"south": {"uv": [0, 6.5, 8, 7], "texture": "#4"},
-				"west": {"uv": [7.5, 1, 8, 7], "rotation": 270, "texture": "#4"},
-				"up": {"uv": [0, 1, 8, 7], "texture": "#4"}
+				"north": {"uv": [8, 0, 16, 1], "texture": "#4"},
+				"east": {"uv": [8, 0, 9, 1], "texture": "#4"},
+				"south": {"uv": [8, 0, 16, 1], "texture": "#4"},
+				"west": {"uv": [15, 0, 16, 1], "texture": "#4"},
+				"up": {"uv": [15, 0, 16, 8], "rotation": 90, "texture": "#4"},
+				"down": {"uv": [15, 0, 16, 8], "rotation": 270, "texture": "#4"}
+			}
+		},
+		{
+			"name": "TopSide2",
+			"from": [0, 12, 0],
+			"to": [16, 14, 2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 8]},
+			"faces": {
+				"north": {"uv": [8, 0, 16, 1], "texture": "#4"},
+				"east": {"uv": [15, 0, 16, 1], "texture": "#4"},
+				"south": {"uv": [8, 0, 16, 1], "texture": "#4"},
+				"west": {"uv": [8, 0, 9, 1], "texture": "#4"},
+				"up": {"uv": [8, 0, 9, 8], "rotation": 90, "texture": "#4"},
+				"down": {"uv": [8, 0, 9, 8], "rotation": 270, "texture": "#4"}
 			}
 		}
 	]

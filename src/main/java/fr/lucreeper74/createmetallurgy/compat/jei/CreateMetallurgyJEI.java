@@ -1,8 +1,12 @@
 package fr.lucreeper74.createmetallurgy.compat.jei;
 
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
+import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.compat.jei.*;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.equipment.blueprint.BlueprintScreen;
+import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
 import com.simibubi.create.content.logistics.filter.AbstractFilterScreen;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.redstone.link.controller.LinkedControllerScreen;
@@ -12,14 +16,12 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.compat.jei.category.AlloyingCategory;
-import fr.lucreeper74.createmetallurgy.compat.jei.category.CastingInBasinCategory;
-import fr.lucreeper74.createmetallurgy.compat.jei.category.CastingInTableCategory;
-import fr.lucreeper74.createmetallurgy.compat.jei.category.MeltingCategory;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingbasin.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.compat.jei.category.*;
+import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.GrindingRecipe;
+import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRecipe;
-import fr.lucreeper74.createmetallurgy.registries.AllBlocks;
-import fr.lucreeper74.createmetallurgy.registries.AllRecipeTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
+import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -59,36 +61,50 @@ public class CreateMetallurgyJEI implements IModPlugin {
 
         CreateRecipeCategory<?>
                 melting = builder(BasinRecipe.class)
-                .addTypedRecipes(AllRecipeTypes.MELTING).catalyst(AllBlocks.FOUNDRY_LID_BLOCK::get)
-                .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
-                .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_LID_BLOCK.get())
+                .addTypedRecipes(CMRecipeTypes.MELTING).catalyst(CMBlocks.FOUNDRY_LID_BLOCK::get)
+                .catalyst(CMBlocks.FOUNDRY_BASIN_BLOCK::get)
+                .doubleItemIcon(CMBlocks.FOUNDRY_BASIN_BLOCK.get(), CMBlocks.FOUNDRY_LID_BLOCK.get())
                 .emptyBackground(177, 100)
                 .build("melting", MeltingCategory::new),
 
                 alloying = builder(BasinRecipe.class)
-                        .addTypedRecipes(AllRecipeTypes.ALLOYING)
-                        .catalyst(AllBlocks.FOUNDRY_MIXER_BLOCK::get)
-                        .catalyst(AllBlocks.GLASSED_FOUNDRY_LID_BLOCK::get)
-                        .catalyst(AllBlocks.FOUNDRY_BASIN_BLOCK::get)
-                        .doubleItemIcon(AllBlocks.FOUNDRY_BASIN_BLOCK.get(), AllBlocks.FOUNDRY_MIXER_BLOCK.get())
+                        .addTypedRecipes(CMRecipeTypes.ALLOYING)
+                        .catalyst(CMBlocks.FOUNDRY_MIXER_BLOCK::get)
+                        .catalyst(CMBlocks.GLASSED_FOUNDRY_LID_BLOCK::get)
+                        .catalyst(CMBlocks.FOUNDRY_BASIN_BLOCK::get)
+                        .doubleItemIcon(CMBlocks.FOUNDRY_BASIN_BLOCK.get(), CMBlocks.FOUNDRY_MIXER_BLOCK.get())
                         .emptyBackground(177, 100)
                         .build("alloying", AlloyingCategory::new),
 
                 casting_in_basin = builder(CastingBasinRecipe.class)
-                        .addTypedRecipes(AllRecipeTypes.CASTING_IN_BASIN)
-                        .catalyst(com.simibubi.create.AllBlocks.SPOUT::get)
-                        .catalyst(AllBlocks.CASTING_BASIN_BLOCK::get)
-                        .doubleItemIcon(AllBlocks.CASTING_BASIN_BLOCK.get(), Items.CLOCK)
+                        .addTypedRecipes(CMRecipeTypes.CASTING_IN_BASIN)
+                        .catalyst(AllBlocks.SPOUT::get)
+                        .catalyst(CMBlocks.CASTING_BASIN_BLOCK::get)
+                        .doubleItemIcon(CMBlocks.CASTING_BASIN_BLOCK.get(), Items.CLOCK)
                         .emptyBackground(177, 53)
                         .build("casting_in_basin", CastingInBasinCategory::new),
 
                 casting_in_table = builder(CastingTableRecipe.class)
-                        .addTypedRecipes(AllRecipeTypes.CASTING_IN_TABLE)
-                        .catalyst(com.simibubi.create.AllBlocks.SPOUT::get)
-                        .catalyst(AllBlocks.CASTING_TABLE_BLOCK::get)
-                        .doubleItemIcon(AllBlocks.CASTING_TABLE_BLOCK.get(), Items.CLOCK)
+                        .addTypedRecipes(CMRecipeTypes.CASTING_IN_TABLE)
+                        .catalyst(AllBlocks.SPOUT::get)
+                        .catalyst(CMBlocks.CASTING_TABLE_BLOCK::get)
+                        .doubleItemIcon(CMBlocks.CASTING_TABLE_BLOCK.get(), Items.CLOCK)
                         .emptyBackground(177, 53)
-                        .build("casting_in_table", CastingInTableCategory::new);
+                        .build("casting_in_table", CastingInTableCategory::new),
+
+                grinding = builder(GrindingRecipe.class)
+                        .addTypedRecipes(CMRecipeTypes.GRINDING)
+                        .catalyst(CMBlocks.BELT_GRINDER_BLOCK::get)
+                        .doubleItemIcon(CMBlocks.BELT_GRINDER_BLOCK.get(), Items.IRON_INGOT)
+                        .emptyBackground(177, 70)
+                        .build("grinding", GrindingCategory::new),
+
+                polishing_with_grinder = builder(SandPaperPolishingRecipe.class)
+                        .addTypedRecipes(AllRecipeTypes.SANDPAPER_POLISHING)
+                        .catalyst(CMBlocks.BELT_GRINDER_BLOCK::get)
+                        .doubleItemIcon(CMBlocks.BELT_GRINDER_BLOCK.get(), AllItems.SAND_PAPER.get())
+                        .emptyBackground(177, 70)
+                        .build("polishing_with_grinder", PolishingWithGrinderCategory::new);
     }
 
     private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {
