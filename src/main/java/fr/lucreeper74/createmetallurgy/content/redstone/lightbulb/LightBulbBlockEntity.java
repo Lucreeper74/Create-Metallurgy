@@ -61,8 +61,8 @@ public class LightBulbBlockEntity extends SmartBlockEntity {
         if (AnimationTickHolder.getTicks() % 10 == 0 && queueReady) {
             if (pointer < sortedQueue.size()) {
                 BlockPos nodePos = sortedQueue.get(pointer);
-                if (level.getBlockEntity(nodePos).isRemoved())
-                    return; //Continue if the current node is unloaded
+                if (level.getBlockEntity(nodePos) == null)
+                    return; //Ignore if break or unloaded
                 level.setBlock(nodePos, level.getBlockState(nodePos).setValue(LEVEL, getBlockState().getValue(LEVEL)), 2);
                 pointer++;
 
