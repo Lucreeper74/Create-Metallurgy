@@ -146,5 +146,5 @@
   "_": "->------------------------]  Chat  [------------------------<-",
 
   "death.attack.createmetallurgy.mechanical_grinder": "%1$s's foots has been transformed into grated cheese",
-  "death.attack.createmetallurgy.mechanical_grinder.player": "%2$s has use %1$s like a cheese for his pasta"
+  "death.attack.createmetallurgy.mechanical_grinder.player": "%2$s used %1$s like a cheese for his pasta"
 }
