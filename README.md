@@ -14,7 +14,11 @@ Create Metallurgy is a Create Mod Addon developped by Luc_Creeper74, introducing
 💡 Feel free to share your ideas in Forum section of the Discord !
 ```
 
-<a href="https://discord.gg/KGQr5a2qc9"><img src="https://i.imgur.com/FF83eI0.png" alt="Discord Logo" width="160"></a>
+<p align="center">
+<a href="https://discord.gg/KGQr5a2qc9"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.2.0/assets/cozy/social/discord-plural_vector.svg" alt="Discord Invitation"></a>
+<a href="https://discord.gg/KGQr5a2qc9"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.2.0/assets/cozy/available/modrinth_vector.svg" alt="Modrinth Page"></a>
+<a href="https://discord.gg/KGQr5a2qc9"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.2.0/assets/cozy/available/curseforge_vector.svg" alt="CurseForge Page"></a>
+</p>
 
 ## Credits
 - **MrGhastien** (Contributors)
