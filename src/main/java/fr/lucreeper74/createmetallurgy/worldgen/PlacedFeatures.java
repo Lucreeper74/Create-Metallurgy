@@ -15,8 +15,8 @@ public class PlacedFeatures {
             DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, CreateMetallurgy.MOD_ID);
 
     public static final RegistryObject<PlacedFeature> WOLFRAMITE_ORE_PLACED = PLACED_FEATURES.register("wolframite_ore_placed",
-            () -> new PlacedFeature(ConfiguredFeatures.WOLFRAMIE_ORE.getHolder().get(), commonOrePlacement(6, // VeinsPerChunk
-                    HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(50)))));
+            () -> new PlacedFeature(ConfiguredFeatures.WOLFRAMIE_ORE.getHolder().get(), commonOrePlacement(7, // VeinsPerChunk
+                    HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(60)))));
 
 
 
