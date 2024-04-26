@@ -3,13 +3,13 @@ package fr.lucreeper74.createmetallurgy.registries;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import com.simibubi.create.foundation.utility.Lang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.GrindingRecipe;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.AlloyingRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.MeltingRecipe;
+import fr.lucreeper74.createmetallurgy.utils.LANG;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -29,14 +29,15 @@ public enum CMRecipeTypes implements IRecipeTypeInfo {
     CASTING_IN_BASIN(CastingBasinRecipe::new),
     CASTING_IN_TABLE(CastingTableRecipe::new),
     GRINDING(GrindingRecipe::new);
-    private final ResourceLocation id = new ResourceLocation(CreateMetallurgy.MOD_ID);
+    private final ResourceLocation id;
     private final RegistryObject<RecipeSerializer<?>> serializerObject;
     @Nullable
     private final RegistryObject<RecipeType<?>> typeObject;
     private final Supplier<RecipeType<?>> type;
 
     CMRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
-        String name = Lang.asId(name());
+        String name = LANG.asId(name());
+        id = CreateMetallurgy.genRL(name);
         serializerObject = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
         typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
         type = typeObject;

@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:grinding",
+  "ingredients": [
+    {
+      "item": "create:waxed_weathered_copper_shingles"
+    }
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "item": "create:weathered_copper_shingles"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:grinding",
+  "ingredients": [
+    {
+      "item": "create:exposed_copper_tiles"
+    }
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "item": "create:copper_tiles"
+    }
+  ]
+}

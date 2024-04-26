@@ -109,8 +109,8 @@ public class CMFluids {
             .register();
 
     // Molten Tungsten
-    public static final ResourceLocation MOLTEN_TUNGSTEN_STILL_RL = CreateMetallurgy.genRL("fluid/tungsten.json/molten_tungsten_still");
-    public static final ResourceLocation MOLTEN_TUNGSTEN_FLOW_RL = CreateMetallurgy.genRL("fluid/tungsten.json/molten_tungsten_flow");
+    public static final ResourceLocation MOLTEN_TUNGSTEN_STILL_RL = CreateMetallurgy.genRL("fluid/tungsten/molten_tungsten_still");
+    public static final ResourceLocation MOLTEN_TUNGSTEN_FLOW_RL = CreateMetallurgy.genRL("fluid/tungsten/molten_tungsten_flow");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TUNGSTEN = REGISTRATE.fluid("molten_tungsten", MOLTEN_TUNGSTEN_STILL_RL, MOLTEN_TUNGSTEN_FLOW_RL)
             .properties(b -> b.viscosity(2000)
                     .density(1400)

@@ -1,0 +1,3 @@
+{
+  "createmetallurgy.light_bulb.tooltip.summary": "Emits _light_ proportionally to the _redstone_ signal received, can be in _network_ with others bulbs."
+}

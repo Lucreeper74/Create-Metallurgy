@@ -1,0 +1,18 @@
+{
+  "values": [
+    "createmetallurgy:flowing_molten_iron",
+    "createmetallurgy:molten_iron",
+    "createmetallurgy:flowing_molten_gold",
+    "createmetallurgy:molten_gold",
+    "createmetallurgy:flowing_molten_copper",
+    "createmetallurgy:molten_copper",
+    "createmetallurgy:flowing_molten_zinc",
+    "createmetallurgy:molten_zinc",
+    "createmetallurgy:flowing_molten_brass",
+    "createmetallurgy:molten_brass",
+    "createmetallurgy:flowing_molten_tungsten",
+    "createmetallurgy:molten_tungsten",
+    "createmetallurgy:flowing_molten_steel",
+    "createmetallurgy:molten_steel"
+  ]
+}

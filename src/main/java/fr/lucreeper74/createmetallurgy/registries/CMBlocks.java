@@ -3,8 +3,10 @@ package fr.lucreeper74.createmetallurgy.registries;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
+import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.BeltGrinderGenerator;
 import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlock;
 import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.BeltGrinderBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinBlock;
@@ -13,8 +15,11 @@ import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.C
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableMovementBehaviour;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlock;
+import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbGenerator;
 import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
@@ -27,8 +32,7 @@ import net.minecraftforge.common.Tags;
 
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
-import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
-import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
+import static com.simibubi.create.foundation.data.TagGen.*;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
 @SuppressWarnings("unused")
@@ -108,7 +112,7 @@ public class CMBlocks {
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .blockstate(new BasinGenerator()::generate)
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister(movementBehaviour(new CastingBasinMovementBehaviour()))
             .item()
@@ -122,7 +126,7 @@ public class CMBlocks {
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .blockstate(new BasinGenerator()::generate)
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister(movementBehaviour(new CastingTableMovementBehaviour()))
             .item()
@@ -135,6 +139,7 @@ public class CMBlocks {
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .blockstate(new FoundryLidGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .item()
             .transform(customItemModel("_", "block"))
@@ -146,6 +151,7 @@ public class CMBlocks {
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .blockstate(new GlassedFoundryLidGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .item()
             .transform(customItemModel("_", "block"))
@@ -157,10 +163,11 @@ public class CMBlocks {
             .properties(p -> p.color(MaterialColor.STONE))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(8.0))
             .item()
-            .transform(customItemModel("_", "block"))
+            .transform(customItemModel("foundry_mixer", "item"))
             .register();
 
     public static final BlockEntry<BeltGrinderBlock> BELT_GRINDER_BLOCK = REGISTRATE
@@ -169,10 +176,12 @@ public class CMBlocks {
             .properties(p -> p.color(MaterialColor.STONE))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .blockstate(new BeltGrinderGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(6.0))
+            .transform(axeOrPickaxe())
             .item()
-            .transform(customItemModel("_", "block"))
+            .transform(customItemModel("mechanical_belt_grinder", "item"))
             .register();
 
     public static final BlockEntry<LightBulbBlock> LIGHT_BULB = REGISTRATE
@@ -180,10 +189,12 @@ public class CMBlocks {
             .initialProperties(() -> Blocks.REDSTONE_LAMP)
             .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN)
                     .lightLevel(s -> s.getValue(LightBulbBlock.LEVEL)))
+            .blockstate(new LightBulbGenerator()::generate)
             .addLayer(() -> RenderType::translucent)
             .addLayer(() -> RenderType::cutoutMipped)
-            .transform(pickaxeOnly())
-            .simpleItem()
+            .transform(axeOrPickaxe())
+            .item()
+            .transform(customItemModel("light_bulb", "item"))
             .register();
 
     public static void register() {}

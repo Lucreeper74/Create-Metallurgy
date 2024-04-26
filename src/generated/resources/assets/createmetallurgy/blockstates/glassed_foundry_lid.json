@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=east,open=false,powered=false,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block",
+      "y": 270
+    },
+    "facing=east,open=false,powered=false,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer",
+      "y": 270
+    },
+    "facing=east,open=false,powered=true,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block",
+      "y": 270
+    },
+    "facing=east,open=false,powered=true,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer",
+      "y": 270
+    },
+    "facing=east,open=true,powered=false,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_open",
+      "y": 270
+    },
+    "facing=east,open=true,powered=false,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer_open",
+      "y": 270
+    },
+    "facing=east,open=true,powered=true,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_open",
+      "y": 270
+    },
+    "facing=east,open=true,powered=true,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer_open",
+      "y": 270
+    },
+    "facing=north,open=false,powered=false,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block",
+      "y": 180
+    },
+    "facing=north,open=false,powered=false,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer",
+      "y": 180
+    },
+    "facing=north,open=false,powered=true,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block",
+      "y": 180
+    },
+    "facing=north,open=false,powered=true,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer",
+      "y": 180
+    },
+    "facing=north,open=true,powered=false,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_open",
+      "y": 180
+    },
+    "facing=north,open=true,powered=false,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer_open",
+      "y": 180
+    },
+    "facing=north,open=true,powered=true,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_open",
+      "y": 180
+    },
+    "facing=north,open=true,powered=true,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer_open",
+      "y": 180
+    },
+    "facing=south,open=false,powered=false,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block"
+    },
+    "facing=south,open=false,powered=false,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer"
+    },
+    "facing=south,open=false,powered=true,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block"
+    },
+    "facing=south,open=false,powered=true,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer"
+    },
+    "facing=south,open=true,powered=false,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_open"
+    },
+    "facing=south,open=true,powered=false,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer_open"
+    },
+    "facing=south,open=true,powered=true,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_open"
+    },
+    "facing=south,open=true,powered=true,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer_open"
+    },
+    "facing=west,open=false,powered=false,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block",
+      "y": 90
+    },
+    "facing=west,open=false,powered=false,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer",
+      "y": 90
+    },
+    "facing=west,open=false,powered=true,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block",
+      "y": 90
+    },
+    "facing=west,open=false,powered=true,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer",
+      "y": 90
+    },
+    "facing=west,open=true,powered=false,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_open",
+      "y": 90
+    },
+    "facing=west,open=true,powered=false,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer_open",
+      "y": 90
+    },
+    "facing=west,open=true,powered=true,under_foundry_mixer=false": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_open",
+      "y": 90
+    },
+    "facing=west,open=true,powered=true,under_foundry_mixer=true": {
+      "model": "createmetallurgy:block/glassed_foundry_lid/block_under_mixer_open",
+      "y": 90
+    }
+  }
+}

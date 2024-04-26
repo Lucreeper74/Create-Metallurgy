@@ -44,9 +44,10 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 @JeiPlugin
+@SuppressWarnings("unused")
 public class CreateMetallurgyJEI implements IModPlugin {
 
-    private static final ResourceLocation ID = new ResourceLocation(CreateMetallurgy.MOD_ID, "jei_plugin");
+    private static final ResourceLocation ID = CreateMetallurgy.genRL("jei_plugin");
 
     @Override
     public ResourceLocation getPluginUid() {

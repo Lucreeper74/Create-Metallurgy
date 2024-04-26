@@ -1,5 +1,6 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.simibubi.create.foundation.ponder.PonderLocalization;
 import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.ponders.CastingScenes;
@@ -20,5 +21,9 @@ public class CMPonders {
 
 
         HELPER.forComponents(CMBlocks.CASTING_BASIN_BLOCK, CMBlocks.CASTING_TABLE_BLOCK).addStoryBoard("casting_blocks", CastingScenes::castingBlocks);
+    }
+
+    public static void registerLang() {
+        PonderLocalization.provideRegistrateLang(CreateMetallurgy.REGISTRATE);
     }
 }

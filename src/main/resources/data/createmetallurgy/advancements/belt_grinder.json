@@ -1,0 +1,38 @@
+{
+  "parent": "createmetallurgy:root",
+  "criteria": {
+    "have_belt_grinder": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:mechanical_belt_grinder"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createmetallurgy.belt_grinder.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "createmetallurgy:mechanical_belt_grinder"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createmetallurgy.belt_grinder"
+    }
+  },
+  "requirements": [
+    [
+      "have_belt_grinder"
+    ]
+  ]
+}

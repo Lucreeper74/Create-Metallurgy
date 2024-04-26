@@ -1,0 +1,17 @@
+{
+  "values": [
+    "createmetallurgy:raw_wolframite_block",
+    "createmetallurgy:tungsten_block",
+    "createmetallurgy:wolframite_ore",
+    "createmetallurgy:coke_block",
+    "createmetallurgy:steel_block",
+    "createmetallurgy:foundry_basin",
+    "createmetallurgy:casting_basin",
+    "createmetallurgy:casting_table",
+    "createmetallurgy:foundry_lid",
+    "createmetallurgy:glassed_foundry_lid",
+    "createmetallurgy:foundry_mixer",
+    "createmetallurgy:mechanical_belt_grinder",
+    "createmetallurgy:light_bulb"
+  ]
+}

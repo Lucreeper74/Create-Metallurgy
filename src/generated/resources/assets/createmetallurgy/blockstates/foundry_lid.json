@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=east,on_foundry_basin=false,open=false,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block",
+      "y": 270
+    },
+    "facing=east,on_foundry_basin=false,open=false,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block",
+      "y": 270
+    },
+    "facing=east,on_foundry_basin=false,open=true,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_open",
+      "y": 270
+    },
+    "facing=east,on_foundry_basin=false,open=true,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_open",
+      "y": 270
+    },
+    "facing=east,on_foundry_basin=true,open=false,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin",
+      "y": 270
+    },
+    "facing=east,on_foundry_basin=true,open=false,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin",
+      "y": 270
+    },
+    "facing=east,on_foundry_basin=true,open=true,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin_open",
+      "y": 270
+    },
+    "facing=east,on_foundry_basin=true,open=true,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin_open",
+      "y": 270
+    },
+    "facing=north,on_foundry_basin=false,open=false,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block",
+      "y": 180
+    },
+    "facing=north,on_foundry_basin=false,open=false,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block",
+      "y": 180
+    },
+    "facing=north,on_foundry_basin=false,open=true,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_open",
+      "y": 180
+    },
+    "facing=north,on_foundry_basin=false,open=true,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_open",
+      "y": 180
+    },
+    "facing=north,on_foundry_basin=true,open=false,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin",
+      "y": 180
+    },
+    "facing=north,on_foundry_basin=true,open=false,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin",
+      "y": 180
+    },
+    "facing=north,on_foundry_basin=true,open=true,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin_open",
+      "y": 180
+    },
+    "facing=north,on_foundry_basin=true,open=true,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin_open",
+      "y": 180
+    },
+    "facing=south,on_foundry_basin=false,open=false,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block"
+    },
+    "facing=south,on_foundry_basin=false,open=false,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block"
+    },
+    "facing=south,on_foundry_basin=false,open=true,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_open"
+    },
+    "facing=south,on_foundry_basin=false,open=true,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_open"
+    },
+    "facing=south,on_foundry_basin=true,open=false,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin"
+    },
+    "facing=south,on_foundry_basin=true,open=false,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin"
+    },
+    "facing=south,on_foundry_basin=true,open=true,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin_open"
+    },
+    "facing=south,on_foundry_basin=true,open=true,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin_open"
+    },
+    "facing=west,on_foundry_basin=false,open=false,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block",
+      "y": 90
+    },
+    "facing=west,on_foundry_basin=false,open=false,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block",
+      "y": 90
+    },
+    "facing=west,on_foundry_basin=false,open=true,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_open",
+      "y": 90
+    },
+    "facing=west,on_foundry_basin=false,open=true,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_open",
+      "y": 90
+    },
+    "facing=west,on_foundry_basin=true,open=false,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin",
+      "y": 90
+    },
+    "facing=west,on_foundry_basin=true,open=false,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin",
+      "y": 90
+    },
+    "facing=west,on_foundry_basin=true,open=true,powered=false": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin_open",
+      "y": 90
+    },
+    "facing=west,on_foundry_basin=true,open=true,powered=true": {
+      "model": "createmetallurgy:block/foundry_lid/block_on_a_basin_open",
+      "y": 90
+    }
+  }
+}

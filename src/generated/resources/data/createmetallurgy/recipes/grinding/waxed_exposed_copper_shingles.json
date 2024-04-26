@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:grinding",
+  "ingredients": [
+    {
+      "item": "create:waxed_exposed_copper_shingles"
+    }
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "item": "create:exposed_copper_shingles"
+    }
+  ]
+}

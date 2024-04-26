@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:grinding",
+  "ingredients": [
+    {
+      "item": "create:oxidized_copper_shingle_slab"
+    }
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "item": "create:weathered_copper_shingle_slab"
+    }
+  ]
+}
