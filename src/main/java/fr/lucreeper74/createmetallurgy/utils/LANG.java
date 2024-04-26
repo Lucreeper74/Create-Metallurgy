@@ -7,6 +7,8 @@ import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.Locale;
+
 public class LANG {
 
     public static LangBuilder builder() {
@@ -15,6 +17,10 @@ public class LANG {
 
     public static MutableComponent translateDirect(String key, Object... args) {
         return Components.translatable(CreateMetallurgy.MOD_ID + "." + key, resolveBuilders(args));
+    }
+
+    public static String asId(String name) {
+        return name.toLowerCase(Locale.ROOT);
     }
 
     public static LangBuilder fluidName(FluidStack stack) {

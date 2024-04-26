@@ -4,10 +4,9 @@ import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.kinetics.drill.DrillBlock;
 import com.simibubi.create.foundation.block.IBE;
-import com.simibubi.create.foundation.placement.IPlacementHelper;
-import com.simibubi.create.foundation.placement.PlacementHelpers;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.VecHelper;
+import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,7 +20,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -34,10 +32,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import static com.simibubi.create.content.kinetics.simpleRelays.ShaftBlock.placementHelperId;
-
 public class BeltGrinderBlock extends HorizontalKineticBlock implements IBE<BeltGrinderBlockEntity> {
-    public static DamageSource damageSourceGrinder = new DamageSource("createmetallurgy.mechanical_grinder");
+    public static DamageSource damageSourceGrinder = new DamageSource(CreateMetallurgy.MOD_ID + ".mechanical_grinder");
 
     public BeltGrinderBlock(Properties properties) {
         super(properties);
@@ -72,15 +68,6 @@ public class BeltGrinderBlock extends HorizontalKineticBlock implements IBE<Belt
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
                                  BlockHitResult ray) {
-        ItemStack heldItem = player.getItemInHand(handIn);
-        IPlacementHelper placementHelper = PlacementHelpers.get(placementHelperId);
-        if (!player.isShiftKeyDown() && player.mayBuild()) {
-            if (placementHelper.matchesItem(heldItem) && placementHelper.getOffset(player, worldIn, state, pos, ray)
-                    .placeInWorld(worldIn, (BlockItem) heldItem.getItem(), player, handIn, ray)
-                    .consumesAction())
-                return InteractionResult.SUCCESS;
-        }
-
         if (player.isSpectator() || !player.getItemInHand(handIn).isEmpty())
             return InteractionResult.PASS;
         if (ray.getDirection() != Direction.UP)
