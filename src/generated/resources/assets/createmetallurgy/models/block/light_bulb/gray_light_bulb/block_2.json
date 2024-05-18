@@ -1,0 +1,6 @@
+{
+  "parent": "createmetallurgy:block/light_bulb/block_2",
+  "textures": {
+    "0": "createmetallurgy:block/light_bulb/gray"
+  }
+}

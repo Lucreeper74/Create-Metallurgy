@@ -12,6 +12,21 @@
     "createmetallurgy:glassed_foundry_lid",
     "createmetallurgy:foundry_mixer",
     "createmetallurgy:mechanical_belt_grinder",
-    "createmetallurgy:light_bulb"
+    "createmetallurgy:white_light_bulb",
+    "createmetallurgy:orange_light_bulb",
+    "createmetallurgy:magenta_light_bulb",
+    "createmetallurgy:light_blue_light_bulb",
+    "createmetallurgy:yellow_light_bulb",
+    "createmetallurgy:lime_light_bulb",
+    "createmetallurgy:pink_light_bulb",
+    "createmetallurgy:gray_light_bulb",
+    "createmetallurgy:light_gray_light_bulb",
+    "createmetallurgy:cyan_light_bulb",
+    "createmetallurgy:purple_light_bulb",
+    "createmetallurgy:blue_light_bulb",
+    "createmetallurgy:brown_light_bulb",
+    "createmetallurgy:green_light_bulb",
+    "createmetallurgy:red_light_bulb",
+    "createmetallurgy:black_light_bulb"
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:dyes/brown"
+    },
+    {
+      "tag": "forge:light_bulbs"
+    }
+  ],
+  "result": {
+    "item": "createmetallurgy:brown_light_bulb"
+  }
+}

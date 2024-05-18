@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:dyes/white"
+    },
+    {
+      "tag": "forge:light_bulbs"
+    }
+  ],
+  "result": {
+    "item": "createmetallurgy:white_light_bulb"
+  }
+}

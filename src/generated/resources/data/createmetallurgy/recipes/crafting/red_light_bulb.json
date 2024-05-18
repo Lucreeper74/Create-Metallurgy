@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": {
+      "item": "minecraft:red_stained_glass"
+    },
+    "S": {
+      "item": "create:iron_sheet"
+    },
+    "T": {
+      "item": "createmetallurgy:tungsten_wire_spool"
+    }
+  },
+  "pattern": [
+    " G ",
+    " T ",
+    " S "
+  ],
+  "result": {
+    "item": "createmetallurgy:red_light_bulb"
+  }
+}

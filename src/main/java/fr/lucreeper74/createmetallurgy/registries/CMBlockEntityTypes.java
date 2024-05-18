@@ -17,6 +17,7 @@ import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidB
 import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidRenderer;
 import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbRenderer;
 
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -67,7 +68,9 @@ public class CMBlockEntityTypes {
 
     public static final BlockEntityEntry<LightBulbBlockEntity> LIGHT_BULB = REGISTRATE
             .blockEntity("light_bulb", LightBulbBlockEntity::new)
-            .validBlocks(CMBlocks.LIGHT_BULB)
+            .validBlocks(CMBlocks.LIGHT_BULBS.toArray())
+            .renderer(() -> LightBulbRenderer::new)
             .register();
+
     public static void register() {}
 }

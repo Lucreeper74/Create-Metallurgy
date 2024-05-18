@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:dyes/green"
+    },
+    {
+      "tag": "forge:light_bulbs"
+    }
+  ],
+  "result": {
+    "item": "createmetallurgy:green_light_bulb"
+  }
+}

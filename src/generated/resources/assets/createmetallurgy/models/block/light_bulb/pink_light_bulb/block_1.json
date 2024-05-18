@@ -1,0 +1,6 @@
+{
+  "parent": "createmetallurgy:block/light_bulb/block_1",
+  "textures": {
+    "0": "createmetallurgy:block/light_bulb/pink"
+  }
+}

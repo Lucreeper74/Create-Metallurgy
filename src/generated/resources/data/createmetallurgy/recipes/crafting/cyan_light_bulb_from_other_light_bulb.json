@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:dyes/cyan"
+    },
+    {
+      "tag": "forge:light_bulbs"
+    }
+  ],
+  "result": {
+    "item": "createmetallurgy:cyan_light_bulb"
+  }
+}
