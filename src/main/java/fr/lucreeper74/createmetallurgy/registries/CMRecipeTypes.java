@@ -9,7 +9,7 @@ import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.AlloyingRec
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.MeltingRecipe;
-import fr.lucreeper74.createmetallurgy.utils.LANG;
+import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -36,7 +36,7 @@ public enum CMRecipeTypes implements IRecipeTypeInfo {
     private final Supplier<RecipeType<?>> type;
 
     CMRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
-        String name = LANG.asId(name());
+        String name = CMLang.asId(name());
         id = CreateMetallurgy.genRL(name);
         serializerObject = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
         typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));

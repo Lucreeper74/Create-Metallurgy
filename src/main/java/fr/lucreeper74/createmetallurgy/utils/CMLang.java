@@ -9,7 +9,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Locale;
 
-public class LANG {
+public class CMLang {
 
     public static LangBuilder builder() {
         return new LangBuilder(CreateMetallurgy.MOD_ID);

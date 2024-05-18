@@ -4,7 +4,7 @@ import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinInventory;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.LangBuilder;
-import fr.lucreeper74.createmetallurgy.utils.LANG;
+import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -30,7 +30,7 @@ public class FoundryBasinBlockEntity extends BasinBlockEntity {
     // CLIENT THINGS -----------------
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        LANG.translate("gui.goggles.foundrybasin_contents")
+        CMLang.translate("gui.goggles.foundrybasin_contents")
                 .forGoggles(tooltip);
 
         IItemHandlerModifiable items = itemCapability.orElse(new ItemStackHandler());
@@ -41,25 +41,25 @@ public class FoundryBasinBlockEntity extends BasinBlockEntity {
             ItemStack stackInSlot = items.getStackInSlot(i);
             if (stackInSlot.isEmpty())
                 continue;
-            LANG.text("")
+            CMLang.text("")
                     .add(Components.translatable(stackInSlot.getDescriptionId())
                             .withStyle(ChatFormatting.GRAY))
-                    .add(LANG.text(" x" + stackInSlot.getCount())
+                    .add(CMLang.text(" x" + stackInSlot.getCount())
                             .style(ChatFormatting.GREEN))
                     .forGoggles(tooltip, 1);
             isEmpty = false;
         }
 
-        LangBuilder mb = LANG.translate("generic.unit.millibuckets");
+        LangBuilder mb = CMLang.translate("generic.unit.millibuckets");
         for (int i = 0; i < fluids.getTanks(); i++) {
             FluidStack fluidStack = fluids.getFluidInTank(i);
             if (fluidStack.isEmpty())
                 continue;
-            LANG.text("")
-                    .add(LANG.fluidName(fluidStack)
-                            .add(LANG.text(" "))
+            CMLang.text("")
+                    .add(CMLang.fluidName(fluidStack)
+                            .add(CMLang.text(" "))
                             .style(ChatFormatting.GRAY)
-                            .add(LANG.number(fluidStack.getAmount())
+                            .add(CMLang.number(fluidStack.getAmount())
                                     .add(mb)
                                     .style(ChatFormatting.BLUE)))
                     .forGoggles(tooltip, 1);

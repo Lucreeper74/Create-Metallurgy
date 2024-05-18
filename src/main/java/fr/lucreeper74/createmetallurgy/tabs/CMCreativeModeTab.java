@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.tabs;
 
-import com.simibubi.create.Create;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import net.minecraft.client.Minecraft;
@@ -15,8 +14,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Collection;
 
-public abstract class CreateMetallurgyCreativeModeTab extends CreativeModeTab {
-    public CreateMetallurgyCreativeModeTab(String id) {
+public abstract class CMCreativeModeTab extends CreativeModeTab {
+    public CMCreativeModeTab(String id) {
         super(CreateMetallurgy.MOD_ID + "." + id);
     }
 

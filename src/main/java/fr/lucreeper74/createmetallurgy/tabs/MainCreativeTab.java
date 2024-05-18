@@ -3,7 +3,7 @@ package fr.lucreeper74.createmetallurgy.tabs;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import net.minecraft.world.item.ItemStack;
 
-public class MainCreativeTab extends CreateMetallurgyCreativeModeTab {
+public class MainCreativeTab extends CMCreativeModeTab {
     public MainCreativeTab() {
         super("main_group");
     }
