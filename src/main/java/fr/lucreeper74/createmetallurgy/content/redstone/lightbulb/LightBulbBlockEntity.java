@@ -2,24 +2,20 @@ package fr.lucreeper74.createmetallurgy.content.redstone.lightbulb;
 
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network.Network;
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network.NetworkHandler;
+import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network.address.NetworkAddressBehaviour;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
 
-import static fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlock.LEVEL;
-
 public class LightBulbBlockEntity extends SmartBlockEntity {
 
-    private Network network;
-    private Boolean queueReady = false;
-    private final List<BlockPos> sortedQueue = new ArrayList<>();
-    private int pointer = 0;
+    private boolean receivedSignalChanged;
+    private NetworkAddressBehaviour addressBehaviour;
+    private int receivedSignal;
+    private int transmittedSignal;
 
     public LightBulbBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
@@ -29,93 +25,82 @@ public class LightBulbBlockEntity extends SmartBlockEntity {
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     }
 
-    public Network getNetwork() {
-        return network;
+    @Override
+    public void addBehavioursDeferred(List<BlockEntityBehaviour> behaviours) {
+        addressBehaviour = createAddressSlot();
+        behaviours.add(addressBehaviour);
     }
 
-    public void setNetwork(Network network) {
-        this.network = network;
+    protected NetworkAddressBehaviour createAddressSlot() {
+        return NetworkAddressBehaviour.networkNode(this, new LightBulbAddressSlot(), this::setSignal, this::getSignal);
     }
 
-    public void buildQueue() {
-        if (level == null || level.isClientSide)
-            return;
+    public int getSignal() {
+        return transmittedSignal;
+    }
 
-        BlockPos pos = getBlockPos();
-        SortedMap<Integer, BlockPos> queue = new TreeMap<>();
+    public void setSignal(int strength) {
+        if (receivedSignal != strength)
+            receivedSignalChanged = true;
+        receivedSignal = strength;
+    }
 
-        for (Network.Node node : network.nodes.values()) {
-            BlockPos nodePos = node.getPos();
-            if (nodePos != pos)
-                queue.put(getDistance(nodePos, pos), nodePos);
+    public void transmit(int strength) {
+        transmittedSignal = strength;
+        if (addressBehaviour != null)
+            addressBehaviour.notifySignalChange();
+    }
+
+    @Override
+    public void initialize() {
+        if (addressBehaviour == null) {
+            addressBehaviour = createAddressSlot();
+            attachBehaviourLate(addressBehaviour);
         }
-        sortedQueue.addAll(queue.values());
-        queue.clear();
-        queueReady = true;
+        super.initialize();
+    }
+
+    @Override
+    public void write(CompoundTag compound, boolean clientPacket) {
+        compound.putInt("Receive", getReceivedSignal());
+        compound.putBoolean("ReceivedChanged", receivedSignalChanged);
+        compound.putInt("Transmit", transmittedSignal);
+        super.write(compound, clientPacket);
+    }
+
+    @Override
+    protected void read(CompoundTag compound, boolean clientPacket) {
+        super.read(compound, clientPacket);
+        receivedSignal = compound.getInt("Receive");
+        receivedSignalChanged = compound.getBoolean("ReceivedChanged");
+        if (level == null || level.isClientSide)
+            transmittedSignal = compound.getInt("Transmit");
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (AnimationTickHolder.getTicks() % 10 == 0 && queueReady) {
-            if (pointer < sortedQueue.size()) {
-                BlockPos nodePos = sortedQueue.get(pointer);
-                if (level.getBlockEntity(nodePos) == null)
-                    return; //Ignore if break or unloaded
-                level.setBlock(nodePos, level.getBlockState(nodePos).setValue(LEVEL, getBlockState().getValue(LEVEL)), 2);
-                pointer++;
+        BlockState blockState = getBlockState();
+        if (receivedSignal != blockState.getValue(LightBulbBlock.LEVEL)) {
+            receivedSignalChanged = true;
+            level.setBlockAndUpdate(worldPosition, blockState.setValue(LightBulbBlock.LEVEL, receivedSignal));
+        }
 
-            } else {
-                queueReady = false;
-                pointer = 0;
-                sortedQueue.clear();
-            }
+        if (receivedSignalChanged) {
+            level.blockUpdated(getBlockPos(), blockState.getBlock());
+            receivedSignalChanged = false;
         }
     }
 
-    public Integer getDistance(BlockPos p1, BlockPos p2) {
-        return (int) Mth.sqrt(
-                Mth.square(p1.getX() - p2.getX()) +
-                        Mth.square(p1.getY() - p2.getY()) +
-                        Mth.square(p1.getZ() - p2.getZ()));
+    public int getReceivedSignal() {
+        return receivedSignal;
     }
 
-
-    void searchNearLight(int range) {
-        if (level == null || level.isClientSide)
-            return;
-
-        BlockPos pos = getBlockPos();
-        for (int x = -range; x <= range; x++) {
-            for (int y = -range; y <= range; y++) {
-                for (int z = -range; z <= range; z++) {
-                    BlockPos foundPos = pos.offset(x, y, z);
-                    if (level.getBlockEntity(foundPos) instanceof LightBulbBlockEntity foundLight && !foundPos.equals(pos)) {
-                        Network foundNetwork = foundLight.getNetwork();
-                        foundNetwork.addNode(pos);
-
-                        if (network == null) { //First Network found -> Adding himself into it
-                            network = foundNetwork;
-                        } else if (foundNetwork != network) { //Found another network while already in one -> Merge the two
-                            NetworkHandler.HANDLER.merge(network, foundNetwork);
-                        }
-
-                    }
-                }
-            }
-        }
-
-        if (network == null) { //No network found -> Create one
-            network = NetworkHandler.HANDLER.create(level);
-            network.addNode(pos);
-        }
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        if (level == null || level.isClientSide()) return;
-        NetworkHandler.HANDLER.load(level);
-    }
+    //    @Override
+//    public void onLoad() {
+//        super.onLoad();
+//        if (level == null || level.isClientSide()) return;
+//        NetworkHandler.HANDLER.load(level);
+//    }
 }

@@ -1,14 +1,14 @@
 package fr.lucreeper74.createmetallurgy.content.redstone.lightbulb;
 
-import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.block.WrenchableDirectionalBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.tabs.CMCreativeModeTab;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -22,39 +22,45 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
-public class LightBulbBlock extends RodBlock implements IBE<LightBulbBlockEntity>, IWrenchable, SimpleWaterloggedBlock {
+public class LightBulbBlock extends WrenchableDirectionalBlock implements IBE<LightBulbBlockEntity>, SimpleWaterloggedBlock {
 
     public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public LightBulbBlock(Properties pProperties) {
+    protected final DyeColor color;
+
+    public LightBulbBlock(Properties pProperties, DyeColor color) {
         super(pProperties);
+        this.color = color;
         registerDefaultState(super.defaultBlockState()
                 .setValue(LEVEL, 0)
-                .setValue(FACING, Direction.UP)
                 .setValue(WATERLOGGED, false));
+    }
+
+    @Override
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> p_149666_2_) {
+        if (group != CMCreativeModeTab.TAB_SEARCH && color != DyeColor.WHITE)
+            return;
+        super.fillItemCategory(group, p_149666_2_);
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
         boolean flag = fluidstate.getType() == Fluids.WATER;
 
-        return this.defaultBlockState().setValue(FACING, pContext.getClickedFace())
+        return this.defaultBlockState()
+                .setValue(FACING, pContext.getClickedFace())
                 .setValue(WATERLOGGED, Boolean.valueOf(flag))
                 .setValue(LEVEL, pContext.getLevel().getBestNeighborSignal(pContext.getClickedPos()));
     }
 
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LEVEL)
-                .add(FACING)
-                .add(WATERLOGGED);
+        builder.add(LEVEL, WATERLOGGED);
         super.createBlockStateDefinition(builder);
     }
 
@@ -84,32 +90,29 @@ public class LightBulbBlock extends RodBlock implements IBE<LightBulbBlockEntity
         return pState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(pState);
     }
 
-    private void updateLevelState(Level level, BlockPos pos) {
-        if (level.isClientSide())
-            return;
-
-        level.setBlock(pos, level.getBlockState(pos).setValue(LEVEL, level.getBestNeighborSignal(pos)), 2);
-        getBlockEntity(level, pos).buildQueue();
+    @Override
+    public boolean isSignalSource(BlockState state) {
+        return false;
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if(level.isClientSide())
+    public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
+        if (worldIn.isClientSide())
             return;
 
-        getBlockEntity(level, pos).searchNearLight(8);
-        updateLevelState(level, pos);
+        if (state.getValue(LEVEL) == worldIn.getBestNeighborSignal(pos))
+            return;
+        transmit(worldIn, pos);
     }
 
-    @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
-        if(level.isClientSide())
+    public void transmit(Level worldIn, BlockPos pos) {
+        if (worldIn.isClientSide)
             return;
 
-        if (state.getValue(LEVEL) == level.getBestNeighborSignal(pos))
-            return;
-        updateLevelState(level, pos);
+        withBlockEntityDo(worldIn, pos,
+                be -> be.transmit( worldIn.getBestNeighborSignal(pos)));
     }
+
 
     @Override
     public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, Direction side) {
@@ -117,21 +120,12 @@ public class LightBulbBlock extends RodBlock implements IBE<LightBulbBlockEntity
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        //This called when the block is destroyed & when state change
-        //If newState == Minecraft:Air -> The block is destroyed
-        if(newState != Blocks.AIR.defaultBlockState())
-            return;
-        if (level == null || level.isClientSide)
-            return;
-
-        getBlockEntity(level, pos).getNetwork().removeNode(pos);
-        super.onRemove(state, level, pos, newState, isMoving);
-    }
-
-    @Override
     public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
         return false;
+    }
+
+    public DyeColor getColor() {
+        return color;
     }
 
     @Override

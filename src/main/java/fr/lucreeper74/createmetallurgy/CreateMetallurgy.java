@@ -8,7 +8,7 @@ import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import fr.lucreeper74.createmetallurgy.content.kinetics.mechanicalArm.AllArmInteract;
 import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingWithSpout;
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network.SavingData;
+import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network.NetworkHandler;
 import fr.lucreeper74.createmetallurgy.registries.*;
 import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.data.CMDatagen;
@@ -35,6 +35,9 @@ public class CreateMetallurgy {
                 .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
     }
 
+    //HANDLERS
+    public static final NetworkHandler NETWORK_HANDLER = new NetworkHandler();
+
     public CreateMetallurgy() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         REGISTRATE.registerEventListeners(eventBus);
@@ -59,7 +62,6 @@ public class CreateMetallurgy {
         eventBus.addListener(this::setup);
 
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.addListener(SavingData::onWorldLoad);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

@@ -1,66 +1,56 @@
 package fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network;
 
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlockEntity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.saveddata.SavedData;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
-public class NetworkHandler extends SavedData {
+public class NetworkHandler {
 
-    public static final NetworkHandler HANDLER = new NetworkHandler();
+    final Map<Address, Network> networkList = new HashMap<>();
 
-    final List<Network> networkList = new ArrayList<>();
-
-    public Network create(Level level) {
-        Network newNetwork = new Network(level);
-        networkList.add(newNetwork);
-        setDirty();
-        return newNetwork;
+    public Network addNetwork(Level level, Address address) {
+        Network network = new Network(level);
+        networkList.put(address, network);
+        return network;
     }
 
-    public void merge(Network a, Network b) {
-        a.nodes.putAll(b.nodes);
-        b.nodes.clear();
-        networkList.remove(b);
-        setDirty();
-    }
+    public static class Address {
+        public static final Address EMPTY = new Address(ItemStack.EMPTY);
+        private static final Map<Item, Address> addresses = new IdentityHashMap<>();
+        private ItemStack stack;
+        private Item item;
 
-    public void load(Level level) {
-        if(HANDLER.networkList.isEmpty())
-            return;
-        for (Network networks : HANDLER.networkList) {
-            for (Network.Node node : networks.nodes.values()) {
-                LightBulbBlockEntity light = (LightBulbBlockEntity) level.getBlockEntity(node.pos);
-                light.setNetwork(networks);
-            }
+        public static Address of(ItemStack stack) {
+            if (stack.isEmpty())
+                return EMPTY;
+            if (!stack.hasTag())
+                return addresses.computeIfAbsent(stack.getItem(), $ -> new Address(stack));
+            return new Address(stack);
+        }
+
+        private Address(ItemStack stack) {
+            this.stack = stack;
+            item = stack.getItem();
+        }
+
+        public ItemStack getStack() {
+            return stack;
+        }
+
+        @Override
+        public int hashCode() {
+            return item.hashCode();
         }
     }
 
-    public ListTag serializeNBT() {
-        ListTag tagList = new ListTag();
-        for (Network network : networkList) {
-            tagList.add(network.serializeNBT());
-        }
-        return tagList;
-    }
-
-    public void deserializeNBT(ListTag nbt, Level level) {
-        for (int i = 0; i < nbt.size(); i++) {
-            Network network = new Network(level);
-            network.deserializeNBT(nbt.getCompound(i));
-            networkList.add(network);
-        }
-    }
-
-    @Override
-    @NotNull
-    public CompoundTag save(CompoundTag tag) {
-        tag.put("Networks", serializeNBT());
-        return tag;
+    public Network getNetOf(Level level, INetworkNode actor) {
+        Address key = actor.getAddress();
+        if (!networkList.containsKey(key))
+            addNetwork(level, key);
+        return networkList.get(actor.getAddress());
     }
 }

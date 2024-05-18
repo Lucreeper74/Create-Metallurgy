@@ -1,80 +1,81 @@
 package fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import net.minecraft.world.level.Level;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Network {
 
-    public final Map<BlockPos, Node> nodes = new HashMap();
+    public final Set<INetworkNode> nodes = new HashSet<>();
     final Level level;
 
     public Network(Level level) {
         this.level = level;
     }
 
-    public void addNode(BlockPos pos) {
-        nodes.put(pos, new Node(pos));
-        NetworkHandler.HANDLER.setDirty();
+    public void addNode(INetworkNode actor) {
+        nodes.add(actor);
     }
 
-    public void removeNode(BlockPos pos) {
-        nodes.remove(pos);
-        if(nodes.isEmpty())
-            NetworkHandler.HANDLER.networkList.remove(this);
-        NetworkHandler.HANDLER.setDirty();
+    public void removeNode(INetworkNode actor) {
+        nodes.remove(actor);
+        if (nodes.isEmpty())
+            CreateMetallurgy.NETWORK_HANDLER.networkList.remove(actor.getAddress());
     }
 
-    public class Node {
+    public void transmit(INetworkNode actor) {
+        int power = 0;
 
-        BlockPos pos;
+        for (INetworkNode other : nodes) {
+            if (!other.isAlive()) {
+                continue;
+            }
 
-        public Node(BlockPos pos) {
-            this.pos = pos;
+//            if (!withinRange(actor, other))
+//                continue;
+
+            if (power < 15)
+                power = Math.max(other.getTransmittedSignal(), power);
         }
 
-        public BlockPos getPos() { return pos;}
 
-        @Override
-        public int hashCode() {
-            return pos.hashCode();
-        }
-
-        public CompoundTag serializeNBT() {
-            CompoundTag nbt = new CompoundTag();
-            nbt.putInt("X", pos.getX());
-            nbt.putInt("Y", pos.getY());
-            nbt.putInt("Z", pos.getZ());
-            return nbt;
+        for (INetworkNode node : nodes) {
+            node.setReceivedSignal(power);
         }
     }
 
-    public CompoundTag serializeNBT() {
-        CompoundTag nbt = new CompoundTag();
 
-        ListTag nbtTagListNodes = new ListTag();
-        for (Node node : nodes.values()) {
-            nbtTagListNodes.add(node.serializeNBT());
-        }
-        nbt.put("Nodes", nbtTagListNodes);
 
-        return nbt;
-    }
 
-    public void deserializeNBT(CompoundTag nbt) {
-        ListTag nodes = (ListTag) nbt.get("Nodes");
 
-        for (int i = 0; i < nodes.size(); i++) {
-            Node node = deserializeNodeNBT(nodes.getCompound(i));
-            this.nodes.put(node.pos, node);
-        }
-    }
 
-    private Node deserializeNodeNBT(CompoundTag nbt) {
-        return new Node(new BlockPos(nbt.getInt("X"), nbt.getInt("Y"), nbt.getInt("Z")));
-    }
+
+
+
+
+//    public CompoundTag serializeNBT() {
+//        CompoundTag nbt = new CompoundTag();
+//
+//        ListTag nbtTagListNodes = new ListTag();
+//        for (Node node : nodes.values()) {
+//            nbtTagListNodes.add(node.serializeNBT());
+//        }
+//        nbt.put("Nodes", nbtTagListNodes);
+//
+//        return nbt;
+//    }
+//
+//    public void deserializeNBT(CompoundTag nbt) {
+//        ListTag nodes = (ListTag) nbt.get("Nodes");
+//
+//        for (int i = 0; i < nodes.size(); i++) {
+//            Node node = deserializeNodeNBT(nodes.getCompound(i));
+//            this.nodes.put(node.pos, node);
+//        }
+//    }
+//
+//    private Node deserializeNodeNBT(CompoundTag nbt) {
+//        return new Node(new BlockPos(nbt.getInt("X"), nbt.getInt("Y"), nbt.getInt("Z")));
+//    }
 }
