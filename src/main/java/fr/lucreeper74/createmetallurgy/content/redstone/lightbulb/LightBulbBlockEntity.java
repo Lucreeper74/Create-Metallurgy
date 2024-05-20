@@ -96,11 +96,4 @@ public class LightBulbBlockEntity extends SmartBlockEntity {
     public int getReceivedSignal() {
         return receivedSignal;
     }
-
-    //    @Override
-//    public void onLoad() {
-//        super.onLoad();
-//        if (level == null || level.isClientSide()) return;
-//        NetworkHandler.HANDLER.load(level);
-//    }
 }

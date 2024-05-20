@@ -119,7 +119,7 @@ public class CastingScenes {
         scene.idle(20);
 
         //Add Funnels
-        scene.world.showSection(util.select.position(2, 1, 1), Direction.DOWN);
+        scene.world.showSection(util.select.position(leverPos), Direction.DOWN);
         scene.idle(5);
         scene.world.showSection(funnelBasin, Direction.SOUTH);
         scene.idle(5);
