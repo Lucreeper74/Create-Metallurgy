@@ -73,7 +73,8 @@ public class NetworkAddressRenderer {
         if (be == null || be.isRemoved())
             return;
 
-        Entity cameraEntity = Minecraft.getInstance().cameraEntity;
+        Minecraft mc = Minecraft.getInstance();
+        Entity cameraEntity = mc.cameraEntity;
         float max = AllConfigs.client().filterItemRenderDistance.getF();
         if (!be.isVirtual() && cameraEntity != null && cameraEntity.position()
                 .distanceToSqr(VecHelper.getCenterOf(be.getBlockPos())) > (max * max))
@@ -81,6 +82,9 @@ public class NetworkAddressRenderer {
 
         NetworkAddressBehaviour behaviour = be.getBehaviour(NetworkAddressBehaviour.TYPE);
         if (behaviour == null)
+            return;
+
+        if(!behaviour.testHit(mc.hitResult.getLocation()))
             return;
 
         ValueBoxTransform transform = behaviour.slot;
