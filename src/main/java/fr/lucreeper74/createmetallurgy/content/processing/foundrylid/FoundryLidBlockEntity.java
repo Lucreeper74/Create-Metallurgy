@@ -2,8 +2,10 @@ package fr.lucreeper74.createmetallurgy.content.processing.foundrylid;
 
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.utility.VecHelper;
+import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.core.BlockPos;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +31,14 @@ public class FoundryLidBlockEntity extends BasinOperatingBlockEntity {
 
     public int processingTime;
     public boolean running;
+
+    public LerpedFloat gauge = LerpedFloat.linear();
+    private final HashMap<BlazeBurnerBlock.HeatLevel, Integer> temp = new HashMap<>(); {
+            temp.put(BlazeBurnerBlock.HeatLevel.NONE,0);
+            temp.put(BlazeBurnerBlock.HeatLevel.SMOULDERING,500);
+            temp.put(BlazeBurnerBlock.HeatLevel.KINDLED,1000);
+            temp.put(BlazeBurnerBlock.HeatLevel.SEETHING,2000);
+    }
 
     public FoundryLidBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -63,6 +74,11 @@ public class FoundryLidBlockEntity extends BasinOperatingBlockEntity {
     @Override
     public void tick() {
         super.tick();
+
+        if(level.isClientSide) {
+            gauge.tickChaser();
+            gauge.chase((double) temp.get(BasinBlockEntity.getHeatLevelOf(this.getLevel().getBlockState(getBlockPos().below(2)))) / 2000, .2f, LerpedFloat.Chaser.EXP);
+        }
 
         if (!level.isClientSide && (currentRecipe == null || processingTime == -1)) {
             running = false;

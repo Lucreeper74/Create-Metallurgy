@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.HashMap;
 
@@ -19,8 +20,6 @@ import static fr.lucreeper74.createmetallurgy.content.processing.foundrylid.Foun
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 public class FoundryLidRenderer extends SafeBlockEntityRenderer<FoundryLidBlockEntity> {
-
-    public LerpedFloat progress = LerpedFloat.linear();
 
     public FoundryLidRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -30,37 +29,22 @@ public class FoundryLidRenderer extends SafeBlockEntityRenderer<FoundryLidBlockE
         if (!be.getBlockState().getValue(ON_FOUNDRY_BASIN))
             return;
 
-        Direction facing = be.getBlockState().getValue(HORIZONTAL_FACING);
+        BlockState blockState = be.getBlockState();
+        Direction facing = blockState.getValue(HORIZONTAL_FACING);
         float dialPivot = 5.75f / 16;
 
-
-        BlazeBurnerBlock.HeatLevel heat = BasinBlockEntity.getHeatLevelOf(be.getLevel()
-                .getBlockState(be.getBlockPos()
-                        .below(2)));
-        progress.tickChaser();
-
-        HashMap<BlazeBurnerBlock.HeatLevel, Integer> temp = new HashMap<>();
-
-        temp.put(BlazeBurnerBlock.HeatLevel.NONE, 0);
-        temp.put(BlazeBurnerBlock.HeatLevel.SMOULDERING, 500);
-        temp.put(BlazeBurnerBlock.HeatLevel.KINDLED, 1000);
-        temp.put(BlazeBurnerBlock.HeatLevel.SEETHING, 2000);
-
-        progress.chase((double) temp.get(heat) / 2000, .02f, LerpedFloat.Chaser.EXP);
-
-
-        CachedBufferer.partial(CMPartialModels.THERMOMETER_GAUGE, be.getBlockState())
+        CachedBufferer.partial(CMPartialModels.THERMOMETER_GAUGE, blockState)
                 .centre()
                 .rotateY(-facing.toYRot())
                 .unCentre()
                 .renderInto(ms, bufferSource.getBuffer(RenderType.solid()));
 
-        CachedBufferer.partial(AllPartialModels.BOILER_GAUGE_DIAL, be.getBlockState())
+        CachedBufferer.partial(AllPartialModels.BOILER_GAUGE_DIAL, blockState)
                 .centre()
                 .rotateY(-facing.toYRot())
                 .unCentre()
                 .translate(0, dialPivot, dialPivot)
-                .rotateX(progress.getValue(partialTicks) * -90)
+                .rotateX(be.gauge.getValue(partialTicks) * -90)
                 .translate(0, -dialPivot, -dialPivot)
                 .renderInto(ms, bufferSource.getBuffer(RenderType.solid()));
 
