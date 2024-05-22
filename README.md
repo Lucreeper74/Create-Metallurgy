@@ -20,6 +20,11 @@ Create Metallurgy is a Create Mod Addon developped by Luc_Creeper74, introducing
 <a href="https://www.curseforge.com/minecraft/mc-mods/create-metallurgy"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.2.0/assets/cozy/available/curseforge_vector.svg" alt="CurseForge Page"></a>
 </p>
 
+## Contribute
+Want to help with translation ? Please refer to language file in [`generated/lang/en_us.json`](https://github.com/Lucreeper74/Create-Metallurgy/blob/mc1.19.2/dev/src/generated/resources/assets/createmetallurgy/lang/en_us.json).
+
+<br>
+
 ## Credits
 - **MrGhastien** (Contributors)
 - **lev** (Artist -> Logo)
