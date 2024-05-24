@@ -5,7 +5,7 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
-version = '${mod_version}-${mc_version}'
+version = "${mod_version}-${mc_version}"
 group = 'fr.lucreeper74.createmetallurgy' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'createmetallurgy'
 
