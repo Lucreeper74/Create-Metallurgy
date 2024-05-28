@@ -1,5 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder;
 
+import com.simibubi.create.AllDamageTypes;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.kinetics.drill.DrillBlock;
@@ -8,14 +9,17 @@ import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.VecHelper;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -101,9 +105,10 @@ public class BeltGrinderBlock extends HorizontalKineticBlock implements IBE<Belt
             if (be.getSpeed() == 0)
                 return;
 
+            Level level = entityIn.level();
             for (ItemStack armor : entityIn.getArmorSlots()) {
                 if (armor.isEmpty() || !armor.isDamageableItem() || armor.getDamageValue() >= armor.getMaxDamage())
-                    entityIn.hurt(CreateDamageSources.saw(worldIn), (float) DrillBlock.getDamage(speed));
+                    entityIn.hurt(CMDamageTypes.grinder(level), (float) DrillBlock.getDamage(speed));
 
                 //Hurt armor every 10 ticks at max speed to every 90 ticks at lower speed -> f(x)= (-10/32) * x + 90
                 if(AnimationTickHolder.getTicks() % Math.round((-10f * speed) / 32f + 90) == 0)
@@ -112,7 +117,6 @@ public class BeltGrinderBlock extends HorizontalKineticBlock implements IBE<Belt
                 if(!armor.isEmpty()) {
                     float pitch = (speed / 256f) + .8f;
                     entityIn.playSound(SoundEvents.GRINDSTONE_USE, .3f, entityIn.level().random.nextFloat() * 0.2F + pitch);
-                    Level level = entityIn.level();
                     RandomSource r = level.getRandom();
                     Vec3 c = VecHelper.getCenterOf(be.getBlockPos());
                     Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .25f)

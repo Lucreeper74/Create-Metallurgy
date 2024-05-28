@@ -21,7 +21,7 @@ public class CMDatagen {
             CMProcessingRecipesGen.registerAll(gen, output);
             CMPonders.registerLang();
             REGISTRATE.addDataGenerator(ProviderType.LANG, CMLangGen::generate);
-            gen.addProvider(event.includeServer(), new CMWorldGenProvider(output, event.getLookupProvider()));
+            gen.addProvider(event.includeServer(), new CMGenEntriesProvider(output, event.getLookupProvider()));
         }
     }
 }
