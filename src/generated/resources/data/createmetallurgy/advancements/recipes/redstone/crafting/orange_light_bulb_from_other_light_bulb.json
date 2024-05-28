@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_light_bulb": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:light_bulbs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "createmetallurgy:crafting/orange_light_bulb_from_other_light_bulb"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_light_bulb",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "createmetallurgy:crafting/orange_light_bulb_from_other_light_bulb"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,8 +1,13 @@
 package fr.lucreeper74.createmetallurgy.worldgen;
 
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import net.minecraft.core.Registry;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -11,14 +16,19 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.List;
 
 public class PlacedFeatures {
-    public static final DeferredRegister<PlacedFeature> PLACED_FEATURES =
-            DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, CreateMetallurgy.MOD_ID);
+    public static final ResourceKey<PlacedFeature> WOLFRAMIE_ORE_PLACED_KEY = registerKey("wolframite_ore_placed");
 
-    public static final RegistryObject<PlacedFeature> WOLFRAMITE_ORE_PLACED = PLACED_FEATURES.register("wolframite_ore_placed",
-            () -> new PlacedFeature(ConfiguredFeatures.WOLFRAMIE_ORE.getHolder().get(), commonOrePlacement(7, // VeinsPerChunk
-                    HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(60)))));
+    public static void bootstrap(BootstapContext<PlacedFeature> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
+        register(context, WOLFRAMIE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ConfiguredFeatures.WOLFRAMIE_ORE_KEY),
+                commonOrePlacement(7, // VeinsPerChunk
+                        HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(60))));
+    }
 
+    private static ResourceKey<PlacedFeature> registerKey(String name) {
+        return ResourceKey.create(Registries.PLACED_FEATURE, CreateMetallurgy.genRL(name));
+    }
 
     //Ore Placements Functions
     public static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {
@@ -33,7 +43,8 @@ public class PlacedFeatures {
         return orePlacement(RarityFilter.onAverageOnceEvery(p_195350_), p_195351_);
     }
 
-    public static void register(IEventBus eventBus) {
-        PLACED_FEATURES.register(eventBus);
+    private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration,
+                                 List<PlacementModifier> modifiers) {
+        context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
     }
 }

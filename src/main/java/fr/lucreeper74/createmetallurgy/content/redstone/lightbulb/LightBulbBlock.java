@@ -3,13 +3,9 @@ package fr.lucreeper74.createmetallurgy.content.redstone.lightbulb;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.block.WrenchableDirectionalBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
-import fr.lucreeper74.createmetallurgy.tabs.CMCreativeModeTab;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -39,13 +35,6 @@ public class LightBulbBlock extends WrenchableDirectionalBlock implements IBE<Li
         registerDefaultState(super.defaultBlockState()
                 .setValue(LEVEL, 0)
                 .setValue(WATERLOGGED, false));
-    }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> p_149666_2_) {
-        if (group != CMCreativeModeTab.TAB_SEARCH && color != DyeColor.WHITE)
-            return;
-        super.fillItemCategory(group, p_149666_2_);
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {

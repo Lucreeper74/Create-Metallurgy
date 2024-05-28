@@ -1,9 +1,6 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
@@ -12,7 +9,6 @@ import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.UncontainableBlockItem;
-import com.simibubi.create.foundation.utility.DyeHelper;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
@@ -29,22 +25,19 @@ import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidG
 import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlock;
-import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.utils.CMDyeHelper;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.Tags;
 
@@ -59,7 +52,7 @@ import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 public class CMBlocks {
 
     static {
-        REGISTRATE.creativeModeTab(() -> CMCreativeTabs.MAIN_CREATIVE_TAB);
+        REGISTRATE.setCreativeTab(CMCreativeTabs.MAIN_CREATIVE_TAB);
     }
 
     public static final BlockEntry<Block> RAW_WOLFRAMITE_BLOCK = REGISTRATE
@@ -116,7 +109,7 @@ public class CMBlocks {
     public static final BlockEntry<FoundryBasinBlock> FOUNDRY_BASIN_BLOCK = REGISTRATE
             .block("foundry_basin", FoundryBasinBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate(new BasinGenerator()::generate)
@@ -129,7 +122,7 @@ public class CMBlocks {
     public static final BlockEntry<CastingBasinBlock> CASTING_BASIN_BLOCK = REGISTRATE
             .block("casting_basin", CastingBasinBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
@@ -143,7 +136,7 @@ public class CMBlocks {
             .block("casting_table", CastingTableBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(BlockBehaviour.Properties::noOcclusion)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
@@ -156,7 +149,7 @@ public class CMBlocks {
     public static final BlockEntry<FoundryLidBlock> FOUNDRY_LID_BLOCK = REGISTRATE
             .block("foundry_lid", FoundryLidBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate(new FoundryLidGenerator()::generate)
@@ -168,7 +161,7 @@ public class CMBlocks {
     public static final BlockEntry<GlassedFoundryLidBlock> GLASSED_FOUNDRY_LID_BLOCK = REGISTRATE
             .block("glassed_foundry_lid", GlassedFoundryLidBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate(new GlassedFoundryLidGenerator()::generate)
@@ -180,7 +173,7 @@ public class CMBlocks {
     public static final BlockEntry<FoundryMixerBlock> FOUNDRY_MIXER_BLOCK = REGISTRATE
             .block("foundry_mixer", FoundryMixerBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.color(MaterialColor.STONE))
+            .properties(p -> p.mapColor(MapColor.STONE))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
@@ -193,7 +186,7 @@ public class CMBlocks {
     public static final BlockEntry<BeltGrinderBlock> BELT_GRINDER_BLOCK = REGISTRATE
             .block("mechanical_belt_grinder", BeltGrinderBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.color(MaterialColor.STONE))
+            .properties(p -> p.mapColor(MapColor.STONE))
             .properties(BlockBehaviour.Properties::noOcclusion)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate(new BeltGrinderGenerator()::generate)
@@ -208,7 +201,7 @@ public class CMBlocks {
         String colourName = colour.getSerializedName();
         return REGISTRATE.block(colourName + "_light_bulb", p -> new LightBulbBlock(p, colour))
                 .initialProperties(() -> Blocks.REDSTONE_LAMP)
-                .properties(p -> p.sound(SoundType.GLASS).color(colour.getMaterialColor())
+                .properties(p -> p.sound(SoundType.GLASS).mapColor(colour)
                         .lightLevel(s -> s.getValue(LightBulbBlock.LEVEL)))
                 .addLayer(() -> RenderType::translucent)
                 .addLayer(() -> RenderType::cutoutMipped)
@@ -228,20 +221,20 @@ public class CMBlocks {
                                     .build();
                         }))
                 .recipe((c, p) -> {
-                    ShapedRecipeBuilder.shaped(c.get())
+                    ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, c.get())
                             .define('S', AllItems.IRON_SHEET.get())
                             .define('T', CMItems.TUNGSTEN_WIRE_SPOOL.get())
                             .define('G', CMDyeHelper.getGlassOfDye(colour))
                             .pattern(" G ").pattern(" T ").pattern(" S ")
                             .unlockedBy("has_tungsten_wire_spool", RegistrateRecipeProvider.has(CMItems.TUNGSTEN_WIRE_SPOOL.get()))
                             .save(p, CreateMetallurgy.genRL("crafting/" + c.getName()));
-                    ShapelessRecipeBuilder.shapeless(c.get())
+                    ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, c.get())
                             .requires(colour.getTag())
                             .requires(forgeItemTag("light_bulbs"))
                             .unlockedBy("has_light_bulb", RegistrateRecipeProvider.has(forgeItemTag("light_bulbs")))
                             .save(p, CreateMetallurgy.genRL("crafting/" + c.getName() + "_from_other_light_bulb"));
                 })
-                .onRegisterAfter(Registry.ITEM_REGISTRY, v -> ItemDescription.useKey(v, "block.createmetallurgy.light_bulb"))
+                .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.light_bulb"))
                 .item(UncontainableBlockItem::new)
                 .tag(forgeItemTag("light_bulbs"))
                 .model((c, p) -> p.withExistingParent(colourName + "_light_bulb", p.modLoc("block/light_bulb/item"))

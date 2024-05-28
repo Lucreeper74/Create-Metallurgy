@@ -30,12 +30,11 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -88,9 +87,9 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (cap == ForgeCapabilities.ITEM_HANDLER)
             return itemCapability.cast();
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+        if (cap == ForgeCapabilities.FLUID_HANDLER)
             return inputTank.getCapability().cast();
         return super.getCapability(cap, side);
     }
@@ -157,7 +156,7 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
 
     public void process() {
         FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
-        inv.insertItem(0, currentRecipe.getResultItem().copy(), false);
+        inv.insertItem(0, currentRecipe.getResultItem(level.registryAccess()).copy(), false);
         fluidInTank.shrink(currentRecipe.getFluidIngredients().get(0).getRequiredAmount());
         getBehaviour(SmartFluidTankBehaviour.INPUT)
                 .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
@@ -201,7 +200,7 @@ public class  CastingBasinBlockEntity extends SmartBlockEntity implements IHaveG
     }
 
     public IFluidHandler getFluidTank() {
-        return getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).orElse(new FluidTank(1));
+        return getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(new FluidTank(1));
     }
 
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {

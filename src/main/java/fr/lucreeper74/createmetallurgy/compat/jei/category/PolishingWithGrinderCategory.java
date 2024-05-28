@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.compat.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
@@ -10,6 +9,7 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.List;
 
@@ -42,10 +42,10 @@ public class PolishingWithGrinderCategory extends CreateRecipeCategory<SandPaper
     }
 
     @Override
-    public void draw(SandPaperPolishingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
-        AllGuiTextures.JEI_DOWN_ARROW.render(matrixStack, 70, 6);
-        AllGuiTextures.JEI_SHADOW.render(matrixStack, 72 - 17, 42 + 13);
+    public void draw(SandPaperPolishingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 70, 6);
+        AllGuiTextures.JEI_SHADOW.render(graphics, 72 - 17, 42 + 13);
 
-        beltGrinder.draw(matrixStack, 72, 42);
+        beltGrinder.draw(graphics, 72, 42);
     }
 }

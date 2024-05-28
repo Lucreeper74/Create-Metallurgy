@@ -16,5 +16,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "createmetallurgy:blocks/yellow_light_bulb"
 }

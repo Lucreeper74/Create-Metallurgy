@@ -10,7 +10,7 @@ import fr.lucreeper74.createmetallurgy.content.kinetics.mechanicalArm.AllArmInte
 import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingWithSpout;
 import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network.NetworkHandler;
 import fr.lucreeper74.createmetallurgy.registries.*;
-import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
+import fr.lucreeper74.createmetallurgy.registries.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.data.CMDatagen;
 import fr.lucreeper74.createmetallurgy.worldgen.ConfiguredFeatures;
 import fr.lucreeper74.createmetallurgy.worldgen.PlacedFeatures;
@@ -42,7 +42,7 @@ public class CreateMetallurgy {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         REGISTRATE.registerEventListeners(eventBus);
 
-        CMCreativeTabs.init();
+        CMCreativeTabs.register(eventBus);
         CMBlocks.register();
         CMItems.register();
         CMFluids.register();
@@ -54,9 +54,6 @@ public class CreateMetallurgy {
         CMRecipeTypes.register(eventBus);
 
         CastingWithSpout.registerDefaults();
-
-        ConfiguredFeatures.register(eventBus);
-        PlacedFeatures.register(eventBus);
 
         eventBus.addListener(EventPriority.LOWEST, CMDatagen::gatherData);
         eventBus.addListener(this::setup);

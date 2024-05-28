@@ -2,6 +2,7 @@ package fr.lucreeper74.createmetallurgy.data.recipes;
 
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WeatheringCopper;
@@ -50,8 +51,8 @@ public class GrindingRecipeGen extends CMProcessingRecipesGen {
 
 
 
-    public GrindingRecipeGen(DataGenerator generator) {
-        super(generator);
+    public GrindingRecipeGen(PackOutput output) {
+        super(output);
     }
 
     @Override

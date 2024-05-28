@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "createmetallurgy:crafting/brown_light_bulb"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tungsten_wire_spool": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:tungsten_wire_spool"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tungsten_wire_spool",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "createmetallurgy:crafting/brown_light_bulb"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -4,9 +4,9 @@ import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.kinetics.drill.DrillBlock;
 import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.VecHelper;
-import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,7 +16,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -33,7 +32,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BeltGrinderBlock extends HorizontalKineticBlock implements IBE<BeltGrinderBlockEntity> {
-    public static DamageSource damageSourceGrinder = new DamageSource(CreateMetallurgy.MOD_ID + ".mechanical_grinder");
+//TODO:    public static DamageSource damageSourceGrinder = new DamageSource(CreateMetallurgy.MOD_ID + ".mechanical_grinder");
 
     public BeltGrinderBlock(Properties properties) {
         super(properties);
@@ -104,16 +103,16 @@ public class BeltGrinderBlock extends HorizontalKineticBlock implements IBE<Belt
 
             for (ItemStack armor : entityIn.getArmorSlots()) {
                 if (armor.isEmpty() || !armor.isDamageableItem() || armor.getDamageValue() >= armor.getMaxDamage())
-                    entityIn.hurt(damageSourceGrinder, (float) DrillBlock.getDamage(speed));
+                    entityIn.hurt(CreateDamageSources.saw(worldIn), (float) DrillBlock.getDamage(speed));
 
                 //Hurt armor every 10 ticks at max speed to every 90 ticks at lower speed -> f(x)= (-10/32) * x + 90
                 if(AnimationTickHolder.getTicks() % Math.round((-10f * speed) / 32f + 90) == 0)
-                    armor.hurt(1, entityIn.level.getRandom(), null);
+                    armor.hurt(1, entityIn.level().getRandom(), null);
 
                 if(!armor.isEmpty()) {
                     float pitch = (speed / 256f) + .8f;
-                    entityIn.playSound(SoundEvents.GRINDSTONE_USE, .3f, entityIn.level.random.nextFloat() * 0.2F + pitch);
-                    Level level = entityIn.level;
+                    entityIn.playSound(SoundEvents.GRINDSTONE_USE, .3f, entityIn.level().random.nextFloat() * 0.2F + pitch);
+                    Level level = entityIn.level();
                     RandomSource r = level.getRandom();
                     Vec3 c = VecHelper.getCenterOf(be.getBlockPos());
                     Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .25f)
@@ -130,11 +129,11 @@ public class BeltGrinderBlock extends HorizontalKineticBlock implements IBE<Belt
         super.updateEntityAfterFallOn(worldIn, entityIn);
         if (!(entityIn instanceof ItemEntity))
             return;
-        if (entityIn.level.isClientSide)
+        if (entityIn.level().isClientSide)
             return;
 
         BlockPos pos = entityIn.blockPosition();
-        withBlockEntityDo(entityIn.level, pos, be -> {
+        withBlockEntityDo(entityIn.level(), pos, be -> {
             if (be.getSpeed() == 0)
                 return;
             be.insertItem((ItemEntity) entityIn);

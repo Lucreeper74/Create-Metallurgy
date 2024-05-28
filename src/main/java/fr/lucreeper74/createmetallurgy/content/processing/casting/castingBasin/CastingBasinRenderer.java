@@ -7,8 +7,8 @@ import fr.lucreeper74.createmetallurgy.utils.CastingItemRenderTypeBuffer;
 import fr.lucreeper74.createmetallurgy.utils.ColoredFluidRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.fluids.FluidStack;
@@ -71,7 +71,7 @@ public class CastingBasinRenderer extends SmartBlockEntityRenderer<CastingBasinB
 
         if(be.running) {
             MultiBufferSource bufferOut = new CastingItemRenderTypeBuffer(buffer, 255 - fluidOpacity, fluidOpacity);
-            renderItem(ms, bufferOut, light, overlay, recipe.getResultItem().copy());
+            renderItem(ms, bufferOut, light, overlay, recipe.getResultItem(be.getLevel().registryAccess()).copy());
         }
 
         renderItem(ms, buffer, light, overlay, be.inv.getItem(0));
@@ -79,8 +79,8 @@ public class CastingBasinRenderer extends SmartBlockEntityRenderer<CastingBasinB
         }
 
     protected void renderItem(PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack stack) {
-        Minecraft.getInstance()
-                .getItemRenderer()
-                .renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, ms, buffer, 0);
+        Minecraft mc = Minecraft.getInstance();
+                mc.getItemRenderer()
+                .renderStatic(stack, ItemDisplayContext.GROUND, light, overlay, ms, buffer, mc.level, 0);
     }
 }

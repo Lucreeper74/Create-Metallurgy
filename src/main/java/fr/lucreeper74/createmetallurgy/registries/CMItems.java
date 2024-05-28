@@ -2,7 +2,6 @@ package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.foundation.item.CombustibleItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
@@ -14,7 +13,7 @@ import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 public class CMItems {
 
     static {
-        REGISTRATE.creativeModeTab(() -> CMCreativeTabs.MAIN_CREATIVE_TAB);
+        REGISTRATE.setCreativeTab(CMCreativeTabs.MAIN_CREATIVE_TAB);
     }
 
     public static final ItemEntry<Item> TUNGSTEN_INGOT = taggedIngredient("tungsten_ingot", forgeItemTag("ingots/tungsten"), Tags.Items.INGOTS),

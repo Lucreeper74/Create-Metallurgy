@@ -10,7 +10,7 @@ import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.C
 import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRecipe;
 import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.MeltingRecipe;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -68,6 +68,6 @@ public enum CMRecipeTypes implements IRecipeTypeInfo {
 
     private static class Registers {
         private static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CreateMetallurgy.MOD_ID);
-        private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, CreateMetallurgy.MOD_ID);
+        private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Registries.RECIPE_TYPE, CreateMetallurgy.MOD_ID);
     }
 }

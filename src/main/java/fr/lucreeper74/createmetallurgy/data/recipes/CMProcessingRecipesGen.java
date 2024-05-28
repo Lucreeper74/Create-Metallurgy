@@ -8,18 +8,20 @@ import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public abstract class CMProcessingRecipesGen extends CMRecipeProvider {
     protected static final List<CMProcessingRecipesGen> GENS = new ArrayList<>();
 
-    public static void registerAll(DataGenerator gen) {
-        GENS.add(new GrindingRecipeGen(gen));
+    public static void registerAll(DataGenerator gen, PackOutput output) {
+        GENS.add(new GrindingRecipeGen(output));
 
         gen.addProvider(true, new DataProvider() {
 
@@ -29,20 +31,16 @@ public abstract class CMProcessingRecipesGen extends CMRecipeProvider {
             }
 
             @Override
-            public void run(CachedOutput dc) {
-                GENS.forEach(g -> {
-                    try {
-                        g.run(dc);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+            public CompletableFuture<?> run(CachedOutput dc) {
+                return CompletableFuture.allOf(GENS.stream()
+                        .map(gen -> gen.run(dc))
+                        .toArray(CompletableFuture[]::new));
             }
         });
     }
 
-    public CMProcessingRecipesGen(DataGenerator generator) {
-        super(generator);
+    public CMProcessingRecipesGen(PackOutput output) {
+        super(output);
     }
 
     protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(String name,

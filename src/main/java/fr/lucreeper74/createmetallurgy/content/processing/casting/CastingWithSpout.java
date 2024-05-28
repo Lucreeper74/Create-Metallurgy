@@ -11,10 +11,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class CastingWithSpout extends BlockSpoutingBehaviour {
@@ -26,7 +25,7 @@ public class CastingWithSpout extends BlockSpoutingBehaviour {
         if (blockEntity == null)
             return 0;
 
-        IFluidHandler fluidHandler = blockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.UP)
+        IFluidHandler fluidHandler = blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER, Direction.UP)
                 .orElse(null);
         if (fluidHandler == null)
             return 0;
@@ -44,13 +43,13 @@ public class CastingWithSpout extends BlockSpoutingBehaviour {
             return 0;
 
         //Do not fill if already a cast item in table
-        IItemHandler itemHandler = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP)
+        IItemHandler itemHandler = blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP)
                 .orElse(null);
-        if(itemHandler == null)
+        if (itemHandler == null)
             return 0;
 
         ItemStack containedItem = itemHandler.getStackInSlot(0);
-        if(!containedItem.isEmpty())
+        if (!containedItem.isEmpty())
             return 0;
 
         // Do not fill if it would only partially fill the table (unless > 1000mb)

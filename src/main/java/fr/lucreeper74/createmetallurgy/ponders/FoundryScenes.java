@@ -24,9 +24,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+
 public class FoundryScenes {
     public static void foundryBasin(SceneBuilder scene, SceneBuildingUtil util) {
         scene.title("foundry_basin", "Melting Metals with Foundry Basin");
@@ -145,7 +146,7 @@ public class FoundryScenes {
         scene.world.modifyBlockEntity(drainPos, ItemDrainBlockEntity.class, be -> {
             be.getBehaviour(SmartFluidTankBehaviour.TYPE)
                     .allowInsertion();
-            be.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+            be.getCapability(ForgeCapabilities.FLUID_HANDLER)
                     .ifPresent(fh -> fh.fill(gold, IFluidHandler.FluidAction.EXECUTE));
         });
         scene.idle(10);

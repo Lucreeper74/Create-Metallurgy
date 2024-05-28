@@ -1,0 +1,60 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/brass/molten_brass_flow"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/brass/molten_brass_still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/copper/molten_copper_flow"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/copper/molten_copper_still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/gold/molten_gold_flow"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/gold/molten_gold_still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/iron/molten_iron_flow"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/iron/molten_iron_still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/steel/molten_steel_flow"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/steel/molten_steel_still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/tungsten/molten_tungsten_flow"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/tungsten/molten_tungsten_still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/zinc/molten_zinc_flow"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/zinc/molten_zinc_still"
+    }
+  ]
+}

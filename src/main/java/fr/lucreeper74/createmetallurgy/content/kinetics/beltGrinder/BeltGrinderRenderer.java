@@ -2,7 +2,7 @@ package fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
@@ -78,8 +79,8 @@ public class BeltGrinderRenderer extends SafeBlockEntityRenderer<BeltGrinderBloc
                 if (stack.isEmpty())
                     continue;
 
-                ItemRenderer itemRenderer = Minecraft.getInstance()
-                        .getItemRenderer();
+                Minecraft mc = Minecraft.getInstance();
+                ItemRenderer itemRenderer = mc.getItemRenderer();
                 BakedModel modelWithOverrides = itemRenderer.getModel(stack, be.getLevel(), null, 0);
                 boolean blockItem = modelWithOverrides.isGui3d();
 
@@ -87,9 +88,9 @@ public class BeltGrinderRenderer extends SafeBlockEntityRenderer<BeltGrinderBloc
 
                 ms.scale(.5f, .5f, .5f);
                 if (alongZ)
-                    ms.mulPose(Vector3f.YP.rotationDegrees(90));
-                ms.mulPose(Vector3f.XP.rotationDegrees(90));
-                itemRenderer.renderStatic(stack, ItemTransforms.TransformType.FIXED, light, overlay, ms, buffer, 0);
+                    ms.mulPose(Axis.YP.rotationDegrees(90));
+                ms.mulPose(Axis.XP.rotationDegrees(90));
+                itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, ms, buffer, mc.level, 0);
                 break;
             }
 
