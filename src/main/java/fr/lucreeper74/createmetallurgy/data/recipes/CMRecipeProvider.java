@@ -1,7 +1,6 @@
 package fr.lucreeper74.createmetallurgy.data.recipes;
 
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;

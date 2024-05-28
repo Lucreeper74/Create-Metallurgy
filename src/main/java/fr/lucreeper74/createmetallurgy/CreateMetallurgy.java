@@ -12,8 +12,6 @@ import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network.Networ
 import fr.lucreeper74.createmetallurgy.registries.*;
 import fr.lucreeper74.createmetallurgy.registries.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.data.CMDatagen;
-import fr.lucreeper74.createmetallurgy.worldgen.ConfiguredFeatures;
-import fr.lucreeper74.createmetallurgy.worldgen.PlacedFeatures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;

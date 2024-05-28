@@ -21,17 +21,6 @@ public class ConfiguredFeatures {
         register(context, WOLFRAMIE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplacables,
                 CMBlocks.WOLFRAMITE_ORE.get().defaultBlockState(), 9));
     }
-//
-//
-//    public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES =
-//            DeferredRegister.create(Registries.CONFIGURED_FEATURE, CreateMetallurgy.MOD_ID);
-//
-//    public static final Supplier<List<OreConfiguration.TargetBlockState>> WOLFRAMIE_ORES = Suppliers.memoize(() -> List.of(
-//            OreConfiguration.target(new BlockMatchTest(Blocks.NETHERRACK), CMBlocks.WOLFRAMITE_ORE.get().defaultBlockState())));
-//
-//    public static final RegistryObject<ConfiguredFeature<?, ?>> WOLFRAMIE_ORE = CONFIGURED_FEATURES.register("wolframite_ore",
-//            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(WOLFRAMIE_ORES.get(), 8))); //VeinSize
-
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, CreateMetallurgy.genRL(name));
