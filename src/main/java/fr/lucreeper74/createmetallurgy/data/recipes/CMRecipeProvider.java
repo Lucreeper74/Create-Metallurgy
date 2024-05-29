@@ -17,7 +17,7 @@ public abstract class CMRecipeProvider extends RecipeProvider {
         super(gen);
     }
     @Override
-    public void buildCraftingRecipes(Consumer<FinishedRecipe> finishedRecipeConsumer) {
+    protected void buildCraftingRecipes(Consumer<FinishedRecipe> finishedRecipeConsumer) {
         all.forEach(c -> c.register(finishedRecipeConsumer));
         CreateMetallurgy.LOGGER.info(getName() + " registered " + all.size() + " recipe" + (all.size() == 1 ? "" : "s"));
     }
