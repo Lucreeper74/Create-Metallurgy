@@ -1,3 +1,4 @@
 {
-  "block.createmetallurgy.light_bulb.tooltip.summary": "Emits _light_ proportionally to the _redstone_ signal received, can be in _network_ with others bulbs."
+  "block.createmetallurgy.light_bulb.tooltip.summary": "Emits _light_ proportionally to the _redstone_ signal received, can be in _network_ with others bulbs.",
+  "block.createmetallurgy.mechanical_grinder.tooltip.summary": "Use _Rotational Force_ to sand down anything above it, even _You_ and your _Armor_!"
 }

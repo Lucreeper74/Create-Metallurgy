@@ -193,6 +193,7 @@ public class CMBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(6.0))
             .transform(axeOrPickaxe())
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.mechanical_grinder"))
             .item()
             .transform(customItemModel("mechanical_belt_grinder", "item"))
             .register();
