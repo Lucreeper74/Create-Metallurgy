@@ -40,6 +40,7 @@
   "block.createmetallurgy.lime_light_bulb": "Lime Light Bulb",
   "block.createmetallurgy.magenta_light_bulb": "Magenta Light Bulb",
   "block.createmetallurgy.mechanical_belt_grinder": "Mechanical Belt Grinder",
+  "block.createmetallurgy.mechanical_grinder.tooltip.summary": "Use _Rotational Force_ to sand down anything above it, even _You_ and your _Armor_!",
   "block.createmetallurgy.molten_brass": "Molten Brass",
   "block.createmetallurgy.molten_copper": "Molten Copper",
   "block.createmetallurgy.molten_gold": "Molten Gold",
