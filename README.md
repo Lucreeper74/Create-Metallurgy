@@ -28,3 +28,6 @@ Want to help with translation ? Please refer to language file in [`generated/lan
 ## Credits
 - **MrGhastien** (Contributors)
 - **lev** (Artist -> Logo)
+
+### **Translation**
+Ripoy -> Russian localization
