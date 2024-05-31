@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "steel_block",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:tungsten_ingot"
+    },
+    {
+      "item": "minecraft:shears"
+    }
+  ],
+  "result": {
+    "item": "createmetallurgy:tungsten_wire",
+    "count": 4
+  }
+}
