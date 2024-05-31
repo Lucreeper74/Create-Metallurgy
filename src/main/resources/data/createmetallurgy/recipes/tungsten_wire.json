@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "steel_block",
   "ingredients": [
     {
       "item": "createmetallurgy:tungsten_ingot"
