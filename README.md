@@ -30,4 +30,5 @@ Want to help with translation ? Please refer to language file in [`generated/lan
 - **lev** (Artist -> Logo)
 
 ### **Translation**
-Ripoy -> Russian localization
+- Ripoy -> Russian localization
+- Tellurium -> Chinese localization
