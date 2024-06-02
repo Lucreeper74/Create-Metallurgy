@@ -31,3 +31,4 @@ Want to help with translation ? Please refer to language file in [`generated/lan
 
 ### **Translation**
 Ripoy -> Russian localization
+Tellurium -> Chinese localization
