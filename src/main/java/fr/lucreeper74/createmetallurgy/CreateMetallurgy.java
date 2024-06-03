@@ -1,7 +1,6 @@
 package fr.lucreeper74.createmetallurgy;
 
 import com.mojang.logging.LogUtils;
-import com.simibubi.create.CreateClient;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
