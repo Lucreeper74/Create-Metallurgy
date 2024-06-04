@@ -13,9 +13,11 @@ import fr.lucreeper74.createmetallurgy.registries.*;
 import fr.lucreeper74.createmetallurgy.registries.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.data.CMDatagen;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -45,13 +47,13 @@ public class CreateMetallurgy {
         CMItems.register();
         CMFluids.register();
         AllArmInteract.register();
-        CMPartialModels.init();
         CMSpriteShifts.init();
-        CMPonders.register();
         CMBlockEntityTypes.register();
         CMRecipeTypes.register(eventBus);
 
         CastingWithSpout.registerDefaults();
+
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateMetallurgyClient.loadClient(eventBus));
 
         eventBus.addListener(EventPriority.LOWEST, CMDatagen::gatherData);
         eventBus.addListener(this::setup);
