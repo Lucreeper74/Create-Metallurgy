@@ -17,6 +17,7 @@ public class CMDatagen {
 
         if (event.includeServer()) {
             CMProcessingRecipesGen.registerAll(gen);
+            CMPonders.register(); // Register before lang cause not run during datagen
             CMPonders.registerLang();
             REGISTRATE.addDataGenerator(ProviderType.LANG, CMLangGen::generate);
         }
