@@ -1,16 +1,11 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
 import com.jozufozu.flywheel.core.PartialModel;
-import com.simibubi.create.content.fluids.FluidTransportBehaviour;
-import com.simibubi.create.foundation.utility.Iterate;
-import com.simibubi.create.foundation.utility.Lang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.DyeColor;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 
 public class CMPartialModels {

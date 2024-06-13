@@ -2,7 +2,6 @@ package fr.lucreeper74.createmetallurgy.content.redstone.lightbulb;
 
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.block.WrenchableDirectionalBlock;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

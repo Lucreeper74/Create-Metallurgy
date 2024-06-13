@@ -1,7 +1,5 @@
 package fr.lucreeper74.createmetallurgy.content.redstone.lightbulb;
 
-import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
-import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.ResetableLazy;

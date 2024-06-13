@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.ponders;
 
-import com.simibubi.create.content.fluids.drain.ItemDrainBlockEntity;
 import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlockEntity;
 import com.simibubi.create.foundation.ponder.PonderPalette;
 import com.simibubi.create.foundation.ponder.SceneBuilder;
@@ -9,7 +8,6 @@ import com.simibubi.create.foundation.ponder.Selection;
 import com.simibubi.create.foundation.ponder.element.InputWindowElement;
 import com.simibubi.create.foundation.utility.Pointing;
 import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlock;
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.RedStoneWireBlock;
