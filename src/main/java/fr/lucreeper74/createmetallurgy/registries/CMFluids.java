@@ -8,6 +8,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
+import static com.simibubi.create.AllTags.forgeFluidTag;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
 @SuppressWarnings("unused")
@@ -26,7 +27,7 @@ public class CMFluids {
                     .tickRate(25)
                     .slopeFindDistance(3)
                     .explosionResistance(100f))
-            .tag(FluidTags.LAVA)
+            .tag(FluidTags.LAVA, forgeFluidTag("molten_iron"), forgeFluidTag("molten_materials"))
             .source(ForgeFlowingFluid.Source::new)
             .bucket()
             .build()
@@ -45,7 +46,7 @@ public class CMFluids {
                     .tickRate(25)
                     .slopeFindDistance(3)
                     .explosionResistance(100f))
-            .tag(FluidTags.LAVA)
+            .tag(FluidTags.LAVA, forgeFluidTag("molten_gold"), forgeFluidTag("molten_materials"))
             .source(ForgeFlowingFluid.Source::new)
             .bucket()
             .build()
@@ -64,7 +65,7 @@ public class CMFluids {
                     .tickRate(25)
                     .slopeFindDistance(3)
                     .explosionResistance(100f))
-            .tag(FluidTags.LAVA)
+            .tag(FluidTags.LAVA, forgeFluidTag("molten_copper"), forgeFluidTag("molten_materials"))
             .source(ForgeFlowingFluid.Source::new)
             .bucket()
             .build()
@@ -83,7 +84,7 @@ public class CMFluids {
                     .tickRate(25)
                     .slopeFindDistance(3)
                     .explosionResistance(100f))
-            .tag(FluidTags.LAVA)
+            .tag(FluidTags.LAVA, forgeFluidTag("molten_zinc"), forgeFluidTag("molten_materials"))
             .source(ForgeFlowingFluid.Source::new)
             .bucket()
             .build()
@@ -102,7 +103,7 @@ public class CMFluids {
                     .tickRate(25)
                     .slopeFindDistance(3)
                     .explosionResistance(100f))
-            .tag(FluidTags.LAVA)
+            .tag(FluidTags.LAVA, forgeFluidTag("molten_brass"), forgeFluidTag("molten_materials"))
             .source(ForgeFlowingFluid.Source::new)
             .bucket()
             .build()
@@ -121,7 +122,7 @@ public class CMFluids {
                     .tickRate(25)
                     .slopeFindDistance(3)
                     .explosionResistance(100f))
-            .tag(FluidTags.LAVA)
+            .tag(FluidTags.LAVA, forgeFluidTag("molten_tungsten"), forgeFluidTag("molten_materials"))
             .source(ForgeFlowingFluid.Source::new)
             .bucket()
             .build()
@@ -140,7 +141,7 @@ public class CMFluids {
                     .tickRate(25)
                     .slopeFindDistance(3)
                     .explosionResistance(100f))
-            .tag(FluidTags.LAVA)
+            .tag(FluidTags.LAVA, forgeFluidTag("molten_steel"), forgeFluidTag("molten_materials"))
             .source(ForgeFlowingFluid.Source::new)
             .bucket()
             .build()
