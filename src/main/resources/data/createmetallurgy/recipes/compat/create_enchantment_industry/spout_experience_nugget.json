@@ -1,0 +1,25 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create_enchantment_industry"
+    }
+  ],
+  "type":"createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_nugget_mold"
+    },
+    {
+      "fluid": "create_enchantment_industry:experience",
+      "amount": 3
+    }
+  ],
+  "processingTime": 60,
+  "results": [
+    {
+      "item": "create:experience_nugget",
+      "amount": 1
+    }
+  ]
+}
