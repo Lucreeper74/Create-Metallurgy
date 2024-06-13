@@ -198,25 +198,31 @@ public class CMBlocks {
             .transform(customItemModel("mechanical_belt_grinder", "item"))
             .register();
 
-    public static final DyedBlockList<LightBulbBlock> LIGHT_BULBS = new DyedBlockList<>(colour -> {
-        String colourName = colour.getSerializedName();
-        return REGISTRATE.block(colourName + "_light_bulb", p -> new LightBulbBlock(p, colour))
+    public static final DyedBlockList<LightBulbBlock> LIGHT_BULBS = new DyedBlockList<>(color -> {
+        String colorName = color.getSerializedName();
+        return REGISTRATE.block(colorName + "_light_bulb", p -> new LightBulbBlock(p, color))
                 .initialProperties(() -> Blocks.REDSTONE_LAMP)
-                .properties(p -> p.sound(SoundType.GLASS).mapColor(colour)
+                .properties(p -> p.sound(SoundType.GLASS).mapColor(color)
                         .lightLevel(s -> s.getValue(LightBulbBlock.LEVEL)))
                 .addLayer(() -> RenderType::translucent)
-                .addLayer(() -> RenderType::cutoutMipped)
                 .transform(axeOrPickaxe())
                 .tag(forgeBlockTag("light_bulbs"))
                 .blockstate((c, p) -> p.getVariantBuilder(c.get())
                         .forAllStates(state -> {
-                            String level = state.getValue(LightBulbBlock.LEVEL).toString();
                             Direction dir = state.getValue(LightBulbBlock.FACING);
                             String path = "block/light_bulb/";
+
                             return ConfiguredModel.builder()
                                     .modelFile(p.models()
-                                            .withExistingParent(path + colourName + "_light_bulb/block_" + level, p.modLoc(path + "block_" + level))
-                                            .texture("0", p.modLoc(path + colourName)))
+                                            .withExistingParent(path + "tube/" + colorName, p.modLoc(path + "tube"))
+                                            .texture("0", p.modLoc(path + colorName)))
+                                    .modelFile(p.models()
+                                            .withExistingParent(path + "tube_glow/" + colorName, p.modLoc(path + "tube_glow"))
+                                            .texture("0", p.modLoc(path + colorName)))
+                                    .modelFile(p.models()
+                                            .withExistingParent(path + "block/" + colorName, p.modLoc(path + "block"))
+                                            .texture("0", p.modLoc(path + colorName))
+                                            .texture("particle", p.modLoc(path + colorName)))
                                     .rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
                                     .rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot()) + 180) % 360)
                                     .build();
@@ -225,12 +231,12 @@ public class CMBlocks {
                     ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, c.get())
                             .define('S', AllItems.IRON_SHEET.get())
                             .define('T', CMItems.TUNGSTEN_WIRE_SPOOL.get())
-                            .define('G', CMDyeHelper.getGlassOfDye(colour))
+                            .define('G', CMDyeHelper.getGlassOfDye(color))
                             .pattern(" G ").pattern(" T ").pattern(" S ")
                             .unlockedBy("has_tungsten_wire_spool", RegistrateRecipeProvider.has(CMItems.TUNGSTEN_WIRE_SPOOL.get()))
                             .save(p, CreateMetallurgy.genRL("crafting/" + c.getName()));
                     ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, c.get())
-                            .requires(colour.getTag())
+                            .requires(color.getTag())
                             .requires(forgeItemTag("light_bulbs"))
                             .unlockedBy("has_light_bulb", RegistrateRecipeProvider.has(forgeItemTag("light_bulbs")))
                             .save(p, CreateMetallurgy.genRL("crafting/" + c.getName() + "_from_other_light_bulb"));
@@ -238,9 +244,8 @@ public class CMBlocks {
                 .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.light_bulb"))
                 .item(UncontainableBlockItem::new)
                 .tag(forgeItemTag("light_bulbs"))
-                .model((c, p) -> p.withExistingParent(colourName + "_light_bulb", p.modLoc("block/light_bulb/item"))
-                        .texture("0", p.modLoc("block/light_bulb/" + colourName)))
-//                .transform(customItemModel(colourName + "_light_bulb", "item"))
+                .model((c, p) -> p.withExistingParent(colorName + "_light_bulb", p.modLoc("block/light_bulb/item"))
+                        .texture("0", p.modLoc("block/light_bulb/" + colorName)))
                 .build()
                 .register();
     });
