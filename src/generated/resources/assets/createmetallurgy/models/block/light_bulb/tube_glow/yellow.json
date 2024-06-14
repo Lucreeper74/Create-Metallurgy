@@ -1,0 +1,6 @@
+{
+  "parent": "createmetallurgy:block/light_bulb/tube_glow",
+  "textures": {
+    "0": "createmetallurgy:block/light_bulb/yellow"
+  }
+}

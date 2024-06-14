@@ -1,7 +1,6 @@
 package fr.lucreeper74.createmetallurgy.ponders;
 
 import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlockEntity;
-import com.simibubi.create.content.redstone.link.RedstoneLinkBlockEntity;
 import com.simibubi.create.foundation.ponder.PonderPalette;
 import com.simibubi.create.foundation.ponder.SceneBuilder;
 import com.simibubi.create.foundation.ponder.SceneBuildingUtil;
@@ -9,12 +8,8 @@ import com.simibubi.create.foundation.ponder.Selection;
 import com.simibubi.create.foundation.ponder.element.InputWindowElement;
 import com.simibubi.create.foundation.utility.Pointing;
 import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlock;
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.RedStoneWireBlock;
 import net.minecraft.world.phys.Vec3;
 
@@ -28,14 +23,14 @@ public class LightBulbScenes {
         BlockPos whiteBulbPos = util.grid.at(1, 1, 1);
         BlockPos redBulbPos = util.grid.at(4, 2, 3);
         BlockPos greenBulbPos = util.grid.at(2, 2, 3);
-        BlockPos BrownBulbPos = util.grid.at(0, 2, 3);
+        BlockPos brownBulbPos = util.grid.at(0, 2, 3);
         BlockPos leverPos = util.grid.at(3, 1, 1);
         BlockPos redstonePos = leverPos.west();
 
         Selection whiteBulb = util.select.position(whiteBulbPos);
         Selection redBulb = util.select.position(redBulbPos);
         Selection greenBulb = util.select.position(greenBulbPos);
-        Selection brownBulb = util.select.position(BrownBulbPos);
+        Selection brownBulb = util.select.position(brownBulbPos);
 
         Vec3 whiteBulbVec = util.vector.blockSurface(whiteBulbPos, Direction.DOWN)
                 .add(0, 12 / 16f, 0);
@@ -79,6 +74,12 @@ public class LightBulbScenes {
         scene.idle(40);
 
         //Add others bulbs
+        scene.world.modifyBlockEntityNBT(util.select.position(leverPos), AnalogLeverBlockEntity.class,
+                nbt -> nbt.putInt("State", 0));
+        scene.world.modifyBlock(redstonePos, s -> s.setValue(RedStoneWireBlock.POWER, 0), false);
+        scene.effects.indicateRedstone(redstonePos);
+        scene.world.modifyBlock(whiteBulbPos, s -> s.setValue(LightBulbBlock.LEVEL, 0), false);
+        scene.idle(20);
         scene.world.showSection(util.select.fromTo(4, 1, 3, 0, 1, 3), Direction.NORTH);
         scene.idle(5);
         scene.world.showSection(redBulb, Direction.DOWN);

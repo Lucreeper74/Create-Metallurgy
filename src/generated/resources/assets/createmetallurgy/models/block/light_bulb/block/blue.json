@@ -1,0 +1,7 @@
+{
+  "parent": "createmetallurgy:block/light_bulb/block",
+  "textures": {
+    "0": "createmetallurgy:block/light_bulb/blue",
+    "particle": "createmetallurgy:block/light_bulb/blue"
+  }
+}

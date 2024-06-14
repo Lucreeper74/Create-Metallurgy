@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "createmetallurgy:block/light_bulb",
+		"particle": "createmetallurgy:block/light_bulb"
+	},
+	"elements": [
+		{
+			"from": [6.3, 8.8, 7.3],
+			"to": [9.7, 10.2, 8.7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-0.2, -0.2, -0.2]},
+			"faces": {
+				"north": {"uv": [0, 12, 3, 13], "texture": "#0"},
+				"east": {"uv": [2, 12, 3, 13], "texture": "#0"},
+				"south": {"uv": [0, 12, 3, 13], "texture": "#0"},
+				"west": {"uv": [0, 12, 1, 13], "texture": "#0"},
+				"up": {"uv": [0, 12, 3, 13], "texture": "#0"},
+				"down": {"uv": [0, 12, 3, 13], "texture": "#0"}
+			}
+		}
+	]
+}

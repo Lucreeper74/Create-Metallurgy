@@ -2,6 +2,11 @@ package fr.lucreeper74.createmetallurgy.registries;
 
 import com.jozufozu.flywheel.core.PartialModel;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import fr.lucreeper74.createmetallurgy.utils.CMLang;
+import net.minecraft.world.item.DyeColor;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 public class CMPartialModels {
 
@@ -13,7 +18,18 @@ public class CMPartialModels {
 
             THERMOMETER_GAUGE = block("gauges/thermometer"),
 
-            GRINDER_BELT = block("mechanical_belt_grinder/belt");
+            GRINDER_BELT = block("mechanical_belt_grinder/belt"),
+
+            BULB_INNER_GLOW = block("light_bulb/inner_glow");
+
+    public static final Map<DyeColor, PartialModel> BULB_TUBES = new EnumMap<>(DyeColor.class);
+    public static final Map<DyeColor, PartialModel> BULB_TUBES_GLOW = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            BULB_TUBES.put(color, block("light_bulb/tube/" + CMLang.asId(color.name())));
+            BULB_TUBES_GLOW.put(color, block("light_bulb/tube_glow/" + CMLang.asId(color.name())));
+        }
+    }
 
     private static PartialModel block(String path) {
         return new PartialModel(CreateMetallurgy.genRL("block/" + path));

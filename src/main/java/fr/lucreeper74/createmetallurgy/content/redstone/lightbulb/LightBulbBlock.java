@@ -49,13 +49,16 @@ public class LightBulbBlock extends WrenchableDirectionalBlock implements IBE<Li
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
+        Level level = pContext.getLevel();
+        FluidState fluidstate = level.getFluidState(pContext.getClickedPos());
         boolean flag = fluidstate.getType() == Fluids.WATER;
+
+        int signal = level.getBestNeighborSignal(pContext.getClickedPos());
 
         return this.defaultBlockState()
                 .setValue(FACING, pContext.getClickedFace())
                 .setValue(WATERLOGGED, Boolean.valueOf(flag))
-                .setValue(LEVEL, pContext.getLevel().getBestNeighborSignal(pContext.getClickedPos()));
+                .setValue(LEVEL, signal);
     }
 
 
@@ -109,8 +112,10 @@ public class LightBulbBlock extends WrenchableDirectionalBlock implements IBE<Li
         if (worldIn.isClientSide)
             return;
 
+        int signal = worldIn.getBestNeighborSignal(pos);
+
         withBlockEntityDo(worldIn, pos,
-                be -> be.transmit( worldIn.getBestNeighborSignal(pos)));
+                be -> be.transmit(signal));
     }
 
 

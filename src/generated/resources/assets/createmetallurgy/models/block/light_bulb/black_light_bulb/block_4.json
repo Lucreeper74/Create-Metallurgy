@@ -1,6 +1,0 @@
-{
-  "parent": "createmetallurgy:block/light_bulb/block_4",
-  "textures": {
-    "0": "createmetallurgy:block/light_bulb/black"
-  }
-}
