@@ -36,6 +36,7 @@ public class FoundryLidBlockEntity extends BasinOperatingBlockEntity {
     private final HashMap<BlazeBurnerBlock.HeatLevel, Integer> temp = new HashMap<>(); {
             temp.put(BlazeBurnerBlock.HeatLevel.NONE,0);
             temp.put(BlazeBurnerBlock.HeatLevel.SMOULDERING,500);
+            temp.put(BlazeBurnerBlock.HeatLevel.FADING,750);
             temp.put(BlazeBurnerBlock.HeatLevel.KINDLED,1000);
             temp.put(BlazeBurnerBlock.HeatLevel.SEETHING,2000);
     }
