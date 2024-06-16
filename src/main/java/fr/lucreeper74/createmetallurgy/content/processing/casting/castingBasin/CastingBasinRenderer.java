@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.fluids.FluidStack;
@@ -28,7 +29,7 @@ public class CastingBasinRenderer extends SmartBlockEntityRenderer<CastingBasinB
         super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
 
         List<Recipe<?>> recipes = be.getMatchingRecipes();
-        if(!recipes.isEmpty()) recipe = (CastingBasinRecipe) recipes.get(0);
+        if (!recipes.isEmpty()) recipe = (CastingBasinRecipe) recipes.get(0);
 
         //Render Fluids
         SmartFluidTankBehaviour tank = be.inputTank;
@@ -66,21 +67,27 @@ public class CastingBasinRenderer extends SmartBlockEntityRenderer<CastingBasinB
 
         //Render Items
         ms.pushPose();
-        ms.translate(.5f, 0, .5f);
-        ms.scale(3.1f, 3.1f, 3.1f);
 
-        if(be.running) {
+        if (be.running) {
             MultiBufferSource bufferOut = new CastingItemRenderTypeBuffer(buffer, 255 - fluidOpacity, fluidOpacity);
             renderItem(ms, bufferOut, light, overlay, recipe.getResultItem().copy());
         }
 
         renderItem(ms, buffer, light, overlay, be.inv.getItem(0));
         ms.popPose();
-        }
+    }
 
     protected void renderItem(PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack stack) {
-        Minecraft.getInstance()
-                .getItemRenderer()
-                .renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, ms, buffer, 0);
+        Minecraft mc = Minecraft.getInstance();
+
+        if(stack.getItem() instanceof BlockItem) {
+            ms.translate(.5f, 0, .5f);
+            ms.scale(3.1f, 3.1f, 3.1f);
+        } else {
+            ms.translate(.5f, .5f, .5f);
+            ms.scale(1, 1, 1);
+        }
+
+        mc.getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, ms, buffer, 0);
     }
 }
