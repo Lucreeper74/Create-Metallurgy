@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-12T15:18:44.2701521	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2024-06-17T12:37:35.860483	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 f04456f610cd304b215ef08ddc6a093927f92c7b assets/createmetallurgy/blockstates/black_light_bulb.json
 02b271ec31ae066791a99576770709a5b31c293f assets/createmetallurgy/blockstates/blue_light_bulb.json
 fc7be34a60de8c31757bcdf540753c079d29245b assets/createmetallurgy/blockstates/brown_light_bulb.json
@@ -256,6 +256,14 @@ e45068f68c9ca144ff4a32ef7ec4618fface4cf8 data/createmetallurgy/recipes/crafting/
 e34df1e3aa4ad2f25c457e7c8d1981b4ac4b67f1 data/forge/tags/blocks/light_bulbs.json
 128c9074112312eaebf90cc7070ca044ef48abb2 data/forge/tags/blocks/ores.json
 128c9074112312eaebf90cc7070ca044ef48abb2 data/forge/tags/blocks/ores/wolframite.json
+273425207a1d434d2daa7ef95283a9bb96f3d20a data/forge/tags/fluids/molten_brass.json
+ecbff4795b40089451f94483c852fcbbe3b5efd7 data/forge/tags/fluids/molten_copper.json
+bf5f256ca527ad23cdb5c6943beb21df777cfcc9 data/forge/tags/fluids/molten_gold.json
+7cdc41ad368f1b77c90038f010481b3f66d7005b data/forge/tags/fluids/molten_iron.json
+90447619d2757d483d930ae2df62bd09b7ad46e7 data/forge/tags/fluids/molten_materials.json
+a357a83f30aafbe3b4bac80b3aa5a0de290b5460 data/forge/tags/fluids/molten_steel.json
+67dcf71c7072388bc957582aecbeb24ae6666868 data/forge/tags/fluids/molten_tungsten.json
+f53c440feb925b5aa3aaa3de38f9c54243ad3b66 data/forge/tags/fluids/molten_zinc.json
 1e0905d51bbd7bac809619b6ce0b7a19dca8db4b data/forge/tags/items/coke.json
 68c268835d090c0c808f93bcfdfc62051f92d301 data/forge/tags/items/crushed_raw_materials/wolframite.json
 0ad9cb97af5fd8caf45b0ff4da767b3950185ae8 data/forge/tags/items/dirty_dusts.json
@@ -295,4 +303,3 @@ f8b65e6d889b44d2d7a42acbfe12db0b6e1cd1f9 data/minecraft/tags/blocks/mineable/pic
 5615b1babc0af3df7f72e30fe071f6fc43e0a82d data/minecraft/tags/blocks/mineable/shovel.json
 faf08f7c44ce603d1b1e811a126bdd737818c901 data/minecraft/tags/blocks/needs_diamond_tool.json
 2282fbc91f98463048f24573cb68a073ea7c3da3 data/minecraft/tags/blocks/needs_stone_tool.json
-90447619d2757d483d930ae2df62bd09b7ad46e7 data/minecraft/tags/fluids/lava.json
