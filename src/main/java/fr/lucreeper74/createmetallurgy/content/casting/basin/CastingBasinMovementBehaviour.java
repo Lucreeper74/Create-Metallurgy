@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin;
+package fr.lucreeper74.createmetallurgy.content.casting.basin;
 
 import com.simibubi.create.content.contraptions.behaviour.MovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
