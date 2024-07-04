@@ -6,9 +6,9 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
-import fr.lucreeper74.createmetallurgy.content.kinetics.mechanicalArm.AllArmInteract;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingWithSpout;
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network.NetworkHandler;
+import fr.lucreeper74.createmetallurgy.registries.CMArmInteract;
+import fr.lucreeper74.createmetallurgy.content.casting.CastingWithSpout;
+import fr.lucreeper74.createmetallurgy.content.light_bulb.network.NetworkHandler;
 import fr.lucreeper74.createmetallurgy.registries.*;
 import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.data.CMDatagen;
@@ -44,11 +44,14 @@ public class CreateMetallurgy {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         REGISTRATE.registerEventListeners(eventBus);
 
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                () -> CMPartialModels::init);
+
         CMCreativeTabs.init();
         CMBlocks.register();
         CMItems.register();
         CMFluids.register();
-        AllArmInteract.register();
+        CMArmInteract.register();
         CMSpriteShifts.init();
         CMBlockEntityTypes.register();
         CMRecipeTypes.register(eventBus);
