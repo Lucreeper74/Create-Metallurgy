@@ -1,10 +1,9 @@
-package fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable;
+package fr.lucreeper74.createmetallurgy.content.casting;
 
-import com.simibubi.create.AllShapes;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
-import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -15,19 +14,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -35,11 +30,11 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
-public class CastingTableBlock extends Block implements IBE<CastingTableBlockEntity>, IWrenchable {
+public abstract class CastingBlock extends Block implements IBE<CastingBlockEntity>, IWrenchable {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public CastingTableBlock(Properties pProperties) {
+    public CastingBlock(Properties pProperties) {
         super(pProperties);
     }
 
@@ -54,8 +49,10 @@ public class CastingTableBlock extends Block implements IBE<CastingTableBlockEnt
                                  BlockHitResult ray) {
         ItemStack heldItem = player.getItemInHand(handIn);
 
-        if (ray.getDirection() != Direction.UP)
+        if (this instanceof CastingTableBlock && ray.getDirection() != Direction.UP)
             return InteractionResult.PASS;
+
+
         if (worldIn.isClientSide)
             return InteractionResult.SUCCESS;
 
@@ -111,21 +108,7 @@ public class CastingTableBlock extends Block implements IBE<CastingTableBlockEnt
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return AllShapes.CASING_14PX.get(Direction.UP);
-    }
-
-    @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         IBE.onRemove(state, worldIn, pos, newState);
-    }
-
-    @Override
-    public Class<CastingTableBlockEntity> getBlockEntityClass() {
-        return CastingTableBlockEntity.class;
-    }
-
-    public BlockEntityType<? extends CastingTableBlockEntity> getBlockEntityType() {
-        return CMBlockEntityTypes.CASTING_TABLE.get();
     }
 }

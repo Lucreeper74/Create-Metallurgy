@@ -1,31 +1,26 @@
-package fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable;
+package fr.lucreeper74.createmetallurgy.content.casting;
 
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
+import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
+import com.simibubi.create.content.kinetics.fan.EncasedFanBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
-import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.LangBuilder;
 import com.simibubi.create.foundation.utility.VecHelper;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.CastingUtils;
-import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
-import fr.lucreeper74.createmetallurgy.utils.CMLang;
-import net.minecraft.ChatFormatting;
+import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -37,35 +32,27 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
-    protected LazyOptional<IItemHandlerModifiable> itemCapability;
+public abstract class CastingBlockEntity extends SmartBlockEntity {
+
+    public LazyOptional<IItemHandlerModifiable> itemCapability;
     public SmartFluidTankBehaviour inputTank;
     public SmartInventory inv;
     public SmartInventory moldInv;
-    public CastingTableRecipe currentRecipe;
+    protected CastingRecipe currentRecipe;
     public boolean running;
     public int processingTick;
 
-    public CastingTableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public CastingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         inv = new SmartInventory(1, this, 1, true).forbidInsertion();
         moldInv = new SmartInventory(1, this, 1, true);
         itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(inv, moldInv));
-    }
-
-    @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        behaviours.add(new DirectBeltInputBehaviour(this));
-
-        inputTank = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 90, true);
-        behaviours.add(inputTank);
     }
 
     @Override
@@ -121,7 +108,7 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
 
         if (running) {
             if (!level.isClientSide) {
-                if (canProcess()) {
+                if (matchCastingRecipe(currentRecipe)) {
                     if (processingTick <= 0) {
                         process();
                         level.playSound(null, worldPosition, SoundEvents.LAVA_EXTINGUISH,
@@ -139,23 +126,15 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
         }
     }
 
-    public boolean canProcess() {
-        FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
-        return currentRecipe.getFluidIngredients().get(0).test(fluidInTank)
-                && fluidInTank.getAmount() >= currentRecipe.getFluidIngredients().get(0).getRequiredAmount()
-                && currentRecipe.getIngredients().get(0).test(moldInv.getStackInSlot(0))
-                && inv.isEmpty();
-    }
-
     public void startProcess() {
         if (running && processingTick > 0) return;
         List<Recipe<?>> recipes = getMatchingRecipes();
         if (recipes.isEmpty()) return;
 
-        currentRecipe = (CastingTableRecipe) recipes.get(0);
+        currentRecipe = (CastingRecipe) recipes.get(0);
 
-        if (canProcess()) {
-            processingTick = CastingUtils.isInAirCurrent(this.getLevel(), this.getBlockPos(), this) ?
+        if (matchCastingRecipe(currentRecipe)) {
+            processingTick = isInAirCurrent(this.getLevel(), this.getBlockPos(), this) ?
                     currentRecipe.getProcessingDuration() / 2 : currentRecipe.getProcessingDuration();
             running = true;
             sendData();
@@ -165,9 +144,12 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
     public void process() {
         FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
         inv.setStackInSlot(0, currentRecipe.getResultItem().copy());
-        fluidInTank.shrink(currentRecipe.getFluidIngredients().get(0).getRequiredAmount());
+        fluidInTank.shrink(currentRecipe.getFluidIngredient().getRequiredAmount());
         getBehaviour(SmartFluidTankBehaviour.INPUT)
                 .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
+
+        if(currentRecipe.isMoldConsumed())
+            moldInv.setStackInSlot(0, ItemStack.EMPTY);
 
         processingTick = -1;
         currentRecipe = null;
@@ -191,16 +173,41 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
             level.addParticle(ParticleTypes.SMOKE, v.x, v.y + .45, v.z, 0, 0, 0);
     }
 
-    protected List<Recipe<?>> getMatchingRecipes() {
+    public IFluidHandler getFluidTank() {
+        return getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).orElse(new FluidTank(1));
+    }
+
+    public static boolean isInAirCurrent(Level level, BlockPos pos, BlockEntity be) {
+        int range = 3;
+
+        for (Direction direction : Direction.values()) {
+            for (int i = 0; i <= range; i++) {
+                BlockPos nearbyPos = pos.relative(direction, i);
+                BlockState nearbyState = level.getBlockState(nearbyPos);
+
+                if (nearbyState.getBlock() instanceof EncasedFanBlock) {
+                    EncasedFanBlockEntity fanBe = (EncasedFanBlockEntity) level.getBlockEntity(nearbyPos);
+                    Direction facing = nearbyState.getValue(EncasedFanBlock.FACING);
+                    BlockEntity facingBe = level.getBlockEntity(nearbyPos.relative(facing, i));
+                    float flowDist = fanBe.airCurrent.maxDistance;
+
+                    if (be == facingBe && flowDist != 0 && flowDist >= i - 1) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    protected <C extends Container> boolean matchCastingRecipe(Recipe<C> recipe) {
+        if (recipe == null || !inv.getStackInSlot(0).isEmpty())
+            return false;
+        return CastingRecipe.match(this, recipe);
+    }
+
+    public List<Recipe<?>> getMatchingRecipes() {
         List<Recipe<?>> list = RecipeFinder.get(getRecipeCacheKey(), level, this::matchStaticFilters);
         return list.stream()
-                .filter(recipe -> {
-                    if (recipe instanceof CastingTableRecipe castingRecipe) {
-                        return castingRecipe.getFluidIngredients().get(0).test(getFluidTank().getFluidInTank(0))
-                                && castingRecipe.getIngredients().get(0).test(moldInv.getStackInSlot(0));
-                    }
-                    return false;
-                })
+                .filter(this::matchCastingRecipe)
                 .sorted((r1, r2) -> r2.getIngredients()
                         .size()
                         - r1.getIngredients()
@@ -208,62 +215,7 @@ public class CastingTableBlockEntity extends SmartBlockEntity implements IHaveGo
                 .collect(Collectors.toList());
     }
 
-    public IFluidHandler getFluidTank() {
-        return getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).orElse(new FluidTank(1));
-    }
+    protected abstract <C extends Container> boolean matchStaticFilters(Recipe<C> recipe);
 
-    protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
-        return r.getType() == CMRecipeTypes.CASTING_IN_TABLE.getType();
-    }
-
-    private static final Object CastingInTableRecipesKey = new Object();
-
-    protected Object getRecipeCacheKey() {
-        return CastingInTableRecipesKey;
-    }
-
-    // CLIENT THINGS -----------------
-    @Override
-    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        CMLang.translate("gui.goggles.castingtable_contents")
-                .forGoggles(tooltip);
-
-        IItemHandlerModifiable items = itemCapability.orElse(new ItemStackHandler());
-        IFluidHandler fluids = getFluidTank();
-        boolean isEmpty = true;
-
-        for (int i = 0; i < items.getSlots(); i++) {
-            ItemStack stackInSlot = items.getStackInSlot(i);
-            if (stackInSlot.isEmpty())
-                continue;
-            CMLang.text("")
-                    .add(Components.translatable(stackInSlot.getDescriptionId())
-                            .withStyle(ChatFormatting.GRAY))
-                    .add(CMLang.text(" x" + stackInSlot.getCount())
-                            .style(ChatFormatting.GREEN))
-                    .forGoggles(tooltip, 1);
-            isEmpty = false;
-        }
-
-        LangBuilder mb = CMLang.translate("generic.unit.millibuckets");
-        for (int i = 0; i < fluids.getTanks(); i++) {
-            FluidStack fluidStack = fluids.getFluidInTank(i);
-            if (fluidStack.isEmpty())
-                continue;
-            CMLang.text("")
-                    .add(CMLang.fluidName(fluidStack)
-                            .add(CMLang.text(" "))
-                            .style(ChatFormatting.GRAY)
-                            .add(CMLang.number(fluidStack.getAmount())
-                                    .add(mb)
-                                    .style(ChatFormatting.BLUE)))
-                    .forGoggles(tooltip, 1);
-            isEmpty = false;
-        }
-
-        if (isEmpty)
-            tooltip.remove(0);
-
-        return true;
-    }
+    protected abstract Object getRecipeCacheKey();
 }

@@ -1,37 +1,40 @@
-package fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable;
+package fr.lucreeper74.createmetallurgy.content.casting;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
+import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipe;
+import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlockEntity;
 import fr.lucreeper74.createmetallurgy.utils.CastingItemRenderTypeBuffer;
 import fr.lucreeper74.createmetallurgy.utils.ColoredFluidRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 
-import static fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableBlock.FACING;
+import static fr.lucreeper74.createmetallurgy.content.casting.CastingBlock.FACING;
 
-public class CastingTableRenderer extends SmartBlockEntityRenderer<CastingTableBlockEntity> {
-    public CastingTableRenderer(BlockEntityRendererProvider.Context context) {
+public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockEntity> {
+    public CastingBlockRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
 
-    private CastingTableRecipe recipe;
+    private CastingRecipe recipe;
 
     @Override
-    protected void renderSafe(CastingTableBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+    protected void renderSafe(CastingBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                               int light, int overlay) {
         super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
 
         List<Recipe<?>> recipes = be.getMatchingRecipes();
-        if(!recipes.isEmpty()) recipe = (CastingTableRecipe) recipes.get(0);
+        if (!recipes.isEmpty()) recipe = (CastingRecipe) recipes.get(0);
 
         //Render Fluids
         SmartFluidTankBehaviour tank = be.inputTank;
@@ -45,9 +48,16 @@ public class CastingTableRenderer extends SmartBlockEntityRenderer<CastingTableB
 
         int fluidOpacity = 255;
 
+        float min, yOffset;
+
         if (!fluidStack.isEmpty() && level > 0.01F) {
-            float min = 13f / 16f;
-            float yOffset = (.8f / 16f) * level;
+            if(be instanceof CastingTableBlockEntity) {
+                min = 13f / 16f;
+                yOffset = (.8f / 16f) * level;
+            } else {
+                min = 2f / 16f;
+                yOffset = (13f / 16f) * level;
+            }
 
             ms.pushPose();
             ms.translate(0, yOffset, 0);
@@ -67,29 +77,38 @@ public class CastingTableRenderer extends SmartBlockEntityRenderer<CastingTableB
         }
 
         //Render Items
-        ms.pushPose();
-
-        ms.translate(.5f, 0, .5f);
-        ms.mulPose(Vector3f.YP.rotationDegrees(-90f * (be.getBlockState().getValue(FACING).get2DDataValue())));
-        ms.translate(-.5f, 0, -.5f);
-
-        ms.translate(.5f, 13.5f / 16f, 11 / 16f);
-        ms.scale(1.5f, 1.5f, 1.5f);
-        ms.mulPose(Vector3f.XP.rotationDegrees(-90f));
-
         if (be.running) {
             MultiBufferSource bufferOut = new CastingItemRenderTypeBuffer(buffer, 255 - fluidOpacity, fluidOpacity);
-            renderItem(ms, bufferOut, light, overlay, recipe.getResultItem().copy());
+            renderItem(be, ms, bufferOut, light, overlay, recipe.getResultItem().copy());
         }
 
-        renderItem(ms, buffer, light, overlay, be.inv.getItem(0));
-        renderItem(ms, buffer, light, overlay, be.moldInv.getItem(0));
-        ms.popPose();
+        renderItem(be, ms, buffer, light, overlay, be.inv.getItem(0));
+        renderItem(be, ms, buffer, light, overlay, be.moldInv.getItem(0));
     }
 
-    protected void renderItem(PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack stack) {
-        Minecraft.getInstance()
-                .getItemRenderer()
-                .renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, ms, buffer, 0);
+    protected void renderItem(CastingBlockEntity be, PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack stack) {
+        ms.pushPose();
+        if (be instanceof CastingTableBlockEntity) {
+            ms.translate(.5f, 0, .5f);
+            ms.mulPose(Vector3f.YP.rotationDegrees(-90f * (be.getBlockState().getValue(FACING).get2DDataValue())));
+            ms.translate(-.5f, 0, -.5f);
+
+            ms.translate(.5f, 13.5f / 16f, 11 / 16f);
+            ms.scale(1.5f, 1.5f, 1.5f);
+            ms.mulPose(Vector3f.XP.rotationDegrees(-90f));
+
+        } else {
+
+            if (stack.getItem() instanceof BlockItem) {
+                ms.translate(.5f, 0, .5f);
+                ms.scale(3.1f, 3.1f, 3.1f);
+            } else {
+                ms.translate(.5f, .5f, .5f);
+                ms.scale(1, 1, 1);
+            }
+        }
+
+        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, ms, buffer, 0);
+        ms.popPose();
     }
 }
