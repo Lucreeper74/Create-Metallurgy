@@ -24,7 +24,7 @@
       "color": "#DBA213",
       "translate": "advancement.createmetallurgy.melting_dusts.desc"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
       "item": "create:electron_tube"

@@ -1,5 +1,5 @@
 {
-  "parent": "createmetallurgy:casting_blocks",
+  "parent": "createmetallurgy:graphite_molds",
   "criteria": {
     "have_tungsten_ingot": {
       "conditions": {
