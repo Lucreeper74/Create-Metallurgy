@@ -42,6 +42,9 @@ public class CreateMetallurgy {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         REGISTRATE.registerEventListeners(eventBus);
 
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                () -> CMPartialModels::init);
+
         CMCreativeTabs.register(eventBus);
         CMBlocks.register();
         CMItems.register();

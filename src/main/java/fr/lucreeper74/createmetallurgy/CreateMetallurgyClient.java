@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy;
 
-import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
 import fr.lucreeper74.createmetallurgy.registries.CMPonders;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -11,7 +10,7 @@ public class CreateMetallurgyClient {
     }
 
     public static void clientInit(final FMLClientSetupEvent event) {
-        CMPartialModels.init();
+//      CMPartialModels.init();
         CMPonders.register();
     }
 }
