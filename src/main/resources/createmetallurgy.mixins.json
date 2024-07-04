@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "fr.lucreeper74.createmetallurgy.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "createmetallurgy.refmap.json",
+  "mixins": [
+    "BurningFluidMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
