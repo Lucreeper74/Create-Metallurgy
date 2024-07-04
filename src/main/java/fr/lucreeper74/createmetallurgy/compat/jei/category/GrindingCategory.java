@@ -5,7 +5,7 @@ import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.animations.AnimatedBeltGrinder;
-import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.GrindingRecipe;
+import fr.lucreeper74.createmetallurgy.content.belt_grinder.GrindingRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;

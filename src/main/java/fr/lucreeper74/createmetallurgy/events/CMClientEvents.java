@@ -1,6 +1,6 @@
 package fr.lucreeper74.createmetallurgy.events;
 
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.network.address.NetworkAddressRenderer;
+import fr.lucreeper74.createmetallurgy.content.light_bulb.network.address.NetworkAddressRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;

@@ -7,7 +7,7 @@ import com.simibubi.create.foundation.ponder.SceneBuildingUtil;
 import com.simibubi.create.foundation.ponder.Selection;
 import com.simibubi.create.foundation.ponder.element.InputWindowElement;
 import com.simibubi.create.foundation.utility.Pointing;
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlock;
+import fr.lucreeper74.createmetallurgy.content.light_bulb.LightBulbBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.RedStoneWireBlock;

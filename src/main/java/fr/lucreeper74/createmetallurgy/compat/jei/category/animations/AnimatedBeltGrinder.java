@@ -3,7 +3,7 @@ package fr.lucreeper74.createmetallurgy.compat.jei.category.animations;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
-import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.BeltGrinderBlock;
+import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
 import net.minecraft.core.Direction;
