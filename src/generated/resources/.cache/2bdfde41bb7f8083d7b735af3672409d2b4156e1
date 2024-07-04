@@ -1,4 +1,4 @@
-// 1.19.2	2024-06-17T12:16:46.6526471	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-07-02T22:10:46.6922266	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 f04456f610cd304b215ef08ddc6a093927f92c7b assets/createmetallurgy/blockstates/black_light_bulb.json
 02b271ec31ae066791a99576770709a5b31c293f assets/createmetallurgy/blockstates/blue_light_bulb.json
 fc7be34a60de8c31757bcdf540753c079d29245b assets/createmetallurgy/blockstates/brown_light_bulb.json
@@ -35,8 +35,8 @@ f338ba7b131752cc464cd0a46164b1d1ee2dace5 assets/createmetallurgy/blockstates/tun
 60874cdfd4db687b6e9e99c25b00e2553e0c5266 assets/createmetallurgy/blockstates/white_light_bulb.json
 6dd6f5e3fc97ad06962e74d31857f5b30507517f assets/createmetallurgy/blockstates/wolframite_ore.json
 8ab8a215d0bcfa56bb116f83d5642f794480e7e6 assets/createmetallurgy/blockstates/yellow_light_bulb.json
-0b1c775f576df6a6c8bc167121bcdb36acbd9e06 assets/createmetallurgy/lang/en_ud.json
-1fb78415f0944adea04bb452cde6ddc3fea57009 assets/createmetallurgy/lang/en_us.json
+8f805470398a5ffa397f8d71c9402b32197e0d6c assets/createmetallurgy/lang/en_ud.json
+ece71d1c8dc0eb1311bcf03e836db2155034c0d6 assets/createmetallurgy/lang/en_us.json
 6a3fb5f460a1d75138faeaacb6cb51130200724e assets/createmetallurgy/models/block/coke_block.json
 23148d6005cf569ebf2fbdd680e502ecbd1d4cb7 assets/createmetallurgy/models/block/light_bulb/block/black.json
 2737b5138341a548d995e80fa72a120dd7b4928a assets/createmetallurgy/models/block/light_bulb/block/blue.json
@@ -303,3 +303,4 @@ f8b65e6d889b44d2d7a42acbfe12db0b6e1cd1f9 data/minecraft/tags/blocks/mineable/pic
 5615b1babc0af3df7f72e30fe071f6fc43e0a82d data/minecraft/tags/blocks/mineable/shovel.json
 faf08f7c44ce603d1b1e811a126bdd737818c901 data/minecraft/tags/blocks/needs_diamond_tool.json
 2282fbc91f98463048f24573cb68a073ea7c3da3 data/minecraft/tags/blocks/needs_stone_tool.json
+7cdc41ad368f1b77c90038f010481b3f66d7005b data/minecraft/tags/fluids/lava.json
