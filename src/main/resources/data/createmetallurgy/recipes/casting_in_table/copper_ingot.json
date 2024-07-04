@@ -5,15 +5,13 @@
       "item": "createmetallurgy:graphite_ingot_mold"
     },
     {
-      "fluid": "createmetallurgy:molten_brass",
+      "fluid": "createmetallurgy:molten_copper",
       "amount": 90
     }
   ],
   "processingTime": 80,
-  "results": [
-    {
-      "item": "create:brass_ingot",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "minecraft:copper_ingot"
+  }
 }

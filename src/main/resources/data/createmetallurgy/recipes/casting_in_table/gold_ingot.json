@@ -5,15 +5,13 @@
       "item": "createmetallurgy:graphite_ingot_mold"
     },
     {
-      "fluid": "createmetallurgy:molten_tungsten",
+      "fluid": "createmetallurgy:molten_gold",
       "amount": 90
     }
   ],
   "processingTime": 80,
-  "results": [
-    {
-      "item": "createmetallurgy:tungsten_ingot",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "minecraft:gold_ingot"
+  }
 }

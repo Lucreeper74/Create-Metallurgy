@@ -2,15 +2,13 @@
   "type": "createmetallurgy:casting_in_basin",
   "ingredients": [
     {
-      "fluid": "createmetallurgy:molten_zinc",
+      "fluid": "createmetallurgy:molten_iron",
       "amount": 810
     }
   ],
   "processingTime": 150,
-  "results": [
-    {
-      "item": "create:zinc_block",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "minecraft:iron_block"
+  }
 }

@@ -5,15 +5,13 @@
       "item": "createmetallurgy:graphite_plate_mold"
     },
     {
-      "fluid": "createmetallurgy:molten_tungsten",
+      "fluid": "createmetallurgy:molten_copper",
       "amount": 90
     }
   ],
   "processingTime": 80,
-  "results": [
-    {
-      "item": "createmetallurgy:tungsten_sheet",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "create:copper_sheet"
+  }
 }

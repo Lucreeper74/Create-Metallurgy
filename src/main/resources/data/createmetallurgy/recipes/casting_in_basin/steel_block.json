@@ -7,10 +7,8 @@
     }
   ],
   "processingTime": 150,
-  "results": [
-    {
-      "item": "createmetallurgy:steel_block",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "createmetallurgy:steel_block"
+  }
 }

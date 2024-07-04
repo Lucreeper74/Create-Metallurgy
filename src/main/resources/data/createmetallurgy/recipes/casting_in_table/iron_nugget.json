@@ -5,15 +5,13 @@
       "item": "createmetallurgy:graphite_nugget_mold"
     },
     {
-      "fluid": "createmetallurgy:molten_zinc",
+      "fluid": "createmetallurgy:molten_iron",
       "amount": 10
     }
   ],
   "processingTime": 40,
-  "results": [
-    {
-      "item": "create:zinc_nugget",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "minecraft:iron_nugget"
+  }
 }

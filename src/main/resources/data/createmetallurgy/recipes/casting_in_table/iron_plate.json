@@ -10,10 +10,8 @@
     }
   ],
   "processingTime": 80,
-  "results": [
-    {
-      "item": "create:iron_sheet",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "create:iron_sheet"
+  }
 }

@@ -5,15 +5,13 @@
       "item": "createmetallurgy:graphite_ingot_mold"
     },
     {
-      "fluid": "createmetallurgy:molten_steel",
+      "fluid": "createmetallurgy:molten_zinc",
       "amount": 90
     }
   ],
   "processingTime": 80,
-  "results": [
-    {
-      "item": "createmetallurgy:steel_ingot",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "create:zinc_ingot"
+  }
 }

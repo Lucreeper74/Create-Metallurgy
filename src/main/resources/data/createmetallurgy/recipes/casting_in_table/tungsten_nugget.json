@@ -5,15 +5,13 @@
       "item": "createmetallurgy:graphite_nugget_mold"
     },
     {
-      "fluid": "createmetallurgy:molten_brass",
+      "fluid": "createmetallurgy:molten_tungsten",
       "amount": 10
     }
   ],
   "processingTime": 40,
-  "results": [
-    {
-      "item": "create:brass_nugget",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "createmetallurgy:tungsten_nugget"
+  }
 }

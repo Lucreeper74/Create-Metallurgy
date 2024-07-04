@@ -10,10 +10,8 @@
     }
   ],
   "processingTime": 80,
-  "results": [
-    {
-      "item": "create:golden_sheet",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "create:golden_sheet"
+  }
 }

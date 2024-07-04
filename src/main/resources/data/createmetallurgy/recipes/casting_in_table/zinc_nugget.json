@@ -5,15 +5,13 @@
       "item": "createmetallurgy:graphite_nugget_mold"
     },
     {
-      "fluid": "createmetallurgy:molten_copper",
+      "fluid": "createmetallurgy:molten_zinc",
       "amount": 10
     }
   ],
   "processingTime": 40,
-  "results": [
-    {
-      "item": "create:copper_nugget",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "create:zinc_nugget"
+  }
 }

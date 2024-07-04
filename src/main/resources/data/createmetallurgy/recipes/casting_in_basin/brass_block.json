@@ -7,10 +7,8 @@
     }
   ],
   "processingTime": 150,
-  "results": [
-    {
-      "item": "create:brass_block",
-      "amount": 1
-    }
-  ]
+  "mold_consumed": false,
+  "result": {
+    "item": "create:brass_block"
+  }
 }
