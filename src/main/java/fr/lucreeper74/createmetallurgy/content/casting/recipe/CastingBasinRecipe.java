@@ -4,7 +4,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,7 +17,7 @@ public class CastingBasinRecipe extends CastingRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return Registry.RECIPE_SERIALIZER.get(CreateMetallurgy.genRL("casting_in_basin"));
+        return BuiltInRegistries.RECIPE_SERIALIZER.get(CreateMetallurgy.genRL("casting_in_basin"));
     }
 
     @Override

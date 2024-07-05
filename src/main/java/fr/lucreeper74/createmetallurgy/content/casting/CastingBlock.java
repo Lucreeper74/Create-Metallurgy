@@ -23,11 +23,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class CastingBlock extends Block implements IBE<CastingBlockEntity>, IWrenchable {
@@ -60,7 +60,7 @@ public abstract class CastingBlock extends Block implements IBE<CastingBlockEnti
             if (!heldItem.isEmpty()) {
                 if (heldItem.getItem()
                         .equals(Items.SPONGE)
-                        && !be.getCapability(ForgeRegistries.FLUIDS)
+                        && !be.getCapability(ForgeCapabilities.FLUID_HANDLER)
                         .map(iFluidHandler -> iFluidHandler.drain(Integer.MAX_VALUE, IFluidHandler.FluidAction.EXECUTE))
                         .orElse(FluidStack.EMPTY)
                         .isEmpty()) {

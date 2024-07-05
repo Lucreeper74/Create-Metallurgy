@@ -79,7 +79,7 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
         //Render Items
         if (be.running) {
             MultiBufferSource bufferOut = new CastingItemRenderTypeBuffer(buffer, 255 - fluidOpacity, fluidOpacity);
-            renderItem(be, ms, bufferOut, light, overlay, recipe.getResultItem().copy());
+            renderItem(be, ms, bufferOut, light, overlay, recipe.getResultItem(be.getLevel().registryAccess()).copy());
         }
 
         renderItem(be, ms, buffer, light, overlay, be.inv.getItem(0));

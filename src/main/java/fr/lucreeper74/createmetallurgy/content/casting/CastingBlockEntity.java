@@ -142,7 +142,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
 
     public void process() {
         FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
-        inv.setStackInSlot(0, currentRecipe.getResultItem().copy());
+        inv.setStackInSlot(0, currentRecipe.getResultItem(level.registryAccess()).copy());
         fluidInTank.shrink(currentRecipe.getFluidIngredient().getRequiredAmount());
         getBehaviour(SmartFluidTankBehaviour.INPUT)
                 .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
