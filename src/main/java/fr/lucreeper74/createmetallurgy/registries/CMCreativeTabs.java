@@ -4,7 +4,7 @@ import com.simibubi.create.foundation.utility.Components;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlock;
+import fr.lucreeper74.createmetallurgy.content.light_bulb.LightBulbBlock;
 import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import it.unimi.dsi.fastutil.objects.ReferenceLinkedOpenHashSet;
