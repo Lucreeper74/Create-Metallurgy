@@ -14,9 +14,7 @@
 
   "createmetallurgy.generic.unit.millibuckets": "mB",
 
-  "advancement.createmetallurgy.root":  "Metallurgy Expert",
-  "advancement.createmetallurgy.root.desc": "Take some blaze cakes, it’s going to heat up!",
-  "advancement.createmetallurgy.foundry_basin":  "Better Blast Furnace",
+  "advancement.createmetallurgy.foundry_basin":  "Metallurgy Expert",
   "advancement.createmetallurgy.foundry_basin.desc": "Craft a Foundry Basin & Foundry Top",
   "advancement.createmetallurgy.casting_blocks":  "Don't Try To Blow on It!",
   "advancement.createmetallurgy.casting_blocks.desc": "Craft a Casting Basin or Casting Table",
@@ -33,7 +31,7 @@
   "advancement.createmetallurgy.steel_age":  "The Steel Age",
   "advancement.createmetallurgy.steel_age.desc": "Alloy Iron and Coke",
   "advancement.createmetallurgy.melting_dusts":  "Effective Factory!",
-  "advancement.createmetallurgy.melting_dusts.desc": "Get any non-dirty minerals dusts",
+  "advancement.createmetallurgy.melting_dusts.desc": "Get any washed minerals dusts",
   "advancement.createmetallurgy.belt_grinder": "What a Cheese Grater!",
   "advancement.createmetallurgy.belt_grinder.desc": "Obtain Mechanical Belt Grinder",
 

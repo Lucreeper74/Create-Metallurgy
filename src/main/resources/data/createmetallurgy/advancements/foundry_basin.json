@@ -1,7 +1,7 @@
 {
-  "parent": "createmetallurgy:root",
+  "parent": "create:burner",
   "criteria": {
-    "have_blast_furnace": {
+    "have_basin": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "have_foundry_lid": {
+    "have_lid": {
       "conditions": {
         "items": [
           {
@@ -44,8 +44,8 @@
   },
   "requirements": [
     [
-      "have_blast_furnace",
-      "have_foundry_lid"
+      "have_basin",
+      "have_lid"
     ]
   ]
 }

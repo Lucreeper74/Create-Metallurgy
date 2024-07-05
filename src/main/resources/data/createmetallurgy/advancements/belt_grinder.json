@@ -1,5 +1,5 @@
 {
-  "parent": "createmetallurgy:root",
+  "parent": "createmetallurgy:foundry_basin",
   "criteria": {
     "have_belt_grinder": {
       "conditions": {
