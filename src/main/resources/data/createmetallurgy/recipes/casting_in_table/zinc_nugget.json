@@ -1,0 +1,17 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_nugget_mold"
+    },
+    {
+      "fluid": "createmetallurgy:molten_zinc",
+      "amount": 10
+    }
+  ],
+  "processingTime": 40,
+  "mold_consumed": false,
+  "result": {
+    "item": "create:zinc_nugget"
+  }
+}

@@ -1,23 +1,22 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerInstance;
-import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.FoundryMixerRenderer;
-import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.BeltGrinderBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.BeltGrinderInstance;
-import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.BeltGrinderRenderer;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinRenderer;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRenderer;
-import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.processing.foundrybasin.FoundryBasinRenderer;
-import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidRenderer;
-import fr.lucreeper74.createmetallurgy.content.processing.glassedfoundrylid.GlassedFoundryLidBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.redstone.lightbulb.LightBulbRenderer;
+import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockRenderer;
+import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerInstance;
+import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerRenderer;
+import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderInstance;
+import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderRenderer;
+import fr.lucreeper74.createmetallurgy.content.casting.basin.CastingBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinRenderer;
+import fr.lucreeper74.createmetallurgy.content.foundry_lid.FoundryLidBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.foundry_lid.FoundryLidRenderer;
+import fr.lucreeper74.createmetallurgy.content.glassed_foundry_lid.GlassedFoundryLidBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.light_bulb.LightBulbBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.light_bulb.LightBulbRenderer;
 
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -32,13 +31,13 @@ public class CMBlockEntityTypes {
     public static final BlockEntityEntry<CastingBasinBlockEntity> CASTING_BASIN = REGISTRATE
             .blockEntity("casting_basin", CastingBasinBlockEntity::new)
             .validBlocks(CMBlocks.CASTING_BASIN_BLOCK)
-            .renderer(() -> CastingBasinRenderer::new)
+            .renderer(() -> CastingBlockRenderer::new)
             .register();
 
     public static final BlockEntityEntry<CastingTableBlockEntity> CASTING_TABLE = REGISTRATE
             .blockEntity("casting_table", CastingTableBlockEntity::new)
             .validBlocks(CMBlocks.CASTING_TABLE_BLOCK)
-            .renderer(() -> CastingTableRenderer::new)
+            .renderer(() -> CastingBlockRenderer::new)
             .register();
 
     public static final BlockEntityEntry<FoundryLidBlockEntity> FOUNDRY_LID = REGISTRATE

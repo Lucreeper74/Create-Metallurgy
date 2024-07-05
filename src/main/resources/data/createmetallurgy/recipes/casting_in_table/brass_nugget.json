@@ -1,0 +1,17 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_nugget_mold"
+    },
+    {
+      "fluid": "createmetallurgy:molten_brass",
+      "amount": 10
+    }
+  ],
+  "processingTime": 40,
+  "mold_consumed": false,
+  "result": {
+    "item": "create:brass_nugget"
+  }
+}

@@ -4,11 +4,10 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.content.kinetics.beltGrinder.GrindingRecipe;
-import fr.lucreeper74.createmetallurgy.content.kinetics.foundrymixer.AlloyingRecipe;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingBasin.CastingBasinRecipe;
-import fr.lucreeper74.createmetallurgy.content.processing.casting.castingtable.CastingTableRecipe;
-import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.MeltingRecipe;
+import fr.lucreeper74.createmetallurgy.content.belt_grinder.GrindingRecipe;
+import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipeSerializer;
+import fr.lucreeper74.createmetallurgy.content.foundry_mixer.AlloyingRecipe;
+import fr.lucreeper74.createmetallurgy.content.foundry_lid.MeltingRecipe;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -26,9 +25,11 @@ public enum CMRecipeTypes implements IRecipeTypeInfo {
 
     MELTING(MeltingRecipe::new),
     ALLOYING(AlloyingRecipe::new),
-    CASTING_IN_BASIN(CastingBasinRecipe::new),
-    CASTING_IN_TABLE(CastingTableRecipe::new),
-    GRINDING(GrindingRecipe::new);
+    GRINDING(GrindingRecipe::new),
+
+    CASTING_IN_BASIN(CastingRecipeSerializer.CastingBasinRecipeSerializer::new),
+    CASTING_IN_TABLE(CastingRecipeSerializer.CastingTableRecipeSerializer::new);
+
     private final ResourceLocation id;
     private final RegistryObject<RecipeSerializer<?>> serializerObject;
     @Nullable

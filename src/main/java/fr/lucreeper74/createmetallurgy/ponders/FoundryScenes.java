@@ -16,7 +16,7 @@ import com.simibubi.create.foundation.ponder.element.WorldSectionElement;
 import com.simibubi.create.foundation.ponder.instruction.EmitParticlesInstruction;
 import com.simibubi.create.foundation.utility.Pointing;
 import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.processing.foundrylid.FoundryLidBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.foundry_lid.FoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.glassed_foundry_lid.GlassedFoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;

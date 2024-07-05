@@ -1,0 +1,17 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_plate_mold"
+    },
+    {
+      "fluid": "createmetallurgy:molten_brass",
+      "amount": 90
+    }
+  ],
+  "processingTime": 80,
+  "mold_consumed": false,
+  "result": {
+    "item": "create:brass_sheet"
+  }
+}
