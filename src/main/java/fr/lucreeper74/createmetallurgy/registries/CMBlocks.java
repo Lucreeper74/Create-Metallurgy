@@ -60,7 +60,10 @@ public class CMBlocks {
             .initialProperties(() -> Blocks.RAW_COPPER_BLOCK)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
-            .simpleItem()
+            .tag(Tags.Blocks.STORAGE_BLOCKS)
+            .transform(tagBlockAndItem("storage_blocks/raw_wolframite"))
+            .tag(Tags.Items.STORAGE_BLOCKS)
+            .build()
             .register();
 
     public static final BlockEntry<Block> TUNGSTEN_BLOCK = REGISTRATE
@@ -68,7 +71,10 @@ public class CMBlocks {
             .initialProperties(() -> Blocks.EMERALD_BLOCK)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
-            .simpleItem()
+            .tag(Tags.Blocks.STORAGE_BLOCKS)
+            .transform(tagBlockAndItem("storage_blocks/tungsten"))
+            .tag(Tags.Items.STORAGE_BLOCKS)
+            .build()
             .register();
 
     public static final BlockEntry<Block> WOLFRAMITE_ORE = REGISTRATE
@@ -87,7 +93,10 @@ public class CMBlocks {
             .initialProperties(() -> Blocks.COAL_BLOCK)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_STONE_TOOL)
-            .simpleItem()
+            .tag(Tags.Blocks.STORAGE_BLOCKS)
+            .transform(tagBlockAndItem("storage_blocks/steel"))
+            .tag(Tags.Items.STORAGE_BLOCKS)
+            .build()
             .register();
 
     public static final BlockEntry<Block> STEEL_BLOCK = REGISTRATE
@@ -95,7 +104,10 @@ public class CMBlocks {
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
-            .simpleItem()
+            .tag(Tags.Blocks.STORAGE_BLOCKS)
+            .transform(tagBlockAndItem("storage_blocks/steel"))
+            .tag(Tags.Items.STORAGE_BLOCKS)
+            .build()
             .register();
 
 
