@@ -45,7 +45,7 @@ public class CMItems {
 
 
     public static final ItemEntry<CombustibleItem> COKE = REGISTRATE.item("coke", CombustibleItem::new)
-            .tag(forgeItemTag("coke"))
+            .tag(forgeItemTag("coal_coke"))
             .onRegister(i -> i.setBurnTime(2000))
             .register();
 

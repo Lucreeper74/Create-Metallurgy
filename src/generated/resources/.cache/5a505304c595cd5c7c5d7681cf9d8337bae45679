@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-05T22:24:41.8368761	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2024-07-09T22:03:11.2965753	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 f04456f610cd304b215ef08ddc6a093927f92c7b assets/createmetallurgy/blockstates/black_light_bulb.json
 02b271ec31ae066791a99576770709a5b31c293f assets/createmetallurgy/blockstates/blue_light_bulb.json
 fc7be34a60de8c31757bcdf540753c079d29245b assets/createmetallurgy/blockstates/brown_light_bulb.json
@@ -256,6 +256,10 @@ e45068f68c9ca144ff4a32ef7ec4618fface4cf8 data/createmetallurgy/recipes/crafting/
 e34df1e3aa4ad2f25c457e7c8d1981b4ac4b67f1 data/forge/tags/blocks/light_bulbs.json
 128c9074112312eaebf90cc7070ca044ef48abb2 data/forge/tags/blocks/ores.json
 128c9074112312eaebf90cc7070ca044ef48abb2 data/forge/tags/blocks/ores/wolframite.json
+7e549068cea1859fb8540bf5153fd8c1a45fa7be data/forge/tags/blocks/storage_blocks.json
+2e228658b47fe0959b22f3d592074cc2a3431a80 data/forge/tags/blocks/storage_blocks/raw_wolframite.json
+f569f5ebce7332dd3ed807ddebb6a8f2f545ec97 data/forge/tags/blocks/storage_blocks/steel.json
+86c71d6e1fbd451290c20316e477f2623c53d190 data/forge/tags/blocks/storage_blocks/tungsten.json
 273425207a1d434d2daa7ef95283a9bb96f3d20a data/forge/tags/fluids/molten_brass.json
 ecbff4795b40089451f94483c852fcbbe3b5efd7 data/forge/tags/fluids/molten_copper.json
 bf5f256ca527ad23cdb5c6943beb21df777cfcc9 data/forge/tags/fluids/molten_gold.json
@@ -264,7 +268,7 @@ bf5f256ca527ad23cdb5c6943beb21df777cfcc9 data/forge/tags/fluids/molten_gold.json
 a357a83f30aafbe3b4bac80b3aa5a0de290b5460 data/forge/tags/fluids/molten_steel.json
 67dcf71c7072388bc957582aecbeb24ae6666868 data/forge/tags/fluids/molten_tungsten.json
 f53c440feb925b5aa3aaa3de38f9c54243ad3b66 data/forge/tags/fluids/molten_zinc.json
-1e0905d51bbd7bac809619b6ce0b7a19dca8db4b data/forge/tags/items/coke.json
+1e0905d51bbd7bac809619b6ce0b7a19dca8db4b data/forge/tags/items/coal_coke.json
 68c268835d090c0c808f93bcfdfc62051f92d301 data/forge/tags/items/crushed_raw_materials/wolframite.json
 0ad9cb97af5fd8caf45b0ff4da767b3950185ae8 data/forge/tags/items/dirty_dusts.json
 259e98fe968b9a49dbf775be645e6a97220d4773 data/forge/tags/items/dirty_dusts/dirty_copper.json
@@ -296,6 +300,10 @@ db4768af588221c69b2596e1228561123bfa8957 data/forge/tags/items/nuggets/tungsten.
 315cd1e09e8be58bb151c83da30108227c63a053 data/forge/tags/items/plates/tungsten.json
 ea65966fd5be81c5867e529a861f5e65337143bf data/forge/tags/items/raw_materials.json
 ea65966fd5be81c5867e529a861f5e65337143bf data/forge/tags/items/raw_materials/wolframite.json
+7e549068cea1859fb8540bf5153fd8c1a45fa7be data/forge/tags/items/storage_blocks.json
+2e228658b47fe0959b22f3d592074cc2a3431a80 data/forge/tags/items/storage_blocks/raw_wolframite.json
+f569f5ebce7332dd3ed807ddebb6a8f2f545ec97 data/forge/tags/items/storage_blocks/steel.json
+86c71d6e1fbd451290c20316e477f2623c53d190 data/forge/tags/items/storage_blocks/tungsten.json
 b25abbad12cb179f13618e0ed4d45e5b8126015c data/forge/tags/items/wires.json
 b25abbad12cb179f13618e0ed4d45e5b8126015c data/forge/tags/items/wires/tungsten.json
 1caa8645024d25ad41e502e7efc71ae116cc9492 data/minecraft/tags/blocks/mineable/axe.json
