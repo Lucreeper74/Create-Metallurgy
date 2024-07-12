@@ -28,7 +28,7 @@ public abstract class CastingRecipeSerializer implements RecipeSerializer<Castin
         int processingDuration = GsonHelper.getAsInt(json, "processingTime");
         boolean moldConsumed = GsonHelper.getAsBoolean(json, "mold_consumed", false);
 
-        JsonElement je = json.get("result");
+        JsonElement je = GsonHelper.getAsJsonObject(json, "result");
         ProcessingOutput result = ProcessingOutput.EMPTY;
         if(je.isJsonObject() && !GsonHelper.isValidNode(je.getAsJsonObject(), "fluid"))
             result = ProcessingOutput.deserialize(je);
