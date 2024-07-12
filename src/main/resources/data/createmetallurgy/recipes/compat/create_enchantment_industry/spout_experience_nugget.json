@@ -16,10 +16,8 @@
     }
   ],
   "processingTime": 60,
-  "results": [
-    {
+  "result": {
       "item": "create:experience_nugget",
       "amount": 1
-    }
-  ]
+  }
 }
