@@ -10,6 +10,7 @@ import com.simibubi.create.foundation.data.SharedProperties;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.UncontainableBlockItem;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
+import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderGenerator;
@@ -33,11 +34,14 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.Tags;
 
@@ -80,6 +84,10 @@ public class CMBlocks {
     public static final BlockEntry<Block> WOLFRAMITE_ORE = REGISTRATE
             .block("wolframite_ore", Block::new)
             .initialProperties(() -> Blocks.COPPER_ORE)
+            .loot((lt, b) -> lt.add(b,
+                    RegistrateBlockLootTables.createSilkTouchDispatchTable(b,
+                            RegistrateBlockLootTables.applyExplosionDecay(b, LootItem.lootTableItem(CMItems.RAW_WOLFRAMITE.get())
+                                    .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))))))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.ORES)
@@ -94,7 +102,7 @@ public class CMBlocks {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_STONE_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .transform(tagBlockAndItem("storage_blocks/steel"))
+            .transform(tagBlockAndItem("storage_blocks/coal_coke"))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
             .register();
