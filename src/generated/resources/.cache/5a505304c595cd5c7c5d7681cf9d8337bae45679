@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-09T22:03:11.2965753	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2024-07-14T15:50:11.2289714	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 f04456f610cd304b215ef08ddc6a093927f92c7b assets/createmetallurgy/blockstates/black_light_bulb.json
 02b271ec31ae066791a99576770709a5b31c293f assets/createmetallurgy/blockstates/blue_light_bulb.json
 fc7be34a60de8c31757bcdf540753c079d29245b assets/createmetallurgy/blockstates/brown_light_bulb.json
@@ -219,7 +219,7 @@ fa7197aa68e7d3ac68cc3adefc14790d9dc0beb5 data/createmetallurgy/loot_tables/block
 207b99919cc71114a5dcbe10ed5dd38fa165381e data/createmetallurgy/loot_tables/blocks/steel_block.json
 0a7d0e70204d169df596b94006cd2da15df73b7e data/createmetallurgy/loot_tables/blocks/tungsten_block.json
 8add3a025a238b2f8c5311dfdca3ef3281130ee9 data/createmetallurgy/loot_tables/blocks/white_light_bulb.json
-9c9e5a5c04229cf08f75c200a22c43be3b0a63ef data/createmetallurgy/loot_tables/blocks/wolframite_ore.json
+badbfa69ebc64fbb77ee0d525bf25f3e07bd6243 data/createmetallurgy/loot_tables/blocks/wolframite_ore.json
 f0e2f3f45958618383ce48d5c0de4409de8d2787 data/createmetallurgy/loot_tables/blocks/yellow_light_bulb.json
 871264e2922ce13ab61be29642052a6aa1658375 data/createmetallurgy/recipes/crafting/black_light_bulb.json
 df40d0a99c4965cd1e5b7f2c9d8aaedb93725ce8 data/createmetallurgy/recipes/crafting/black_light_bulb_from_other_light_bulb.json
@@ -257,8 +257,9 @@ e34df1e3aa4ad2f25c457e7c8d1981b4ac4b67f1 data/forge/tags/blocks/light_bulbs.json
 128c9074112312eaebf90cc7070ca044ef48abb2 data/forge/tags/blocks/ores.json
 128c9074112312eaebf90cc7070ca044ef48abb2 data/forge/tags/blocks/ores/wolframite.json
 7e549068cea1859fb8540bf5153fd8c1a45fa7be data/forge/tags/blocks/storage_blocks.json
+2282fbc91f98463048f24573cb68a073ea7c3da3 data/forge/tags/blocks/storage_blocks/coal_coke.json
 2e228658b47fe0959b22f3d592074cc2a3431a80 data/forge/tags/blocks/storage_blocks/raw_wolframite.json
-f569f5ebce7332dd3ed807ddebb6a8f2f545ec97 data/forge/tags/blocks/storage_blocks/steel.json
+9721ecad2b195e8148bb4ea24a042be2bfe92ada data/forge/tags/blocks/storage_blocks/steel.json
 86c71d6e1fbd451290c20316e477f2623c53d190 data/forge/tags/blocks/storage_blocks/tungsten.json
 273425207a1d434d2daa7ef95283a9bb96f3d20a data/forge/tags/fluids/molten_brass.json
 ecbff4795b40089451f94483c852fcbbe3b5efd7 data/forge/tags/fluids/molten_copper.json
@@ -301,8 +302,9 @@ db4768af588221c69b2596e1228561123bfa8957 data/forge/tags/items/nuggets/tungsten.
 ea65966fd5be81c5867e529a861f5e65337143bf data/forge/tags/items/raw_materials.json
 ea65966fd5be81c5867e529a861f5e65337143bf data/forge/tags/items/raw_materials/wolframite.json
 7e549068cea1859fb8540bf5153fd8c1a45fa7be data/forge/tags/items/storage_blocks.json
+2282fbc91f98463048f24573cb68a073ea7c3da3 data/forge/tags/items/storage_blocks/coal_coke.json
 2e228658b47fe0959b22f3d592074cc2a3431a80 data/forge/tags/items/storage_blocks/raw_wolframite.json
-f569f5ebce7332dd3ed807ddebb6a8f2f545ec97 data/forge/tags/items/storage_blocks/steel.json
+9721ecad2b195e8148bb4ea24a042be2bfe92ada data/forge/tags/items/storage_blocks/steel.json
 86c71d6e1fbd451290c20316e477f2623c53d190 data/forge/tags/items/storage_blocks/tungsten.json
 b25abbad12cb179f13618e0ed4d45e5b8126015c data/forge/tags/items/wires.json
 b25abbad12cb179f13618e0ed4d45e5b8126015c data/forge/tags/items/wires/tungsten.json
