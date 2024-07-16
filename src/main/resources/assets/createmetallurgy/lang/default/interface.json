@@ -8,6 +8,8 @@
   "createmetallurgy.recipe.grinding": "Grinding",
   "createmetallurgy.recipe.polishing_with_grinder": "Polishing With Grinder",
 
+  "createmetallurgy.recipe.casting.mold_consumed": "Mold consumed!",
+
   "createmetallurgy.gui.goggles.foundrybasin_contents": "Foundry Basin Contents",
   "createmetallurgy.gui.goggles.castingbasin_contents": "Casting Basin Contents",
   "createmetallurgy.gui.goggles.castingtable_contents": "Casting Table Contents",

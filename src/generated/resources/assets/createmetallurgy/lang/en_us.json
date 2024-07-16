@@ -90,6 +90,7 @@
   "createmetallurgy.ponder.light_bulbs.text_3": "Light Bulbs are available in all colors",
   "createmetallurgy.ponder.light_bulbs.text_4": "Placing items in Address slot can connect others light bulbs in a Network",
   "createmetallurgy.recipe.alloying": "Foundry Alloying",
+  "createmetallurgy.recipe.casting.mold_consumed": "Mold consumed!",
   "createmetallurgy.recipe.casting_in_basin": "Casting In Basin",
   "createmetallurgy.recipe.casting_in_table": "Casting In Table",
   "createmetallurgy.recipe.grinding": "Grinding",
