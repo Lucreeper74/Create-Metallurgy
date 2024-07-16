@@ -34,3 +34,4 @@ Want to help with translation ? Please refer to language file in [`generated/lan
 - Ripoy -> Russian localization
 - Tellurium -> Chinese localization
 - Albertosaurio65 -> Spanish localization
+- TinxLD -> German localization
