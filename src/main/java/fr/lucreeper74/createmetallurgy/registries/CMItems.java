@@ -7,6 +7,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 
+import static com.simibubi.create.AllTags.AllItemTags.CRUSHED_RAW_MATERIALS;
+import static com.simibubi.create.AllTags.AllItemTags.PLATES;
 import static com.simibubi.create.AllTags.forgeItemTag;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -18,12 +20,12 @@ public class CMItems {
     }
 
     public static final ItemEntry<Item> TUNGSTEN_INGOT = taggedIngredient("tungsten_ingot", forgeItemTag("ingots/tungsten"), Tags.Items.INGOTS),
-            TUNGSTEN_SHEET = taggedIngredient("tungsten_sheet", forgeItemTag("plates/tungsten"), forgeItemTag("plates")),
+            TUNGSTEN_SHEET = taggedIngredient("tungsten_sheet", forgeItemTag("plates/tungsten"),PLATES.tag),
             TUNGSTEN_NUGGET = taggedIngredient("tungsten_nugget", forgeItemTag("nuggets/tungsten"), Tags.Items.NUGGETS),
             TUNGSTEN_WIRE = taggedIngredient("tungsten_wire", forgeItemTag("wires/tungsten"), forgeItemTag("wires"));
 
     public static final ItemEntry<Item>  RAW_WOLFRAMITE = taggedIngredient("raw_wolframite", forgeItemTag("raw_materials/wolframite"), forgeItemTag("raw_materials")),
-            CRUSHED_RAW_WOLFRAMITE = taggedIngredient("crushed_raw_wolframite", forgeItemTag("crushed_raw_materials/wolframite")),
+            CRUSHED_RAW_WOLFRAMITE = taggedIngredient("crushed_raw_wolframite", CRUSHED_RAW_MATERIALS.tag),
             DIRTY_WOLFRAMITE_DUST = taggedIngredient("dirty_wolframite_dust", forgeItemTag("dirty_dusts/dirty_wolframite"), forgeItemTag("dirty_dusts")),
             WOLFRAMITE_DUST = taggedIngredient("wolframite_dust", forgeItemTag("dusts/wolframite"), forgeItemTag("dusts"));
 

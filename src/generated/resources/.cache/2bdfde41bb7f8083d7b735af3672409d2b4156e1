@@ -1,4 +1,4 @@
-// 1.19.2	2024-07-14T12:42:52.5915321	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-07-16T16:48:09.0606371	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 f04456f610cd304b215ef08ddc6a093927f92c7b assets/createmetallurgy/blockstates/black_light_bulb.json
 02b271ec31ae066791a99576770709a5b31c293f assets/createmetallurgy/blockstates/blue_light_bulb.json
 fc7be34a60de8c31757bcdf540753c079d29245b assets/createmetallurgy/blockstates/brown_light_bulb.json
@@ -35,8 +35,8 @@ f338ba7b131752cc464cd0a46164b1d1ee2dace5 assets/createmetallurgy/blockstates/tun
 60874cdfd4db687b6e9e99c25b00e2553e0c5266 assets/createmetallurgy/blockstates/white_light_bulb.json
 6dd6f5e3fc97ad06962e74d31857f5b30507517f assets/createmetallurgy/blockstates/wolframite_ore.json
 8ab8a215d0bcfa56bb116f83d5642f794480e7e6 assets/createmetallurgy/blockstates/yellow_light_bulb.json
-8f805470398a5ffa397f8d71c9402b32197e0d6c assets/createmetallurgy/lang/en_ud.json
-ece71d1c8dc0eb1311bcf03e836db2155034c0d6 assets/createmetallurgy/lang/en_us.json
+1b7c0a8671e507bb2b4563a89d6aca08f22f701d assets/createmetallurgy/lang/en_ud.json
+e0be2ed99fd36315fed7b74c4f10841ba4049292 assets/createmetallurgy/lang/en_us.json
 6a3fb5f460a1d75138faeaacb6cb51130200724e assets/createmetallurgy/models/block/coke_block.json
 23148d6005cf569ebf2fbdd680e502ecbd1d4cb7 assets/createmetallurgy/models/block/light_bulb/block/black.json
 2737b5138341a548d995e80fa72a120dd7b4928a assets/createmetallurgy/models/block/light_bulb/block/blue.json
@@ -253,6 +253,7 @@ d00cbf7b73c0193c95fd92d041bcb6991fdef62b data/createmetallurgy/recipes/crafting/
 a5395d3fa3847901abddbf5716e7f90fd4bf6276 data/createmetallurgy/recipes/crafting/white_light_bulb_from_other_light_bulb.json
 ec34bc8f0f9a84d7c8cc165d376ca761ccc92e03 data/createmetallurgy/recipes/crafting/yellow_light_bulb.json
 e33542b62715d6af3507af15518dfa9ed3befdd8 data/createmetallurgy/recipes/crafting/yellow_light_bulb_from_other_light_bulb.json
+68c268835d090c0c808f93bcfdfc62051f92d301 data/create/tags/items/crushed_raw_materials.json
 e34df1e3aa4ad2f25c457e7c8d1981b4ac4b67f1 data/forge/tags/blocks/light_bulbs.json
 128c9074112312eaebf90cc7070ca044ef48abb2 data/forge/tags/blocks/ores.json
 128c9074112312eaebf90cc7070ca044ef48abb2 data/forge/tags/blocks/ores/wolframite.json
@@ -270,7 +271,6 @@ a357a83f30aafbe3b4bac80b3aa5a0de290b5460 data/forge/tags/fluids/molten_steel.jso
 67dcf71c7072388bc957582aecbeb24ae6666868 data/forge/tags/fluids/molten_tungsten.json
 f53c440feb925b5aa3aaa3de38f9c54243ad3b66 data/forge/tags/fluids/molten_zinc.json
 1e0905d51bbd7bac809619b6ce0b7a19dca8db4b data/forge/tags/items/coal_coke.json
-68c268835d090c0c808f93bcfdfc62051f92d301 data/forge/tags/items/crushed_raw_materials/wolframite.json
 0ad9cb97af5fd8caf45b0ff4da767b3950185ae8 data/forge/tags/items/dirty_dusts.json
 259e98fe968b9a49dbf775be645e6a97220d4773 data/forge/tags/items/dirty_dusts/dirty_copper.json
 8a91cc905e9cd72903661c9f3342661b4b58dd24 data/forge/tags/items/dirty_dusts/dirty_gold.json
