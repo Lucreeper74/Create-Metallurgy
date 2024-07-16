@@ -14,12 +14,11 @@ import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderGenerator;
+import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockMovementBehavior;
 import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerBlock;
 import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderBlock;
 import fr.lucreeper74.createmetallurgy.content.casting.basin.CastingBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.casting.basin.CastingBasinMovementBehaviour;
 import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlock;
-import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableMovementBehaviour;
 import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.foundry_lid.FoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.foundry_lid.FoundryLidGenerator;
@@ -147,7 +146,7 @@ public class CMBlocks {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
-            .onRegister(movementBehaviour(new CastingBasinMovementBehaviour()))
+            .onRegister(movementBehaviour(new CastingBlockMovementBehavior()))
             .item()
             .transform(customItemModel("_", "block"))
             .register();
@@ -161,7 +160,7 @@ public class CMBlocks {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
-            .onRegister(movementBehaviour(new CastingTableMovementBehaviour()))
+            .onRegister(movementBehaviour(new CastingBlockMovementBehavior()))
             .item()
             .transform(customItemModel("_", "block"))
             .register();
