@@ -4,6 +4,7 @@ import com.simibubi.create.api.behaviour.BlockSpoutingBehaviour;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import fr.lucreeper74.createmetallurgy.content.casting.basin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,7 +32,7 @@ public class CastingWithSpout extends BlockSpoutingBehaviour {
         if (fluidHandler.getTanks() != 1)
             return 0;
 
-        if (!(blockEntity instanceof CastingTableBlockEntity || blockEntity instanceof CastingTableBlockEntity))
+        if (!(blockEntity instanceof CastingTableBlockEntity || blockEntity instanceof CastingBasinBlockEntity))
             return 0;
 
         if (!fluidHandler.isFluidValid(0, availableFluid))
