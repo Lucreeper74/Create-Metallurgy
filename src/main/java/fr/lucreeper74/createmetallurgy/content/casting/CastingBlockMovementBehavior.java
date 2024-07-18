@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.casting.table;
+package fr.lucreeper74.createmetallurgy.content.casting;
 
 import com.simibubi.create.content.contraptions.behaviour.MovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
@@ -12,7 +12,8 @@ import net.minecraftforge.items.ItemStackHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CastingTableMovementBehaviour implements MovementBehaviour {
+public class CastingBlockMovementBehavior implements MovementBehaviour {
+
     public Map<String, ItemStackHandler> getOrReadInventory(MovementContext context) {
         Map<String, ItemStackHandler> map = new HashMap<>();
         map.put("inv", new ItemStackHandler(9));
@@ -42,8 +43,10 @@ public class CastingTableMovementBehaviour implements MovementBehaviour {
                 if (itemStackHandler.getStackInSlot(i)
                         .isEmpty())
                     continue;
+
                 ItemEntity itemEntity = new ItemEntity(context.world, context.position.x, context.position.y - .45f,
                         context.position.z, itemStackHandler.getStackInSlot(i));
+
                 itemEntity.setDeltaMovement(facingVec.scale(.05));
                 context.world.addFreshEntity(itemEntity);
                 itemStackHandler.setStackInSlot(i, ItemStack.EMPTY);
@@ -51,8 +54,8 @@ public class CastingTableMovementBehaviour implements MovementBehaviour {
             context.blockEntityData.put(key, itemStackHandler.serializeNBT());
         });
         BlockEntity blockEntity = context.contraption.presentBlockEntities.get(context.localPos);
-        if (blockEntity instanceof CastingTableBlockEntity)
-            ((CastingTableBlockEntity) blockEntity).readOnlyItems(context.blockEntityData);
+        if (blockEntity instanceof CastingBlockEntity castingBE)
+            castingBE.readOnlyItems(context.blockEntityData);
         context.temporaryData = false; // did already dump, so can't any more
     }
 }
