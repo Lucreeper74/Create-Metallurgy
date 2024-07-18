@@ -82,7 +82,7 @@ public class CreateMetallurgyJEI implements IModPlugin {
                         .catalyst(AllBlocks.SPOUT::get)
                         .catalyst(CMBlocks.CASTING_BASIN_BLOCK::get)
                         .doubleItemIcon(CMBlocks.CASTING_BASIN_BLOCK.get(), Items.CLOCK)
-                        .emptyBackground(177, 53)
+                        .emptyBackground(177, 63)
                         .build("casting_in_basin", CastingInBasinCategory::new),
 
                 casting_in_table = builder(CastingTableRecipe.class)
@@ -90,7 +90,7 @@ public class CreateMetallurgyJEI implements IModPlugin {
                         .catalyst(AllBlocks.SPOUT::get)
                         .catalyst(CMBlocks.CASTING_TABLE_BLOCK::get)
                         .doubleItemIcon(CMBlocks.CASTING_TABLE_BLOCK.get(), Items.CLOCK)
-                        .emptyBackground(177, 53)
+                        .emptyBackground(177, 63)
                         .build("casting_in_table", CastingInTableCategory::new),
 
                 grinding = builder(GrindingRecipe.class)
