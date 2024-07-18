@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-18T13:22:12.7802411	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2024-07-18T13:32:46.4973075	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 f04456f610cd304b215ef08ddc6a093927f92c7b assets/createmetallurgy/blockstates/black_light_bulb.json
 02b271ec31ae066791a99576770709a5b31c293f assets/createmetallurgy/blockstates/blue_light_bulb.json
 fc7be34a60de8c31757bcdf540753c079d29245b assets/createmetallurgy/blockstates/brown_light_bulb.json
@@ -253,6 +253,7 @@ e52f03b484a39cf511659bd980b87172ab51dfab data/createmetallurgy/recipes/crafting/
 3b1d7704f0d74402e87a3d1154d7519b42363bd3 data/createmetallurgy/recipes/crafting/white_light_bulb_from_other_light_bulb.json
 fd8bbfb2beb3b6ed691a43ec81e89260e4249901 data/createmetallurgy/recipes/crafting/yellow_light_bulb.json
 e45068f68c9ca144ff4a32ef7ec4618fface4cf8 data/createmetallurgy/recipes/crafting/yellow_light_bulb_from_other_light_bulb.json
+68c268835d090c0c808f93bcfdfc62051f92d301 data/create/tags/items/crushed_raw_materials.json
 e34df1e3aa4ad2f25c457e7c8d1981b4ac4b67f1 data/forge/tags/blocks/light_bulbs.json
 128c9074112312eaebf90cc7070ca044ef48abb2 data/forge/tags/blocks/ores.json
 128c9074112312eaebf90cc7070ca044ef48abb2 data/forge/tags/blocks/ores/wolframite.json
@@ -270,7 +271,6 @@ a357a83f30aafbe3b4bac80b3aa5a0de290b5460 data/forge/tags/fluids/molten_steel.jso
 67dcf71c7072388bc957582aecbeb24ae6666868 data/forge/tags/fluids/molten_tungsten.json
 f53c440feb925b5aa3aaa3de38f9c54243ad3b66 data/forge/tags/fluids/molten_zinc.json
 1e0905d51bbd7bac809619b6ce0b7a19dca8db4b data/forge/tags/items/coal_coke.json
-68c268835d090c0c808f93bcfdfc62051f92d301 data/forge/tags/items/crushed_raw_materials/wolframite.json
 0ad9cb97af5fd8caf45b0ff4da767b3950185ae8 data/forge/tags/items/dirty_dusts.json
 259e98fe968b9a49dbf775be645e6a97220d4773 data/forge/tags/items/dirty_dusts/dirty_copper.json
 8a91cc905e9cd72903661c9f3342661b4b58dd24 data/forge/tags/items/dirty_dusts/dirty_gold.json
