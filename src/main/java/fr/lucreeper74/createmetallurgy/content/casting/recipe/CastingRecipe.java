@@ -3,6 +3,7 @@ package fr.lucreeper74.createmetallurgy.content.casting.recipe;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
+import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockEntity;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
+import org.slf4j.Logger;
 
 public abstract class CastingRecipe implements Recipe<SmartInventory> {
 
@@ -31,6 +33,7 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
         this.moldConsumed = moldConsumed;
         this.result = result;
 
+        validate(id);
     }
 
     public static boolean match(CastingBlockEntity be, Recipe<?> recipe) {
@@ -49,6 +52,14 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
         return false;
     }
 
+    private void validate(ResourceLocation recipeTypeId) {
+        String messageHeader = "Your custom recipe (" + recipeTypeId + ")";
+        Logger logger = CreateMetallurgy.LOGGER;
+
+        if(ingredient.isEmpty() && moldConsumed) {
+            logger.warn(messageHeader + " specified a mold condition. Mold conditions have no impact on this recipe cause there is no mold.");
+        }
+    }
 
     @Override
     public boolean matches(SmartInventory pContainer, Level pLevel) {
