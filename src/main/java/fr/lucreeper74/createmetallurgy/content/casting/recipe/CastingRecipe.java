@@ -3,6 +3,7 @@ package fr.lucreeper74.createmetallurgy.content.casting.recipe;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
+import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockEntity;
 import net.minecraft.resources.ResourceLocation;
@@ -24,13 +25,13 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
     protected boolean moldConsumed;
     protected ProcessingOutput result;
 
-    public CastingRecipe(ResourceLocation id, Ingredient ingredient, FluidIngredient fluid, int processingTime, boolean moldConsumed, ProcessingOutput result) {
+    public CastingRecipe(ResourceLocation id) {
         this.id = id;
-        this.ingredient = ingredient;
-        this.fluidIngredient = fluid;
-        this.processingDuration = processingTime;
-        this.moldConsumed = moldConsumed;
-        this.result = result;
+        this.ingredient = Ingredient.EMPTY;
+        this.fluidIngredient = FluidIngredient.EMPTY;
+        this.processingDuration = 0;
+        this.moldConsumed = false;
+        this.result = ProcessingOutput.EMPTY;
 
         validate(id);
     }
@@ -94,7 +95,11 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
     public abstract RecipeSerializer<?> getSerializer();
 
     @Override
-    public abstract RecipeType<?> getType();
+    public RecipeType<?> getType() {
+        return getTypeInfo().getType();
+    }
+
+    public abstract IRecipeTypeInfo getTypeInfo();
 
     public Ingredient getIngredient() {
         return ingredient;
