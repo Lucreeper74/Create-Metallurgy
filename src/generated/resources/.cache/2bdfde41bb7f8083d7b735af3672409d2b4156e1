@@ -1,4 +1,4 @@
-// 1.19.2	2024-07-16T16:48:09.0606371	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-07-22T22:06:46.7803848	Registrate Provider for createmetallurgy [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 f04456f610cd304b215ef08ddc6a093927f92c7b assets/createmetallurgy/blockstates/black_light_bulb.json
 02b271ec31ae066791a99576770709a5b31c293f assets/createmetallurgy/blockstates/blue_light_bulb.json
 fc7be34a60de8c31757bcdf540753c079d29245b assets/createmetallurgy/blockstates/brown_light_bulb.json
@@ -35,8 +35,8 @@ f338ba7b131752cc464cd0a46164b1d1ee2dace5 assets/createmetallurgy/blockstates/tun
 60874cdfd4db687b6e9e99c25b00e2553e0c5266 assets/createmetallurgy/blockstates/white_light_bulb.json
 6dd6f5e3fc97ad06962e74d31857f5b30507517f assets/createmetallurgy/blockstates/wolframite_ore.json
 8ab8a215d0bcfa56bb116f83d5642f794480e7e6 assets/createmetallurgy/blockstates/yellow_light_bulb.json
-1b7c0a8671e507bb2b4563a89d6aca08f22f701d assets/createmetallurgy/lang/en_ud.json
-e0be2ed99fd36315fed7b74c4f10841ba4049292 assets/createmetallurgy/lang/en_us.json
+065238834297f8a414d140ad1835b03aa1af2c53 assets/createmetallurgy/lang/en_ud.json
+935c329f24fcb2bb74224f0476d2a18eaaf0f8f1 assets/createmetallurgy/lang/en_us.json
 6a3fb5f460a1d75138faeaacb6cb51130200724e assets/createmetallurgy/models/block/coke_block.json
 23148d6005cf569ebf2fbdd680e502ecbd1d4cb7 assets/createmetallurgy/models/block/light_bulb/block/black.json
 2737b5138341a548d995e80fa72a120dd7b4928a assets/createmetallurgy/models/block/light_bulb/block/blue.json
