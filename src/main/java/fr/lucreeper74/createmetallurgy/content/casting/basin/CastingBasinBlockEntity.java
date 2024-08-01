@@ -1,9 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.casting.basin;
 
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockEntity;
@@ -28,14 +25,6 @@ public class CastingBasinBlockEntity extends CastingBlockEntity implements IHave
 
     public CastingBasinBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-    }
-
-    @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        behaviours.add(new DirectBeltInputBehaviour(this));
-
-        inputTank = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 810, true);
-        behaviours.add(inputTank);
     }
 
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
@@ -73,10 +62,8 @@ public class CastingBasinBlockEntity extends CastingBlockEntity implements IHave
         }
 
         LangBuilder mb = CMLang.translate("generic.unit.millibuckets");
-        for (int i = 0; i < fluids.getTanks(); i++) {
-            FluidStack fluidStack = fluids.getFluidInTank(i);
-            if (fluidStack.isEmpty())
-                continue;
+        FluidStack fluidStack = fluids.getFluidInTank(0);
+        if (!fluidStack.isEmpty()) {
             CMLang.text("")
                     .add(CMLang.fluidName(fluidStack)
                             .add(CMLang.text(" "))

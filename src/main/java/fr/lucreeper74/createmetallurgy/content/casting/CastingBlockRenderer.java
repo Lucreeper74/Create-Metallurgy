@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
+import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipe;
 import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlockEntity;
 import fr.lucreeper74.createmetallurgy.utils.CastingItemRenderTypeBuffer;
@@ -34,20 +35,15 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
         super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
 
         List<Recipe<?>> recipes = be.getMatchingRecipes();
-        if (!recipes.isEmpty()) recipe = (CastingRecipe) recipes.get(0);
+        if (!recipes.isEmpty())
+            recipe = (CastingRecipe) recipes.get(0);
 
         //Render Fluids
-        SmartFluidTankBehaviour tank = be.inputTank;
-        if (tank == null)
-            return;
-
-        SmartFluidTankBehaviour.TankSegment primaryTank = tank.getPrimaryTank();
-        FluidStack fluidStack = primaryTank.getRenderedFluid();
-        float level = primaryTank.getFluidLevel()
-                .getValue(partialTicks);
+        CastingFluidTank tank = be.inputTank;
+        FluidStack fluidStack = tank.getFluid();
+        float level = tank.getFluidLevel().getValue(partialTicks);
 
         int fluidOpacity = 255;
-
         float min, yOffset;
 
         if (!fluidStack.isEmpty() && level > 0.01F) {
@@ -62,7 +58,7 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
             ms.pushPose();
             ms.translate(0, yOffset, 0);
 
-            if (be.running) {
+            if (recipe != null) {
                 int timer = be.processingTick;
                 int totalTime = recipe.getProcessingDuration();
 
@@ -77,7 +73,7 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
         }
 
         //Render Items
-        if (be.running) {
+        if (recipe != null) {
             MultiBufferSource bufferOut = new CastingItemRenderTypeBuffer(buffer, 255 - fluidOpacity, fluidOpacity);
             renderItem(be, ms, bufferOut, light, overlay, recipe.getResultItem().copy());
         }
