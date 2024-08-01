@@ -9,7 +9,6 @@ import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.VecHelper;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

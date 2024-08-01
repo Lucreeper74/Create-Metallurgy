@@ -4,7 +4,6 @@ import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import org.jetbrains.annotations.NotNull;
 
 public class CastingFluidTank extends FluidTank {
 

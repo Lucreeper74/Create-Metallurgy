@@ -2,9 +2,7 @@ package fr.lucreeper74.createmetallurgy.content.casting;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipe;
 import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlockEntity;
 import fr.lucreeper74.createmetallurgy.utils.CastingItemRenderTypeBuffer;
