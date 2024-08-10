@@ -109,23 +109,27 @@ public class CastingFluidTank extends FluidTank {
             return 0;
         }
 
-
         // If full -> nothing
         int space = capacity - fluid.getAmount();
         if (space <= 0) {
             return 0;
         }
         // If enough space -> Fill
-        if (resource.getAmount() < space) {
-            fluid.grow(resource.getAmount());
-            space = resource.getAmount();
+        int amount = resource.getAmount();
+        if (amount < space) {
+            if (action.execute()) {
+                fluid.grow(amount);
+                onContentsChanged();
+            }
+            return amount;
         } else {
             // If too much -> Fill to max
-            fluid.setAmount(capacity);
+            if (action.execute()) {
+                fluid.setAmount(capacity);
+                onContentsChanged();
+            }
+            return space;
         }
-        if (space > 0)
-            onContentsChanged();
-        return space;
     }
 
     public LerpedFloat getFluidLevel() {
