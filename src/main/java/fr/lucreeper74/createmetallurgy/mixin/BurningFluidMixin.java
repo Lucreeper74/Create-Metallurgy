@@ -24,7 +24,7 @@ public abstract class BurningFluidMixin {
     protected Object2DoubleMap<FluidType> forgeFluidTypeHeight;
 
     @Inject(method = "isInLava()Z", at = @At(value = "HEAD"), cancellable = true)
-    private void create$isInBurningFluid(CallbackInfoReturnable<Boolean> cir) {
+    private void createmetallurgy$isInBurningFluid(CallbackInfoReturnable<Boolean> cir) {
         if (firstTick)
             return;
 
