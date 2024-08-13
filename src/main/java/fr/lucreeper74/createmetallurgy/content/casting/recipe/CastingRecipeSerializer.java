@@ -3,7 +3,6 @@ package fr.lucreeper74.createmetallurgy.content.casting.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -17,8 +16,13 @@ public abstract class CastingRecipeSerializer implements RecipeSerializer<Castin
     protected void writeToJson(JsonObject json, CastingRecipe recipe) {
         JsonArray jsonIngredients = new JsonArray();
 
-        jsonIngredients.add(recipe.ingredient.toJson());
-        jsonIngredients.add(recipe.fluidIngredient.serialize());
+        Ingredient ingredient = recipe.ingredient;
+        if(!ingredient.isEmpty())
+            jsonIngredients.add(ingredient.toJson());
+
+        FluidIngredient fluidIngredient = recipe.fluidIngredient;
+        if(fluidIngredient != FluidIngredient.EMPTY)
+            jsonIngredients.add(recipe.fluidIngredient.serialize());
 
         json.add("ingredients", jsonIngredients);
         json.add("result", recipe.result.serialize());
@@ -47,7 +51,7 @@ public abstract class CastingRecipeSerializer implements RecipeSerializer<Castin
 
         JsonElement je =  GsonHelper.getAsJsonObject(json, "result");
         if(je.isJsonObject() && !GsonHelper.isValidNode(je.getAsJsonObject(), "fluid"))
-            recipe.result = ProcessingOutput.deserialize(je);
+            recipe.result = CastingOutput.deserialize(je);
 
         return recipe;
     }
@@ -59,7 +63,7 @@ public abstract class CastingRecipeSerializer implements RecipeSerializer<Castin
         recipe.fluidIngredient = FluidIngredient.read(buffer);
         recipe.processingDuration = buffer.readInt();
         recipe.moldConsumed = buffer.readBoolean();
-        recipe.result = ProcessingOutput.read(buffer);
+        recipe.result = CastingOutput.read(buffer);
 
         return recipe;
     }
