@@ -70,6 +70,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
         compound.put("moldInv", moldInv.serializeNBT());
         compound.put("inv", inv.serializeNBT());
         compound.put("inputTank", inputTank.writeToNBT(new CompoundTag()));
+        compound.put("fluidBuffer", fluidBuffer.writeToNBT(new CompoundTag()));
         compound.putInt("castingTime", processingTick);
         compound.putBoolean("running", running);
         super.write(compound, clientPacket);
@@ -80,6 +81,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
         moldInv.deserializeNBT(compound.getCompound("moldInv"));
         inv.deserializeNBT(compound.getCompound("inv"));
         inputTank.readFromNBT(compound.getCompound("inputTank"));
+        fluidBuffer = FluidStack.loadFluidStackFromNBT(compound.getCompound("fluidBuffer"));
         processingTick = compound.getInt("castingTime");
         running = compound.getBoolean("running");
         super.read(compound, clientPacket);
