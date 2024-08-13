@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.content.casting.recipe;
 
-import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -23,7 +22,7 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
     protected Ingredient ingredient;
     protected int processingDuration;
     protected boolean moldConsumed;
-    protected ProcessingOutput result;
+    protected CastingOutput result;
 
     public CastingRecipe(ResourceLocation id) {
         this.id = id;
@@ -31,7 +30,7 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
         this.fluidIngredient = FluidIngredient.EMPTY;
         this.processingDuration = 0;
         this.moldConsumed = false;
-        this.result = ProcessingOutput.EMPTY;
+        this.result = CastingOutput.EMPTY;
 
         validate(id);
     }
@@ -79,10 +78,6 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
     @Override
     public ItemStack getResultItem() {
         return result.getStack();
-    }
-
-    public ProcessingOutput getProcessingOutput() {
-        return result;
     }
 
     @Override
