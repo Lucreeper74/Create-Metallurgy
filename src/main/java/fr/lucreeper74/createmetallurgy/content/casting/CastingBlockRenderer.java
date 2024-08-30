@@ -41,11 +41,12 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
         FluidStack fluidStack = tank.getFluid();
         float level = tank.getFluidLevel().getValue(partialTicks);
 
+        int opacity = 0;
         int fluidOpacity = 255;
         float min, yOffset;
 
         if (!fluidStack.isEmpty() && level > 0.01F) {
-            if(be instanceof CastingTableBlockEntity) {
+            if (be instanceof CastingTableBlockEntity) {
                 min = 13f / 16f;
                 yOffset = (.8f / 16f) * level;
             } else {
@@ -60,9 +61,12 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
                 int timer = be.processingTick;
                 int totalTime = recipe.getProcessingDuration();
 
-                if (timer > 0 && totalTime > 0) fluidOpacity = 255 * timer / totalTime;
-            }
+                if (timer > 0 && totalTime > 0)
+                    opacity = (4 * 255) * (totalTime - timer) / totalTime;
 
+                if (opacity > 3 * 255)
+                    fluidOpacity = (4 * 255) - opacity;
+            }
             ColoredFluidRenderer.renderFluidBox(fluidStack,
                     2f / 16f, min - yOffset, 2f / 16f,
                     14f / 16f, min, 14f / 16f, buffer, ms, light, ColoredFluidRenderer.RGBAtoColor(255, 255, 255, fluidOpacity), false);
@@ -71,8 +75,8 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
         }
 
         //Render Items
-        if (recipe != null) {
-            MultiBufferSource bufferOut = new CastingItemRenderTypeBuffer(buffer, 255 - fluidOpacity, fluidOpacity);
+        if (recipe != null && be.running) {
+            MultiBufferSource bufferOut = new CastingItemRenderTypeBuffer(buffer, opacity / 4, fluidOpacity);
             renderItem(be, ms, bufferOut, light, overlay, recipe.getResultItem().copy());
         }
 
@@ -81,6 +85,9 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
     }
 
     protected void renderItem(CastingBlockEntity be, PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack stack) {
+        if(stack.isEmpty())
+            return;
+
         ms.pushPose();
         if (be instanceof CastingTableBlockEntity) {
             ms.translate(.5f, 0, .5f);
