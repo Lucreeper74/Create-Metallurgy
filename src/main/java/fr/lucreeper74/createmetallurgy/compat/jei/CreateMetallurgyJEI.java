@@ -8,7 +8,6 @@ import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.equipment.blueprint.BlueprintScreen;
 import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
 import com.simibubi.create.content.logistics.filter.AbstractFilterScreen;
-import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.redstone.link.controller.LinkedControllerScreen;
 import com.simibubi.create.content.trains.schedule.ScheduleScreen;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
@@ -20,6 +19,7 @@ import fr.lucreeper74.createmetallurgy.compat.jei.category.*;
 import fr.lucreeper74.createmetallurgy.content.belt_grinder.GrindingRecipe;
 import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingBasinRecipe;
 import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingTableRecipe;
+import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinRecipe;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import mezz.jei.api.IModPlugin;
@@ -61,14 +61,14 @@ public class CreateMetallurgyJEI implements IModPlugin {
         allCategories.clear();
 
         CreateRecipeCategory<?>
-                melting = builder(BasinRecipe.class)
+                melting = builder(FoundryBasinRecipe.class)
                 .addTypedRecipes(CMRecipeTypes.MELTING).catalyst(CMBlocks.FOUNDRY_LID_BLOCK::get)
                 .catalyst(CMBlocks.FOUNDRY_BASIN_BLOCK::get)
                 .doubleItemIcon(CMBlocks.FOUNDRY_BASIN_BLOCK.get(), CMBlocks.FOUNDRY_LID_BLOCK.get())
                 .emptyBackground(177, 100)
                 .build("melting", MeltingCategory::new),
 
-                alloying = builder(BasinRecipe.class)
+                alloying = builder(FoundryBasinRecipe.class)
                         .addTypedRecipes(CMRecipeTypes.ALLOYING)
                         .catalyst(CMBlocks.FOUNDRY_MIXER_BLOCK::get)
                         .catalyst(CMBlocks.GLASSED_FOUNDRY_LID_BLOCK::get)

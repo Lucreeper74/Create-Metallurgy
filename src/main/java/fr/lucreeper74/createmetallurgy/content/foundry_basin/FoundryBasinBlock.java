@@ -15,6 +15,7 @@ public class FoundryBasinBlock extends BasinBlock implements IWrenchable {
     public FoundryBasinBlock(Properties p_i48440_1_) {
         super(p_i48440_1_);
     }
+
     @Override
     public BlockEntityType<? extends FoundryBasinBlockEntity> getBlockEntityType() {
         return CMBlockEntityTypes.FOUNDRY_BASIN.get();
