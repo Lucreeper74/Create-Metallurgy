@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.mixin;
+package fr.lucreeper74.createmetallurgy.mixins;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import net.minecraft.world.entity.Entity;
@@ -23,7 +23,7 @@ public abstract class BurningFluidMixin {
     @Shadow
     protected Object2DoubleMap<FluidType> forgeFluidTypeHeight;
 
-    @Inject(method = "isInLava()Z", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "isInLava()Z", at = @At(value = "HEAD"), cancellable = true, remap = false)
     private void createmetallurgy$isInBurningFluid(CallbackInfoReturnable<Boolean> cir) {
         if (firstTick)
             return;
