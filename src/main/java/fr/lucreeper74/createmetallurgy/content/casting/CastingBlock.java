@@ -57,13 +57,12 @@ public abstract class CastingBlock extends Block implements IBE<CastingBlockEnti
             return InteractionResult.SUCCESS;
 
         return onBlockEntityUse(worldIn, pos, be -> {
+            if(!be.getFluidTank().getFluidInTank(0).isEmpty())
+                return InteractionResult.PASS;
             if (!heldItem.isEmpty()) {
                 if (heldItem.getItem()
-                        .equals(Items.SPONGE)
-                        && !be.getCapability(ForgeCapabilities.FLUID_HANDLER)
-                        .map(iFluidHandler -> iFluidHandler.drain(Integer.MAX_VALUE, IFluidHandler.FluidAction.EXECUTE))
-                        .orElse(FluidStack.EMPTY)
-                        .isEmpty()) {
+                        .equals(Items.SPONGE)) {
+                    be.reset();
                     return InteractionResult.SUCCESS;
                 }
                 if (be.moldInv.isEmpty()) {
@@ -88,7 +87,7 @@ public abstract class CastingBlock extends Block implements IBE<CastingBlockEnti
                         1f + Create.RANDOM.nextFloat());
                 return InteractionResult.SUCCESS;
             }
-            return InteractionResult.FAIL;
+            return InteractionResult.PASS;
         });
     }
 

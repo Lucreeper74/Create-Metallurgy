@@ -1,8 +1,10 @@
 package fr.lucreeper74.createmetallurgy.content.casting;
 
+import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
@@ -40,10 +42,12 @@ import java.util.stream.Collectors;
 public abstract class CastingBlockEntity extends SmartBlockEntity {
 
     public LazyOptional<IItemHandlerModifiable> itemCapability;
-    public SmartFluidTankBehaviour inputTank;
+    public CastingFluidTank inputTank;
+    private final LazyOptional<CastingFluidTank> fluidCapability = LazyOptional.of(() -> inputTank);
     public SmartInventory inv;
     public SmartInventory moldInv;
     protected CastingRecipe currentRecipe;
+    protected FluidStack fluidBuffer;
     public boolean running;
     public int processingTick;
 
@@ -52,12 +56,20 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
         inv = new SmartInventory(1, this, 1, true).forbidInsertion();
         moldInv = new SmartInventory(1, this, 1, true);
         itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(inv, moldInv));
+        inputTank = new CastingFluidTank(this);
+        fluidBuffer = FluidStack.EMPTY;
+    }
+
+    @Override
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+        behaviours.add(new DirectBeltInputBehaviour(this));
     }
 
     @Override
     public void write(CompoundTag compound, boolean clientPacket) {
         compound.put("moldInv", moldInv.serializeNBT());
         compound.put("inv", inv.serializeNBT());
+        compound.put("inputTank", inputTank.writeToNBT(new CompoundTag()));
         compound.putInt("castingTime", processingTick);
         compound.putBoolean("running", running);
         super.write(compound, clientPacket);
@@ -67,6 +79,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
     protected void read(CompoundTag compound, boolean clientPacket) {
         moldInv.deserializeNBT(compound.getCompound("moldInv"));
         inv.deserializeNBT(compound.getCompound("inv"));
+        inputTank.readFromNBT(compound.getCompound("inputTank"));
         processingTick = compound.getInt("castingTime");
         running = compound.getBoolean("running");
         super.read(compound, clientPacket);
@@ -82,7 +95,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
         if (cap == ForgeCapabilities.ITEM_HANDLER)
             return itemCapability.cast();
         if (cap == ForgeCapabilities.FLUID_HANDLER)
-            return inputTank.getCapability().cast();
+            return fluidCapability.cast();
         return super.getCapability(cap, side);
     }
 
@@ -99,6 +112,8 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
 
         if (level == null) return;
 
+        inputTank.tick();
+
         if (!level.isClientSide && (currentRecipe == null || processingTick == -1)) {
             running = false;
             processingTick = -1;
@@ -107,32 +122,21 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
 
         if (running) {
             if (!level.isClientSide) {
-                if (matchCastingRecipe(currentRecipe)) {
-                    if (processingTick <= 0) {
+                if (inputTank.getFluidAmount() >= inputTank.getCapacity() && matchCastingRecipe(currentRecipe)) {
+                    if (processingTick <= 0)
                         process();
-                        level.playSound(null, worldPosition, SoundEvents.LAVA_EXTINGUISH,
-                                SoundSource.BLOCKS, .2f, .5f);
-                    }
-                } else {
-                    processFailed();
-                }
-            }
-            if (level.isClientSide) spawnParticles();
+                } else reset();
+            } else spawnParticles();
 
-            if (processingTick >= 0) {
+            if (processingTick >= 0)
                 --processingTick;
-            }
         }
     }
 
     public void startProcess() {
         if (running && processingTick > 0) return;
-        List<Recipe<?>> recipes = getMatchingRecipes();
-        if (recipes.isEmpty()) return;
 
-        currentRecipe = (CastingRecipe) recipes.get(0);
-
-        if (matchCastingRecipe(currentRecipe)) {
+        if (currentRecipe != null && inputTank.getFluidAmount() >= inputTank.getCapacity() && matchCastingRecipe(currentRecipe)) {
             processingTick = isInAirCurrent(this.getLevel(), this.getBlockPos(), this) ?
                     currentRecipe.getProcessingDuration() / 2 : currentRecipe.getProcessingDuration();
             running = true;
@@ -144,23 +148,13 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
         FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
         inv.setStackInSlot(0, currentRecipe.getResultItem(level.registryAccess()).copy());
         fluidInTank.shrink(currentRecipe.getFluidIngredient().getRequiredAmount());
-        getBehaviour(SmartFluidTankBehaviour.INPUT)
-                .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
 
         if(currentRecipe.isMoldConsumed())
             moldInv.setStackInSlot(0, ItemStack.EMPTY);
 
-        processingTick = -1;
-        currentRecipe = null;
-        running = false;
-        sendData();
-    }
-
-    public void processFailed() {
-        processingTick = -1;
-        currentRecipe = null;
-        running = false;
-        sendData();
+        level.playSound(null, worldPosition, SoundEvents.LAVA_EXTINGUISH,
+                SoundSource.BLOCKS, .2f, .5f);
+        reset();
     }
 
     protected void spawnParticles() {
@@ -212,6 +206,31 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
                         - r1.getIngredients()
                         .size())
                 .collect(Collectors.toList());
+    }
+
+    public int initProcess(FluidStack fluid, IFluidHandler.FluidAction action) {
+        if (currentRecipe != null || running)
+            return 0;
+        fluidBuffer = fluid;
+        List<Recipe<?>> recipes = getMatchingRecipes();
+        if (recipes.isEmpty())
+            return 0;
+        CastingRecipe recipe = (CastingRecipe) recipes.get(0);
+        if (action == IFluidHandler.FluidAction.EXECUTE) {
+            currentRecipe = recipe;
+            sendData();
+        }
+        return recipe.getFluidIngredient().getRequiredAmount();
+    }
+    public void reset() {
+        inputTank.reset();
+        processingTick = -1;
+        currentRecipe = null;
+        running = false;
+        sendData();
+    }
+    public FluidStack getFluidBuffer() {
+        return fluidBuffer;
     }
 
     protected abstract <C extends Container> boolean matchStaticFilters(Recipe<C> recipe);

@@ -105,11 +105,11 @@ public class CastingScenes {
         scene.idle(60);
         scene.world.modifyBlockEntity(tablePos, CastingTableBlockEntity.class, be -> be.inv
                 .setStackInSlot(0, ingot));
-        scene.world.modifyBlockEntity(tablePos, CastingTableBlockEntity.class, CastingTableBlockEntity::processFailed);
+        scene.world.modifyBlockEntity(tablePos, CastingTableBlockEntity.class, CastingTableBlockEntity::reset);
 
         scene.world.modifyBlockEntity(basinPos, CastingBasinBlockEntity.class, be -> be.inv
                 .setStackInSlot(0, block));
-        scene.world.modifyBlockEntity(basinPos, CastingBasinBlockEntity.class, CastingBasinBlockEntity::processFailed);
+        scene.world.modifyBlockEntity(basinPos, CastingBasinBlockEntity.class, CastingBasinBlockEntity::reset);
         scene.idle(5);
 
         scene.overlay.showControls(new InputWindowElement(tableTop, Pointing.DOWN)
