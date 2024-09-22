@@ -30,14 +30,6 @@ public class CastingTableBlockEntity extends CastingBlockEntity implements IHave
         super(type, pos, state);
     }
 
-    @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        behaviours.add(new DirectBeltInputBehaviour(this));
-
-        inputTank = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 90, true);
-        behaviours.add(inputTank);
-    }
-
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
         return r.getType() == CMRecipeTypes.CASTING_IN_TABLE.getType();
     }
@@ -73,10 +65,8 @@ public class CastingTableBlockEntity extends CastingBlockEntity implements IHave
         }
 
         LangBuilder mb = CMLang.translate("generic.unit.millibuckets");
-        for (int i = 0; i < fluids.getTanks(); i++) {
-            FluidStack fluidStack = fluids.getFluidInTank(i);
-            if (fluidStack.isEmpty())
-                continue;
+        FluidStack fluidStack = fluids.getFluidInTank(0);
+        if (!fluidStack.isEmpty()) {
             CMLang.text("")
                     .add(CMLang.fluidName(fluidStack)
                             .add(CMLang.text(" "))
