@@ -7,6 +7,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.utility.VecHelper;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinOperatingBE;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,7 +28,7 @@ import java.util.Optional;
 
 import static fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidBlock.OPEN;
 
-public class FoundryLidBlockEntity extends BasinOperatingBlockEntity {
+public class FoundryLidBlockEntity extends FoundryBasinOperatingBE {
 
     public int processingTime;
     public boolean running;
@@ -78,7 +79,7 @@ public class FoundryLidBlockEntity extends BasinOperatingBlockEntity {
 
         if(level.isClientSide) {
             gauge.tickChaser();
-            gauge.chase((double) temp.getOrDefault(BasinBlockEntity.getHeatLevelOf(this.getLevel().getBlockState(getBlockPos().below(2))), 0) / 2000, .2f, LerpedFloat.Chaser.EXP);
+            gauge.chase((double) temp.getOrDefault(FoundryBasinBlockEntity.getHeatLevelOf(this.getLevel().getBlockState(getBlockPos().below(2))), 0) / 2000, .2f, LerpedFloat.Chaser.EXP);
         }
 
         if (!level.isClientSide && (currentRecipe == null || processingTime == -1)) {
@@ -128,12 +129,16 @@ public class FoundryLidBlockEntity extends BasinOperatingBlockEntity {
 
     @Override
     protected boolean updateBasin() {
-        if (running) return true;
-        if (level == null || level.isClientSide) return true;
-        if (getBasin().filter(BasinBlockEntity::canContinueProcessing).isEmpty()) return true;
+        if (running)
+            return true;
+        if (level == null || level.isClientSide)
+            return true;
+        if (getBasin().filter(BasinBlockEntity::canContinueProcessing).isEmpty())
+            return true;
 
         List<Recipe<?>> recipes = getMatchingRecipes();
-        if (recipes.isEmpty()) return true;
+        if (recipes.isEmpty())
+            return true;
         currentRecipe = recipes.get(0);
         startProcessingBasin();
         sendData();
