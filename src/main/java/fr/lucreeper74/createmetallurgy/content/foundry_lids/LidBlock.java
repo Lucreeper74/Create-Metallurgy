@@ -1,10 +1,8 @@
-package fr.lucreeper74.createmetallurgy.content.foundry_lid;
+package fr.lucreeper74.createmetallurgy.content.foundry_lids;
 
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.foundation.block.IBE;
 import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -16,7 +14,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -29,13 +26,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 
-public class FoundryLidBlock extends Block implements IBE<FoundryLidBlockEntity>, IWrenchable {
+public abstract class LidBlock extends Block implements IWrenchable {
+
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty ON_FOUNDRY_BASIN = BooleanProperty.create("on_foundry_basin");
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    public FoundryLidBlock(Properties properties) {
+    public LidBlock(Properties properties) {
         super(properties);
         registerDefaultState(super.defaultBlockState()
                 .setValue(ON_FOUNDRY_BASIN, false)
@@ -55,10 +53,11 @@ public class FoundryLidBlock extends Block implements IBE<FoundryLidBlockEntity>
         super.onPlace(state, level, pos, p_60569_, p_60570_);
 
         if (level.getBlockEntity(pos.below()) instanceof FoundryBasinBlockEntity)
-            level.setBlock(pos, state.setValue(ON_FOUNDRY_BASIN, true), 1);
+            state = state.setValue(ON_FOUNDRY_BASIN, true);
         else
-            level.setBlock(pos, state.setValue(ON_FOUNDRY_BASIN, false), 1);
+            state = state.setValue(ON_FOUNDRY_BASIN, false);
 
+        level.setBlock(pos, state, 1);
     }
 
     @Override
@@ -91,18 +90,16 @@ public class FoundryLidBlock extends Block implements IBE<FoundryLidBlockEntity>
         }
 
         ItemStack heldItem = player.getItemInHand(hand);
-        return onBlockEntityUse(level, pos, be -> {
-            if (!heldItem.isEmpty() && state.getValue(OPEN)) {
-                if (level.getBlockEntity(pos.below()) instanceof FoundryBasinBlockEntity basinBE) {
-                    ItemStack insertItem = ItemHandlerHelper.insertItem(basinBE.getInputInventory(), heldItem, false);
-                    player.setItemInHand(hand, heldItem.split(insertItem.getCount()));
-                    level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM,
-                            SoundSource.PLAYERS, 1f, 1f + Create.RANDOM.nextFloat());
-                    return InteractionResult.SUCCESS;
-                }
+        if (!heldItem.isEmpty() && state.getValue(OPEN)) {
+            if (level.getBlockEntity(pos.below()) instanceof FoundryBasinBlockEntity basinBE) {
+                ItemStack insertItem = ItemHandlerHelper.insertItem(basinBE.getInputInventory(), heldItem, false);
+                player.setItemInHand(hand, heldItem.split(insertItem.getCount()));
+                level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM,
+                        SoundSource.PLAYERS, 1f, 1f + Create.RANDOM.nextFloat());
+                return InteractionResult.SUCCESS;
             }
-            return InteractionResult.PASS;
-        });
+        }
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -121,15 +118,5 @@ public class FoundryLidBlock extends Block implements IBE<FoundryLidBlockEntity>
         } else {
             return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection());
         }
-    }
-
-    @Override
-    public Class<FoundryLidBlockEntity> getBlockEntityClass() {
-        return FoundryLidBlockEntity.class;
-    }
-
-    @Override
-    public BlockEntityType<? extends FoundryLidBlockEntity> getBlockEntityType() {
-        return CMBlockEntityTypes.FOUNDRY_LID.get();
     }
 }

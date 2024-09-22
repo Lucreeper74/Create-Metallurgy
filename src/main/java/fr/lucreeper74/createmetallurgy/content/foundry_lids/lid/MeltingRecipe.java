@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.foundry_lid;
+package fr.lucreeper74.createmetallurgy.content.foundry_lids.lid;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinRecipe;

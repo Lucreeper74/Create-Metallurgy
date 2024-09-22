@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.foundry_lid;
+package fr.lucreeper74.createmetallurgy.content.foundry_lids.glassed_lid;
 
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.ModelFile;
 
-public class FoundryLidGenerator extends SpecialBlockStateGen {
+public class GlassedFoundryLidGenerator extends SpecialBlockStateGen {
 
     @Override
     protected int getXRotation(BlockState state) {
@@ -17,19 +17,19 @@ public class FoundryLidGenerator extends SpecialBlockStateGen {
 
     @Override
     protected int getYRotation(BlockState state) {
-        return horizontalAngle(state.getValue(FoundryLidBlock.FACING));
+        return horizontalAngle(state.getValue(GlassedFoundryLidBlock.FACING));
     }
 
     @Override
     public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
                                                 BlockState state) {
 
-        if (state.getValue(FoundryLidBlock.ON_FOUNDRY_BASIN)) {
-            if (state.getValue(FoundryLidBlock.OPEN))
-                return AssetLookup.partialBaseModel(ctx, prov, "on_a_basin_open");
-            return AssetLookup.partialBaseModel(ctx, prov, "on_a_basin");
+        if (state.getValue(GlassedFoundryLidBlock.UNDER_FOUNDRY_MIXER)) {
+            if (state.getValue(GlassedFoundryLidBlock.OPEN))
+                return AssetLookup.partialBaseModel(ctx, prov, "under_mixer_open");
+            return AssetLookup.partialBaseModel(ctx, prov, "under_mixer");
         }
-        if(state.getValue(FoundryLidBlock.OPEN))
+        if(state.getValue(GlassedFoundryLidBlock.OPEN))
             return AssetLookup.partialBaseModel(ctx, prov, "open");
 
         return AssetLookup.partialBaseModel(ctx, prov);

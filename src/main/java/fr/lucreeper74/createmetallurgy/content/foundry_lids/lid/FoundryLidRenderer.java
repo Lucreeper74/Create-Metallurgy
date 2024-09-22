@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.foundry_lid;
+package fr.lucreeper74.createmetallurgy.content.foundry_lids.lid;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllPartialModels;
@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 
-import static fr.lucreeper74.createmetallurgy.content.foundry_lid.FoundryLidBlock.ON_FOUNDRY_BASIN;
+import static fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidBlock.ON_FOUNDRY_BASIN;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 public class FoundryLidRenderer extends SafeBlockEntityRenderer<FoundryLidBlockEntity> {

@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.foundry_lid;
+package fr.lucreeper74.createmetallurgy.content.foundry_lids.lid;
 
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-import static fr.lucreeper74.createmetallurgy.content.foundry_lid.FoundryLidBlock.OPEN;
+import static fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidBlock.OPEN;
 
 public class FoundryLidBlockEntity extends BasinOperatingBlockEntity {
 
