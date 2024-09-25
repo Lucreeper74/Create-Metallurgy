@@ -2,12 +2,12 @@ package fr.lucreeper74.createmetallurgy.compat.jei.category;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
-import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.utility.Components;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.elements.CastingInTableElement;
+import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipe;
 import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingTableRecipe;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import mezz.jei.api.forge.ForgeTypes;
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastingInTableCategory extends CreateRecipeCategory<CastingTableRecipe> {
+public class CastingInTableCategory extends CastingAbstractCategory<CastingTableRecipe> {
     private final CastingInTableElement castingTable = new CastingInTableElement();
 
     public CastingInTableCategory(Info<CastingTableRecipe> info) {
@@ -48,12 +48,10 @@ public class CastingInTableCategory extends CreateRecipeCategory<CastingTableRec
                     .setBackground(getRenderedSlot(), -1, -1)
                     .addIngredients(mold);
 
-        ProcessingOutput output = recipe.getProcessingOutput();
         builder
                 .addSlot(RecipeIngredientRole.OUTPUT, 139, 27)
-                .setBackground(getRenderedSlot(output), -1, -1)
-                .addItemStack(recipe.getResultItem())
-                .addTooltipCallback(addStochasticTooltip(output));
+                .setBackground(getRenderedSlot(), -1, -1)
+                .addItemStack(recipe.getResultItem());
     }
 
     @Override
@@ -66,9 +64,7 @@ public class CastingInTableCategory extends CreateRecipeCategory<CastingTableRec
             AllIcons.I_DISABLE.render(matrixStack, 14, 44);
 
         castingTable.draw(matrixStack, 48, 27);
-
-        Minecraft.getInstance().font.draw(matrixStack, Components.translatable(((float) recipe.getProcessingDuration() / 20.0F) + "s").withStyle(ChatFormatting.GRAY),
-                95, 26, 0xffffff);
+        drawCastingTime(recipe, matrixStack, 22);
     }
 
     @Override
