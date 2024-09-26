@@ -1,5 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.casting;
 
+import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlockEntity;
@@ -39,7 +40,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class CastingBlockEntity extends SmartBlockEntity {
+public abstract class CastingBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
     public LazyOptional<IItemHandlerModifiable> itemCapability;
     public CastingFluidTank inputTank;
@@ -117,22 +118,25 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
 
         inputTank.tick();
 
-        if (!level.isClientSide && (currentRecipe == null || processingTick == -1)) {
-            running = false;
+        if (!level.isClientSide && !running) {
             processingTick = -1;
             startProcess();
         }
 
         if (running) {
             if (!level.isClientSide) {
-                if (inputTank.getFluidAmount() >= inputTank.getCapacity() && matchCastingRecipe(currentRecipe)) {
+                if (canProcess()) {
                     if (processingTick <= 0)
                         process();
                 } else reset();
             } else spawnParticles();
 
-            if (processingTick >= 0)
-                --processingTick;
+            if (processingTick >= 0) {
+                if (isInAirCurrent(this.getLevel(), this.getBlockPos(), this))
+                    processingTick = processingTick - 2;
+                else
+                    --processingTick;
+            }
         }
     }
 
@@ -140,9 +144,8 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
         if (running && processingTick > 0)
             return;
 
-        if (currentRecipe != null && inputTank.getFluidAmount() >= inputTank.getCapacity() && matchCastingRecipe(currentRecipe)) {
-            processingTick = isInAirCurrent(this.getLevel(), this.getBlockPos(), this) ?
-                    currentRecipe.getProcessingDuration() / 2 : currentRecipe.getProcessingDuration();
+        if (canProcess()) {
+            processingTick = currentRecipe.getProcessingDuration();
             running = true;
             sendData();
         }
@@ -159,6 +162,12 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
         level.playSound(null, worldPosition, SoundEvents.LAVA_EXTINGUISH,
                 SoundSource.BLOCKS, .2f, .5f);
         reset();
+    }
+
+    public boolean canProcess() {
+        if (currentRecipe != null)
+            return inputTank.getFluidAmount() >= inputTank.getCapacity() && matchCastingRecipe(currentRecipe);
+        return false;
     }
 
     protected void spawnParticles() {
