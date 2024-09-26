@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_copper",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 320,
+  "result": {
+    "item": "minecraft:copper_block"
+  }
+}

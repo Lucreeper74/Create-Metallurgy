@@ -1,0 +1,17 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_nugget_mold"
+    },
+    {
+      "amount": 10,
+      "fluid": "createmetallurgy:molten_gold",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 10,
+  "result": {
+    "item": "minecraft:gold_nugget"
+  }
+}

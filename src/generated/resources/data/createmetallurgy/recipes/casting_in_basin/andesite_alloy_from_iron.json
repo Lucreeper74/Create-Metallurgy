@@ -1,0 +1,18 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "item": "minecraft:andesite"
+    },
+    {
+      "amount": 90,
+      "fluid": "createmetallurgy:molten_iron",
+      "nbt": {}
+    }
+  ],
+  "mold_consumed": true,
+  "processingTime": 360,
+  "result": {
+    "item": "create:andesite_alloy_block"
+  }
+}

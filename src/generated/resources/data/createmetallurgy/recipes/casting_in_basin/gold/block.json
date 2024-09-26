@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_gold",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 320,
+  "result": {
+    "item": "minecraft:gold_block"
+  }
+}

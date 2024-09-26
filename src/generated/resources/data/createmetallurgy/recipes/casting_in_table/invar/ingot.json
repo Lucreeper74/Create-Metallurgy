@@ -1,0 +1,26 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:ingots/invar"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_ingot_mold"
+    },
+    {
+      "amount": 90,
+      "fluid": "createmetallurgy:molten_invar",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 60,
+  "result": {
+    "tag": "forge:ingots/invar"
+  }
+}
