@@ -3,15 +3,16 @@ package fr.lucreeper74.createmetallurgy.content.foundry_mixer;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.foundation.utility.VecHelper;
-import fr.lucreeper74.createmetallurgy.content.foundry_lid.FoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.content.glassed_foundry_lid.GlassedFoundryLidBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinRecipe;
 import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,11 +35,45 @@ public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
     public void tick() {
         super.tick();
 
-        if(level != null && !running) {
+        if (level != null && !running) {
             if (!level.isClientSide) {
                 basinChecker.scheduleUpdate();
             }
         }
+    }
+
+    @Override
+    protected <C extends Container> boolean matchBasinRecipe(Recipe<C> recipe) {
+        if (recipe == null)
+            return false;
+        Optional<BasinBlockEntity> basin = getBasin();
+        if (!basin.isPresent())
+            return false;
+        return FoundryBasinRecipe.match((FoundryBasinBlockEntity) basin.get(), recipe);
+    }
+
+    @Override
+    protected void applyBasinRecipe() {
+        if (currentRecipe == null)
+            return;
+
+        Optional<BasinBlockEntity> optionalBasin = getBasin();
+        if (!optionalBasin.isPresent())
+            return;
+        FoundryBasinBlockEntity basin = (FoundryBasinBlockEntity) optionalBasin.get();
+        boolean wasEmpty = basin.canContinueProcessing();
+        if (!FoundryBasinRecipe.apply(basin, currentRecipe))
+            return;
+        getProcessedRecipeTrigger().ifPresent(this::award);
+        basin.inputTank.sendDataImmediately();
+
+        // Continue mixing
+        if (wasEmpty && matchBasinRecipe(currentRecipe)) {
+            continueWithPreviousRecipe();
+            sendData();
+        }
+
+        basin.notifyChangeOfContents();
     }
 
     @Override
@@ -58,15 +93,16 @@ public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
         if (level == null)
             return Optional.empty();
         BlockEntity basinBE = level.getBlockEntity(worldPosition.below(2));
-        BlockEntity topBE = level.getBlockEntity(worldPosition.below());
-        if (!(basinBE instanceof FoundryBasinBlockEntity && topBE instanceof GlassedFoundryLidBlockEntity))
+        Block top = level.getBlockState(worldPosition.below()).getBlock();
+        if (!(basinBE instanceof FoundryBasinBlockEntity && top instanceof GlassedFoundryLidBlock))
             return Optional.empty();
-        if(topBE.getBlockState().getValue(FoundryLidBlock.OPEN))
-                return Optional.empty();
+        if (level.getBlockState(worldPosition.below()).getValue(GlassedFoundryLidBlock.OPEN))
+            return Optional.empty();
         return Optional.of((FoundryBasinBlockEntity) basinBE);
     }
 
     private static final Object AlloyingRecipesKey = new Object();
+
     @Override
     protected Object getRecipeCacheKey() {
         return AlloyingRecipesKey;
