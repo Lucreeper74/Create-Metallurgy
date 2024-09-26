@@ -40,5 +40,7 @@
   "createmetallurgy.logistics.address": "Net Address",
 
   "death.attack.createmetallurgy.mechanical_grinder": "%1$s's foots has been transformed into grated cheese",
-  "death.attack.createmetallurgy.mechanical_grinder.player": "%2$s used %1$s like a cheese for his pasta"
+  "death.attack.createmetallurgy.mechanical_grinder.player": "%2$s used %1$s like a cheese for his pasta",
+  "death.attack.createmetallurgy.molten_fluid": "%1$s tried to dip into molten metal like it was fondue...",
+  "death.attack.createmetallurgy.molten_fluid.player": "%2$s confused %1$s with a piece of bread for his molten metal fondue"
 }
