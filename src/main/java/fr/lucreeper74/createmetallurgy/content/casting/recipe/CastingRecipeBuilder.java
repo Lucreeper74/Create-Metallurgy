@@ -109,8 +109,8 @@ public class CastingRecipeBuilder {
         return this;
     }
 
-    public CastingRecipeBuilder withMoldConsumed() {
-        recipe.moldConsumed = true;
+    public CastingRecipeBuilder withMoldConsumed(boolean condition) {
+        recipe.moldConsumed = condition;
         return this;
     }
 

@@ -33,6 +33,9 @@ public class ColoredFluidRenderer extends FluidRenderer {
 
     public static void renderFluidBox(FluidStack fluidStack, float xMin, float yMin, float zMin, float xMax, float yMax,
                                       float zMax, VertexConsumer builder, PoseStack ms, int light, int color, boolean renderBottom) {
+        if (fluidStack.isEmpty())
+            return;
+
         Fluid fluid = fluidStack.getFluid();
         IClientFluidTypeExtensions clientFluid = IClientFluidTypeExtensions.of(fluid);
         FluidType fluidAttributes = fluid.getFluidType();

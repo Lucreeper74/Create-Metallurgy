@@ -8,7 +8,7 @@ import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
 import net.minecraft.util.Mth;
 
-import static fr.lucreeper74.createmetallurgy.content.glassed_foundry_lid.GlassedFoundryLidBlock.UNDER_FOUNDRY_MIXER;
+import static fr.lucreeper74.createmetallurgy.content.foundry_lids.glassed_lid.GlassedFoundryLidBlock.UNDER_FOUNDRY_MIXER;
 
 public class AnimatedFoundryMixer extends AnimatedKinetics {
     @Override

@@ -1,15 +1,11 @@
 package fr.lucreeper74.createmetallurgy.compat.jei.category;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.AllIcons;
-import com.simibubi.create.foundation.utility.Components;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.elements.CastingInBasinElement;
 import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingBasinRecipe;
-import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipe;
-import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingTableRecipe;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -17,7 +13,6 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;

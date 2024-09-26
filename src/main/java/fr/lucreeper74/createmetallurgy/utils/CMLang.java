@@ -44,7 +44,7 @@ public class CMLang {
 
     public static Object[] resolveBuilders(Object[] args) {
         for (int i = 0; i < args.length; i++)
-            if (args[i]instanceof LangBuilder cb)
+            if (args[i] instanceof LangBuilder cb)
                 args[i] = cb.component();
         return args;
     }
