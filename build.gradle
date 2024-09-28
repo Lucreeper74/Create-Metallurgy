@@ -145,7 +145,7 @@ repositories {
         url = 'https://maven.tterrag.com/'
     }
 
-    //For JEI
+    // For JEI
     maven {
         name = "Progwml6's maven"
         url = "https://maven.blamejared.com/"
@@ -159,11 +159,27 @@ repositories {
         url = "https://modmaven.dev"
     }
 
-    //For Jade
+    // For Jade
     maven {
         url "https://www.cursemaven.com"
         content {
             includeGroup "curse.maven"
+        }
+    }
+
+    // For Architectury
+    maven {
+        url = "https://maven.architectury.dev"
+        content {
+            includeGroup "dev.architectury"
+        }
+    }
+
+    // For KubeJS
+    maven {
+        url = "https://maven.saps.dev/minecraft"
+        content {
+            includeGroup "dev.latvian.mods"
         }
     }
 }
@@ -174,6 +190,10 @@ dependencies {
     implementation fg.deobf("com.simibubi.create:create-${mc_version}:${create_version}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${mc_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+
+    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
+    implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
+    implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
