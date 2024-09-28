@@ -1,5 +1,0 @@
-// 1.20.1	2024-06-11T00:28:19.3051389	Create Metallurgy's Generated Registry Entries
-bac28086c2a3f7a494e79e79e06ec006ba31537b data/createmetallurgy/damage_type/mechanical_grinder.json
-7f3862b02943f227bef74dc3db62014f523b2bc4 data/createmetallurgy/forge/biome_modifier/add_nether_wolframite_ore.json
-65ecf3387d7bd6ce4390a126b7d9218e2390ac89 data/createmetallurgy/worldgen/configured_feature/wolframite_ore.json
-4721aaf6fae6af79334841351435516b553374b2 data/createmetallurgy/worldgen/placed_feature/wolframite_ore_placed.json
