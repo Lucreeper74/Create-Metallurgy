@@ -4,7 +4,6 @@ import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import org.jetbrains.annotations.NotNull;
 public class CastingFluidTank extends FluidTank {
     private final CastingBlockEntity be;
     protected LerpedFloat fluidLevel;
@@ -71,6 +70,7 @@ public class CastingFluidTank extends FluidTank {
         if (resource.isEmpty() || !isFluidValid(resource)) {
             return 0;
         }
+
         int capacity = this.capacity;
         if (capacity == 0) {
             capacity = be.initProcess(resource, action);
@@ -80,6 +80,7 @@ public class CastingFluidTank extends FluidTank {
                 this.capacity = capacity;
             }
         }
+
         // Fill when empty
         if (fluid.isEmpty()) {
             int amount = Math.min(capacity, resource.getAmount());
@@ -89,26 +90,33 @@ public class CastingFluidTank extends FluidTank {
             }
             return amount;
         }
+
         // Safety (should never false)
         if (!fluid.isFluidEqual(resource)) {
             return 0;
         }
+
         // If full -> nothing
         int space = capacity - fluid.getAmount();
         if (space <= 0) {
             return 0;
         }
         // If enough space -> Fill
-        if (resource.getAmount() < space) {
-            fluid.grow(resource.getAmount());
-            space = resource.getAmount();
+        int amount = resource.getAmount();
+        if (amount < space) {
+            if (action.execute()) {
+                fluid.grow(amount);
+                onContentsChanged();
+            }
+            return amount;
         } else {
             // If too much -> Fill to max
-            fluid.setAmount(capacity);
+            if (action.execute()) {
+                fluid.setAmount(capacity);
+                onContentsChanged();
+            }
+            return space;
         }
-        if (space > 0)
-            onContentsChanged();
-        return space;
     }
     public LerpedFloat getFluidLevel() {
         return fluidLevel;
