@@ -97,6 +97,7 @@
   "createmetallurgy.recipe.grinding": "打磨",
   "createmetallurgy.recipe.melting": "熔铸炉熔炼",
   "createmetallurgy.recipe.polishing_with_grinder": "磨床打磨",
+  "createmetallurgy.recipe.casting.mold_consumed": "消耗模具!",
   "death.attack.createmetallurgy.mechanical_grinder": "%1$s的脚被擦成了丝",
   "death.attack.createmetallurgy.mechanical_grinder.player": "%2$s把%1$s擦成丝炒了",
   "fluid.createmetallurgy.molten_brass": "熔融黄铜",
