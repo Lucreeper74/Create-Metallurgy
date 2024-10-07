@@ -1,0 +1,25 @@
+{
+  "type": "createmetallurgy:melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:dirty_dusts/tin"
+      }
+    }
+  ],
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "tag": "forge:dirty_dusts/tin"
+    }
+  ],
+  "processingTime": 35,
+  "results": [
+    {
+      "amount": 90,
+      "fluid": "createmetallurgy:molten_tin"
+    }
+  ]
+}

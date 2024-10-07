@@ -1,0 +1,23 @@
+{
+  "type": "createmetallurgy:alloying",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "amount": 20,
+      "fluid": "createmetallurgy:molten_iron",
+      "nbt": {}
+    },
+    {
+      "amount": 10,
+      "fluid": "createmetallurgy:molten_nickel",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 40,
+  "results": [
+    {
+      "amount": 30,
+      "fluid": "createmetallurgy:molten_invar"
+    }
+  ]
+}

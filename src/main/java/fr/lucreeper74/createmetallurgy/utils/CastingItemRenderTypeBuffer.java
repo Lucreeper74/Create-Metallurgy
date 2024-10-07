@@ -14,7 +14,7 @@ public class CastingItemRenderTypeBuffer implements MultiBufferSource {
         this.inner = inner;
         // alpha is a direct fade from 0 to 255
         this.alpha = Mth.clamp(alphaItem, 0, 0xFF);
-        // RGB based on temperature, fades from 0xB06020 tint to 0xFFFFFF
+        // RGB based on fluid opacity, fades from 0xB06020 tint to 0xFFFFFF
         alphaFluid = Mth.clamp(alphaFluid, 0, 0xFF);
         this.red   = 0xFF - (alphaFluid * (0xFF - 0xB0) / 0xFF);
         this.green = 0xFF - (alphaFluid * (0xFF - 0x60) / 0xFF);

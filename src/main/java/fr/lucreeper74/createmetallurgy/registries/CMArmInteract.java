@@ -4,7 +4,6 @@ import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPoint
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -12,6 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.Function;
 
+@SuppressWarnings("unused")
 public class CMArmInteract extends AllArmInteractionPointTypes {
 
     public static final FoundryBasinType FOUNDRY_BASIN = register("foundry_basin", FoundryBasinType::new);

@@ -1,0 +1,23 @@
+{
+  "type": "createmetallurgy:alloying",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "amount": 30,
+      "fluid": "createmetallurgy:molten_copper",
+      "nbt": {}
+    },
+    {
+      "amount": 10,
+      "fluid": "createmetallurgy:molten_tin",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 40,
+  "results": [
+    {
+      "amount": 40,
+      "fluid": "createmetallurgy:molten_bronze"
+    }
+  ]
+}

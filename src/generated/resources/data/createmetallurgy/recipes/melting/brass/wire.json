@@ -1,0 +1,25 @@
+{
+  "type": "createmetallurgy:melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:wires/brass"
+      }
+    }
+  ],
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "tag": "forge:wires/brass"
+    }
+  ],
+  "processingTime": 20,
+  "results": [
+    {
+      "amount": 45,
+      "fluid": "createmetallurgy:molten_brass"
+    }
+  ]
+}

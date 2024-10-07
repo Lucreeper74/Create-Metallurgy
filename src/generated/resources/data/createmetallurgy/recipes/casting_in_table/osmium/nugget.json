@@ -1,0 +1,26 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:nuggets/osmium"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_nugget_mold"
+    },
+    {
+      "amount": 10,
+      "fluid": "createmetallurgy:molten_osmium",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 10,
+  "result": {
+    "tag": "forge:nuggets/osmium"
+  }
+}

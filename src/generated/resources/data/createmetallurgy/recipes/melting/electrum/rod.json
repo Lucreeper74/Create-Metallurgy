@@ -1,0 +1,25 @@
+{
+  "type": "createmetallurgy:melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:rods/electrum"
+      }
+    }
+  ],
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "tag": "forge:rods/electrum"
+    }
+  ],
+  "processingTime": 20,
+  "results": [
+    {
+      "amount": 45,
+      "fluid": "createmetallurgy:molten_electrum"
+    }
+  ]
+}

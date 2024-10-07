@@ -23,9 +23,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
@@ -57,8 +54,9 @@ public abstract class CastingBlock extends Block implements IBE<CastingBlockEnti
             return InteractionResult.SUCCESS;
 
         return onBlockEntityUse(worldIn, pos, be -> {
-            if(!be.getFluidTank().getFluidInTank(0).isEmpty())
+            if (!be.getFluidTank().getFluidInTank(0).isEmpty())
                 return InteractionResult.PASS;
+
             if (!heldItem.isEmpty()) {
                 if (heldItem.getItem()
                         .equals(Items.SPONGE)) {

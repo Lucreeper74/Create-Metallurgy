@@ -1,11 +1,11 @@
 package fr.lucreeper74.createmetallurgy.content.casting;
 
+import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
@@ -39,7 +39,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class CastingBlockEntity extends SmartBlockEntity {
+public abstract class CastingBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
     public LazyOptional<IItemHandlerModifiable> itemCapability;
     public CastingFluidTank inputTank;
@@ -70,6 +70,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
         compound.put("moldInv", moldInv.serializeNBT());
         compound.put("inv", inv.serializeNBT());
         compound.put("inputTank", inputTank.writeToNBT(new CompoundTag()));
+        compound.put("fluidBuffer", fluidBuffer.writeToNBT(new CompoundTag()));
         compound.putInt("castingTime", processingTick);
         compound.putBoolean("running", running);
         super.write(compound, clientPacket);
@@ -80,6 +81,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
         moldInv.deserializeNBT(compound.getCompound("moldInv"));
         inv.deserializeNBT(compound.getCompound("inv"));
         inputTank.readFromNBT(compound.getCompound("inputTank"));
+        fluidBuffer = FluidStack.loadFluidStackFromNBT(compound.getCompound("fluidBuffer"));
         processingTick = compound.getInt("castingTime");
         running = compound.getBoolean("running");
         super.read(compound, clientPacket);
@@ -110,35 +112,39 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
     public void tick() {
         super.tick();
 
-        if (level == null) return;
+        if (level == null)
+            return;
 
         inputTank.tick();
 
-        if (!level.isClientSide && (currentRecipe == null || processingTick == -1)) {
-            running = false;
+        if (!level.isClientSide && !running) {
             processingTick = -1;
             startProcess();
         }
 
         if (running) {
             if (!level.isClientSide) {
-                if (inputTank.getFluidAmount() >= inputTank.getCapacity() && matchCastingRecipe(currentRecipe)) {
+                if (canProcess()) {
                     if (processingTick <= 0)
                         process();
                 } else reset();
             } else spawnParticles();
 
-            if (processingTick >= 0)
-                --processingTick;
+            if (processingTick >= 0) {
+                if (isInAirCurrent(this.getLevel(), this.getBlockPos(), this))
+                    processingTick = processingTick - 2;
+                else
+                    --processingTick;
+            }
         }
     }
 
     public void startProcess() {
-        if (running && processingTick > 0) return;
+        if (running && processingTick > 0)
+            return;
 
-        if (currentRecipe != null && inputTank.getFluidAmount() >= inputTank.getCapacity() && matchCastingRecipe(currentRecipe)) {
-            processingTick = isInAirCurrent(this.getLevel(), this.getBlockPos(), this) ?
-                    currentRecipe.getProcessingDuration() / 2 : currentRecipe.getProcessingDuration();
+        if (canProcess()) {
+            processingTick = currentRecipe.getProcessingDuration();
             running = true;
             sendData();
         }
@@ -146,15 +152,21 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
 
     public void process() {
         FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
-        inv.setStackInSlot(0, currentRecipe.getResultItem(level.registryAccess()).copy());
+        inv.setStackInSlot(0, currentRecipe.getResultItem(getLevel().registryAccess()).copy());
         fluidInTank.shrink(currentRecipe.getFluidIngredient().getRequiredAmount());
 
-        if(currentRecipe.isMoldConsumed())
+        if (currentRecipe.isMoldConsumed())
             moldInv.setStackInSlot(0, ItemStack.EMPTY);
 
         level.playSound(null, worldPosition, SoundEvents.LAVA_EXTINGUISH,
                 SoundSource.BLOCKS, .2f, .5f);
         reset();
+    }
+
+    public boolean canProcess() {
+        if (currentRecipe != null)
+            return inputTank.getFluidAmount() >= inputTank.getCapacity() && matchCastingRecipe(currentRecipe);
+        return false;
     }
 
     protected void spawnParticles() {
@@ -211,17 +223,22 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
     public int initProcess(FluidStack fluid, IFluidHandler.FluidAction action) {
         if (currentRecipe != null || running)
             return 0;
+
         fluidBuffer = fluid;
+
         List<Recipe<?>> recipes = getMatchingRecipes();
         if (recipes.isEmpty())
             return 0;
+
         CastingRecipe recipe = (CastingRecipe) recipes.get(0);
         if (action == IFluidHandler.FluidAction.EXECUTE) {
             currentRecipe = recipe;
             sendData();
         }
+
         return recipe.getFluidIngredient().getRequiredAmount();
     }
+
     public void reset() {
         inputTank.reset();
         processingTick = -1;
@@ -229,9 +246,11 @@ public abstract class CastingBlockEntity extends SmartBlockEntity {
         running = false;
         sendData();
     }
+
     public FluidStack getFluidBuffer() {
         return fluidBuffer;
     }
+
 
     protected abstract <C extends Container> boolean matchStaticFilters(Recipe<C> recipe);
 

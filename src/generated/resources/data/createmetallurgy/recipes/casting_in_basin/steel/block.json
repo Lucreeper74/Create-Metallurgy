@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_steel",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 320,
+  "result": {
+    "item": "createmetallurgy:steel_block"
+  }
+}

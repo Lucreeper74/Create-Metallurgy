@@ -10,16 +10,20 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.HashSet;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class GrindingRecipeGen extends CMProcessingRecipesGen {
 
 
     GeneratedRecipe
+
             ALL_COPPER_BLOCKS = deoxidized(),
-            ALL_WAXED_COPPER_BLOCKS = unwaxed();
+            ALL_WAXED_COPPER_BLOCKS = unwaxed()
 
+            ;
 
+    //
 
-    GeneratedRecipe deoxidized() {
+    protected GeneratedRecipe deoxidized() {
         for (Block current : WeatheringCopper.NEXT_BY_BLOCK.get().values()) {
             Block previous = WeatheringCopper.getPrevious(current).get();
 
@@ -29,8 +33,7 @@ public class GrindingRecipeGen extends CMProcessingRecipesGen {
         }
         return null;
     }
-
-    GeneratedRecipe unwaxed() {
+    protected GeneratedRecipe unwaxed() {
         Set<Block> coppers = new HashSet<>() {{
             addAll(WeatheringCopper.NEXT_BY_BLOCK.get().values());
             addAll(WeatheringCopper.PREVIOUS_BY_BLOCK.get().values());
@@ -48,7 +51,7 @@ public class GrindingRecipeGen extends CMProcessingRecipesGen {
         return null;
     }
 
-
+    //
 
     public GrindingRecipeGen(PackOutput output) {
         super(output);

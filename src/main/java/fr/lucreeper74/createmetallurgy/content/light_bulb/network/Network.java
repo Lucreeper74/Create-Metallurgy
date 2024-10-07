@@ -44,38 +44,4 @@ public class Network {
             node.setReceivedSignal(power);
         }
     }
-
-
-
-
-
-
-
-
-
-
-//    public CompoundTag serializeNBT() {
-//        CompoundTag nbt = new CompoundTag();
-//
-//        ListTag nbtTagListNodes = new ListTag();
-//        for (Node node : nodes.values()) {
-//            nbtTagListNodes.add(node.serializeNBT());
-//        }
-//        nbt.put("Nodes", nbtTagListNodes);
-//
-//        return nbt;
-//    }
-//
-//    public void deserializeNBT(CompoundTag nbt) {
-//        ListTag nodes = (ListTag) nbt.get("Nodes");
-//
-//        for (int i = 0; i < nodes.size(); i++) {
-//            Node node = deserializeNodeNBT(nodes.getCompound(i));
-//            this.nodes.put(node.pos, node);
-//        }
-//    }
-//
-//    private Node deserializeNodeNBT(CompoundTag nbt) {
-//        return new Node(new BlockPos(nbt.getInt("X"), nbt.getInt("Y"), nbt.getInt("Z")));
-//    }
 }

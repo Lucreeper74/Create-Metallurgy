@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
 import com.simibubi.create.foundation.block.render.SpriteShifter;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 
+@SuppressWarnings("unused")
 public class CMSpriteShifts {
     public static final SpriteShiftEntry SAND_PAPER_BELT =
             get("block/grinder_belt/sand_paper", "block/grinder_belt/sand_paper_scroll"),

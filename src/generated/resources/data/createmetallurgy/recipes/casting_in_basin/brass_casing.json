@@ -1,0 +1,18 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "tag": "forge:stripped_logs"
+    },
+    {
+      "amount": 90,
+      "fluid": "createmetallurgy:molten_brass",
+      "nbt": {}
+    }
+  ],
+  "mold_consumed": true,
+  "processingTime": 70,
+  "result": {
+    "item": "create:brass_casing"
+  }
+}

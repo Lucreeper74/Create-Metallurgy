@@ -1,0 +1,23 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:storage_blocks/aluminum"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_aluminum",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 320,
+  "result": {
+    "tag": "forge:storage_blocks/aluminum"
+  }
+}

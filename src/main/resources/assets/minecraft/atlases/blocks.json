@@ -2,59 +2,155 @@
   "sources": [
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/brass/molten_brass_flow"
+      "resource": "createmetallurgy:fluid/brass/flowing"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/brass/molten_brass_still"
+      "resource": "createmetallurgy:fluid/brass/still"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/copper/molten_copper_flow"
+      "resource": "createmetallurgy:fluid/copper/flowing"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/copper/molten_copper_still"
+      "resource": "createmetallurgy:fluid/copper/still"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/gold/molten_gold_flow"
+      "resource": "createmetallurgy:fluid/gold/flowing"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/gold/molten_gold_still"
+      "resource": "createmetallurgy:fluid/gold/still"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/iron/molten_iron_flow"
+      "resource": "createmetallurgy:fluid/iron/flowing"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/iron/molten_iron_still"
+      "resource": "createmetallurgy:fluid/iron/still"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/steel/molten_steel_flow"
+      "resource": "createmetallurgy:fluid/steel/flowing"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/steel/molten_steel_still"
+      "resource": "createmetallurgy:fluid/steel/still"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/tungsten/molten_tungsten_flow"
+      "resource": "createmetallurgy:fluid/tungsten/flowing"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/tungsten/molten_tungsten_still"
+      "resource": "createmetallurgy:fluid/tungsten/still"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/zinc/molten_zinc_flow"
+      "resource": "createmetallurgy:fluid/zinc/flowing"
     },
     {
       "type": "single",
-      "resource": "createmetallurgy:fluid/zinc/molten_zinc_still"
+      "resource": "createmetallurgy:fluid/zinc/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/netherite/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/netherite/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/aluminum/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/aluminum/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/lead/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/lead/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/nickel/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/nickel/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/osmium/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/osmium/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/silver/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/silver/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/tin/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/tin/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/invar/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/invar/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/electrum/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/electrum/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/bronze/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/bronze/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/constantan/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/constantan/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/void_steel/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/void_steel/still"
     }
   ]
 }

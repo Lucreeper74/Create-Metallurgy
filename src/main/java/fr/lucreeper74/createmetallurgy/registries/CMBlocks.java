@@ -20,11 +20,11 @@ import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlock;
 import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerBlock;
 import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderBlock;
 import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_lid.FoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_lid.FoundryLidGenerator;
-import fr.lucreeper74.createmetallurgy.content.glassed_foundry_lid.GlassedFoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.content.glassed_foundry_lid.GlassedFoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.light_bulb.LightBulbBlock;
+import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidGenerator;
+import fr.lucreeper74.createmetallurgy.content.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.foundry_lids.glassed_lid.GlassedFoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.utils.CMDyeHelper;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
@@ -265,6 +265,7 @@ public class CMBlocks {
                 .tag(forgeItemTag("light_bulbs"))
                 .model((c, p) -> p.withExistingParent(colorName + "_light_bulb", p.modLoc("block/light_bulb/item"))
                         .texture("0", p.modLoc("block/light_bulb/" + colorName)))
+//              .transform(customItemModel(colorName + "_light_bulb", "item"))
                 .build()
                 .register();
     });

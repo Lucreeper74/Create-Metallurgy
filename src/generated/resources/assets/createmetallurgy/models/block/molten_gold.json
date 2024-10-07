@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "createmetallurgy:fluid/gold/molten_gold_still"
+    "particle": "createmetallurgy:fluid/gold/still"
   }
 }

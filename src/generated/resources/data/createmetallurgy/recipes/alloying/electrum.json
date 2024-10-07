@@ -1,0 +1,23 @@
+{
+  "type": "createmetallurgy:alloying",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "amount": 10,
+      "fluid": "createmetallurgy:molten_gold",
+      "nbt": {}
+    },
+    {
+      "amount": 10,
+      "fluid": "createmetallurgy:molten_silver",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 40,
+  "results": [
+    {
+      "amount": 30,
+      "fluid": "createmetallurgy:molten_electrum"
+    }
+  ]
+}

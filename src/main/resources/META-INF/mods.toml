@@ -67,6 +67,6 @@ Create Metallurgy is a Create Mod Addon developped by Luc_Creeper74, that allow 
 [[dependencies.createmetallurgy]]
     modId="create"
     mandatory=true
-    versionRange="[0.5.1.f,)"
+    versionRange="[0.5.1.h,)"
     ordering="NONE"
     side="BOTH"

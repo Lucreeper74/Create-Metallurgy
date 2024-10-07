@@ -1,0 +1,26 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:gears/void_steel"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_gear_mold"
+    },
+    {
+      "amount": 360,
+      "fluid": "createmetallurgy:molten_void_steel",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 160,
+  "result": {
+    "tag": "forge:gears/void_steel"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:rods/copper"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "createmetallurgy:graphite_rod_mold"
+    },
+    {
+      "amount": 45,
+      "fluid": "createmetallurgy:molten_copper",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 30,
+  "result": {
+    "tag": "forge:rods/copper"
+  }
+}

@@ -1,9 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.casting.table;
 
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockEntity;

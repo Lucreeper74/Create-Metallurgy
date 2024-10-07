@@ -1,8 +1,8 @@
 package fr.lucreeper74.createmetallurgy.content.casting.recipe;
 
-import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
+import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockEntity;
 import net.minecraft.core.RegistryAccess;
@@ -23,15 +23,15 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
     protected Ingredient ingredient;
     protected int processingDuration;
     protected boolean moldConsumed;
-    protected ProcessingOutput result;
+    protected CastingOutput result;
 
-    public CastingRecipe(ResourceLocation id, Ingredient ingredient, FluidIngredient fluid, int processingTime, boolean moldConsumed, ProcessingOutput result) {
+    public CastingRecipe(ResourceLocation id) {
         this.id = id;
-        this.ingredient = ingredient;
-        this.fluidIngredient = fluid;
-        this.processingDuration = processingTime;
-        this.moldConsumed = moldConsumed;
-        this.result = result;
+        this.ingredient = Ingredient.EMPTY;
+        this.fluidIngredient = FluidIngredient.EMPTY;
+        this.processingDuration = 0;
+        this.moldConsumed = false;
+        this.result = CastingOutput.EMPTY;
 
         validate(id);
     }
@@ -61,7 +61,7 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
     }
 
     @Override
-    public boolean matches(SmartInventory pContainer, Level pLevel) {
+    public boolean matches(SmartInventory inv, Level level) {
         return false;
     }
 
@@ -80,10 +80,6 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
         return result.getStack();
     }
 
-    public ProcessingOutput getProcessingOutput() {
-        return result;
-    }
-
     @Override
     public ResourceLocation getId() {
         return id;
@@ -93,7 +89,11 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
     public abstract RecipeSerializer<?> getSerializer();
 
     @Override
-    public abstract RecipeType<?> getType();
+    public RecipeType<?> getType() {
+        return getTypeInfo().getType();
+    }
+
+    public abstract IRecipeTypeInfo getTypeInfo();
 
     public Ingredient getIngredient() {
         return ingredient;
