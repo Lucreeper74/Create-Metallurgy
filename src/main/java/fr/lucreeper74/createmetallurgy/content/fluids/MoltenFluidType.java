@@ -21,12 +21,12 @@ public class MoltenFluidType extends AllFluids.TintedFluidType {
 
     @Override
     protected int getTintColor(FluidStack stack) {
-        return 0x00ffffff;
+        return 0xFFFFFFFF;
     }
 
     @Override
     protected int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
-        return 0x00ffffff;
+        return 0xFFFFFFFF;
     }
 
     @Override
