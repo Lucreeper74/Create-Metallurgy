@@ -2,7 +2,7 @@
   "itemGroup.createmetallurgy.main_group": "机械动力:冶金学",
   "advancement.createmetallurgy.belt_grinder": "超好用擦丝器!",
   "createmetallurgy.recipe.casting.mold_consumed": "消耗模具!",
-  "death.attack.createmetallurgy.molten_fluid.player": "%2$s把%1$s熔化成了[银]耳莲子羹的糖",
+  "death.attack.createmetallurgy.molten_fluid.player": "%2$s把%1$s熔化成了[银]耳莲子羹中的糖",
   "createmetallurgy.ponder.tag.metalwork": "金属加工",
   "createmetallurgy.ponder.tag.metalwork.description": "用于加工金属的组件",
   "advancement.createmetallurgy.belt_grinder.desc": "获得动力砂带磨床",
