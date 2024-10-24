@@ -15,12 +15,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -68,24 +70,24 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
 
     @Override
     public void write(CompoundTag compound, boolean clientPacket) {
+        super.write(compound, clientPacket);
         compound.put("moldInv", moldInv.serializeNBT());
         compound.put("inv", inv.serializeNBT());
         compound.put("inputTank", inputTank.writeToNBT(new CompoundTag()));
         compound.put("fluidBuffer", fluidBuffer.writeToNBT(new CompoundTag()));
         compound.putInt("castingTime", processingTick);
         compound.putBoolean("running", running);
-        super.write(compound, clientPacket);
     }
 
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
+        super.read(compound, clientPacket);
         moldInv.deserializeNBT(compound.getCompound("moldInv"));
         inv.deserializeNBT(compound.getCompound("inv"));
         inputTank.readFromNBT(compound.getCompound("inputTank"));
         fluidBuffer = FluidStack.loadFluidStackFromNBT(compound.getCompound("fluidBuffer"));
         processingTick = compound.getInt("castingTime");
         running = compound.getBoolean("running");
-        super.read(compound, clientPacket);
     }
 
     public void readOnlyItems(CompoundTag compound) {
@@ -124,12 +126,20 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
         }
 
         if (running) {
+            if (currentRecipe == null) { //Was running on unload, fetch old recipe
+                List<Recipe<?>> recipes = getMatchingRecipes();
+                if (!recipes.isEmpty())
+                    currentRecipe = (CastingRecipe) recipes.get(0);
+            }
+
             if (!level.isClientSide) {
                 if (canProcess()) {
                     if (processingTick <= 0)
                         process();
-                } else reset();
-            } else spawnParticles();
+                } else
+                    reset();
+            } else
+                spawnParticles();
 
             if (processingTick >= 0) {
                 if (isInAirCurrent(this.getLevel(), this.getBlockPos(), this))
