@@ -159,11 +159,21 @@ public class FoundryBasinRecipe extends ProcessingRecipe<SmartInventory> {
 
     @Override
     protected int getMaxInputCount() {
-        return 1;
+        return 9;
     }
 
     @Override
     protected int getMaxOutputCount() {
+        return 4;
+    }
+
+    @Override
+    protected int getMaxFluidInputCount() {
+        return 4;
+    }
+
+    @Override
+    protected int getMaxFluidOutputCount() {
         return 2;
     }
 
