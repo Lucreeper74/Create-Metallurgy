@@ -1,8 +1,11 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.simibubi.create.AllTags;
+import com.simibubi.create.foundation.item.TagDependentIngredientItem;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType;
+import fr.lucreeper74.createmetallurgy.content.fluids.TagDependentBucketItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.common.SoundActions;
@@ -12,14 +15,14 @@ import static com.simibubi.create.AllTags.forgeFluidTag;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
 @SuppressWarnings("unused")
-public class CMFluids {
+public class  CMFluids {
     //Simple Metals
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_IRON = moltenFluid("iron", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_GOLD = moltenFluid("gold", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_COPPER = moltenFluid("copper", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ZINC = moltenFluid("zinc", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_BRASS = moltenFluid("brass", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TUNGSTEN = moltenFluid("tungsten", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TUNGSTEN = moltenFluid("tungsten", 2200, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_STEEL = moltenFluid("steel", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_NETHERITE = moltenFluid("netherite", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ALUMINUM = moltenFluid("aluminum", 2000, 1400, 10, 2, 25, 3, 100f);
@@ -35,6 +38,7 @@ public class CMFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_BRONZE = moltenFluid("bronze", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_CONSTANTAN = moltenFluid("constantan", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_VOID_STEEL = moltenFluid("void_steel", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_OBDURIUM = moltenFluid("obdurium", 2400, 1400, 10, 2, 25, 3, 100f);
 
     //
 
@@ -54,7 +58,7 @@ public class CMFluids {
                         .explosionResistance(explosionResistance))
                 .tag(forgeFluidTag("molten_" + name), forgeFluidTag("molten_materials"))
                 .source(ForgeFlowingFluid.Source::new)
-                .bucket()
+                .bucket((content, props) -> new TagDependentBucketItem(content, props, AllTags.forgeItemTag("ingots/" + name)))
                 .build()
                 .register();
     }
