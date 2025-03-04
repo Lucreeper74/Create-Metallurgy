@@ -1,9 +1,9 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.AllTags;
-import com.simibubi.create.foundation.item.TagDependentIngredientItem;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidSource;
 import fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType;
 import fr.lucreeper74.createmetallurgy.content.fluids.TagDependentBucketItem;
 import net.minecraft.resources.ResourceLocation;
@@ -57,7 +57,7 @@ public class  CMFluids {
                         .slopeFindDistance(slopeDistance)
                         .explosionResistance(explosionResistance))
                 .tag(forgeFluidTag("molten_" + name), forgeFluidTag("molten_materials"))
-                .source(ForgeFlowingFluid.Source::new)
+                .source(MoltenFluidSource::new)
                 .bucket((content, props) -> new TagDependentBucketItem(content, props, AllTags.forgeItemTag("ingots/" + name)))
                 .build()
                 .register();
