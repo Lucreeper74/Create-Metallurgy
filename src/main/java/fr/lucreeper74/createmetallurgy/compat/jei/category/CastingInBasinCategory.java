@@ -5,7 +5,7 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.AllIcons;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.elements.CastingInBasinElement;
-import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingBasinRecipe;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;

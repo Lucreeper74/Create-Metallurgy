@@ -26,36 +26,28 @@ public class MeltingRecipeGen extends CMProcessingRecipesGen {
 
             COMPAT_METALS = moddedMetals(),
 
-            IRON_METAL = standardMetals(CMFluids.MOLTEN_IRON, "iron"),
-                    GOLD_METAL = standardMetals(CMFluids.MOLTEN_GOLD, "gold"),
-                    COPPER_METAL = standardMetals(CMFluids.MOLTEN_COPPER, "copper"),
-                    BRASS_METAL = standardMetals(CMFluids.MOLTEN_BRASS, "brass"),
-                    ZINC_METAL = standardMetals(CMFluids.MOLTEN_ZINC, "zinc"),
-                    TUNGSTEN_METAL = standardMetals(CMFluids.MOLTEN_TUNGSTEN, "tungsten"),
-                    STEEL_METAL = standardMetals(CMFluids.MOLTEN_STEEL, "steel"),
-                    NETHERITE_METAL = standardMetals(CMFluids.MOLTEN_NETHERITE, "netherite")
-
-            ;
+    IRON_METAL = standardMetals(CMFluids.MOLTEN_IRON, "iron", HeatCondition.HEATED),
+            GOLD_METAL = standardMetals(CMFluids.MOLTEN_GOLD, "gold", HeatCondition.HEATED),
+            COPPER_METAL = standardMetals(CMFluids.MOLTEN_COPPER, "copper", HeatCondition.HEATED),
+            BRASS_METAL = standardMetals(CMFluids.MOLTEN_BRASS, "brass", HeatCondition.HEATED),
+            ZINC_METAL = standardMetals(CMFluids.MOLTEN_ZINC, "zinc", HeatCondition.HEATED),
+            TUNGSTEN_METAL = standardMetals(CMFluids.MOLTEN_TUNGSTEN, "tungsten", HeatCondition.HEATED),
+            OBDURIUM_METAL = standardMetals(CMFluids.MOLTEN_OBDURIUM, "obdurium", HeatCondition.SUPERHEATED),
+            STEEL_METAL = standardMetals(CMFluids.MOLTEN_STEEL, "steel", HeatCondition.HEATED),
+            NETHERITE_METAL = standardMetals(CMFluids.MOLTEN_NETHERITE, "netherite", HeatCondition.SUPERHEATED);
 
     //
 
-    protected GeneratedRecipe standardMetals(FluidEntry<ForgeFlowingFluid.Flowing> fluid, String metalName) {
-        meltingTag(metalName + "/ingot", forgeItemTag("ingots/" + metalName), fluid, 90, HeatCondition.HEATED, 40);
-        meltingTag(metalName + "/nugget", forgeItemTag("nuggets/" + metalName), fluid, 10, HeatCondition.HEATED, 4);
-        meltingTag(metalName + "/plate", forgeItemTag("plates/" + metalName), fluid, 90, HeatCondition.HEATED, 40);
-
-        if(metalName.equals("tungsten")) {
-            meltingTag("wolframite/dirty_dust", forgeItemTag("dirty_dusts/wolframite"), fluid, 90, HeatCondition.HEATED, 30);
-            meltingTag("wolframite/dust", forgeItemTag("dusts/wolframite"), fluid, 90, HeatCondition.HEATED, 30);
-        } else {
-            meltingTag(metalName + "/dirty_dust", forgeItemTag("dirty_dusts/" + metalName), fluid, 90, HeatCondition.HEATED, 30);
-            meltingTag(metalName + "/dust", forgeItemTag("dusts/" + metalName), fluid, 90, HeatCondition.HEATED, 20);
-        }
-
-        meltingTag(metalName + "/rod", forgeItemTag("rods/" + metalName), fluid, 45, HeatCondition.HEATED, 20);
-        meltingTag(metalName + "/gear", forgeItemTag("gears/" + metalName), fluid, 360, HeatCondition.HEATED, 160);
-        meltingTag(metalName + "/coin", forgeItemTag("coins/" + metalName), fluid, 10, HeatCondition.HEATED, 4);
-        meltingTag(metalName + "/wire", forgeItemTag("wires/" + metalName), fluid, 45, HeatCondition.HEATED, 20);
+    protected GeneratedRecipe standardMetals(FluidEntry<ForgeFlowingFluid.Flowing> fluid, String metalName, HeatCondition heatCondition) {
+        meltingTag(metalName + "/ingot", forgeItemTag("ingots/" + metalName), fluid, 90, heatCondition, 40);
+        meltingTag(metalName + "/nugget", forgeItemTag("nuggets/" + metalName), fluid, 10, heatCondition, 4);
+        meltingTag(metalName + "/plate", forgeItemTag("plates/" + metalName), fluid, 90, heatCondition, 40);
+        meltingTag(metalName + "/dirty_dust", forgeItemTag("dirty_dusts/" + metalName), fluid, 90, heatCondition, 30);
+        meltingTag(metalName + "/dust", forgeItemTag("dusts/" + metalName), fluid, 90, heatCondition, 20);
+        meltingTag(metalName + "/rod", forgeItemTag("rods/" + metalName), fluid, 45, heatCondition, 20);
+        meltingTag(metalName + "/gear", forgeItemTag("gears/" + metalName), fluid, 360, heatCondition, 160);
+        meltingTag(metalName + "/coin", forgeItemTag("coins/" + metalName), fluid, 10, heatCondition, 4);
+        meltingTag(metalName + "/wire", forgeItemTag("wires/" + metalName), fluid, 45, heatCondition, 20);
         return null;
     }
 

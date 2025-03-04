@@ -1,8 +1,11 @@
 package fr.lucreeper74.createmetallurgy.data.recipes;
 
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.tterrag.registrate.util.entry.FluidEntry;
+import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
+import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.TagKey;
@@ -21,6 +24,12 @@ public class AlloyingRecipeGen extends CMProcessingRecipesGen {
             ELECTRUM = basicAlloy("electrum", CMFluids.MOLTEN_GOLD, 10, CMFluids.MOLTEN_SILVER, 10, CMFluids.MOLTEN_ELECTRUM, 30, HeatCondition.HEATED, 40),
             BRONZE = basicAlloy("bronze", CMFluids.MOLTEN_COPPER, 30, CMFluids.MOLTEN_TIN, 10, CMFluids.MOLTEN_BRONZE, 40, HeatCondition.HEATED, 40),
             CONSTANTAN = basicAlloy("constantan", CMFluids.MOLTEN_COPPER, 10, CMFluids.MOLTEN_NICKEL, 10, CMFluids.MOLTEN_CONSTANTAN, 20, HeatCondition.HEATED, 40),
+
+
+            OBDURIUM = create("obdurium", b -> b.require(AllItems.ANDESITE_ALLOY.get())
+                .require(CMFluids.MOLTEN_TUNGSTEN.get(), 60)
+                .requiresHeat(HeatCondition.SUPERHEATED)
+                .output(CMFluids.MOLTEN_OBDURIUM.get(), 150)),
 
             NETHERITE = create("netherite", b -> b.require(Items.NETHERITE_SCRAP)
                 .require(Items.NETHERITE_SCRAP)

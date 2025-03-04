@@ -8,7 +8,7 @@ import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.compat.CMCompatMetals;
-import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipeBuilder;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingRecipeBuilder;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
@@ -40,12 +40,12 @@ public class CastingRecipeGen extends CreateRecipeProvider {
                 ZINC_METAL = standardMetals(CMFluids.MOLTEN_ZINC, AllBlocks.ZINC_BLOCK.get(), AllItems.ZINC_INGOT.get(), null, AllItems.ZINC_NUGGET.get(), "zinc"),
                 STEEL_METAL = standardMetals(CMFluids.MOLTEN_STEEL, CMBlocks.STEEL_BLOCK.get(), CMItems.STEEL_INGOT.get(), null, null, "steel"),
                 TUNGSTEN_METAL = standardMetals(CMFluids.MOLTEN_TUNGSTEN, CMBlocks.TUNGSTEN_BLOCK.get(), CMItems.TUNGSTEN_INGOT.get(), CMItems.TUNGSTEN_SHEET.get(), CMItems.TUNGSTEN_NUGGET.get(), "tungsten"),
+                OBDURIUM_METAL = standardMetals(CMFluids.MOLTEN_OBDURIUM, CMBlocks.OBDURIUM_BLOCK.get(), CMItems.OBDURIUM_INGOT.get(), CMItems.OBDURIUM_SHEET.get(), null, "obdurium"),
                 NETHERITE_METAL = standardMetals(CMFluids.MOLTEN_NETHERITE, Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT, null, null, "netherite"),
 
             ANDESITE_ALLOY_FROM_IRON = basin("andesite_alloy_from_iron", Items.ANDESITE, true, CMFluids.MOLTEN_IRON, 90, AllBlocks.ANDESITE_ALLOY_BLOCK.get(), 360),
                 ANDESITE_ALLOY_FROM_ZINC = basin("andesite_alloy_from_zinc", Items.ANDESITE, true, CMFluids.MOLTEN_ZINC, 90, AllBlocks.ANDESITE_ALLOY_BLOCK.get(), 360),
 
-//          ANDESITE_CASING = basinWithMoldTag(AllTags.AllItemTags.STRIPPED_LOGS.tag, CMFluids.MOLTEN_ANDESITE_ALLOY, 90, AllBlocks.ANDESITE_CASING, 200),
                 COPPER_CASING = basinWithMoldTag(AllTags.AllItemTags.STRIPPED_LOGS.tag, true, CMFluids.MOLTEN_COPPER, 90, AllBlocks.COPPER_CASING.get(), 70),
                 BRASS_CASING = basinWithMoldTag(AllTags.AllItemTags.STRIPPED_LOGS.tag, true, CMFluids.MOLTEN_BRASS, 90, AllBlocks.BRASS_CASING.get(), 70)
 

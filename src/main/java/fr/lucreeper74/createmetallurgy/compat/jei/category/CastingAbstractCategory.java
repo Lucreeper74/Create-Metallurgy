@@ -2,7 +2,7 @@ package fr.lucreeper74.createmetallurgy.compat.jei.category;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
-import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingRecipe;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
