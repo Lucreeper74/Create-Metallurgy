@@ -47,9 +47,7 @@ public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
         if (recipe == null)
             return false;
         Optional<BasinBlockEntity> basin = getBasin();
-        if (!basin.isPresent())
-            return false;
-        return FoundryBasinRecipe.match((FoundryBasinBlockEntity) basin.get(), recipe);
+        return basin.filter(basinBlockEntity -> FoundryBasinRecipe.match((FoundryBasinBlockEntity) basinBlockEntity, recipe)).isPresent();
     }
 
     @Override
@@ -58,7 +56,7 @@ public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
             return;
 
         Optional<BasinBlockEntity> optionalBasin = getBasin();
-        if (!optionalBasin.isPresent())
+        if (optionalBasin.isEmpty())
             return;
         FoundryBasinBlockEntity basin = (FoundryBasinBlockEntity) optionalBasin.get();
         boolean wasEmpty = basin.canContinueProcessing();

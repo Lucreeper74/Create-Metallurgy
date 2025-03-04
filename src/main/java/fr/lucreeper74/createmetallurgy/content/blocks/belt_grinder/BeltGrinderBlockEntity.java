@@ -274,10 +274,8 @@ public class BeltGrinderBlockEntity extends KineticBlockEntity {
                 results.add(recipe.getResultItem()
                         .copy());
 
-            for (int i = 0; i < results.size(); i++) {
-                ItemStack stack = results.get(i);
+            for (ItemStack stack : results)
                 ItemHelper.addToList(stack, list);
-            }
         }
         for (int slot = 0; slot < list.size() && slot + 1 < inv.getSlots(); slot++)
             inv.setStackInSlot(slot + 1, list.get(slot));
@@ -308,7 +306,7 @@ public class BeltGrinderBlockEntity extends KineticBlockEntity {
         float speed = Math.abs(getSpeed());
         if (speed == 0)
             return;
-        if(!inv.isEmpty() && AnimationTickHolder.getTicks() % 4 == 0) {
+        if (!inv.isEmpty() && AnimationTickHolder.getTicks() % 4 == 0) {
             float pitch = Mth.clamp((speed / 256f) * 2f, .5f, 1.6f);
             AllSoundEvents.SANDING_SHORT.playAt(level, worldPosition, .3f, level.random.nextFloat() * 0.5F + pitch, true);
         }

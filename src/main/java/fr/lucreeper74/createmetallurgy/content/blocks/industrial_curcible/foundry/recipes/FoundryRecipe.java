@@ -1,7 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.industrial_curcible.foundry.recipes;
 
 import com.google.gson.JsonObject;
-import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;

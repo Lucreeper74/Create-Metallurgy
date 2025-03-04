@@ -82,9 +82,7 @@ public class FoundryBasinRecipe extends ProcessingRecipe<SmartInventory> {
             int[] extractedFluidsFromTank = new int[availableFluids.getTanks()];
 
             Ingredients:
-            for (int i = 0; i < ingredients.size(); i++) {
-                Ingredient ingredient = ingredients.get(i);
-
+            for (Ingredient ingredient : ingredients) {
                 for (int slot = 0; slot < availableItems.getSlots(); slot++) {
                     if (simulate && availableItems.getStackInSlot(slot)
                             .getCount() <= extractedItemsFromSlot[slot])
@@ -104,8 +102,7 @@ public class FoundryBasinRecipe extends ProcessingRecipe<SmartInventory> {
 
             boolean fluidsAffected = false;
             FluidIngredients:
-            for (int i = 0; i < fluidIngredients.size(); i++) {
-                FluidIngredient fluidIngredient = fluidIngredients.get(i);
+            for (FluidIngredient fluidIngredient : fluidIngredients) {
                 int amountRequired = fluidIngredient.getRequiredAmount();
 
                 for (int tank = 0; tank < availableFluids.getTanks(); tank++) {
