@@ -2,18 +2,17 @@
   "type": "create:milling",
   "ingredients": [
     {
-      "item": "create:crushed_raw_zinc"
+      "item": "create:crushed_raw_iron"
     }
   ],
   "processingTime": 150,
   "results": [
     {
-      "item": "createmetallurgy:dirty_zinc_dust"
+      "item": "createmetallurgy:dirty_iron_dust"
     },
     {
       "chance": 0.25,
-      "count": 1,
-      "item": "createmetallurgy:dirty_zinc_dust"
+      "item": "createmetallurgy:dirty_iron_dust"
     }
   ]
 }

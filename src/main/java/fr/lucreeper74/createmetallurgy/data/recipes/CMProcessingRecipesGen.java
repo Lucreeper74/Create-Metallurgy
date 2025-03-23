@@ -1,19 +1,19 @@
 package fr.lucreeper74.createmetallurgy.data.recipes;
 
-import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import fr.lucreeper74.createmetallurgy.data.recipes.create.*;
+import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.AlloyingRecipeGen;
+import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.GrindingRecipeGen;
+import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.MeltingRecipeGen;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
@@ -22,13 +22,21 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-public abstract class CMProcessingRecipesGen extends CreateRecipeProvider {
+public abstract class CMProcessingRecipesGen extends CMRecipeProvider {
     protected static final List<CMProcessingRecipesGen> GENS = new ArrayList<>();
 
     public static void registerAll(DataGenerator gen) {
+        /* Create Metallurgy Recipes */
         GENS.add(new GrindingRecipeGen(gen));
         GENS.add(new MeltingRecipeGen(gen));
         GENS.add(new AlloyingRecipeGen(gen));
+
+        /* Create Recipes */
+        GENS.add(new CMMixingRecipeGen(gen));
+        GENS.add(new CMCrushingRecipeGen(gen));
+        GENS.add(new CMMillingRecipeGen(gen));
+        GENS.add(new CMWashingRecipeGen(gen));
+        GENS.add(new CMPressingRecipeGen(gen));
 
         gen.addProvider(true, new DataProvider() {
 
@@ -55,7 +63,7 @@ public abstract class CMProcessingRecipesGen extends CreateRecipeProvider {
     }
 
 
-    <T extends ProcessingRecipe<?>> GeneratedRecipe create(Supplier<ItemLike> singleIngredient,
+    protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(Supplier<ItemLike> singleIngredient,
                                                                                 UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
         return create(CreateMetallurgy.MOD_ID, singleIngredient, transform);
     }
@@ -107,14 +115,5 @@ public abstract class CMProcessingRecipesGen extends CreateRecipeProvider {
 
     protected <T extends ProcessingRecipe<?>> ProcessingRecipeSerializer<T> getSerializer() {
         return getRecipeType().getSerializer();
-    }
-
-    // Shortcut for tags & items
-    protected static class T {
-
-
-        static TagKey<Item> coke() {
-            return AllTags.forgeItemTag("coal_coke");
-        }
     }
 }

@@ -11,8 +11,7 @@
     },
     {
       "chance": 0.5,
-      "item": "minecraft:gold_nugget",
-      "count": 2
+      "item": "minecraft:gold_nugget"
     }
   ]
 }

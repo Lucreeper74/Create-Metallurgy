@@ -12,7 +12,6 @@
     },
     {
       "chance": 0.25,
-      "count": 1,
       "item": "createmetallurgy:dirty_wolframite_dust"
     }
   ]

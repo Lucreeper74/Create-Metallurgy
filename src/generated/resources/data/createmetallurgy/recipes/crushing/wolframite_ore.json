@@ -12,10 +12,6 @@
     },
     {
       "chance": 0.75,
-      "item": "createmetallurgy:crushed_raw_wolframite"
-    },
-    {
-      "chance": 0.75,
       "item": "create:experience_nugget"
     },
     {
