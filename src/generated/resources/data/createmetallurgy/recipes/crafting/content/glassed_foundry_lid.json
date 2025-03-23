@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "create:andesite_alloy"
+    },
+    "B": {
+      "tag": "forge:glass"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "B B"
+  ],
+  "result": {
+    "item": "createmetallurgy:glassed_foundry_lid"
+  }
+}
