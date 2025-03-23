@@ -1,0 +1,38 @@
+{
+  "parent": "createmetallurgy:industrial_crucible",
+  "criteria": {
+    "have_foundry_unit": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:foundry_unit"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createmetallurgy.foundry.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "createmetallurgy:foundry_unit"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createmetallurgy.foundry"
+    }
+  },
+  "requirements": [
+    [
+      "have_foundry_unit"
+    ]
+  ]
+}

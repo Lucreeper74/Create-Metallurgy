@@ -1,0 +1,26 @@
+{
+  "type": "createmetallurgy:bulk_melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:storage_blocks/silver"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/silver"
+    }
+  ],
+  "maxHeatRequirement": 50,
+  "minHeatRequirement": 4,
+  "processingTime": 200,
+  "results": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_silver"
+    }
+  ]
+}

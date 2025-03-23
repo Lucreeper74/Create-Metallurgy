@@ -1,7 +1,7 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.AllItems;
-import com.simibubi.create.content.fluids.tank.FluidTankItem;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
@@ -15,21 +15,19 @@ import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderGenerator;
-import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockMovementBehavior;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidGenerator;
-import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerBlock;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderBlock;
-import fr.lucreeper74.createmetallurgy.content.casting.basin.CastingBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.glassed_lid.GlassedFoundryLidGenerator;
-import fr.lucreeper74.createmetallurgy.content.industrial_ladle.IndustrialLadleBlock;
-import fr.lucreeper74.createmetallurgy.content.industrial_ladle.IndustrialLadleGenerator;
-import fr.lucreeper74.createmetallurgy.content.industrial_ladle.IndustrialLadleModel;
-import fr.lucreeper74.createmetallurgy.content.light_bulb.LightBulbBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockMovementBehavior;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.basin.CastingBasinBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTableBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.*;
+import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.utils.CMDyeHelper;
 import net.minecraft.client.renderer.RenderType;
@@ -43,7 +41,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
@@ -82,6 +79,17 @@ public class CMBlocks {
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/tungsten"))
+            .tag(Tags.Items.STORAGE_BLOCKS)
+            .build()
+            .register();
+
+    public static final BlockEntry<Block> OBDURIUM_BLOCK = REGISTRATE
+            .block("obdurium_block", Block::new)
+            .initialProperties(() -> Blocks.EMERALD_BLOCK)
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .tag(BlockTags.NEEDS_DIAMOND_TOOL)
+            .tag(Tags.Blocks.STORAGE_BLOCKS)
+            .transform(tagBlockAndItem("storage_blocks/obdurium"))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
             .register();
@@ -208,15 +216,17 @@ public class CMBlocks {
             .transform(customItemModel("foundry_mixer", "item"))
             .register();
 
-    public static final BlockEntry<IndustrialLadleBlock> INDUSTRIAL_LADLE = REGISTRATE.block("industrial_ladle", Material.METAL, IndustrialLadleBlock::new)
-            .initialProperties(SharedProperties::copperMetal)
+    public static final BlockEntry<CrucibleBlock> INDUSTRIAL_CRUCIBLE = REGISTRATE
+            .block("industrial_crucible", CrucibleBlock::new)
+            .initialProperties(() -> Blocks.DEEPSLATE_BRICKS)
             .properties(p -> p.noOcclusion().isRedstoneConductor((p1, p2, p3) -> true))
             .transform(pickaxeOnly())
-            .blockstate(new IndustrialLadleGenerator()::generate)
-            .onRegister(CreateRegistrate.blockModel(() -> IndustrialLadleModel::new))
+            .blockstate(new CrucibleGenerator()::generate)
+            .onRegister(CreateRegistrate.blockModel(() -> CrucibleModel::new))
             .addLayer(() -> RenderType::cutoutMipped)
-            .item(FluidTankItem::new)
-            .model(AssetLookup.customBlockItemModel("_", "block_single_window"))
+            .tag(AllTags.AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag)
+            .item(CrucibleBlockItem::new)
+            .model(AssetLookup.customBlockItemModel("_", "block_single"))
             .build()
             .register();
 
@@ -272,12 +282,12 @@ public class CMBlocks {
                             .define('G', CMDyeHelper.getGlassOfDye(color))
                             .pattern(" G ").pattern(" T ").pattern(" S ")
                             .unlockedBy("has_tungsten_wire_spool", RegistrateRecipeProvider.has(CMItems.TUNGSTEN_WIRE_SPOOL.get()))
-                            .save(p, CreateMetallurgy.genRL("crafting/" + c.getName()));
+                            .save(p, CreateMetallurgy.genRL("crafting/light_bulbs/" + c.getName()));
                     ShapelessRecipeBuilder.shapeless(c.get())
                             .requires(color.getTag())
                             .requires(forgeItemTag("light_bulbs"))
                             .unlockedBy("has_light_bulb", RegistrateRecipeProvider.has(forgeItemTag("light_bulbs")))
-                            .save(p, CreateMetallurgy.genRL("crafting/" + c.getName() + "_from_other_light_bulb"));
+                            .save(p, CreateMetallurgy.genRL("crafting/light_bulbs/" + c.getName() + "_from_other_light_bulb"));
                 })
                 .onRegisterAfter(Registry.ITEM_REGISTRY, v -> ItemDescription.useKey(v, "block.createmetallurgy.light_bulb"))
                 .item(UncontainableBlockItem::new)

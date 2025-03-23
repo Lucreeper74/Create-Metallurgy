@@ -2,22 +2,21 @@ package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.content.processing.basin.BasinRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockRenderer;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidRenderer;
-import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerInstance;
-import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerRenderer;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderInstance;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderRenderer;
-import fr.lucreeper74.createmetallurgy.content.casting.basin.CastingBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.industrial_ladle.IndustrialLadleBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.industrial_ladle.IndustrialLadleRenderer;
-import fr.lucreeper74.createmetallurgy.content.light_bulb.LightBulbBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.light_bulb.LightBulbRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerInstance;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderInstance;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.basin.CastingBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTableBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbRenderer;
 
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -44,7 +43,6 @@ public class CMBlockEntityTypes {
     public static final BlockEntityEntry<FoundryLidBlockEntity> FOUNDRY_LID = REGISTRATE
             .blockEntity("foundry_top", FoundryLidBlockEntity::new)
             .validBlocks(CMBlocks.FOUNDRY_LID_BLOCK)
-            .renderer(() -> FoundryLidRenderer::new)
             .register();
 
     public static final BlockEntityEntry<FoundryMixerBlockEntity> FOUNDRY_MIXER = REGISTRATE
@@ -54,10 +52,10 @@ public class CMBlockEntityTypes {
             .renderer(() -> FoundryMixerRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<IndustrialLadleBlockEntity> INDUSTRIAL_LADLE = REGISTRATE
-            .blockEntity("industrial_ladle", IndustrialLadleBlockEntity::new)
-            .validBlocks(CMBlocks.INDUSTRIAL_LADLE)
-            .renderer(() -> IndustrialLadleRenderer::new)
+    public static final BlockEntityEntry<CrucibleBlockEntity> INDUSTRIAL_LADLE = REGISTRATE
+            .blockEntity("industrial_ladle", CrucibleBlockEntity::new)
+            .validBlocks(CMBlocks.INDUSTRIAL_CRUCIBLE)
+            .renderer(() -> CrucibleRenderer::new)
             .register();
 
     public static final BlockEntityEntry<BeltGrinderBlockEntity> BELT_GRINDER = REGISTRATE

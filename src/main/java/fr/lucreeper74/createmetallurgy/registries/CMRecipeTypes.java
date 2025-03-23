@@ -4,11 +4,12 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.GrindingRecipe;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.MeltingRecipe;
-import fr.lucreeper74.createmetallurgy.content.foundry_mixer.AlloyingRecipe;
-import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingRecipeSerializer;
-import fr.lucreeper74.createmetallurgy.content.industrial_ladle.BulkMeltingRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.GrindingRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.MeltingRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.AlloyingRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingRecipeSerializer;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.BulkMeltingRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityMeltingRecipe;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -28,21 +29,20 @@ public enum CMRecipeTypes implements IRecipeTypeInfo {
     ALLOYING(AlloyingRecipe::new),
     GRINDING(GrindingRecipe::new),
     BULK_MELTING(BulkMeltingRecipe::new),
+    ENTITY_MELTING(EntityMeltingRecipe::new),
 
     CASTING_IN_BASIN(CastingRecipeSerializer.CastingBasinRecipeSerializer::new),
     CASTING_IN_TABLE(CastingRecipeSerializer.CastingTableRecipeSerializer::new);
 
     private final ResourceLocation id;
     private final RegistryObject<RecipeSerializer<?>> serializerObject;
-    @Nullable
-    private final RegistryObject<RecipeType<?>> typeObject;
     private final Supplier<RecipeType<?>> type;
 
     CMRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
         String name = CMLang.asId(name());
         id = CreateMetallurgy.genRL(name);
         serializerObject = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
-        typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
+        @Nullable RegistryObject<RecipeType<?>> typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
         type = typeObject;
     }
     CMRecipeTypes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {

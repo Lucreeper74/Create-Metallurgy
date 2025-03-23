@@ -1,0 +1,285 @@
+package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible;
+
+import com.simibubi.create.Create;
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
+import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.VecHelper;
+import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
+import fr.lucreeper74.createmetallurgy.registries.CMItems;
+import fr.lucreeper74.createmetallurgy.registries.CMShapes;
+import fr.lucreeper74.createmetallurgy.utils.CMConnectivityHandler;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.util.ForgeSoundType;
+import net.minecraftforge.items.ItemHandlerHelper;
+
+public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlockEntity> {
+    public static final BooleanProperty TOP = BooleanProperty.create("top");
+    public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
+    public static final EnumProperty<Shape> SHAPE = EnumProperty.create("shape", Shape.class);
+    public static final BooleanProperty WINDOW = BooleanProperty.create("window");
+
+    public CrucibleBlock(Properties pProperties) {
+        super(pProperties);
+        registerDefaultState(super.defaultBlockState()
+                .setValue(TOP, true)
+                .setValue(BOTTOM, true)
+                .setValue(SHAPE, Shape.PLAIN)
+                .setValue(WINDOW, false));
+    }
+
+    public static boolean isLadle(BlockState state) {
+        return state.getBlock() instanceof CrucibleBlock;
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean moved) {
+        if (oldState.getBlock() == state.getBlock())
+            return;
+        if (moved)
+            return;
+        withBlockEntityDo(world, pos, CrucibleBlockEntity::updateConnectivity);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(TOP, BOTTOM, SHAPE, WINDOW);
+    }
+
+    @Override
+    public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
+        CrucibleBlockEntity ladle = CMConnectivityHandler.partAt(getBlockEntityType(), world, pos);
+        if (ladle == null)
+            return 0;
+        if (ladle.getControllerBE() == null)
+            return 0;
+        return ladle.luminosity;
+    }
+
+    @Override
+    public InteractionResult onWrenched(BlockState state, UseOnContext context) {
+        if (state.getValue(SHAPE) == Shape.INNER)
+            return InteractionResult.PASS;
+
+        Level level = context.getLevel();
+        BlockPos clickedPos = context.getClickedPos();
+
+        level.setBlockAndUpdate(clickedPos, state.setValue(WINDOW, !state.getValue(WINDOW)));
+        level.playSound(null, clickedPos, SoundEvents.DEEPSLATE_PLACE, SoundSource.PLAYERS, 1f,
+                .2f + Create.RANDOM.nextFloat());
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public InteractionResult onSneakWrenched(BlockState state, UseOnContext context) {
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        if (world.getBlockEntity(pos) instanceof CrucibleBlockEntity ladleBE) {
+            CrucibleBlockEntity cBE = ladleBE.getControllerBE();
+
+            if (cBE != null && cBE.foundry.isActive()) {
+                world.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.PLAYERS, .2f,
+                        1f + Create.RANDOM.nextFloat());
+
+                cBE.updateLadleState(false);
+                if (!context.getPlayer().isCreative())
+                    context.getPlayer().getInventory().placeItemBackInInventory(new ItemStack(CMItems.FOUNDRY_UNIT.get()));
+
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return IWrenchable.super.onSneakWrenched(state, context);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        Boolean bottom = state.getValue(BOTTOM);
+        //Boolean top = state.getValue(TOP);
+        CMShapes.Builder shape = CMShapes.shape(0, 0, 0, 16, 16, 16);
+
+        switch (state.getValue(SHAPE)) {
+            case NE -> shape.erase(0, 0, 3, 13, 16, 16);
+            case NW -> shape.erase(3, 0, 3, 16, 16, 16);
+            case SE -> shape.erase(0, 0, 0, 13, 16, 13);
+            case SW -> shape.erase(3, 0, 0, 16, 16, 13);
+
+            case NORTH -> shape.erase(0, 0, 3, 16, 16, 16);
+            case SOUTH -> shape.erase(0, 0, 0, 16, 16, 13);
+            case EAST -> shape.erase(0, 0, 0, 13, 16, 16);
+            case WEST -> shape.erase(3, 0, 0, 16, 16, 16);
+
+            case PLAIN -> shape.erase(3, 0, 3, 13, 16, 13);
+
+            case INNER -> shape.erase(0, 0, 0, 16, 16, 16);
+        }
+
+        if (bottom)
+            shape.add(0, 0, 0, 16, 4, 16);
+
+        //if (top)
+        //  shape.add(0, 12, 0, 16, 16, 16);
+
+        return shape.build();
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (state.hasBlockEntity() && (state.getBlock() != newState.getBlock() || !newState.hasBlockEntity())) {
+            BlockEntity be = world.getBlockEntity(pos);
+            if (!(be instanceof CrucibleBlockEntity))
+                return;
+            CrucibleBlockEntity ladleBe = (CrucibleBlockEntity) be;
+            world.removeBlockEntity(pos);
+            CMConnectivityHandler.splitMulti(ladleBe);
+        }
+    }
+
+    @Override
+    public void updateEntityAfterFallOn(BlockGetter worldIn, Entity entityIn) {
+        super.updateEntityAfterFallOn(worldIn, entityIn);
+
+        if (!CMBlocks.INDUSTRIAL_CRUCIBLE.has(worldIn.getBlockState(entityIn.blockPosition())))
+            return;
+
+        if (entityIn instanceof ItemEntity itemEntity) {
+            withBlockEntityDo(worldIn, entityIn.blockPosition(), be -> {
+                ItemStack insertItem = ItemHandlerHelper.insertItem(be.getControllerBE().foundry.inputInv, itemEntity.getItem()
+                        .copy(), false);
+
+                if (insertItem.isEmpty()) {
+                    itemEntity.discard();
+                    return;
+                }
+                itemEntity.setItem(insertItem);
+            });
+        } else {
+            withBlockEntityDo(worldIn, entityIn.blockPosition(), be -> {
+                if (be != null) {
+                    CrucibleBlockEntity controller = be.getControllerBE();
+                    if (controller != null)
+                        controller.processFallOnEntity(entityIn);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Class<CrucibleBlockEntity> getBlockEntityClass() {
+        return CrucibleBlockEntity.class;
+    }
+
+    public BlockEntityType<? extends CrucibleBlockEntity> getBlockEntityType() {
+        return CMBlockEntityTypes.INDUSTRIAL_LADLE.get();
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        if (mirror == Mirror.NONE)
+            return state;
+        boolean x = mirror == Mirror.FRONT_BACK;
+        return switch (state.getValue(SHAPE)) {
+            case NE -> state.setValue(SHAPE, x ? Shape.NW : Shape.SE);
+            case NW -> state.setValue(SHAPE, x ? Shape.NE : Shape.SW);
+            case SE -> state.setValue(SHAPE, x ? Shape.SW : Shape.NE);
+            case SW -> state.setValue(SHAPE, x ? Shape.SE : Shape.NW);
+            default -> state;
+        };
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        for (int i = 0; i < rotation.ordinal(); i++)
+            state = rotateOnce(state);
+        return state;
+    }
+
+    private BlockState rotateOnce(BlockState state) {
+        return switch (state.getValue(SHAPE)) {
+            case NE -> state.setValue(SHAPE, Shape.SE);
+            case NW -> state.setValue(SHAPE, Shape.NE);
+            case SE -> state.setValue(SHAPE, Shape.SW);
+            case SW -> state.setValue(SHAPE, Shape.NW);
+            default -> state;
+        };
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        super.animateTick(state, level, pos, random);
+
+        withBlockEntityDo(level, pos, be -> {
+            CrucibleBlockEntity controller = be.getControllerBE();
+            if (controller != null && state.getValue(BOTTOM)) {
+                if (!controller.getTank().isEmpty() && random.nextInt(200) == 0)
+                    level.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.LAVA_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.7F + random.nextFloat() * 0.15F, false);
+
+                if (controller.foundry.getCurrentHeat() > 0 && random.nextInt(3) == 0) {
+                    float radius = controller.getWidth() / 2f;
+                    Vec3 c = Vec3.atLowerCornerOf(controller.getBlockPos()).add(radius, controller.getHeight() * controller.getTank().getFillState(), radius);
+                    Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, random, radius - 4/16f)
+                            .multiply(1, 0, 1));
+
+                    level.addParticle(ParticleTypes.LARGE_SMOKE, v.x, v.y + 3/16f, v.z, 0, 0, 0);
+                }
+            }
+        });
+    }
+
+    // Tanks are less noisy when placed in batch
+    public static final SoundType SILENCED_BRICKS =
+            new ForgeSoundType(0.1F, 1.5F, () -> SoundEvents.DEEPSLATE_BRICKS_BREAK, () -> SoundEvents.DEEPSLATE_BRICKS_STEP,
+                    () -> SoundEvents.DEEPSLATE_BRICKS_PLACE, () -> SoundEvents.DEEPSLATE_BRICKS_HIT, () -> SoundEvents.DEEPSLATE_BRICKS_FALL);
+
+    @Override
+    public SoundType getSoundType(BlockState state, LevelReader world, BlockPos pos, Entity entity) {
+        SoundType soundType = super.getSoundType(state, world, pos, entity);
+        if (entity != null && entity.getPersistentData()
+                .contains("SilenceTankSound"))
+            return SILENCED_BRICKS;
+        return soundType;
+    }
+
+    public enum Shape implements StringRepresentable {
+        PLAIN, // For Single blocks
+        INNER, // For Inners
+        NW, SW, NE, SE, // For Corners
+        NORTH, SOUTH, WEST, EAST; // For Walls
+
+        @Override
+        public String getSerializedName() {
+            return Lang.asId(name());
+        }
+
+        public boolean isWall() {
+            return this.equals(NORTH) || this.equals(SOUTH) || this.equals(WEST) || this.equals(EAST);
+        }
+
+        public boolean isCorner() {
+            return this.equals(NW) || this.equals(SW) || this.equals(NE) || this.equals(SE);
+        }
+    }
+}

@@ -1,0 +1,244 @@
+{
+  "variants": {
+    "bottom=false,shape=east,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=east,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=east,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_east"
+    },
+    "bottom=false,shape=east,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_east_window"
+    },
+    "bottom=false,shape=inner,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=inner,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=inner,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=inner,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=ne,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=ne,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=ne,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_ne"
+    },
+    "bottom=false,shape=ne,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_ne_window"
+    },
+    "bottom=false,shape=north,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=north,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=north,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_north"
+    },
+    "bottom=false,shape=north,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_north_window"
+    },
+    "bottom=false,shape=nw,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=nw,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=nw,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_nw"
+    },
+    "bottom=false,shape=nw,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_nw_window"
+    },
+    "bottom=false,shape=plain,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=plain,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=plain,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top"
+    },
+    "bottom=false,shape=plain,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_window"
+    },
+    "bottom=false,shape=se,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=se,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=se,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_se"
+    },
+    "bottom=false,shape=se,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_se_window"
+    },
+    "bottom=false,shape=south,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=south,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=south,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_south"
+    },
+    "bottom=false,shape=south,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_south_window"
+    },
+    "bottom=false,shape=sw,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=sw,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=sw,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_sw"
+    },
+    "bottom=false,shape=sw,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_sw_window"
+    },
+    "bottom=false,shape=west,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle"
+    },
+    "bottom=false,shape=west,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_middle_window"
+    },
+    "bottom=false,shape=west,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_west"
+    },
+    "bottom=false,shape=west,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_top_west_window"
+    },
+    "bottom=true,shape=east,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=east,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=east,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_east"
+    },
+    "bottom=true,shape=east,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_east_window"
+    },
+    "bottom=true,shape=inner,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=inner,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=inner,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=inner,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=ne,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=ne,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=ne,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_ne"
+    },
+    "bottom=true,shape=ne,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_ne_window"
+    },
+    "bottom=true,shape=north,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=north,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=north,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_north"
+    },
+    "bottom=true,shape=north,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_north_window"
+    },
+    "bottom=true,shape=nw,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=nw,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=nw,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_nw"
+    },
+    "bottom=true,shape=nw,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_nw_window"
+    },
+    "bottom=true,shape=plain,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=plain,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=plain,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single"
+    },
+    "bottom=true,shape=plain,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_window"
+    },
+    "bottom=true,shape=se,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=se,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=se,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_se"
+    },
+    "bottom=true,shape=se,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_se_window"
+    },
+    "bottom=true,shape=south,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=south,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=south,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_south"
+    },
+    "bottom=true,shape=south,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_south_window"
+    },
+    "bottom=true,shape=sw,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=sw,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=sw,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_sw"
+    },
+    "bottom=true,shape=sw,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_sw_window"
+    },
+    "bottom=true,shape=west,top=false,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom"
+    },
+    "bottom=true,shape=west,top=false,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_bottom_window"
+    },
+    "bottom=true,shape=west,top=true,window=false": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_west"
+    },
+    "bottom=true,shape=west,top=true,window=true": {
+      "model": "createmetallurgy:block/industrial_crucible/block_single_west_window"
+    }
+  }
+}
