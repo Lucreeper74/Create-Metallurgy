@@ -174,6 +174,7 @@ public class BeltGrinderBlockEntity extends KineticBlockEntity {
                 setChanged();
                 sendData();
             }
+            return;
         }
 
         // Eject Items
