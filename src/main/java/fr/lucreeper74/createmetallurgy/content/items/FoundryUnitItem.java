@@ -1,10 +1,10 @@
 package fr.lucreeper74.createmetallurgy.content.items;
 
 import com.simibubi.create.AllSoundEvents;
-import com.simibubi.create.Create;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -29,7 +29,7 @@ public class FoundryUnitItem extends Item {
             if (!cBE.foundry.isActive()) {
                 cBE.updateLadleState(true);
                 level.playSound(null, clickedPos, AllSoundEvents.WRENCH_ROTATE.getMainEvent(), SoundSource.PLAYERS, .2f,
-                        1f + Create.RANDOM.nextFloat());
+                        1f + RandomSource.create().nextFloat());
 
                 if (!context.getPlayer().isCreative())
                     item.shrink(1);
