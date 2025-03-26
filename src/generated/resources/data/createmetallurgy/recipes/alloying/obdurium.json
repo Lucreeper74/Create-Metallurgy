@@ -1,0 +1,20 @@
+{
+  "type": "createmetallurgy:alloying",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "item": "create:andesite_alloy"
+    },
+    {
+      "amount": 60,
+      "fluid": "createmetallurgy:molten_tungsten",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 150,
+      "fluid": "createmetallurgy:molten_obdurium"
+    }
+  ]
+}

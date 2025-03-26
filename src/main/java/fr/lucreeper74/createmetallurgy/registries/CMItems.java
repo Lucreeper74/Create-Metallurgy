@@ -1,7 +1,11 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.item.CombustibleItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import fr.lucreeper74.createmetallurgy.content.items.FoundryUnitItem;
 import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -20,9 +24,13 @@ public class CMItems {
     }
 
     public static final ItemEntry<Item> TUNGSTEN_INGOT = taggedIngredient("tungsten_ingot", forgeItemTag("ingots/tungsten"), Tags.Items.INGOTS),
-            TUNGSTEN_SHEET = taggedIngredient("tungsten_sheet", forgeItemTag("plates/tungsten"),PLATES.tag),
+            TUNGSTEN_SHEET = taggedIngredient("tungsten_sheet", forgeItemTag("plates/tungsten"), PLATES.tag),
             TUNGSTEN_NUGGET = taggedIngredient("tungsten_nugget", forgeItemTag("nuggets/tungsten"), Tags.Items.NUGGETS),
             TUNGSTEN_WIRE = taggedIngredient("tungsten_wire", forgeItemTag("wires/tungsten"), forgeItemTag("wires"));
+
+    public static final ItemEntry<Item> OBDURIUM_INGOT = taggedIngredient("obdurium_ingot", forgeItemTag("ingots/obdurium"), Tags.Items.INGOTS),
+            OBDURIUM_SHEET = taggedIngredient("obdurium_sheet", forgeItemTag("plates/obdurium"), PLATES.tag);
+
 
     public static final ItemEntry<Item>  RAW_WOLFRAMITE = taggedIngredient("raw_wolframite", forgeItemTag("raw_materials/tungsten"), forgeItemTag("raw_materials")),
             CRUSHED_RAW_WOLFRAMITE = taggedIngredient("crushed_raw_wolframite", CRUSHED_RAW_MATERIALS.tag),
@@ -54,6 +62,9 @@ public class CMItems {
             .onRegister(i -> i.setBurnTime(2000))
             .register();
 
+    public static final ItemEntry<FoundryUnitItem> FOUNDRY_UNIT = REGISTRATE.item("foundry_unit", FoundryUnitItem::new)
+            .register();
+
 
     public static final ItemEntry<Item> GRAPHITE = taggedIngredient("graphite", forgeItemTag("graphite")),
             STEEL_INGOT = taggedIngredient("steel_ingot", forgeItemTag("ingots/steel"), Tags.Items.INGOTS),
@@ -61,10 +72,24 @@ public class CMItems {
             TUNGSTEN_WIRE_SPOOL = REGISTRATE.item("tungsten_wire_spool", Item::new).register(),
             SANDPAPER_BELT = REGISTRATE.item("sandpaper_belt", Item::new).register();
 
+    public static final ItemEntry<SequencedAssemblyItem>
+            INCOMPLETE_INDUSTRIAL_CRUCIBLE = sequencedIngredient("incomplete_industrial_crucible", AllTags.AllItemTags.UPRIGHT_ON_BELT.tag);
+
     //Shortcut
     @SafeVarargs
     private static ItemEntry<Item> taggedIngredient(String name, TagKey<Item>... tags) {
         return REGISTRATE.item(name, Item::new)
+                .tag(tags)
+                .register();
+    }
+
+    private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name) {
+        return REGISTRATE.item(name, SequencedAssemblyItem::new)
+                .register();
+    }
+
+    private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name, TagKey<Item>... tags) {
+        return REGISTRATE.item(name, SequencedAssemblyItem::new)
                 .tag(tags)
                 .register();
     }
