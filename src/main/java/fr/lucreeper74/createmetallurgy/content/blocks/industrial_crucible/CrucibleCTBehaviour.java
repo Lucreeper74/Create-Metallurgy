@@ -14,8 +14,8 @@ public class CrucibleCTBehaviour extends ConnectedTextureBehaviour.Base {
 
     protected CTSpriteShiftEntry topShift;
     protected CTSpriteShiftEntry layerShift;
-    private CTSpriteShiftEntry innerShift;
-    private CTSpriteShiftEntry windowShift;
+    protected CTSpriteShiftEntry innerShift;
+    protected CTSpriteShiftEntry windowShift;
 
     public CrucibleCTBehaviour(CTSpriteShiftEntry layerShift, CTSpriteShiftEntry windowShift, CTSpriteShiftEntry topShift, CTSpriteShiftEntry innerShift) {
         this.layerShift = layerShift;
