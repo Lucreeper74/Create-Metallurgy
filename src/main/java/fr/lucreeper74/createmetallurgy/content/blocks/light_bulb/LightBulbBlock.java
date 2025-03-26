@@ -3,6 +3,7 @@ package fr.lucreeper74.createmetallurgy.content.blocks.light_bulb;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.block.WrenchableDirectionalBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMShapes;
 import fr.lucreeper74.createmetallurgy.tabs.CMCreativeModeTab;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,7 +24,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class LightBulbBlock extends WrenchableDirectionalBlock implements IBE<LightBulbBlockEntity>, SimpleWaterloggedBlock {
@@ -69,14 +69,7 @@ public class LightBulbBlock extends WrenchableDirectionalBlock implements IBE<Li
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return switch (state.getValue(FACING)) {
-            default -> Shapes.or(Block.box(5, 0, 5, 11, 12, 11));
-            case DOWN -> Shapes.or(Block.box(5, 4, 5, 11, 16, 11));
-            case NORTH -> Shapes.or(Block.box(5, 5, 4, 11, 11, 16));
-            case SOUTH -> Shapes.or(Block.box(5, 5, 0, 11, 11, 12));
-            case EAST -> Shapes.or(Block.box(0, 5, 5, 12, 11, 11));
-            case WEST -> Shapes.or(Block.box(4, 5, 5, 16, 11, 11));
-        };
+        return CMShapes.LIGHT_BULB.get(state.getValue(FACING));
     }
 
     @Override

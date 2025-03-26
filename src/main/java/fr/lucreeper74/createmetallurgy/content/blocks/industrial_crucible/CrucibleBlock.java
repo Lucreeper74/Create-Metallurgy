@@ -5,12 +5,15 @@ import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
+import com.simibubi.create.foundation.utility.VoxelShaper;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import fr.lucreeper74.createmetallurgy.registries.CMShapes;
 import fr.lucreeper74.createmetallurgy.utils.CMConnectivityHandler;
+import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -33,6 +36,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -90,7 +94,7 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
 
         level.setBlockAndUpdate(clickedPos, state.setValue(WINDOW, !state.getValue(WINDOW)));
         level.playSound(null, clickedPos, SoundEvents.DEEPSLATE_PLACE, SoundSource.PLAYERS, 1f,
-                .2f + Create.RANDOM.nextFloat());
+                .2f + RandomSource.create().nextFloat());
         return InteractionResult.SUCCESS;
     }
 
@@ -103,7 +107,7 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
 
             if (cBE != null && cBE.foundry.isActive()) {
                 world.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.PLAYERS, .2f,
-                        1f + Create.RANDOM.nextFloat());
+                        1f + RandomSource.create().nextFloat());
 
                 cBE.updateLadleState(false);
                 if (!context.getPlayer().isCreative())
@@ -118,32 +122,23 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         Boolean bottom = state.getValue(BOTTOM);
-        //Boolean top = state.getValue(TOP);
-        CMShapes.Builder shape = CMShapes.shape(0, 0, 0, 16, 16, 16);
-
-        switch (state.getValue(SHAPE)) {
-            case NE -> shape.erase(0, 0, 3, 13, 16, 16);
-            case NW -> shape.erase(3, 0, 3, 16, 16, 16);
-            case SE -> shape.erase(0, 0, 0, 13, 16, 13);
-            case SW -> shape.erase(3, 0, 0, 16, 16, 13);
-
-            case NORTH -> shape.erase(0, 0, 3, 16, 16, 16);
-            case SOUTH -> shape.erase(0, 0, 0, 16, 16, 13);
-            case EAST -> shape.erase(0, 0, 0, 13, 16, 16);
-            case WEST -> shape.erase(3, 0, 0, 16, 16, 16);
-
-            case PLAIN -> shape.erase(3, 0, 3, 13, 16, 13);
-
-            case INNER -> shape.erase(0, 0, 0, 16, 16, 16);
-        }
+        Shape shape = state.getValue(SHAPE);
+        Direction direction = shape.toDirection();
 
         if (bottom)
-            shape.add(0, 0, 0, 16, 4, 16);
-
-        //if (top)
-        //  shape.add(0, 12, 0, 16, 16, 16);
-
-        return shape.build();
+            return switch (shape) {
+                case NE, SE, NW, SW -> CMShapes.CRUCIBLE_CORNER_BOTTOM.get(direction);
+                case NORTH, SOUTH, EAST, WEST -> CMShapes.CRUCIBLE_WALL_BOTTOM.get(direction);
+                case PLAIN -> CMShapes.CRUCIBLE_SINGLE_BOTTOM;
+                default -> CMShapes.CRUCIBLE_BOTTOM;
+            };
+        else
+            return switch (shape) {
+                case NE, SE, NW, SW -> CMShapes.CRUCIBLE_CORNER.get(direction);
+                case NORTH, SOUTH, EAST, WEST -> CMShapes.CRUCIBLE_WALL.get(direction);
+                case PLAIN -> CMShapes.CRUCIBLE_SINGLE;
+                default -> Shapes.empty();
+            };
     }
 
     @Override
@@ -240,10 +235,10 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
                 if (controller.foundry.getCurrentHeat() > 0 && random.nextInt(3) == 0) {
                     float radius = controller.getWidth() / 2f;
                     Vec3 c = Vec3.atLowerCornerOf(controller.getBlockPos()).add(radius, controller.getHeight() * controller.getTank().getFillState(), radius);
-                    Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, random, radius - 4/16f)
+                    Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, random, radius - 4 / 16f)
                             .multiply(1, 0, 1));
 
-                    level.addParticle(ParticleTypes.LARGE_SMOKE, v.x, v.y + 3/16f, v.z, 0, 0, 0);
+                    level.addParticle(ParticleTypes.LARGE_SMOKE, v.x, v.y + 3 / 16f, v.z, 0, 0, 0);
                 }
             }
         });
@@ -271,7 +266,7 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
 
         @Override
         public String getSerializedName() {
-            return Lang.asId(name());
+            return CMLang.asId(name());
         }
 
         public boolean isWall() {
@@ -280,6 +275,16 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
 
         public boolean isCorner() {
             return this.equals(NW) || this.equals(SW) || this.equals(NE) || this.equals(SE);
+        }
+
+        public Direction toDirection() {
+            return switch (this) {
+                case NE, NORTH -> Direction.NORTH;
+                case NW, WEST -> Direction.WEST;
+                case SW, SOUTH -> Direction.SOUTH;
+                case SE, EAST -> Direction.EAST;
+                default -> Direction.DOWN;
+            };
         }
     }
 }

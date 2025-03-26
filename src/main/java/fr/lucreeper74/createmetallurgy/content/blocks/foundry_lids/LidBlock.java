@@ -3,6 +3,7 @@ package fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.registries.CMShapes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -43,8 +44,7 @@ public abstract class LidBlock extends Block implements IWrenchable {
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return Shapes.or(Block.box(1, 0, 1, 15, 14, 15),
-                Block.box(3, 13, 3, 13, 15, 13));
+        return CMShapes.FOUNDRY_LID;
 
     }
 
