@@ -5,14 +5,14 @@
       "type": "forge:not",
       "value": {
         "type": "forge:tag_empty",
-        "tag": "forge:dusts/wolframite"
+        "tag": "forge:dirty_dusts/tungsten"
       }
     }
   ],
   "heatRequirement": "heated",
   "ingredients": [
     {
-      "tag": "forge:dusts/wolframite"
+      "tag": "forge:dirty_dusts/tungsten"
     }
   ],
   "processingTime": 30,

@@ -5,21 +5,21 @@
       "type": "forge:not",
       "value": {
         "type": "forge:tag_empty",
-        "tag": "forge:dusts/netherite"
+        "tag": "forge:dusts/tungsten"
       }
     }
   ],
-  "heatRequirement": "superheated",
+  "heatRequirement": "heated",
   "ingredients": [
     {
-      "tag": "forge:dusts/netherite"
+      "tag": "forge:dusts/tungsten"
     }
   ],
   "processingTime": 20,
   "results": [
     {
       "amount": 90,
-      "fluid": "createmetallurgy:molten_netherite"
+      "fluid": "createmetallurgy:molten_tungsten"
     }
   ]
 }
