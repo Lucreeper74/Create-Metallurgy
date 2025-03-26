@@ -3,7 +3,7 @@ package fr.lucreeper74.createmetallurgy.compat.jei.category;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
-import fr.lucreeper74.createmetallurgy.compat.jei.category.elements.FoundryTopElement;
+import fr.lucreeper74.createmetallurgy.compat.jei.category.elements.FoundryLidElement;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinRecipe;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import net.minecraft.ChatFormatting;
@@ -12,7 +12,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 
 public class MeltingCategory extends FoundryBasinCategory {
-    private final FoundryTopElement castingtop = new FoundryTopElement();
+    private final FoundryLidElement castingtop = new FoundryLidElement();
     private final AnimatedBlazeBurner heater = new AnimatedBlazeBurner();
 
     public MeltingCategory(Info<FoundryBasinRecipe> info) {

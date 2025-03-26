@@ -1,6 +1,6 @@
-package fr.lucreeper74.createmetallurgy.content.blocks.industrial_curcible.foundry;
+package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry;
 
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_curcible.CurcibleBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -11,11 +11,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class MeltingInventory implements IItemHandlerModifiable {
 
-    private final CurcibleBlockEntity be;
+    private final CrucibleBlockEntity be;
     protected int firstLimitedSlot;
     private final MeltingSlot[] slots;
 
-    public MeltingInventory(CurcibleBlockEntity be, int maxSize) {
+    public MeltingInventory(CrucibleBlockEntity be, int maxSize) {
         firstLimitedSlot = maxSize;
         this.slots = new MeltingSlot[maxSize];
         this.be = be;

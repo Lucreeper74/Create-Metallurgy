@@ -1,14 +1,14 @@
-package fr.lucreeper74.createmetallurgy.data.recipes;
+package fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.compat.CMCompatMetals;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingRecipeBuilder;
+import fr.lucreeper74.createmetallurgy.data.recipes.CMRecipeProvider;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
@@ -27,7 +27,7 @@ import java.util.function.UnaryOperator;
 import static com.simibubi.create.AllTags.forgeItemTag;
 
 @SuppressWarnings("unused")
-public class CastingRecipeGen extends CreateRecipeProvider {
+public class CastingRecipeGen extends CMRecipeProvider {
 
     GeneratedRecipe
 

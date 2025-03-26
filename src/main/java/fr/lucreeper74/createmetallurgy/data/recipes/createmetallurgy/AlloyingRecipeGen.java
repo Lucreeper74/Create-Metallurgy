@@ -1,8 +1,9 @@
-package fr.lucreeper74.createmetallurgy.data.recipes;
+package fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy;
 
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.tterrag.registrate.util.entry.FluidEntry;
+import fr.lucreeper74.createmetallurgy.data.recipes.CMProcessingRecipesGen;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.data.DataGenerator;

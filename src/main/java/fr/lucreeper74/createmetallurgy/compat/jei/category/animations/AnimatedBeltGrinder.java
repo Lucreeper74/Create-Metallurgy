@@ -13,10 +13,9 @@ public class AnimatedBeltGrinder extends AnimatedKinetics {
     public void draw(PoseStack matrixStack, int xOffset, int yOffset) {
         matrixStack.pushPose();
         matrixStack.translate(xOffset, yOffset, 0);
-        matrixStack.translate(0, 0, 200);
-        matrixStack.translate(2, 22, 0);
+        matrixStack.translate(2, 22, 200);
         matrixStack.mulPose(Vector3f.XP.rotationDegrees(-15.5f));
-        matrixStack.mulPose(Vector3f.YP.rotationDegrees(22.5f + 90));
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(22.5f + 90f));
         int scale = 25;
 
         blockElement(shaft(Direction.Axis.X))

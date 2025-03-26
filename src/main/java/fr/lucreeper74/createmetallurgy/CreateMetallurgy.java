@@ -45,7 +45,7 @@ public class CreateMetallurgy {
         REGISTRATE.registerEventListeners(eventBus);
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> CMPartialModels::init);
+                () -> CMPartialModels::init); // Causing crash with ModernFix if Client init
 
         CMCreativeTabs.init();
         CMBlocks.register();

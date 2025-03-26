@@ -28,16 +28,18 @@ import java.util.Optional;
 
 public class FoundryLidBlockEntity extends FoundryBasinOperatingBE {
 
+
     public int processingTime;
     public boolean running;
 
-    public LerpedFloat gauge = LerpedFloat.linear();
-    private final HashMap<BlazeBurnerBlock.HeatLevel, Integer> temp = new HashMap<>(); {
-            temp.put(BlazeBurnerBlock.HeatLevel.NONE,0);
-            temp.put(BlazeBurnerBlock.HeatLevel.SMOULDERING,500);
-            temp.put(BlazeBurnerBlock.HeatLevel.FADING,750);
-            temp.put(BlazeBurnerBlock.HeatLevel.KINDLED,1000);
-            temp.put(BlazeBurnerBlock.HeatLevel.SEETHING,2000);
+    private final HashMap<BlazeBurnerBlock.HeatLevel, Integer> temp = new HashMap<>();
+
+    {
+        temp.put(BlazeBurnerBlock.HeatLevel.NONE, 0);
+        temp.put(BlazeBurnerBlock.HeatLevel.SMOULDERING, 500);
+        temp.put(BlazeBurnerBlock.HeatLevel.FADING, 750);
+        temp.put(BlazeBurnerBlock.HeatLevel.KINDLED, 1000);
+        temp.put(BlazeBurnerBlock.HeatLevel.SEETHING, 2000);
     }
 
     public FoundryLidBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -74,12 +76,6 @@ public class FoundryLidBlockEntity extends FoundryBasinOperatingBE {
     @Override
     public void tick() {
         super.tick();
-
-        if(level.isClientSide) {
-            gauge.tickChaser();
-            gauge.chase((double) temp.getOrDefault(FoundryBasinBlockEntity.getHeatLevelOf(this.getLevel().getBlockState(getBlockPos().below(2))), 0) / 2000, .2f, LerpedFloat.Chaser.EXP);
-        }
-
         if (!level.isClientSide && (currentRecipe == null || processingTime == -1)) {
             running = false;
             processingTime = -1;
@@ -92,17 +88,19 @@ public class FoundryLidBlockEntity extends FoundryBasinOperatingBE {
                 applyBasinRecipe();
                 sendData();
             }
-            if(!level.isClientSide && processingTime % 40 == 0){
-                level.playSound(null, worldPosition, SoundEvents.LAVA_AMBIENT,
-                        SoundSource.BLOCKS, .5f, .75f);
+
+            RandomSource random = RandomSource.create();
+            if (!level.isClientSide && random.nextInt(40) == 0) {
+                level.playSound(null, getBlockPos(), SoundEvents.LAVA_AMBIENT, SoundSource.BLOCKS, .25f, .65f + random.nextFloat() * .1f);
             }
 
-            if(level.isClientSide && processingTime % 2 == 0)
+            if (level.isClientSide && processingTime % 2 == 0)
                 spawnParticles();
 
             if (processingTime > 0) --processingTime;
         }
     }
+
     protected void spawnParticles() {
         RandomSource r = level.getRandom();
         Vec3 c = VecHelper.getCenterOf(worldPosition);
@@ -120,7 +118,7 @@ public class FoundryLidBlockEntity extends FoundryBasinOperatingBE {
         BlockEntity basinBE = level.getBlockEntity(worldPosition.below());
         if (!(basinBE instanceof FoundryBasinBlockEntity))
             return Optional.empty();
-        if(getBlockState().getValue(LidBlock.OPEN))
+        if (getBlockState().getValue(LidBlock.OPEN))
             return Optional.empty();
         return Optional.of((FoundryBasinBlockEntity) basinBE);
     }
@@ -157,6 +155,7 @@ public class FoundryLidBlockEntity extends FoundryBasinOperatingBE {
     }
 
     private static final Object MeltingRecipesKey = new Object();
+
     @Override
     protected Object getRecipeCacheKey() {
         return MeltingRecipesKey;

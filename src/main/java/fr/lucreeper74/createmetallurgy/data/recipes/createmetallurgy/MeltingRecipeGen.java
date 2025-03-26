@@ -1,8 +1,9 @@
-package fr.lucreeper74.createmetallurgy.data.recipes;
+package fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy;
 
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.compat.CMCompatMetals;
+import fr.lucreeper74.createmetallurgy.data.recipes.CMProcessingRecipesGen;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.data.DataGenerator;
@@ -13,7 +14,6 @@ import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 import static com.simibubi.create.AllTags.forgeItemTag;
@@ -69,13 +69,14 @@ public class MeltingRecipeGen extends CMProcessingRecipesGen {
     }
 
     /**
-     * Recipes with output Tags :
+     * Recipes with input Tags :
      *
-     * @param recipeId Recipe name / folders
-     * @param inputTag Input from tag
-     * @param result   Fluid result
-     * @param amount   Fluid amount
-     * @param duration Processing time
+     * @param recipeId      Recipe name / folders
+     * @param inputTag      Input from tag
+     * @param result        Fluid result
+     * @param amount        Fluid amount
+     * @param heatCondition Heat condition
+     * @param duration      Processing time
      */
     protected GeneratedRecipe meltingTag(String recipeId, TagKey<Item> inputTag, FluidEntry<ForgeFlowingFluid.Flowing> result, int amount, HeatCondition heatCondition, int duration) {
         return create(recipeId, b -> b.duration(duration)
@@ -87,12 +88,13 @@ public class MeltingRecipeGen extends CMProcessingRecipesGen {
 
 
     /**
-     * Recipes with output Items :
+     * Recipes with input Items :
      *
-     * @param input    Input
-     * @param result   Fluid result
-     * @param amount   Fluid amount
-     * @param duration Processing time
+     * @param input         Input
+     * @param result        Fluid result
+     * @param amount        Fluid amount
+     * @param heatCondition Heat condition
+     * @param duration      Processing time
      */
     protected GeneratedRecipe meltingItem(Supplier<ItemLike> input, FluidEntry<ForgeFlowingFluid.Flowing> result, int amount, HeatCondition heatCondition, int duration) {
         return create(input, b -> b.duration(duration)
