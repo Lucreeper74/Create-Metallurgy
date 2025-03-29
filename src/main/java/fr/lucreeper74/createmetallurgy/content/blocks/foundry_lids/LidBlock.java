@@ -68,7 +68,7 @@ public abstract class LidBlock extends Block implements IWrenchable {
             state = state.setValue(ON_FOUNDRY_BASIN, false);
         if (flag != state.getValue(POWERED)) {
             if (flag != state.getValue(OPEN))
-                level.levelEvent(null, flag ? 1037 : 1036, pos, 0);
+                level.levelEvent(null, flag ? 1036 : 1037, pos, 0);
             level.setBlock(pos, state.setValue(POWERED, flag).setValue(OPEN, flag), 2);
         } else {
             level.setBlock(pos, state, 2);
