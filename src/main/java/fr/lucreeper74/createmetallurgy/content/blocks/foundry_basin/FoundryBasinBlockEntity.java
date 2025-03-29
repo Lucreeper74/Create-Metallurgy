@@ -1,6 +1,7 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin;
 
 import com.simibubi.create.Create;
+import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinInventory;
@@ -133,8 +134,13 @@ public class FoundryBasinBlockEntity extends BasinBlockEntity {
         if (!(blockState.getBlock() instanceof FoundryBasinBlock))
             return;
         Direction direction = blockState.getValue(FoundryBasinBlock.FACING);
-        BlockEntity be = level.getBlockEntity(worldPosition.below()
-                .relative(direction));
+        BlockPos output = worldPosition.below().relative(direction);
+        BlockEntity be = level.getBlockEntity(output);
+
+        DirectBeltInputBehaviour directBeltInputBehaviour =
+                BlockEntityBehaviour.get(level, output, DirectBeltInputBehaviour.TYPE);
+        if (directBeltInputBehaviour == null || !directBeltInputBehaviour.canInsertFromSide(direction))
+            return;
 
         IFluidHandler targetTank = be == null ? null
                 : be.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, direction.getOpposite())
