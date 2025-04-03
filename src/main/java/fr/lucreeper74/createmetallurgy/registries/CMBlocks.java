@@ -17,6 +17,8 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockMovementBehavior;
+import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlock;
@@ -64,7 +66,7 @@ public class CMBlocks {
     public static final BlockEntry<Block> RAW_WOLFRAMITE_BLOCK = REGISTRATE
             .block("raw_wolframite_block", Block::new)
             .initialProperties(() -> Blocks.RAW_COPPER_BLOCK)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/raw_wolframite"))
@@ -75,7 +77,7 @@ public class CMBlocks {
     public static final BlockEntry<Block> TUNGSTEN_BLOCK = REGISTRATE
             .block("tungsten_block", Block::new)
             .initialProperties(() -> Blocks.EMERALD_BLOCK)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/tungsten"))
@@ -86,7 +88,7 @@ public class CMBlocks {
     public static final BlockEntry<Block> OBDURIUM_BLOCK = REGISTRATE
             .block("obdurium_block", Block::new)
             .initialProperties(() -> Blocks.EMERALD_BLOCK)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/obdurium"))
@@ -101,7 +103,7 @@ public class CMBlocks {
                     RegistrateBlockLootTables.createSilkTouchDispatchTable(b,
                             RegistrateBlockLootTables.applyExplosionDecay(b, LootItem.lootTableItem(CMItems.RAW_WOLFRAMITE.get())
                                     .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))))))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.ORES)
             .transform(tagBlockAndItem("ores/wolframite"))
@@ -112,7 +114,7 @@ public class CMBlocks {
     public static final BlockEntry<Block> COKE_BLOCK = REGISTRATE
             .block("coke_block", Block::new)
             .initialProperties(() -> Blocks.COAL_BLOCK)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_STONE_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/coal_coke"))
@@ -123,7 +125,7 @@ public class CMBlocks {
     public static final BlockEntry<Block> STEEL_BLOCK = REGISTRATE
             .block("steel_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/steel"))
@@ -144,7 +146,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate(new BasinGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister(movementBehaviour(new BasinMovementBehaviour()))
@@ -157,7 +159,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister(movementBehaviour(new CastingBlockMovementBehavior()))
@@ -171,7 +173,7 @@ public class CMBlocks {
             .properties(BlockBehaviour.Properties::noOcclusion)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister(movementBehaviour(new CastingBlockMovementBehavior()))
@@ -184,7 +186,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate(new FoundryLidGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .item()
@@ -196,7 +198,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate(new GlassedFoundryLidGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .item()
@@ -208,7 +210,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.STONE))
             .properties(BlockBehaviour.Properties::noOcclusion)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(8.0))
@@ -235,7 +237,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.color(MaterialColor.STONE))
             .properties(BlockBehaviour.Properties::noOcclusion)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate(new BeltGrinderGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(6.0))
@@ -298,6 +300,19 @@ public class CMBlocks {
                 .build()
                 .register();
     });
+
+    public static final BlockEntry<FaucetBlock> FAUCET_BLOCK = REGISTRATE
+            .block("faucet", FaucetBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
+            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+            .transform(pickaxeOnly())
+            .blockstate(new FaucetGenerator()::generate)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .onRegisterAfter(Registry.ITEM_REGISTRY, v -> ItemDescription.useKey(v, "block.createmetallurgy.faucet"))
+            .item()
+            .transform(customItemModel("faucet", "block"))
+            .register();
 
     public static void register() {
     }

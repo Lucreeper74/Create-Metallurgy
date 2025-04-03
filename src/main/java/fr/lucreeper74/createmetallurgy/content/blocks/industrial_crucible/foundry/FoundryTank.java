@@ -183,10 +183,6 @@ public class FoundryTank implements IFluidHandler {
                 for (Ingredient ingredient : recipe.getIngredients()) {
                     for (int i = 0; i < inv.getSlots(); i++) {
                         MeltingSlot slot = inv.getSlot(i);
-
-                        // TODO: FIX that multiple input item of the same type is ignored
-
-
                         if (ingredient.test(slot.getStack())) {
                             slot.setStack(ItemStack.EMPTY);
                             break;

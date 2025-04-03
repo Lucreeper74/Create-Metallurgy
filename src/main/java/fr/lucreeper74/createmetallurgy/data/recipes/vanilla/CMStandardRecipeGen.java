@@ -191,7 +191,12 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
     FOUNDRY_UNIT = create(CMItems.FOUNDRY_UNIT).unlockedByTag(T::steelIngot)
             .viaShaped(b -> b.define('S', T.steelIngot())
                     .define('C', Items.COMPASS)
-                    .pattern("SCS"))
+                    .pattern("SCS")),
+
+    FAUCET = create(CMBlocks.FAUCET_BLOCK).unlockedBy(T::andesiteAlloy)
+            .viaShaped(b -> b.define('A', T.andesiteAlloy())
+                    .pattern("A A")
+                    .pattern(" A "))
 
     ;
 

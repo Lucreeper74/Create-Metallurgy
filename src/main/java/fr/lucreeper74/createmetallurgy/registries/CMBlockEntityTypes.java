@@ -3,6 +3,8 @@ package fr.lucreeper74.createmetallurgy.registries;
 import com.simibubi.create.content.processing.basin.BasinRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerInstance;
@@ -69,6 +71,12 @@ public class CMBlockEntityTypes {
             .blockEntity("light_bulb", LightBulbBlockEntity::new)
             .validBlocks(CMBlocks.LIGHT_BULBS.toArray())
             .renderer(() -> LightBulbRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<FaucetBlockEntity> FAUCET = REGISTRATE
+            .blockEntity("faucet", FaucetBlockEntity::new)
+            .validBlocks(CMBlocks.FAUCET_BLOCK)
+            .renderer(() -> FaucetRenderer::new)
             .register();
 
     public static void register() {}

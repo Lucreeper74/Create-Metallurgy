@@ -13,6 +13,7 @@ public class CMShapes {
     public static final VoxelShaper
 
             LIGHT_BULB = shape(5, 0, 5, 11, 12, 11).forDirectional(),
+            FAUCET = shape(4, 6, 8, 12, 11, 15).forDirectional(NORTH),
 
     CRUCIBLE_CORNER = shape(0, 0, 0, 16, 16, 16).erase(0, 0, 3, 13, 16, 16).forHorizontal(NORTH),
             CRUCIBLE_WALL = shape(0, 0, 0, 16, 16, 3).forHorizontal(NORTH),
@@ -25,7 +26,8 @@ public class CMShapes {
             CRUCIBLE_SINGLE_BOTTOM = shape(0, 0, 0, 16, 16, 16).erase(3, 0, 3, 13, 16, 13).add(0, 0, 0, 16, 4, 16).build(),
             CRUCIBLE_BOTTOM = shape(0, 0, 0, 16, 4, 16).build(),
 
-            FOUNDRY_LID = shape(1, 0, 1, 15, 14, 15).add(3, 13, 3, 13, 15, 13).build();
+            FOUNDRY_LID = shape(1, 0, 1, 15, 14, 15).add(3, 13, 3, 13, 15, 13).build(),
+            FAUCET_DOWN = shape(4, 8, 4, 12, 16, 12).build();
 
     //
 

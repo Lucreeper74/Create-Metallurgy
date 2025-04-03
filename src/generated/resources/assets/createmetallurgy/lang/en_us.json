@@ -30,6 +30,8 @@
   "block.createmetallurgy.casting_table": "Casting Table",
   "block.createmetallurgy.coke_block": "Coke Block",
   "block.createmetallurgy.cyan_light_bulb": "Cyan Light Bulb",
+  "block.createmetallurgy.faucet": "Faucet",
+  "block.createmetallurgy.faucet.tooltip.summary": "_Manual_ alternative to the _Spout_! Use to vertically transport fluids up to _5 blocks_ down!",
   "block.createmetallurgy.foundry_basin": "Foundry Basin",
   "block.createmetallurgy.foundry_lid": "Foundry Lid",
   "block.createmetallurgy.foundry_mixer": "Foundry Mixer",

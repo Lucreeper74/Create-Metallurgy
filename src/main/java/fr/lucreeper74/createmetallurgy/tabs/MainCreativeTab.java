@@ -1,6 +1,7 @@
 package fr.lucreeper74.createmetallurgy.tabs;
 
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
+import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import net.minecraft.world.item.ItemStack;
 
 public class MainCreativeTab extends CMCreativeModeTab {
@@ -10,6 +11,6 @@ public class MainCreativeTab extends CMCreativeModeTab {
 
     @Override
     public ItemStack makeIcon() {
-        return new ItemStack(CMFluids.MOLTEN_IRON.getBucket().get());
+        return CMItems.OBDURIUM_INGOT.asStack();
     }
 }
