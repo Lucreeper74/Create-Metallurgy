@@ -1,23 +1,21 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.foundation.ponder.PonderRegistry;
-import com.simibubi.create.foundation.ponder.PonderTag;
-import com.simibubi.create.infrastructure.ponder.AllPonderTags;
+import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 
 public class CMPonderTags {
+    public static final ResourceLocation METALWORK = new ResourceLocation(CreateMetallurgy.MOD_ID, "metalwork");
 
-        public static final PonderTag METALWORK = create("metalwork").item(CMBlocks.FOUNDRY_MIXER_BLOCK.get(), true, false)
-                .defaultLang("Metalwork", "Components which used to work metals")
-                .addToIndex();
+    public static void register(PonderTagRegistrationHelper<ResourceLocation> helper) {
+        PonderTagRegistrationHelper<RegistryEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
-        private static PonderTag create(String id) {
-            return new PonderTag(CreateMetallurgy.genRL(id));
-        }
-
-    public static void register() {
-        PonderRegistry.TAGS.forTag(METALWORK)
+        helper.registerTag(METALWORK).addToIndex().item(CMBlocks.FOUNDRY_MIXER_BLOCK.get().asItem(), true, false)
+                .title("Metalwork").description("Components which used to work metals").register();
+        HELPER.addToTag(METALWORK)
                 .add(CMBlocks.FOUNDRY_BASIN_BLOCK)
                 .add(CMBlocks.FOUNDRY_LID_BLOCK)
                 .add(CMBlocks.FOUNDRY_MIXER_BLOCK)
@@ -26,7 +24,7 @@ public class CMPonderTags {
                 .add(CMBlocks.CASTING_BASIN_BLOCK)
                 .add(CMBlocks.BELT_GRINDER_BLOCK);
 
-        PonderRegistry.TAGS.forTag(AllPonderTags.REDSTONE)
+        HELPER.addToTag(AllCreatePonderTags.REDSTONE)
                 .add(CMBlocks.LIGHT_BULBS.get(DyeColor.WHITE));
     }
 }

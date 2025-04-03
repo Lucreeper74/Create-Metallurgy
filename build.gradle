@@ -144,6 +144,10 @@ repositories {
         name = 'tterrag maven'
         url = 'https://maven.tterrag.com/'
     }
+    maven {
+        name = 'create maven'
+        url = 'https://maven.createmod.net/'
+    }
 
     // For JEI
     maven {
@@ -188,7 +192,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
     implementation fg.deobf("com.simibubi.create:create-${mc_version}:${create_version}:slim") { transitive = false }
-    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${mc_version}:${flywheel_version}")
+    implementation fg.deobf("net.createmod.ponder:Ponder-Forge-${mc_version}:${ponder_version}")
+    implementation fg.deobf("dev.engine-room.flywheel:flywheel-forge-${mc_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 
     implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")

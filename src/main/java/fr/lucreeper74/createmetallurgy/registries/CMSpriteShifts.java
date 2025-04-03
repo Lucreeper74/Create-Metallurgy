@@ -1,8 +1,8 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
-import com.simibubi.create.foundation.block.render.SpriteShifter;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import net.createmod.catnip.render.SpriteShiftEntry;
+import net.createmod.catnip.render.SpriteShifter;
 
 @SuppressWarnings("unused")
 public class CMSpriteShifts {

@@ -1,24 +1,30 @@
 package fr.lucreeper74.createmetallurgy.compat.jei.category;
 
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
+import com.simibubi.create.content.fluids.potion.PotionFluidHandler;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.item.ItemHelper;
-import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.Pair;
+import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinRecipe;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.ingredient.IRecipeSlotRichTooltipCallback;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.createmod.catnip.data.Pair;
+import net.createmod.catnip.lang.Lang;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
@@ -26,6 +32,8 @@ import org.apache.commons.lang3.mutable.MutableInt;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecipe> {
 
@@ -34,6 +42,39 @@ public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecip
     public FoundryBasinCategory(Info<FoundryBasinRecipe> info, boolean needsHeating) {
         super(info);
         this.needsHeating = needsHeating;
+    }
+
+    public static FluidStack withImprovedVisibility(FluidStack stack) {
+        FluidStack display = stack.copy();
+        int displayedAmount = (int) (stack.getAmount() * .75f) + 250;
+        display.setAmount(displayedAmount);
+        return display;
+    }
+
+    public static List<FluidStack> withImprovedVisibility(List<FluidStack> stacks) {
+        return stacks.stream()
+                .map(FoundryBasinCategory::withImprovedVisibility)
+                .collect(Collectors.toList());
+    }
+
+    public static IRecipeSlotRichTooltipCallback addFluidTooltip(int mbAmount) {
+        return (view, tooltip) -> {
+            Optional<FluidStack> displayed = view.getDisplayedIngredient(ForgeTypes.FLUID_STACK);
+            if (displayed.isEmpty())
+                return;
+
+            FluidStack fluidStack = displayed.get();
+
+            if (fluidStack.getFluid().isSame(AllFluids.POTION.get())) {
+                ArrayList<Component> potionTooltip = new ArrayList<>();
+                PotionFluidHandler.addPotionTooltip(fluidStack, potionTooltip, 1);
+                tooltip.addAll(potionTooltip.stream().toList());
+            }
+
+            int amount = mbAmount == -1 ? fluidStack.getAmount() : mbAmount;
+            Component text = Component.literal(String.valueOf(amount)).append(CreateLang.translateDirect("generic.unit.millibuckets")).withStyle(ChatFormatting.GOLD);
+            tooltip.add(text);
+        };
     }
 
     @Override
@@ -63,7 +104,7 @@ public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecip
                     .addSlot(RecipeIngredientRole.INPUT, 17 + xOffset + (i % 3) * 19, 51 - (i / 3) * 19)
                     .setBackground(getRenderedSlot(), -1, -1)
                     .addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(fluidIngredient.getMatchingFluidStacks()))
-                    .addTooltipCallback(addFluidTooltip(fluidIngredient.getRequiredAmount()));
+                    .addRichTooltipCallback(addFluidTooltip(fluidIngredient.getRequiredAmount()));
             i++;
         }
 
@@ -78,7 +119,7 @@ public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecip
                     .addSlot(RecipeIngredientRole.OUTPUT, xPosition, yPosition)
                     .setBackground(getRenderedSlot(result), -1, -1)
                     .addItemStack(result.getStack())
-                    .addTooltipCallback(addStochasticTooltip(result));
+                    .addRichTooltipCallback(addStochasticTooltip(result));
             i++;
         }
 
@@ -90,7 +131,7 @@ public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecip
                     .addSlot(RecipeIngredientRole.OUTPUT, xPosition, yPosition)
                     .setBackground(getRenderedSlot(), -1, -1)
                     .addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(fluidResult))
-                    .addTooltipCallback(addFluidTooltip(fluidResult.getAmount()));
+                    .addRichTooltipCallback(addFluidTooltip(fluidResult.getAmount()));
             i++;
         }
 
@@ -126,7 +167,7 @@ public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecip
 
         AllGuiTextures heatBar = noHeat ? AllGuiTextures.JEI_NO_HEAT_BAR : AllGuiTextures.JEI_HEAT_BAR;
         heatBar.render(graphics, 4, 80);
-        graphics.drawString(Minecraft.getInstance().font, Lang.translateDirect(requiredHeat.getTranslationKey()), 9,
+        graphics.drawString(Minecraft.getInstance().font, CreateLang.translateDirect(requiredHeat.getTranslationKey()), 9,
                 86, requiredHeat.getColor(), false);
     }
 }

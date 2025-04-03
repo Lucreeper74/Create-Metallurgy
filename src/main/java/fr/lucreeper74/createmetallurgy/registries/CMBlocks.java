@@ -1,7 +1,7 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.AllItems;
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
 import com.simibubi.create.foundation.block.DyedBlockList;
@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.UncontainableBlockItem;
+import com.simibubi.create.infrastructure.config.CStress;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -44,14 +45,14 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.Tags;
 
-import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.AllTags.forgeBlockTag;
 import static com.simibubi.create.AllTags.forgeItemTag;
+import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movementBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "removal"})
 public class CMBlocks {
 
     static {
@@ -197,7 +198,7 @@ public class CMBlocks {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
-            .transform(BlockStressDefaults.setImpact(8.0))
+            .transform(CStress.setImpact(8.0))
             .item()
             .transform(customItemModel("foundry_mixer", "item"))
             .register();
@@ -210,7 +211,7 @@ public class CMBlocks {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate(new BeltGrinderGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
-            .transform(BlockStressDefaults.setImpact(6.0))
+            .transform(CStress.setImpact(6.0))
             .transform(axeOrPickaxe())
             .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.mechanical_grinder"))
             .item()

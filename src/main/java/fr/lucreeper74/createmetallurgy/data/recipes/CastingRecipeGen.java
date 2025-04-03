@@ -4,7 +4,6 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
-import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.compat.CMCompatMetals;
@@ -22,6 +21,8 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraftforge.registries.ForgeRegistries;
+
 import java.util.function.UnaryOperator;
 
 import static com.simibubi.create.AllTags.forgeItemTag;
@@ -227,7 +228,7 @@ public class CastingRecipeGen extends CreateRecipeProvider {
      */
     protected GeneratedRecipe create(CMRecipeTypes type, ItemLike result, UnaryOperator<CastingRecipeBuilder> transform) {
         GeneratedRecipe generatedRecipe =
-                c -> transform.apply(new CastingRecipeBuilder(type, CreateMetallurgy.genRL(RegisteredObjects.getKeyOrThrow(result
+                c -> transform.apply(new CastingRecipeBuilder(type, CreateMetallurgy.genRL(ForgeRegistries.ITEMS.getKey(result
                                 .asItem()).getPath())))
                         .build(c);
         all.add(generatedRecipe);

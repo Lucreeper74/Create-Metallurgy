@@ -7,11 +7,12 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBox;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxRenderer;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
-import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.VecHelper;
+import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import it.unimi.dsi.fastutil.Pair;
+import net.createmod.catnip.math.VecHelper;
+import net.createmod.catnip.outliner.Outliner;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -53,7 +54,7 @@ public class NetworkAddressRenderer {
         if (!empty)
             box.wideOutline();
 
-        CreateClient.OUTLINER.showValueBox(Pair.of("address", pos), box.transform(behaviour.slot))
+        Outliner.getInstance().showAABB(Pair.of("address", pos), box.transform(behaviour.slot).getBounds())
                 .highlightFace(result.getDirection());
 
         if (!hit)
@@ -62,7 +63,7 @@ public class NetworkAddressRenderer {
         List<MutableComponent> tip = new ArrayList<>();
         tip.add(label.copy());
         tip.add(
-                Lang.translateDirect(empty ?
+                CreateLang.translateDirect(empty ?
                         "logistics.filter.click_to_set" : "logistics.filter.click_to_replace"));
         CreateClient.VALUE_SETTINGS_HANDLER.showHoverTip(tip);
     }
@@ -91,7 +92,7 @@ public class NetworkAddressRenderer {
         ItemStack stack = behaviour.address.getStack();
 
         ms.pushPose();
-        transform.transform(be.getBlockState(), ms);
+        transform.transform(be.getLevel(), be.getBlockPos(), be.getBlockState(), ms);
         ValueBoxRenderer.renderItemIntoValueBox(stack, ms, buffer, light, overlay);
         ms.popPose();
 

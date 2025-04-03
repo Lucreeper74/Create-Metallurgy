@@ -1,10 +1,10 @@
 package fr.lucreeper74.createmetallurgy.utils;
 
-import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
-import com.simibubi.create.foundation.utility.Iterate;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
+import net.createmod.catnip.data.Iterate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -49,7 +49,7 @@ public class ColoredFluidRenderer extends FluidRenderer {
         Vec3 center = new Vec3(xMin + (xMax - xMin) / 2, yMin + (yMax - yMin) / 2, zMin + (zMax - zMin) / 2);
         ms.pushPose();
         if (fluidAttributes.isLighterThanAir())
-            TransformStack.cast(ms)
+            TransformStack.of(ms)
                     .translate(center)
                     .rotateX(180)
                     .translateBack(center);

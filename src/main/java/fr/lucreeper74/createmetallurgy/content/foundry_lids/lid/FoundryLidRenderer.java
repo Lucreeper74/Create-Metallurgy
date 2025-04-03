@@ -3,8 +3,8 @@ package fr.lucreeper74.createmetallurgy.content.foundry_lids.lid;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
 import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
+import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -27,16 +27,16 @@ public class FoundryLidRenderer extends SafeBlockEntityRenderer<FoundryLidBlockE
         Direction facing = blockState.getValue(HORIZONTAL_FACING);
         float dialPivot = 5.75f / 16;
 
-        CachedBufferer.partial(CMPartialModels.THERMOMETER_GAUGE, blockState)
-                .centre()
+        CachedBuffers.partial(CMPartialModels.THERMOMETER_GAUGE, blockState)
+                .center()
                 .rotateY(-facing.toYRot())
-                .unCentre()
+                .uncenter()
                 .renderInto(ms, bufferSource.getBuffer(RenderType.solid()));
 
-        CachedBufferer.partial(AllPartialModels.BOILER_GAUGE_DIAL, blockState)
-                .centre()
+        CachedBuffers.partial(AllPartialModels.BOILER_GAUGE_DIAL, blockState)
+                .center()
                 .rotateY(-facing.toYRot())
-                .unCentre()
+                .uncenter()
                 .translate(0, dialPivot, dialPivot)
                 .rotateX(be.gauge.getValue(partialTicks) * -90)
                 .translate(0, -dialPivot, -dialPivot)

@@ -1,15 +1,15 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual;
 import com.simibubi.create.content.processing.basin.BasinRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockRenderer;
 import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidRenderer;
 import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerInstance;
+import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerVisual;
 import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerRenderer;
 import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderInstance;
 import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderRenderer;
 import fr.lucreeper74.createmetallurgy.content.casting.basin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlockEntity;
@@ -47,14 +47,14 @@ public class CMBlockEntityTypes {
 
     public static final BlockEntityEntry<FoundryMixerBlockEntity> FOUNDRY_MIXER = REGISTRATE
             .blockEntity("foundry_mixer", FoundryMixerBlockEntity::new)
-            .instance(() -> FoundryMixerInstance::new)
+            .visual(() -> FoundryMixerVisual::new)
             .validBlocks(CMBlocks.FOUNDRY_MIXER_BLOCK)
             .renderer(() -> FoundryMixerRenderer::new)
             .register();
 
     public static final BlockEntityEntry<BeltGrinderBlockEntity> BELT_GRINDER = REGISTRATE
             .blockEntity("mechanical_belt_grinder", BeltGrinderBlockEntity::new)
-            .instance(() -> BeltGrinderInstance::new)
+            .visual(() -> SingleAxisRotatingVisual::shaft, false)
             .validBlocks(CMBlocks.BELT_GRINDER_BLOCK)
             .renderer(() -> BeltGrinderRenderer::new)
             .register();

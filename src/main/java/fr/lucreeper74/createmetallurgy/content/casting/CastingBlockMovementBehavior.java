@@ -1,6 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.casting;
 
-import com.simibubi.create.content.contraptions.behaviour.MovementBehaviour;
+import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -22,7 +22,7 @@ public class CastingBlockMovementBehavior implements MovementBehaviour {
     }
 
     @Override
-    public boolean renderAsNormalBlockEntity() {
+    public boolean disableBlockEntityRendering() {
         return true;
     }
 

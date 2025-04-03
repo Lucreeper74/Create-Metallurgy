@@ -7,6 +7,9 @@ import com.simibubi.create.content.processing.basin.BasinInventory;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.utility.*;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
+import net.createmod.catnip.data.IntAttached;
+import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,6 +28,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import net.createmod.catnip.nbt.NBTHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -163,7 +167,7 @@ public class FoundryBasinBlockEntity extends BasinBlockEntity {
             if (stackInSlot.isEmpty())
                 continue;
             CMLang.text("")
-                    .add(Components.translatable(stackInSlot.getDescriptionId())
+                    .add(Component.translatable(stackInSlot.getDescriptionId())
                             .withStyle(ChatFormatting.GRAY))
                     .add(CMLang.text(" x" + stackInSlot.getCount())
                             .style(ChatFormatting.GREEN))

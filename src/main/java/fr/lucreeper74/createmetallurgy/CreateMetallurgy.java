@@ -12,6 +12,7 @@ import fr.lucreeper74.createmetallurgy.content.light_bulb.network.NetworkHandler
 import fr.lucreeper74.createmetallurgy.registries.*;
 import fr.lucreeper74.createmetallurgy.registries.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.data.CMDatagen;
+import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
 @Mod(CreateMetallurgy.MOD_ID)
@@ -31,7 +33,7 @@ public class CreateMetallurgy {
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
     public static final Logger LOGGER = LogUtils.getLogger();
     static {
-        REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE)
+        REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
                 .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
     }
 
@@ -49,22 +51,28 @@ public class CreateMetallurgy {
         CMBlocks.register();
         CMItems.register();
         CMFluids.register();
-        CMArmInteract.register();
         CMSpriteShifts.init();
         CMBlockEntityTypes.register();
         CMRecipeTypes.register(eventBus);
 
-        CastingWithSpout.registerDefaults();
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateMetallurgyClient.loadClient(eventBus));
 
         eventBus.addListener(EventPriority.LOWEST, CMDatagen::gatherData);
+        eventBus.addListener(CreateMetallurgy::onRegister);
+
         eventBus.addListener(this::setup);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+    }
+
+    public static void onRegister(final RegisterEvent event) {
+        CMArmInteract.init();
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        CastingWithSpout.registerDefaults(); // Blocks registered after FMLCommonSetupEvent
     }
 
     public static ResourceLocation genRL(String path) {

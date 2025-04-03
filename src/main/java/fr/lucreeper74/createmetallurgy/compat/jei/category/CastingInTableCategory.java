@@ -20,6 +20,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static fr.lucreeper74.createmetallurgy.compat.jei.category.FoundryBasinCategory.addFluidTooltip;
+import static fr.lucreeper74.createmetallurgy.compat.jei.category.FoundryBasinCategory.withImprovedVisibility;
+
 public class CastingInTableCategory extends CastingAbstractCategory<CastingTableRecipe> {
     private final CastingInTableElement castingTable = new CastingInTableElement();
 
@@ -35,7 +38,7 @@ public class CastingInTableCategory extends CastingAbstractCategory<CastingTable
                 .addSlot(RecipeIngredientRole.INPUT, 15, 6)
                 .setBackground(getRenderedSlot(), -1, -1)
                 .addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(fluidIngredient.getMatchingFluidStacks()))
-                .addTooltipCallback(addFluidTooltip(fluidIngredient.getRequiredAmount()));
+                .addRichTooltipCallback(addFluidTooltip(fluidIngredient.getRequiredAmount()));
 
         Ingredient mold = recipe.getIngredient();
         if (!mold.isEmpty())
@@ -65,6 +68,7 @@ public class CastingInTableCategory extends CastingAbstractCategory<CastingTable
 
     @Override
     @NotNull
+    @SuppressWarnings("removal")
     public List<Component> getTooltipStrings(CastingTableRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltip = new ArrayList<>();
 
