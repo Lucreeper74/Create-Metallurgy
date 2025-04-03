@@ -367,8 +367,6 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         int overflow = tankInventory.getFillAmount() - tankInventory.getCapacity();
         if (overflow > 0)
             tankInventory.drain(overflow, IFluidHandler.FluidAction.EXECUTE);
-
-        //TODO: TEST IF OVERFLOW WORK AS INTENDED
     }
 
 

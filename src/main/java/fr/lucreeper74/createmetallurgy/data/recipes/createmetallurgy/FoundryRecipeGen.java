@@ -43,7 +43,16 @@ public class FoundryRecipeGen extends CMRecipeProvider {
             NETHERITE_METAL = standardMetals(CMFluids.MOLTEN_NETHERITE, "netherite", 16),
 
     /* Entity Melting Recipes */
-    TEST2 = meltingEntity("tadpole",EntityType.TADPOLE, 2,CMFluids.MOLTEN_BRASS, 100, 4);
+    IRON_GOLEM = meltingEntity("iron_golem", EntityType.IRON_GOLEM, 6, CMFluids.MOLTEN_IRON, 315, 9),
+            ZOMBIFIED_PIGLIN = meltingEntity("zombified_piglin", EntityType.ZOMBIFIED_PIGLIN, 4, CMFluids.MOLTEN_GOLD, 40, 6),
+            PIGLIN = meltingEntity("piglin", EntityType.PIGLIN, 4, CMFluids.MOLTEN_GOLD, 10, 6),
+            PIGLIN_BRUTE = meltingEntity("piglin_brute", EntityType.PIGLIN_BRUTE, 4, CMFluids.MOLTEN_GOLD, 20, 6),
+
+    WITHER_SKELETON = createEntity("wither_skeleton", b -> (EntityMeltingRecipeBuilder) b
+            .requireEntity(EntityType.WITHER_SKELETON, 4)
+            .requiresMinHeat(9)
+            .require(CMFluids.MOLTEN_IRON.get(), 270)
+                .output(CMFluids.MOLTEN_STEEL.get(), 270));
 
     protected GeneratedRecipe moddedMetals() {
         for (CMCompatMetals metal : CMCompatMetals.values()) {

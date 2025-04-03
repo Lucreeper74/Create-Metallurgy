@@ -1,0 +1,22 @@
+{
+  "type": "createmetallurgy:entity_melting",
+  "entity": {
+    "type": "minecraft:wither_skeleton",
+    "damage": 4
+  },
+  "ingredients": [
+    {
+      "amount": 270,
+      "fluid": "createmetallurgy:molten_iron",
+      "nbt": {}
+    }
+  ],
+  "maxHeatRequirement": 50,
+  "minHeatRequirement": 9,
+  "results": [
+    {
+      "amount": 270,
+      "fluid": "createmetallurgy:molten_steel"
+    }
+  ]
+}
