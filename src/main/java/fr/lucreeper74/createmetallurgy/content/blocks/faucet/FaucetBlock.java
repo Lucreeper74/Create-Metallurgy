@@ -2,12 +2,10 @@ package fr.lucreeper74.createmetallurgy.content.blocks.faucet;
 
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.block.WrenchableDirectionalBlock;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMShapes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;

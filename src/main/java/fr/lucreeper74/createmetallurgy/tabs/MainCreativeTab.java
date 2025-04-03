@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.tabs;
 
-import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import net.minecraft.world.item.ItemStack;
 

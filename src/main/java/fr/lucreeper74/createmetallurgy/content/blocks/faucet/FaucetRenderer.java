@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.EmptyFluidHandler;
 
 public class FaucetRenderer extends SafeBlockEntityRenderer<FaucetBlockEntity> {
 
