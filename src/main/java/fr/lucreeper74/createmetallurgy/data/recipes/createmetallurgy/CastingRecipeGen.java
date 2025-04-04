@@ -47,7 +47,9 @@ public class CastingRecipeGen extends CMRecipeProvider {
                 ANDESITE_ALLOY_FROM_ZINC = basin("andesite_alloy_from_zinc", Items.ANDESITE, true, CMFluids.MOLTEN_ZINC, 90, AllBlocks.ANDESITE_ALLOY_BLOCK.get(), 360),
 
                 COPPER_CASING = basinWithMoldTag(AllTags.AllItemTags.STRIPPED_LOGS.tag, true, CMFluids.MOLTEN_COPPER, 90, AllBlocks.COPPER_CASING.get(), 70),
-                BRASS_CASING = basinWithMoldTag(AllTags.AllItemTags.STRIPPED_LOGS.tag, true, CMFluids.MOLTEN_BRASS, 90, AllBlocks.BRASS_CASING.get(), 70)
+                BRASS_CASING = basinWithMoldTag(AllTags.AllItemTags.STRIPPED_LOGS.tag, true, CMFluids.MOLTEN_BRASS, 90, AllBlocks.BRASS_CASING.get(), 70),
+
+            SLAG = table("slag_casting", CMFluids.MOLTEN_SLAG, 90, CMItems.SLAG.get(), 60)
 
     ;
 

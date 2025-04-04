@@ -25,22 +25,50 @@ public class  CMFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TUNGSTEN = moltenFluid("tungsten", 2200, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_STEEL = moltenFluid("steel", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_NETHERITE = moltenFluid("netherite", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ALUMINUM = moltenFluid("aluminum", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_LEAD = moltenFluid("lead", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_NICKEL = moltenFluid("nickel", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_OSMIUM = moltenFluid("osmium", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_SILVER = moltenFluid("silver", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TIN = moltenFluid("tin", 2000, 1400, 10, 2, 25, 3, 100f);
+
+    // Modded Metals
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ALUMINUM = moddedMoltenFluid("aluminum", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_LEAD = moddedMoltenFluid("lead", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_NICKEL = moddedMoltenFluid("nickel", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_OSMIUM = moddedMoltenFluid("osmium", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_SILVER = moddedMoltenFluid("silver", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TIN = moddedMoltenFluid("tin", 2000, 1400, 10, 2, 25, 3, 100f);
 
     //Alloys
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_INVAR = moltenFluid("invar", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ELECTRUM = moltenFluid("electrum", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_BRONZE = moltenFluid("bronze", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_CONSTANTAN = moltenFluid("constantan", 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_VOID_STEEL = moltenFluid("void_steel", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_OBDURIUM = moltenFluid("obdurium", 2400, 1400, 10, 2, 25, 3, 100f);
 
+    // Modded Alloys
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_INVAR = moddedMoltenFluid("invar", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ELECTRUM = moddedMoltenFluid("electrum", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_BRONZE = moddedMoltenFluid("bronze", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_CONSTANTAN = moddedMoltenFluid("constantan", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_VOID_STEEL = moddedMoltenFluid("void_steel", 2000, 1400, 10, 2, 25, 3, 100f);
+
+    //Others
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_SLAG = moltenFluid("slag", 2500, 1400, 12, 2, 25, 3, 100f);
+
     //
+
+    private static FluidEntry<ForgeFlowingFluid.Flowing> moddedMoltenFluid(String name, int viscosity, int density, int lightLevel, int levelDecrease, int tickRate, int slopeDistance, float explosionResistance) {
+        ResourceLocation STILL_RL = CreateMetallurgy.genRL("fluid/" + name + "/still");
+        ResourceLocation FLOW_RL = CreateMetallurgy.genRL("fluid/" + name + "/flowing");
+        return REGISTRATE.fluid("molten_" + name, STILL_RL, FLOW_RL, MoltenFluidType::new)
+                .properties(b -> b.viscosity(viscosity)
+                        .density(density)
+                        .lightLevel(lightLevel)
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
+                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
+                        .canHydrate(false).canDrown(false).canSwim(false))
+                .fluidProperties(p -> p.levelDecreasePerBlock(levelDecrease)
+                        .tickRate(tickRate)
+                        .slopeFindDistance(slopeDistance)
+                        .explosionResistance(explosionResistance))
+                .tag(forgeFluidTag("molten_" + name), forgeFluidTag("molten_materials"))
+                .source(MoltenFluidSource::new)
+                .bucket((content, props) -> new TagDependentBucketItem(content, props, AllTags.forgeItemTag("ingots/" + name)))
+                .build()
+                .register();
+    }
 
     private static FluidEntry<ForgeFlowingFluid.Flowing> moltenFluid(String name, int viscosity, int density, int lightLevel, int levelDecrease, int tickRate, int slopeDistance, float explosionResistance) {
         ResourceLocation STILL_RL = CreateMetallurgy.genRL("fluid/" + name + "/still");
@@ -58,7 +86,7 @@ public class  CMFluids {
                         .explosionResistance(explosionResistance))
                 .tag(forgeFluidTag("molten_" + name), forgeFluidTag("molten_materials"))
                 .source(MoltenFluidSource::new)
-                .bucket((content, props) -> new TagDependentBucketItem(content, props, AllTags.forgeItemTag("ingots/" + name)))
+                .bucket()
                 .build()
                 .register();
     }

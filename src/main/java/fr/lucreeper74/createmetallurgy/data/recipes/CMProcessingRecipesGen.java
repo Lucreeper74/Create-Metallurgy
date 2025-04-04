@@ -37,6 +37,7 @@ public abstract class CMProcessingRecipesGen extends CMRecipeProvider {
         GENS.add(new CMMillingRecipeGen(gen));
         GENS.add(new CMWashingRecipeGen(gen));
         GENS.add(new CMPressingRecipeGen(gen));
+        GENS.add(new CMCompactingRecipeGen(gen));
 
         gen.addProvider(true, new DataProvider() {
 

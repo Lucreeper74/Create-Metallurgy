@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "amount": 90,
+      "fluid": "createmetallurgy:molten_slag",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 60,
+  "result": {
+    "item": "createmetallurgy:slag"
+  }
+}

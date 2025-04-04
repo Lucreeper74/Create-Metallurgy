@@ -28,6 +28,8 @@
     "createmetallurgy:molten_silver",
     "createmetallurgy:flowing_molten_tin",
     "createmetallurgy:molten_tin",
+    "createmetallurgy:flowing_molten_obdurium",
+    "createmetallurgy:molten_obdurium",
     "createmetallurgy:flowing_molten_invar",
     "createmetallurgy:molten_invar",
     "createmetallurgy:flowing_molten_electrum",
@@ -38,7 +40,7 @@
     "createmetallurgy:molten_constantan",
     "createmetallurgy:flowing_molten_void_steel",
     "createmetallurgy:molten_void_steel",
-    "createmetallurgy:flowing_molten_obdurium",
-    "createmetallurgy:molten_obdurium"
+    "createmetallurgy:flowing_molten_slag",
+    "createmetallurgy:molten_slag"
   ]
 }

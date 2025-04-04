@@ -55,6 +55,8 @@ public class CMItems {
             GRAPHITE_ROD_MOLD = taggedIngredient("graphite_rod_mold", forgeItemTag("graphite_molds/rod"), forgeItemTag("graphite_molds")),
             GRAPHITE_GEAR_MOLD = taggedIngredient("graphite_gear_mold", forgeItemTag("graphite_molds/gear"), forgeItemTag("graphite_molds"));
 
+    public static final ItemEntry<Item> SLAG = taggedIngredient("slag", forgeItemTag("slag"));
+
 
     public static final ItemEntry<CombustibleItem> COKE = REGISTRATE.item("coke", CombustibleItem::new)
             .tag(forgeItemTag("coal_coke"))

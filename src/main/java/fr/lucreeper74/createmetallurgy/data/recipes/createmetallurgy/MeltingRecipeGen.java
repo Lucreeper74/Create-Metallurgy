@@ -42,12 +42,15 @@ public class MeltingRecipeGen extends CMProcessingRecipesGen {
         meltingTag(metalName + "/ingot", forgeItemTag("ingots/" + metalName), fluid, 90, heatCondition, 40);
         meltingTag(metalName + "/nugget", forgeItemTag("nuggets/" + metalName), fluid, 10, heatCondition, 4);
         meltingTag(metalName + "/plate", forgeItemTag("plates/" + metalName), fluid, 90, heatCondition, 40);
-        meltingTag(metalName + "/dirty_dust", forgeItemTag("dirty_dusts/" + metalName), fluid, 90, heatCondition, 30);
         meltingTag(metalName + "/dust", forgeItemTag("dusts/" + metalName), fluid, 90, heatCondition, 20);
         meltingTag(metalName + "/rod", forgeItemTag("rods/" + metalName), fluid, 45, heatCondition, 20);
         meltingTag(metalName + "/gear", forgeItemTag("gears/" + metalName), fluid, 360, heatCondition, 160);
         meltingTag(metalName + "/coin", forgeItemTag("coins/" + metalName), fluid, 10, heatCondition, 4);
         meltingTag(metalName + "/wire", forgeItemTag("wires/" + metalName), fluid, 45, heatCondition, 20);
+
+        // Impure melting
+        meltingTag(metalName + "/ore", forgeItemTag("raw_materials/" + metalName), fluid, 90, CMFluids.MOLTEN_SLAG, 45, heatCondition, 40);
+        meltingTag(metalName + "/dirty_dust", forgeItemTag("dirty_dusts/" + metalName), fluid, 90, CMFluids.MOLTEN_SLAG, 30, heatCondition, 30);
         return null;
     }
 
@@ -56,7 +59,6 @@ public class MeltingRecipeGen extends CMProcessingRecipesGen {
             String metalName = metal.getName();
             //Items
             meltingTag(metalName + "/ingot", forgeItemTag("ingots/" + metalName), metal.getFluid(), 90, HeatCondition.HEATED, 40);
-            meltingTag(metalName + "/dirty_dust", forgeItemTag("dirty_dusts/" + metalName), metal.getFluid(), 90, HeatCondition.HEATED, 35);
             meltingTag(metalName + "/dust", forgeItemTag("dusts/" + metalName), metal.getFluid(), 90, HeatCondition.HEATED, 20);
             meltingTag(metalName + "/nugget", forgeItemTag("nuggets/" + metalName), metal.getFluid(), 10, HeatCondition.HEATED, 4);
             meltingTag(metalName + "/plate", forgeItemTag("plates/" + metalName), metal.getFluid(), 90, HeatCondition.HEATED, 40);
@@ -64,8 +66,33 @@ public class MeltingRecipeGen extends CMProcessingRecipesGen {
             meltingTag(metalName + "/gear", forgeItemTag("gears/" + metalName), metal.getFluid(), 360, HeatCondition.HEATED, 160);
             meltingTag(metalName + "/coin", forgeItemTag("coins/" + metalName), metal.getFluid(), 10, HeatCondition.HEATED, 4);
             meltingTag(metalName + "/wire", forgeItemTag("wires/" + metalName), metal.getFluid(), 45, HeatCondition.HEATED, 20);
+
+            // Impure melting
+            meltingTag(metalName + "/ore", forgeItemTag("raw_materials/" + metalName), metal.getFluid(), 90, CMFluids.MOLTEN_SLAG, 45, HeatCondition.HEATED, 40);
+            meltingTag(metalName + "/dirty_dust", forgeItemTag("dirty_dusts/" + metalName), metal.getFluid(), 90, CMFluids.MOLTEN_SLAG, 30, HeatCondition.HEATED, 35);
         }
         return null;
+    }
+
+    /**
+     * Recipes with input Tags + byproduct :
+     *
+     * @param recipeId      Recipe name / folders
+     * @param inputTag      Input from tag
+     * @param result        Fluid result
+     * @param amount        Fluid amount
+     * @param byproduct     Second Fluid result
+     * @param byAmount      Second Fluid amount
+     * @param heatCondition Heat condition
+     * @param duration      Processing time
+     */
+    protected GeneratedRecipe meltingTag(String recipeId, TagKey<Item> inputTag, FluidEntry<ForgeFlowingFluid.Flowing> result, int amount, FluidEntry<ForgeFlowingFluid.Flowing> byproduct, int byAmount, HeatCondition heatCondition, int duration) {
+        return create(recipeId, b -> b.duration(duration)
+                .withCondition(new NotCondition(new TagEmptyCondition(inputTag.location())))
+                .require(inputTag)
+                .requiresHeat(heatCondition)
+                .output(result.get(), amount)
+                .output(byproduct.get(), byAmount));
     }
 
     /**

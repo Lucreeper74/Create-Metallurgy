@@ -20,6 +20,10 @@
     {
       "amount": 90,
       "fluid": "createmetallurgy:molten_void_steel"
+    },
+    {
+      "amount": 30,
+      "fluid": "createmetallurgy:molten_slag"
     }
   ]
 }
