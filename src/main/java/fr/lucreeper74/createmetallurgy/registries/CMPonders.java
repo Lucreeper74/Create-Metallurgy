@@ -29,7 +29,8 @@ public class CMPonders {
                 .addStoryBoard("casting_blocks", CastingScenes::castingBlocks, CMPonderTags.METALWORK);
 
         HELPER.forComponents(CMBlocks.INDUSTRIAL_CRUCIBLE)
-                .addStoryBoard("industrial_crucible", CrucibleScenes::crucible, CMPonderTags.METALWORK);
+                .addStoryBoard("industrial_crucible", CrucibleScenes::crucible, CMPonderTags.METALWORK)
+                .addStoryBoard("foundry", CrucibleScenes::foundry, CMPonderTags.METALWORK);
 
         HELPER.forComponents(CMBlocks.LIGHT_BULBS.toArray())
                 .addStoryBoard("light_bulbs", LightBulbScenes::lightBulbScenes, AllPonderTags.REDSTONE);
