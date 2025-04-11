@@ -49,7 +49,7 @@ public class FoundryData {
             be.notifyUpdate();
 
         // Melting Recipes
-        for (int slot = 0; slot < be.getTotalFoundrySize(); slot++) {
+        for (int slot = 0; slot < be.getTotalSize(); slot++) {
             MeltingSlot meltingSlot = inputInv.getSlot(slot);
             if (meltingSlot.canMelt())
                 meltingSlot.heatItem();
@@ -120,7 +120,7 @@ public class FoundryData {
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
 
-        getHeatLevelTooltip(foundrySize).forGoggles(tooltip);
+        CMLang.builder().add(getHeatLevelComponent(foundrySize)).forGoggles(tooltip);
 
         tooltip.add(Components.immutableEmpty());
 
@@ -158,9 +158,10 @@ public class FoundryData {
     }
 
     @NotNull
-    public LangBuilder getHeatLevelTooltip(int foundrySize) {
+    public MutableComponent getHeatLevelComponent(int foundrySize) {
         FoundryHeatLevel heatLevel = FoundryHeatLevel.getHeatLevel(getCurrentHeat(), foundrySize);
         LangBuilder builder = CMLang.text(TooltipHelper.makeProgressBar(3, heatLevel.ordinal()));
+
 
         builder.translate("foundry." + CMLang.asId(heatLevel.name()))
                 .space()
@@ -173,7 +174,7 @@ public class FoundryData {
 
         builder.color(heatLevel.getTextColor());
 
-        return builder;
+        return builder.component();
     }
 
     private MutableComponent progressBarComponent(int maxValue, int progress, int maxLength) {
@@ -185,21 +186,6 @@ public class FoundryData {
                 .append(bars(level > 6 ? Math.min(level - 6, 3) : 0, ChatFormatting.YELLOW))
                 .append(bars(Math.max(0, maxLength - level), ChatFormatting.DARK_GRAY));
     }
-
-//    private MutableComponent heatBarComponent(int maxHeat, int heat, int maxLength, int baseSize) {
-//
-//        int min = -(baseSize);
-//        int max = baseSize * 2;
-//
-//
-//        return Components.empty()
-//                .append(bars(Math.max(0, minValue - 1), ChatFormatting.GOLD))
-//                .append(bars(minValue > 0 ? 1 : 0, ChatFormatting.YELLOW))
-//                .append(bars(Math.max(0, level - minValue), ChatFormatting.GOLD))
-//                .append(bars(Math.max(0, maxValue - level), ChatFormatting.DARK_RED))
-//                .append(bars(Math.max(0, Math.min(18 - maxValue, ((maxValue / 5 + 1) * 5) - maxValue)),
-//                        ChatFormatting.DARK_GRAY));
-//    }
 
     private MutableComponent bars(int count, ChatFormatting format) {
         return Components.literal(Strings.repeat('|', count))

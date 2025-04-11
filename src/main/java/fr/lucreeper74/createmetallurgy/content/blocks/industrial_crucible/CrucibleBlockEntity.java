@@ -127,10 +127,10 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         if (isController()) {
             width = compound.getInt("Size");
             height = compound.getInt("Height");
-            tankInventory.setCapacity(getTotalFoundrySize() * CAPACITY_FACTOR);
+            tankInventory.setCapacity(getTotalSize() * CAPACITY_FACTOR);
             tankInventory.deserializeNBT(compound.getCompound("TankContent"));
 
-            foundry.inputInv.setFirstLimitedSlot(getTotalFoundrySize());
+            foundry.inputInv.setFirstLimitedSlot(getTotalSize());
             foundry.inputInv.deserializeNBT(compound.getCompound("MeltingInv"));
 
             if (tankInventory.getFillState() > 1)
@@ -153,8 +153,8 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
             if (hasLevel())
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
             if (isController()) {
-                tankInventory.setCapacity(CAPACITY_FACTOR * getTotalFoundrySize());
-                foundry.inputInv.setFirstLimitedSlot(getTotalFoundrySize());
+                tankInventory.setCapacity(CAPACITY_FACTOR * getTotalSize());
+                foundry.inputInv.setFirstLimitedSlot(getTotalSize());
             }
             invalidateRenderBoundingBox();
         }
@@ -532,9 +532,11 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         this.width = width;
     }
 
-    public int getTotalFoundrySize() {
+    public int getTotalSize() {
         return width * width * height;
     }
+
+    public int getBaseSize() { return getWidth() * getWidth(); }
 
     private static final Object EntityMeltingCacheKey = new Object();
 
@@ -546,7 +548,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
         CMLang.translate("crucible.title").forGoggles(tooltip);
 
-        controllerBE.foundry.addToGoggleTooltip(tooltip, isPlayerSneaking, controllerBE.getWidth() * controllerBE.getWidth());
+        controllerBE.foundry.addToGoggleTooltip(tooltip, isPlayerSneaking, controllerBE.getBaseSize());
 
         CMLang.translate("crucible.capacity").style(ChatFormatting.GRAY).forGoggles(tooltip);
 

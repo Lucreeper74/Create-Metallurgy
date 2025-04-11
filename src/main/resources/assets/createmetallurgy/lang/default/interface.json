@@ -33,6 +33,10 @@
   "createmetallurgy.foundry.heating": "Heating",
   "createmetallurgy.foundry.overheating": "Overheating!",
 
+  "createmetallurgy.display_source.foundry.not_enough_space": "Not enough space ",
+  "createmetallurgy.display_source.foundry.for_foundry_status": "for Foundry Status",
+  "createmetallurgy.display_source.foundry_status": "Foundry Thermal Status",
+
   "createmetallurgy.generic.unit.thermal": "Tu",
   "createmetallurgy.generic.icon.heart": "\u2764",
   "createmetallurgy.generic.icon.up": "\u2191",
@@ -62,7 +66,6 @@
   "advancement.createmetallurgy.industrial_crucible.desc": "Obtain an Industrial Crucible",
   "advancement.createmetallurgy.foundry": "Metallurgy Mastery",
   "advancement.createmetallurgy.foundry.desc": "Obtain a Foundry Unit",
-
 
   "createmetallurgy.logistics.address": "Net Address",
 
