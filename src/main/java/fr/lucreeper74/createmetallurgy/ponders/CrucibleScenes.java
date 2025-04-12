@@ -160,7 +160,7 @@ public class CrucibleScenes {
         scene.overlay.showText(60)
                 .attachKeyFrame()
                 .colored(PonderPalette.OUTPUT)
-                .text("...Foundry can have a size up to 5x5 blocks in width to reach the maximum temperature.")
+                .text("...Foundry can have a size up to 5x5 blocks in width to reach the maximum temperature")
                 .pointAt(util.vector.blockSurface(crucibleGauge, Direction.NORTH))
                 .placeNearTarget();
         scene.idle(70);
@@ -206,7 +206,7 @@ public class CrucibleScenes {
                 new InputWindowElement(util.vector.blockSurface(crucibleGauge, Direction.NORTH), Pointing.DOWN).withItem(AllItems.GOGGLES.asStack()), 60);
         scene.idle(6);
         scene.overlay.showText(60)
-                .text("The Foundry's current status can be inspected with Engineer's Goggles. The foundry's temperature is reported in Thermal Units (TU).")
+                .text("The Foundry's current status can be inspected with Engineer's Goggles. The foundry's temperature is reported in Thermal Units (Tu)")
                 .attachKeyFrame()
                 .colored(PonderPalette.BLUE)
                 .pointAt(util.vector.blockSurface(crucibleGauge, Direction.NORTH))
@@ -246,7 +246,7 @@ public class CrucibleScenes {
         scene.overlay.showText(60)
                 .attachKeyFrame()
                 .colored(PonderPalette.FAST)
-                .text("Foundries can also perform other types of recipes, such as entity melting and alloying.")
+                .text("Foundries can also perform other types of recipes, such as entity melting and alloying")
                 .pointAt(util.vector.blockSurface(crucibleController.above(), Direction.WEST))
                 .placeNearTarget();
         scene.idle(70);
