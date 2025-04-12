@@ -222,6 +222,10 @@
   "item.createmetallurgy.zinc_dust": "Zinkpoeder",
   "itemGroup.createmetallurgy.main_group": "Create: Metallurgy"
 
+  "createmetallurgy.display_source.foundry.for_foundry_status": "voor Smelterij Status",
+  "createmetallurgy.display_source.foundry.not_enough_space": "Niet genoeg plaats",
+  "createmetallurgy.display_source.foundry_status": "Smelterij Thermische Status",
+
   "createmetallurgy.ponder.foundry.header": "Een Smelterij Opzetten",
   "createmetallurgy.ponder.foundry.text_1": "Industriële Smeltkroezen kunnen ook als een Smelterij worden gebruikt...",
   "createmetallurgy.ponder.foundry.text_2": "...je kunt deze op elk moment verwijderen met een Moersleutel",
