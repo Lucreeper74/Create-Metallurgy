@@ -23,15 +23,15 @@ public class CastingFluidTank extends FluidTank {
                 .chase(0, .25f, LerpedFloat.Chaser.EXP);
     }
 
-    public FluidTank readFromNBT(CompoundTag nbt) {
-        setFluid(FluidStack.loadFluidStackFromNBT(nbt));
+    public FluidTank readFromNBT(CompoundTag nbt, boolean clientPacket) {
+        setFluid(FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluid")));
         setCapacity(nbt.getInt("capacity"));
-        fluidLevel.readNBT(nbt.getCompound("level"), true);
+        fluidLevel.readNBT(nbt.getCompound("level"), clientPacket);
         return this;
     }
 
     public CompoundTag writeToNBT(CompoundTag nbt) {
-        fluid.writeToNBT(nbt);
+        nbt.put("fluid", fluid.writeToNBT(new CompoundTag()));
         nbt.putInt("capacity", capacity);
         nbt.put("level", fluidLevel.writeNBT());
         return nbt;
@@ -74,7 +74,7 @@ public class CastingFluidTank extends FluidTank {
         if (!be.hasLevel())
             return;
         fluidLevel.chase(getFluidAmount() / (float) getCapacity(), .25f, LerpedFloat.Chaser.EXP);
-        if (!be.getLevel().isClientSide)
+        if (!be.getLevel().isClientSide())
             sendDataLazily();
         super.onContentsChanged();
     }

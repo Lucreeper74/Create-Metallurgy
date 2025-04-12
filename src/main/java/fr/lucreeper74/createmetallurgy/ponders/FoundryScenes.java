@@ -118,6 +118,7 @@ public class FoundryScenes {
         scene.idle(5);
         ItemStack goldDust = CMItems.GOLD_DUST.asStack();
         scene.world.createItemOnBelt(util.grid.at(4, 1, 2), Direction.UP, goldDust);
+        scene.world.modifyBlock(burnerPos, s -> s.setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.KINDLED), false);
         scene.idle(40);
         scene.overlay.showControls(new InputWindowElement(basinSide, Pointing.LEFT)
                 .withItem(CMItems.GOLD_DUST.asStack()), 20);
@@ -131,7 +132,7 @@ public class FoundryScenes {
                 .pointAt(lidTrap)
                 .placeNearTarget();
         scene.idle(90);
-        scene.overlay.showControls(new InputWindowElement(lidTrap, Pointing.LEFT).rightClick(), 30);
+        scene.overlay.showControls(new InputWindowElement(lidTrap, Pointing.LEFT).whileSneaking().rightClick(), 30);
         scene.idle(7);
         scene.world.modifyBlock(lidPos, s -> s.setValue(GlassedFoundryLidBlock.OPEN, false), false);
 
@@ -221,8 +222,8 @@ public class FoundryScenes {
         scene.idle(90);
         scene.overlay.showText(80)
                 .attachKeyFrame()
-                .colored(PonderPalette.MEDIUM)
-                .text("...you will need a Super Heated Blaze Burner")
+                .colored(PonderPalette.OUTPUT)
+                .text("...you will need a Heated Blaze Burner")
                 .pointAt(burnerSide)
                 .placeNearTarget();
         scene.idle(90);
@@ -230,7 +231,7 @@ public class FoundryScenes {
         scene.overlay.showControls(new InputWindowElement(burnerSide, Pointing.LEFT).rightClick()
                 .withItem(AllItems.BLAZE_CAKE.asStack()), 30);
         scene.idle(7);
-        scene.world.modifyBlock(burner, s -> s.setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SEETHING), false);
+        scene.world.modifyBlock(burner, s -> s.setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.KINDLED), false);
         scene.idle(20);
 
         //Adding Molten Iron
@@ -257,7 +258,7 @@ public class FoundryScenes {
                 .pointAt(lidTrap)
                 .placeNearTarget();
         scene.idle(90);
-        scene.overlay.showControls(new InputWindowElement(lidTrap, Pointing.LEFT).rightClick(), 30);
+        scene.overlay.showControls(new InputWindowElement(lidTrap, Pointing.LEFT).whileSneaking().rightClick(), 30);
         scene.idle(7);
         scene.world.modifyBlock(topPos, s -> s.setValue(GlassedFoundryLidBlock.OPEN, false), false);
         scene.idle(40);

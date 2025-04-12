@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
 import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.ponders.CastingScenes;
+import fr.lucreeper74.createmetallurgy.ponders.CrucibleScenes;
 import fr.lucreeper74.createmetallurgy.ponders.FoundryScenes;
 import fr.lucreeper74.createmetallurgy.ponders.LightBulbScenes;
 
@@ -26,6 +27,10 @@ public class CMPonders {
 
         HELPER.forComponents(CMBlocks.CASTING_BASIN_BLOCK, CMBlocks.CASTING_TABLE_BLOCK)
                 .addStoryBoard("casting_blocks", CastingScenes::castingBlocks, CMPonderTags.METALWORK);
+
+        HELPER.forComponents(CMBlocks.INDUSTRIAL_CRUCIBLE)
+                .addStoryBoard("industrial_crucible", CrucibleScenes::crucible, CMPonderTags.METALWORK)
+                .addStoryBoard("foundry", CrucibleScenes::foundry, CMPonderTags.METALWORK);
 
         HELPER.forComponents(CMBlocks.LIGHT_BULBS.toArray())
                 .addStoryBoard("light_bulbs", LightBulbScenes::lightBulbScenes, AllPonderTags.REDSTONE);

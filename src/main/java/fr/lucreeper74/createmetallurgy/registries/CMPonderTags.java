@@ -24,7 +24,8 @@ public class CMPonderTags {
                 .add(CMBlocks.GLASSED_FOUNDRY_LID_BLOCK)
                 .add(CMBlocks.CASTING_TABLE_BLOCK)
                 .add(CMBlocks.CASTING_BASIN_BLOCK)
-                .add(CMBlocks.BELT_GRINDER_BLOCK);
+                .add(CMBlocks.BELT_GRINDER_BLOCK)
+                .add(CMBlocks.INDUSTRIAL_CRUCIBLE);
 
         PonderRegistry.TAGS.forTag(AllPonderTags.REDSTONE)
                 .add(CMBlocks.LIGHT_BULBS.get(DyeColor.WHITE));

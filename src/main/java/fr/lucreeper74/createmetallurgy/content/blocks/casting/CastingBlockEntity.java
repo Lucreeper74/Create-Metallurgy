@@ -45,7 +45,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
 
     public LazyOptional<IItemHandlerModifiable> itemCapability;
     public CastingFluidTank inputTank;
-    private final LazyOptional<CastingFluidTank> fluidCapability = LazyOptional.of(() -> inputTank);
+    private final LazyOptional<CastingFluidTank> fluidCapability;
     public SmartInventory inv;
     public SmartInventory moldInv;
     protected CastingRecipe currentRecipe;
@@ -64,6 +64,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
         inv = new SmartInventory(1, this, 1, true).forbidInsertion();
         moldInv = new SmartInventory(1, this, 1, true);
         itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(inv, moldInv));
+        fluidCapability = LazyOptional.of(() -> inputTank);
         inputTank = new CastingFluidTank(this);
         fluidBuffer = FluidStack.EMPTY;
         lastOutput = ItemStack.EMPTY;
@@ -92,7 +93,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
         super.read(compound, clientPacket);
         moldInv.deserializeNBT(compound.getCompound("moldInv"));
         inv.deserializeNBT(compound.getCompound("inv"));
-        inputTank.readFromNBT(compound.getCompound("inputTank"));
+        inputTank.readFromNBT(compound.getCompound("inputTank"), clientPacket);
         fluidBuffer = FluidStack.loadFluidStackFromNBT(compound.getCompound("fluidBuffer"));
         lastOutput = ItemStack.of(compound.getCompound("lastOutput"));
         processingTick = compound.getInt("castingTime");

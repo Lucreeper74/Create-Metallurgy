@@ -32,14 +32,14 @@ public class FoundryRecipeGen extends CMRecipeProvider {
     /* Bulk Melting Recipes */
     COMPAT_METALS_BLOCKS = moddedMetals(),
 
-    IRON_METAL = standardMetals(CMFluids.MOLTEN_IRON, "iron", 4),
-            GOLD_METAL = standardMetals(CMFluids.MOLTEN_GOLD, "gold", 4),
-            COPPER_METAL = standardMetals(CMFluids.MOLTEN_COPPER, "copper", 4),
-            BRASS_METAL = standardMetals(CMFluids.MOLTEN_BRASS, "brass", 4),
-            ZINC_METAL = standardMetals(CMFluids.MOLTEN_ZINC, "zinc", 4),
-            TUNGSTEN_METAL = standardMetals(CMFluids.MOLTEN_TUNGSTEN, "tungsten", 4),
-            OBDURIUM_METAL = standardMetals(CMFluids.MOLTEN_OBDURIUM, "obdurium", 4),
-            STEEL_METAL = standardMetals(CMFluids.MOLTEN_STEEL, "steel", 4),
+    IRON_METAL = standardMetals(CMFluids.MOLTEN_IRON, "iron", 6),
+            GOLD_METAL = standardMetals(CMFluids.MOLTEN_GOLD, "gold", 6),
+            COPPER_METAL = standardMetals(CMFluids.MOLTEN_COPPER, "copper", 6),
+            BRASS_METAL = standardMetals(CMFluids.MOLTEN_BRASS, "brass", 6),
+            ZINC_METAL = standardMetals(CMFluids.MOLTEN_ZINC, "zinc", 6),
+            TUNGSTEN_METAL = standardMetals(CMFluids.MOLTEN_TUNGSTEN, "tungsten", 9),
+            OBDURIUM_METAL = standardMetals(CMFluids.MOLTEN_OBDURIUM, "obdurium", 9),
+            STEEL_METAL = standardMetals(CMFluids.MOLTEN_STEEL, "steel", 6),
             NETHERITE_METAL = standardMetals(CMFluids.MOLTEN_NETHERITE, "netherite", 16),
 
     /* Entity Melting Recipes */
@@ -58,7 +58,7 @@ public class FoundryRecipeGen extends CMRecipeProvider {
         for (CMCompatMetals metal : CMCompatMetals.values()) {
             String metalName = metal.getName();
             //Blocks
-            meltingTag(metalName + "/block", forgeItemTag("storage_blocks/" + metalName), metal.getFluid(), 810, 4, 200);
+            meltingTag(metalName + "/block", forgeItemTag("storage_blocks/" + metalName), metal.getFluid(), 810, 6, 200);
         }
         return null;
     }

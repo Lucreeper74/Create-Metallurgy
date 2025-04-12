@@ -29,6 +29,7 @@ import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasin
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.*;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryDisplaySource;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.tabs.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.utils.CMDyeHelper;
@@ -52,6 +53,7 @@ import net.minecraftforge.common.Tags;
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.AllTags.forgeBlockTag;
 import static com.simibubi.create.AllTags.forgeItemTag;
+import static com.simibubi.create.content.redstone.displayLink.AllDisplayBehaviours.assignDataBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
@@ -225,6 +227,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .blockstate(new CrucibleGenerator()::generate)
             .onRegister(CreateRegistrate.blockModel(() -> CrucibleModel::new))
+            .onRegister(assignDataBehaviour(new FoundryDisplaySource(), "foundry_status"))
             .addLayer(() -> RenderType::cutoutMipped)
             .tag(AllTags.AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag)
             .item(CrucibleBlockItem::new)
