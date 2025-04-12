@@ -221,4 +221,20 @@
   "item.createmetallurgy.wolframite_dust": "Wolframietpoeder",
   "item.createmetallurgy.zinc_dust": "Zinkpoeder",
   "itemGroup.createmetallurgy.main_group": "Create: Metallurgy"
+
+  "createmetallurgy.ponder.foundry.header": "Een Smelterij Opzetten",
+  "createmetallurgy.ponder.foundry.text_1": "Industriële Smeltkroezen kunnen ook als een Smelterij worden gebruikt...",
+  "createmetallurgy.ponder.foundry.text_2": "...je kunt deze op elk moment verwijderen met een Moersleutel",
+  "createmetallurgy.ponder.foundry.text_3": "Om metalen te smelten, moet je de Smelterij verwarmen...",
+  "createmetallurgy.ponder.foundry.text_4": "...een Smelterij kan een grootte hebben van maximaal 5x5 blokken in de breedte om de hoogste temperatuur te bereiken",
+  "createmetallurgy.ponder.foundry.text_5": "Echter, elk basisblok zonder een brander eronder zal de Smelterij afkoelen. Meer warmte betekent sneller smelten",
+  "createmetallurgy.ponder.foundry.text_6": "In tegenstelling tot de Smelterij-kom is deze groot genoeg om meerdere- en grotere voorwerpen tegelijk te smelten",
+  "createmetallurgy.ponder.foundry.text_7": "De huidige status van de Smelterij kan worden gecontroleerd met een Ingenieursbril. De temperatuur van de Smelterij wordt gerapporteerd in Thermische Eenheden (Tu)",
+  "createmetallurgy.ponder.foundry.text_8": "Voorwerpen kunnen ook aan elke kant worden overgedragen, zoals bij een Voorraadkluis",
+  "createmetallurgy.ponder.foundry.text_9": "Smelterijen kunnen ook andere soorten recepten uitvoeren, zoals het smelten van entiteiten en legeringen",
+
+  "createmetallurgy.ponder.industrial_crucible.header": "Een Industriële Smeltkroes Bouwen",
+  "createmetallurgy.ponder.industrial_crucible.text_1": "Industriële Smeltkroezen kunnen worden gebruikt om gesmolten metalen op te slaan",
+  "createmetallurgy.ponder.industrial_crucible.text_2": "Je kunt ramen toevoegen met een Moersleutel!",
+  "createmetallurgy.ponder.industrial_crucible.text_3": "Smeltkroezen kunnen ook meerdere vloeistoffen tegelijk opslaan!",
 }
