@@ -36,3 +36,4 @@ Want to help with translation ? Please refer to language file in [`generated/lan
 - Albertosaurio65 -> Spanish localization
 - TinxLD -> German localization
 - BramVerkuijlen -> Dutch localization
+- Janko -> Croatian localization
