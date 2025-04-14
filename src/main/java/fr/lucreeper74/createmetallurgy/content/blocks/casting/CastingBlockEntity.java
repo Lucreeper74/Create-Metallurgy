@@ -6,11 +6,15 @@ import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.INamedIconOptions;
+import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
+import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.VecHelper;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingRecipe;
+import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -43,6 +47,7 @@ import java.util.stream.Collectors;
 
 public abstract class CastingBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
+    protected ScrollOptionBehaviour<LockMode> lockSelect;
     public LazyOptional<IItemHandlerModifiable> itemCapability;
     public CastingFluidTank inputTank;
     private final LazyOptional<CastingFluidTank> fluidCapability;
@@ -73,6 +78,18 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         behaviours.add(new DirectBeltInputBehaviour(this));
+
+        behaviours.add(lockSelect = new ScrollOptionBehaviour<>(LockMode.class,
+                CMLang.translateDirect("casting.lockmode"), this, new CastingBlockLockSlot()));
+
+        lockSelect.withCallback(setting -> {
+            boolean isLocked = setting == 0;
+            level.setBlock(getBlockPos(), getBlockState().setValue(CastingBlock.LOCKED, isLocked), 2);
+            if (isLocked)
+                moldInv.forbidExtraction();
+            else
+                moldInv.allowExtraction();
+        });
     }
 
     @Override
@@ -281,4 +298,27 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
     protected abstract <C extends Container> boolean matchStaticFilters(Recipe<C> recipe);
 
     protected abstract Object getRecipeCacheKey();
+
+    public enum LockMode implements INamedIconOptions {
+        LOCK(AllIcons.I_CONFIG_LOCKED),
+        UNLOCKED(AllIcons.I_CONFIG_UNLOCKED);
+
+        private final String translationKey;
+        private final AllIcons icon;
+
+        LockMode(AllIcons icon) {
+            this.icon = icon;
+            this.translationKey = ordinal() == 0 ? "gui.terrainzapper.placement.attached" : "action.discard";
+        }
+
+        @Override
+        public AllIcons getIcon() {
+            return icon;
+        }
+
+        @Override
+        public String getTranslationKey() {
+            return translationKey;
+        }
+    }
 }

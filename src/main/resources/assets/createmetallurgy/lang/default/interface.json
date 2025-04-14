@@ -68,6 +68,7 @@
   "advancement.createmetallurgy.foundry.desc": "Obtain a Foundry Unit",
 
   "createmetallurgy.logistics.address": "Net Address",
+  "createmetallurgy.casting.lockmode": "Mold Locking Mode",
 
   "death.attack.createmetallurgy.mechanical_grinder": "%1$s's foots has been transformed into grated cheese",
   "death.attack.createmetallurgy.mechanical_grinder.player": "%2$s used %1$s like a cheese for his pasta",

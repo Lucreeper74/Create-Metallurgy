@@ -79,6 +79,7 @@
   "block.createmetallurgy.white_light_bulb": "White Light Bulb",
   "block.createmetallurgy.wolframite_ore": "Wolframite Ore",
   "block.createmetallurgy.yellow_light_bulb": "Yellow Light Bulb",
+  "createmetallurgy.casting.lockmode": "Mold Locking Mode",
   "createmetallurgy.crucible.capacity": "Remaining Capacity",
   "createmetallurgy.crucible.empty": "Foundry Empty...",
   "createmetallurgy.crucible.fluid_content": "Fluid Contents",
