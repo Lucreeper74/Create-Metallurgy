@@ -66,10 +66,6 @@ public class MeltingSlot implements ContainerData {
 
     public boolean canMelt() {
         if (processingTime > 0 && FoundryRecipe.isEnoughHeated(be, currentRecipe)) {
-            if (stack.isEmpty()) {
-                reset();
-                return false;
-            }
             return true;
         } else {
             startRecipe();
@@ -145,14 +141,14 @@ public class MeltingSlot implements ContainerData {
     }
 
     public void deserializeNBT(CompoundTag nbt) {
-        stack = ItemStack.of(nbt);
+        stack = ItemStack.of(nbt.getCompound("stack"));
         processingTime = nbt.getInt("processingTime");
         processDuration = nbt.getInt("processDuration");
     }
 
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
-        stack.save(nbt);
+        nbt.put("stack", stack.save(new CompoundTag()));
         nbt.putInt("processingTime", processingTime);
         nbt.putInt("processDuration", processDuration);
         return nbt;

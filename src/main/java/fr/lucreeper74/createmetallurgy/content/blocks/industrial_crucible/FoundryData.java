@@ -51,6 +51,9 @@ public class FoundryData {
         // Melting Recipes
         for (int slot = 0; slot < be.getTotalSize(); slot++) {
             MeltingSlot meltingSlot = inputInv.getSlot(slot);
+            if (meltingSlot.getStack().isEmpty())
+                continue;
+
             if (meltingSlot.canMelt())
                 meltingSlot.heatItem();
             else
