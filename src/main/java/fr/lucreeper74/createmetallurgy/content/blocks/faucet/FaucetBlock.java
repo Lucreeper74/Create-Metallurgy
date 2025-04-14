@@ -76,8 +76,7 @@ public class FaucetBlock extends WrenchableDirectionalBlock implements IBE<Fauce
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(OPEN)
-                .add(POWERED);
+        builder.add(OPEN, POWERED);
         super.createBlockStateDefinition(builder);
     }
 

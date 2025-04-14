@@ -103,10 +103,7 @@ public abstract class LidBlock extends Block implements IWrenchable {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(ON_FOUNDRY_BASIN)
-                .add(FACING)
-                .add(OPEN)
-                .add(POWERED);
+        builder.add(ON_FOUNDRY_BASIN, FACING, OPEN, POWERED);
         super.createBlockStateDefinition(builder);
     }
 
