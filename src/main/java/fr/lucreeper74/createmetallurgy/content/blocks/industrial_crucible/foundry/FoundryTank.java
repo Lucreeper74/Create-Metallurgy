@@ -205,7 +205,7 @@ public class FoundryTank implements IFluidHandler {
 
         Predicate<Recipe<?>> type = RecipeConditions.isOfType(CMRecipeTypes.ALLOYING.getType());
         List<Recipe<?>> recipes = RecipeFinder.get(BulkAlloyingCacheKey, level, type).stream()
-                .filter(r -> FoundryRecipe.match(be, r))
+                .filter(r -> FoundryRecipe.bulkMatch(be, r))
                 .sorted((r1, r2) -> r2.getIngredients()
                         .size()
                         - r1.getIngredients()

@@ -12,6 +12,7 @@ import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundr
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
@@ -45,10 +46,9 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
         return true;
     }
 
-    public static boolean match(CrucibleBlockEntity be, Recipe<?> recipe) {
+    public static boolean bulkMatch(CrucibleBlockEntity be, Recipe<?> recipe) {
         if (recipe instanceof ProcessingRecipe<?> processRecipe) {
             boolean matchItem = true;
-            boolean matchFluid = true;
 
             List<Ingredient> ingredients = processRecipe.getIngredients();
             if (!ingredients.isEmpty()) {
@@ -72,7 +72,13 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
                     matchItem = false;
                 }
             }
+            return fluidMatch(be, recipe) && matchItem;
+        }
+        return false;
+    }
 
+    public static boolean fluidMatch(CrucibleBlockEntity be, Recipe<?> recipe) {
+        if (recipe instanceof ProcessingRecipe<?> processRecipe) {
             List<FluidIngredient> fluidIngredients = processRecipe.getFluidIngredients();
             if (!fluidIngredients.isEmpty()) {
                 FluidIngredient:
@@ -82,13 +88,18 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
                         if (fluidIngredient.test(fluid) && fluidIngredient.getRequiredAmount() <= fluid.getAmount())
                             continue FluidIngredient;
                     }
-
                     // No matching fluid
-                    matchFluid = false;
+                    return false;
                 }
+                return true;
             }
+        }
+        return false;
+    }
 
-            return matchFluid && matchItem;
+    public static boolean matchSpecific(ItemStack stack, Recipe<?> recipe) {
+        if (recipe instanceof ProcessingRecipe<?> processRecipe) {
+            return processRecipe.getIngredients().get(0).test(stack);
         }
         return false;
     }

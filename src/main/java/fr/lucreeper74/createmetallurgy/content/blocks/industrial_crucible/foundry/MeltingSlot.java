@@ -19,6 +19,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.FoundryRecipe.matchSpecific;
+
 public class MeltingSlot implements ContainerData {
 
     private ItemStack stack;
@@ -115,7 +117,7 @@ public class MeltingSlot implements ContainerData {
 
         Predicate<Recipe<?>> type = RecipeConditions.isOfType(CMRecipeTypes.BULK_MELTING.getType(), CMRecipeTypes.MELTING.getType());
         List<Recipe<?>> recipes = RecipeFinder.get(BulkMeltingCacheKey, level, type).stream()
-                .filter(r -> FoundryRecipe.match(be, r))
+                .filter(r -> matchSpecific(getStack(), r))
                 .sorted((r1, r2) -> r2.getIngredients()
                         .size()
                         - r1.getIngredients()

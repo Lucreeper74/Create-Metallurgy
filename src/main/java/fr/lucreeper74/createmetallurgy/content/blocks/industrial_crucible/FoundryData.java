@@ -66,7 +66,6 @@ public class FoundryData {
     public boolean updateTemperature(CrucibleBlockEntity be) {
         BlockPos controllerPos = be.getBlockPos();
         Level level = be.getLevel();
-        //needsHeatLevelUpdate = false;
 
         int prevActive = currentHeat;
         currentHeat = 0;
