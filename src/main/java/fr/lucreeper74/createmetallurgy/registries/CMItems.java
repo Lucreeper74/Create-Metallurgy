@@ -1,7 +1,10 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.simibubi.create.AllTags;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.item.CombustibleItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import fr.lucreeper74.createmetallurgy.content.items.FoundryUnitItem;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
@@ -23,10 +26,14 @@ public class CMItems {
             TUNGSTEN_NUGGET = taggedIngredient("tungsten_nugget", forgeItemTag("nuggets/tungsten"), Tags.Items.NUGGETS),
             TUNGSTEN_WIRE = taggedIngredient("tungsten_wire", forgeItemTag("wires/tungsten"), forgeItemTag("wires"));
 
-    public static final ItemEntry<Item>  RAW_WOLFRAMITE = taggedIngredient("raw_wolframite", forgeItemTag("raw_materials/wolframite"), forgeItemTag("raw_materials")),
+    public static final ItemEntry<Item> OBDURIUM_INGOT = taggedIngredient("obdurium_ingot", forgeItemTag("ingots/obdurium"), Tags.Items.INGOTS),
+            OBDURIUM_SHEET = taggedIngredient("obdurium_sheet", forgeItemTag("plates/obdurium"), PLATES.tag);
+
+
+    public static final ItemEntry<Item> RAW_WOLFRAMITE = taggedIngredient("raw_wolframite", forgeItemTag("raw_materials/tungsten"), forgeItemTag("raw_materials")),
             CRUSHED_RAW_WOLFRAMITE = taggedIngredient("crushed_raw_wolframite", CRUSHED_RAW_MATERIALS.tag),
-            DIRTY_WOLFRAMITE_DUST = taggedIngredient("dirty_wolframite_dust", forgeItemTag("dirty_dusts/dirty_wolframite"), forgeItemTag("dirty_dusts")),
-            WOLFRAMITE_DUST = taggedIngredient("wolframite_dust", forgeItemTag("dusts/wolframite"), forgeItemTag("dusts"));
+            DIRTY_WOLFRAMITE_DUST = taggedIngredient("dirty_wolframite_dust", forgeItemTag("dirty_dusts/tungsten"), forgeItemTag("dirty_dusts")),
+            WOLFRAMITE_DUST = taggedIngredient("wolframite_dust", forgeItemTag("dusts/tungsten"), forgeItemTag("dusts"));
 
     public static final ItemEntry<Item> DIRTY_GOLD_DUST = taggedIngredient("dirty_gold_dust", forgeItemTag("dirty_dusts/gold"), forgeItemTag("dirty_dusts")),
             GOLD_DUST = taggedIngredient("gold_dust", forgeItemTag("dusts/gold"), forgeItemTag("dusts"));
@@ -47,10 +54,15 @@ public class CMItems {
             GRAPHITE_ROD_MOLD = taggedIngredient("graphite_rod_mold", forgeItemTag("graphite_molds/rod"), forgeItemTag("graphite_molds")),
             GRAPHITE_GEAR_MOLD = taggedIngredient("graphite_gear_mold", forgeItemTag("graphite_molds/gear"), forgeItemTag("graphite_molds"));
 
+    public static final ItemEntry<Item> SLAG = taggedIngredient("slag", forgeItemTag("slag"));
+
 
     public static final ItemEntry<CombustibleItem> COKE = REGISTRATE.item("coke", CombustibleItem::new)
             .tag(forgeItemTag("coal_coke"))
             .onRegister(i -> i.setBurnTime(2000))
+            .register();
+
+    public static final ItemEntry<FoundryUnitItem> FOUNDRY_UNIT = REGISTRATE.item("foundry_unit", FoundryUnitItem::new)
             .register();
 
 
@@ -60,10 +72,24 @@ public class CMItems {
             TUNGSTEN_WIRE_SPOOL = REGISTRATE.item("tungsten_wire_spool", Item::new).register(),
             SANDPAPER_BELT = REGISTRATE.item("sandpaper_belt", Item::new).register();
 
+    public static final ItemEntry<SequencedAssemblyItem>
+            INCOMPLETE_INDUSTRIAL_CRUCIBLE = sequencedIngredient("incomplete_industrial_crucible", AllTags.AllItemTags.UPRIGHT_ON_BELT.tag);
+
     //Shortcut
     @SafeVarargs
     private static ItemEntry<Item> taggedIngredient(String name, TagKey<Item>... tags) {
         return REGISTRATE.item(name, Item::new)
+                .tag(tags)
+                .register();
+    }
+
+    private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name) {
+        return REGISTRATE.item(name, SequencedAssemblyItem::new)
+                .register();
+    }
+
+    private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name, TagKey<Item>... tags) {
+        return REGISTRATE.item(name, SequencedAssemblyItem::new)
                 .tag(tags)
                 .register();
     }

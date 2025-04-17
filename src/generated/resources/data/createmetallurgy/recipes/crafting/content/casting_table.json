@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "create:andesite_alloy"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "A A",
+    "A A"
+  ],
+  "result": {
+    "item": "createmetallurgy:casting_table"
+  },
+  "show_notification": true
+}

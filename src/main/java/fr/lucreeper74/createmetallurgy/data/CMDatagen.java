@@ -4,7 +4,9 @@ import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import com.tterrag.registrate.providers.ProviderType;
 import fr.lucreeper74.createmetallurgy.data.lang.CMLangGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMProcessingRecipesGen;
-import fr.lucreeper74.createmetallurgy.data.recipes.CastingRecipeGen;
+import fr.lucreeper74.createmetallurgy.data.recipes.vanilla.CMStandardRecipeGen;
+import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.CastingRecipeGen;
+import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.FoundryRecipeGen;
 import fr.lucreeper74.createmetallurgy.registries.CMPonders;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -20,10 +22,13 @@ public class CMDatagen {
 
 
         if (event.includeServer()) {
+            CMPonders.register(); // Register before lang cause not run during datagen
+
+            gen.addProvider(true, new CMStandardRecipeGen(output));
             gen.addProvider(true, new CastingRecipeGen(output));
+            gen.addProvider(true, new FoundryRecipeGen(output));
 
             CMProcessingRecipesGen.registerAll(gen, output);
-            CMPonders.register(); // Register before lang cause not run during datagen
 
             CMPonders.registerLang();
             AllPonderTags.register();

@@ -1,0 +1,29 @@
+{
+  "type": "createmetallurgy:melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:raw_materials/gold"
+      }
+    }
+  ],
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "tag": "forge:raw_materials/gold"
+    }
+  ],
+  "processingTime": 40,
+  "results": [
+    {
+      "amount": 90,
+      "fluid": "createmetallurgy:molten_gold"
+    },
+    {
+      "amount": 45,
+      "fluid": "createmetallurgy:molten_slag"
+    }
+  ]
+}

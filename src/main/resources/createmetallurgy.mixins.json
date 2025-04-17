@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "createmetallurgy.refmap.json",
   "mixins": [
+    "BlockMovementCheckMixin",
     "FoundryBasinCheckMixin"
   ],
   "injectors": {

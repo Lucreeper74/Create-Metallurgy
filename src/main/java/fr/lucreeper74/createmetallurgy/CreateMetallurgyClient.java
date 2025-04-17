@@ -12,7 +12,7 @@ public class CreateMetallurgyClient {
     }
 
     public static void clientInit(final FMLClientSetupEvent event) {
-//      CMPartialModels.init();
+        //CMPartialModels.init(); // Moved to main (Cause crash if here with ModernFix)
         CMPonderTags.register();
         CMPonders.register();
     }

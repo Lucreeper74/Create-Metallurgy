@@ -1,11 +1,13 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.AllItems;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
 import com.simibubi.create.foundation.block.DyedBlockList;
 import com.simibubi.create.foundation.data.AssetLookup;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.UncontainableBlockItem;
@@ -13,18 +15,22 @@ import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderGenerator;
-import fr.lucreeper74.createmetallurgy.content.casting.CastingBlockMovementBehavior;
-import fr.lucreeper74.createmetallurgy.content.casting.basin.CastingBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.casting.table.CastingTableBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_mixer.FoundryMixerBlock;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.light_bulb.LightBulbBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.lid.FoundryLidGenerator;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.content.foundry_lids.glassed_lid.GlassedFoundryLidGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockMovementBehavior;
+import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.basin.CastingBasinBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTableBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.*;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryDisplaySource;
+import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.utils.CMDyeHelper;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
@@ -47,6 +53,7 @@ import net.minecraftforge.common.Tags;
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.AllTags.forgeBlockTag;
 import static com.simibubi.create.AllTags.forgeItemTag;
+import static com.simibubi.create.content.redstone.displayLink.AllDisplayBehaviours.assignDataBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
@@ -61,7 +68,7 @@ public class CMBlocks {
     public static final BlockEntry<Block> RAW_WOLFRAMITE_BLOCK = REGISTRATE
             .block("raw_wolframite_block", Block::new)
             .initialProperties(() -> Blocks.RAW_COPPER_BLOCK)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/raw_wolframite"))
@@ -72,10 +79,21 @@ public class CMBlocks {
     public static final BlockEntry<Block> TUNGSTEN_BLOCK = REGISTRATE
             .block("tungsten_block", Block::new)
             .initialProperties(() -> Blocks.EMERALD_BLOCK)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/tungsten"))
+            .tag(Tags.Items.STORAGE_BLOCKS)
+            .build()
+            .register();
+
+    public static final BlockEntry<Block> OBDURIUM_BLOCK = REGISTRATE
+            .block("obdurium_block", Block::new)
+            .initialProperties(() -> Blocks.EMERALD_BLOCK)
+            .transform(pickaxeOnly())
+            .tag(BlockTags.NEEDS_DIAMOND_TOOL)
+            .tag(Tags.Blocks.STORAGE_BLOCKS)
+            .transform(tagBlockAndItem("storage_blocks/obdurium"))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
             .register();
@@ -87,7 +105,7 @@ public class CMBlocks {
                     RegistrateBlockLootTables.createSilkTouchDispatchTable(b,
                             lt.applyExplosionDecay(b, LootItem.lootTableItem(CMItems.RAW_WOLFRAMITE.get())
                                     .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))))))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.ORES)
             .transform(tagBlockAndItem("ores/wolframite"))
@@ -98,7 +116,7 @@ public class CMBlocks {
     public static final BlockEntry<Block> COKE_BLOCK = REGISTRATE
             .block("coke_block", Block::new)
             .initialProperties(() -> Blocks.COAL_BLOCK)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_STONE_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/coal_coke"))
@@ -109,7 +127,7 @@ public class CMBlocks {
     public static final BlockEntry<Block> STEEL_BLOCK = REGISTRATE
             .block("steel_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/steel"))
@@ -130,7 +148,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate(new BasinGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister(movementBehaviour(new BasinMovementBehaviour()))
@@ -143,7 +161,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister(movementBehaviour(new CastingBlockMovementBehavior()))
@@ -157,7 +175,7 @@ public class CMBlocks {
             .properties(BlockBehaviour.Properties::noOcclusion)
             .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister(movementBehaviour(new CastingBlockMovementBehavior()))
@@ -170,7 +188,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate(new FoundryLidGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .item()
@@ -182,7 +200,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate(new GlassedFoundryLidGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .item()
@@ -194,7 +212,7 @@ public class CMBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.mapColor(MapColor.STONE))
             .properties(BlockBehaviour.Properties::noOcclusion)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(8.0))
@@ -202,12 +220,27 @@ public class CMBlocks {
             .transform(customItemModel("foundry_mixer", "item"))
             .register();
 
+    public static final BlockEntry<CrucibleBlock> INDUSTRIAL_CRUCIBLE = REGISTRATE
+            .block("industrial_crucible", CrucibleBlock::new)
+            .initialProperties(() -> Blocks.DEEPSLATE_BRICKS)
+            .properties(p -> p.noOcclusion().isRedstoneConductor((p1, p2, p3) -> true))
+            .transform(pickaxeOnly())
+            .blockstate(new CrucibleGenerator()::generate)
+            .onRegister(CreateRegistrate.blockModel(() -> CrucibleModel::new))
+            .onRegister(assignDataBehaviour(new FoundryDisplaySource(), "foundry_status"))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .tag(AllTags.AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag)
+            .item(CrucibleBlockItem::new)
+            .model(AssetLookup.customBlockItemModel("_", "block_single"))
+            .build()
+            .register();
+
     public static final BlockEntry<BeltGrinderBlock> BELT_GRINDER_BLOCK = REGISTRATE
             .block("mechanical_belt_grinder", BeltGrinderBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.mapColor(MapColor.STONE))
             .properties(BlockBehaviour.Properties::noOcclusion)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .transform(pickaxeOnly())
             .blockstate(new BeltGrinderGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(6.0))
@@ -258,7 +291,7 @@ public class CMBlocks {
                             .requires(color.getTag())
                             .requires(forgeItemTag("light_bulbs"))
                             .unlockedBy("has_light_bulb", RegistrateRecipeProvider.has(forgeItemTag("light_bulbs")))
-                            .save(p, CreateMetallurgy.genRL("crafting/" + c.getName() + "_from_other_light_bulb"));
+                            .save(p, CreateMetallurgy.genRL("crafting/light_bulbs/" + c.getName() + "_from_other_light_bulb"));
                 })
                 .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.light_bulb"))
                 .item(UncontainableBlockItem::new)
@@ -269,6 +302,19 @@ public class CMBlocks {
                 .build()
                 .register();
     });
+
+    public static final BlockEntry<FaucetBlock> FAUCET_BLOCK = REGISTRATE
+            .block("faucet", FaucetBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
+            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+            .transform(pickaxeOnly())
+            .blockstate(new FaucetGenerator()::generate)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.faucet"))
+            .item()
+            .transform(customItemModel("faucet", "block"))
+            .register();
 
     public static void register() {
     }

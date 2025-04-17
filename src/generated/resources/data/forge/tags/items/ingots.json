@@ -1,6 +1,7 @@
 {
   "values": [
     "createmetallurgy:tungsten_ingot",
+    "createmetallurgy:obdurium_ingot",
     "createmetallurgy:steel_ingot"
   ]
 }

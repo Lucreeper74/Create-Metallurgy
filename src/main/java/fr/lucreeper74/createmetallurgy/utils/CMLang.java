@@ -1,6 +1,7 @@
 package fr.lucreeper74.createmetallurgy.utils;
 
 import com.simibubi.create.foundation.utility.Components;
+import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import com.simibubi.create.foundation.utility.LangNumberFormat;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
@@ -9,7 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Locale;
 
-public class CMLang {
+public class CMLang extends Lang {
 
     public static LangBuilder builder() {
         return new LangBuilder(CreateMetallurgy.MOD_ID);

@@ -1,0 +1,16 @@
+{
+  "type": "createmetallurgy:entity_melting",
+  "entity": {
+    "type": "minecraft:zombified_piglin",
+    "damage": 4
+  },
+  "ingredients": [],
+  "maxHeatRequirement": 50,
+  "minHeatRequirement": 6,
+  "results": [
+    {
+      "amount": 40,
+      "fluid": "createmetallurgy:molten_gold"
+    }
+  ]
+}

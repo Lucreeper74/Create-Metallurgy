@@ -151,6 +151,22 @@
     {
       "type": "single",
       "resource": "createmetallurgy:fluid/void_steel/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/obdurium/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/obdurium/still"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/slag/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/slag/still"
     }
   ]
 }

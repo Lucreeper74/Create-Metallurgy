@@ -20,6 +20,10 @@
     {
       "amount": 90,
       "fluid": "createmetallurgy:molten_brass"
+    },
+    {
+      "amount": 30,
+      "fluid": "createmetallurgy:molten_slag"
     }
   ]
 }

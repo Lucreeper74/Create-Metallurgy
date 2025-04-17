@@ -3,7 +3,7 @@ package fr.lucreeper74.createmetallurgy.compat.jei.category;
 import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.animations.AnimatedFoundryMixer;
-import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinRecipe;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import net.minecraft.client.gui.GuiGraphics;
 

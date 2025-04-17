@@ -1,0 +1,6 @@
+{
+  "parent": "createmetallurgy:block/industrial_crucible/block_single_se",
+  "textures": {
+    "1": "createmetallurgy:block/industrial_crucible/crucible_window"
+  }
+}

@@ -17,10 +17,15 @@ public class CMPartialModels {
             SHAFTLESS_STONE_COGWHEEL = block("foundry_mixer/cog"),
 
             THERMOMETER_GAUGE = block("gauges/thermometer"),
+            THERMOMETER_DIAL = block("gauges/dial"),
 
             GRINDER_BELT = block("mechanical_belt_grinder/belt"),
 
-            BULB_INNER_GLOW = block("light_bulb/inner_glow");
+            BULB_INNER_GLOW = block("light_bulb/inner_glow"),
+
+    // JEI Gui models
+
+            JEI_CURCIBLE_2X2 = jei("assembled_crucible");
 
     public static final Map<DyeColor, PartialModel> BULB_TUBES = new EnumMap<>(DyeColor.class);
     public static final Map<DyeColor, PartialModel> BULB_TUBES_GLOW = new EnumMap<>(DyeColor.class);
@@ -33,6 +38,9 @@ public class CMPartialModels {
 
     private static PartialModel block(String path) {
         return new PartialModel(CreateMetallurgy.genRL("block/" + path));
+    }
+    private static PartialModel jei(String path) {
+        return new PartialModel(CreateMetallurgy.genRL("jei/" + path));
     }
 
     public static void init() {

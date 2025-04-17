@@ -9,7 +9,7 @@ import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
 
-import static fr.lucreeper74.createmetallurgy.content.foundry_lids.glassed_lid.GlassedFoundryLidBlock.UNDER_FOUNDRY_MIXER;
+import static fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock.UNDER_FOUNDRY_MIXER;
 
 public class AnimatedFoundryMixer extends AnimatedKinetics {
     @Override
@@ -57,5 +57,4 @@ public class AnimatedFoundryMixer extends AnimatedKinetics {
 
         matrixStack.popPose();
     }
-
 }

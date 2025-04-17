@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "tag": "forge:wires/tungsten"
+    }
+  },
+  "pattern": [
+    " W ",
+    "WSW",
+    " W "
+  ],
+  "result": {
+    "item": "createmetallurgy:tungsten_wire_spool"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,26 @@
+{
+  "type": "createmetallurgy:bulk_melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:storage_blocks/tungsten"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/tungsten"
+    }
+  ],
+  "maxHeatRequirement": 50,
+  "minHeatRequirement": 9,
+  "processingTime": 200,
+  "results": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_tungsten"
+    }
+  ]
+}

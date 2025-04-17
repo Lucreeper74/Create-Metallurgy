@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "result": {
+    "item": "createmetallurgy:graphite"
+  }
+}

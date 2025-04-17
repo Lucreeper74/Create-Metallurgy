@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "create:andesite_alloy"
+    }
+  },
+  "pattern": [
+    "A A",
+    " A "
+  ],
+  "result": {
+    "item": "createmetallurgy:faucet"
+  },
+  "show_notification": true
+}

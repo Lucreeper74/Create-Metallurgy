@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "createmetallurgy:raw_wolframite"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CCC",
+    "CCC"
+  ],
+  "result": {
+    "item": "createmetallurgy:raw_wolframite_block"
+  },
+  "show_notification": true
+}

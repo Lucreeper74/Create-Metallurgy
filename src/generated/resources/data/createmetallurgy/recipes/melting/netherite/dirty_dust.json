@@ -9,7 +9,7 @@
       }
     }
   ],
-  "heatRequirement": "heated",
+  "heatRequirement": "superheated",
   "ingredients": [
     {
       "tag": "forge:dirty_dusts/netherite"
@@ -20,6 +20,10 @@
     {
       "amount": 90,
       "fluid": "createmetallurgy:molten_netherite"
+    },
+    {
+      "amount": 30,
+      "fluid": "createmetallurgy:molten_slag"
     }
   ]
 }

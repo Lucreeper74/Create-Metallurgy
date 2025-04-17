@@ -16,20 +16,22 @@ import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.*;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.GrindingRecipe;
-import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingBasinRecipe;
-import fr.lucreeper74.createmetallurgy.content.casting.recipe.CastingTableRecipe;
-import fr.lucreeper74.createmetallurgy.content.foundry_basin.FoundryBasinRecipe;
+import fr.lucreeper74.createmetallurgy.compat.jei.category.entity.EntityIngredientHelper;
+import fr.lucreeper74.createmetallurgy.compat.jei.category.entity.EntityIngredientRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.GrindingRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingTableRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.BulkMeltingRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityMeltingRecipe;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
+import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -105,11 +107,32 @@ public class CreateMetallurgyJEI implements IModPlugin {
                         .catalyst(CMBlocks.BELT_GRINDER_BLOCK::get)
                         .doubleItemIcon(CMBlocks.BELT_GRINDER_BLOCK.get(), AllItems.SAND_PAPER.get())
                         .emptyBackground(177, 70)
-                        .build("polishing_with_grinder", PolishingWithGrinderCategory::new);
+                        .build("polishing_with_grinder", PolishingWithGrinderCategory::new),
+
+                bulk_melting = builder(BulkMeltingRecipe.class)
+                        .addTypedRecipes(CMRecipeTypes.BULK_MELTING)
+                        .catalyst(CMBlocks.INDUSTRIAL_CRUCIBLE::get)
+                        .catalyst(CMItems.FOUNDRY_UNIT::get)
+                        .doubleItemIcon(CMBlocks.INDUSTRIAL_CRUCIBLE.get(), Items.BLAZE_POWDER)
+                        .emptyBackground(177, 100)
+                        .build("bulk_melting", BulkMeltingCategory::new),
+
+                entity_melting = builder(EntityMeltingRecipe.class)
+                        .addTypedRecipes(CMRecipeTypes.ENTITY_MELTING)
+                        .catalyst(CMBlocks.INDUSTRIAL_CRUCIBLE::get)
+                        .catalyst(CMItems.FOUNDRY_UNIT::get)
+                        .doubleItemIcon(CMBlocks.INDUSTRIAL_CRUCIBLE.get(), Items.TROPICAL_FISH)
+                        .emptyBackground(177, 100)
+                        .build("entity_melting", EntityMeltingCategory::new);
     }
 
     private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {
         return new CategoryBuilder<>(recipeClass);
+    }
+
+    @Override
+    public void registerIngredients(IModIngredientRegistration registration) {
+        registration.register(CMJeiConstants.ENTITY_TYPE, Collections.emptyList(), new EntityIngredientHelper(), new EntityIngredientRenderer(1));
     }
 
     @Override

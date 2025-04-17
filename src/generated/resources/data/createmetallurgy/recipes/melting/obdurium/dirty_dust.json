@@ -1,0 +1,29 @@
+{
+  "type": "createmetallurgy:melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:dirty_dusts/obdurium"
+      }
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:dirty_dusts/obdurium"
+    }
+  ],
+  "processingTime": 30,
+  "results": [
+    {
+      "amount": 90,
+      "fluid": "createmetallurgy:molten_obdurium"
+    },
+    {
+      "amount": 30,
+      "fluid": "createmetallurgy:molten_slag"
+    }
+  ]
+}

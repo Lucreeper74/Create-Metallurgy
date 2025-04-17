@@ -3,7 +3,7 @@ package fr.lucreeper74.createmetallurgy.compat.jei.category.animations;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
-import fr.lucreeper74.createmetallurgy.content.belt_grinder.BeltGrinderBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,10 +15,9 @@ public class AnimatedBeltGrinder extends AnimatedKinetics {
         PoseStack matrixStack = graphics.pose();
         matrixStack.pushPose();
         matrixStack.translate(xOffset, yOffset, 0);
-        matrixStack.translate(0, 0, 200);
-        matrixStack.translate(2, 22, 0);
+        matrixStack.translate(2, 22, 200);
         matrixStack.mulPose(Axis.XP.rotationDegrees(-15.5f));
-        matrixStack.mulPose(Axis.YP.rotationDegrees(22.5f + 90));
+        matrixStack.mulPose(Axis.YP.rotationDegrees(22.5f + 90f));
         int scale = 25;
 
         blockElement(shaft(Direction.Axis.X))
@@ -33,7 +32,7 @@ public class AnimatedBeltGrinder extends AnimatedKinetics {
                 .render(graphics);
 
         blockElement(CMPartialModels.GRINDER_BELT)
-                .rotateBlock(0, -90, 0)
+                .rotateBlock(0, -90, -90)
                 .scale(scale)
                 .render(graphics);
 

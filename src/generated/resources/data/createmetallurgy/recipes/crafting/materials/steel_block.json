@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "createmetallurgy:steel_ingot"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CCC",
+    "CCC"
+  ],
+  "result": {
+    "item": "createmetallurgy:steel_block"
+  },
+  "show_notification": true
+}

@@ -7,8 +7,8 @@ import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import fr.lucreeper74.createmetallurgy.registries.CMArmInteract;
-import fr.lucreeper74.createmetallurgy.content.casting.CastingWithSpout;
-import fr.lucreeper74.createmetallurgy.content.light_bulb.network.NetworkHandler;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingWithSpout;
+import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.network.NetworkHandler;
 import fr.lucreeper74.createmetallurgy.registries.*;
 import fr.lucreeper74.createmetallurgy.registries.CMCreativeTabs;
 import fr.lucreeper74.createmetallurgy.data.CMDatagen;
@@ -43,7 +43,7 @@ public class CreateMetallurgy {
         REGISTRATE.registerEventListeners(eventBus);
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> CMPartialModels::init);
+                () -> CMPartialModels::init); // Causing crash with ModernFix if Client init
 
         CMCreativeTabs.register(eventBus);
         CMBlocks.register();
