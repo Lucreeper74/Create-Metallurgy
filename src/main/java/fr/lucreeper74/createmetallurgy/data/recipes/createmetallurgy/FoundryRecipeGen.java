@@ -43,7 +43,7 @@ public class FoundryRecipeGen extends CMRecipeProvider {
             NETHERITE_METAL = standardMetals(CMFluids.MOLTEN_NETHERITE, "netherite", 16),
 
     /* Entity Melting Recipes */
-    IRON_GOLEM = meltingEntity("iron_golem", EntityType.IRON_GOLEM, 6, CMFluids.MOLTEN_IRON, 315, 9),
+    IRON_GOLEM = meltingEntity("iron_golem", EntityType.IRON_GOLEM, 6, CMFluids.MOLTEN_IRON, 135, 9),
             ZOMBIFIED_PIGLIN = meltingEntity("zombified_piglin", EntityType.ZOMBIFIED_PIGLIN, 4, CMFluids.MOLTEN_GOLD, 40, 6),
             PIGLIN = meltingEntity("piglin", EntityType.PIGLIN, 4, CMFluids.MOLTEN_GOLD, 10, 6),
             PIGLIN_BRUTE = meltingEntity("piglin_brute", EntityType.PIGLIN_BRUTE, 4, CMFluids.MOLTEN_GOLD, 20, 6),
