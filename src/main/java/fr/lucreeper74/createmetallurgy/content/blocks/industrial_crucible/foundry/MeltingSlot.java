@@ -67,12 +67,12 @@ public class MeltingSlot implements ContainerData {
     }
 
     public boolean canMelt() {
-        if (processingTime > 0 && FoundryRecipe.isEnoughHeated(be, currentRecipe)) {
-            return true;
+        if (processingTime > 0 && currentRecipe != null) {
+            return FoundryRecipe.isEnoughHeated(be, currentRecipe);
         } else {
             startRecipe();
+            return false;
         }
-        return false;
     }
 
     public void heatItem() {
@@ -85,10 +85,7 @@ public class MeltingSlot implements ContainerData {
     }
 
     public void coolItem() {
-        if (currentRecipe == null)
-            return;
-
-        if (processingTime < currentRecipe.getProcessingDuration()) {
+        if (processingTime < processDuration) {
             processingTime++;
             be.notifyUpdate();
         }
