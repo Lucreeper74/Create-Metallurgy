@@ -2,7 +2,6 @@ package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.foundation.damageTypes.DamageTypeBuilder;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import it.unimi.dsi.fastutil.floats.FloatSpliterators;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;

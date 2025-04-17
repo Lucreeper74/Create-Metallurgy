@@ -4,7 +4,6 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMProcessingRecipesGen;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 
 @SuppressWarnings("unused")

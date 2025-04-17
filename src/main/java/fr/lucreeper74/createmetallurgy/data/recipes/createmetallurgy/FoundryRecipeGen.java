@@ -11,7 +11,6 @@ import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundr
 import fr.lucreeper74.createmetallurgy.data.recipes.CMRecipeProvider;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;

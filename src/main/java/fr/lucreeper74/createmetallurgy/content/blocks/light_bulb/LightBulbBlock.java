@@ -46,7 +46,7 @@ public class LightBulbBlock extends WrenchableDirectionalBlock implements IBE<Li
 
         return this.defaultBlockState()
                 .setValue(FACING, pContext.getClickedFace())
-                .setValue(WATERLOGGED, Boolean.valueOf(flag))
+                .setValue(WATERLOGGED, flag)
                 .setValue(LEVEL, signal);
     }
 

@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.compat.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.AllIcons;
 import fr.lucreeper74.createmetallurgy.compat.jei.CMJeiConstants;

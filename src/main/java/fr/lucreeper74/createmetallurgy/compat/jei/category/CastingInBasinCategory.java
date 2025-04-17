@@ -1,46 +1,17 @@
 package fr.lucreeper74.createmetallurgy.compat.jei.category;
 
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.AllIcons;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.elements.CastingInBasinElement;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingBasinRecipe;
-import mezz.jei.api.forge.ForgeTypes;
-import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
-import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.world.item.crafting.Ingredient;
 
 public class CastingInBasinCategory extends CastingAbstractCategory<CastingBasinRecipe> {
     private final CastingInBasinElement castingBasin = new CastingInBasinElement();
 
     public CastingInBasinCategory(Info<CastingBasinRecipe> info) {
         super(info);
-    }
-
-    @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, CastingBasinRecipe recipe, IFocusGroup focuses) {
-
-        FluidIngredient fluidIngredient = recipe.getFluidIngredient();
-        builder
-                .addSlot(RecipeIngredientRole.INPUT, 15, 6)
-                .setBackground(getRenderedSlot(), -1, -1)
-                .addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(fluidIngredient.getMatchingFluidStacks()))
-                .addTooltipCallback(addFluidTooltip(fluidIngredient.getRequiredAmount()));
-
-        Ingredient mold = recipe.getIngredient();
-        if (!mold.isEmpty())
-            builder
-                    .addSlot(RecipeIngredientRole.INPUT, 15, 26)
-                    .setBackground(getRenderedSlot(), -1, -1)
-                    .addIngredients(mold);
-
-        builder
-                .addSlot(RecipeIngredientRole.OUTPUT, 139, 27)
-                .setBackground(getRenderedSlot(), -1, -1)
-                .addItemStack(getResultItem(recipe));
     }
 
     @Override

@@ -7,7 +7,6 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMProcessingRecipesGen;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
