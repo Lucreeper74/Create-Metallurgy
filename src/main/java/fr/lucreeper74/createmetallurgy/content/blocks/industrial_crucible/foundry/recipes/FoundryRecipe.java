@@ -91,8 +91,8 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
                     // No matching fluid
                     return false;
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }
