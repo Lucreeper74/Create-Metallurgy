@@ -9,7 +9,7 @@
   "minHeatRequirement": 9,
   "results": [
     {
-      "amount": 315,
+      "amount": 135,
       "fluid": "createmetallurgy:molten_iron"
     }
   ]
