@@ -1,4 +1,4 @@
-<p align="center"><img src="https://i.imgur.com/eixa9Tn.png" alt="Logo" width="200"></p>
+<p align="center"><img src="https://i.imgur.com/4VhWnMh.png" alt="Logo" width="200"></p>
 
 <h1 align="center">Create Metallurgy<br>
 	<a href="https://github.com/Lucreeper74/Create-Metallurgy/blob/mc1.19.2/dev/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Lucreeper74/Create-Metallurgy?style=flat&color=900c3f"></a>
