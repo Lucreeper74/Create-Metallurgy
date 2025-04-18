@@ -223,7 +223,9 @@ public class CMBlocks {
     public static final BlockEntry<CrucibleBlock> INDUSTRIAL_CRUCIBLE = REGISTRATE
             .block("industrial_crucible", CrucibleBlock::new)
             .initialProperties(() -> Blocks.DEEPSLATE_BRICKS)
-            .properties(p -> p.noOcclusion().isRedstoneConductor((p1, p2, p3) -> true))
+            .properties(p -> p.noOcclusion()
+                    .isRedstoneConductor((p1, p2, p3) -> true)
+                    .forceSolidOn())
             .transform(pickaxeOnly())
             .blockstate(new CrucibleGenerator()::generate)
             .onRegister(CreateRegistrate.blockModel(() -> CrucibleModel::new))
