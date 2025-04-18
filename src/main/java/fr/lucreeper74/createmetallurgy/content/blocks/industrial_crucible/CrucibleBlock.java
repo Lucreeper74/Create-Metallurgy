@@ -1,7 +1,13 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible;
 
+import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
+import com.simibubi.create.content.fluids.tank.CreativeFluidTankBlockEntity;
+import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
+import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
+import com.simibubi.create.content.fluids.transfer.GenericItemFilling;
 import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.utility.VecHelper;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
@@ -11,16 +17,20 @@ import fr.lucreeper74.createmetallurgy.utils.CMConnectivityHandler;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -33,11 +43,16 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.ForgeSoundType;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlockEntity> {
@@ -121,6 +136,101 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
             }
         }
         return IWrenchable.super.onSneakWrenched(state, context);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        ItemStack heldItem = player.getItemInHand(hand);
+        boolean onClient = level.isClientSide;
+
+        if (heldItem.isEmpty())
+            return InteractionResult.PASS;
+        if (!player.isCreative())
+            return InteractionResult.PASS;
+
+        FluidHelper.FluidExchange exchange = null;
+        CrucibleBlockEntity be = CMConnectivityHandler.partAt(getBlockEntityType(), level, pos);
+        if (be == null)
+            return InteractionResult.FAIL;
+
+        LazyOptional<IFluidHandler> tankCapability = be.getCapability(ForgeCapabilities.FLUID_HANDLER);
+        if (!tankCapability.isPresent())
+            return InteractionResult.PASS;
+        IFluidHandler fluidTank = tankCapability.orElse(null);
+        FluidStack prevFluidInTank = fluidTank.getFluidInTank(0)
+                .copy();
+
+        if (FluidHelper.tryEmptyItemIntoBE(level, player, hand, heldItem, be))
+            exchange = FluidHelper.FluidExchange.ITEM_TO_TANK;
+        else if (FluidHelper.tryFillItemFromBE(level, player, hand, heldItem, be))
+            exchange = FluidHelper.FluidExchange.TANK_TO_ITEM;
+
+        if (exchange == null) {
+            if (GenericItemEmptying.canItemBeEmptied(level, heldItem)
+                    || GenericItemFilling.canItemBeFilled(level, heldItem))
+                return InteractionResult.SUCCESS;
+            return InteractionResult.PASS;
+        }
+
+        SoundEvent soundevent = null;
+        BlockState fluidState = null;
+        FluidStack fluidInTank = tankCapability.map(fh -> fh.getFluidInTank(0))
+                .orElse(FluidStack.EMPTY);
+
+        if (exchange == FluidHelper.FluidExchange.ITEM_TO_TANK) {
+            Fluid fluid = fluidInTank.getFluid();
+            fluidState = fluid.defaultFluidState()
+                    .createLegacyBlock();
+            soundevent = FluidHelper.getEmptySound(fluidInTank);
+        }
+
+        if (exchange == FluidHelper.FluidExchange.TANK_TO_ITEM) {
+            Fluid fluid = prevFluidInTank.getFluid();
+            fluidState = fluid.defaultFluidState()
+                    .createLegacyBlock();
+            soundevent = FluidHelper.getFillSound(prevFluidInTank);
+        }
+
+        if (soundevent != null && !onClient) {
+            float pitch = Mth.clamp(1 - (1f * fluidInTank.getAmount() / (CrucibleBlockEntity.getCapacityFactor() * 16)), 0, 1);
+            pitch /= 1.5f;
+            pitch += .5f;
+            pitch += (level.random.nextFloat() - .5f) / 4f;
+            level.playSound(null, pos, soundevent, SoundSource.BLOCKS, .5f, pitch);
+        }
+
+        if (!fluidInTank.isFluidStackIdentical(prevFluidInTank)) {
+            if (be instanceof CrucibleBlockEntity) {
+                CrucibleBlockEntity controllerBE = be.getControllerBE();
+                if (controllerBE != null) {
+                    if (onClient) {
+                        BlockParticleOption blockParticleData =
+                                new BlockParticleOption(ParticleTypes.BLOCK, fluidState);
+                        float fluidLevel = (float) fluidInTank.getAmount() / fluidTank.getTankCapacity(0);
+
+                        boolean reversed = fluidInTank.getFluid()
+                                .getFluidType()
+                                .isLighterThanAir();
+                        if (reversed)
+                            fluidLevel = 1 - fluidLevel;
+
+                        Vec3 vec = hit.getLocation();
+                        vec = new Vec3(vec.x, controllerBE.getBlockPos()
+                                .getY() + fluidLevel * (controllerBE.getHeight() - .5f) + .25f, vec.z);
+                        Vec3 motion = player.position()
+                                .subtract(vec)
+                                .scale(1 / 20f);
+                        vec = vec.add(motion);
+                        level.addParticle(blockParticleData, vec.x, vec.y, vec.z, motion.x, motion.y, motion.z);
+                        return InteractionResult.SUCCESS;
+                    }
+                    controllerBE.sendData();
+                    controllerBE.setChanged();
+                }
+            }
+        }
+
+        return InteractionResult.SUCCESS;
     }
 
     @Override

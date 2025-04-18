@@ -535,6 +535,10 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
     public int getBaseSize() { return getWidth() * getWidth(); }
 
+    public static int getCapacityFactor() {
+        return CAPACITY_FACTOR;
+    }
+
     private static final Object EntityMeltingCacheKey = new Object();
 
     @Override
