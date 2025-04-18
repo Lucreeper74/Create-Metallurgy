@@ -1,6 +1,7 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.faucet;
 
 import com.simibubi.create.content.fluids.FluidFX;
+import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
@@ -46,7 +47,11 @@ public class FaucetBlockEntity extends SmartBlockEntity {
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound, clientPacket);
+        int prevFallingDist = fallingDistance;
         fallingDistance = compound.getInt("fallingDistance");
+        if (fallingDistance != prevFallingDist)
+            invalidateRenderBoundingBox();
+
         if (compound.contains("renderFluid")) {
             renderFluid = FluidStack.loadFluidStackFromNBT(compound.getCompound("renderFluid"));
         } else {
@@ -98,9 +103,10 @@ public class FaucetBlockEntity extends SmartBlockEntity {
             pos = pos.below();
             if (!level.getBlockState(pos).isAir())
                 break;
-            fallingDistance = i + 1;
+            fallingDistance = i + 2;
         }
         targetTank = getTank(pos, getBlockState().getValue(FaucetBlock.FACING).getOpposite());
+        sendData();
         return targetTank;
     }
 
@@ -126,6 +132,11 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         fluidInTank.setAmount(TRANSFER_RATE);
 
         int fill = 0;
+
+        DirectBeltInputBehaviour directBeltInputBehaviour =
+                BlockEntityBehaviour.get(level, getBlockPos().below(fallingDistance), DirectBeltInputBehaviour.TYPE);
+        if (directBeltInputBehaviour == null || !directBeltInputBehaviour.canInsertFromSide(Direction.DOWN))
+            return 0;
 
         for (boolean simulate : Iterate.trueAndFalse) {
             IFluidHandler.FluidAction action = simulate ? IFluidHandler.FluidAction.SIMULATE : IFluidHandler.FluidAction.EXECUTE;
