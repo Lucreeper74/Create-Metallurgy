@@ -82,7 +82,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
                 CMLang.translateDirect("casting.lockmode"), this, new CastingBlockLockSlot()));
 
         lockSelect.withCallback(setting -> {
-            boolean isLocked = setting == 0;
+            boolean isLocked = setting == 1;
             level.setBlock(getBlockPos(), getBlockState().setValue(CastingBlock.LOCKED, isLocked), 2);
             if (isLocked)
                 moldInv.forbidExtraction();
