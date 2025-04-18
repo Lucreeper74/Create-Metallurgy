@@ -4,10 +4,16 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
+import fr.lucreeper74.createmetallurgy.registries.CMShapes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.fluids.FluidStack;
 
 public class FaucetRenderer extends SafeBlockEntityRenderer<FaucetBlockEntity> {
@@ -34,8 +40,15 @@ public class FaucetRenderer extends SafeBlockEntityRenderer<FaucetBlockEntity> {
                     FluidRenderer.renderFluidBox(fluidStack, 5/16f, 7/16f, 8/16f, 11/16f, 10/16f, 15/16f, bufferSource, ms, light, false);
 
                 // For the fluid stream
+                Level level = be.getLevel();
+                BlockPos targetPos = be.getBlockPos().below(be.getFallingDistance());
+                VoxelShape shape = level.getBlockState(targetPos).getShape(level, targetPos);
+                double maxY = 0;
+                if (!shape.isEmpty())
+                    maxY = shape.bounds().maxY;
+
                 float radius = 2f;
-                AABB bb = new AABB(.5f, 9/16f, .5f, .5f, -(be.getFallingDistance()) - .25f, .5f).inflate(radius / 32f);
+                AABB bb = new AABB(.5f, 9/16f, .5f, .5f, -be.getFallingDistance() + maxY, .5f).inflate(radius / 32f);
                 FluidRenderer.renderFluidBox(fluidStack, (float) bb.minX, (float) bb.minY, (float) bb.minZ,
                         (float) bb.maxX, (float) bb.maxY, (float) bb.maxZ, bufferSource, ms, light, true);
 
