@@ -299,8 +299,8 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
     protected abstract Object getRecipeCacheKey();
 
     public enum LockMode implements INamedIconOptions {
-        LOCK(AllIcons.I_CONFIG_LOCKED),
-        UNLOCKED(AllIcons.I_CONFIG_UNLOCKED);
+        UNLOCKED(AllIcons.I_CONFIG_UNLOCKED),
+        LOCK(AllIcons.I_CONFIG_LOCKED);
 
         private final String translationKey;
         private final AllIcons icon;
