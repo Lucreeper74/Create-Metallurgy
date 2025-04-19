@@ -39,6 +39,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -84,6 +85,7 @@ public class CMBlocks {
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/tungsten"))
             .tag(Tags.Items.STORAGE_BLOCKS)
+            .properties(Item.Properties::fireResistant)
             .build()
             .register();
 
@@ -95,6 +97,7 @@ public class CMBlocks {
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem("storage_blocks/obdurium"))
             .tag(Tags.Items.STORAGE_BLOCKS)
+            .properties(Item.Properties::fireResistant)
             .build()
             .register();
 
@@ -233,6 +236,7 @@ public class CMBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .tag(AllTags.AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag)
             .item(CrucibleBlockItem::new)
+            .properties(Item.Properties::fireResistant)
             .model(AssetLookup.customBlockItemModel("_", "block_single"))
             .build()
             .register();

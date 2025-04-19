@@ -21,13 +21,13 @@ public class CMItems {
         REGISTRATE.setCreativeTab(CMCreativeTabs.MAIN_CREATIVE_TAB);
     }
 
-    public static final ItemEntry<Item> TUNGSTEN_INGOT = taggedIngredient("tungsten_ingot", forgeItemTag("ingots/tungsten"), Tags.Items.INGOTS),
-            TUNGSTEN_SHEET = taggedIngredient("tungsten_sheet", forgeItemTag("plates/tungsten"), PLATES.tag),
-            TUNGSTEN_NUGGET = taggedIngredient("tungsten_nugget", forgeItemTag("nuggets/tungsten"), Tags.Items.NUGGETS),
-            TUNGSTEN_WIRE = taggedIngredient("tungsten_wire", forgeItemTag("wires/tungsten"), forgeItemTag("wires"));
+    public static final ItemEntry<Item> TUNGSTEN_INGOT = taggedIngredientFireResistant("tungsten_ingot", forgeItemTag("ingots/tungsten"), Tags.Items.INGOTS),
+            TUNGSTEN_SHEET = taggedIngredientFireResistant("tungsten_sheet", forgeItemTag("plates/tungsten"), PLATES.tag),
+            TUNGSTEN_NUGGET = taggedIngredientFireResistant("tungsten_nugget", forgeItemTag("nuggets/tungsten"), Tags.Items.NUGGETS),
+            TUNGSTEN_WIRE = taggedIngredientFireResistant("tungsten_wire", forgeItemTag("wires/tungsten"), forgeItemTag("wires"));
 
-    public static final ItemEntry<Item> OBDURIUM_INGOT = taggedIngredient("obdurium_ingot", forgeItemTag("ingots/obdurium"), Tags.Items.INGOTS),
-            OBDURIUM_SHEET = taggedIngredient("obdurium_sheet", forgeItemTag("plates/obdurium"), PLATES.tag);
+    public static final ItemEntry<Item> OBDURIUM_INGOT = taggedIngredientFireResistant("obdurium_ingot", forgeItemTag("ingots/obdurium"), Tags.Items.INGOTS),
+            OBDURIUM_SHEET = taggedIngredientFireResistant("obdurium_sheet", forgeItemTag("plates/obdurium"), PLATES.tag);
 
 
     public static final ItemEntry<Item> RAW_WOLFRAMITE = taggedIngredient("raw_wolframite", forgeItemTag("raw_materials/tungsten"), forgeItemTag("raw_materials")),
@@ -80,6 +80,14 @@ public class CMItems {
     private static ItemEntry<Item> taggedIngredient(String name, TagKey<Item>... tags) {
         return REGISTRATE.item(name, Item::new)
                 .tag(tags)
+                .register();
+    }
+
+    @SafeVarargs
+    private static ItemEntry<Item> taggedIngredientFireResistant(String name, TagKey<Item>... tags) {
+        return REGISTRATE.item(name, Item::new)
+                .tag(tags)
+                .properties(Item.Properties::fireResistant)
                 .register();
     }
 
