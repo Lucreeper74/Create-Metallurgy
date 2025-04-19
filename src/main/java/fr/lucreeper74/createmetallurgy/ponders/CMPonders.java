@@ -50,6 +50,7 @@ public class CMPonders implements PonderPlugin {
     @Override
     public void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
         PonderPlugin.super.registerTags(helper);
+        CMPonderTags.register(helper);
         PonderTagRegistrationHelper<RegistryEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
         HELPER.addToTag(METALWORK)

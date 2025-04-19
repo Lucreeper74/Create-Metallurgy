@@ -25,7 +25,7 @@ public class CMPonderTags {
         helper.registerTag(METALWORK)
                 .addToIndex()
                 .item(AllBlocks.COGWHEEL.get(), true, false)
-                .title("Kinetic Blocks")
+                .title("Metalwork")
                 .description("Components which used to work metals")
                 .register();
 
