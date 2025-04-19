@@ -458,7 +458,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
                     if (getTank().fill(output.copy(), IFluidHandler.FluidAction.SIMULATE) >= output.getAmount())
                         getTank().fill(output.copy(), IFluidHandler.FluidAction.EXECUTE);
             }
-        } else if (!isFireImmune)
+        } else if (!isFireImmune && foundry.getCurrentHeat() > 0)
             entityIn.hurt(CMDamageTypes.foundry(level), 4.0F);
 
     }
