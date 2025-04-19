@@ -10,7 +10,6 @@ import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.AlloyingRec
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.GrindingRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.MeltingRecipeGen;
 import net.createmod.catnip.platform.CatnipServices;
-import net.createmod.catnip.platform.services.RegisteredObjectsHelper;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;

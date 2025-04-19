@@ -1,14 +1,11 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.casting;
 
 import com.simibubi.create.api.behaviour.spouting.BlockSpoutingBehaviour;
-import com.simibubi.create.compat.tconstruct.SpoutCasting;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.foundation.fluid.FluidHelper;
-import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.basin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTableBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
-import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;

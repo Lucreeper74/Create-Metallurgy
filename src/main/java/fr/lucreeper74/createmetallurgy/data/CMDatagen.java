@@ -6,7 +6,6 @@ import fr.lucreeper74.createmetallurgy.data.recipes.CMProcessingRecipesGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.vanilla.CMStandardRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.CastingRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.FoundryRecipeGen;
-import fr.lucreeper74.createmetallurgy.ponders.CMPonders;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.data.event.GatherDataEvent;
