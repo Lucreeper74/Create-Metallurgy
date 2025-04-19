@@ -446,7 +446,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
         boolean isFireImmune = entityIn.fireImmune();
 
-        if (!isFireImmune)
+        if (!isFireImmune && foundry.getCurrentHeat() > 0)
             entityIn.setSecondsOnFire(MOLTEN_FLUID_BURNING_TIME);
 
         if (recipe != null) {
