@@ -1,15 +1,15 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible;
 
 import com.simibubi.create.AllKeys;
-import com.simibubi.create.content.fluids.tank.BoilerHeaters;
+import com.simibubi.create.api.boiler.BoilerHeater;
 import com.simibubi.create.foundation.item.TooltipHelper;
-import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.LangBuilder;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.MeltingInventory;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.MeltingSlot;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import joptsimple.internal.Strings;
+import net.createmod.catnip.animation.LerpedFloat;
+import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -74,7 +74,7 @@ public class FoundryData {
             for (int zOffset = 0; zOffset < be.getWidth(); zOffset++) {
                 BlockPos pos = controllerPos.offset(xOffset, -1, zOffset);
                 BlockState blockState = level.getBlockState(pos);
-                float heat = BoilerHeaters.getActiveHeat(level, pos, blockState);
+                float heat = BoilerHeater.findHeat(level, pos, blockState);
                 currentHeat += heat;
             }
         }
@@ -124,7 +124,7 @@ public class FoundryData {
 
         CMLang.builder().add(getHeatLevelComponent(foundrySize)).forGoggles(tooltip);
 
-        tooltip.add(Components.immutableEmpty());
+        tooltip.add(Component.empty());
 
         if (AllKeys.shiftDown()) {
             int displayed = 0;
@@ -143,7 +143,7 @@ public class FoundryData {
                 int duration = slot.processDuration;
 
                 CMLang.text("")
-                        .add(CMLang.itemName(stackInSlot).style(ChatFormatting.GRAY))
+                        .add(CreateLang.itemName(stackInSlot).style(ChatFormatting.GRAY))
                         .space()
                         .add(duration > 0 ?
                                 progressBarComponent(duration, slot.processingTime, 9) :
@@ -153,7 +153,7 @@ public class FoundryData {
                 displayed++;
             }
             if (displayed > 0)
-                tooltip.add(Components.immutableEmpty());
+                tooltip.add(Component.empty());
         }
 
         return true;
@@ -182,7 +182,7 @@ public class FoundryData {
     private MutableComponent progressBarComponent(int maxValue, int progress, int maxLength) {
         int level = maxLength - ((progress * maxLength) / maxValue);
 
-        return Components.empty()
+        return Component.empty()
                 .append(bars(Math.min(level, 3), ChatFormatting.DARK_RED))
                 .append(bars(level > 3 ? Math.min(level - 3, 3) : 0, ChatFormatting.GOLD))
                 .append(bars(level > 6 ? Math.min(level - 6, 3) : 0, ChatFormatting.YELLOW))
@@ -190,7 +190,7 @@ public class FoundryData {
     }
 
     private MutableComponent bars(int count, ChatFormatting format) {
-        return Components.literal(Strings.repeat('|', count))
+        return Component.literal(Strings.repeat('|', count))
                 .withStyle(format);
     }
 

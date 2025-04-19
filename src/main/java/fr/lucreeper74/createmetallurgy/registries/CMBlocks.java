@@ -2,7 +2,6 @@ package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
 import com.simibubi.create.foundation.block.DyedBlockList;
@@ -29,7 +28,6 @@ import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasin
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.*;
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryDisplaySource;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.utils.CMDyeHelper;
 import net.minecraft.client.renderer.RenderType;
@@ -51,10 +49,10 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.Tags;
 
-import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.AllTags.forgeBlockTag;
 import static com.simibubi.create.AllTags.forgeItemTag;
-import static com.simibubi.create.content.redstone.displayLink.AllDisplayBehaviours.assignDataBehaviour;
+import static com.simibubi.create.api.behaviour.display.DisplaySource.displaySource;
+import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movementBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
@@ -218,7 +216,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
-            .transform(BlockStressDefaults.setImpact(8.0))
+            //.transform(CMStress.setImpact(8.0))
             .item()
             .transform(customItemModel("foundry_mixer", "item"))
             .register();
@@ -230,9 +228,10 @@ public class CMBlocks {
                     .isRedstoneConductor((p1, p2, p3) -> true)
                     .forceSolidOn())
             .transform(pickaxeOnly())
+            .transform(displaySource(CMDisplaySources.FOUNDRY_STATUS))
             .blockstate(new CrucibleGenerator()::generate)
             .onRegister(CreateRegistrate.blockModel(() -> CrucibleModel::new))
-            .onRegister(assignDataBehaviour(new FoundryDisplaySource(), "foundry_status"))
+            //.onRegister(assignDataBehaviour(new FoundryDisplaySource(), "foundry_status"))
             .addLayer(() -> RenderType::cutoutMipped)
             .tag(AllTags.AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag)
             .item(CrucibleBlockItem::new)
@@ -249,7 +248,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .blockstate(new BeltGrinderGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
-            .transform(BlockStressDefaults.setImpact(6.0))
+            //.transform(CMStress.setImpact(6.0))
             .transform(axeOrPickaxe())
             .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.mechanical_grinder"))
             .item()

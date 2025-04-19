@@ -4,10 +4,9 @@ import com.simibubi.create.foundation.block.connected.AllCTTypes;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
 import com.simibubi.create.foundation.block.connected.CTType;
-import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
-import com.simibubi.create.foundation.block.render.SpriteShifter;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import net.minecraft.resources.ResourceLocation;
+import net.createmod.catnip.render.SpriteShiftEntry;
+import net.createmod.catnip.render.SpriteShifter;
 
 @SuppressWarnings("unused")
 public class CMSpriteShifts {
@@ -27,8 +26,8 @@ public class CMSpriteShifts {
     }
 
     private static CTSpriteShiftEntry getCT(CTType type, String name) {
-        return CTSpriteShifter.getCT(type, new ResourceLocation("createmetallurgy:block/" + name),
-                new ResourceLocation("createmetallurgy:block/" + name + "_connected"));
+        return CTSpriteShifter.getCT(type, CreateMetallurgy.genRL("block/" + name),
+                CreateMetallurgy.genRL("block/" + name + "_connected"));
     }
 
     private static CTSpriteShiftEntry rectangleType(String name) {

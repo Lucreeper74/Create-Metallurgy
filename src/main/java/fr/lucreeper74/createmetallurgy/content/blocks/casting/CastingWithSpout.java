@@ -1,11 +1,14 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.casting;
 
-import com.simibubi.create.api.behaviour.BlockSpoutingBehaviour;
+import com.simibubi.create.api.behaviour.spouting.BlockSpoutingBehaviour;
+import com.simibubi.create.compat.tconstruct.SpoutCasting;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.basin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTableBlockEntity;
+import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +19,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class CastingWithSpout extends BlockSpoutingBehaviour {
+public enum CastingWithSpout implements BlockSpoutingBehaviour {
+    INSTANCE;
 
     @Override
     public int fillBlock(Level level, BlockPos pos, SpoutBlockEntity spout, FluidStack availableFluid,
@@ -63,6 +67,7 @@ public class CastingWithSpout extends BlockSpoutingBehaviour {
     }
 
     public static void registerDefaults() {
-        addCustomSpoutInteraction(CreateMetallurgy.genRL("spout_casting"), new CastingWithSpout());
+        BlockSpoutingBehaviour.BY_BLOCK_ENTITY.register(CMBlockEntityTypes.CASTING_BASIN.get(), CastingWithSpout.INSTANCE);
+        BlockSpoutingBehaviour.BY_BLOCK_ENTITY.register(CMBlockEntityTypes.CASTING_TABLE.get(), CastingWithSpout.INSTANCE);
     }
 }

@@ -1,38 +1,33 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.simibubi.create.api.registry.CreateBuiltInRegistries;
 import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPointTypes;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.function.Function;
-
 @SuppressWarnings("unused")
 public class CMArmInteract extends AllArmInteractionPointTypes {
-
-    public static final FoundryBasinType FOUNDRY_BASIN = register("foundry_basin", FoundryBasinType::new);
-    public static final CastingBasinType CASTING_BASIN = register("casting_basin", CastingBasinType::new);
-    public static final CastingTableType CASTING_TABLE = register("casting_table", CastingTableType::new);
-    public static final BeltGrinderType BELT_GRINDER = register("belt_grinder", BeltGrinderType::new);
-
-    private static <T extends ArmInteractionPointType> T register(String id, Function<ResourceLocation, T> factory) {
-        T type = factory.apply(CreateMetallurgy.genRL(id));
-        ArmInteractionPointType.register(type);
-        return type;
+    static {
+        register("foundry_basin", new FoundryBasinType());
+        register("casting_basin", new CastingBasinType());
+        register("casting_table", new CastingTableType());
+        register("belt_grinder", new BeltGrinderType());
     }
 
-    public static void register() {}
+    private static <T extends ArmInteractionPointType> void register(String name, T type) {
+        Registry.register(CreateBuiltInRegistries.ARM_INTERACTION_POINT_TYPE, CreateMetallurgy.genRL(name), type);
+    }
+
+    public static void init() {}
 
     //
 
     public static class FoundryBasinType extends ArmInteractionPointType {
-        public FoundryBasinType(ResourceLocation id) {
-            super(id);
-        }
 
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
@@ -46,9 +41,6 @@ public class CMArmInteract extends AllArmInteractionPointTypes {
     }
 
     public static class CastingBasinType extends ArmInteractionPointType {
-        public CastingBasinType(ResourceLocation id) {
-            super(id);
-        }
 
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
@@ -62,9 +54,6 @@ public class CMArmInteract extends AllArmInteractionPointTypes {
     }
 
     public static class CastingTableType extends ArmInteractionPointType {
-        public CastingTableType(ResourceLocation id) {
-            super(id);
-        }
 
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
@@ -78,9 +67,6 @@ public class CMArmInteract extends AllArmInteractionPointTypes {
     }
 
     public static class BeltGrinderType extends ArmInteractionPointType {
-        public BeltGrinderType(ResourceLocation id) {
-            super(id);
-        }
 
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {

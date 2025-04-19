@@ -34,7 +34,7 @@ public class FaucetRenderer extends SafeBlockEntityRenderer<FaucetBlockEntity> {
 
                 // For the fluid in the faucet
                 if (facing != Direction.DOWN)
-                    FluidRenderer.renderFluidBox(fluidStack, 5/16f, 7/16f, 8/16f, 11/16f, 10/16f, 15/16f, bufferSource, ms, light, false);
+                    FluidRenderer.renderFluidBox(fluidStack.getFluid(), fluidStack.getAmount(), 5/16f, 7/16f, 8/16f, 11/16f, 10/16f, 15/16f, bufferSource, ms, light, false, true, fluidStack.getTag());
 
                 // For the fluid stream
                 Level level = be.getLevel();
@@ -46,8 +46,8 @@ public class FaucetRenderer extends SafeBlockEntityRenderer<FaucetBlockEntity> {
 
                 float radius = 2f;
                 AABB bb = new AABB(.5f, 9/16f, .5f, .5f, -be.getFallingDistance() + maxY, .5f).inflate(radius / 32f);
-                FluidRenderer.renderFluidBox(fluidStack, (float) bb.minX, (float) bb.minY, (float) bb.minZ,
-                        (float) bb.maxX, (float) bb.maxY, (float) bb.maxZ, bufferSource, ms, light, true);
+                FluidRenderer.renderFluidBox(fluidStack.getFluid(), fluidStack.getAmount(), (float) bb.minX, (float) bb.minY, (float) bb.minZ,
+                        (float) bb.maxX, (float) bb.maxY, (float) bb.maxZ, bufferSource, ms, light, true, true, fluidStack.getTag());
 
                 ms.popPose();
             }

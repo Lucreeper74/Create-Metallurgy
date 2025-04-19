@@ -3,7 +3,6 @@ package fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.compat.CMCompatMetals;
@@ -13,6 +12,7 @@ import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -229,7 +229,7 @@ public class CastingRecipeGen extends CMRecipeProvider {
      */
     protected GeneratedRecipe create(CMRecipeTypes type, ItemLike result, UnaryOperator<CastingRecipeBuilder> transform) {
         GeneratedRecipe generatedRecipe =
-                c -> transform.apply(new CastingRecipeBuilder(type, CreateMetallurgy.genRL(RegisteredObjects.getKeyOrThrow(result
+                c -> transform.apply(new CastingRecipeBuilder(type, CreateMetallurgy.genRL(CatnipServices.REGISTRIES.getKeyOrThrow(result
                                 .asItem()).getPath())))
                         .build(c);
         all.add(generatedRecipe);

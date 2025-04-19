@@ -2,9 +2,9 @@ package fr.lucreeper74.createmetallurgy.compat.jei.category.elements;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.simibubi.create.foundation.gui.element.GuiGameElement;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import mezz.jei.api.gui.drawable.IDrawable;
+import net.createmod.catnip.gui.element.GuiGameElement;
 import net.minecraft.client.gui.GuiGraphics;
 
 public class FoundryLidElement implements IDrawable {

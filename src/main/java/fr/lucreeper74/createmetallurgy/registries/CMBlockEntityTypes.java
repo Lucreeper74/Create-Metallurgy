@@ -7,14 +7,14 @@ import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerInstance;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderInstance;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderVisual;
 import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.basin.CastingBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTableBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerVisual;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlockEntity;
@@ -49,7 +49,7 @@ public class CMBlockEntityTypes {
 
     public static final BlockEntityEntry<FoundryMixerBlockEntity> FOUNDRY_MIXER = REGISTRATE
             .blockEntity("foundry_mixer", FoundryMixerBlockEntity::new)
-            .instance(() -> FoundryMixerInstance::new)
+            .visual(() -> FoundryMixerVisual::new)
             .validBlocks(CMBlocks.FOUNDRY_MIXER_BLOCK)
             .renderer(() -> FoundryMixerRenderer::new)
             .register();
@@ -62,7 +62,7 @@ public class CMBlockEntityTypes {
 
     public static final BlockEntityEntry<BeltGrinderBlockEntity> BELT_GRINDER = REGISTRATE
             .blockEntity("mechanical_belt_grinder", BeltGrinderBlockEntity::new)
-            .instance(() -> BeltGrinderInstance::new)
+            .visual(() -> BeltGrinderVisual::new)
             .validBlocks(CMBlocks.BELT_GRINDER_BLOCK)
             .renderer(() -> BeltGrinderRenderer::new)
             .register();

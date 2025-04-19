@@ -1,14 +1,14 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer;
 
-import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
+import dev.engine_room.flywheel.api.visualization.VisualizationManager;
 import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -24,12 +24,13 @@ public class FoundryMixerRenderer extends MechanicalMixerRenderer {
     protected void renderSafe(MechanicalMixerBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                               int light, int overlay) {
 
-        if (Backend.canUseInstancing(be.getLevel())) return;
+
+        if (VisualizationManager.supportsVisualization(be.getLevel())) return;
 
         BlockState blockState = be.getBlockState();
         VertexConsumer vb = buffer.getBuffer(RenderType.solid());
 
-        SuperByteBuffer superBuffer = CachedBufferer.partial(CMPartialModels.SHAFTLESS_STONE_COGWHEEL, blockState);
+        SuperByteBuffer superBuffer = CachedBuffers.partial(CMPartialModels.SHAFTLESS_STONE_COGWHEEL, blockState);
         standardKineticRotationTransform(superBuffer, be, light).renderInto(ms, vb);
 
         float renderedHeadOffset = be.getRenderedHeadOffset(partialTicks);
@@ -37,14 +38,14 @@ public class FoundryMixerRenderer extends MechanicalMixerRenderer {
         float time = AnimationTickHolder.getRenderTime(be.getLevel());
         float angle = ((time * speed * 6 / 10f) % 360) / 180 * (float) Math.PI;
 
-        SuperByteBuffer poleRender = CachedBufferer.partial(CMPartialModels.FOUNDRY_MIXER_POLE, blockState);
+        SuperByteBuffer poleRender = CachedBuffers.partial(CMPartialModels.FOUNDRY_MIXER_POLE, blockState);
         poleRender.translate(0, -renderedHeadOffset, 0)
                 .light(light)
                 .renderInto(ms, vb);
 
         VertexConsumer vbCutout = buffer.getBuffer(RenderType.cutoutMipped());
-        SuperByteBuffer headRender = CachedBufferer.partial(CMPartialModels.FOUNDRY_MIXER_HEAD, blockState);
-        headRender.rotateCentered(Direction.UP, angle)
+        SuperByteBuffer headRender = CachedBuffers.partial(CMPartialModels.FOUNDRY_MIXER_HEAD, blockState);
+        headRender.rotateCentered(angle, Direction.UP)
                 .translate(0, -renderedHeadOffset, 0)
                 .light(light)
                 .renderInto(ms, vbCutout);

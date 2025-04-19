@@ -5,14 +5,14 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
-import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringRenderer;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
 import fr.lucreeper74.createmetallurgy.registries.CMSpriteShifts;
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SpriteShiftEntry;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -55,7 +55,7 @@ public class BeltGrinderRenderer extends SafeBlockEntityRenderer<BeltGrinderBloc
         scroll = scroll - Math.floor(scroll);
         scroll = scroll * spriteSize * .5f;
 
-        SuperByteBuffer rotatedCoil = CachedBufferer.partialFacing(CMPartialModels.GRINDER_BELT, blockState,
+        SuperByteBuffer rotatedCoil = CachedBuffers.partialFacing(CMPartialModels.GRINDER_BELT, blockState,
                 blockState.getValue(HORIZONTAL_FACING));
         rotatedCoil.light(light)
                 .renderInto(ms, vb);
@@ -104,7 +104,7 @@ public class BeltGrinderRenderer extends SafeBlockEntityRenderer<BeltGrinderBloc
     }
 
     private SuperByteBuffer getRotatedModel(BeltGrinderBlockEntity be) {
-        return CachedBufferer.block(KineticBlockEntityRenderer.KINETIC_BLOCK,
+        return CachedBuffers.block(KineticBlockEntityRenderer.KINETIC_BLOCK,
                 getRenderedBlockState(be));
     }
 

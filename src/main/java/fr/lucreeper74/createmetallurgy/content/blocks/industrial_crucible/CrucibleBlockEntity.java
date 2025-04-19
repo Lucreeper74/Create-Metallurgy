@@ -1,16 +1,14 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible;
 
 import com.simibubi.create.AllKeys;
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeConditions;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
-import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.LangBuilder;
+import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityMeltingRecipe;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryTank;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.FoundryRecipe;
@@ -18,6 +16,7 @@ import fr.lucreeper74.createmetallurgy.registries.CMDamageTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import fr.lucreeper74.createmetallurgy.utils.CMConnectivityHandler;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
+import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -555,18 +554,18 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
 
         FoundryTank tank = controllerBE.getTank();
-        LangBuilder mb = Lang.translate("generic.unit.millibuckets");
+        LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
 
         CMLang.number(tank.getFillAmount())
                 .add(mb)
                 .style(ChatFormatting.BLUE)
                 .text(ChatFormatting.GRAY, " / ")
-                .add(Lang.number(tank.getCapacity())
+                .add(CreateLang.number(tank.getCapacity())
                         .add(mb)
                         .style(ChatFormatting.DARK_GRAY))
                 .forGoggles(tooltip, 1);
 
-        tooltip.add(Components.immutableEmpty());
+        tooltip.add(Component.empty());
 
         if (AllKeys.shiftDown()) {
             CMLang.translate("crucible.fluid_content")

@@ -1,6 +1,6 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.jozufozu.flywheel.core.PartialModel;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.world.item.DyeColor;
@@ -37,10 +37,10 @@ public class CMPartialModels {
     }
 
     private static PartialModel block(String path) {
-        return new PartialModel(CreateMetallurgy.genRL("block/" + path));
+        return PartialModel.of(CreateMetallurgy.genRL("block/" + path));
     }
     private static PartialModel jei(String path) {
-        return new PartialModel(CreateMetallurgy.genRL("jei/" + path));
+        return PartialModel.of(CreateMetallurgy.genRL("jei/" + path));
     }
 
     public static void init() {

@@ -91,7 +91,7 @@ public class NetworkAddressBehaviour extends BlockEntityBehaviour implements INe
     public boolean testHit(Vec3 hit) {
         BlockState state = blockEntity.getBlockState();
         Vec3 localHit = hit.subtract(Vec3.atLowerCornerOf(blockEntity.getBlockPos()));
-        return slot.testHit(state, localHit);
+        return slot.testHit(getWorld(), getPos(), state, localHit);
     }
 
     @Override

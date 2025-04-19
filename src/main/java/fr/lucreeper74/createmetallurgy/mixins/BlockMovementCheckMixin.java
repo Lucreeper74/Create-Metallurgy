@@ -1,7 +1,7 @@
 package fr.lucreeper74.createmetallurgy.mixins;
 
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.content.contraptions.BlockMovementChecks;
+import com.simibubi.create.impl.contraption.BlockMovementChecksImpl;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = BlockMovementChecks.class, remap = false)
+@Mixin(value = BlockMovementChecksImpl.class, remap = false)
 public class BlockMovementCheckMixin {
 
     @Inject(method = "isBlockAttachedTowardsFallback", at = @At("HEAD"), cancellable = true)

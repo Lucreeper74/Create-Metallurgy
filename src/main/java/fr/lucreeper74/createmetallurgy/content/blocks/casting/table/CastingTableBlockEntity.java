@@ -1,12 +1,11 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.casting.table;
 
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.LangBuilder;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
+import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -54,7 +53,7 @@ public class CastingTableBlockEntity extends CastingBlockEntity implements IHave
             if (stackInSlot.isEmpty())
                 continue;
             CMLang.text("")
-                    .add(Components.translatable(stackInSlot.getDescriptionId())
+                    .add(Component.translatable(stackInSlot.getDescriptionId())
                             .withStyle(ChatFormatting.GRAY))
                     .add(CMLang.text(" x" + stackInSlot.getCount())
                             .style(ChatFormatting.GREEN))
@@ -62,7 +61,7 @@ public class CastingTableBlockEntity extends CastingBlockEntity implements IHave
             isEmpty = false;
         }
 
-        LangBuilder mb = Lang.translate("generic.unit.millibuckets");
+        LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
         FluidStack fluidStack = fluids.getFluidInTank(0);
         if (!fluidStack.isEmpty()) {
             CMLang.text("")

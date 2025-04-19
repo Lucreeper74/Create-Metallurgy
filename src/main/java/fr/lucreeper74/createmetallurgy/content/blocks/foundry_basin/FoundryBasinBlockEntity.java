@@ -10,6 +10,10 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.utility.*;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
+import net.createmod.catnip.data.IntAttached;
+import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.lang.LangBuilder;
+import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -188,7 +192,7 @@ public class FoundryBasinBlockEntity extends BasinBlockEntity {
             if (stackInSlot.isEmpty())
                 continue;
             CMLang.text("")
-                    .add(Components.translatable(stackInSlot.getDescriptionId())
+                    .add(Component.translatable(stackInSlot.getDescriptionId())
                             .withStyle(ChatFormatting.GRAY))
                     .add(CMLang.text(" x" + stackInSlot.getCount())
                             .style(ChatFormatting.GREEN))
@@ -196,7 +200,7 @@ public class FoundryBasinBlockEntity extends BasinBlockEntity {
             isEmpty = false;
         }
 
-        LangBuilder mb = Lang.translate("generic.unit.millibuckets");
+        LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
         for (int i = 0; i < fluids.getTanks(); i++) {
             FluidStack fluidStack = fluids.getFluidInTank(i);
             if (fluidStack.isEmpty())

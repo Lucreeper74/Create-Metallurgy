@@ -1,14 +1,15 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.light_bulb;
 
-import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkBlock;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.RenderTypes;
-import com.simibubi.create.foundation.utility.AngleHelper;
+import dev.engine_room.flywheel.lib.transform.PoseTransformStack;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.network.address.NetworkAddressRenderer;
 import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
+import net.createmod.catnip.math.AngleHelper;
+import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.renderer.*;
 
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -31,7 +32,7 @@ public class LightBulbRenderer extends SafeBlockEntityRenderer<LightBulbBlockEnt
 
 
         BlockState blockState = be.getBlockState();
-        TransformStack msr = TransformStack.cast(ms);
+        TransformStack<PoseTransformStack> msr = TransformStack.of(ms);
 
         Direction face = blockState.getOptionalValue(DisplayLinkBlock.FACING)
                 .orElse(Direction.UP);
@@ -40,29 +41,29 @@ public class LightBulbRenderer extends SafeBlockEntityRenderer<LightBulbBlockEnt
             face = face.getOpposite();
         ms.pushPose();
 
-        msr.centre()
+        msr.center()
                 .rotateY(AngleHelper.horizontalAngle(face))
                 .rotateX(-AngleHelper.verticalAngle(face) - 90)
-                .unCentre();
+                .uncenter();
 
         if (glowValue > .125f) {
-            CachedBufferer.partial(CMPartialModels.BULB_INNER_GLOW, be.getBlockState())
+            CachedBuffers.partial(CMPartialModels.BULB_INNER_GLOW, be.getBlockState())
                     .light(light)
                     .color(color, color, color, 255)
                     .disableDiffuse()
                     .translate(.5, .5625, .5)
                     .scale(size)
                     .translate(-0.5, -0.5625, -0.5)
-                    .renderInto(ms, buffer.getBuffer(RenderTypes.getAdditive()));
-            CachedBufferer.partial(CMPartialModels.BULB_TUBES.get(be.getColor()), blockState)
+                    .renderInto(ms, buffer.getBuffer(RenderTypes.additive()));
+            CachedBuffers.partial(CMPartialModels.BULB_TUBES.get(be.getColor()), blockState)
                     .light(light)
                     .renderInto(ms, buffer.getBuffer(RenderType.translucent()));
-            CachedBufferer.partial(CMPartialModels.BULB_TUBES_GLOW.get(be.getColor()), blockState)
+            CachedBuffers.partial(CMPartialModels.BULB_TUBES_GLOW.get(be.getColor()), blockState)
                     .light(light)
                     .color(color, color, color, 255)
                     .disableDiffuse()
-                    .renderInto(ms, buffer.getBuffer(RenderTypes.getAdditive()));
-        } else CachedBufferer.partial(CMPartialModels.BULB_TUBES.get(be.getColor()), blockState)
+                    .renderInto(ms, buffer.getBuffer(RenderTypes.additive()));
+        } else CachedBuffers.partial(CMPartialModels.BULB_TUBES.get(be.getColor()), blockState)
                 .light(light)
                 .renderInto(ms, buffer.getBuffer(RenderType.translucent()));
 

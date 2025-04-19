@@ -1,12 +1,12 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry;
 
+import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkContext;
-import com.simibubi.create.content.redstone.displayLink.source.DisplaySource;
 import com.simibubi.create.content.redstone.displayLink.target.DisplayTargetStats;
-import com.simibubi.create.foundation.utility.Components;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.FoundryData;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.LecternBlockEntity;
@@ -35,7 +35,7 @@ public class FoundryDisplaySource extends DisplaySource {
                 return reduce.orElse(EMPTY_LINE);
             });
 
-            return List.of(componentList.reduce((comp1, comp2) -> comp1.append(Components.literal("\n"))
+            return List.of(componentList.reduce((comp1, comp2) -> comp1.append(Component.literal("\n"))
                             .append(comp2))
                     .orElse(EMPTY_LINE));
         }

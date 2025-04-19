@@ -2,11 +2,11 @@ package fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid;
 
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.foundation.utility.VecHelper;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.LidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinOperatingBE;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 

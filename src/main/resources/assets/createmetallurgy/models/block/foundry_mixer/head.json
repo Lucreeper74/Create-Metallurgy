@@ -6,6 +6,7 @@
 		"1": "createmetallurgy:block/foundry_mixer_head",
 		"particle": "createmetallurgy:block/foundry_mixer_head"
 	},
+	"render_type": "minecraft:cutout",
 	"elements": [
 		{
 			"name": "MixerCenter",

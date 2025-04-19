@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.foundation.utility.Components;
 import com.tterrag.registrate.util.entry.*;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
@@ -10,6 +9,7 @@ import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import it.unimi.dsi.fastutil.objects.ReferenceLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,7 +31,7 @@ public class CMCreativeTabs {
 
     public static final RegistryObject<CreativeModeTab> MAIN_CREATIVE_TAB = REGISTER.register("main_group",
             () -> CreativeModeTab.builder()
-                    .title(Components.translatable("itemGroup." + CreateMetallurgy.MOD_ID + ".main_group"))
+                    .title(Component.translatable("itemGroup." + CreateMetallurgy.MOD_ID + ".main_group"))
                     .icon(CMItems.OBDURIUM_INGOT::asStack)
                     .displayItems(new RegistrateDisplayItemsGenerator())
                     .build());

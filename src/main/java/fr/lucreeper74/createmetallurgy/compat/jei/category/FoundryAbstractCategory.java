@@ -7,15 +7,14 @@ import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.item.ItemHelper;
-import com.simibubi.create.foundation.utility.Pair;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.FoundryData;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.FoundryRecipe;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.createmod.catnip.data.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -61,12 +60,9 @@ public abstract class FoundryAbstractCategory<T extends FoundryRecipe> extends C
             i++;
         }
         for (FluidIngredient fluidIngredient : recipe.getFluidIngredients()) {
-            builder
-                    .addSlot(RecipeIngredientRole.INPUT, 8 + xOffset + (i % 3) * 19, 56 - (i / 3) * 19)
-                    .setBackground(getRenderedSlot(), -1, -1)
-                    .addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(fluidIngredient.getMatchingFluidStacks()))
-                    .addTooltipCallback(addFluidTooltip(fluidIngredient.getRequiredAmount()));
-            i++;
+            int x = 8 + xOffset + (i % 3) * 19;
+            int y = 56 - (i / 3) * 19;
+            addFluidSlot(builder, x, y, fluidIngredient);
         }
 
         size = recipe.getRollableResults().size() + recipe.getFluidResults().size();
@@ -80,19 +76,14 @@ public abstract class FoundryAbstractCategory<T extends FoundryRecipe> extends C
                     .addSlot(RecipeIngredientRole.OUTPUT, xPosition, yPosition)
                     .setBackground(getRenderedSlot(result), -1, -1)
                     .addItemStack(result.getStack())
-                    .addTooltipCallback(addStochasticTooltip(result));
+                    .addRichTooltipCallback(addStochasticTooltip(result));
             i++;
         }
 
         for (FluidStack fluidResult : recipe.getFluidResults()) {
-            int xPosition = 150 - (size % 2 != 0 && i == size - 1 ? 0 : i % 2 == 0 ? 10 : -9);
-            int yPosition = -19 * (i / 2) + 56;
-
-            builder
-                    .addSlot(RecipeIngredientRole.OUTPUT, xPosition, yPosition)
-                    .setBackground(getRenderedSlot(), -1, -1)
-                    .addIngredient(ForgeTypes.FLUID_STACK, withImprovedVisibility(fluidResult))
-                    .addTooltipCallback(addFluidTooltip(fluidResult.getAmount()));
+            int x = 150 - (size % 2 != 0 && i == size - 1 ? 0 : i % 2 == 0 ? 10 : -9);
+            int y = -19 * (i / 2) + 56;
+            addFluidSlot(builder, x, y, fluidResult);
             i++;
         }
     }

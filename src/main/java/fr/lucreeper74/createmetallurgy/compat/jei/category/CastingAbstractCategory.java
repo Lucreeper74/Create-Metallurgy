@@ -4,7 +4,6 @@ import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingRecipe;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -28,11 +27,7 @@ public abstract class CastingAbstractCategory<T extends CastingRecipe> extends C
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
         FluidIngredient fluidIngredient = recipe.getFluidIngredient();
-        builder
-                .addSlot(RecipeIngredientRole.INPUT, 15, 6)
-                .setBackground(getRenderedSlot(), -1, -1)
-                .addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(fluidIngredient.getMatchingFluidStacks()))
-                .addTooltipCallback(addFluidTooltip(fluidIngredient.getRequiredAmount()));
+        addFluidSlot(builder, 15, 6, fluidIngredient);
 
         Ingredient mold = recipe.getIngredient();
         if (!mold.isEmpty())

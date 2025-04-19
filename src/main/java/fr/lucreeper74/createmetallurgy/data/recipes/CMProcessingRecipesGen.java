@@ -4,12 +4,13 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import com.simibubi.create.foundation.utility.RegisteredObjects;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.data.recipes.create.*;
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.AlloyingRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.GrindingRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.MeltingRecipeGen;
+import net.createmod.catnip.platform.CatnipServices;
+import net.createmod.catnip.platform.services.RegisteredObjectsHelper;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -101,7 +102,7 @@ public abstract class CMProcessingRecipesGen extends CMRecipeProvider {
             ItemLike itemLike = singleIngredient.get();
             transform
                     .apply(new ProcessingRecipeBuilder<>(serializer.getFactory(),
-                            new ResourceLocation(namespace, RegisteredObjects.getKeyOrThrow(itemLike.asItem())
+                            new ResourceLocation(namespace, CatnipServices.REGISTRIES.getKeyOrThrow(itemLike.asItem())
                                     .getPath())).withItemIngredients(Ingredient.of(itemLike)))
                     .build(c);
         };

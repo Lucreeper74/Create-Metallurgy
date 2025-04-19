@@ -1,7 +1,11 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.casting;
 
-import com.simibubi.create.content.contraptions.behaviour.MovementBehaviour;
+import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
+import com.simibubi.create.content.contraptions.render.ContraptionMatrices;
+import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
+import com.simibubi.create.foundation.virtualWorld.VirtualRenderWorld;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -22,11 +26,6 @@ public class CastingBlockMovementBehavior implements MovementBehaviour {
     }
 
     @Override
-    public boolean renderAsNormalBlockEntity() {
-        return true;
-    }
-
-    @Override
     public void tick(MovementContext context) {
         MovementBehaviour.super.tick(context);
         if (context.temporaryData == null || (boolean) context.temporaryData) {
@@ -34,6 +33,13 @@ public class CastingBlockMovementBehavior implements MovementBehaviour {
             facingVec.normalize();
             if (Direction.getNearest(facingVec.x, facingVec.y, facingVec.z) == Direction.DOWN)
                 dump(context, facingVec);
+        }
+
+        if (context.world.isClientSide) {
+            BlockEntity be = context.contraption.presentBlockEntities.get(context.localPos);
+            if (be instanceof CastingBlockEntity castingBE) {
+                castingBE.inputTank.getFluidLevel().tickChaser();
+            }
         }
     }
 

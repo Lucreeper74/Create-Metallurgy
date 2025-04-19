@@ -1,14 +1,15 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible;
 
-import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.utility.Iterate;
+import dev.engine_room.flywheel.lib.transform.PoseTransformStack;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryTank;
 import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
+import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -76,7 +77,7 @@ public class CrucibleRenderer extends SafeBlockEntityRenderer<CrucibleBlockEntit
             float zMax = zMin + be.width - 2 * tankHullWidth;
 
             ms.pushPose();
-            FluidRenderer.renderFluidBox(fluidStack, xMin, yMin, zMin, xMax, yMax, zMax, buffer, ms, light, false);
+            FluidRenderer.renderFluidBox(fluidStack.getFluid(), fluidStack.getAmount(), xMin, yMin, zMin, xMax, yMax, zMax, buffer, ms, light, false, true, fluidStack.getTag());
             ms.popPose();
 
             yMin = yMax; // To stack fluids upwards
@@ -88,7 +89,7 @@ public class CrucibleRenderer extends SafeBlockEntityRenderer<CrucibleBlockEntit
         BlockState blockState = be.getBlockState();
         VertexConsumer vb = buffer.getBuffer(RenderType.solid());
         ms.pushPose();
-        TransformStack msr = TransformStack.cast(ms);
+        TransformStack<PoseTransformStack> msr = TransformStack.of(ms);
         msr.translate(be.width / 2f, .5f, be.width / 2f);
 
         float dialPivotY = 6.5f / 16f;
@@ -104,18 +105,19 @@ public class CrucibleRenderer extends SafeBlockEntityRenderer<CrucibleBlockEntit
 
         for (Direction d : Iterate.horizontalDirections) {
             ms.pushPose();
-            CachedBufferer.partial(CMPartialModels.THERMOMETER_GAUGE, blockState)
-                    .rotateY(d.toYRot())
-                    .unCentre()
+            float yRot = -d.toYRot() - 90;
+            CachedBuffers.partial(CMPartialModels.THERMOMETER_GAUGE, blockState)
+                    .rotateYDegrees(yRot)
+                    .uncenter()
                     .translate(be.width / 2f - 6 / 16f, 0, 0)
                     .light(light)
                     .renderInto(ms, vb);
-            CachedBufferer.partial(CMPartialModels.THERMOMETER_DIAL, blockState)
-                    .rotateY(d.toYRot())
-                    .unCentre()
+            CachedBuffers.partial(CMPartialModels.THERMOMETER_DIAL, blockState)
+                    .rotateYDegrees(yRot)
+                    .uncenter()
                     .translate(be.width / 2f - 6 / 16f, 0, 0)
                     .translate(0, dialPivotY, dialPivotZ)
-                    .rotateX(-180 * progress)
+                    .rotateXDegrees(-180 * progress)
                     .translate(0, -dialPivotY, -dialPivotZ)
                     .light(light)
                     .renderInto(ms, vb);

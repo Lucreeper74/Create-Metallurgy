@@ -1,9 +1,9 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible;
 
 import com.simibubi.create.foundation.block.connected.CTModel;
-import com.simibubi.create.foundation.utility.Iterate;
 import fr.lucreeper74.createmetallurgy.registries.CMSpriteShifts;
 import fr.lucreeper74.createmetallurgy.utils.CMConnectivityHandler;
+import net.createmod.catnip.data.Iterate;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
