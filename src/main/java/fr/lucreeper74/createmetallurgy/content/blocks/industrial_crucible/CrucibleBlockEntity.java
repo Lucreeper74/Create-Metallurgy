@@ -2,6 +2,7 @@ package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible;
 
 import com.simibubi.create.AllKeys;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -99,6 +100,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+        behaviours.add(new DirectBeltInputBehaviour(this));
     }
 
     @Override
