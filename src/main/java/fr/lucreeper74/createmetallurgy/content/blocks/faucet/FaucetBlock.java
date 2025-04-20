@@ -53,7 +53,7 @@ public class FaucetBlock extends WrenchableDirectionalBlock implements IBE<Fauce
             return CMShapes.FAUCET_DOWN;
     }
 
-    protected void playSound(@Nullable Player pPlayer, Level pLevel, BlockPos pPos, boolean pIsOpened) {
+    protected static void playSound(@Nullable Player pPlayer, Level pLevel, BlockPos pPos, boolean pIsOpened) {
         pLevel.playSound(pPlayer, pPos, pIsOpened ? BlockSetType.IRON.trapdoorOpen() : BlockSetType.IRON.trapdoorClose(), SoundSource.BLOCKS, 1.0F, pLevel.getRandom().nextFloat() * 0.1F + 0.9F);
         pLevel.gameEvent(pPlayer, pIsOpened ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pPos);
     }
@@ -64,8 +64,13 @@ public class FaucetBlock extends WrenchableDirectionalBlock implements IBE<Fauce
         if (hand != InteractionHand.MAIN_HAND)
             return InteractionResult.PASS;
 
-        level.setBlock(pos, state.cycle(OPEN), 3);
-        playSound(player, level, pos, currentState);
+        withBlockEntityDo(level, pos, be -> {
+            if (be.tryFill() > 0) {
+                level.setBlock(pos, state.cycle(OPEN), 3);
+                playSound(player, level, pos, currentState);
+            }
+        });
+
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
 

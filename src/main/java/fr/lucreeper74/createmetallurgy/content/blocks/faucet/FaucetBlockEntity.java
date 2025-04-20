@@ -101,9 +101,9 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         BlockPos pos = worldPosition;
         for (int i = 0; i < MAX_HEIGHT; i++) {
             pos = pos.below();
+            fallingDistance = i + 1;
             if (!level.getBlockState(pos).isAir())
                 break;
-            fallingDistance = i + 2;
         }
         targetTank = getTank(pos, getBlockState().getValue(FaucetBlock.FACING).getOpposite());
         sendData();
@@ -117,11 +117,18 @@ public class FaucetBlockEntity extends SmartBlockEntity {
             return;
         }
 
-        if (tryFill() <= 0)
-            spillFluid(); // If it fails, spill the fluid
+        if (tryFill() <= 0) {
+            if (getBlockState().getValue(FaucetBlock.POWERED))
+                spillFluid(); // If it fails & forced open, spill the fluid
+            else {
+                BlockState newState = getBlockState().cycle(FaucetBlock.OPEN);
+                getLevel().setBlock(getBlockPos(), newState, 3); // Close it
+                FaucetBlock.playSound(null, getLevel(), getBlockPos(), newState.getValue(FaucetBlock.OPEN));
+            }
+        }
     }
 
-    private int tryFill() {
+    protected int tryFill() {
         IFluidHandler inputTank = getAttachedTank().orElse(EmptyFluidHandler.INSTANCE);
         IFluidHandler targetTank = getTargetTank().orElse(EmptyFluidHandler.INSTANCE);
 
@@ -135,7 +142,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
 
         DirectBeltInputBehaviour directBeltInputBehaviour =
                 BlockEntityBehaviour.get(level, getBlockPos().below(fallingDistance), DirectBeltInputBehaviour.TYPE);
-        if (directBeltInputBehaviour == null || !directBeltInputBehaviour.canInsertFromSide(Direction.DOWN))
+        if (directBeltInputBehaviour == null || !directBeltInputBehaviour.canInsertFromSide(Direction.UP))
             return 0;
 
         for (boolean simulate : Iterate.trueAndFalse) {
@@ -159,7 +166,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         return fill;
     }
 
-    public void spillFluid() {
+    protected void spillFluid() {
         IFluidHandler inputTank = getAttachedTank().orElse(EmptyFluidHandler.INSTANCE);
 
         FluidStack fluid = inputTank.drain(TRANSFER_RATE, IFluidHandler.FluidAction.EXECUTE);
