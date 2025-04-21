@@ -22,8 +22,8 @@ public class BeltGrinderFilterSlot extends ValueBoxTransform {
     @Override
     public void rotate(LevelAccessor level, BlockPos pos, BlockState state, PoseStack ms) {
         TransformStack.of(ms)
-                .rotateY(angleY(state))
-                .rotateX(90);
+                .rotateYDegrees(angleY(state))
+                .rotateXDegrees(90);
     }
 
     protected float angleY(BlockState state) {
