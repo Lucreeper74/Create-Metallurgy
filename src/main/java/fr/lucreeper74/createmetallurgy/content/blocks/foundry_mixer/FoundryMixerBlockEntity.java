@@ -3,8 +3,8 @@ package fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
@@ -92,9 +92,9 @@ public class FoundryMixerBlockEntity extends MechanicalMixerBlockEntity {
             return Optional.empty();
         BlockEntity basinBE = level.getBlockEntity(worldPosition.below(2));
         Block top = level.getBlockState(worldPosition.below()).getBlock();
-        if (!(basinBE instanceof FoundryBasinBlockEntity && top instanceof GlassedFoundryLidBlock))
+        if (!(basinBE instanceof FoundryBasinBlockEntity && top instanceof FoundryLidBlock))
             return Optional.empty();
-        if (level.getBlockState(worldPosition.below()).getValue(GlassedFoundryLidBlock.OPEN))
+        if (level.getBlockState(worldPosition.below()).getValue(FoundryLidBlock.OPEN))
             return Optional.empty();
         return Optional.of((FoundryBasinBlockEntity) basinBE);
     }

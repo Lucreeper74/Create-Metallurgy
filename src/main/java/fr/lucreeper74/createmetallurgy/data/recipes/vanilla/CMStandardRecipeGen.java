@@ -164,12 +164,6 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
                     .pattern("AAA")
                     .pattern("A A")),
 
-    GLASSED_FOUNDRY_LID = create(CMBlocks.GLASSED_FOUNDRY_LID_BLOCK).unlockedBy(T::andesiteAlloy)
-            .viaShaped(b -> b.define('A', T.andesiteAlloy())
-                    .define('B', Tags.Items.GLASS)
-                    .pattern("ABA")
-                    .pattern("B B")),
-
     FOUNDRY_BASIN = create(CMBlocks.FOUNDRY_BASIN_BLOCK).unlockedBy(T::refractoryMortar)
             .viaShaped(b -> b.define('A', T.andesiteAlloy())
                     .define('P', T.refractoryMortar())

@@ -108,7 +108,7 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
         Level level = context.getLevel();
         BlockPos clickedPos = context.getClickedPos();
 
-        level.setBlockAndUpdate(clickedPos, state.setValue(WINDOW, !state.getValue(WINDOW)));
+        level.setBlockAndUpdate(clickedPos, state.cycle(WINDOW));
         level.playSound(null, clickedPos, SoundEvents.DEEPSLATE_PLACE, SoundSource.PLAYERS, 1f,
                 .2f + RandomSource.create().nextFloat());
         return InteractionResult.SUCCESS;

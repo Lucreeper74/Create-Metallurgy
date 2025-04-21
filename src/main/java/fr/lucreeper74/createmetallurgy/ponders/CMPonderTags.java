@@ -35,7 +35,6 @@ public class CMPonderTags {
                 .add(CMBlocks.FOUNDRY_BASIN_BLOCK)
                 .add(CMBlocks.FOUNDRY_LID_BLOCK)
                 .add(CMBlocks.FOUNDRY_MIXER_BLOCK)
-                .add(CMBlocks.GLASSED_FOUNDRY_LID_BLOCK)
                 .add(CMBlocks.CASTING_TABLE_BLOCK)
                 .add(CMBlocks.CASTING_BASIN_BLOCK)
                 .add(CMBlocks.BELT_GRINDER_BLOCK)

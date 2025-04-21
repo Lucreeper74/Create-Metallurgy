@@ -11,9 +11,9 @@ import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.ponder.*;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import net.createmod.catnip.math.Pointing;
@@ -71,7 +71,7 @@ public class FoundryScenes {
                 .placeNearTarget();
         scene.idle(90);
 
-        scene.world().modifyBlock(lidPos, s -> s.setValue(GlassedFoundryLidBlock.OPEN, true), false);
+        scene.world().modifyBlock(lidPos, s -> s.setValue(FoundryLidBlock.OPEN, true), false);
         scene.world().showSection(util.select().position(lidPos), Direction.DOWN);
         scene.idle(10);
         scene.overlay().showText(80)
@@ -137,7 +137,7 @@ public class FoundryScenes {
         scene.idle(90);
         scene.overlay().showControls(lidTrap, Pointing.LEFT, 30).whileSneaking().rightClick();
         scene.idle(7);
-        scene.world().modifyBlock(lidPos, s -> s.setValue(GlassedFoundryLidBlock.OPEN, false), false);
+        scene.world().modifyBlock(lidPos, s -> s.setValue(FoundryLidBlock.OPEN, false), false);
 
         //Start Recipe & Spoutout fluids
         scene.world().modifyBlockEntity(lidPos, FoundryLidBlockEntity.class, FoundryLidBlockEntity::startProcessingBasin);
@@ -189,7 +189,7 @@ public class FoundryScenes {
         scene.world().modifyBlock(basinPos, s -> s.setValue(BasinBlock.FACING, Direction.DOWN), false);
         scene.world().showSection(util.select().position(basinPos), Direction.DOWN);
         scene.idle(5);
-        scene.world().modifyBlock(topPos, s -> s.setValue(GlassedFoundryLidBlock.OPEN, true), false);
+        scene.world().modifyBlock(topPos, s -> s.setValue(FoundryLidBlock.OPEN, true), false);
         scene.world().showSection(util.select().position(topPos), Direction.DOWN);
         scene.idle(5);
         scene.world().showSection(util.select().position(mixer), Direction.DOWN);
@@ -261,7 +261,7 @@ public class FoundryScenes {
         scene.idle(90);
         scene.overlay().showControls(lidTrap, Pointing.LEFT, 30).whileSneaking().rightClick();
         scene.idle(7);
-        scene.world().modifyBlock(topPos, s -> s.setValue(GlassedFoundryLidBlock.OPEN, false), false);
+        scene.world().modifyBlock(topPos, s -> s.setValue(FoundryLidBlock.OPEN, false), false);
         scene.idle(40);
 
         scene.rotateCameraY(70);

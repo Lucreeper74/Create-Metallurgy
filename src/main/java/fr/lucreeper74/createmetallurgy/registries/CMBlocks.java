@@ -19,15 +19,13 @@ import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderGe
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockMovementBehavior;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetGenerator;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.basin.CastingBasinBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTableBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.*;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.utils.CMDyeHelper;
@@ -192,18 +190,6 @@ public class CMBlocks {
             .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
             .transform(pickaxeOnly())
             .blockstate(new FoundryLidGenerator()::generate)
-            .addLayer(() -> RenderType::cutoutMipped)
-            .item()
-            .transform(customItemModel("_", "block"))
-            .register();
-
-    public static final BlockEntry<GlassedFoundryLidBlock> GLASSED_FOUNDRY_LID_BLOCK = REGISTRATE
-            .block("glassed_foundry_lid", GlassedFoundryLidBlock::new)
-            .initialProperties(SharedProperties::stone)
-            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
-            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .transform(pickaxeOnly())
-            .blockstate(new GlassedFoundryLidGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
             .item()
             .transform(customItemModel("_", "block"))

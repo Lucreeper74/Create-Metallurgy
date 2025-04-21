@@ -1,9 +1,8 @@
-package fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid;
+package fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid;
 
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.LidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinOperatingBE;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.createmod.catnip.math.VecHelper;
@@ -105,7 +104,7 @@ public class FoundryLidBlockEntity extends FoundryBasinOperatingBE {
         BlockEntity basinBE = level.getBlockEntity(worldPosition.below());
         if (!(basinBE instanceof FoundryBasinBlockEntity))
             return Optional.empty();
-        if (getBlockState().getValue(LidBlock.OPEN))
+        if (getBlockState().getValue(FoundryLidBlock.OPEN))
             return Optional.empty();
         return Optional.of((FoundryBasinBlockEntity) basinBE);
     }

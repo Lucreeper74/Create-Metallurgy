@@ -1,6 +1,5 @@
-package fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid;
+package fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid;
 
-import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -23,16 +22,15 @@ public class FoundryLidGenerator extends SpecialBlockStateGen {
     @Override
     public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
                                                 BlockState state) {
+        Boolean window = state.getValue(FoundryLidBlock.WINDOW);
+        Boolean open = state.getValue(FoundryLidBlock.OPEN);
 
-        if (state.getValue(FoundryLidBlock.ON_FOUNDRY_BASIN)) {
-            if (state.getValue(FoundryLidBlock.OPEN))
-                return AssetLookup.partialBaseModel(ctx, prov, "on_a_basin_open");
-            return AssetLookup.partialBaseModel(ctx, prov, "on_a_basin");
-        }
-        if(state.getValue(FoundryLidBlock.OPEN))
-            return AssetLookup.partialBaseModel(ctx, prov, "open");
+        String variant = "";
+        if (open)
+            variant += "_open";
+        if (window)
+            variant += "_window";
 
-        return AssetLookup.partialBaseModel(ctx, prov);
+        return prov.models().getExistingFile(prov.modLoc("block/foundry_lid/block" + variant));
     }
-
 }

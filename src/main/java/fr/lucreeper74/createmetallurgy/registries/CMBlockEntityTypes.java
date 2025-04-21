@@ -5,7 +5,7 @@ import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetRenderer;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.FoundryLidBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlockEntity;

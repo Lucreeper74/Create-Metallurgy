@@ -73,7 +73,6 @@ public class CreateMetallurgyJEI implements IModPlugin {
                 alloying = builder(FoundryBasinRecipe.class)
                         .addTypedRecipes(CMRecipeTypes.ALLOYING)
                         .catalyst(CMBlocks.FOUNDRY_MIXER_BLOCK::get)
-                        .catalyst(CMBlocks.GLASSED_FOUNDRY_LID_BLOCK::get)
                         .catalyst(CMBlocks.FOUNDRY_BASIN_BLOCK::get)
                         .doubleItemIcon(CMBlocks.FOUNDRY_BASIN_BLOCK.get(), CMBlocks.FOUNDRY_MIXER_BLOCK.get())
                         .emptyBackground(177, 100)

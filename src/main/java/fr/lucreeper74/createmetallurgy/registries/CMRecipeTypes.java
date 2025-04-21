@@ -5,7 +5,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.GrindingRecipe;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.lid.MeltingRecipe;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.MeltingRecipe;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.AlloyingRecipe;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingRecipeSerializer;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.BulkMeltingRecipe;

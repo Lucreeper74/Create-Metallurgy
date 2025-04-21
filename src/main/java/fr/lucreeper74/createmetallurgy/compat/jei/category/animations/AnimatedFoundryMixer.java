@@ -3,13 +3,12 @@ package fr.lucreeper74.createmetallurgy.compat.jei.category.animations;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
-
-import static fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock.UNDER_FOUNDRY_MIXER;
 
 public class AnimatedFoundryMixer extends AnimatedKinetics {
     @Override
@@ -45,7 +44,7 @@ public class AnimatedFoundryMixer extends AnimatedKinetics {
                 .scale(scale)
                 .render(graphics);
 
-        blockElement(CMBlocks.GLASSED_FOUNDRY_LID_BLOCK.getDefaultState().setValue(UNDER_FOUNDRY_MIXER, true))
+        blockElement(CMBlocks.FOUNDRY_LID_BLOCK.getDefaultState().setValue(FoundryLidBlock.WINDOW, true))
                 .atLocal(0, .65, 0)
                 .scale(scale)
                 .render(graphics);
