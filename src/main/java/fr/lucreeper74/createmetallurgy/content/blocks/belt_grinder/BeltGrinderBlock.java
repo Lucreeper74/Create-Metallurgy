@@ -52,6 +52,11 @@ public class BeltGrinderBlock extends HorizontalKineticBlock implements IBE<Belt
     }
 
     @Override
+    public SpeedLevel getMinimumRequiredSpeedLevel() {
+        return SpeedLevel.FAST;
+    }
+
+    @Override
     public Direction.Axis getRotationAxis(BlockState state) {
         return state.getValue(HORIZONTAL_FACING)
                 .getAxis();

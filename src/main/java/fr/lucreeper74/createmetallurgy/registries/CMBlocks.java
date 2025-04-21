@@ -2,6 +2,7 @@ package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
 import com.simibubi.create.foundation.block.DyedBlockList;
@@ -28,6 +29,7 @@ import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasin
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.*;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryDisplaySource;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.utils.CMDyeHelper;
 import net.minecraft.client.renderer.RenderType;
@@ -216,7 +218,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .addLayer(() -> RenderType::cutoutMipped)
-            //.transform(CMStress.setImpact(8.0))
+            .onRegister((block) -> BlockStressValues.IMPACTS.register(block, () -> 8.0))
             .item()
             .transform(customItemModel("foundry_mixer", "item"))
             .register();
@@ -231,7 +233,6 @@ public class CMBlocks {
             .transform(displaySource(CMDisplaySources.FOUNDRY_STATUS))
             .blockstate(new CrucibleGenerator()::generate)
             .onRegister(CreateRegistrate.blockModel(() -> CrucibleModel::new))
-            //.onRegister(assignDataBehaviour(new FoundryDisplaySource(), "foundry_status"))
             .addLayer(() -> RenderType::cutoutMipped)
             .tag(AllTags.AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag)
             .item(CrucibleBlockItem::new)
@@ -248,7 +249,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .blockstate(new BeltGrinderGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
-            //.transform(CMStress.setImpact(6.0))
+            .onRegister((block) -> BlockStressValues.IMPACTS.register(block, () -> 6.0))
             .transform(axeOrPickaxe())
             .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.mechanical_grinder"))
             .item()
