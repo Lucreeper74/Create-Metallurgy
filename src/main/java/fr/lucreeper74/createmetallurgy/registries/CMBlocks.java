@@ -29,7 +29,6 @@ import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasin
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lids.glassed_lid.GlassedFoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.*;
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryDisplaySource;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.utils.CMDyeHelper;
 import net.minecraft.client.renderer.RenderType;
