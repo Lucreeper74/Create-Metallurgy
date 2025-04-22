@@ -55,10 +55,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound, clientPacket);
-        int prevFallingDist = fallingDistance;
         fallingDistance = compound.getInt("fallingDistance");
-        if (fallingDistance != prevFallingDist)
-            invalidateRenderBoundingBox();
 
         if (compound.contains("renderFluid")) {
             renderFluid = FluidStack.loadFluidStackFromNBT(compound.getCompound("renderFluid"));
@@ -107,13 +104,18 @@ public class FaucetBlockEntity extends SmartBlockEntity {
     public LazyOptional<IFluidHandler> getTargetTank() {
         // Fetch the targeted tank each time needed
         BlockPos pos = worldPosition;
+        int fallDist = 0;
         for (int i = 0; i < MAX_HEIGHT; i++) {
             pos = pos.below();
-            fallingDistance = i + 1;
+            fallDist = i + 1;
             if (!level.getBlockState(pos).isAir())
                 break;
         }
         targetTank = getTank(pos, getBlockState().getValue(FaucetBlock.FACING).getOpposite());
+        if (fallDist != fallingDistance) {
+            fallingDistance = fallDist;
+            invalidateRenderBoundingBox();
+        }
         sendData();
         return targetTank;
     }
