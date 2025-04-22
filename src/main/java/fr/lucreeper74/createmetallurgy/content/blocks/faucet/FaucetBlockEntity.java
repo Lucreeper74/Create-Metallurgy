@@ -5,6 +5,7 @@ import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehavi
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
+import fr.lucreeper74.createmetallurgy.registries.CMDamageTypes;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
@@ -12,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,6 +26,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.EmptyFluidHandler;
 
 import java.util.List;
+
+import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
 
 public class FaucetBlockEntity extends SmartBlockEntity {
     private static final int MAX_HEIGHT = 5;
@@ -111,10 +115,12 @@ public class FaucetBlockEntity extends SmartBlockEntity {
     }
 
     public void trySpoutput() {
-        if (level.isClientSide()) {
-            if (!renderFluid.isEmpty())
+        if (!renderFluid.isEmpty()) {
+            if (level.isClientSide()) {
                 createFluidParticles(renderFluid);
-            return;
+                return;
+            }
+            hurtEntities();
         }
 
         if (tryFill() <= 0) {
@@ -125,6 +131,14 @@ public class FaucetBlockEntity extends SmartBlockEntity {
                 getLevel().setBlock(getBlockPos(), newState, 3); // Close it
                 FaucetBlock.playSound(null, getLevel(), getBlockPos(), newState.getValue(FaucetBlock.OPEN));
             }
+        }
+    }
+
+    private void hurtEntities() {
+        List<Entity> entities = getLevel().getEntities(null, getRenderBoundingBox()); // Blacklist entities in the parameter
+        for (Entity entity : entities) {
+            entity.setSecondsOnFire(MOLTEN_FLUID_BURNING_TIME);
+            entity.hurt(CMDamageTypes.moltenFluid(getLevel()), 4.0F);
         }
     }
 
