@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -137,8 +138,11 @@ public class FaucetBlockEntity extends SmartBlockEntity {
     private void hurtEntities() {
         List<Entity> entities = getLevel().getEntities(null, getRenderBoundingBox()); // Blacklist entities in the parameter
         for (Entity entity : entities) {
-            entity.setSecondsOnFire(MOLTEN_FLUID_BURNING_TIME);
-            entity.hurt(CMDamageTypes.moltenFluid(getLevel()), 4.0F);
+            if (!entity.fireImmune()) {
+                entity.setSecondsOnFire(MOLTEN_FLUID_BURNING_TIME);
+                if (entity.hurt(CMDamageTypes.moltenFluid(entity.level()), 4.0F))
+                    entity.playSound(SoundEvents.GENERIC_BURN, .4F, 3F);
+            }
         }
     }
 
