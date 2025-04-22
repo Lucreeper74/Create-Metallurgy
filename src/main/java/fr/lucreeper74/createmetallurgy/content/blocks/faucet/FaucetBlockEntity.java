@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import fr.lucreeper74.createmetallurgy.registries.CMDamageTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -121,7 +123,8 @@ public class FaucetBlockEntity extends SmartBlockEntity {
                 createFluidParticles(renderFluid);
                 return;
             }
-            hurtEntities();
+            if (renderFluid.getFluid().is(CMFluids.MOLTEN_MATERIALS) || renderFluid.getRawFluid().equals(Fluids.LAVA))
+                hurtEntities();
         }
 
         if (tryFill() <= 0) {

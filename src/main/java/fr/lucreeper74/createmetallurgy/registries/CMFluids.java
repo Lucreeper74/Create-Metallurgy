@@ -8,6 +8,8 @@ import fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType;
 import fr.lucreeper74.createmetallurgy.content.fluids.TagDependentBucketItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
@@ -19,6 +21,8 @@ import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
 @SuppressWarnings("unused")
 public class  CMFluids {
+    public static final TagKey<Fluid> MOLTEN_MATERIALS = forgeFluidTag("molten_materials");
+
     public static final List<FluidEntry<ForgeFlowingFluid.Flowing>> ALL_MODDED_FLUIDS = new ArrayList<>();
 
     //Simple Metals
@@ -68,7 +72,7 @@ public class  CMFluids {
                         .tickRate(tickRate)
                         .slopeFindDistance(slopeDistance)
                         .explosionResistance(explosionResistance))
-                .tag(forgeFluidTag("molten_" + name), forgeFluidTag("molten_materials"))
+                .tag(forgeFluidTag("molten_" + name), MOLTEN_MATERIALS)
                 .source(MoltenFluidSource::new)
                 .bucket((content, props) -> new TagDependentBucketItem(content, props, AllTags.forgeItemTag("ingots/" + name)))
                 .build()
@@ -92,7 +96,7 @@ public class  CMFluids {
                         .tickRate(tickRate)
                         .slopeFindDistance(slopeDistance)
                         .explosionResistance(explosionResistance))
-                .tag(forgeFluidTag("molten_" + name), forgeFluidTag("molten_materials"))
+                .tag(forgeFluidTag("molten_" + name), MOLTEN_MATERIALS)
                 .source(MoltenFluidSource::new)
                 .bucket()
                 .build()
