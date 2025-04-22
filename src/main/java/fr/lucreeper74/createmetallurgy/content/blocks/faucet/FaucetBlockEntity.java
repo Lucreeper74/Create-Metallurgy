@@ -14,12 +14,13 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -123,7 +124,8 @@ public class FaucetBlockEntity extends SmartBlockEntity {
                 createFluidParticles(renderFluid);
                 return;
             }
-            if (renderFluid.getFluid().is(CMFluids.MOLTEN_MATERIALS) || renderFluid.getRawFluid().equals(Fluids.LAVA))
+            Fluid fluid = renderFluid.getFluid();
+            if (fluid.is(CMFluids.MOLTEN_MATERIALS) || fluid.is(FluidTags.LAVA))
                 hurtEntities();
         }
 
