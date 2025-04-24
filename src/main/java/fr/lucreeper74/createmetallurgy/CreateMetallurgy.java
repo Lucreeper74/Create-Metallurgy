@@ -53,6 +53,7 @@ public class CreateMetallurgy {
         CMBlocks.register();
         CMItems.register();
         CMFluids.register();
+        CMEntityTypes.register();
         CMSpriteShifts.init();
         CMBlockEntityTypes.register();
         CMRecipeTypes.register(eventBus);
@@ -61,6 +62,7 @@ public class CreateMetallurgy {
 
         eventBus.addListener(CreateMetallurgy::init);
         eventBus.addListener(CreateMetallurgy::onRegister);
+        eventBus.addListener(CMEntityTypes::registerEntityAttributes);
         eventBus.addListener(EventPriority.LOWEST, CMDatagen::gatherData);
 
         MinecraftForge.EVENT_BUS.register(this);

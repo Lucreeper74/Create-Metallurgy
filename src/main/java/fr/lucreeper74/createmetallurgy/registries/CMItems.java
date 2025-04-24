@@ -1,13 +1,18 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.AllTags;
+import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.item.CombustibleItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
+import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleStyles;
 import fr.lucreeper74.createmetallurgy.content.items.FoundryUnitItem;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
+
+import java.util.Locale;
 
 import static com.simibubi.create.AllTags.AllItemTags.CRUSHED_RAW_MATERIALS;
 import static com.simibubi.create.AllTags.AllItemTags.PLATES;
@@ -74,6 +79,24 @@ public class CMItems {
 
     public static final ItemEntry<SequencedAssemblyItem>
             INCOMPLETE_INDUSTRIAL_CRUCIBLE = sequencedIngredient("incomplete_industrial_crucible", AllTags.AllItemTags.UPRIGHT_ON_BELT.tag);
+
+    // Logistic
+    static {
+        for (PackageStyle style : LadleStyles.STYLES) {
+            String size = "_" + style.width() + "x" + style.height();
+            REGISTRATE.item(LadleStyles.getItemId(style).getPath(), p -> new LadleItem(p, LadleStyles.STYLES.get(0)))
+                    .properties(p -> p.stacksTo(1))
+                    .tag(AllTags.AllItemTags.PACKAGES.tag)
+                    .model((c, p) ->
+                            p.withExistingParent(c.getName(), p.modLoc("item/ladle/" + style.type() + size)))
+                    .lang("Transfer " + style.type()
+                            .substring(0, 1)
+                            .toUpperCase(Locale.ROOT)
+                            + style.type()
+                            .substring(1))
+                    .register();
+        }
+    }
 
     //Shortcut
     @SafeVarargs
