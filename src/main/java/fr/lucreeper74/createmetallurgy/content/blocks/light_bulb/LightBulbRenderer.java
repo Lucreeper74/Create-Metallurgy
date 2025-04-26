@@ -42,8 +42,8 @@ public class LightBulbRenderer extends SafeBlockEntityRenderer<LightBulbBlockEnt
         ms.pushPose();
 
         msr.center()
-                .rotateY(AngleHelper.horizontalAngle(face))
-                .rotateX(-AngleHelper.verticalAngle(face) - 90)
+                .rotateYDegrees(AngleHelper.horizontalAngle(face))
+                .rotateXDegrees(-AngleHelper.verticalAngle(face) - 90)
                 .uncenter();
 
         if (glowValue > .125f) {
