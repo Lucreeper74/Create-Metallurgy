@@ -114,6 +114,14 @@
     },
     {
       "type": "single",
+      "resource": "createmetallurgy:fluid/lithium/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/lithium/still"
+    },
+    {
+      "type": "single",
       "resource": "createmetallurgy:fluid/invar/flowing"
     },
     {

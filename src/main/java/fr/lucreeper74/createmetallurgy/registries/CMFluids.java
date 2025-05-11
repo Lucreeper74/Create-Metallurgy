@@ -38,6 +38,7 @@ public class  CMFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_OSMIUM = moddedMoltenFluid("osmium", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_SILVER = moddedMoltenFluid("silver", 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TIN = moddedMoltenFluid("tin", 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_LITHIUM = moddedMoltenFluid("lithium", 2000, 1400, 10, 2, 25, 3, 100f);
 
     //Alloys
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_OBDURIUM = moltenFluid("obdurium", 2400, 1400, 10, 2, 25, 3, 100f);

@@ -13,6 +13,7 @@ public enum CMCompatMetals {
     OSMIUM(CMFluids.MOLTEN_OSMIUM),
     SILVER(CMFluids.MOLTEN_SILVER),
     TIN(CMFluids.MOLTEN_TIN),
+    LITHIUM(CMFluids.MOLTEN_LITHIUM),
 
     //Alloys
     INVAR(CMFluids.MOLTEN_INVAR),
