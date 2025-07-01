@@ -300,14 +300,14 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
 
     public enum LockMode implements INamedIconOptions {
         UNLOCKED(AllIcons.I_CONFIG_UNLOCKED),
-        LOCK(AllIcons.I_CONFIG_LOCKED);
+        LOCKED(AllIcons.I_CONFIG_LOCKED);
 
         private final String translationKey;
         private final AllIcons icon;
 
         LockMode(AllIcons icon) {
             this.icon = icon;
-            this.translationKey = ordinal() == 0 ? "gui.terrainzapper.placement.attached" : "action.discard";
+            this.translationKey = "createmetallurgy.casting.lock_mode." + CMLang.asId(name());;
         }
 
         @Override
