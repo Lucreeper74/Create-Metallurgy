@@ -27,6 +27,9 @@
   "createmetallurgy.crucible.hold_details": "Hold [%1$s] for details",
   "createmetallurgy.crucible.empty": "Foundry Empty...",
 
+  "createmetallurgy.casting.lock_mode.locked": "Locked",
+  "createmetallurgy.casting.lock_mode.unlocked": "Unlocked",
+
   "createmetallurgy.foundry.status": "Thermal Status",
   "createmetallurgy.foundry.cooling": "Cooling!",
   "createmetallurgy.foundry.stable": "Stable",
