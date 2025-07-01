@@ -307,7 +307,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
 
         LockMode(AllIcons icon) {
             this.icon = icon;
-            this.translationKey = "createmetallurgy.casting.lock_mode." + CMLang.asId(name());;
+            this.translationKey = "createmetallurgy.casting.lock_mode." + CMLang.asId(name());
         }
 
         @Override
