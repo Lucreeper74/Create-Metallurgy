@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
 import dev.engine_room.flywheel.lib.transform.TransformStack;
 import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.render.FluidRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -27,7 +28,7 @@ public class ColoredFluidRenderer extends FluidRenderer {
 
     public static void renderFluidBox(FluidStack fluidStack, float xMin, float yMin, float zMin, float xMax, float yMax,
                                       float zMax, MultiBufferSource buffer, PoseStack ms, int light, int color, boolean renderBottom) {
-        renderFluidBox(fluidStack, xMin, yMin, zMin, xMax, yMax, zMax, getFluidBuilder(buffer), ms, light, color,
+        renderFluidBox(fluidStack, xMin, yMin, zMin, xMax, yMax, zMax, FluidRenderHelper.getFluidBuilder(buffer), ms, light, color,
                 renderBottom);
     }
 
@@ -62,14 +63,14 @@ public class ColoredFluidRenderer extends FluidRenderer {
             if (side.getAxis()
                     .isHorizontal()) {
                 if (side.getAxis() == Direction.Axis.X) {
-                    renderStillTiledFace(side, zMin, yMin, zMax, yMax, positive ? xMax : xMin, builder, ms, light,
+                    renderFlowingTiledFace(side, zMin, yMin, zMax, yMax, positive ? xMax : xMin, builder, ms, light,
                             color, fluidTexture);
                 } else {
-                    renderStillTiledFace(side, xMin, yMin, xMax, yMax, positive ? zMax : zMin, builder, ms, light,
+                    renderFlowingTiledFace(side, xMin, yMin, xMax, yMax, positive ? zMax : zMin, builder, ms, light,
                             color, fluidTexture);
                 }
             } else {
-                renderStillTiledFace(side, xMin, zMin, xMax, zMax, positive ? yMax : yMin, builder, ms, light, color,
+                renderFlowingTiledFace(side, xMin, zMin, xMax, zMax, positive ? yMax : yMin, builder, ms, light, color,
                         fluidTexture);
             }
         }

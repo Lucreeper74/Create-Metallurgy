@@ -9,6 +9,7 @@ import dev.engine_room.flywheel.lib.transform.TransformStack;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryTank;
 import fr.lucreeper74.createmetallurgy.registries.CMPartialModels;
 import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.platform.ForgeCatnipServices;
 import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -77,7 +78,7 @@ public class CrucibleRenderer extends SafeBlockEntityRenderer<CrucibleBlockEntit
             float zMax = zMin + be.width - 2 * tankHullWidth;
 
             ms.pushPose();
-            FluidRenderer.renderFluidBox(fluidStack.getFluid(), fluidStack.getAmount(), xMin, yMin, zMin, xMax, yMax, zMax, buffer, ms, light, false, true, fluidStack.getTag());
+            ForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack, xMin, yMin, zMin, xMax, yMax, zMax, buffer, ms, light, false, true);
             ms.popPose();
 
             yMin = yMax; // To stack fluids upwards
