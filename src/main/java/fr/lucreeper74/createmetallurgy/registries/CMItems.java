@@ -14,10 +14,12 @@ import net.minecraftforge.common.Tags;
 
 import java.util.Locale;
 
-import static com.simibubi.create.AllTags.AllItemTags.CRUSHED_RAW_MATERIALS;
-import static com.simibubi.create.AllTags.AllItemTags.PLATES;
+import static com.simibubi.create.AllTags.AllItemTags.*;
 import static com.simibubi.create.AllTags.forgeItemTag;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
+import static fr.lucreeper74.createmetallurgy.registries.CMTags.CMItemTags.*;
+import static net.minecraftforge.common.Tags.Items.DUSTS;
+import static net.minecraftforge.common.Tags.Items.RAW_MATERIALS;
 
 @SuppressWarnings("unused")
 public class CMItems {
@@ -29,35 +31,35 @@ public class CMItems {
     public static final ItemEntry<Item> TUNGSTEN_INGOT = taggedIngredientFireResistant("tungsten_ingot", forgeItemTag("ingots/tungsten"), Tags.Items.INGOTS),
             TUNGSTEN_SHEET = taggedIngredientFireResistant("tungsten_sheet", forgeItemTag("plates/tungsten"), PLATES.tag),
             TUNGSTEN_NUGGET = taggedIngredientFireResistant("tungsten_nugget", forgeItemTag("nuggets/tungsten"), Tags.Items.NUGGETS),
-            TUNGSTEN_WIRE = taggedIngredientFireResistant("tungsten_wire", forgeItemTag("wires/tungsten"), forgeItemTag("wires"));
+            TUNGSTEN_WIRE = taggedIngredientFireResistant("tungsten_wire", forgeItemTag("wires/tungsten"), WIRES.tag);
 
     public static final ItemEntry<Item> OBDURIUM_INGOT = taggedIngredientFireResistant("obdurium_ingot", forgeItemTag("ingots/obdurium"), Tags.Items.INGOTS),
             OBDURIUM_SHEET = taggedIngredientFireResistant("obdurium_sheet", forgeItemTag("plates/obdurium"), PLATES.tag);
 
 
-    public static final ItemEntry<Item> RAW_WOLFRAMITE = taggedIngredient("raw_wolframite", forgeItemTag("raw_materials/tungsten"), forgeItemTag("raw_materials")),
+    public static final ItemEntry<Item> RAW_WOLFRAMITE = taggedIngredient("raw_wolframite", forgeItemTag("raw_materials/tungsten"), RAW_MATERIALS),
             CRUSHED_RAW_WOLFRAMITE = taggedIngredient("crushed_raw_wolframite", CRUSHED_RAW_MATERIALS.tag),
-            DIRTY_WOLFRAMITE_DUST = taggedIngredient("dirty_wolframite_dust", forgeItemTag("dirty_dusts/tungsten"), forgeItemTag("dirty_dusts")),
-            WOLFRAMITE_DUST = taggedIngredient("wolframite_dust", forgeItemTag("dusts/tungsten"), forgeItemTag("dusts"));
+            DIRTY_WOLFRAMITE_DUST = taggedIngredient("dirty_wolframite_dust", forgeItemTag("dirty_dusts/tungsten"), DIRTY_DUSTS.tag),
+            WOLFRAMITE_DUST = taggedIngredient("wolframite_dust", forgeItemTag("dusts/tungsten"), DUSTS);
 
-    public static final ItemEntry<Item> DIRTY_GOLD_DUST = taggedIngredient("dirty_gold_dust", forgeItemTag("dirty_dusts/gold"), forgeItemTag("dirty_dusts")),
-            GOLD_DUST = taggedIngredient("gold_dust", forgeItemTag("dusts/gold"), forgeItemTag("dusts"));
+    public static final ItemEntry<Item> DIRTY_GOLD_DUST = taggedIngredient("dirty_gold_dust", forgeItemTag("dirty_dusts/gold"), DIRTY_DUSTS.tag),
+            GOLD_DUST = taggedIngredient("gold_dust", forgeItemTag("dusts/gold"), DUSTS);
 
-    public static final ItemEntry<Item> DIRTY_IRON_DUST = taggedIngredient("dirty_iron_dust", forgeItemTag("dirty_dusts/iron"), forgeItemTag("dirty_dusts")),
-            IRON_DUST = taggedIngredient("iron_dust", forgeItemTag("dusts/iron"), forgeItemTag("dusts"));
+    public static final ItemEntry<Item> DIRTY_IRON_DUST = taggedIngredient("dirty_iron_dust", forgeItemTag("dirty_dusts/iron"), DIRTY_DUSTS.tag),
+            IRON_DUST = taggedIngredient("iron_dust", forgeItemTag("dusts/iron"), DUSTS);
 
-    public static final ItemEntry<Item> DIRTY_COPPER_DUST = taggedIngredient("dirty_copper_dust", forgeItemTag("dirty_dusts/copper"), forgeItemTag("dirty_dusts")),
-            COPPER_DUST = taggedIngredient("copper_dust", forgeItemTag("dusts/copper"), forgeItemTag("dusts"));
+    public static final ItemEntry<Item> DIRTY_COPPER_DUST = taggedIngredient("dirty_copper_dust", forgeItemTag("dirty_dusts/copper"), DIRTY_DUSTS.tag),
+            COPPER_DUST = taggedIngredient("copper_dust", forgeItemTag("dusts/copper"), DUSTS);
 
-    public static final ItemEntry<Item> DIRTY_ZINC_DUST = taggedIngredient("dirty_zinc_dust", forgeItemTag("dirty_dusts/zinc"), forgeItemTag("dirty_dusts")),
-            ZINC_DUST = taggedIngredient("zinc_dust", forgeItemTag("dusts/zinc"), forgeItemTag("dusts"));
+    public static final ItemEntry<Item> DIRTY_ZINC_DUST = taggedIngredient("dirty_zinc_dust", forgeItemTag("dirty_dusts/zinc"), DIRTY_DUSTS.tag),
+            ZINC_DUST = taggedIngredient("zinc_dust", forgeItemTag("dusts/zinc"), DUSTS);
 
-    public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = taggedIngredient("graphite_blank_mold", forgeItemTag("graphite_molds/blank"), forgeItemTag("graphite_molds")),
-            GRAPHITE_INGOT_MOLD = taggedIngredient("graphite_ingot_mold", forgeItemTag("graphite_molds/ingot"), forgeItemTag("graphite_molds")),
-            GRAPHITE_NUGGET_MOLD = taggedIngredient("graphite_nugget_mold", forgeItemTag("graphite_molds/nugget"), forgeItemTag("graphite_molds")),
-            GRAPHITE_PLATE_MOLD = taggedIngredient("graphite_plate_mold", forgeItemTag("graphite_molds/plate"), forgeItemTag("graphite_molds")),
-            GRAPHITE_ROD_MOLD = taggedIngredient("graphite_rod_mold", forgeItemTag("graphite_molds/rod"), forgeItemTag("graphite_molds")),
-            GRAPHITE_GEAR_MOLD = taggedIngredient("graphite_gear_mold", forgeItemTag("graphite_molds/gear"), forgeItemTag("graphite_molds"));
+    public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = taggedIngredient("graphite_blank_mold", forgeItemTag("graphite_molds/blank"), GRAPHITE_MOLDS.tag),
+            GRAPHITE_INGOT_MOLD = taggedIngredient("graphite_ingot_mold", forgeItemTag("graphite_molds/ingot"), GRAPHITE_MOLDS.tag),
+            GRAPHITE_NUGGET_MOLD = taggedIngredient("graphite_nugget_mold", forgeItemTag("graphite_molds/nugget"), GRAPHITE_MOLDS.tag),
+            GRAPHITE_PLATE_MOLD = taggedIngredient("graphite_plate_mold", forgeItemTag("graphite_molds/plate"), GRAPHITE_MOLDS.tag),
+            GRAPHITE_ROD_MOLD = taggedIngredient("graphite_rod_mold", forgeItemTag("graphite_molds/rod"), GRAPHITE_MOLDS.tag),
+            GRAPHITE_GEAR_MOLD = taggedIngredient("graphite_gear_mold", forgeItemTag("graphite_molds/gear"), GRAPHITE_MOLDS.tag);
 
     public static final ItemEntry<Item> SLAG = taggedIngredient("slag", forgeItemTag("slag"));
 
@@ -86,7 +88,7 @@ public class CMItems {
             String size = "_" + style.width() + "x" + style.height();
             REGISTRATE.item(LadleStyles.getItemId(style).getPath(), p -> new LadleItem(p, LadleStyles.STYLES.get(0)))
                     .properties(p -> p.stacksTo(1))
-                    .tag(AllTags.AllItemTags.PACKAGES.tag)
+                    .tag(PACKAGES.tag, LADLE.tag)
                     .model((c, p) ->
                             p.withExistingParent(c.getName(), p.modLoc("item/ladle/" + style.type() + size)))
                     .lang("Transfer " + style.type()
