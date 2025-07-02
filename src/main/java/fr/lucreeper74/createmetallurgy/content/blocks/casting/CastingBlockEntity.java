@@ -79,7 +79,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
         behaviours.add(new DirectBeltInputBehaviour(this));
 
         behaviours.add(lockSelect = new ScrollOptionBehaviour<>(LockMode.class,
-                CMLang.translateDirect("casting.lockmode"), this, new CastingBlockLockSlot()));
+                CMLang.translateDirect("casting.lock_mode"), this, new CastingBlockLockSlot()));
 
         lockSelect.withCallback(setting -> {
             boolean isLocked = setting == 1;
