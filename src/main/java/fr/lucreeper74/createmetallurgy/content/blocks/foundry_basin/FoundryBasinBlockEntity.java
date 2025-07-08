@@ -153,7 +153,19 @@ public class FoundryBasinBlockEntity extends BasinBlockEntity {
         if (targetTank == null)
             return;
 
-        FluidStack fluidInTank = outputTank.getPrimaryHandler().getFluid();
+        IFluidHandler fluidHandler = getOutputTank().getCapability().orElse(null);
+        FluidStack fluidInTank = FluidStack.EMPTY;
+
+        for (int i = 0; i < fluidHandler.getTanks(); i++) {
+            FluidStack fluidStack = fluidHandler.getFluidInTank(i);
+            if (fluidStack.isEmpty())
+                continue;
+            fluidInTank = fluidStack;
+            break;
+        }
+
+        if (fluidInTank.isEmpty())
+            return;
 
         for (boolean simulate : Iterate.trueAndFalse) {
             IFluidHandler.FluidAction action = simulate ? IFluidHandler.FluidAction.SIMULATE : IFluidHandler.FluidAction.EXECUTE;
