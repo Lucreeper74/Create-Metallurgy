@@ -299,7 +299,7 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
     }
 
     public BlockEntityType<? extends CrucibleBlockEntity> getBlockEntityType() {
-        return CMBlockEntityTypes.INDUSTRIAL_LADLE.get();
+        return CMBlockEntityTypes.INDUSTRIAL_CRUCIBLE.get();
     }
 
     @Override

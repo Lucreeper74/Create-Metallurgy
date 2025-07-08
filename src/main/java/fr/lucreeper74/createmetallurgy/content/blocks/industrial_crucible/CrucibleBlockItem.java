@@ -74,7 +74,7 @@ public class CrucibleBlockItem extends BlockItem {
 
         if (!CrucibleBlock.isLadle(placedOnState))
             return;
-        CrucibleBlockEntity ladleAt = CMConnectivityHandler.partAt(CMBlockEntityTypes.INDUSTRIAL_LADLE.get(), world, placedOnPos);
+        CrucibleBlockEntity ladleAt = CMConnectivityHandler.partAt(CMBlockEntityTypes.INDUSTRIAL_CRUCIBLE.get(), world, placedOnPos);
 
         if (ladleAt == null)
             return;

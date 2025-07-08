@@ -19,6 +19,8 @@ import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.Crucib
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.ladle_depot.PouringStationBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.ladle_depot.PouringStationRenderer;
 
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -43,7 +45,7 @@ public class CMBlockEntityTypes {
             .register();
 
     public static final BlockEntityEntry<FoundryLidBlockEntity> FOUNDRY_LID = REGISTRATE
-            .blockEntity("foundry_top", FoundryLidBlockEntity::new)
+            .blockEntity("foundry_lid", FoundryLidBlockEntity::new)
             .validBlocks(CMBlocks.FOUNDRY_LID_BLOCK)
             .register();
 
@@ -54,8 +56,8 @@ public class CMBlockEntityTypes {
             .renderer(() -> FoundryMixerRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<CrucibleBlockEntity> INDUSTRIAL_LADLE = REGISTRATE
-            .blockEntity("industrial_ladle", CrucibleBlockEntity::new)
+    public static final BlockEntityEntry<CrucibleBlockEntity> INDUSTRIAL_CRUCIBLE = REGISTRATE
+            .blockEntity("industrial_crucible", CrucibleBlockEntity::new)
             .validBlocks(CMBlocks.INDUSTRIAL_CRUCIBLE)
             .renderer(() -> CrucibleRenderer::new)
             .register();
@@ -77,6 +79,13 @@ public class CMBlockEntityTypes {
             .blockEntity("faucet", FaucetBlockEntity::new)
             .validBlocks(CMBlocks.FAUCET_BLOCK)
             .renderer(() -> FaucetRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<PouringStationBlockEntity> LADLE_DEPOT = REGISTRATE
+            .blockEntity("ladle_depot", PouringStationBlockEntity::new)
+            //.visual(() -> LabelingDepotVisual::new, true)
+            .validBlocks(CMBlocks.LADLE_DEPOT_BLOCK)
+            .renderer(() -> PouringStationRenderer::new)
             .register();
 
     public static void register() {}
