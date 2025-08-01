@@ -11,7 +11,6 @@ import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.utility.*;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.createmod.catnip.data.IntAttached;
-import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.ChatFormatting;

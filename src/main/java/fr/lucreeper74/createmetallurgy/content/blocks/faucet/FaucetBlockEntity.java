@@ -1,13 +1,11 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.faucet;
 
 import com.simibubi.create.content.fluids.FluidFX;
-import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import fr.lucreeper74.createmetallurgy.registries.CMDamageTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
-import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
