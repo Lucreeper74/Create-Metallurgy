@@ -149,37 +149,28 @@ public class FoundryBasinBlockEntity extends BasinBlockEntity {
         IFluidHandler targetTank = be == null ? null
                 : be.getCapability(ForgeCapabilities.FLUID_HANDLER, direction.getOpposite())
                 .orElse(null);
+        IFluidHandler basinTank = getOutputTank().getCapability().orElse(null);
 
-        if (targetTank == null)
+        if (targetTank == null || basinTank == null)
             return;
 
-        IFluidHandler fluidHandler = getOutputTank().getCapability().orElse(null);
-        FluidStack fluidInTank = FluidStack.EMPTY;
+        FluidStack drained = basinTank.drain(basinTank.getTankCapacity(0), IFluidHandler.FluidAction.SIMULATE);
 
-        for (int i = 0; i < fluidHandler.getTanks(); i++) {
-            FluidStack fluidStack = fluidHandler.getFluidInTank(i);
-            if (fluidStack.isEmpty())
-                continue;
-            fluidInTank = fluidStack;
-            break;
-        }
-
-        if (fluidInTank.isEmpty())
+        if (drained.isEmpty())
             return;
 
-        for (boolean simulate : Iterate.trueAndFalse) {
-            IFluidHandler.FluidAction action = simulate ? IFluidHandler.FluidAction.SIMULATE : IFluidHandler.FluidAction.EXECUTE;
-            int fill = targetTank instanceof SmartFluidTankBehaviour.InternalFluidHandler
-                    ? ((SmartFluidTankBehaviour.InternalFluidHandler) targetTank).forceFill(fluidInTank.copy(), action)
-                    : targetTank.fill(fluidInTank.copy(), action);
+        int filled = targetTank instanceof SmartFluidTankBehaviour.InternalFluidHandler
+                ? ((SmartFluidTankBehaviour.InternalFluidHandler) targetTank).forceFill(drained, IFluidHandler.FluidAction.SIMULATE)
+                : targetTank.fill(drained, IFluidHandler.FluidAction.SIMULATE);
 
-            if (fill <= 0)
-                break;
-            if (simulate)
-                continue;
+        if (filled > 0) {
+            drained = basinTank.drain(filled, IFluidHandler.FluidAction.EXECUTE);
+            if (targetTank instanceof SmartFluidTankBehaviour.InternalFluidHandler)
+                ((SmartFluidTankBehaviour.InternalFluidHandler) targetTank).forceFill(drained, IFluidHandler.FluidAction.EXECUTE);
+            else
+                targetTank.fill(drained, IFluidHandler.FluidAction.EXECUTE);
 
-            visualizedOutputFluids.add(IntAttached.withZero(fluidInTank.copy()));
-            fluidInTank.shrink(fill);
+            visualizedOutputFluids.add(IntAttached.withZero(drained.copy()));
             notifyChangeOfContents();
             sendData();
         }

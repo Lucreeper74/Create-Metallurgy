@@ -27,6 +27,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler.*;
 import net.minecraftforge.fluids.capability.templates.EmptyFluidHandler;
 
 import java.util.List;
@@ -157,38 +158,28 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         IFluidHandler inputTank = getAttachedTank().orElse(EmptyFluidHandler.INSTANCE);
         IFluidHandler targetTank = getTargetTank().orElse(EmptyFluidHandler.INSTANCE);
 
-        FluidStack fluidInTank = inputTank.getFluidInTank(0).copy();
-        if (fluidInTank.isEmpty())
+        FluidStack drained = inputTank.drain(TRANSFER_RATE, FluidAction.SIMULATE);
+
+        if (drained.isEmpty())
             return 0;
 
-        fluidInTank.setAmount(TRANSFER_RATE);
+        int filled = targetTank instanceof SmartFluidTankBehaviour.InternalFluidHandler
+                ? ((SmartFluidTankBehaviour.InternalFluidHandler) targetTank).forceFill(drained, FluidAction.SIMULATE)
+                : targetTank.fill(drained, FluidAction.SIMULATE);
 
-        int fill = 0;
-
-        DirectBeltInputBehaviour directBeltInputBehaviour =
-                BlockEntityBehaviour.get(level, getBlockPos().below(fallingDistance), DirectBeltInputBehaviour.TYPE);
-        if (directBeltInputBehaviour == null || !directBeltInputBehaviour.canInsertFromSide(Direction.UP))
-            return 0;
-
-        for (boolean simulate : Iterate.trueAndFalse) {
-            IFluidHandler.FluidAction action = simulate ? IFluidHandler.FluidAction.SIMULATE : IFluidHandler.FluidAction.EXECUTE;
-            fill = targetTank instanceof SmartFluidTankBehaviour.InternalFluidHandler
-                    ? ((SmartFluidTankBehaviour.InternalFluidHandler) targetTank).forceFill(fluidInTank, action)
-                    : targetTank.fill(fluidInTank, action);
-
-            if (fill <= 0)
-                break;
-            if (simulate)
-                continue;
-
-            FluidStack drained = inputTank.drain(fill, IFluidHandler.FluidAction.EXECUTE);
+        if (filled > 0) {
+            drained = inputTank.drain(filled, FluidAction.EXECUTE);
+            filled = targetTank instanceof SmartFluidTankBehaviour.InternalFluidHandler
+                    ? ((SmartFluidTankBehaviour.InternalFluidHandler) targetTank).forceFill(drained, FluidAction.EXECUTE)
+                    : targetTank.fill(drained, FluidAction.EXECUTE);
 
             if (!renderFluid.isFluidEqual(drained)) {
                 renderFluid = drained;
                 sendData();
             }
         }
-        return fill;
+
+        return filled;
     }
 
     protected void spillFluid() {
