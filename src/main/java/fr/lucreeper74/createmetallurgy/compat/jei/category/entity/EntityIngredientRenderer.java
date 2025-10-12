@@ -22,10 +22,10 @@ import java.util.List;
 
 import static net.minecraft.client.gui.screens.inventory.InventoryScreen.renderEntityInInventory;
 
-public record EntityIngredientRenderer(int scale) implements IIngredientRenderer<EntityIngredient.EntityInput> {
+public record EntityIngredientRenderer(int scale) implements IIngredientRenderer<EntityIngredient.EntityStack> {
 
     @Override
-    public void render(GuiGraphics graphics, @NotNull EntityIngredient.EntityInput entityInput) {
+    public void render(GuiGraphics graphics, @NotNull EntityIngredient.EntityStack entityInput) {
         PoseStack matrixStack = graphics.pose();
         matrixStack.pushPose();
 
@@ -53,7 +53,7 @@ public record EntityIngredientRenderer(int scale) implements IIngredientRenderer
     }
 
     @Override
-    public List<Component> getTooltip(EntityIngredient.EntityInput entityInput, TooltipFlag tooltipFlag) {
+    public List<Component> getTooltip(EntityIngredient.EntityStack entityInput, TooltipFlag tooltipFlag) {
         List<Component> tooltip = new ArrayList<>();
         tooltip.add(entityInput.type().getDescription());
         if (tooltipFlag.isAdvanced())

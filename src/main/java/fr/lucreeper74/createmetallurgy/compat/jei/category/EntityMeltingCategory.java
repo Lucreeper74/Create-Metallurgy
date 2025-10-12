@@ -2,11 +2,10 @@ package fr.lucreeper74.createmetallurgy.compat.jei.category;
 
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.AllIcons;
-import fr.lucreeper74.createmetallurgy.compat.jei.CMJeiConstants;
+import fr.lucreeper74.createmetallurgy.compat.jei.CMJeiTypes;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.elements.FoundryElement;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.entity.EntityIngredientRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityIngredient;
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityIngredient.EntityInput;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityMeltingRecipe;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -29,13 +28,13 @@ public class EntityMeltingCategory extends FoundryAbstractCategory<EntityMelting
         super.setRecipe(builder, recipe, focuses);
 
         EntityIngredient entityIngredient = recipe.getEntityIngredient();
-        IIngredientRenderer<EntityInput> renderer = new EntityIngredientRenderer(45);
+        IIngredientRenderer<EntityIngredient.EntityStack> renderer = new EntityIngredientRenderer(45);
 
         boolean hasIngredients = !recipe.getIngredients().isEmpty() || !recipe.getFluidIngredients().isEmpty();
 
         builder.addSlot(RecipeIngredientRole.INPUT, 50, hasIngredients ? 10 : 30)
-                .setCustomRenderer(CMJeiConstants.ENTITY_TYPE, renderer)
-                .addIngredients(CMJeiConstants.ENTITY_TYPE, entityIngredient.getDisplay())
+                .setCustomRenderer(CMJeiTypes.ENTITY_STACK, renderer)
+                .addIngredients(CMJeiTypes.ENTITY_STACK, entityIngredient.getDisplay())
                 .setBackground(asDrawable(AllGuiTextures.JEI_QUESTION_MARK), 2, 1);
 
     }

@@ -204,16 +204,16 @@ public abstract class EntityIngredient implements Predicate<EntityType<?>> {
     }
 
     /* For JEI purposes */
-    private List<EntityInput> display;
-    public List<EntityInput> getDisplay() {
+    private List<EntityStack> display;
+    public List<EntityStack> getDisplay() {
         if (display == null)
-            display = EntityInput.wrap(getEntities());
+            display = EntityStack.wrap(getEntities());
         return display;
     }
 
-    public record EntityInput(EntityType<?> type) {
-        public static List<EntityInput> wrap(List<EntityType<?>> types) {
-            return types.stream().map(EntityInput::new).toList();
+    public record EntityStack(EntityType<?> type) {
+        public static List<EntityStack> wrap(List<EntityType<?>> types) {
+            return types.stream().map(EntityStack::new).toList();
         }
     }
 }

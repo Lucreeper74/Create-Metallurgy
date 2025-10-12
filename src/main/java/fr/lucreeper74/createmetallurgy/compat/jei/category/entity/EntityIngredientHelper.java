@@ -1,6 +1,6 @@
 package fr.lucreeper74.createmetallurgy.compat.jei.category.entity;
 
-import fr.lucreeper74.createmetallurgy.compat.jei.CMJeiConstants;
+import fr.lucreeper74.createmetallurgy.compat.jei.CMJeiTypes;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityIngredient;
 import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
@@ -17,34 +17,34 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-public class EntityIngredientHelper implements IIngredientHelper<EntityIngredient.EntityInput> {
+public class EntityIngredientHelper implements IIngredientHelper<EntityIngredient.EntityStack> {
     @Override
-    public IIngredientType<EntityIngredient.EntityInput> getIngredientType() {
-        return CMJeiConstants.ENTITY_TYPE;
+    public IIngredientType<EntityIngredient.EntityStack> getIngredientType() {
+        return CMJeiTypes.ENTITY_STACK;
     }
 
     @Override
-    public String getDisplayName(EntityIngredient.EntityInput type) {
+    public String getDisplayName(EntityIngredient.EntityStack type) {
         return type.type().getDescription().getString();
     }
 
     @Override
-    public String getUniqueId(EntityIngredient.EntityInput type, UidContext context) {
+    public String getUniqueId(EntityIngredient.EntityStack type, UidContext context) {
         return getResourceLocation(type).toString();
     }
 
     @Override
-    public ResourceLocation getResourceLocation(EntityIngredient.EntityInput type) {
+    public ResourceLocation getResourceLocation(EntityIngredient.EntityStack type) {
         return ForgeRegistries.ENTITY_TYPES.getKey(type.type());
     }
 
     @Override
-    public EntityIngredient.EntityInput copyIngredient(EntityIngredient.EntityInput type) {
+    public EntityIngredient.EntityStack copyIngredient(EntityIngredient.EntityStack type) {
         return type;
     }
 
     @Override
-    public String getErrorInfo(@Nullable EntityIngredient.EntityInput type) {
+    public String getErrorInfo(@Nullable EntityIngredient.EntityStack type) {
         if (type == null) {
             return "null";
         }
@@ -52,14 +52,14 @@ public class EntityIngredientHelper implements IIngredientHelper<EntityIngredien
     }
 
     @Override
-    public Optional<ResourceLocation> getTagEquivalent(Collection<EntityIngredient.EntityInput> ingredients) {
+    public Optional<ResourceLocation> getTagEquivalent(Collection<EntityIngredient.EntityStack> ingredients) {
         /* From JEI mezz.jei.common.util.TagUtil */
 
         if (ingredients.size() < 2)
             return Optional.empty();
 
         List<? extends EntityType<?>> values = ingredients.stream()
-                .map(EntityIngredient.EntityInput::type)
+                .map(EntityIngredient.EntityStack::type)
                 .toList();
 
         return  BuiltInRegistries.ENTITY_TYPE.getTags()
