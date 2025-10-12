@@ -8,6 +8,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleStyles;
 import fr.lucreeper74.createmetallurgy.content.items.FoundryUnitItem;
+import fr.lucreeper74.createmetallurgy.content.items.ladle_filter.LadleFilterItem;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
@@ -78,6 +79,9 @@ public class CMItems {
             STURDY_WHISK = REGISTRATE.item("sturdy_whisk", Item::new).register(),
             TUNGSTEN_WIRE_SPOOL = REGISTRATE.item("tungsten_wire_spool", Item::new).register(),
             SANDPAPER_BELT = REGISTRATE.item("sandpaper_belt", Item::new).register();
+
+    public static final ItemEntry<LadleFilterItem> LADLE_FILTER = REGISTRATE.item("ladle_filter", LadleFilterItem::new)
+            .register();
 
     public static final ItemEntry<SequencedAssemblyItem>
             INCOMPLETE_INDUSTRIAL_CRUCIBLE = sequencedIngredient("incomplete_industrial_crucible", AllTags.AllItemTags.UPRIGHT_ON_BELT.tag);

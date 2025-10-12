@@ -50,13 +50,16 @@ public class CreateMetallurgy {
 
         CMCreativeTabs.register(eventBus);
         CMDisplaySources.register();
+        CMTags.init();
         CMBlocks.register();
         CMItems.register();
         CMFluids.register();
+        CMMenuTypes.register();
         CMEntityTypes.register();
         CMSpriteShifts.init();
         CMBlockEntityTypes.register();
         CMRecipeTypes.register(eventBus);
+        CMPackets.registerPackets();
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateMetallurgyClient.loadClient(eventBus));
 
