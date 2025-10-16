@@ -14,6 +14,7 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -127,6 +128,11 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
                     .pattern(" A ")
                     .pattern("BAB")
                     .pattern("TBT")),
+
+    LADLE_FILTER = create(CMItems.LADLE_FILTER).unlockedByTag(T::steelIngot).returns(2)
+            .viaShaped(b -> b.define('W', ItemTags.WOOL)
+                    .define('S', T.steelIngot())
+                    .pattern("SW")),
 
     COKE = create(CMItems.COKE::get).withSuffix("_from_coal")
             .viaCookingTag(T::coal)

@@ -10,7 +10,7 @@ import net.minecraftforge.network.NetworkEvent;
 public class LadleFilterScreenPacket extends SimplePacketBase {
 
     public enum Type {
-        UPDATE_ADDRESS, UPDATE_PERCENT, UPDATE_FLUID;
+        UPDATE_ADDRESS, UPDATE_PERCENT, UPDATE_FLUID
     }
 
     private final Type type;
@@ -20,12 +20,6 @@ public class LadleFilterScreenPacket extends SimplePacketBase {
         type = Type.values()[buffer.readInt()];
         NBTdata = buffer.readNbt();
     }
-
-    public LadleFilterScreenPacket(Type type) {
-        this.type = type;
-        this.NBTdata = new CompoundTag();
-    }
-
 
     public LadleFilterScreenPacket(Type type, CompoundTag data) {
         this.type = type;

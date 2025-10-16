@@ -200,7 +200,7 @@ public class LadleFilterScreen extends AbstractFilterScreen<LadleFilterMenu> {
     @Override
     protected void contentsCleared() {
         filledAmount.setState(-1);
-        addressBox.setValue("");
+        addressBox.setValue("*");
         deferFocus = true;
         comparator.setState(0);
     }
