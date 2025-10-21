@@ -39,7 +39,7 @@ public abstract class CastingOutput {
     public static CastingOutput deserialize(JsonElement je) {
         if (!je.isJsonObject())
             throw new JsonSyntaxException("CastingOutput must be a json object");
-        
+
         JsonObject json = je.getAsJsonObject();
         int count = GsonHelper.getAsInt(json, "count", 1);
         if (json.has("item")) {
