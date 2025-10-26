@@ -59,7 +59,7 @@ public class LadleFilterMenu extends AbstractFilterMenu {
 
     @Override
     public void clearContents() {
-        address = "";
+        address = "*";
         fluidFilter = FluidStack.EMPTY;
         filledAmount = -1;
         comparator = 0;
