@@ -32,7 +32,6 @@ public class MeltingRecipeGen extends CMProcessingRecipesGen {
                 TagKey<Item> inputTag = type.getItemTag(metalName);
                 int duration = (int) (CMRecipeProvider.MELTING_DURATION * type.getDurationFactor());
 
-                // TODO: Change heat condition to be based on the fluid temp.
                 create(recipeID, b -> {
                     b.duration(duration)
                             .withCondition(new NotCondition(new TagEmptyCondition(inputTag.location())))

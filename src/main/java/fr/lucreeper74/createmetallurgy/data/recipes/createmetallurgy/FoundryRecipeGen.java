@@ -49,7 +49,6 @@ public class FoundryRecipeGen extends CMRecipeProvider {
             String metalName = metal.getName();
             CMMetals.MetalItemType block = CMMetals.MetalItemType.BLOCK;
             //Block
-            // TODO: Change heat condition to depend on the fluid temp
             meltingTag(metalName + "/block", block.getItemTag(metalName), metal.getFluid(), block.getFluidAmount(), getMetalHeat(metal), (int) (CMRecipeProvider.MELTING_DURATION * block.getDurationFactor() * .7f));
         }
         return null;

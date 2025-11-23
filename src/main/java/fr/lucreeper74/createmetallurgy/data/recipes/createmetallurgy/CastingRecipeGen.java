@@ -119,7 +119,6 @@ public class CastingRecipeGen extends CMRecipeProvider {
                 ItemLike requiredItem = type.getItem(inputTag);
                 int duration = (int) (CMRecipeProvider.CASTING_DURATION * type.getDurationFactor());
 
-                // TODO: Change heat condition to be based on the fluid temp.
                 create(recipeType, recipeID, b -> {
                     b.duration(duration)
                             .require(metal.getFluid().get(), type.getFluidAmount());
@@ -149,7 +148,6 @@ public class CastingRecipeGen extends CMRecipeProvider {
                 TagKey<Item> inputTag = type.getItemTag(metalName);
                 int duration = (int) (CMRecipeProvider.CASTING_DURATION * type.getDurationFactor());
 
-                // TODO: Change heat condition to be based on the fluid temp.
                 create(recipeType, recipeID, b -> {
                     b.duration(duration)
                             .require(metal.getFluid().get(), type.getFluidAmount());
