@@ -7,15 +7,12 @@
     },
     "B": {
       "item": "create:sturdy_sheet"
-    },
-    "T": {
-      "tag": "forge:plates/tungsten"
     }
   },
   "pattern": [
     " A ",
     "BAB",
-    "TBT"
+    "BBB"
   ],
   "result": {
     "item": "createmetallurgy:sturdy_whisk"

@@ -122,12 +122,11 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
                     .pattern(" W ")),
 
     STURDY_WHISK = create(CMItems.STURDY_WHISK).unlockedByTag(T::tungstenSheet)
-            .viaShaped(b -> b.define('T', T.tungstenSheet())
-                    .define('A', T.andesiteAlloy())
+            .viaShaped(b -> b.define('A', T.andesiteAlloy())
                     .define('B', AllItems.STURDY_SHEET.get())
                     .pattern(" A ")
                     .pattern("BAB")
-                    .pattern("TBT")),
+                    .pattern("BBB")),
 
     LADLE_FILTER = create(CMItems.LADLE_FILTER).unlockedByTag(T::steelIngot).returns(2)
             .viaShaped(b -> b.define('W', ItemTags.WOOL)
