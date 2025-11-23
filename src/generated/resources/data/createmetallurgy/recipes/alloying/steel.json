@@ -3,7 +3,7 @@
   "heatRequirement": "heated",
   "ingredients": [
     {
-      "tag": "forge:coal_coke"
+      "tag": "createmetallurgy:coal_coke"
     },
     {
       "amount": 270,

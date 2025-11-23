@@ -92,7 +92,7 @@ public class CMItems {
             String size = "_" + style.width() + "x" + style.height();
             REGISTRATE.item(LadleStyles.getItemId(style).getPath(), p -> new LadleItem(p, LadleStyles.STYLES.get(0)))
                     .properties(p -> p.stacksTo(1))
-                    .tag(PACKAGES.tag, LADLE.tag)
+                    .tag(PACKAGES.tag, LADLE.tag, NOT_UPRIGHT_ON_BELT.tag)
                     .model((c, p) ->
                             p.withExistingParent(c.getName(), p.modLoc("item/ladle/" + style.type() + size)))
                     .lang("Transfer " + style.type()

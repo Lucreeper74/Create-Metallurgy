@@ -1,14 +1,16 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.AllTags;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import net.createmod.catnip.lang.Lang;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import org.jetbrains.annotations.Nullable;
 
 import static fr.lucreeper74.createmetallurgy.registries.CMTags.CMNameSpace.CREATE_METALLURGY;
 import static fr.lucreeper74.createmetallurgy.registries.CMTags.CMNameSpace.FORGE;
@@ -17,22 +19,48 @@ public class CMTags {
 
     public enum CMNameSpace {
 
-        CREATE_METALLURGY(CreateMetallurgy.MOD_ID, false, true),
+        CREATE_METALLURGY(CreateMetallurgy.MOD_ID),
         FORGE("forge"),
         ;
 
         public final String id;
-        public final boolean optionalDefault;
-        public final boolean alwaysDatagenDefault;
 
         CMNameSpace(String id) {
-            this(id, true, false);
+            this.id = id;
         }
 
-        CMNameSpace(String id, boolean optionalDefault, boolean alwaysDatagenDefault) {
-            this.id = id;
-            this.optionalDefault = optionalDefault;
-            this.alwaysDatagenDefault = alwaysDatagenDefault;
+        public ResourceLocation id(String path) {
+            return new ResourceLocation(this.id, path);
+        }
+
+        public ResourceLocation id(Enum<?> entry, @Nullable String pathOverride) {
+            return this.id(pathOverride != null ? pathOverride : Lang.asId(entry.name()));
+        }
+    }
+
+    public enum CMBlockTags {
+
+        COKE_STORAGE_BLOCKS(FORGE, "storage_blocks/coke_block"),
+        LIGHT_BULB,
+
+        ;
+
+        public final TagKey<Block> tag;
+
+        CMBlockTags() {
+            this(CREATE_METALLURGY);
+        }
+
+        CMBlockTags(CMNameSpace namespace) {
+            this(namespace, null);
+        }
+
+        CMBlockTags(CMNameSpace namespace, @Nullable String pathOverride) {
+            this.tag = TagKey.create(Registries.BLOCK, namespace.id(this, pathOverride));
+        }
+
+        public boolean matches(BlockState state) {
+            return state.is(tag);
         }
     }
 
@@ -42,47 +70,48 @@ public class CMTags {
         DIRTY_DUSTS(FORGE),
         WIRES(FORGE),
         LADLE,
+        COKE_STORAGE_BLOCKS(FORGE, "storage_blocks/coke_block"),
+        LIGHT_BULB,
+        COAL_COKE,
 
         ;
 
         public final TagKey<Item> tag;
-        public final boolean alwaysDatagen;
 
         CMItemTags() {
             this(CREATE_METALLURGY);
         }
 
         CMItemTags(CMNameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+            this(namespace, null);
         }
 
-        CMItemTags(CMNameSpace namespace, String path) {
-            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
-        }
-
-        CMItemTags(CMNameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
-        }
-
-        CMItemTags(CMNameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
-            if (optional) {
-                tag = AllTags.optionalTag(ForgeRegistries.ITEMS, id);
-            } else {
-                tag = ItemTags.create(id);
-            }
-            this.alwaysDatagen = alwaysDatagen;
+        CMItemTags(CMNameSpace namespace, @Nullable String pathOverride) {
+            this.tag = TagKey.create(Registries.ITEM, namespace.id(this, pathOverride));
         }
 
         public boolean matches(ItemStack stack) {
             return stack.is(tag);
         }
-
-        private static void init() {
-        }
     }
 
-    public static void init() {
-        CMItemTags.init();
+    public enum CMFluidTags {
+
+        MOLTEN_MATERIAL(FORGE),
+        ;
+
+        public final TagKey<Fluid> tag;
+
+        CMFluidTags() {
+            this(CREATE_METALLURGY);
+        }
+
+        CMFluidTags(CMNameSpace namespace) {
+            this(namespace, null);
+        }
+
+        CMFluidTags(CMNameSpace namespace, @Nullable String pathOverride) {
+            this.tag = TagKey.create(Registries.FLUID, namespace.id(this, pathOverride));
+        }
     }
 }
