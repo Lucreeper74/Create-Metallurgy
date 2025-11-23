@@ -9,13 +9,13 @@
       }
     }
   ],
-  "heatRequirement": "heated",
+  "heatRequirement": "superheated",
   "ingredients": [
     {
       "tag": "forge:wires/osmium"
     }
   ],
-  "processingTime": 20,
+  "processingTime": 16,
   "results": [
     {
       "amount": 45,

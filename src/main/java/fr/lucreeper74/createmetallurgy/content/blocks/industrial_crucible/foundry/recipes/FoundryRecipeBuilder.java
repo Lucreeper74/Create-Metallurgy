@@ -16,9 +16,12 @@ import java.util.function.Consumer;
 
 public class FoundryRecipeBuilder<T extends FoundryRecipe> extends ProcessingRecipeBuilder<T> {
 
+    public static final int DEFAULT_MIN_HEAT = -50;
+    public static final int DEFAULT_MAX_HEAT = 50;
+
     /* Default heat requirements are the max/min possible */
-    protected int minHeatRequirement = -50;
-    protected int maxHeatRequirement = 50;
+    protected int minHeatRequirement = DEFAULT_MIN_HEAT;
+    protected int maxHeatRequirement = DEFAULT_MAX_HEAT;
 
     public FoundryRecipeBuilder(ProcessingRecipeFactory<T> factory, ResourceLocation recipeId) {
         super(factory, recipeId);

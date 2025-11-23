@@ -5,21 +5,21 @@
       "type": "forge:not",
       "value": {
         "type": "forge:tag_empty",
-        "tag": "forge:raw_materials/void_steel"
+        "tag": "forge:raw_materials/tungsten"
       }
     }
   ],
-  "heatRequirement": "heated",
+  "heatRequirement": "superheated",
   "ingredients": [
     {
-      "tag": "forge:raw_materials/void_steel"
+      "tag": "forge:raw_materials/tungsten"
     }
   ],
   "processingTime": 40,
   "results": [
     {
       "amount": 90,
-      "fluid": "createmetallurgy:molten_void_steel"
+      "fluid": "createmetallurgy:molten_tungsten"
     },
     {
       "amount": 45,

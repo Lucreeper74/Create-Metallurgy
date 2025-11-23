@@ -3,11 +3,11 @@ package fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.compat.CMCompatMetals;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityMeltingRecipe;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityMeltingRecipeBuilder;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.FoundryRecipe;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.FoundryRecipeBuilder;
+import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMRecipeProvider;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
@@ -22,7 +22,7 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 import java.util.function.UnaryOperator;
 
-import static com.simibubi.create.AllTags.forgeItemTag;
+import static fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.FoundryRecipeBuilder.DEFAULT_MAX_HEAT;
 
 @SuppressWarnings("unused")
 public class FoundryRecipeGen extends CMRecipeProvider {
@@ -30,17 +30,7 @@ public class FoundryRecipeGen extends CMRecipeProvider {
     GeneratedRecipe
 
     /* Bulk Melting Recipes */
-    COMPAT_METALS_BLOCKS = moddedMetals(),
-
-    IRON_METAL = standardMetals(CMFluids.MOLTEN_IRON, "iron", 6),
-            GOLD_METAL = standardMetals(CMFluids.MOLTEN_GOLD, "gold", 6),
-            COPPER_METAL = standardMetals(CMFluids.MOLTEN_COPPER, "copper", 6),
-            BRASS_METAL = standardMetals(CMFluids.MOLTEN_BRASS, "brass", 6),
-            ZINC_METAL = standardMetals(CMFluids.MOLTEN_ZINC, "zinc", 6),
-            TUNGSTEN_METAL = standardMetals(CMFluids.MOLTEN_TUNGSTEN, "tungsten", 9),
-            OBDURIUM_METAL = standardMetals(CMFluids.MOLTEN_OBDURIUM, "obdurium", 9),
-            STEEL_METAL = standardMetals(CMFluids.MOLTEN_STEEL, "steel", 6),
-            NETHERITE_METAL = standardMetals(CMFluids.MOLTEN_NETHERITE, "netherite", 16),
+    ALL_METALS = allMetals(),
 
     /* Entity Melting Recipes */
     IRON_GOLEM = meltingEntity("iron_golem", EntityType.IRON_GOLEM, 6, CMFluids.MOLTEN_IRON, 135, 9),
@@ -54,20 +44,25 @@ public class FoundryRecipeGen extends CMRecipeProvider {
             .require(CMFluids.MOLTEN_IRON.get(), 270)
                 .output(CMFluids.MOLTEN_STEEL.get(), 270));
 
-    protected GeneratedRecipe moddedMetals() {
-        for (CMCompatMetals metal : CMCompatMetals.values()) {
+    protected GeneratedRecipe allMetals() {
+        for (CMMetals metal : CMMetals.values()) {
             String metalName = metal.getName();
-            //Blocks
-            meltingTag(metalName + "/block", forgeItemTag("storage_blocks/" + metalName), metal.getFluid(), 810, 6, 200);
+            CMMetals.MetalItemType block = CMMetals.MetalItemType.BLOCK;
+            //Block
+            // TODO: Change heat condition to depend on the fluid temp
+            meltingTag(metalName + "/block", block.getItemTag(metalName), metal.getFluid(), block.getFluidAmount(), getMetalHeat(metal), (int) (CMRecipeProvider.MELTING_DURATION * block.getDurationFactor() * .7f));
         }
         return null;
     }
 
-    protected GeneratedRecipe standardMetals(FluidEntry<ForgeFlowingFluid.Flowing> fluid, String metalName, int minHeat) {
-        return meltingTag(metalName + "/block", forgeItemTag("storage_blocks/" + metalName), fluid, 810, minHeat, 200);
-    }
-
     //
+
+    /**
+     * Recipe heat condition for metal based on metal fluid temp
+     */
+    protected int getMetalHeat(CMMetals metal) {
+        return (int) (((float) DEFAULT_MAX_HEAT / (HEAT_CONDITION_THRESHOLD*5)) * metal.getMeltingPoint());
+    }
 
     /**
      * Recipes with input Tag :

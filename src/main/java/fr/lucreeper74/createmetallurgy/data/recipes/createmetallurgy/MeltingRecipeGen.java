@@ -1,22 +1,16 @@
 package fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy;
 
 import com.simibubi.create.content.processing.recipe.HeatCondition;
-import com.tterrag.registrate.util.entry.FluidEntry;
-import fr.lucreeper74.createmetallurgy.compat.CMCompatMetals;
+import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMProcessingRecipesGen;
+import fr.lucreeper74.createmetallurgy.data.recipes.CMRecipeProvider;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
-
-import java.util.function.Supplier;
-
-import static com.simibubi.create.AllTags.forgeItemTag;
 
 @SuppressWarnings("unused")
 public class MeltingRecipeGen extends CMProcessingRecipesGen {
@@ -24,109 +18,36 @@ public class MeltingRecipeGen extends CMProcessingRecipesGen {
 
     GeneratedRecipe
 
-            COMPAT_METALS = moddedMetals(),
-
-    IRON_METAL = standardMetals(CMFluids.MOLTEN_IRON, "iron", HeatCondition.HEATED),
-            GOLD_METAL = standardMetals(CMFluids.MOLTEN_GOLD, "gold", HeatCondition.HEATED),
-            COPPER_METAL = standardMetals(CMFluids.MOLTEN_COPPER, "copper", HeatCondition.HEATED),
-            BRASS_METAL = standardMetals(CMFluids.MOLTEN_BRASS, "brass", HeatCondition.HEATED),
-            ZINC_METAL = standardMetals(CMFluids.MOLTEN_ZINC, "zinc", HeatCondition.HEATED),
-            TUNGSTEN_METAL = standardMetals(CMFluids.MOLTEN_TUNGSTEN, "tungsten", HeatCondition.HEATED),
-            OBDURIUM_METAL = standardMetals(CMFluids.MOLTEN_OBDURIUM, "obdurium", HeatCondition.SUPERHEATED),
-            STEEL_METAL = standardMetals(CMFluids.MOLTEN_STEEL, "steel", HeatCondition.HEATED),
-            NETHERITE_METAL = standardMetals(CMFluids.MOLTEN_NETHERITE, "netherite", HeatCondition.SUPERHEATED);
-
+            ALL_METALS = allMetals();
     //
 
-    protected GeneratedRecipe standardMetals(FluidEntry<ForgeFlowingFluid.Flowing> fluid, String metalName, HeatCondition heatCondition) {
-        meltingTag(metalName + "/ingot", forgeItemTag("ingots/" + metalName), fluid, 90, heatCondition, 40);
-        meltingTag(metalName + "/nugget", forgeItemTag("nuggets/" + metalName), fluid, 10, heatCondition, 4);
-        meltingTag(metalName + "/plate", forgeItemTag("plates/" + metalName), fluid, 90, heatCondition, 40);
-        meltingTag(metalName + "/dust", forgeItemTag("dusts/" + metalName), fluid, 90, heatCondition, 20);
-        meltingTag(metalName + "/rod", forgeItemTag("rods/" + metalName), fluid, 45, heatCondition, 20);
-        meltingTag(metalName + "/gear", forgeItemTag("gears/" + metalName), fluid, 360, heatCondition, 160);
-        meltingTag(metalName + "/coin", forgeItemTag("coins/" + metalName), fluid, 10, heatCondition, 4);
-        meltingTag(metalName + "/wire", forgeItemTag("wires/" + metalName), fluid, 45, heatCondition, 20);
+    protected GeneratedRecipe allMetals() {
+        for (CMMetals metal : CMMetals.values()) {
+            for (CMMetals.MetalItemType type : CMMetals.MetalItemType.values()) {
+                if (type.equals(CMMetals.MetalItemType.BLOCK))
+                    continue; // Skip blocks that can't be melted using Foundry Basin
 
-        // Impure melting
-        meltingTag(metalName + "/ore", forgeItemTag("raw_materials/" + metalName), fluid, 90, CMFluids.MOLTEN_SLAG, 45, heatCondition, 40);
-        meltingTag(metalName + "/dirty_dust", forgeItemTag("dirty_dusts/" + metalName), fluid, 90, CMFluids.MOLTEN_SLAG, 30, heatCondition, 30);
-        return null;
-    }
+                String metalName = metal.getName();
+                String recipeID = metalName + "/" + type.getName();
+                TagKey<Item> inputTag = type.getItemTag(metalName);
+                int duration = (int) (CMRecipeProvider.MELTING_DURATION * type.getDurationFactor());
 
-    protected GeneratedRecipe moddedMetals() {
-        for (CMCompatMetals metal : CMCompatMetals.values()) {
-            String metalName = metal.getName();
-            //Items
-            meltingTag(metalName + "/ingot", forgeItemTag("ingots/" + metalName), metal.getFluid(), 90, HeatCondition.HEATED, 40);
-            meltingTag(metalName + "/dust", forgeItemTag("dusts/" + metalName), metal.getFluid(), 90, HeatCondition.HEATED, 20);
-            meltingTag(metalName + "/nugget", forgeItemTag("nuggets/" + metalName), metal.getFluid(), 10, HeatCondition.HEATED, 4);
-            meltingTag(metalName + "/plate", forgeItemTag("plates/" + metalName), metal.getFluid(), 90, HeatCondition.HEATED, 40);
-            meltingTag(metalName + "/rod", forgeItemTag("rods/" + metalName), metal.getFluid(), 45, HeatCondition.HEATED, 20);
-            meltingTag(metalName + "/gear", forgeItemTag("gears/" + metalName), metal.getFluid(), 360, HeatCondition.HEATED, 160);
-            meltingTag(metalName + "/coin", forgeItemTag("coins/" + metalName), metal.getFluid(), 10, HeatCondition.HEATED, 4);
-            meltingTag(metalName + "/wire", forgeItemTag("wires/" + metalName), metal.getFluid(), 45, HeatCondition.HEATED, 20);
+                // TODO: Change heat condition to be based on the fluid temp.
+                create(recipeID, b -> {
+                    b.duration(duration)
+                            .withCondition(new NotCondition(new TagEmptyCondition(inputTag.location())))
+                            .require(inputTag)
+                            .requiresHeat(metal.getMeltingPoint() <= HEAT_CONDITION_THRESHOLD ? HeatCondition.HEATED : HeatCondition.SUPERHEATED)
+                            .output(metal.getFluid().get(), type.getFluidAmount());
 
-            // Impure melting
-            meltingTag(metalName + "/ore", forgeItemTag("raw_materials/" + metalName), metal.getFluid(), 90, CMFluids.MOLTEN_SLAG, 45, HeatCondition.HEATED, 40);
-            meltingTag(metalName + "/dirty_dust", forgeItemTag("dirty_dusts/" + metalName), metal.getFluid(), 90, CMFluids.MOLTEN_SLAG, 30, HeatCondition.HEATED, 35);
+                    if (type.isImpure())
+                        b.output(CMFluids.MOLTEN_SLAG.get(), type.getImpurity());
+
+                    return b;
+                });
+            }
         }
         return null;
-    }
-
-    /**
-     * Recipes with input Tags + byproduct :
-     *
-     * @param recipeId      Recipe name / folders
-     * @param inputTag      Input from tag
-     * @param result        Fluid result
-     * @param amount        Fluid amount
-     * @param byproduct     Second Fluid result
-     * @param byAmount      Second Fluid amount
-     * @param heatCondition Heat condition
-     * @param duration      Processing time
-     */
-    protected GeneratedRecipe meltingTag(String recipeId, TagKey<Item> inputTag, FluidEntry<ForgeFlowingFluid.Flowing> result, int amount, FluidEntry<ForgeFlowingFluid.Flowing> byproduct, int byAmount, HeatCondition heatCondition, int duration) {
-        return create(recipeId, b -> b.duration(duration)
-                .withCondition(new NotCondition(new TagEmptyCondition(inputTag.location())))
-                .require(inputTag)
-                .requiresHeat(heatCondition)
-                .output(result.get(), amount)
-                .output(byproduct.get(), byAmount));
-    }
-
-    /**
-     * Recipes with input Tags :
-     *
-     * @param recipeId      Recipe name / folders
-     * @param inputTag      Input from tag
-     * @param result        Fluid result
-     * @param amount        Fluid amount
-     * @param heatCondition Heat condition
-     * @param duration      Processing time
-     */
-    protected GeneratedRecipe meltingTag(String recipeId, TagKey<Item> inputTag, FluidEntry<ForgeFlowingFluid.Flowing> result, int amount, HeatCondition heatCondition, int duration) {
-        return create(recipeId, b -> b.duration(duration)
-                .withCondition(new NotCondition(new TagEmptyCondition(inputTag.location())))
-                .require(inputTag)
-                .requiresHeat(heatCondition)
-                .output(result.get(), amount));
-    }
-
-
-    /**
-     * Recipes with input Items :
-     *
-     * @param input         Input
-     * @param result        Fluid result
-     * @param amount        Fluid amount
-     * @param heatCondition Heat condition
-     * @param duration      Processing time
-     */
-    protected GeneratedRecipe meltingItem(Supplier<ItemLike> input, FluidEntry<ForgeFlowingFluid.Flowing> result, int amount, HeatCondition heatCondition, int duration) {
-        return create(input, b -> b.duration(duration)
-                .requiresHeat(heatCondition)
-                .output(result.get(), amount));
     }
 
     //

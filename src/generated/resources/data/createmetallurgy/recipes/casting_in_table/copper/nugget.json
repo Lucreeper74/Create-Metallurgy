@@ -10,7 +10,7 @@
       "nbt": {}
     }
   ],
-  "processingTime": 10,
+  "processingTime": 6,
   "result": {
     "item": "create:copper_nugget"
   }

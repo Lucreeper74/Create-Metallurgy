@@ -15,8 +15,8 @@
     }
   ],
   "maxHeatRequirement": 50,
-  "minHeatRequirement": 6,
-  "processingTime": 200,
+  "minHeatRequirement": 1,
+  "processingTime": 224,
   "results": [
     {
       "amount": 810,

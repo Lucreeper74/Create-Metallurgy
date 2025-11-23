@@ -5,21 +5,21 @@
       "type": "forge:not",
       "value": {
         "type": "forge:tag_empty",
-        "tag": "forge:raw_materials/osmium"
+        "tag": "forge:raw_materials/void_steel"
       }
     }
   ],
-  "heatRequirement": "heated",
+  "heatRequirement": "superheated",
   "ingredients": [
     {
-      "tag": "forge:raw_materials/osmium"
+      "tag": "forge:raw_materials/void_steel"
     }
   ],
   "processingTime": 40,
   "results": [
     {
       "amount": 90,
-      "fluid": "createmetallurgy:molten_osmium"
+      "fluid": "createmetallurgy:molten_void_steel"
     },
     {
       "amount": 45,

@@ -9,13 +9,13 @@
       }
     }
   ],
-  "heatRequirement": "heated",
+  "heatRequirement": "superheated",
   "ingredients": [
     {
       "tag": "forge:dirty_dusts/void_steel"
     }
   ],
-  "processingTime": 35,
+  "processingTime": 30,
   "results": [
     {
       "amount": 90,

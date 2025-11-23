@@ -1,0 +1,215 @@
+package fr.lucreeper74.createmetallurgy.data.recipes;
+
+import com.simibubi.create.api.data.recipe.DatagenMod;
+import com.tterrag.registrate.util.entry.FluidEntry;
+import fr.lucreeper74.createmetallurgy.registries.CMFluids;
+import fr.lucreeper74.createmetallurgy.registries.CMItems;
+import fr.lucreeper74.createmetallurgy.utils.CMLang;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.function.Supplier;
+
+import static com.simibubi.create.foundation.data.recipe.Mods.*;
+import static fr.lucreeper74.createmetallurgy.data.recipes.CMMods.*;
+
+public enum CMMetals {
+    //Simple metals
+    IRON(() -> CMFluids.MOLTEN_IRON, VANILLA),
+    COPPER(() -> CMFluids.MOLTEN_COPPER, VANILLA),
+    GOLD(() -> CMFluids.MOLTEN_GOLD, VANILLA),
+    NETHERITE(() -> CMFluids.MOLTEN_NETHERITE, VANILLA),
+
+    ZINC(() -> CMFluids.MOLTEN_ZINC, CREATE),
+    BRASS(() -> CMFluids.MOLTEN_BRASS, CREATE),
+
+    TUNGSTEN(() -> CMFluids.MOLTEN_TUNGSTEN, "wolframite", CREATE_METALLURGY),
+    OBDURIUM(() -> CMFluids.MOLTEN_OBDURIUM, CREATE_METALLURGY),
+    STEEL(() -> CMFluids.MOLTEN_STEEL, CREATE_METALLURGY),
+
+    ALUMINUM(() -> CMFluids.MOLTEN_ALUMINUM, IE, TFMG),
+    LEAD(() -> CMFluids.MOLTEN_LEAD, MEK, TH, IE, TFMG),
+    NICKEL(() -> CMFluids.MOLTEN_NICKEL, IE, TH, TFMG),
+    OSMIUM(() -> CMFluids.MOLTEN_OSMIUM, MEK),
+    SILVER(() -> CMFluids.MOLTEN_SILVER, IE, TH),
+    TIN(() -> CMFluids.MOLTEN_TIN, MEK, TH),
+
+    //Alloys
+    INVAR(() -> CMFluids.MOLTEN_INVAR, TH),
+    ELECTRUM(() -> CMFluids.MOLTEN_ELECTRUM, MEK, TH, CADDITION),
+    BRONZE(() -> CMFluids.MOLTEN_BRONZE, MEK, TH),
+    CONSTANTAN(() -> CMFluids.MOLTEN_CONSTANTAN, TH, IE),
+    VOID_STEEL(() -> CMFluids.MOLTEN_VOID_STEEL, CUTILITIES);
+
+    private final String name;
+    private final String raw_name;
+    private final Set<DatagenMod> mods;
+    private final Supplier<FluidEntry<ForgeFlowingFluid.Flowing>> fluidSup;
+
+    public final ItemLikeTag ores;
+    public final TagKey<Item> rawOres;
+    public final ItemLikeTag rawStorageBlocks;
+    public final ItemLikeTag storageBlocks;
+
+    CMMetals(Supplier<FluidEntry<ForgeFlowingFluid.Flowing>> fluidSup, DatagenMod... mods) {
+        this(fluidSup, "", mods);
+    }
+
+    CMMetals(Supplier<FluidEntry<ForgeFlowingFluid.Flowing>> fluidSup, String raw_name, DatagenMod... mods) {
+        this.name = CMLang.asId(name());
+        this.raw_name = raw_name.isEmpty() ? name : raw_name;
+        this.fluidSup = fluidSup;
+        this.mods = mods.length == 0 ? Set.of() : Set.copyOf(Set.of(mods));
+
+        this.ores = new ItemLikeTag("ores/" + this.raw_name);
+        this.rawOres = itemTag("raw_materials/" + this.raw_name);
+        this.rawStorageBlocks = new ItemLikeTag("storage_blocks/raw_" + this.raw_name);
+        this.storageBlocks = new ItemLikeTag("storage_blocks/" + this.name);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRawName() {
+        return raw_name;
+    }
+
+    public Set<DatagenMod> getMods() {
+        return mods;
+    }
+
+    public int getMeltingPoint() {
+        return getFluid().getType().getTemperature();
+    }
+
+    public boolean isStandard() {
+        return (mods.contains(VANILLA) || mods.contains(CREATE) || mods.contains(CREATE_METALLURGY));
+    }
+
+    public FluidEntry<ForgeFlowingFluid.Flowing> getFluid() {
+        return fluidSup.get();
+    }
+
+    private static TagKey<Item> itemTag(String path) {
+        // TODO: change forge to c in 1.21
+        return TagKey.create(Registries.ITEM, new ResourceLocation("forge", path));
+    }
+
+    private static TagKey<Block> blockTag(String path) {
+        // TODO: change forge to c in 1.21
+        return TagKey.create(Registries.BLOCK, new ResourceLocation("forge", path));
+    }
+
+    public record ItemLikeTag(TagKey<Item> items, TagKey<Block> blocks) {
+        private ItemLikeTag(String path) {
+            this(itemTag(path), blockTag(path));
+        }
+    }
+
+    public enum MetalItemType {
+        // Pure (can be cast/crafted from ingots)
+        INGOT(CMItems.GRAPHITE_INGOT_MOLD, 90, 1f),
+        NUGGET(CMItems.GRAPHITE_NUGGET_MOLD, 10, .11f),
+        PLATE(CMItems.GRAPHITE_PLATE_MOLD, 90, 1f),
+        DUST(90, .5f, false),
+        WIRE(45, .4f, false),
+        GEAR(CMItems.GRAPHITE_GEAR_MOLD, 360, 4f),
+        ROD(CMItems.GRAPHITE_ROD_MOLD, 45, .5f),
+        COIN(10, .11f, false),
+        BLOCK(810, 8f),
+
+        // Impure
+        RAW_MATERIAL(90, 45, 1f, false),
+        DIRTY_DUST(90, 30, .75f, false),
+        ;
+
+        private final String name;
+        private final ItemLike mold;
+        private final int fluidAmount;
+        private final int impurity;
+        private final float durationFactor;
+        private final boolean canBeCast;
+
+        MetalItemType(int fluidAmount, float durationFactor) {
+            this(null, fluidAmount, 0, durationFactor, true);
+        }
+
+        MetalItemType(ItemLike mold, int fluidAmount, float durationFactor) {
+            this(mold.asItem(), fluidAmount, 0, durationFactor, true);
+        }
+
+        MetalItemType(int fluidAmount, float durationFactor, boolean canBeCast) {
+            this(null, fluidAmount, 0, durationFactor, canBeCast);
+        }
+
+        MetalItemType(int fluidAmount, int impurity, float durationFactor, boolean canBeCast) {
+            this(null, fluidAmount, impurity, durationFactor, canBeCast);
+        }
+
+        MetalItemType(ItemLike mold, int fluidAmount, int impurity, float durationFactor, boolean canBeCast) {
+            this.name = CMLang.asId(name());
+            this.mold = mold;
+            this.fluidAmount = fluidAmount;
+            this.impurity = impurity;
+            this.durationFactor = durationFactor;
+            this.canBeCast = canBeCast;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getID() {
+            return switch (this) {
+                case BLOCK -> "storage_" + name;
+                default -> name;
+            };
+        }
+
+        public boolean hasMold() {
+            return mold != null;
+        }
+
+        public ItemLike getMold() {
+            return mold;
+        }
+
+        public boolean canBeCast() {
+            return canBeCast;
+        }
+
+        public int getFluidAmount() {
+            return fluidAmount;
+        }
+
+        public boolean isImpure() {
+            return impurity > 0;
+        }
+
+        public int getImpurity() {
+            return impurity;
+        }
+
+        public float getDurationFactor() {
+            return durationFactor;
+        }
+
+        public TagKey<Item> getItemTag(String metalName) {
+            return itemTag(getID() + "s/" + metalName);
+        }
+
+        public ItemLike getItem(TagKey<Item> tag) {
+            Iterator<Item> items = ForgeRegistries.ITEMS.tags().getTag(tag).iterator();
+            return items.hasNext() ? items.next() : null;
+        }
+    }
+}

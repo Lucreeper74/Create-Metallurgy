@@ -19,7 +19,7 @@
       "nbt": {}
     }
   ],
-  "processingTime": 10,
+  "processingTime": 6,
   "result": {
     "tag": "forge:nuggets/nickel"
   }

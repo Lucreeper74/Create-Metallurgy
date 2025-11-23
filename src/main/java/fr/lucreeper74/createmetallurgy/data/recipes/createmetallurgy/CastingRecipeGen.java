@@ -5,8 +5,8 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.compat.CMCompatMetals;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingRecipeBuilder;
+import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMRecipeProvider;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
@@ -22,78 +22,155 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
-import java.util.function.UnaryOperator;
 
-import static com.simibubi.create.AllTags.forgeItemTag;
+import java.util.Map;
+import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
 public class CastingRecipeGen extends CMRecipeProvider {
 
     GeneratedRecipe
 
-            COMPAT_METALS = moddedMetals(),
+            ALL_COMPAT_METALS = allCompatMetals(),
 
-            IRON_METAL = standardMetals(CMFluids.MOLTEN_IRON, Items.IRON_BLOCK, Items.IRON_INGOT, AllItems.IRON_SHEET.get(), Items.IRON_NUGGET, "iron"),
-                GOLD_METAL = standardMetals(CMFluids.MOLTEN_GOLD, Items.GOLD_BLOCK, Items.GOLD_INGOT, AllItems.GOLDEN_SHEET.get(), Items.GOLD_NUGGET, "gold"),
-                COPPER_METAL = standardMetals(CMFluids.MOLTEN_COPPER, Items.COPPER_BLOCK, Items.COPPER_INGOT, AllItems.COPPER_SHEET.get(), AllItems.COPPER_NUGGET.get(), "copper"),
-                BRASS_METAL = standardMetals(CMFluids.MOLTEN_BRASS, AllBlocks.BRASS_BLOCK.get(), AllItems.BRASS_INGOT.get(), AllItems.BRASS_SHEET.get(), AllItems.BRASS_NUGGET.get(), "brass"),
-                ZINC_METAL = standardMetals(CMFluids.MOLTEN_ZINC, AllBlocks.ZINC_BLOCK.get(), AllItems.ZINC_INGOT.get(), null, AllItems.ZINC_NUGGET.get(), "zinc"),
-                STEEL_METAL = standardMetals(CMFluids.MOLTEN_STEEL, CMBlocks.STEEL_BLOCK.get(), CMItems.STEEL_INGOT.get(), null, null, "steel"),
-                TUNGSTEN_METAL = standardMetals(CMFluids.MOLTEN_TUNGSTEN, CMBlocks.TUNGSTEN_BLOCK.get(), CMItems.TUNGSTEN_INGOT.get(), CMItems.TUNGSTEN_SHEET.get(), CMItems.TUNGSTEN_NUGGET.get(), "tungsten"),
-                OBDURIUM_METAL = standardMetals(CMFluids.MOLTEN_OBDURIUM, CMBlocks.OBDURIUM_BLOCK.get(), CMItems.OBDURIUM_INGOT.get(), CMItems.OBDURIUM_SHEET.get(), null, "obdurium"),
-                NETHERITE_METAL = standardMetals(CMFluids.MOLTEN_NETHERITE, Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT, null, null, "netherite"),
+    IRON = allStandard(CMMetals.IRON, Map.ofEntries(
+            Map.entry(CMMetals.MetalItemType.INGOT, Items.IRON_INGOT),
+            Map.entry(CMMetals.MetalItemType.PLATE, AllItems.IRON_SHEET),
+            Map.entry(CMMetals.MetalItemType.NUGGET, Items.IRON_NUGGET),
+            Map.entry(CMMetals.MetalItemType.BLOCK,  Items.IRON_BLOCK)
+    )),
 
-            ANDESITE_ALLOY_FROM_IRON = basin("andesite_alloy_from_iron", Items.ANDESITE, true, CMFluids.MOLTEN_IRON, 90, AllBlocks.ANDESITE_ALLOY_BLOCK.get(), 360),
-                ANDESITE_ALLOY_FROM_ZINC = basin("andesite_alloy_from_zinc", Items.ANDESITE, true, CMFluids.MOLTEN_ZINC, 90, AllBlocks.ANDESITE_ALLOY_BLOCK.get(), 360),
+    COPPER = allStandard(CMMetals.COPPER, Map.ofEntries(
+            Map.entry(CMMetals.MetalItemType.INGOT, Items.COPPER_INGOT),
+            Map.entry(CMMetals.MetalItemType.PLATE, AllItems.COPPER_SHEET),
+            Map.entry(CMMetals.MetalItemType.NUGGET, AllItems.COPPER_NUGGET),
+            Map.entry(CMMetals.MetalItemType.BLOCK,  Items.COPPER_BLOCK)
+    )),
 
-                COPPER_CASING = basinWithMoldTag(AllTags.AllItemTags.STRIPPED_LOGS.tag, true, CMFluids.MOLTEN_COPPER, 90, AllBlocks.COPPER_CASING.get(), 70),
-                BRASS_CASING = basinWithMoldTag(AllTags.AllItemTags.STRIPPED_LOGS.tag, true, CMFluids.MOLTEN_BRASS, 90, AllBlocks.BRASS_CASING.get(), 70),
+    GOLD = allStandard(CMMetals.GOLD, Map.ofEntries(
+            Map.entry(CMMetals.MetalItemType.INGOT, Items.GOLD_INGOT),
+            Map.entry(CMMetals.MetalItemType.PLATE, AllItems.GOLDEN_SHEET),
+            Map.entry(CMMetals.MetalItemType.NUGGET, Items.GOLD_NUGGET),
+            Map.entry(CMMetals.MetalItemType.BLOCK,  Items.GOLD_BLOCK)
+    )),
 
-            SLAG = table("slag_casting", CMFluids.MOLTEN_SLAG, 90, CMItems.SLAG.get(), 60)
+    NETHERITE = allStandard(CMMetals.NETHERITE, Map.ofEntries(
+            Map.entry(CMMetals.MetalItemType.INGOT, Items.NETHERITE_INGOT),
+            Map.entry(CMMetals.MetalItemType.BLOCK,  Items.NETHERITE_BLOCK)
+    )),
 
-    ;
+    ZINC = allStandard(CMMetals.ZINC, Map.ofEntries(
+            Map.entry(CMMetals.MetalItemType.INGOT, AllItems.ZINC_INGOT),
+            Map.entry(CMMetals.MetalItemType.NUGGET, AllItems.ZINC_NUGGET),
+            Map.entry(CMMetals.MetalItemType.BLOCK,  AllBlocks.ZINC_BLOCK)
+    )),
+
+    BRASS = allStandard(CMMetals.BRASS, Map.ofEntries(
+            Map.entry(CMMetals.MetalItemType.INGOT, AllItems.BRASS_INGOT),
+            Map.entry(CMMetals.MetalItemType.PLATE, AllItems.BRASS_SHEET),
+            Map.entry(CMMetals.MetalItemType.NUGGET, AllItems.BRASS_NUGGET),
+            Map.entry(CMMetals.MetalItemType.BLOCK,  AllBlocks.BRASS_BLOCK)
+    )),
+
+    TUNGSTEN = allStandard(CMMetals.TUNGSTEN, Map.ofEntries(
+            Map.entry(CMMetals.MetalItemType.INGOT, CMItems.TUNGSTEN_INGOT),
+            Map.entry(CMMetals.MetalItemType.PLATE, CMItems.TUNGSTEN_SHEET),
+            Map.entry(CMMetals.MetalItemType.NUGGET, CMItems.TUNGSTEN_NUGGET),
+            Map.entry(CMMetals.MetalItemType.BLOCK,  CMBlocks.TUNGSTEN_BLOCK)
+    )),
+
+    OBDURIUM = allStandard(CMMetals.OBDURIUM, Map.ofEntries(
+            Map.entry(CMMetals.MetalItemType.INGOT, CMItems.OBDURIUM_INGOT),
+            Map.entry(CMMetals.MetalItemType.PLATE, CMItems.OBDURIUM_SHEET),
+            Map.entry(CMMetals.MetalItemType.BLOCK,  CMBlocks.OBDURIUM_BLOCK)
+    )),
+
+    STEEL = allStandard(CMMetals.STEEL, Map.ofEntries(
+            Map.entry(CMMetals.MetalItemType.INGOT, CMItems.STEEL_INGOT),
+            Map.entry(CMMetals.MetalItemType.BLOCK,  CMBlocks.STEEL_BLOCK)
+    )),
+
+
+
+    ANDESITE_ALLOY_FROM_IRON = basin("andesite_alloy_from_iron", Items.ANDESITE, true, CMFluids.MOLTEN_IRON, 90, AllBlocks.ANDESITE_ALLOY_BLOCK.get(), 360),
+            ANDESITE_ALLOY_FROM_ZINC = basin("andesite_alloy_from_zinc", Items.ANDESITE, true, CMFluids.MOLTEN_ZINC, 90, AllBlocks.ANDESITE_ALLOY_BLOCK.get(), 360),
+
+    COPPER_CASING = basinWithMoldTag(AllTags.AllItemTags.STRIPPED_LOGS.tag, true, CMFluids.MOLTEN_COPPER, 90, AllBlocks.COPPER_CASING.get(), 70),
+            BRASS_CASING = basinWithMoldTag(AllTags.AllItemTags.STRIPPED_LOGS.tag, true, CMFluids.MOLTEN_BRASS, 90, AllBlocks.BRASS_CASING.get(), 70),
+
+    SLAG = table("slag_casting", CMFluids.MOLTEN_SLAG, 90, CMItems.SLAG.get(), 60);
 
     //
 
-    protected GeneratedRecipe standardMetals(FluidEntry<ForgeFlowingFluid.Flowing> fluid, ItemLike block, ItemLike ingot, ItemLike plate, ItemLike nugget, String metalName) {
-        //Items
-        table(metalName + "/ingot", CMItems.GRAPHITE_INGOT_MOLD.get(), false, fluid, 90, ingot, 60);
+    protected GeneratedRecipe allCompatMetals() {
+        for (CMMetals metal : CMMetals.values()) {
+            if (metal.isStandard())
+                continue; // Skip all standard metals
 
-        if (nugget != null)
-            table(metalName + "/nugget", CMItems.GRAPHITE_NUGGET_MOLD.get(), false, fluid, 10, nugget, 10);
-        else
-            tableTag(metalName + "/nugget", CMItems.GRAPHITE_NUGGET_MOLD.get(), false, fluid, 10, forgeItemTag("nuggets/" + metalName), 10);
+            for (CMMetals.MetalItemType type : CMMetals.MetalItemType.values()) {
+                if (!type.canBeCast())
+                    continue; // Skip non-castable items
 
-        if (plate != null)
-            table(metalName + "/plate", CMItems.GRAPHITE_PLATE_MOLD.get(), false, fluid, 90, plate, 60);
-        else
-            tableTag(metalName + "/plate", CMItems.GRAPHITE_PLATE_MOLD.get(), false, fluid, 90, forgeItemTag("plates/" + metalName), 60);
+                CMRecipeTypes recipeType = type.equals(CMMetals.MetalItemType.BLOCK) ? CMRecipeTypes.CASTING_IN_BASIN : CMRecipeTypes.CASTING_IN_TABLE;
 
-        tableTag(metalName + "/rod", CMItems.GRAPHITE_ROD_MOLD.get(), false, fluid, 45, forgeItemTag("rods/" + metalName), 30);
-        tableTag(metalName + "/gear", CMItems.GRAPHITE_GEAR_MOLD.get(), false, fluid, 360, forgeItemTag("gears/" + metalName), 160);
-        //Block
-        basin(metalName + "/block", fluid, 810, block, 320);
-        return null;
-    }
+                String metalName = metal.getName();
+                String recipeID = metalName + "/" + type.getName();
+                TagKey<Item> inputTag = type.getItemTag(metalName);
+                ItemLike requiredItem = type.getItem(inputTag);
+                int duration = (int) (CMRecipeProvider.CASTING_DURATION * type.getDurationFactor());
 
+                // TODO: Change heat condition to be based on the fluid temp.
+                create(recipeType, recipeID, b -> {
+                    b.duration(duration)
+                            .require(metal.getFluid().get(), type.getFluidAmount());
 
-    protected GeneratedRecipe moddedMetals() {
-        for (CMCompatMetals metal : CMCompatMetals.values()) {
-            String metalName = metal.getName();
-            //Items
-            tableTag(metalName + "/ingot", CMItems.GRAPHITE_INGOT_MOLD.get(), false, metal.getFluid(), 90, forgeItemTag("ingots/" + metalName), 60);
-            tableTag(metalName + "/nugget", CMItems.GRAPHITE_NUGGET_MOLD.get(), false, metal.getFluid(), 10, forgeItemTag("nuggets/" + metalName), 10);
-            tableTag(metalName + "/plate", CMItems.GRAPHITE_PLATE_MOLD.get(), false, metal.getFluid(), 90, forgeItemTag("plates/" + metalName), 60);
-            tableTag(metalName + "/rod", CMItems.GRAPHITE_ROD_MOLD.get(), false, metal.getFluid(), 45, forgeItemTag("rods/" + metalName), 30);
-            tableTag(metalName + "/gear", CMItems.GRAPHITE_GEAR_MOLD.get(), false, metal.getFluid(), 360, forgeItemTag("gears/" + metalName), 160);
-            //Block
-            basinTag(metalName + "/block", metal.getFluid(), 810, forgeItemTag("storage_blocks/" + metalName), 320);
+                    if (type.hasMold())
+                        b.require(type.getMold());
+
+                    b.withCondition(new NotCondition(new TagEmptyCondition(inputTag.location())))
+                            .output(inputTag);
+
+                    return b;
+                });
+            }
         }
         return null;
     }
 
+    protected GeneratedRecipe allStandard(CMMetals metal, Map<CMMetals.MetalItemType, ItemLike> typesItems) {
+            for (CMMetals.MetalItemType type : CMMetals.MetalItemType.values()) {
+                if (!type.canBeCast())
+                    continue; // Skip non-castable items
+
+                CMRecipeTypes recipeType = type.equals(CMMetals.MetalItemType.BLOCK) ? CMRecipeTypes.CASTING_IN_BASIN : CMRecipeTypes.CASTING_IN_TABLE;
+
+                String metalName = metal.getName();
+                String recipeID = metalName + "/" + type.getName();
+                TagKey<Item> inputTag = type.getItemTag(metalName);
+                int duration = (int) (CMRecipeProvider.CASTING_DURATION * type.getDurationFactor());
+
+                // TODO: Change heat condition to be based on the fluid temp.
+                create(recipeType, recipeID, b -> {
+                    b.duration(duration)
+                            .require(metal.getFluid().get(), type.getFluidAmount());
+
+                    if (type.hasMold())
+                        b.require(type.getMold());
+
+                    if (typesItems.containsKey(type))
+                        b.output(typesItems.get(type));
+                    else
+                        b.withCondition(new NotCondition(new TagEmptyCondition(inputTag.location())))
+                                .output(inputTag);
+
+                    return b;
+                });
+            }
+        return null;
+    }
+
     /**
-     * Recipes with ouput Tags :
+     * Recipes with output Tags :
      *
      * @param recipeId  Recipe name / folders
      * @param mold      Mold used (Optional)

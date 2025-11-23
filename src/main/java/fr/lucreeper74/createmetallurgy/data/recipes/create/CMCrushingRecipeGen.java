@@ -22,7 +22,7 @@ public class CMCrushingRecipeGen extends CMProcessingRecipesGen {
     GeneratedRecipe
 
             NETHER_WOLFRAMITE_ORE = netherOre(CMBlocks.WOLFRAMITE_ORE::get, CMItems.CRUSHED_RAW_WOLFRAMITE::get, 1, 350),
-            RAW_WOLFRAMITE = rawOre("wolframite", T::tungstenBlock, CMItems.CRUSHED_RAW_WOLFRAMITE::get, 1),
+            RAW_WOLFRAMITE = rawOre("wolframite", T::rawWolframite, CMItems.CRUSHED_RAW_WOLFRAMITE::get, 1),
             RAW_WOLFRAMITE_BLOCK = rawOreBlock("wolframite", T::wolframiteBlock, CMItems.CRUSHED_RAW_WOLFRAMITE::get, 1)
 
     ;

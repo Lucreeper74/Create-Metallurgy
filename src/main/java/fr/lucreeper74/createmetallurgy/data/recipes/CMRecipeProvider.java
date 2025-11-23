@@ -1,13 +1,14 @@
 package fr.lucreeper74.createmetallurgy.data.recipes;
 
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
+import fr.lucreeper74.createmetallurgy.registries.CMItems;
+import fr.lucreeper74.createmetallurgy.registries.CMTags.CMItemTags;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
-import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
-import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -17,11 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static com.simibubi.create.AllTags.forgeItemTag;
-
 public abstract class CMRecipeProvider extends RecipeProvider {
 
     protected final List<GeneratedRecipe> all = new ArrayList<>();
+    public static final int MELTING_DURATION = 40; // Duration in tick of the melting of an Ingot
+    public static final int CASTING_DURATION = 60; // Duration in tick of the casting of an Ingot
+    public static final int HEAT_CONDITION_THRESHOLD = 2000; // Threshold after which the condition is superheated
 
     public CMRecipeProvider(PackOutput output) {
         super(output);
@@ -89,39 +91,39 @@ public abstract class CMRecipeProvider extends RecipeProvider {
         }
 
         public static TagKey<Item> coke() {
-            return forgeItemTag("coal_coke");
+            return CMItemTags.COAL_COKE.tag;
         }
 
         public static TagKey<Item> tungstenIngot() {
-            return forgeItemTag("ingots/tungsten");
+            return CMMetals.MetalItemType.INGOT.getItemTag(CMMetals.TUNGSTEN.getName());
         }
 
         public static TagKey<Item> tungstenSheet() {
-            return forgeItemTag("plates/tungsten");
+            return CMMetals.MetalItemType.PLATE.getItemTag(CMMetals.TUNGSTEN.getName());
         }
 
         public static TagKey<Item> tungstenWire() {
-            return forgeItemTag("wires/tungsten");
+            return CMMetals.MetalItemType.WIRE.getItemTag(CMMetals.TUNGSTEN.getName());
         }
 
-        public static TagKey<Item> tungstenBlock() {
-            return forgeItemTag("raw_materials/tungsten");
+        public static TagKey<Item> rawWolframite() {
+            return CMMetals.TUNGSTEN.rawOres;
         }
 
         public static TagKey<Item> wolframiteBlock() {
-            return forgeItemTag("storage_blocks/raw_wolframite");
+            return CMMetals.TUNGSTEN.rawStorageBlocks.items();
         }
 
         public static TagKey<Item> obduriumIngot() {
-            return forgeItemTag("ingots/obdurium");
+            return CMMetals.MetalItemType.INGOT.getItemTag(CMMetals.OBDURIUM.getName());
         }
 
         public static TagKey<Item> obduriumSheet() {
-            return forgeItemTag("plates/obdurium");
+            return CMMetals.MetalItemType.PLATE.getItemTag(CMMetals.OBDURIUM.getName());
         }
 
         public static TagKey<Item> steelIngot() {
-            return forgeItemTag("ingots/steel");
+            return CMMetals.MetalItemType.INGOT.getItemTag(CMMetals.STEEL.getName());
         }
 
     }
