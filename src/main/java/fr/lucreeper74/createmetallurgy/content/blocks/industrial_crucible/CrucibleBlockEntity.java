@@ -6,12 +6,13 @@ import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehavi
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeConditions;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.CreateLang;
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityMeltingRecipe;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryTank;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityMeltingRecipe;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.FoundryRecipe;
 import fr.lucreeper74.createmetallurgy.registries.CMDamageTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
@@ -47,7 +48,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.*;
+import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
 
 public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer {
     public static final int MAX_SIZE = 5;
@@ -439,7 +440,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         Predicate<Recipe<?>> type = RecipeConditions.isOfType(CMRecipeTypes.ENTITY_MELTING.getType());
         List<Recipe<?>> recipes = RecipeFinder.get(EntityMeltingCacheKey, level, type).stream()
                 .filter(r -> r instanceof EntityMeltingRecipe entityRecipe
-                        && entityRecipe.matches(this, entityRecipe, entityIn.getType())
+                        && entityRecipe.matches(this, entityIn.getType())
                         && FoundryRecipe.isEnoughHeated(this, entityRecipe))
                 .toList();
 
@@ -455,14 +456,36 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
             if (entityIn.hurt(CMDamageTypes.foundry(level), recipe.getEntityIngredient().getDamage()))
                 entityIn.playSound(SoundEvents.GENERIC_BURN, 0.4F, 2.0F + RandomSource.create().nextFloat() * 0.4F);
 
-            if (!entityIn.isAlive()) {
-                for (FluidStack output : recipe.getFluidResults())
-                    if (getTank().fill(output.copy(), IFluidHandler.FluidAction.SIMULATE) >= output.getAmount())
-                        getTank().fill(output.copy(), IFluidHandler.FluidAction.EXECUTE);
-            }
+            if (!entityIn.isAlive())
+                applyRecipe(recipe);
+
         } else if (!isFireImmune && foundry.getCurrentHeat() > 0)
             entityIn.hurt(CMDamageTypes.foundry(level), 4.0F);
 
+    }
+
+    private void applyRecipe(EntityMeltingRecipe recipe) {
+        Ingredient:
+        for (FluidIngredient fluidIngredient : recipe.getFluidIngredients()) {
+            int amountRequired = fluidIngredient.getRequiredAmount();
+
+            for (int i = 0; i < getTank().getTanks(); i++) {
+                FluidStack availableFluid = getTank().getFluidInTank(i).copy();
+                int availableAmount = availableFluid.getAmount();
+
+                if (fluidIngredient.test(availableFluid) && fluidIngredient.getRequiredAmount() <= availableAmount) {
+                    availableFluid.setAmount(Math.min(amountRequired, availableAmount));
+                    getTank().drain(availableFluid, IFluidHandler.FluidAction.EXECUTE);
+                    continue Ingredient;
+                }
+            }
+            return; // Not enough fluid or fluid not match
+        }
+
+        for (FluidStack output : recipe.getFluidResults()) {
+            if (getTank().fill(output.copy(), IFluidHandler.FluidAction.SIMULATE) == output.getAmount())
+                getTank().fill(output.copy(), IFluidHandler.FluidAction.EXECUTE);
+        }
     }
 
     @Override
@@ -534,7 +557,9 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         return width * width * height;
     }
 
-    public int getBaseSize() { return getWidth() * getWidth(); }
+    public int getBaseSize() {
+        return getWidth() * getWidth();
+    }
 
     public static int getCapacityFactor() {
         return CAPACITY_FACTOR;

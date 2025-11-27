@@ -6,7 +6,6 @@ import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.Crucib
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.crafting.Recipe;
 
 public class EntityMeltingRecipe extends FoundryRecipe {
 
@@ -22,8 +21,8 @@ public class EntityMeltingRecipe extends FoundryRecipe {
         return false;
     }
 
-    public boolean matches(CrucibleBlockEntity be, Recipe<?> recipe, EntityType<?> type) {
-        return bulkMatch(be, recipe) && entityIngredient.test(type);
+    public boolean matches(CrucibleBlockEntity be, EntityType<?> type) {
+        return bulkMatch(be, this) && entityIngredient.test(type);
     }
 
     public EntityIngredient getEntityIngredient() {
