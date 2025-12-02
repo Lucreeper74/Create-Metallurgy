@@ -20,6 +20,9 @@
   "createmetallurgy.gui.goggles.foundrybasin_contents": "Foundry Basin Contents",
   "createmetallurgy.gui.goggles.castingbasin_contents": "Casting Basin Contents",
   "createmetallurgy.gui.goggles.castingtable_contents": "Casting Table Contents",
+  "createmetallurgy.gui.ladle_filter.filled_amount": "Filling amount:",
+  "createmetallurgy.gui.ladle_filter.filled_amount_hint": "Scroll down below 0 to disable it",
+  "createmetallurgy.gui.ladle_filter.comparator": "Comparator selection:",
 
   "createmetallurgy.crucible.title": "Crucible Informations:",
   "createmetallurgy.crucible.fluid_content": "Fluid Contents",
@@ -41,6 +44,12 @@
   "createmetallurgy.generic.icon.heart": "\u2764",
   "createmetallurgy.generic.icon.up": "\u2191",
   "createmetallurgy.generic.icon.down": "\u2193",
+
+  "createmetallurgy.generic.symbol.greater": ">",
+  "createmetallurgy.generic.symbol.greater_eq": "\u2265",
+  "createmetallurgy.generic.symbol.equal": "=",
+  "createmetallurgy.generic.symbol.less": "<",
+  "createmetallurgy.generic.symbol.less_eq": "\u2264",
 
   "advancement.createmetallurgy.foundry_basin":  "Metallurgy Expert",
   "advancement.createmetallurgy.foundry_basin.desc": "Craft a Foundry Basin & Foundry Top",
