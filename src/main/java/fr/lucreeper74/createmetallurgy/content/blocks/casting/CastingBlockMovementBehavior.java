@@ -32,7 +32,7 @@ public class CastingBlockMovementBehavior implements MovementBehaviour {
         }
 
         if (context.world.isClientSide) {
-            BlockEntity be = context.contraption.presentBlockEntities.get(context.localPos);
+            BlockEntity be = context.contraption.getBlockEntityClientSide(context.localPos);
             if (be instanceof CastingBlockEntity castingBE) {
                 castingBE.inputTank.getFluidLevel().tickChaser();
             }
@@ -55,7 +55,7 @@ public class CastingBlockMovementBehavior implements MovementBehaviour {
             }
             context.blockEntityData.put(key, itemStackHandler.serializeNBT());
         });
-        BlockEntity blockEntity = context.contraption.presentBlockEntities.get(context.localPos);
+        BlockEntity blockEntity = context.contraption.getBlockEntityClientSide(context.localPos);
         if (blockEntity instanceof CastingBlockEntity castingBE)
             castingBE.readOnlyItems(context.blockEntityData);
         context.temporaryData = false; // did already dump, so can't any more
