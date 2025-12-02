@@ -18,7 +18,10 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -121,18 +124,6 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
                     .pattern("WSW")
                     .pattern(" W ")),
 
-    STURDY_WHISK = create(CMItems.STURDY_WHISK).unlockedByTag(T::tungstenSheet)
-            .viaShaped(b -> b.define('A', T.andesiteAlloy())
-                    .define('B', AllItems.STURDY_SHEET.get())
-                    .pattern(" A ")
-                    .pattern("BAB")
-                    .pattern("BBB")),
-
-    LADLE_FILTER = create(CMItems.LADLE_FILTER).unlockedByTag(T::steelIngot).returns(2)
-            .viaShaped(b -> b.define('W', ItemTags.WOOL)
-                    .define('S', T.steelIngot())
-                    .pattern("SW")),
-
     COKE = create(CMItems.COKE::get).withSuffix("_from_coal")
             .viaCookingTag(T::coal)
             .rewardXP(.5f)
@@ -192,8 +183,19 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
     FAUCET = create(CMBlocks.FAUCET_BLOCK).unlockedBy(T::andesiteAlloy)
             .viaShaped(b -> b.define('A', T.andesiteAlloy())
                     .pattern("A A")
-                    .pattern(" A "))
+                    .pattern(" A ")),
 
+    STURDY_WHISK = create(CMItems.STURDY_WHISK).unlockedByTag(T::tungstenSheet)
+            .viaShaped(b -> b.define('A', T.andesiteAlloy())
+                    .define('B', AllItems.STURDY_SHEET.get())
+                    .pattern(" A ")
+                    .pattern("BAB")
+                    .pattern("BBB")),
+
+    LADLE_FILTER = create(CMItems.LADLE_FILTER).unlockedByTag(T::steelIngot).returns(2)
+            .viaShaped(b -> b.define('W', ItemTags.WOOL)
+                    .define('S', T.steelIngot())
+                    .pattern("SW"))
     ;
 
     //
