@@ -17,10 +17,10 @@ import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasin
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerVisual;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.labelling_station.LabellingStationBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbRenderer;
-import fr.lucreeper74.createmetallurgy.content.blocks.ladle_depot.PouringStationBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.ladle_depot.PouringStationRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.labelling_station.LabellingStationRenderer;
 
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -81,11 +81,11 @@ public class CMBlockEntityTypes {
             .renderer(() -> FaucetRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<PouringStationBlockEntity> LADLE_DEPOT = REGISTRATE
-            .blockEntity("ladle_depot", PouringStationBlockEntity::new)
+    public static final BlockEntityEntry<LabellingStationBlockEntity> LABELLING_STATION = REGISTRATE
+            .blockEntity("labelling_station", LabellingStationBlockEntity::new)
             //.visual(() -> LabelingDepotVisual::new, true)
-            .validBlocks(CMBlocks.LADLE_DEPOT_BLOCK)
-            .renderer(() -> PouringStationRenderer::new)
+            .validBlocks(CMBlocks.LABELLING_STATION_BLOCK)
+            .renderer(() -> LabellingStationRenderer::new)
             .register();
 
     public static void register() {}
