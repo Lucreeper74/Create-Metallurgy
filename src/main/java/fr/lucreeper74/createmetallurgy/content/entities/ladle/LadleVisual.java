@@ -16,6 +16,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class LadleVisual extends AbstractEntityVisual<LadleEntity> implements SimpleDynamicVisual {
     public final TransformedInstance instance;
+    //private final FluidVisual fluid;
+    //private final FluidStack fluidStack;
 
     public LadleVisual(VisualizationContext ctx, LadleEntity entity, float partialTick) {
         super(ctx, entity, partialTick);
@@ -27,6 +29,9 @@ public class LadleVisual extends AbstractEntityVisual<LadleEntity> implements Si
 
         instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(model))
                 .createInstance();
+
+        //fluidStack = FluidUtil.getFluidContained(entity.getBox()).orElse(FluidStack.EMPTY);
+        //fluid = new FluidVisual(ctx, false, true);
 
         animate(partialTick);
     }

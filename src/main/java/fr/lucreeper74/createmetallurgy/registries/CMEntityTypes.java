@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.Create;
 import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
 import com.tterrag.registrate.util.entry.EntityEntry;
@@ -11,7 +10,7 @@ import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleEntity;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleRenderer;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleVisual;
-import net.createmod.catnip.lang.Lang;
+import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
@@ -22,7 +21,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 public class CMEntityTypes {
 
     public static final EntityEntry<LadleEntity> LADLE = register("ladle", LadleEntity::new, () -> LadleRenderer::new,
-            MobCategory.MISC, 10, 3, true, false, LadleEntity::build)
+            MobCategory.MISC, 10, 3, true, true, LadleEntity::build)
             .visual(() -> LadleVisual::new, true)
             .register();
 
@@ -32,7 +31,7 @@ public class CMEntityTypes {
                                                                          NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,
                                                                          MobCategory group, int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire,
                                                                          NonNullConsumer<EntityType.Builder<T>> propertyBuilder) {
-        String id = Lang.asId(name);
+        String id = CMLang.asId(name);
         return (CreateEntityBuilder<T, ?>) CreateMetallurgy.REGISTRATE
                 .entity(id, factory, group)
                 .properties(b -> b.setTrackingRange(range)
