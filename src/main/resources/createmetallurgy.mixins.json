@@ -6,7 +6,9 @@
   "refmap": "createmetallurgy.refmap.json",
   "mixins": [
     "BlockMovementCheckMixin",
-    "FoundryBasinCheckMixin"
+    "FilterItemStackCreationMixin",
+    "FoundryBasinCheckMixin",
+    "LadleRendererChainConveyorMixin"
   ],
   "injectors": {
     "defaultRequire": 1
