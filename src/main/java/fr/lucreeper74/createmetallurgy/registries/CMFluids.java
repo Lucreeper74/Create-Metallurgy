@@ -73,7 +73,7 @@ public class  CMFluids {
                         .explosionResistance(explosionResistance))
                 .tag(CMTags.CMFluidTags.MOLTEN_MATERIAL.tag, AllTags.AllFluidTags.BOTTOMLESS_DENY.tag)
                 .source(MoltenFluidSource::new)
-                .bucket((content, props) -> new TagDependentBucketItem(content, props, CMMetals.MetalItemType.INGOT.getItemTag(name)))
+                .bucket((content, props) -> new TagDependentBucketItem(content, props, metal.getItemTag(CMMetals.ItemType.INGOT)))
                 .build()
                 .register();
 

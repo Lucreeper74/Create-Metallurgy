@@ -95,35 +95,35 @@ public abstract class CMRecipeProvider extends RecipeProvider {
         }
 
         public static TagKey<Item> tungstenIngot() {
-            return CMMetals.MetalItemType.INGOT.getItemTag(CMMetals.TUNGSTEN.getName());
+            return CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.INGOT);
         }
 
         public static TagKey<Item> tungstenSheet() {
-            return CMMetals.MetalItemType.PLATE.getItemTag(CMMetals.TUNGSTEN.getName());
+            return CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.PLATE);
         }
 
         public static TagKey<Item> tungstenWire() {
-            return CMMetals.MetalItemType.WIRE.getItemTag(CMMetals.TUNGSTEN.getName());
+            return CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.WIRE);
         }
 
         public static TagKey<Item> rawWolframite() {
-            return CMMetals.TUNGSTEN.rawOres;
+            return CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.RAW_MATERIAL);
         }
 
         public static TagKey<Item> wolframiteBlock() {
-            return CMMetals.TUNGSTEN.rawStorageBlocks.items();
+            return CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.RAW_BLOCK);
         }
 
         public static TagKey<Item> obduriumIngot() {
-            return CMMetals.MetalItemType.INGOT.getItemTag(CMMetals.OBDURIUM.getName());
+            return CMMetals.OBDURIUM.getItemTag(CMMetals.ItemType.INGOT);
         }
 
         public static TagKey<Item> obduriumSheet() {
-            return CMMetals.MetalItemType.PLATE.getItemTag(CMMetals.OBDURIUM.getName());
+            return CMMetals.OBDURIUM.getItemTag(CMMetals.ItemType.PLATE);
         }
 
         public static TagKey<Item> steelIngot() {
-            return CMMetals.MetalItemType.INGOT.getItemTag(CMMetals.STEEL.getName());
+            return CMMetals.STEEL.getItemTag(CMMetals.ItemType.INGOT);
         }
 
     }

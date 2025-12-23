@@ -34,60 +34,60 @@ public class CastingRecipeGen extends CMRecipeProvider {
             ALL_COMPAT_METALS = allCompatMetals(),
 
     IRON = allStandard(CMMetals.IRON, Map.ofEntries(
-            Map.entry(CMMetals.MetalItemType.INGOT, Items.IRON_INGOT),
-            Map.entry(CMMetals.MetalItemType.PLATE, AllItems.IRON_SHEET),
-            Map.entry(CMMetals.MetalItemType.NUGGET, Items.IRON_NUGGET),
-            Map.entry(CMMetals.MetalItemType.BLOCK,  Items.IRON_BLOCK)
+            Map.entry(CMMetals.ItemType.INGOT, Items.IRON_INGOT),
+            Map.entry(CMMetals.ItemType.PLATE, AllItems.IRON_SHEET),
+            Map.entry(CMMetals.ItemType.NUGGET, Items.IRON_NUGGET),
+            Map.entry(CMMetals.ItemType.BLOCK,  Items.IRON_BLOCK)
     )),
 
     COPPER = allStandard(CMMetals.COPPER, Map.ofEntries(
-            Map.entry(CMMetals.MetalItemType.INGOT, Items.COPPER_INGOT),
-            Map.entry(CMMetals.MetalItemType.PLATE, AllItems.COPPER_SHEET),
-            Map.entry(CMMetals.MetalItemType.NUGGET, AllItems.COPPER_NUGGET),
-            Map.entry(CMMetals.MetalItemType.BLOCK,  Items.COPPER_BLOCK)
+            Map.entry(CMMetals.ItemType.INGOT, Items.COPPER_INGOT),
+            Map.entry(CMMetals.ItemType.PLATE, AllItems.COPPER_SHEET),
+            Map.entry(CMMetals.ItemType.NUGGET, AllItems.COPPER_NUGGET),
+            Map.entry(CMMetals.ItemType.BLOCK,  Items.COPPER_BLOCK)
     )),
 
     GOLD = allStandard(CMMetals.GOLD, Map.ofEntries(
-            Map.entry(CMMetals.MetalItemType.INGOT, Items.GOLD_INGOT),
-            Map.entry(CMMetals.MetalItemType.PLATE, AllItems.GOLDEN_SHEET),
-            Map.entry(CMMetals.MetalItemType.NUGGET, Items.GOLD_NUGGET),
-            Map.entry(CMMetals.MetalItemType.BLOCK,  Items.GOLD_BLOCK)
+            Map.entry(CMMetals.ItemType.INGOT, Items.GOLD_INGOT),
+            Map.entry(CMMetals.ItemType.PLATE, AllItems.GOLDEN_SHEET),
+            Map.entry(CMMetals.ItemType.NUGGET, Items.GOLD_NUGGET),
+            Map.entry(CMMetals.ItemType.BLOCK,  Items.GOLD_BLOCK)
     )),
 
     NETHERITE = allStandard(CMMetals.NETHERITE, Map.ofEntries(
-            Map.entry(CMMetals.MetalItemType.INGOT, Items.NETHERITE_INGOT),
-            Map.entry(CMMetals.MetalItemType.BLOCK,  Items.NETHERITE_BLOCK)
+            Map.entry(CMMetals.ItemType.INGOT, Items.NETHERITE_INGOT),
+            Map.entry(CMMetals.ItemType.BLOCK,  Items.NETHERITE_BLOCK)
     )),
 
     ZINC = allStandard(CMMetals.ZINC, Map.ofEntries(
-            Map.entry(CMMetals.MetalItemType.INGOT, AllItems.ZINC_INGOT),
-            Map.entry(CMMetals.MetalItemType.NUGGET, AllItems.ZINC_NUGGET),
-            Map.entry(CMMetals.MetalItemType.BLOCK,  AllBlocks.ZINC_BLOCK)
+            Map.entry(CMMetals.ItemType.INGOT, AllItems.ZINC_INGOT),
+            Map.entry(CMMetals.ItemType.NUGGET, AllItems.ZINC_NUGGET),
+            Map.entry(CMMetals.ItemType.BLOCK,  AllBlocks.ZINC_BLOCK)
     )),
 
     BRASS = allStandard(CMMetals.BRASS, Map.ofEntries(
-            Map.entry(CMMetals.MetalItemType.INGOT, AllItems.BRASS_INGOT),
-            Map.entry(CMMetals.MetalItemType.PLATE, AllItems.BRASS_SHEET),
-            Map.entry(CMMetals.MetalItemType.NUGGET, AllItems.BRASS_NUGGET),
-            Map.entry(CMMetals.MetalItemType.BLOCK,  AllBlocks.BRASS_BLOCK)
+            Map.entry(CMMetals.ItemType.INGOT, AllItems.BRASS_INGOT),
+            Map.entry(CMMetals.ItemType.PLATE, AllItems.BRASS_SHEET),
+            Map.entry(CMMetals.ItemType.NUGGET, AllItems.BRASS_NUGGET),
+            Map.entry(CMMetals.ItemType.BLOCK,  AllBlocks.BRASS_BLOCK)
     )),
 
     TUNGSTEN = allStandard(CMMetals.TUNGSTEN, Map.ofEntries(
-            Map.entry(CMMetals.MetalItemType.INGOT, CMItems.TUNGSTEN_INGOT),
-            Map.entry(CMMetals.MetalItemType.PLATE, CMItems.TUNGSTEN_SHEET),
-            Map.entry(CMMetals.MetalItemType.NUGGET, CMItems.TUNGSTEN_NUGGET),
-            Map.entry(CMMetals.MetalItemType.BLOCK,  CMBlocks.TUNGSTEN_BLOCK)
+            Map.entry(CMMetals.ItemType.INGOT, CMItems.TUNGSTEN_INGOT),
+            Map.entry(CMMetals.ItemType.PLATE, CMItems.TUNGSTEN_SHEET),
+            Map.entry(CMMetals.ItemType.NUGGET, CMItems.TUNGSTEN_NUGGET),
+            Map.entry(CMMetals.ItemType.BLOCK,  CMBlocks.TUNGSTEN_BLOCK)
     )),
 
     OBDURIUM = allStandard(CMMetals.OBDURIUM, Map.ofEntries(
-            Map.entry(CMMetals.MetalItemType.INGOT, CMItems.OBDURIUM_INGOT),
-            Map.entry(CMMetals.MetalItemType.PLATE, CMItems.OBDURIUM_SHEET),
-            Map.entry(CMMetals.MetalItemType.BLOCK,  CMBlocks.OBDURIUM_BLOCK)
+            Map.entry(CMMetals.ItemType.INGOT, CMItems.OBDURIUM_INGOT),
+            Map.entry(CMMetals.ItemType.PLATE, CMItems.OBDURIUM_SHEET),
+            Map.entry(CMMetals.ItemType.BLOCK,  CMBlocks.OBDURIUM_BLOCK)
     )),
 
     STEEL = allStandard(CMMetals.STEEL, Map.ofEntries(
-            Map.entry(CMMetals.MetalItemType.INGOT, CMItems.STEEL_INGOT),
-            Map.entry(CMMetals.MetalItemType.BLOCK,  CMBlocks.STEEL_BLOCK)
+            Map.entry(CMMetals.ItemType.INGOT, CMItems.STEEL_INGOT),
+            Map.entry(CMMetals.ItemType.BLOCK,  CMBlocks.STEEL_BLOCK)
     )),
 
 
@@ -107,15 +107,14 @@ public class CastingRecipeGen extends CMRecipeProvider {
             if (metal.isStandard())
                 continue; // Skip all standard metals
 
-            for (CMMetals.MetalItemType type : CMMetals.MetalItemType.values()) {
+            for (CMMetals.ItemType type : CMMetals.ItemType.values()) {
                 if (!type.canBeCast())
                     continue; // Skip non-castable items
 
-                CMRecipeTypes recipeType = type.equals(CMMetals.MetalItemType.BLOCK) ? CMRecipeTypes.CASTING_IN_BASIN : CMRecipeTypes.CASTING_IN_TABLE;
+                CMRecipeTypes recipeType = type.equals(CMMetals.ItemType.BLOCK) ? CMRecipeTypes.CASTING_IN_BASIN : CMRecipeTypes.CASTING_IN_TABLE;
 
-                String metalName = metal.getName();
-                String recipeID = metalName + "/" + type.getName();
-                TagKey<Item> inputTag = type.getItemTag(metalName);
+                String recipeID = metal + "/" + type.getName();
+                TagKey<Item> inputTag = metal.getItemTag(type);
                 ItemLike requiredItem = type.getItem(inputTag);
                 int duration = (int) (CMRecipeProvider.CASTING_DURATION * type.getDurationFactor());
 
@@ -136,16 +135,15 @@ public class CastingRecipeGen extends CMRecipeProvider {
         return null;
     }
 
-    protected GeneratedRecipe allStandard(CMMetals metal, Map<CMMetals.MetalItemType, ItemLike> typesItems) {
-            for (CMMetals.MetalItemType type : CMMetals.MetalItemType.values()) {
+    protected GeneratedRecipe allStandard(CMMetals metal, Map<CMMetals.ItemType, ItemLike> typesItems) {
+            for (CMMetals.ItemType type : CMMetals.ItemType.values()) {
                 if (!type.canBeCast())
                     continue; // Skip non-castable items
 
-                CMRecipeTypes recipeType = type.equals(CMMetals.MetalItemType.BLOCK) ? CMRecipeTypes.CASTING_IN_BASIN : CMRecipeTypes.CASTING_IN_TABLE;
+                CMRecipeTypes recipeType = type.equals(CMMetals.ItemType.BLOCK) ? CMRecipeTypes.CASTING_IN_BASIN : CMRecipeTypes.CASTING_IN_TABLE;
 
-                String metalName = metal.getName();
-                String recipeID = metalName + "/" + type.getName();
-                TagKey<Item> inputTag = type.getItemTag(metalName);
+                String recipeID = metal + "/" + type.getName();
+                TagKey<Item> inputTag = metal.getItemTag(type);
                 int duration = (int) (CMRecipeProvider.CASTING_DURATION * type.getDurationFactor());
 
                 create(recipeType, recipeID, b -> {

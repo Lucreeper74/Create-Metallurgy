@@ -26,6 +26,12 @@ public class CMPartialModels {
 
             BULB_INNER_GLOW = block("light_bulb/inner_glow"),
 
+            LABELLING_STATION_TRAY_REGULAR = block("labelling_station/tray"),
+                LABELLING_STATION_TRAY_DEFRAG = block("labelling_station/tray"),
+                LABELLING_STATION_HATCH_OPEN = block("labelling_station/hatch_open"),
+                LABELLING_STATION_HATCH_CLOSED = block("labelling_station/hatch_closed"),
+
+
     // JEI Gui models
 
             JEI_CURCIBLE_2X2 = jei("assembled_crucible");
@@ -48,7 +54,7 @@ public class CMPartialModels {
             ResourceLocation key = LadleStyles.getItemId(style);
             PartialModel model = PartialModel.of(CreateMetallurgy.genRL("item/" + key.getPath()));
             AllPartialModels.PACKAGES.put(key, model);
-            AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(LadleStyles.getHandleModel(style)));
+            AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(LadleStyles.getHandleModel()));
         }
     }
 

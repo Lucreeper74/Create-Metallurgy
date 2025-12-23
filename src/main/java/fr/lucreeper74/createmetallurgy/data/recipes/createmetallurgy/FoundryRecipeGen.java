@@ -46,10 +46,9 @@ public class FoundryRecipeGen extends CMRecipeProvider {
 
     protected GeneratedRecipe allMetals() {
         for (CMMetals metal : CMMetals.values()) {
-            String metalName = metal.getName();
-            CMMetals.MetalItemType block = CMMetals.MetalItemType.BLOCK;
+            CMMetals.ItemType block = CMMetals.ItemType.BLOCK;
             //Block
-            meltingTag(metalName + "/block", block.getItemTag(metalName), metal.getFluid(), block.getFluidAmount(), getMetalHeat(metal), (int) (CMRecipeProvider.MELTING_DURATION * block.getDurationFactor() * .7f));
+            meltingTag(metal + "/block", metal.getItemTag(block), metal.getFluid(), block.getFluidAmount(), getMetalHeat(metal), (int) (CMRecipeProvider.MELTING_DURATION * block.getDurationFactor() * .7f));
         }
         return null;
     }

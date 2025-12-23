@@ -1,11 +1,11 @@
 package fr.lucreeper74.createmetallurgy.data.recipes.create;
 
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.foundation.item.TagDependentIngredientItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMProcessingRecipesGen;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
@@ -23,9 +23,9 @@ public class CMWashingRecipeGen extends CMProcessingRecipesGen {
 
     //
 
-    public GeneratedRecipe dirtyDust(ItemEntry<Item> crushed, Supplier<ItemLike> nugget, Supplier<ItemLike> secondary,
-                                                           float secondaryChance) {
-        return create(crushed::get, b -> b.output(nugget.get())
+    public GeneratedRecipe dirtyDust(ItemEntry<TagDependentIngredientItem> dirtyDust, Supplier<ItemLike> dust, Supplier<ItemLike> secondary,
+                                     float secondaryChance) {
+        return create(dirtyDust::get, b -> b.output(dust.get())
                 .output(secondaryChance, secondary.get()));
     }
 

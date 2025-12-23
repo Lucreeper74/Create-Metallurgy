@@ -66,13 +66,15 @@ public class CMTags {
 
     public enum CMItemTags {
 
-        GRAPHITE_MOLDS(FORGE),
+        GRAPHITE_MOLDS,
+        GRAPHITE(FORGE),
         DIRTY_DUSTS(FORGE),
         WIRES(FORGE),
         LADLE,
         COKE_STORAGE_BLOCKS(FORGE, "storage_blocks/coke_block"),
         LIGHT_BULB,
-        COAL_COKE,
+        COAL_COKE(FORGE),
+        SLAG,
 
         ;
 

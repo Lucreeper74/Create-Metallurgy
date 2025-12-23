@@ -55,7 +55,6 @@ public enum CMMetals {
     private final Supplier<FluidEntry<ForgeFlowingFluid.Flowing>> fluidSup;
 
     public final ItemLikeTag ores;
-    public final TagKey<Item> rawOres;
     public final ItemLikeTag rawStorageBlocks;
     public final ItemLikeTag storageBlocks;
 
@@ -69,9 +68,8 @@ public enum CMMetals {
         this.fluidSup = fluidSup;
         this.mods = mods.length == 0 ? Set.of() : Set.copyOf(Set.of(mods));
 
-        this.ores = new ItemLikeTag("ores/" + this.raw_name);
-        this.rawOres = itemTag("raw_materials/" + this.raw_name);
-        this.rawStorageBlocks = new ItemLikeTag("storage_blocks/raw_" + this.raw_name);
+        this.ores = new ItemLikeTag("ores/" + this.name);
+        this.rawStorageBlocks = new ItemLikeTag("storage_blocks/raw_" + this.name);
         this.storageBlocks = new ItemLikeTag("storage_blocks/" + this.name);
     }
 
@@ -99,6 +97,10 @@ public enum CMMetals {
         return fluidSup.get();
     }
 
+    public TagKey<Item> getItemTag(ItemType type) {
+        return itemTag(type.getID() + getName());
+    }
+
     private static TagKey<Item> itemTag(String path) {
         // TODO: change forge to c in 1.21
         return TagKey.create(Registries.ITEM, new ResourceLocation("forge", path));
@@ -115,47 +117,48 @@ public enum CMMetals {
         }
     }
 
-    public enum MetalItemType {
+    public enum ItemType {
         // Pure (can be cast/crafted from ingots)
-        INGOT(CMItems.GRAPHITE_INGOT_MOLD, 90, 1f),
-        NUGGET(CMItems.GRAPHITE_NUGGET_MOLD, 10, .11f),
-        PLATE(CMItems.GRAPHITE_PLATE_MOLD, 90, 1f),
+        INGOT(() -> CMItems.GRAPHITE_INGOT_MOLD, 90, 1f),
+        NUGGET(() -> CMItems.GRAPHITE_NUGGET_MOLD, 10, .11f),
+        PLATE(() -> CMItems.GRAPHITE_PLATE_MOLD, 90, 1f),
         DUST(90, .5f, false),
         WIRE(45, .4f, false),
-        GEAR(CMItems.GRAPHITE_GEAR_MOLD, 360, 4f),
-        ROD(CMItems.GRAPHITE_ROD_MOLD, 45, .5f),
+        GEAR(() -> CMItems.GRAPHITE_GEAR_MOLD, 360, 4f),
+        ROD(() -> CMItems.GRAPHITE_ROD_MOLD, 45, .5f),
         COIN(10, .11f, false),
         BLOCK(810, 8f),
 
         // Impure
         RAW_MATERIAL(90, 45, 1f, false),
+        RAW_BLOCK(810, 405, 8f, false),
         DIRTY_DUST(90, 30, .75f, false),
         ;
 
         private final String name;
-        private final ItemLike mold;
+        private final Supplier<ItemLike> mold;
         private final int fluidAmount;
         private final int impurity;
         private final float durationFactor;
         private final boolean canBeCast;
 
-        MetalItemType(int fluidAmount, float durationFactor) {
+        ItemType(int fluidAmount, float durationFactor) {
             this(null, fluidAmount, 0, durationFactor, true);
         }
 
-        MetalItemType(ItemLike mold, int fluidAmount, float durationFactor) {
-            this(mold.asItem(), fluidAmount, 0, durationFactor, true);
+        ItemType(Supplier<ItemLike> mold, int fluidAmount, float durationFactor) {
+            this(mold, fluidAmount, 0, durationFactor, true);
         }
 
-        MetalItemType(int fluidAmount, float durationFactor, boolean canBeCast) {
+        ItemType(int fluidAmount, float durationFactor, boolean canBeCast) {
             this(null, fluidAmount, 0, durationFactor, canBeCast);
         }
 
-        MetalItemType(int fluidAmount, int impurity, float durationFactor, boolean canBeCast) {
+        ItemType(int fluidAmount, int impurity, float durationFactor, boolean canBeCast) {
             this(null, fluidAmount, impurity, durationFactor, canBeCast);
         }
 
-        MetalItemType(ItemLike mold, int fluidAmount, int impurity, float durationFactor, boolean canBeCast) {
+        ItemType(Supplier<ItemLike> mold, int fluidAmount, int impurity, float durationFactor, boolean canBeCast) {
             this.name = CMLang.asId(name());
             this.mold = mold;
             this.fluidAmount = fluidAmount;
@@ -170,8 +173,9 @@ public enum CMMetals {
 
         public String getID() {
             return switch (this) {
-                case BLOCK -> "storage_" + name;
-                default -> name;
+                case BLOCK -> "storage_blocks/";
+                case RAW_BLOCK -> "storage_blocks/raw_";
+                default -> name + "s/";
             };
         }
 
@@ -180,7 +184,7 @@ public enum CMMetals {
         }
 
         public ItemLike getMold() {
-            return mold;
+            return mold.get();
         }
 
         public boolean canBeCast() {
@@ -201,10 +205,6 @@ public enum CMMetals {
 
         public float getDurationFactor() {
             return durationFactor;
-        }
-
-        public TagKey<Item> getItemTag(String metalName) {
-            return itemTag(getID() + "s/" + metalName);
         }
 
         public ItemLike getItem(TagKey<Item> tag) {
