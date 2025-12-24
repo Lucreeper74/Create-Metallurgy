@@ -119,11 +119,20 @@ public class CMItems {
 
     //Shortcuts
     private static ItemEntry<TagDependentIngredientItem> compatDust(CMMetals metal, CMMetals.ItemType dustType) {
-        return REGISTRATE
-                .item(metal.getName() + "_" + dustType.getName(),
+        if (!dustType.equals(CMMetals.ItemType.DIRTY_DUST) && !dustType.equals(CMMetals.ItemType.DUST))
+            return null;
+
+        ItemBuilder<TagDependentIngredientItem, CreateRegistrate>  itemEntry = REGISTRATE
+                .item((dustType.equals(CMMetals.ItemType.DIRTY_DUST) ? "dirty_" : "") + metal.getName() + "_dust",
                         props -> new TagDependentIngredientItem(props, metal.getItemTag(dustType)))
-                .tag(DUSTS)
-                .register();
+                .tag(metal.getItemTag(dustType));
+
+        switch(dustType) {
+            case DIRTY_DUST -> itemEntry.tag(DIRTY_DUSTS.tag);
+            case DUST -> itemEntry.tag(DUSTS);
+        }
+
+        return itemEntry.register();
     }
 
     @SafeVarargs

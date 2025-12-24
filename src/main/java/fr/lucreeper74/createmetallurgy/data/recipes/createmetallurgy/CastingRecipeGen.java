@@ -113,7 +113,7 @@ public class CastingRecipeGen extends CMRecipeProvider {
 
                 CMRecipeTypes recipeType = type.equals(CMMetals.ItemType.BLOCK) ? CMRecipeTypes.CASTING_IN_BASIN : CMRecipeTypes.CASTING_IN_TABLE;
 
-                String recipeID = metal + "/" + type.getName();
+                String recipeID = metal.getName() + "/" + type.getName();
                 TagKey<Item> inputTag = metal.getItemTag(type);
                 ItemLike requiredItem = type.getItem(inputTag);
                 int duration = (int) (CMRecipeProvider.CASTING_DURATION * type.getDurationFactor());
@@ -142,7 +142,7 @@ public class CastingRecipeGen extends CMRecipeProvider {
 
                 CMRecipeTypes recipeType = type.equals(CMMetals.ItemType.BLOCK) ? CMRecipeTypes.CASTING_IN_BASIN : CMRecipeTypes.CASTING_IN_TABLE;
 
-                String recipeID = metal + "/" + type.getName();
+                String recipeID = metal.getName() + "/" + type.getName();
                 TagKey<Item> inputTag = metal.getItemTag(type);
                 int duration = (int) (CMRecipeProvider.CASTING_DURATION * type.getDurationFactor());
 

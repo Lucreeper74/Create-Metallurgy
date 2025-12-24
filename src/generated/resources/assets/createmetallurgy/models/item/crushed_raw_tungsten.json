@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "createmetallurgy:item/dirty_wolframite_dust"
+    "layer0": "createmetallurgy:item/crushed_raw_tungsten"
   }
 }

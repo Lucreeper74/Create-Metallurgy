@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "createmetallurgy:crafting/materials/raw_wolframite"
+        "recipe": "createmetallurgy:crafting/materials/raw_tungsten"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "createmetallurgy:crafting/materials/raw_wolframite"
+      "createmetallurgy:crafting/materials/raw_tungsten"
     ]
   },
   "sends_telemetry_event": false

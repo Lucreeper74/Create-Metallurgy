@@ -24,10 +24,10 @@ public class MeltingRecipeGen extends CMProcessingRecipesGen {
     protected GeneratedRecipe allMetals() {
         for (CMMetals metal : CMMetals.values()) {
             for (CMMetals.ItemType type : CMMetals.ItemType.values()) {
-                if (type.equals(CMMetals.ItemType.BLOCK))
+                if (type.equals(CMMetals.ItemType.BLOCK) || type.equals(CMMetals.ItemType.RAW_BLOCK))
                     continue; // Skip blocks that can't be melted using Foundry Basin
 
-                String recipeID = metal + "/" + type.getName();
+                String recipeID = metal.getName() + "/" + type.getName();
                 TagKey<Item> inputTag = metal.getItemTag(type);
                 int duration = (int) (CMRecipeProvider.MELTING_DURATION * type.getDurationFactor());
 

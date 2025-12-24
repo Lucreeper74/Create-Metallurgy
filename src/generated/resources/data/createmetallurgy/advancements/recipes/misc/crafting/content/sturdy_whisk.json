@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/steel"
+            "tag": "forge:plates/tungsten"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "createmetallurgy:crafting/materials/ladle_filter"
+        "recipe": "createmetallurgy:crafting/content/sturdy_whisk"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "createmetallurgy:crafting/materials/ladle_filter"
+      "createmetallurgy:crafting/content/sturdy_whisk"
     ]
   },
   "sends_telemetry_event": false
