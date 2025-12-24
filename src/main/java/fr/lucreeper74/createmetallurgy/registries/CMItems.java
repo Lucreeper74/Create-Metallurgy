@@ -20,7 +20,6 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 
 import static com.simibubi.create.AllTags.AllItemTags.*;
-import static com.simibubi.create.AllTags.forgeItemTag;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 import static fr.lucreeper74.createmetallurgy.registries.CMTags.CMItemTags.*;
 import static net.minecraftforge.common.Tags.Items.*;
