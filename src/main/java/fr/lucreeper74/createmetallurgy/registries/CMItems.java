@@ -44,12 +44,12 @@ public class CMItems {
             TUNGSTEN_NUGGET = taggedIngredientFireResistant("tungsten_nugget", CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.NUGGET), NUGGETS),
             TUNGSTEN_WIRE = taggedIngredientFireResistant("tungsten_wire", CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.WIRE), WIRES.tag);
 
-    public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = taggedIngredient("graphite_blank_mold", forgeItemTag("graphite_molds/blank"), GRAPHITE_MOLDS.tag),
-            GRAPHITE_INGOT_MOLD = taggedIngredient("graphite_ingot_mold", forgeItemTag("graphite_molds/ingot"), GRAPHITE_MOLDS.tag),
-            GRAPHITE_NUGGET_MOLD = taggedIngredient("graphite_nugget_mold", forgeItemTag("graphite_molds/nugget"), GRAPHITE_MOLDS.tag),
-            GRAPHITE_PLATE_MOLD = taggedIngredient("graphite_plate_mold", forgeItemTag("graphite_molds/plate"), GRAPHITE_MOLDS.tag),
-            GRAPHITE_ROD_MOLD = taggedIngredient("graphite_rod_mold", forgeItemTag("graphite_molds/rod"), GRAPHITE_MOLDS.tag),
-            GRAPHITE_GEAR_MOLD = taggedIngredient("graphite_gear_mold", forgeItemTag("graphite_molds/gear"), GRAPHITE_MOLDS.tag);
+    public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = taggedIngredient("graphite_blank_mold", GRAPHITE_MOLDS.tag),
+            GRAPHITE_INGOT_MOLD = taggedIngredient("graphite_ingot_mold", GRAPHITE_MOLDS.tag),
+            GRAPHITE_NUGGET_MOLD = taggedIngredient("graphite_nugget_mold", GRAPHITE_MOLDS.tag),
+            GRAPHITE_PLATE_MOLD = taggedIngredient("graphite_plate_mold", GRAPHITE_MOLDS.tag),
+            GRAPHITE_ROD_MOLD = taggedIngredient("graphite_rod_mold", GRAPHITE_MOLDS.tag),
+            GRAPHITE_GEAR_MOLD = taggedIngredient("graphite_gear_mold", GRAPHITE_MOLDS.tag);
 
     // Metal Dust
     public static final ItemEntry<TagDependentIngredientItem> WOLFRAMITE_DUST = compatDust(CMMetals.TUNGSTEN, CMMetals.ItemType.DUST),
