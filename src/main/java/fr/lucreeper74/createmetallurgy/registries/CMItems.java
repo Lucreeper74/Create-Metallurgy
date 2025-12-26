@@ -1,15 +1,12 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.CombustibleItem;
 import com.simibubi.create.foundation.item.TagDependentIngredientItem;
 import com.tterrag.registrate.builders.ItemBuilder;
-import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleStyles;
 import fr.lucreeper74.createmetallurgy.content.items.FoundryUnitItem;
@@ -65,7 +62,6 @@ public class CMItems {
             DIRTY_ZINC_DUST = compatDust(CMMetals.ZINC, CMMetals.ItemType.DIRTY_DUST);
 
 
-
     public static final ItemEntry<Item> SLAG = taggedIngredient("slag", CMTags.CMItemTags.SLAG.tag);
 
 
@@ -90,43 +86,25 @@ public class CMItems {
     public static final ItemEntry<SequencedAssemblyItem>
             INCOMPLETE_INDUSTRIAL_CRUCIBLE = sequencedIngredient("incomplete_industrial_crucible", AllTags.AllItemTags.UPRIGHT_ON_BELT.tag);
 
-    // Logistic
-    static {
-        boolean rareCreated = false;
-        boolean normalCreated = false;
-        for (PackageStyle style : LadleStyles.STYLES) {
-            ItemBuilder<LadleItem, CreateRegistrate> ladleItem = REGISTRATE.item(LadleStyles.getItemId(style).getPath(), p -> new LadleItem(p, style))
-                    .properties(p -> p.stacksTo(1))
-                    .tag(PACKAGES.tag, LADLE.tag, NOT_UPRIGHT_ON_BELT.tag)
-                    .model((c, p) -> {
-                        if (style.rare())
-                            p.withExistingParent(c.getName(), p.modLoc("item/ladle/custom"))
-                                    .texture("2", p.modLoc("item/ladle/community/" + style.type()));
-                        else
-                            p.withExistingParent(c.getName(), p.modLoc("item/ladle/" + style.type()));
-                    })
-                    .lang((style.rare() ? "Rare " : "") + "Transfer Ladle");
-
-            if (rareCreated && style.rare() || normalCreated && !style.rare())
-                ladleItem.setData(ProviderType.LANG, NonNullBiConsumer.noop());
-
-            rareCreated |= style.rare();
-            normalCreated |= !style.rare();
-            ladleItem.register();
-        }
-    }
+    public static final ItemEntry<LadleItem> TRANSFER_LADLE = REGISTRATE.item("transfer_ladle", p ->
+                    new LadleItem(p, LadleStyles.getDefaultStyle()))
+            .properties(p -> p.stacksTo(1))
+            .tag(PACKAGES.tag, LADLE.tag, NOT_UPRIGHT_ON_BELT.tag)
+            .model((c, p) ->
+                    p.withExistingParent(c.getName(), p.modLoc("item/ladle/" + LadleStyles.getDefaultStyle().type())))
+            .register();
 
     //Shortcuts
     private static ItemEntry<TagDependentIngredientItem> compatDust(CMMetals metal, CMMetals.ItemType dustType) {
         if (!dustType.equals(CMMetals.ItemType.DIRTY_DUST) && !dustType.equals(CMMetals.ItemType.DUST))
             return null;
 
-        ItemBuilder<TagDependentIngredientItem, CreateRegistrate>  itemEntry = REGISTRATE
+        ItemBuilder<TagDependentIngredientItem, CreateRegistrate> itemEntry = REGISTRATE
                 .item((dustType.equals(CMMetals.ItemType.DIRTY_DUST) ? "dirty_" : "") + metal.getName() + "_dust",
                         props -> new TagDependentIngredientItem(props, metal.getItemTag(dustType)))
                 .tag(metal.getItemTag(dustType));
 
-        switch(dustType) {
+        switch (dustType) {
             case DIRTY_DUST -> itemEntry.tag(DIRTY_DUSTS.tag);
             case DUST -> itemEntry.tag(DUSTS);
         }

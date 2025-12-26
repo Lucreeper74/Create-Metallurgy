@@ -44,15 +44,11 @@ public class CMPartialModels {
             BULB_TUBES_GLOW.put(color, block("light_bulb/tube_glow/" + CMLang.asId(color.name())));
         }
     }
-//
-//    public static final Map<ResourceLocation, PartialModel> LADLES = new HashMap<>();
-//    public static final List<PartialModel> LADLES_TO_HIDE_AS = new ArrayList<>();
-//    public static final Map<ResourceLocation, PartialModel> LADLE_HANDLE = new HashMap<>();
 
     static {
-        for (PackageStyle style : LadleStyles.STYLES) {
-            ResourceLocation key = LadleStyles.getItemId(style);
-            PartialModel model = PartialModel.of(CreateMetallurgy.genRL("item/" + key.getPath()));
+        for (PackageStyle style : LadleStyles.ALL_STYLES) {
+            ResourceLocation key = LadleStyles.getStyleId(style);
+            PartialModel model = PartialModel.of(CreateMetallurgy.genRL("item/ladle/" + key.getPath()));
             AllPartialModels.PACKAGES.put(key, model);
             AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(LadleStyles.getHandleModel()));
         }

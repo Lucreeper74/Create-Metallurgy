@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.content.entities.ladle;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllPartialModels;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import dev.engine_room.flywheel.lib.instance.InstanceTypes;
@@ -10,9 +9,7 @@ import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import dev.engine_room.flywheel.lib.visual.AbstractEntityVisual;
 import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class LadleVisual extends AbstractEntityVisual<LadleEntity> implements SimpleDynamicVisual {
     public final TransformedInstance instance;
@@ -22,10 +19,7 @@ public class LadleVisual extends AbstractEntityVisual<LadleEntity> implements Si
     public LadleVisual(VisualizationContext ctx, LadleEntity entity, float partialTick) {
         super(ctx, entity, partialTick);
 
-        ItemStack box = entity.box;
-        if (box.isEmpty() || !LadleItem.isPackage(box))
-            box = AllBlocks.CARDBOARD_BLOCK.asStack();
-        PartialModel model = AllPartialModels.PACKAGES.get(ForgeRegistries.ITEMS.getKey(box.getItem()));
+        PartialModel model = AllPartialModels.PACKAGES.get(LadleStyles.getStyleId(LadleStyles.getRandomStyle()));
 
         instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(model))
                 .createInstance();

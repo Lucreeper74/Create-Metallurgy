@@ -11,8 +11,8 @@ import com.simibubi.create.foundation.gui.widget.SelectionScrollInput;
 import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleFluidHandler;
-import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleStyles;
 import fr.lucreeper74.createmetallurgy.content.items.ladle_filter.LadleFilterScreenPacket.Type;
+import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import fr.lucreeper74.createmetallurgy.registries.CMPackets;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.createmod.catnip.gui.element.GuiGameElement;
@@ -165,7 +165,7 @@ public class LadleFilterScreen extends AbstractFilterScreen<LadleFilterMenu> {
         PoseStack ms = graphics.pose();
         ms.pushPose();
         ms.translate(leftPos + 16, topPos + 23, 0);
-        GuiGameElement.of(LadleStyles.getDefault())
+        GuiGameElement.of(CMItems.TRANSFER_LADLE)
                 .render(graphics);
         ms.popPose();
     }

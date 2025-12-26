@@ -50,10 +50,12 @@ public class LadleItem extends PackageItem {
     public LadleItem(Properties properties, PackageStyle style) {
         super(properties, style);
 
+        this.style = LadleStyles.getRandomStyle();
+
         PackageStyles.ALL_BOXES.remove(this); // Avoid touching Create's packages
         PackageStyles.STANDARD_BOXES.remove(this);
-
-        LadleStyles.ALL_LADLES.add(this);
+//        LadleStyles.ALL_STYLES.add(this);
+//        (style.rare() ? LadleStyles.RARE_LADLES_STYLES : LadleStyles.STANDARD_LADLES_STYLES).add(this);
     }
 
     public static boolean isLadle(ItemStack stack) {

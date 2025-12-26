@@ -1,10 +1,5 @@
 {
   "values": [
-    "createmetallurgy:ghast_ladle",
-    "createmetallurgy:cute_ladle",
-    "createmetallurgy:old_ladle",
-    "createmetallurgy:strider_ladle",
-    "createmetallurgy:restingphantom_ladle",
-    "createmetallurgy:the_cooler_ladle"
+    "createmetallurgy:transfer_ladle"
   ]
 }
