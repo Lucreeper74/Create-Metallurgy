@@ -9,6 +9,8 @@ import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -27,12 +29,22 @@ public class CastingBasinBlockEntity extends CastingBlockEntity implements IHave
         super(type, pos, state);
     }
 
+    @Override
+    protected void playProcessSound() {
+        float pitch = 1f - level.random.nextFloat() * .4f;
+
+        level.playLocalSound(worldPosition,
+                SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, .5f, pitch, false);
+    }
+
+    @Override
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
         return r.getType() == CMRecipeTypes.CASTING_IN_BASIN.getType();
     }
 
     private static final Object CastingInBasinRecipesKey = new Object();
 
+    @Override
     protected Object getRecipeCacheKey() {
         return CastingInBasinRecipesKey;
     }

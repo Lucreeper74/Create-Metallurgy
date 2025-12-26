@@ -1,5 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.casting.table;
 
+import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockEntity;
@@ -9,6 +10,8 @@ import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -27,12 +30,24 @@ public class CastingTableBlockEntity extends CastingBlockEntity implements IHave
         super(type, pos, state);
     }
 
+    @Override
+    protected void playProcessSound() {
+        float pitch = 1f - level.random.nextFloat() * .4f;
+
+        level.playLocalSound(worldPosition,
+                SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 1f, pitch, false);
+        AllSoundEvents.STEAM.playAt(level,
+                worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), .2f, pitch, false);
+    }
+
+    @Override
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
         return r.getType() == CMRecipeTypes.CASTING_IN_TABLE.getType();
     }
 
     private static final Object CastingInTableRecipesKey = new Object();
 
+    @Override
     protected Object getRecipeCacheKey() {
         return CastingInTableRecipesKey;
     }

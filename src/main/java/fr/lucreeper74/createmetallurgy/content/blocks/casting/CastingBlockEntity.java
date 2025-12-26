@@ -1,5 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.casting;
 
+import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
@@ -19,8 +20,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -153,22 +152,29 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
         }
 
         if (running) {
-            if (currentRecipe == null) { //Was running on unload, fetch old recipe
+            if (currentRecipe == null) { // Was running on unload, fetch old recipe
                 List<Recipe<?>> recipes = getMatchingRecipes();
                 if (!recipes.isEmpty())
                     currentRecipe = (CastingRecipe) recipes.get(0);
             }
 
-            if (!level.isClientSide) {
-                if (canProcess()) {
-                    if (processingTick <= 0)
-                        process();
-                } else
-                    reset();
-            } else
+            if (level.isClientSide)
                 spawnParticles();
 
-            if (processingTick >= 0) {
+            if (!canProcess()) {
+                reset();
+                return;
+            }
+
+            if (processingTick <= 0) {
+                // Recipe finished, process
+                if (!level.isClientSide)
+                    process();
+                else
+                    playProcessSound();
+
+            } else {
+                // Currently casting, counter handling
                 if (isInAirCurrent(this.getLevel(), this.getBlockPos(), this))
                     processingTick -= 2;
                 else
@@ -195,10 +201,8 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
 
         if (currentRecipe.isMoldConsumed())
             moldInv.setStackInSlot(0, ItemStack.EMPTY);
-
-        level.playSound(null, worldPosition, SoundEvents.LAVA_EXTINGUISH,
-                SoundSource.BLOCKS, .2f, .5f);
         reset();
+        sendData();
     }
 
     public boolean canProcess() {
@@ -293,6 +297,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
         return fluidBuffer;
     }
 
+    protected abstract void playProcessSound();
 
     protected abstract <C extends Container> boolean matchStaticFilters(Recipe<C> recipe);
 
