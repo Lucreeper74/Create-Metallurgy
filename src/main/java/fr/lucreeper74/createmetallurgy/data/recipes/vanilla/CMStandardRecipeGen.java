@@ -195,7 +195,14 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
     LADLE_FILTER = create(CMItems.LADLE_FILTER).unlockedByTag(T::steelIngot).returns(2)
             .viaShaped(b -> b.define('W', ItemTags.WOOL)
                     .define('S', T.steelIngot())
-                    .pattern("SW"))
+                    .pattern("SW")),
+
+    TRANSFER_LADLE = create(CMItems.TRANSFER_LADLE).unlockedByTag(T::steelIngot).returns(2)
+            .viaShaped(b -> b.define('S', T.steelIngot())
+                    .define('A', T.andesiteAlloy())
+                    .define('M', T.refractoryMortar())
+                    .pattern("SMS")
+                    .pattern(" A "))
     ;
 
     //

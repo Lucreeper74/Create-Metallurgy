@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "create:andesite_alloy"
+    },
+    "M": {
+      "item": "createmetallurgy:refractory_mortar"
+    },
+    "S": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "pattern": [
+    "SMS",
+    " A "
+  ],
+  "result": {
+    "count": 2,
+    "item": "createmetallurgy:transfer_ladle"
+  },
+  "show_notification": true
+}
