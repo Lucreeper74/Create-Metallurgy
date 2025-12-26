@@ -96,9 +96,9 @@ public class LadleEntity extends LivingEntity implements IEntityAdditionalSpawnD
                 .scale(1.5f));
         LadleEntity.originalEntity = originalEntity;
 
-        if (world != null && !world.isClientSide)
+        if (!world.isClientSide)
             if (ChuteBlock.isChute(world.getBlockState(BlockPos.containing(position.x, position.y + .5f, position.z))))
-                LadleEntity.setYRot(((int) LadleEntity.getYRot()) / 90 * 90);
+                LadleEntity.setYRot((float) ((int) LadleEntity.getYRot()) / 90 * 90);
 
         return LadleEntity;
     }
