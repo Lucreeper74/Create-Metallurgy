@@ -16,11 +16,9 @@
         {
           "item": "createmetallurgy:incomplete_industrial_crucible"
         },
-        [
-          {
-            "item": "createmetallurgy:refractory_mortar"
-          }
-        ]
+        {
+          "item": "createmetallurgy:refractory_mortar"
+        }
       ],
       "results": [
         {
@@ -34,11 +32,9 @@
         {
           "item": "createmetallurgy:incomplete_industrial_crucible"
         },
-        [
-          {
-            "tag": "forge:plates/obdurium"
-          }
-        ]
+        {
+          "tag": "forge:plates/obdurium"
+        }
       ],
       "results": [
         {

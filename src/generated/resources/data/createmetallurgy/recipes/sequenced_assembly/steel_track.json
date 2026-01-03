@@ -6,8 +6,8 @@
   "loops": 1,
   "results": [
     {
-      "item": "create:track",
-      "count": 12
+      "count": 12,
+      "item": "create:track"
     }
   ],
   "sequence": [
@@ -17,11 +17,9 @@
         {
           "item": "create:incomplete_track"
         },
-        [
-          {
-            "tag": "forge:ingots/steel"
-          }
-        ]
+        {
+          "tag": "forge:ingots/steel"
+        }
       ],
       "results": [
         {
@@ -35,11 +33,9 @@
         {
           "item": "create:incomplete_track"
         },
-        [
-          {
-            "tag": "forge:ingots/steel"
-          }
-        ]
+        {
+          "tag": "forge:ingots/steel"
+        }
       ],
       "results": [
         {
