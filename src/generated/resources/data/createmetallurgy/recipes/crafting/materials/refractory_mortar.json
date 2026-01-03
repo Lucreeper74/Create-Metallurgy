@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "createmetallurgy:refractory_mortar_ball"
+    }
+  },
+  "pattern": [
+    "MM",
+    "MM"
+  ],
+  "result": {
+    "item": "createmetallurgy:refractory_mortar"
+  },
+  "show_notification": true
+}

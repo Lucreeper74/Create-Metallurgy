@@ -23,7 +23,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
@@ -109,7 +108,7 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
                     .requires(Items.COAL, 8)),
 
     SANDPAPER_BELT = create(CMItems.SANDPAPER_BELT).unlockedByTag(T::sandpaper)
-            .viaShaped(b -> b.define('D', Tags.Items.SAND_COLORLESS)
+            .viaShaped(b -> b.define('D', T.sandpaper())
                     .pattern("DDD")
                     .pattern("DDD")),
 
@@ -128,7 +127,17 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
             .viaCookingTag(T::coal)
             .rewardXP(.5f)
             .forDuration(200)
-            .inBlastFurnace();
+            .inBlastFurnace(),
+
+    REFRACTORY_MORTAR_BLOCK = create(CMBlocks.REFRACTORY_MORTAR).unlockedBy(T::refractoryMortar)
+            .viaShaped(b -> b.define('M', T.refractoryMortarBall())
+                    .pattern("MM")
+                    .pattern("MM")),
+
+    REFRACTORY_MORTAR_BALL = create(CMItems.REFRACTORY_MORTAR_BALL).withSuffix("_from_block")
+            .returns(4)
+            .unlockedBy(T::refractoryMortar)
+            .viaShapeless(b -> b.requires(T.refractoryMortar()));
 
 
     private Marker CONTENT = enterFolder("content");
@@ -195,14 +204,7 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
     LADLE_FILTER = create(CMItems.LADLE_FILTER).unlockedByTag(T::steelIngot).returns(2)
             .viaShaped(b -> b.define('W', ItemTags.WOOL)
                     .define('S', T.steelIngot())
-                    .pattern("SW")),
-
-    TRANSFER_LADLE = create(CMItems.TRANSFER_LADLE).unlockedByTag(T::steelIngot).returns(2)
-            .viaShaped(b -> b.define('S', T.steelIngot())
-                    .define('A', T.andesiteAlloy())
-                    .define('M', T.refractoryMortar())
-                    .pattern("SMS")
-                    .pattern(" A "))
+                    .pattern("SW"))
     ;
 
     //
