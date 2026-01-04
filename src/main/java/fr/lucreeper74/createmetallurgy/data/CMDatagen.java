@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMProcessingRecipesGen;
+import fr.lucreeper74.createmetallurgy.data.recipes.create.CMSequencedAssemblyRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.vanilla.CMStandardRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.CastingRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.FoundryRecipeGen;
@@ -30,6 +31,7 @@ public class CMDatagen {
             gen.addProvider(true, new CMStandardRecipeGen(output));
             gen.addProvider(true, new CastingRecipeGen(output));
             gen.addProvider(true, new FoundryRecipeGen(output));
+            gen.addProvider(true, new CMSequencedAssemblyRecipeGen(output));
 
             CMProcessingRecipesGen.registerAll(gen, output);
             gen.addProvider(event.includeServer(), new CMGenEntriesProvider(output, event.getLookupProvider()));

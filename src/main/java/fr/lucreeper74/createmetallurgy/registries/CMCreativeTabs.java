@@ -98,7 +98,8 @@ public class CMCreativeTabs {
             Set<Item> exclusions = new ReferenceOpenHashSet<>();
 
             List<ItemProviderEntry<?>> simpleExclusions = List.of(
-                    CMItems.INCOMPLETE_INDUSTRIAL_CRUCIBLE
+                    CMItems.INCOMPLETE_INDUSTRIAL_CRUCIBLE,
+                    CMItems.INCOMPLETE_LADLE_FRAME
             );
 
             List<TagDependentBucketItem> tagDependentExclusions = CMFluids.ALL_MODDED_FLUIDS.stream()

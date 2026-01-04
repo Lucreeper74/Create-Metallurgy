@@ -13,6 +13,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
 public class FoundryUnitItem extends Item {
+
     public FoundryUnitItem(Properties properties) {
         super(properties);
     }

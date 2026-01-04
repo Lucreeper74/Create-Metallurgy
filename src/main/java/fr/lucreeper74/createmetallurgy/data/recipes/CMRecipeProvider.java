@@ -2,6 +2,7 @@ package fr.lucreeper74.createmetallurgy.data.recipes;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import com.simibubi.create.AllTags;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
@@ -57,7 +58,11 @@ public abstract class CMRecipeProvider extends RecipeProvider {
 
         /* Create tags / Items */
         public static TagKey<Item> sandpaper() {
-            return Tags.Items.SAND_COLORLESS;
+            return AllTags.AllItemTags.SANDPAPER.tag;
+        }
+
+        public static TagKey<Item> sleepers() {
+            return AllTags.AllItemTags.SLEEPERS.tag;
         }
 
         public static ItemLike andesiteAlloy() {
@@ -88,6 +93,10 @@ public abstract class CMRecipeProvider extends RecipeProvider {
 
         public static ItemLike refractoryMortar() {
             return CMBlocks.REFRACTORY_MORTAR.get();
+        }
+
+        public static ItemLike refractoryMortarBall() {
+            return CMItems.REFRACTORY_MORTAR_BALL.get();
         }
 
         public static TagKey<Item> coke() {
@@ -125,6 +134,5 @@ public abstract class CMRecipeProvider extends RecipeProvider {
         public static TagKey<Item> steelIngot() {
             return CMMetals.STEEL.getItemTag(CMMetals.ItemType.INGOT);
         }
-
     }
 }
