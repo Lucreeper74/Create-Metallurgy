@@ -50,12 +50,16 @@ public class LadleItem extends PackageItem {
     public LadleItem(Properties properties, PackageStyle style) {
         super(properties, style);
 
-        this.style = LadleStyles.getRandomStyle();
+        LadleStyles.ALL_LADLES.add(this);
+        PackageStyles.ALL_BOXES.remove(this); // Avoid touching Create's packages list
 
-        PackageStyles.ALL_BOXES.remove(this); // Avoid touching Create's packages
-        PackageStyles.STANDARD_BOXES.remove(this);
-//        LadleStyles.ALL_STYLES.add(this);
-//        (style.rare() ? LadleStyles.RARE_LADLES_STYLES : LadleStyles.STANDARD_LADLES_STYLES).add(this);
+        if (style.rare()) {
+            LadleStyles.RARE_LADLES.add(this);
+            PackageStyles.RARE_BOXES.remove(this);
+        } else {
+            LadleStyles.STANDARD_LADLES.add(this);
+            PackageStyles.STANDARD_BOXES.remove(this);
+        }
     }
 
     public static boolean isLadle(ItemStack stack) {

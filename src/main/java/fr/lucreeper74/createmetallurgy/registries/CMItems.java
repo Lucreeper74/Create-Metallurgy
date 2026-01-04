@@ -1,12 +1,14 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.AllTags;
+import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.CombustibleItem;
 import com.simibubi.create.foundation.item.TagDependentIngredientItem;
 import com.tterrag.registrate.builders.ItemBuilder;
+import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleStyles;
 import fr.lucreeper74.createmetallurgy.content.items.FoundryUnitItem;
@@ -73,26 +75,42 @@ public class CMItems {
     public static final ItemEntry<FoundryUnitItem> FOUNDRY_UNIT = REGISTRATE.item("foundry_unit", FoundryUnitItem::new)
             .register();
 
+    public static final ItemEntry<LadleFilterItem> LADLE_FILTER = REGISTRATE.item("ladle_filter", LadleFilterItem::new)
+            .register();
 
     public static final ItemEntry<Item> GRAPHITE = taggedIngredient("graphite", CMTags.CMItemTags.GRAPHITE.tag),
             STEEL_INGOT = taggedIngredient("steel_ingot", CMMetals.STEEL.getItemTag(CMMetals.ItemType.INGOT), Tags.Items.INGOTS),
             STURDY_WHISK = REGISTRATE.item("sturdy_whisk", Item::new).register(),
             TUNGSTEN_WIRE_SPOOL = REGISTRATE.item("tungsten_wire_spool", Item::new).register(),
-            SANDPAPER_BELT = REGISTRATE.item("sandpaper_belt", Item::new).register();
-
-    public static final ItemEntry<LadleFilterItem> LADLE_FILTER = REGISTRATE.item("ladle_filter", LadleFilterItem::new)
-            .register();
+            SANDPAPER_BELT = REGISTRATE.item("sandpaper_belt", Item::new).register(),
+            REFRACTORY_MORTAR_BALL = REGISTRATE.item("refractory_mortar_ball", Item::new).register();
 
     public static final ItemEntry<SequencedAssemblyItem>
-            INCOMPLETE_INDUSTRIAL_CRUCIBLE = sequencedIngredient("incomplete_industrial_crucible", AllTags.AllItemTags.UPRIGHT_ON_BELT.tag);
+            INCOMPLETE_INDUSTRIAL_CRUCIBLE = sequencedIngredient("incomplete_industrial_crucible", UPRIGHT_ON_BELT.tag),
+            INCOMPLETE_LADLE_FRAME = sequencedIngredient("incomplete_ladle_frame", UPRIGHT_ON_BELT.tag);
 
-    public static final ItemEntry<LadleItem> TRANSFER_LADLE = REGISTRATE.item("transfer_ladle", p ->
-                    new LadleItem(p, LadleStyles.getDefaultStyle()))
-            .properties(p -> p.stacksTo(1))
-            .tag(PACKAGES.tag, LADLE.tag, NOT_UPRIGHT_ON_BELT.tag)
-            .model((c, p) ->
-                    p.withExistingParent(c.getName(), p.modLoc("item/ladle/" + LadleStyles.getDefaultStyle().type())))
-            .register();
+    static {
+        boolean rareCreated = false;
+        boolean normalCreated = false;
+        for (PackageStyle style : LadleStyles.LADLES_STYLES) {
+            ItemBuilder<LadleItem, CreateRegistrate> ladleItem = REGISTRATE.item(LadleStyles.getItemId(style).getPath(), p -> new LadleItem(p, style))
+                    .properties(p -> p.stacksTo(1))
+                    .tag(PACKAGES.tag, LADLE.tag, NOT_UPRIGHT_ON_BELT.tag)
+                    .model((c, p) -> {
+                        if (style.rare())
+                            p.withExistingParent(c.getName(), p.modLoc("item/ladle/custom"))
+                                    .texture("2", p.modLoc("item/ladle/community/" + style.type()));
+                        else
+                            p.withExistingParent(c.getName(), p.modLoc("item/ladle/" + style.type()));
+                    })
+                    .lang((style.rare() ? "Rare " : "") + "Transfer Ladle");
+            if (rareCreated && style.rare() || normalCreated && !style.rare())
+                ladleItem.setData(ProviderType.LANG, NonNullBiConsumer.noop());
+            rareCreated |= style.rare();
+            normalCreated |= !style.rare();
+            ladleItem.register();
+        }
+    }
 
     //Shortcuts
     private static ItemEntry<TagDependentIngredientItem> compatDust(CMMetals metal, CMMetals.ItemType dustType) {
@@ -132,6 +150,7 @@ public class CMItems {
                 .register();
     }
 
+    @SafeVarargs
     private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name, TagKey<Item>... tags) {
         return REGISTRATE.item(name, SequencedAssemblyItem::new)
                 .tag(tags)

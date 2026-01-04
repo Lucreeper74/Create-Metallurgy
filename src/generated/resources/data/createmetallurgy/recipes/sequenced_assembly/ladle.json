@@ -1,0 +1,97 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "create:andesite_alloy"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "chance": 249.75,
+      "item": "createmetallurgy:ghast_transfer_ladle"
+    },
+    {
+      "chance": 249.75,
+      "item": "createmetallurgy:cute_transfer_ladle"
+    },
+    {
+      "chance": 249.75,
+      "item": "createmetallurgy:old_transfer_ladle"
+    },
+    {
+      "chance": 249.75,
+      "item": "createmetallurgy:strider_transfer_ladle"
+    },
+    {
+      "chance": 0.5,
+      "item": "createmetallurgy:restingphantom_transfer_ladle"
+    },
+    {
+      "chance": 0.5,
+      "item": "createmetallurgy:the_cooler_transfer_ladle"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createmetallurgy:incomplete_ladle_frame"
+        },
+        {
+          "tag": "forge:ingots/steel"
+        }
+      ],
+      "results": [
+        {
+          "item": "createmetallurgy:incomplete_ladle_frame"
+        }
+      ]
+    },
+    {
+      "type": "createmetallurgy:grinding",
+      "ingredients": [
+        {
+          "item": "createmetallurgy:incomplete_ladle_frame"
+        }
+      ],
+      "processingTime": 40,
+      "results": [
+        {
+          "item": "createmetallurgy:incomplete_ladle_frame"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createmetallurgy:incomplete_ladle_frame"
+        },
+        {
+          "item": "createmetallurgy:refractory_mortar_ball"
+        }
+      ],
+      "results": [
+        {
+          "item": "createmetallurgy:incomplete_ladle_frame"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createmetallurgy:incomplete_ladle_frame"
+        }
+      ],
+      "results": [
+        {
+          "item": "createmetallurgy:incomplete_ladle_frame"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "createmetallurgy:incomplete_ladle_frame"
+  }
+}

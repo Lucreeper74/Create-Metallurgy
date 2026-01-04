@@ -46,9 +46,9 @@ public class CMPartialModels {
     }
 
     static {
-        for (PackageStyle style : LadleStyles.ALL_STYLES) {
-            ResourceLocation key = LadleStyles.getStyleId(style);
-            PartialModel model = PartialModel.of(CreateMetallurgy.genRL("item/ladle/" + key.getPath()));
+        for (PackageStyle style : LadleStyles.LADLES_STYLES) {
+            ResourceLocation key = LadleStyles.getItemId(style);
+            PartialModel model = PartialModel.of(CreateMetallurgy.genRL("item/" + key.getPath()));
             AllPartialModels.PACKAGES.put(key, model);
             AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(LadleStyles.getHandleModel()));
         }

@@ -1,0 +1,6 @@
+{
+  "parent": "createmetallurgy:item/ladle/custom",
+  "textures": {
+    "2": "createmetallurgy:item/ladle/community/restingphantom"
+  }
+}
