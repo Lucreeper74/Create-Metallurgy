@@ -15,6 +15,7 @@ import net.minecraftforge.fluids.FluidUtil;
 import java.util.Optional;
 
 public class LadleItemRenderer extends CustomRenderedItemModelRenderer {
+
     public void render(ItemStack box, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext displayContext, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         renderer.render(model.getOriginalModel(), light);
         ms.pushPose();

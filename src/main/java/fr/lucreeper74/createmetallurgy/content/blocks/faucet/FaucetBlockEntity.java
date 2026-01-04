@@ -216,23 +216,6 @@ public class FaucetBlockEntity extends SmartBlockEntity {
             }
         }
 
-
-//        int filled = targetTank instanceof SmartFluidTankBehaviour.InternalFluidHandler
-//                ? ((SmartFluidTankBehaviour.InternalFluidHandler) targetTank).forceFill(drained, FluidAction.SIMULATE)
-//                : targetTank.fill(drained, FluidAction.SIMULATE);
-//
-//        if (filled > 0) {
-//            drained = inputTank.drain(filled, FluidAction.EXECUTE);
-//            filled = targetTank instanceof SmartFluidTankBehaviour.InternalFluidHandler
-//                    ? ((SmartFluidTankBehaviour.InternalFluidHandler) targetTank).forceFill(drained, FluidAction.EXECUTE)
-//                    : targetTank.fill(drained, FluidAction.EXECUTE);
-//
-//            if (!renderFluid.isFluidEqual(drained)) {
-//                renderFluid = drained;
-//                sendData();
-//            }
-//        }
-
         return filled;
     }
 
