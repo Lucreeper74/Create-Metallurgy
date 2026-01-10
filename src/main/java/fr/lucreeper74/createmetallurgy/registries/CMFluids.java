@@ -9,6 +9,8 @@ import fr.lucreeper74.createmetallurgy.content.fluids.TagDependentBucketItem;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
@@ -101,6 +103,11 @@ public class  CMFluids {
                 .bucket()
                 .build()
                 .register();
+    }
+
+    @Deprecated
+    public static boolean isMoltenMaterial(Fluid fluid) {
+        return fluid.is(CMTags.CMFluidTags.MOLTEN_MATERIAL.tag) || fluid.is(FluidTags.LAVA);
     }
 
     public static void register() {}

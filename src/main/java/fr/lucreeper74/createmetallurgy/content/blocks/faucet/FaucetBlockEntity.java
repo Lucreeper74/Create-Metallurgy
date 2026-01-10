@@ -7,7 +7,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleEntity;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import fr.lucreeper74.createmetallurgy.registries.CMDamageTypes;
-import fr.lucreeper74.createmetallurgy.registries.CMTags;
+import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
@@ -15,7 +15,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -35,7 +34,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import java.util.List;
 
-import static fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleFluidHandler.LADLE_CAPACITY;
+import static fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem.LADLE_CAPACITY;
 import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
 
 public class FaucetBlockEntity extends SmartBlockEntity {
@@ -153,7 +152,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         List<Entity> entities = getLevel().getEntities(null, getRenderBoundingBox()); // Blacklist entities in the parameter
 
         for (Entity entity : entities) {
-            if (spilledFluid.is(CMTags.CMFluidTags.MOLTEN_MATERIAL.tag) || spilledFluid.is(FluidTags.LAVA)) {
+            if (CMFluids.isMoltenMaterial(spilledFluid)) {
                 if (!entity.fireImmune()) {
                     entity.setSecondsOnFire(MOLTEN_FLUID_BURNING_TIME);
                     if (entity.hurt(CMDamageTypes.moltenFluid(entity.level()), 4.0F))
