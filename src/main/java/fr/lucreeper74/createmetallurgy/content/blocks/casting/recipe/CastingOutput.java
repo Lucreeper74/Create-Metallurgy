@@ -3,6 +3,7 @@ package fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -10,6 +11,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Iterator;
@@ -41,8 +43,7 @@ public abstract class CastingOutput {
         JsonObject json = je.getAsJsonObject();
         int count = GsonHelper.getAsInt(json, "count", 1);
         if (json.has("item")) {
-            String itemId = GsonHelper.getAsString(json, "item");
-            ItemStack itemstack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemId)), count);
+            ItemStack itemstack = CraftingHelper.getItemStack(json, true, true);
             return CastingOutput.fromStack(itemstack);
         } else if (json.has("tag")) {
             String rawTag = GsonHelper.getAsString(json, "tag");
@@ -82,6 +83,8 @@ public abstract class CastingOutput {
             int count = stack.getCount();
             if (count > 1)
                 json.addProperty("count", count);
+            if (stack.hasTag())
+                json.add("nbt", JsonParser.parseString(stack.getTag().toString()));
             return json;
         }
     }
