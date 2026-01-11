@@ -22,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.network.PlayMessages.SpawnEntity;
 
@@ -73,7 +74,8 @@ public class LadleEntity extends PackageEntity implements IHaveGoggleInformation
             if (!(box.getItem() instanceof LadleItem))
                 return;
 
-            if (!CMFluids.isMoltenMaterial(FluidUtil.getFluidContained(box).get().getFluid()))
+            FluidStack containedFluid = FluidUtil.getFluidContained(box).orElse(FluidStack.EMPTY);
+            if (!CMFluids.isMoltenMaterial(containedFluid.getFluid()))
                 return;
 
             spawnParticles(level(), getEyePosition());
