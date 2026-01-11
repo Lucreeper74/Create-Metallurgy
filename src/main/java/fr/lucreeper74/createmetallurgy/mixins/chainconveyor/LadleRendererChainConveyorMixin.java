@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.mixins;
+package fr.lucreeper74.createmetallurgy.mixins.chainconveyor;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ChainConveyorRenderer.class)
 public class LadleRendererChainConveyorMixin {
+
     @WrapOperation(
             method = "renderBox",
             at = @At(

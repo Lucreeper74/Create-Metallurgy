@@ -1,6 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
+  "mixinextras": {
+    "minVersion": "0.5.0"
+  },
   "package": "fr.lucreeper74.createmetallurgy.mixins",
   "compatibilityLevel": "JAVA_17",
   "refmap": "createmetallurgy.refmap.json",
@@ -8,7 +11,10 @@
     "BlockMovementCheckMixin",
     "FilterItemStackCreationMixin",
     "FoundryBasinCheckMixin",
-    "LadleRendererChainConveyorMixin"
+    "accessors.PackageEntityAccessor",
+    "chainconveyor.LadleChainConveyorBEMixin",
+    "chainconveyor.LadleRendererChainConveyorMixin",
+    "chainconveyor.LadleVisualChainConveyorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

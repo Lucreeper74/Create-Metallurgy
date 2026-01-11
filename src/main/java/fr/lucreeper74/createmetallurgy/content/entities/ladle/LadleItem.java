@@ -31,21 +31,25 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-
-import static fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleFluidHandler.LADLE_CAPACITY;
+import java.util.function.Predicate;
 
 public class LadleItem extends PackageItem {
+    public static final int LADLE_CAPACITY = 9000; // in mb
 
     public LadleItem(Properties properties, PackageStyle style) {
         super(properties, style);
@@ -100,6 +104,7 @@ public class LadleItem extends PackageItem {
 
     public static FluidTank getFluidContents(ItemStack ladle) {
         FluidTank newTank = new FluidTank(LADLE_CAPACITY);
+        newTank.setValidator(Predicate.not(fluidStack -> fluidStack.getFluid().getFluidType().isLighterThanAir()));
         CompoundTag fluidNBT = ladle.getTagElement("Fluid");
         if (fluidNBT != null && !fluidNBT.isEmpty())
             newTank.readFromNBT(fluidNBT);
@@ -261,7 +266,7 @@ public class LadleItem extends PackageItem {
     }
 
     @Override
-    public String getDescriptionId() {
+    public @NotNull String getDescriptionId() {
         return "item." + CreateMetallurgy.MOD_ID + (style.rare() ? ".rare_ladle" : ".ladle");
     }
 
@@ -272,13 +277,11 @@ public class LadleItem extends PackageItem {
 
     @Override
     public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        if (this.getClass() == LadleItem.class)
-            return new LadleFluidHandler(stack);
-        else
-            return super.initCapabilities(stack, nbt);
+        return new FluidHandlerItemStack(stack, LADLE_CAPACITY);
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(SimpleCustomRenderer.create(this, new LadleItemRenderer()));
         super.initializeClient(consumer);

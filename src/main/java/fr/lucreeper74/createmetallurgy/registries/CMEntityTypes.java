@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
 import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
@@ -9,7 +8,6 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleEntity;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleRenderer;
-import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleVisual;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -22,7 +20,6 @@ public class CMEntityTypes {
 
     public static final EntityEntry<LadleEntity> LADLE = register("ladle", LadleEntity::new, () -> LadleRenderer::new,
             MobCategory.MISC, 10, 3, true, true, LadleEntity::build)
-            .visual(() -> LadleVisual::new, true)
             .register();
 
     //
@@ -46,7 +43,7 @@ public class CMEntityTypes {
     }
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        event.put(LADLE.get(), PackageEntity.createPackageAttributes()
+        event.put(LADLE.get(), LadleEntity.createPackageAttributes()
                 .build());
     }
 
