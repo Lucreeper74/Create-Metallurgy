@@ -10,7 +10,7 @@ import com.simibubi.create.foundation.gui.widget.ScrollInput;
 import com.simibubi.create.foundation.gui.widget.SelectionScrollInput;
 import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleFluidHandler;
+import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleStyles;
 import fr.lucreeper74.createmetallurgy.content.items.ladle_filter.LadleFilterScreenPacket.Type;
 import fr.lucreeper74.createmetallurgy.registries.CMPackets;
@@ -123,7 +123,7 @@ public class LadleFilterScreen extends AbstractFilterScreen<LadleFilterMenu> {
         filledAmount = new ScrollInput(x + 55, y + 55, 46, 18)
                 .titled(filledAmountTitle)
                 .addHint(filledAmountHint)
-                .withRange(-1, LadleFluidHandler.LADLE_CAPACITY + 1)
+                .withRange(-1, LadleItem.LADLE_CAPACITY + 1)
                 .calling(state -> sendScrollInputs())
                 .withStepFunction(sc ->
                         filledAmount.getState() < 0 ? 1 :
