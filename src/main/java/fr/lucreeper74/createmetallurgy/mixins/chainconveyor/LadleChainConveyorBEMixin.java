@@ -2,8 +2,6 @@ package fr.lucreeper74.createmetallurgy.mixins.chainconveyor;
 
 import com.simibubi.create.content.kinetics.chainConveyor.ChainConveyorBlockEntity;
 import com.simibubi.create.content.kinetics.chainConveyor.ChainConveyorPackage;
-import com.simibubi.create.content.logistics.box.PackageEntity;
-import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleEntity;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
@@ -12,7 +10,6 @@ import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidStack;
@@ -21,7 +18,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
@@ -32,21 +28,23 @@ import static fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleFluidV
 @Mixin(ChainConveyorBlockEntity.class)
 public class LadleChainConveyorBEMixin {
 
-    @Redirect(
+    @Inject(
             method = "drop",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"
-            ),
+            at = @At("HEAD"),
+            cancellable = true,
             remap = false
     )
-    private boolean dropRedirected(Level level, Entity originalEntity, ChainConveyorPackage box) {
-        if (box.item.getItem() instanceof LadleItem)
-            return level.addFreshEntity(LadleEntity.fromItemStack(level, box.worldPosition.subtract(0, .5f, 0), box.item));
-        else if (box.item.getItem() instanceof PackageItem)
-            return level.addFreshEntity(PackageEntity.fromItemStack(level, box.worldPosition.subtract(0, .5f, 0), box.item));
+    private void onDrop(ChainConveyorPackage box, CallbackInfo ci) {
+        ChainConveyorBlockEntity be = (ChainConveyorBlockEntity) (Object) this;
+        Level level = be.getLevel();
 
-        return false;
+        if (box.worldPosition == null)
+            return;
+
+        if (box.item.getItem() instanceof LadleItem) {
+            level.addFreshEntity(LadleEntity.fromItemStack(level, box.worldPosition.subtract(0, .5f, 0), box.item));
+            ci.cancel();
+        }
     }
 
     @Inject(
