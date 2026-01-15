@@ -1,0 +1,26 @@
+{
+  "type": "createmetallurgy:bulk_melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:storage_blocks/lithium"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/lithium"
+    }
+  ],
+  "maxHeatRequirement": 50,
+  "minHeatRequirement": 0,
+  "processingTime": 224,
+  "results": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_lithium"
+    }
+  ]
+}

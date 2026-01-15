@@ -22,7 +22,7 @@ import static com.simibubi.create.foundation.data.recipe.Mods.*;
 import static fr.lucreeper74.createmetallurgy.data.recipes.CMMods.*;
 
 public enum CMMetals {
-    //Simple metals
+    // Simple metals
     IRON(() -> CMFluids.MOLTEN_IRON, VANILLA),
     COPPER(() -> CMFluids.MOLTEN_COPPER, VANILLA),
     GOLD(() -> CMFluids.MOLTEN_GOLD, VANILLA),
@@ -35,14 +35,16 @@ public enum CMMetals {
     OBDURIUM(() -> CMFluids.MOLTEN_OBDURIUM, CREATE_METALLURGY),
     STEEL(() -> CMFluids.MOLTEN_STEEL, CREATE_METALLURGY),
 
+    // Modded Metals
     ALUMINUM(() -> CMFluids.MOLTEN_ALUMINUM, IE, TFMG),
     LEAD(() -> CMFluids.MOLTEN_LEAD, MEK, TH, IE, TFMG),
     NICKEL(() -> CMFluids.MOLTEN_NICKEL, IE, TH, TFMG),
     OSMIUM(() -> CMFluids.MOLTEN_OSMIUM, MEK),
     SILVER(() -> CMFluids.MOLTEN_SILVER, IE, TH),
     TIN(() -> CMFluids.MOLTEN_TIN, MEK, TH),
+    LITHIUM(() -> CMFluids.MOLTEN_LITHIUM, TFMG),
 
-    //Alloys
+    // Alloys
     INVAR(() -> CMFluids.MOLTEN_INVAR, TH),
     ELECTRUM(() -> CMFluids.MOLTEN_ELECTRUM, MEK, TH, CADDITION),
     BRONZE(() -> CMFluids.MOLTEN_BRONZE, MEK, TH),

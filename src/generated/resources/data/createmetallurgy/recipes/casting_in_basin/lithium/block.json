@@ -1,0 +1,23 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:storage_blocks/lithium"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_lithium",
+      "nbt": {}
+    }
+  ],
+  "processingTime": 480,
+  "result": {
+    "tag": "forge:storage_blocks/lithium"
+  }
+}
