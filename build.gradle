@@ -155,8 +155,11 @@ dependencies {
     compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${mc_version}:${flywheel_version}"))
     runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${mc_version}:${flywheel_version}"))
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
-    implementation("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
+        jarJar.ranged(it, "[${mixin_extras_version},)")
+    }
 
     implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
     implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
@@ -164,8 +167,8 @@ dependencies {
 
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
-
     runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
+
     implementation fg.deobf("curse.maven:jade-324717:${jade_id}")
 
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
@@ -180,7 +183,7 @@ jar {
                 "Specification-Vendor"    : "createmetallurgysareus",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
+                //"Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "createmetallurgysareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 'MixinConfigs': 'createmetallurgy.mixins.json'
