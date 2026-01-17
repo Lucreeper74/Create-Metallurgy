@@ -98,8 +98,8 @@ public class CastingScenes {
         scene.world().modifyBlockEntity(tankPos, FluidTankBlockEntity.class, be -> be.getTankInventory()
                 .fill(brass, IFluidHandler.FluidAction.EXECUTE));
         scene.idle(40);
-        scene.world().modifyBlockEntity(tablePos, CastingTableBlockEntity.class, CastingTableBlockEntity::startProcess);
-        scene.world().modifyBlockEntity(basinPos, CastingBasinBlockEntity.class, CastingBasinBlockEntity::startProcess);
+        scene.world().modifyBlockEntity(tablePos, CastingTableBlockEntity.class, CastingTableBlockEntity::updateCasting);
+        scene.world().modifyBlockEntity(basinPos, CastingBasinBlockEntity.class, CastingBasinBlockEntity::updateCasting);
 
         //Add Output & stop recipes
         scene.idle(60);
