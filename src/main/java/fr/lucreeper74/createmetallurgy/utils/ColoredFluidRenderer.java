@@ -63,15 +63,15 @@ public class ColoredFluidRenderer extends FluidRenderer {
             if (side.getAxis()
                     .isHorizontal()) {
                 if (side.getAxis() == Direction.Axis.X) {
-                    renderFlowingTiledFace(side, zMin, yMin, zMax, yMax, positive ? xMax : xMin, builder, ms, light,
-                            color, fluidTexture);
+                    FluidRenderHelper.renderTiledFace(side, zMin, yMin, zMax, yMax, positive ? xMax : xMin, builder, ms, light,
+                            color, fluidTexture, 1f);
                 } else {
-                    renderFlowingTiledFace(side, xMin, yMin, xMax, yMax, positive ? zMax : zMin, builder, ms, light,
-                            color, fluidTexture);
+                    FluidRenderHelper.renderTiledFace(side, xMin, yMin, xMax, yMax, positive ? zMax : zMin, builder, ms, light,
+                            color, fluidTexture, 1f);
                 }
             } else {
-                renderFlowingTiledFace(side, xMin, zMin, xMax, zMax, positive ? yMax : yMin, builder, ms, light, color,
-                        fluidTexture);
+                FluidRenderHelper.renderTiledFace(side, xMin, zMin, xMax, zMax, positive ? yMax : yMin, builder, ms, light, color,
+                        fluidTexture, 1f);
             }
         }
 
