@@ -33,8 +33,8 @@ public class CastingBasinBlockEntity extends CastingBlockEntity implements IHave
     protected void playProcessSound() {
         float pitch = 1f - level.random.nextFloat() * .4f;
 
-        level.playLocalSound(worldPosition,
-                SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, .5f, pitch, false);
+        level.playSound(null, worldPosition,
+                SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, .5f, pitch);
     }
 
     @Override

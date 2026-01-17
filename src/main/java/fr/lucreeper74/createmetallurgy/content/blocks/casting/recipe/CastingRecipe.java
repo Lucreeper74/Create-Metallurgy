@@ -45,17 +45,15 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
         }
     }
 
-    public static boolean match(CastingBlockEntity be, Recipe<?> recipe) {
+    public static boolean match(CastingBlockEntity be, Recipe<?> recipe, FluidStack testedFluid) {
         if (recipe instanceof CastingRecipe castingRecipe) {
-            FluidStack fluidInBuffer = be.getFluidBuffer();
             ItemStack mold = be.moldInv.getStackInSlot(0);
             Ingredient ingredient = castingRecipe.getIngredient();
 
-            boolean fluidMatches = castingRecipe.getFluidIngredient().test(fluidInBuffer);
-            boolean hasMold = !ingredient.isEmpty();
-            boolean ingredientMatches = hasMold && ingredient.test(mold);
+            boolean fluidMatches = castingRecipe.getFluidIngredient().test(testedFluid);
+            boolean ingredientMatches = ingredient.test(mold);
 
-            return fluidMatches && (!hasMold || ingredientMatches);
+            return fluidMatches && ingredientMatches;
         }
         return false;
     }

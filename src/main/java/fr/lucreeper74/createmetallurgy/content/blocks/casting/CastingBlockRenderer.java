@@ -27,9 +27,8 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
         super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
 
         //Render Fluids
-        CastingFluidTank tank = be.inputTank;
-        FluidStack fluidStack = tank.getFluid();
-        float level = tank.getFluidLevel().getValue(partialTicks);
+        FluidStack fluidStack = be.inputTank.getFluid();
+        float level = be.inputTank.getFluidLevel().getValue(partialTicks);
 
         int opacity = 0;
         int fluidOpacity = 255;
@@ -49,7 +48,7 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
 
             if (be.running) {
                 int timer = be.processingTick;
-                int totalTime = be.totalProcessTicks;
+                int totalTime = be.totalRecipeTime;
 
                 if (timer > 0 && totalTime > 0)
                     opacity = (4 * 255) * (totalTime - timer) / totalTime;
@@ -64,10 +63,10 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
             ms.popPose();
         }
 
-        //Render Items
+        // Render Items
         if (be.running) {
             MultiBufferSource bufferOut = new CastingItemRenderTypeBuffer(buffer, opacity / 4, fluidOpacity);
-            renderItem(be, ms, bufferOut, light, overlay, be.getRecipeOutput());
+            renderItem(be, ms, bufferOut, light, overlay, be.getCurrentRecipeOutput());
         }
 
         renderItem(be, ms, buffer, light, overlay, be.inv.getItem(0));

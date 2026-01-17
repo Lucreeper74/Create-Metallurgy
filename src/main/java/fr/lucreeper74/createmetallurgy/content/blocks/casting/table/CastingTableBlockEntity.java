@@ -34,8 +34,8 @@ public class CastingTableBlockEntity extends CastingBlockEntity implements IHave
     protected void playProcessSound() {
         float pitch = 1f - level.random.nextFloat() * .4f;
 
-        level.playLocalSound(worldPosition,
-                SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 1f, pitch, false);
+        level.playSound(null, worldPosition,
+                SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 1f, pitch);
         AllSoundEvents.STEAM.playAt(level,
                 worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), .2f, pitch, false);
     }

@@ -72,9 +72,14 @@ public class CastingFluidTank extends FluidTank {
     protected void onContentsChanged() {
         if (!be.hasLevel())
             return;
+
         fluidLevel.chase(getFluidAmount() / (float) getCapacity(), .25f, LerpedFloat.Chaser.EXP);
+
         if (!be.getLevel().isClientSide())
             sendDataLazily();
+
+        be.notifyChangeOfContents();
+
         super.onContentsChanged();
     }
 
@@ -86,7 +91,7 @@ public class CastingFluidTank extends FluidTank {
 
         int capacity = this.capacity;
         if (capacity == 0) {
-            capacity = be.initProcess(resource, action);
+            capacity = be.checkCastingRecipe(resource);
             if (capacity <= 0)
                 return 0;
             if (action.execute()) {
@@ -132,7 +137,10 @@ public class CastingFluidTank extends FluidTank {
 
     @Override
     public @NotNull FluidStack drain(int maxDrain, FluidAction action) {
-        int drained =  Math.min(fluid.getAmount(), maxDrain);
+        if (be.running && be.processingTick > 0)
+            return FluidStack.EMPTY; // Cannot drain while solidify
+
+        int drained = Math.min(fluid.getAmount(), maxDrain);
 
         FluidStack stack = new FluidStack(fluid, drained);
         if (action.execute() && drained > 0) {
