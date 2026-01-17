@@ -116,6 +116,16 @@ public class CastingScenes {
         scene.overlay().showControls(basinTop, Pointing.DOWN, 30).withItem(block);
         scene.idle(20);
 
+        //Show locking mode
+        Vec3 lockSlot = tableTop.add(0, -5 / 16f, -8 / 16f);
+        scene.overlay().showScrollInput(lockSlot, Direction.NORTH, 80);
+        scene.overlay().showText(80)
+                .attachKeyFrame()
+                .text("Molds can be locked in place using the lock mode selection slot")
+                .pointAt(lockSlot)
+                .placeNearTarget();
+        scene.idle(90);
+
         //Add Funnels
         scene.world().showSection(util.select().position(leverPos), Direction.DOWN);
         scene.idle(5);
@@ -128,7 +138,7 @@ public class CastingScenes {
         Vec3 filter = util.vector().topOf(tableFunnelPos).add(0, -5 / 16f, -1.5 / 16f);
         scene.overlay().showText(80)
                 .attachKeyFrame()
-                .text("If you are using Funnels instead of manually...")
+                .text("If you are using Funnels while keeping the mold unlocked...")
                 .pointAt(tableTop)
                 .placeNearTarget();
         scene.idle(90);
