@@ -50,7 +50,8 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
             ItemStack mold = be.moldInv.getStackInSlot(0);
             Ingredient ingredient = castingRecipe.getIngredient();
 
-            boolean fluidMatches = castingRecipe.getFluidIngredient().test(testedFluid);
+            FluidIngredient fluidIngredient = castingRecipe.getFluidIngredient();
+            boolean fluidMatches = fluidIngredient.test(testedFluid) && testedFluid.getAmount() >= fluidIngredient.getRequiredAmount();
             boolean ingredientMatches = ingredient.test(mold);
 
             return fluidMatches && ingredientMatches;
