@@ -67,7 +67,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
     public CastingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
 
-        inputTank = new CastingFluidTank(this);
+        inputTank = new CastingFluidTank(this, () -> contentsChanged = true);
         fluidCapability = LazyOptional.of(() -> inputTank);
 
         inv = new SmartInventory(1, this, 1, true).forbidInsertion();
@@ -187,6 +187,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
     }
 
     public void startProcess() {
+        moldInv.forbidInsertion();
         processingTick = currentRecipe.getProcessingDuration();
         running = true;
     }
@@ -299,16 +300,13 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
     }
 
     public void reset() {
+        moldInv.allowInsertion();
         inputTank.reset();
         processingTick = -1;
         currentRecipe = null;
         running = false;
         currentRecipeOutput = ItemStack.EMPTY;
         sendData();
-    }
-
-    public void notifyChangeOfContents() {
-        contentsChanged = true;
     }
 
     public void updateMoldInvLock() {
