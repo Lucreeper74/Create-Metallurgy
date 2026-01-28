@@ -41,7 +41,7 @@ public abstract class CastingRecipeSerializer implements RecipeSerializer<Castin
 
         for (JsonElement je : GsonHelper.getAsJsonArray(json, "ingredients")) {
             if (FluidIngredient.isFluidIngredient(je))
-                recipe.fluidIngredient =  FluidIngredient.deserialize(je);
+                recipe.fluidIngredient = FluidIngredient.deserialize(je);
             else
                 recipe.ingredient = Ingredient.fromJson(je);
         }
@@ -52,6 +52,8 @@ public abstract class CastingRecipeSerializer implements RecipeSerializer<Castin
         JsonElement je =  GsonHelper.getAsJsonObject(json, "result");
         if(je.isJsonObject() && !GsonHelper.isValidNode(je.getAsJsonObject(), "fluid"))
             recipe.result = CastingOutput.deserialize(je);
+
+        recipe.validate(recipeId);
 
         return recipe;
     }
@@ -64,6 +66,8 @@ public abstract class CastingRecipeSerializer implements RecipeSerializer<Castin
         recipe.processingDuration = buffer.readInt();
         recipe.moldConsumed = buffer.readBoolean();
         recipe.result = CastingOutput.read(buffer);
+
+        recipe.validate(recipeId);
 
         return recipe;
     }

@@ -30,16 +30,18 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
     public FoundryRecipe(IRecipeTypeInfo typeInfo, ProcessingRecipeBuilder.ProcessingRecipeParams params) {
         super(typeInfo, params);
 
-        validate(typeInfo.getId());
+        // validate(typeInfo.getId()); // Already called in readAdditional() !
     }
 
-    private void validate(ResourceLocation recipeTypeId) {
-        String messageHeader = "Your custom recipe (" + recipeTypeId + ")";
+    private void validate(ResourceLocation typeInfoId) {
+        String messageHeader = "Your custom recipe (" + typeInfoId + " named '" + getId().getPath() + "')";
         Logger logger = CreateMetallurgy.LOGGER;
 
-        if (minHeat > maxHeat) {
-            logger.warn(messageHeader + " specified a minimum heat value greater than the maximum value.");
-        }
+        if (!fluidIngredients.isEmpty() && !ingredients.isEmpty())
+            logger.warn("{} cannot have input items & fluids at the same time!", messageHeader);
+
+        if (minHeat > maxHeat)
+            logger.warn("{} specified a minimum heat value greater than the maximum value.", messageHeader);
     }
 
     protected boolean canSpecifyDuration() {
@@ -84,7 +86,7 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
                 FluidIngredient:
                 for (FluidIngredient fluidIngredient : fluidIngredients) {
 
-                    for (FluidStack fluid : be.getTank().fluids) {
+                    for (FluidStack fluid : be.getTank().getFluids()) {
                         if (fluidIngredient.test(fluid) && fluidIngredient.getRequiredAmount() <= fluid.getAmount())
                             continue FluidIngredient;
                     }
@@ -99,7 +101,8 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
 
     public static boolean matchSpecific(ItemStack stack, Recipe<?> recipe) {
         if (recipe instanceof ProcessingRecipe<?> processRecipe) {
-            return processRecipe.getIngredients().get(0).test(stack);
+            if (!processRecipe.getIngredients().isEmpty())
+                return processRecipe.getIngredients().get(0).test(stack);
         }
         return false;
     }
@@ -139,12 +142,12 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
 
     @Override
     protected int getMaxFluidInputCount() {
-        return 10;
+        return 20;
     }
 
     @Override
     protected int getMaxFluidOutputCount() {
-        return 10;
+        return 20;
     }
 
     @Override
@@ -165,6 +168,8 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
         super.readAdditional(json);
         maxHeat = GsonHelper.getAsInt(json, "maxHeatRequirement", 50);
         minHeat = GsonHelper.getAsInt(json, "minHeatRequirement", -50);
+
+        validate(getTypeInfo().getId());
     }
 
     @Override

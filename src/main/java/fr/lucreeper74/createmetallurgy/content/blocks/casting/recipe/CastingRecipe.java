@@ -32,16 +32,14 @@ public abstract class CastingRecipe implements Recipe<SmartInventory> {
         this.processingDuration = 0;
         this.moldConsumed = false;
         this.result = CastingOutput.EMPTY;
-
-        validate(id);
     }
 
-    private void validate(ResourceLocation recipeTypeId) {
+    protected void validate(ResourceLocation recipeTypeId) {
         String messageHeader = "Your custom recipe (" + recipeTypeId + ")";
         Logger logger = CreateMetallurgy.LOGGER;
 
-        if(ingredient.isEmpty() && moldConsumed) {
-            logger.warn(messageHeader + " specified a mold condition. Mold conditions have no impact on this recipe cause there is no mold.");
+        if (ingredient.isEmpty() && moldConsumed) {
+            logger.warn("{} specified a mold condition. Mold condition have no impact on this recipe cause there is no mold.", messageHeader);
         }
     }
 
