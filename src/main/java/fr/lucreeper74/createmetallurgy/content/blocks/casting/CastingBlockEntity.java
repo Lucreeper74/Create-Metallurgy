@@ -200,7 +200,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
             return; // No fluid contained
 
         // Get matching recipes for the current content
-        List<Recipe<?>> recipes = getMatchingRecipes(getFluidTank().getFluid());
+        List<Recipe<?>> recipes = getMatchingRecipes(getFluidTank().getFluid(), false);
         if (recipes.isEmpty())
             return; // No recipe found
 
@@ -217,7 +217,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
 
     public void applyRecipe() {
         FluidStack fluidInTank = getFluidTank().getFluidInTank(0);
-        if (matchCastingRecipe(currentRecipe, getFluidTank().getFluid())) {
+        if (matchCastingRecipe(currentRecipe, getFluidTank().getFluid(), false)) {
             inv.setStackInSlot(0, currentRecipeOutput);
             fluidInTank.shrink(currentRecipe.getFluidIngredient().getRequiredAmount());
 
@@ -272,27 +272,27 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
         return false;
     }
 
-    protected <C extends Container> boolean matchCastingRecipe(Recipe<C> recipe, FluidStack testedFluid) {
+    protected <C extends Container> boolean matchCastingRecipe(Recipe<C> recipe, FluidStack testedFluid, boolean ignoreFluidAmount) {
         if (recipe == null || !inv.getStackInSlot(0).isEmpty())
             return false;
-        return CastingRecipe.match(this, recipe, testedFluid);
+        return CastingRecipe.match(this, recipe, testedFluid, ignoreFluidAmount);
     }
 
-    public List<Recipe<?>> getMatchingRecipes(FluidStack testedFluid) {
+    public List<Recipe<?>> getMatchingRecipes(FluidStack testedFluid, boolean ignoreFluidAmount) {
         List<Recipe<?>> list = RecipeFinder.get(getRecipeCacheKey(), getLevel(), this::matchStaticFilters);
         return list.stream()
-                .filter(recipe -> matchCastingRecipe(recipe, testedFluid))
+                .filter(recipe -> matchCastingRecipe(recipe, testedFluid, ignoreFluidAmount))
                 .sorted(Comparator.comparingInt(r -> r.getIngredients()
                         .size()))
                 .collect(Collectors.toList());
     }
 
-    public int checkCastingRecipe(FluidStack fluid) {
+    public int getRequirementFromFluid(FluidStack fluid) {
         if (currentRecipe != null || running)
             return 0;
 
         // Check for recipes for a fluid requested in Casting Fluid Tank
-        List<Recipe<?>> recipes = getMatchingRecipes(fluid);
+        List<Recipe<?>> recipes = getMatchingRecipes(fluid, true);
         if (recipes.isEmpty())
             return 0;
 
