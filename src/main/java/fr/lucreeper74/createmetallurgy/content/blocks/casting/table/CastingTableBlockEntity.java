@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.casting.table;
 
-import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockEntity;
@@ -32,12 +31,10 @@ public class CastingTableBlockEntity extends CastingBlockEntity implements IHave
 
     @Override
     protected void playProcessSound() {
-        float pitch = 1f - level.random.nextFloat() * .4f;
+        float pitch = 2f - level.random.nextFloat() * .4f;
 
         level.playSound(null, worldPosition,
-                SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 1f, pitch);
-        AllSoundEvents.STEAM.playAt(level,
-                worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), .2f, pitch, false);
+                SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, .5f, pitch);
     }
 
     @Override
