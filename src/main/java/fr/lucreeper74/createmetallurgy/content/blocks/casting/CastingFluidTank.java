@@ -90,7 +90,7 @@ public class CastingFluidTank extends FluidTank {
 
         int capacity = this.capacity;
         if (capacity == 0) {
-            capacity = be.checkCastingRecipe(resource);
+            capacity = be.getRequirementFromFluid(resource.copy());
             if (capacity <= 0)
                 return 0;
             if (action.execute()) {
