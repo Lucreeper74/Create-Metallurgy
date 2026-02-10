@@ -19,8 +19,10 @@ public class CMPartialModels {
             FOUNDRY_MIXER_HEAD = block("foundry_mixer/head"),
             SHAFTLESS_STONE_COGWHEEL = block("foundry_mixer/cog"),
 
-            THERMOMETER_GAUGE = block("gauges/thermometer"),
-            THERMOMETER_DIAL = block("gauges/dial"),
+            THERMOMETER_GAUGE = block("attachments/gauge/thermometer"),
+                THERMOMETER_DIAL = block("attachments/gauge/dial"),
+                FLUID_PORT = block("attachments/fluid_port"),
+                ITEM_PORT = block("attachments/item_port"),
 
             GRINDER_BELT = block("mechanical_belt_grinder/belt"),
 
