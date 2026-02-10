@@ -114,7 +114,7 @@ public class CreateMetallurgyJEI implements IModPlugin {
                 bulk_melting = builder(BulkMeltingRecipe.class)
                         .addTypedRecipes(CMRecipeTypes.BULK_MELTING)
                         .catalyst(CMBlocks.INDUSTRIAL_CRUCIBLE::get)
-                        .catalyst(CMItems.FOUNDRY_UNIT::get)
+                        .catalyst(CMItems.GAUGE_ATTACHMENT::get)
                         .doubleItemIcon(CMBlocks.INDUSTRIAL_CRUCIBLE.get(), Items.BLAZE_POWDER)
                         .emptyBackground(177, 100)
                         .build("bulk_melting", BulkMeltingCategory::new),
@@ -122,7 +122,7 @@ public class CreateMetallurgyJEI implements IModPlugin {
                 entity_melting = builder(EntityMeltingRecipe.class)
                         .addTypedRecipes(CMRecipeTypes.ENTITY_MELTING)
                         .catalyst(CMBlocks.INDUSTRIAL_CRUCIBLE::get)
-                        .catalyst(CMItems.FOUNDRY_UNIT::get)
+                        .catalyst(CMItems.GAUGE_ATTACHMENT::get)
                         .doubleItemIcon(CMBlocks.INDUSTRIAL_CRUCIBLE.get(), Items.TROPICAL_FISH)
                         .emptyBackground(177, 100)
                         .build("entity_melting", EntityMeltingCategory::new);
