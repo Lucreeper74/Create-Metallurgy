@@ -18,7 +18,7 @@ public class CMDamageTypes {
     //Damage Types -----------------------------------------------------------------------------
     public static final ResourceKey<DamageType>
             GRINDER = key("mechanical_grinder"),
-            MOLTEN_FLUID = key("molten_fluid"), // todo: Cannot die on Peaceful difficulty
+            MOLTEN_FLUID = key("molten_fluid"),
             FOUNDRY = key("crucible");
 
     private static ResourceKey<DamageType> key(String name) {
