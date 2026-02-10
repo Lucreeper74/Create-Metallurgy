@@ -40,8 +40,23 @@ public class FoundryItemSlot {
         this.contentsChanged = true;
     }
 
+    public CrucibleBlockEntity getController() {
+        return controller.get();
+    }
+
     public ItemStack getStack() {
         return stack;
+    }
+
+    public void setStack(ItemStack newStack) {
+        this.stack = newStack;
+        contentsChanged = true;
+    }
+
+    public ItemStack removeStack() {
+        ItemStack removedStack = getStack().copy();
+        setStack(ItemStack.EMPTY);
+        return removedStack;
     }
 
     private void reset() {
@@ -51,62 +66,13 @@ public class FoundryItemSlot {
         heating = false;
     }
 
-    private void updateMeltingRecipe() {
-        if (currentRecipe != null)
-            return;
-
-        if (stack.isEmpty()) {
-            reset();
-            return;
-        }
-
-        ProcessingRecipe<?> recipe = getMatchingRecipe();
-        if (recipe != null) {
-            int duration = recipe.getProcessingDuration();
-
-            int minHeat;
-
-            if (recipe instanceof FoundryRecipe foundryRecipe) {
-                minHeat = foundryRecipe.getMinHeat();
-            } else
-                minHeat = FoundryRecipe.getHeatRequirement(recipe.getRequiredHeat());
-
-            float speedFactor = (float) (1f + (SPEED_LIMIT - 1f) * (1f - Math.exp(.14f * (minHeat - controller.get().foundryData.getCurrentHeat()))));
-
-            // Todo: only increasing for heating recipes!
-            processingTime = (int) (duration / speedFactor);
-            processDuration = processingTime;
-            currentRecipe = recipe;
-            heating = true;
-        }
-
-        //onContentChanged(false);
-        //contentsChanged = true;
-    }
-
-    public ItemStack removeStack() {
-        ItemStack removedStack = getStack().copy();
-        setStack(ItemStack.EMPTY);
-        return removedStack;
-    }
-
-    public void setStack(ItemStack newStack) {
-        this.stack = newStack;
-        //onContentChanged(true);
-        contentsChanged = true;
-    }
-
-    // todo: For the methods below for melting logic, may be protected or private
-    public void tick() {
-        if (!controller.get().getLevel().isClientSide) {
+    protected void tick() {
+        if (!getController().getLevel().isClientSide) {
             if (contentsChanged) {
                 contentsChanged = false;
                 onContentChanged(true);
             }
         }
-
-//        if (getStack().isEmpty())
-//            return;
 
         if (canMelt())
             heatItem();
@@ -114,10 +80,10 @@ public class FoundryItemSlot {
             coolItem();
     }
 
-    public boolean canMelt() {
-        if (!controller.get().getLevel().isClientSide) {
+    protected boolean canMelt() {
+        if (!getController().getLevel().isClientSide) {
             boolean prevHeating = heating;
-            heating = BulkMeltingRecipe.matches(controller.get(), currentRecipe, this);
+            heating = BulkMeltingRecipe.matches(getController(), currentRecipe, this);
 
             if (heating != prevHeating)
                 contentsChanged = true;
@@ -126,14 +92,14 @@ public class FoundryItemSlot {
         return heating;
     }
 
-    public void heatItem() {
+    private void heatItem() {
         if (processingTime <= 0)
             tryMeltItem();
         else
             processingTime--;
     }
 
-    public void coolItem() {
+    private void coolItem() {
         if (processingTime < processDuration)
             processingTime++;
     }
@@ -142,7 +108,7 @@ public class FoundryItemSlot {
         if (currentRecipe == null)
             return;
 
-        IFluidHandler fluidHandler = controller.get().getTank();
+        IFluidHandler fluidHandler = getController().getTank();
 
         for (FluidStack output : currentRecipe.getFluidResults()) {
             if (fluidHandler.fill(output.copy(), IFluidHandler.FluidAction.SIMULATE) >= output.getAmount()) {
@@ -159,11 +125,43 @@ public class FoundryItemSlot {
         updateCallback.run();
 
         if (notifyController)
-            controller.get().notifyUpdate();
+            getController().notifyUpdate();
+    }
+
+    public void updateMeltingRecipe() {
+        if (currentRecipe != null)
+            return;
+
+        if (stack.isEmpty()) {
+            reset();
+            return;
+        }
+
+        ProcessingRecipe<?> recipe = getMatchingRecipe();
+        if (recipe != null) {
+            int duration = recipe.getProcessingDuration();
+
+            // Todo: only increasing for heating recipes!
+            processingTime = (int) (duration / getSpeedFactor(recipe));
+            processDuration = processingTime;
+            currentRecipe = recipe;
+            heating = true;
+        }
+    }
+
+    public float getSpeedFactor(ProcessingRecipe<?> recipe) {
+        int minHeat;
+        if (recipe instanceof FoundryRecipe foundryRecipe) {
+            minHeat = foundryRecipe.getMinHeat();
+        } else
+            minHeat = FoundryRecipe.getHeatRequirement(recipe.getRequiredHeat());
+
+        // 1+(speedLimit-1) (1-ℯ^(k (Tmin-x))) Paste this in math curve tracer
+        return (float) (1f + (SPEED_LIMIT - 1f) * (1f - Math.exp(.14f * (minHeat - controller.get().foundryData.getCurrentHeat()))));
     }
 
     private ProcessingRecipe<?> getMatchingRecipe() {
-        Level level = controller.get().getLevel();
+        Level level = getController().getLevel();
         if (level == null)
             return null;
 
