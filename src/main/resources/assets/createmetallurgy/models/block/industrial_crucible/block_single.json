@@ -1,4 +1,5 @@
 {
+	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
@@ -8,6 +9,16 @@
 		"particle": "createmetallurgy:block/industrial_crucible/crucible"
 	},
 	"elements": [
+		{
+			"name": "SideRight",
+			"from": [13, 4, 0],
+			"to": [16, 12, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 12, 8]},
+			"faces": {
+				"east": {"uv": [0, 4, 16, 12], "texture": "#1", "cullface": "east"},
+				"west": {"uv": [0, 4, 16, 12], "texture": "#1", "cullface": "east"}
+			}
+		},
 		{
 			"name": "Lid",
 			"from": [0, 0, 0],
@@ -24,17 +35,7 @@
 		},
 		{
 			"name": "SideRight",
-			"from": [15, 4, 0],
-			"to": [16, 12, 16],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 12, 8]},
-			"faces": {
-				"east": {"uv": [0, 4, 16, 12], "texture": "#1", "cullface": "east"},
-				"west": {"uv": [0, 4, 16, 12], "texture": "#1", "cullface": "east"}
-			}
-		},
-		{
-			"name": "SideRight",
-			"from": [0, 4, 15],
+			"from": [0, 4, 13],
 			"to": [16, 12, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 12, 8]},
 			"faces": {
@@ -45,7 +46,7 @@
 		{
 			"name": "SideRight",
 			"from": [0, 4, 0],
-			"to": [1, 12, 16],
+			"to": [3, 12, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 12, 8]},
 			"faces": {
 				"east": {"uv": [0, 4, 16, 12], "texture": "#1", "cullface": "west"},
@@ -55,7 +56,7 @@
 		{
 			"name": "SideRight",
 			"from": [0, 4, 0],
-			"to": [16, 12, 1],
+			"to": [16, 12, 3],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, -23]},
 			"faces": {
 				"north": {"uv": [0, 4, 16, 12], "texture": "#1", "cullface": "north"},
