@@ -1,6 +1,7 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes;
 
 import com.google.gson.JsonObject;
+import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
@@ -8,19 +9,20 @@ import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.MeltingInventory;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryItemHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity.MAX_SIZE;
 
 public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
 
@@ -44,21 +46,20 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
             logger.warn("{} specified a minimum heat value greater than the maximum value.", messageHeader);
     }
 
-    protected boolean canSpecifyDuration() {
-        return true;
+    public void apply(CrucibleBlockEntity be, ProcessingRecipe<?> processingRecipe) {
+
     }
 
-    public static boolean bulkMatch(CrucibleBlockEntity be, Recipe<?> recipe) {
-        if (recipe instanceof ProcessingRecipe<?> processRecipe) {
-            boolean matchItem = true;
+    public static boolean match(CrucibleBlockEntity be, ProcessingRecipe<?> processingRecipe) {
+        boolean matchItem = true;
 
-            List<Ingredient> ingredients = processRecipe.getIngredients();
-            if (!ingredients.isEmpty()) {
-                List<Integer> toExclude = new ArrayList<>();
+        List<Ingredient> ingredients = processingRecipe.getIngredients();
+        if (!ingredients.isEmpty()) {
+            List<Integer> toExclude = new ArrayList<>();
 
                 Ingredients:
                 for (Ingredient item : ingredients) {
-                    MeltingInventory inv = be.foundry.getInventory();
+                    FoundryItemHandler inv = be.foundryData.getInputInv();
 
                     for (int i = 0; i < inv.getSlots(); i++) {
                         if (toExclude.contains(i))
@@ -70,64 +71,60 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
                         }
                     }
 
-                    // No matching item
-                    matchItem = false;
-                }
+                // No matching item
+                matchItem = false;
             }
-            return fluidMatch(be, recipe) && matchItem;
         }
-        return false;
+        return matchFluid(be, processingRecipe) && matchItem;
     }
 
-    public static boolean fluidMatch(CrucibleBlockEntity be, Recipe<?> recipe) {
-        if (recipe instanceof ProcessingRecipe<?> processRecipe) {
-            List<FluidIngredient> fluidIngredients = processRecipe.getFluidIngredients();
-            if (!fluidIngredients.isEmpty()) {
-                FluidIngredient:
-                for (FluidIngredient fluidIngredient : fluidIngredients) {
+    public static boolean matchFluid(CrucibleBlockEntity be, ProcessingRecipe<?> processRecipe) {
+        List<FluidIngredient> fluidIngredients = processRecipe.getFluidIngredients();
+        if (!fluidIngredients.isEmpty()) {
+            FluidIngredient:
+            for (FluidIngredient fluidIngredient : fluidIngredients) {
 
-                    for (FluidStack fluid : be.getTank().getFluids()) {
-                        if (fluidIngredient.test(fluid) && fluidIngredient.getRequiredAmount() <= fluid.getAmount())
-                            continue FluidIngredient;
-                    }
-                    // No matching fluid
-                    return false;
+                for (FluidStack fluid : be.getTank().getFluids()) {
+                    if (fluidIngredient.test(fluid) && fluidIngredient.getRequiredAmount() <= fluid.getAmount())
+                        continue FluidIngredient;
                 }
+                // No matching fluid
+                return false;
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
-    public static boolean matchSpecific(ItemStack stack, Recipe<?> recipe) {
-        if (recipe instanceof ProcessingRecipe<?> processRecipe) {
-            if (!processRecipe.getIngredients().isEmpty())
-                return processRecipe.getIngredients().get(0).test(stack);
-        }
-        return false;
+    public static boolean matchSpecific(CrucibleBlockEntity be, ItemStack stack, ProcessingRecipe<?> processRecipe) {
+        if (!processRecipe.getIngredients().isEmpty())
+            return processRecipe.getIngredients().get(0).test(stack) && matchFluid(be, processRecipe);
+        else
+            return false;
     }
 
-    public static boolean isEnoughHeated(CrucibleBlockEntity ladle, ProcessingRecipe<?> recipe) {
+    public static boolean matchHeatCondition(CrucibleBlockEntity be, ProcessingRecipe<?> recipe) {
         if (recipe == null)
             return false;
 
-        int currentHeat = ladle.foundry.getCurrentHeat();
+        int currentHeat = be.foundryData.getCurrentHeat();
 
         if (recipe instanceof FoundryRecipe foundryRecipe)
             return currentHeat >= foundryRecipe.getMinHeat() && currentHeat <= foundryRecipe.getMaxHeat();
         else
-            return currentHeat >= getHeatRequirement(recipe);
+            return currentHeat >= getHeatRequirement(recipe.getRequiredHeat());
     }
 
-    public static int getHeatRequirement(ProcessingRecipe<?> recipe) {
-        if (recipe == null)
-            return 0;
-
-        return switch (recipe.getRequiredHeat()) {
+    public static int getHeatRequirement(HeatCondition heatCondition) {
+        return switch (heatCondition) {
             case NONE -> 0;
             case HEATED -> 2;
             case SUPERHEATED -> 3;
         };
+    }
+
+    @Override
+    protected boolean canSpecifyDuration() {
+        return true;
     }
 
     @Override
@@ -166,8 +163,8 @@ public class FoundryRecipe extends ProcessingRecipe<SmartInventory> {
     @Override
     public void readAdditional(JsonObject json) {
         super.readAdditional(json);
-        maxHeat = GsonHelper.getAsInt(json, "maxHeatRequirement", 50);
-        minHeat = GsonHelper.getAsInt(json, "minHeatRequirement", -50);
+        maxHeat = GsonHelper.getAsInt(json, "maxHeatRequirement", MAX_SIZE * MAX_SIZE * 2);
+        minHeat = GsonHelper.getAsInt(json, "minHeatRequirement", -(MAX_SIZE * MAX_SIZE));
 
         validate(getTypeInfo().getId());
     }

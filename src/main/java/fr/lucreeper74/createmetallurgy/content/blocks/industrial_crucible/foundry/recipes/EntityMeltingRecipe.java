@@ -22,7 +22,7 @@ public class EntityMeltingRecipe extends FoundryRecipe {
     }
 
     public boolean matches(CrucibleBlockEntity be, EntityType<?> type) {
-        return bulkMatch(be, this) && entityIngredient.test(type);
+        return match(be, this) && entityIngredient.test(type) && FoundryRecipe.matchHeatCondition(be, this);
     }
 
     public EntityIngredient getEntityIngredient() {
