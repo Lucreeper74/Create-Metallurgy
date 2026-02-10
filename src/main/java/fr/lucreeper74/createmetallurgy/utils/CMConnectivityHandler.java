@@ -143,8 +143,8 @@ public class CMConnectivityHandler {
 
         // optional foundry fluids handling
         FoundryTank beTank = null;
-        if (be instanceof CrucibleBlockEntity ladleBE)
-            beTank = ladleBE.getTank();
+        if (be instanceof CrucibleBlockEntity crucibleBE)
+            beTank = crucibleBE.getTank();
 
         Direction.Axis axis = be.getMainConnectionAxis();
 
@@ -227,11 +227,12 @@ public class CMConnectivityHandler {
 
                     extraData = be.modifyExtraData(extraData);
 
-                    if (part instanceof CrucibleBlockEntity ladleBE) {
-                        FoundryTank tankAt = ladleBE.getTank();
+                    if (part instanceof CrucibleBlockEntity partBE) {
 
-                        for (int i = 0; i < tankAt.fluids.size(); i++) {
-                            FluidStack fluidAt = tankAt.fluids.get(i);
+                        // Fluid Handling
+                        FoundryTank tankAt = partBE.getTank();
+                        for (int i = 0; i < tankAt.segments.size(); i++) {
+                            FluidStack fluidAt = tankAt.segments.get(i).getFluid();
 
                             if (!fluidAt.isEmpty()) {
                                 beTank.fill(fluidAt, IFluidHandler.FluidAction.EXECUTE);
@@ -279,17 +280,17 @@ public class CMConnectivityHandler {
         Direction.Axis axis = be.getMainConnectionAxis();
 
         // fluids handling, if present
-        List<FluidStack> toDistribute = new ArrayList<>();
+        List<FluidStack> fluidToDistribute = new ArrayList<>();
         int maxCapacity = 0;
 
-        if (be instanceof CrucibleBlockEntity ladleBE) {
-            FoundryTank tank = ladleBE.getTank();
+        if (be instanceof CrucibleBlockEntity crucibleBE) {
+
+            // Fluids saving
+            FoundryTank tank = crucibleBE.getTank();
             if (!tank.isEmpty()) {
                 maxCapacity = tank.getCapacity();
-                toDistribute.addAll(tank.fluids);
-                tank.fluids.clear();
-
-                ladleBE.applyFluidTankSize(1);
+                fluidToDistribute.addAll(tank.getFluids());
+                tank.segments.clear();
             }
         }
 
@@ -315,34 +316,11 @@ public class CMConnectivityHandler {
                     partAt.setExtraData((controllerBE == null ? null : controllerBE.getExtraData()));
                     partAt.removeController(true);
 
-
-                    // Redistribute all fluids drained from main tank
-                    // Making this generic would be a rather large mess, unfortunately
-                    if (!toDistribute.isEmpty() && partAt != be) {
-                        for (int i = 0; i < toDistribute.size(); i++) {
-                            FluidStack original = toDistribute.get(i);
-
-                            if (original.isEmpty()) {
-                                toDistribute.remove(i);
-                                continue;
-                            }
-
-                            FluidStack copy = original.copy();
-                            FoundryTank tank = (partAt instanceof CrucibleBlockEntity ifluidPart ? ifluidPart.getTank() : null);
-
-                            int split = Math.min(maxCapacity, original.getAmount());
-                            copy.setAmount(split);
-
-                            if (tank != null) {
-                                int filled = tank.fill(copy, IFluidHandler.FluidAction.EXECUTE);
-
-                                if (filled > 0) {
-                                    original.shrink(filled);
-                                    if (original.isEmpty())
-                                        toDistribute.remove(original);
-                                }
-                            }
-                        }
+                    /*
+                     *  Making these generic would be a rather large mess, unfortunately...
+                     */
+                    if (partAt != be) {
+                        redistributeFluids(fluidToDistribute, partAt, maxCapacity);
                     }
 
                     if (tryReconnect) {
@@ -364,6 +342,37 @@ public class CMConnectivityHandler {
 
         if (tryReconnect)
             formMulti(be.getType(), level, cache == null ? new CMConnectivityHandler.SearchCache<>() : cache, frontier);
+    }
+
+    private static <T extends BlockEntity & IMultiBlockEntityContainer> void redistributeFluids(List<FluidStack> fluidToDistribute, T partAt, int maxCapacity) {
+        // Redistribute all fluids drained from the previous controller
+        if (!fluidToDistribute.isEmpty()) {
+            FoundryTank tank = (partAt instanceof CrucibleBlockEntity partBe ? partBe.getTank() : null);
+
+            for (int i = 0; i < fluidToDistribute.size(); i++) {
+                FluidStack original = fluidToDistribute.get(i);
+
+                if (original.isEmpty()) {
+                    fluidToDistribute.remove(i);
+                    continue;
+                }
+
+                FluidStack copy = original.copy();
+
+                int split = Math.min(maxCapacity, original.getAmount());
+                copy.setAmount(split);
+
+                if (tank != null) {
+                    int filled = tank.fill(copy, IFluidHandler.FluidAction.EXECUTE);
+
+                    if (filled > 0) {
+                        original.shrink(filled);
+                        if (original.isEmpty())
+                            fluidToDistribute.remove(original);
+                    }
+                }
+            }
+        }
     }
 
     private static <T extends BlockEntity & IMultiBlockEntityContainer> PriorityQueue<Pair<Integer, T>> makeCreationQueue() {
