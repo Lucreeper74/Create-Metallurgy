@@ -1,6 +1,6 @@
 {
   "effects": "burning",
-  "exhaustion": 0.0,
+  "exhaustion": 0.1,
   "message_id": "createmetallurgy.crucible",
-  "scaling": "always"
+  "scaling": "when_caused_by_living_non_player"
 }
