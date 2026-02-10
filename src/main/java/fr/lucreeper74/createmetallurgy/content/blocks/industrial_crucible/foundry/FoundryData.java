@@ -76,7 +76,7 @@ public class FoundryData {
 
     public void read(CompoundTag nbt, int base_width) {
         currentHeat = nbt.getInt("CurrentHeat");
-        gauge.chase((float) getCurrentHeat() / getMaxHeat(base_width), .125f, LerpedFloat.Chaser.EXP);
+        gauge.chase(getHeatGaugeValue(base_width), .125f, LerpedFloat.Chaser.EXP);
     }
 
     public int getCurrentHeat() {
@@ -87,8 +87,9 @@ public class FoundryData {
         return inputInv;
     }
 
-    public int getMaxHeat(int base_width) {
-        return base_width * base_width * 2;
+    public float getHeatGaugeValue(int base_width) {
+        int base_surface = base_width * base_width;
+        return (float) (getCurrentHeat() + base_surface) / ((base_surface * 2) + base_surface);
     }
 
     public void addToGoggleTooltip(List<Component> tooltip, boolean gaugeActive, int foundrySize) {

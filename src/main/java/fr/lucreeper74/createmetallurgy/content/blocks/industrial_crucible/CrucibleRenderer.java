@@ -18,13 +18,12 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
-
-import java.util.Random;
 
 public class CrucibleRenderer extends SafeBlockEntityRenderer<CrucibleBlockEntity> {
 
@@ -149,14 +148,12 @@ public class CrucibleRenderer extends SafeBlockEntityRenderer<CrucibleBlockEntit
 
         float dialPivotY = 6.5f / 16f;
         float dialPivotZ = 8f / 16f;
-        float progress = Mth.clamp(controller.foundryData.gauge.getValue(partialTicks) + .25f, 0, 1.05f);
+        float progress = controller.foundryData.gauge.getValue(partialTicks);
 
-        Random random = new Random();
-
-        if (progress >= 1f) {
+        if (progress >= 0.95f) {
             // Make the gauge to jiggle
-            float amplitude = .015f;
-            progress += Mth.clamp(random.nextFloat(.02f) - amplitude, -amplitude, amplitude);
+            float amplitude = .03f;
+            progress += Mth.clamp(RandomSource.create().nextFloat() * amplitude, -amplitude, amplitude);
         }
 
         CachedBuffers.partial(gaugeModel, blockState)
