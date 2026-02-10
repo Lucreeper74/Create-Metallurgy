@@ -72,7 +72,7 @@ public class CrucibleBlockItem extends BlockItem {
         BlockPos placedOnPos = pos.relative(face.getOpposite());
         BlockState placedOnState = world.getBlockState(placedOnPos);
 
-        if (!CrucibleBlock.isLadle(placedOnState))
+        if (!CrucibleBlock.isCrucible(placedOnState))
             return;
         CrucibleBlockEntity ladleAt = CMConnectivityHandler.partAt(CMBlockEntityTypes.INDUSTRIAL_CRUCIBLE.get(), world, placedOnPos);
 
@@ -99,7 +99,7 @@ public class CrucibleBlockItem extends BlockItem {
             for (int zOffset = 0; zOffset < width; zOffset++) {
                 BlockPos offsetPos = startPos.offset(xOffset, 0, zOffset);
                 BlockState blockState = world.getBlockState(offsetPos);
-                if (CrucibleBlock.isLadle(blockState))
+                if (CrucibleBlock.isCrucible(blockState))
                     continue;
                 if (!blockState.canBeReplaced())
                     return;
@@ -114,7 +114,7 @@ public class CrucibleBlockItem extends BlockItem {
             for (int zOffset = 0; zOffset < width; zOffset++) {
                 BlockPos offsetPos = startPos.offset(xOffset, 0, zOffset);
                 BlockState blockState = world.getBlockState(offsetPos);
-                if (CrucibleBlock.isLadle(blockState))
+                if (CrucibleBlock.isCrucible(blockState))
                     continue;
                 BlockPlaceContext context = BlockPlaceContext.at(ctx, offsetPos, face);
                 player.getPersistentData()

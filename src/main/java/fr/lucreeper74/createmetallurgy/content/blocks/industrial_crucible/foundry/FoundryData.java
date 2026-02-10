@@ -1,11 +1,10 @@
-package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible;
+package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry;
 
 import com.simibubi.create.AllKeys;
 import com.simibubi.create.api.boiler.BoilerHeater;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.utility.CreateLang;
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.MeltingInventory;
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.MeltingSlot;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import joptsimple.internal.Strings;
 import net.createmod.catnip.animation.LerpedFloat;
@@ -24,46 +23,34 @@ import java.util.List;
 
 public class FoundryData {
 
-    protected MeltingInventory inputInv;
-
-    private boolean active;
+    private final CrucibleBlockEntity be;
+    protected FoundryItemHandler inputInv;
     private int currentHeat;
 
     // For rendering purposes only
     public LerpedFloat gauge = LerpedFloat.linear();
 
-    protected void createInventory(CrucibleBlockEntity be, int size) {
-        inputInv = new MeltingInventory(be, size);
+    public FoundryData(CrucibleBlockEntity be) {
+        this.be = be;
+        this.inputInv = new FoundryItemHandler();
     }
 
-    public void tick(CrucibleBlockEntity be) {
-        if (!active)
+    public void tick() {
+        inputInv.tick();
+
+        if (be.getLevel() == null)
             return;
+
         if (be.getLevel().isClientSide) {
             gauge.tickChaser();
-            gauge.chase((float) getCurrentHeat() / getMaxHeat(be), .05f, LerpedFloat.Chaser.EXP);
             return;
         }
 
-        if (updateTemperature(be))
+        if (updateTemperature())
             be.notifyUpdate();
-
-        // Melting Recipes
-        for (int slot = 0; slot < be.getTotalSize(); slot++) {
-            MeltingSlot meltingSlot = inputInv.getSlot(slot);
-            if (meltingSlot.getStack().isEmpty())
-                continue;
-
-            if (meltingSlot.canMelt())
-                meltingSlot.heatItem();
-            else
-                meltingSlot.coolItem();
-        }
-
-        be.tankInventory.process();
     }
 
-    public boolean updateTemperature(CrucibleBlockEntity be) {
+    public boolean updateTemperature() {
         BlockPos controllerPos = be.getBlockPos();
         Level level = be.getLevel();
 
@@ -81,56 +68,45 @@ public class FoundryData {
         return prevActive != currentHeat;
     }
 
-
     public CompoundTag write() {
         CompoundTag nbt = new CompoundTag();
-        nbt.putBoolean("Controlled", active);
-        nbt.putInt("currentHeat", currentHeat);
+        nbt.putInt("CurrentHeat", currentHeat);
         return nbt;
     }
 
-    public void read(CompoundTag nbt) {
-        active = nbt.getBoolean("Controlled");
-        currentHeat = nbt.getInt("currentHeat");
-    }
-
-    public boolean isActive() {
-        return active;
+    public void read(CompoundTag nbt, int base_width) {
+        currentHeat = nbt.getInt("CurrentHeat");
+        gauge.chase((float) getCurrentHeat() / getMaxHeat(base_width), .125f, LerpedFloat.Chaser.EXP);
     }
 
     public int getCurrentHeat() {
         return currentHeat;
     }
 
-    public int getMaxHeat(CrucibleBlockEntity be) {
-        return be.getWidth() * be.getWidth() * 2;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public MeltingInventory getInventory() {
+    public FoundryItemHandler getInputInv() {
         return inputInv;
     }
 
-    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking, int foundrySize) {
-        if (!isActive())
-            return false;
+    public int getMaxHeat(int base_width) {
+        return base_width * base_width * 2;
+    }
 
-        CMLang.translate("foundry.status")
-                .style(ChatFormatting.GRAY)
-                .forGoggles(tooltip);
+    public void addToGoggleTooltip(List<Component> tooltip, boolean gaugeActive, int foundrySize) {
+        if (gaugeActive) {
+            CMLang.translate("foundry.status")
+                    .style(ChatFormatting.GRAY)
+                    .forGoggles(tooltip);
 
-        CMLang.builder().add(getHeatLevelComponent(foundrySize)).forGoggles(tooltip);
+            CMLang.builder().add(getHeatLevelComponent(foundrySize)).forGoggles(tooltip);
 
-        tooltip.add(Component.empty());
+            tooltip.add(Component.empty());
+        }
 
         if (AllKeys.shiftDown()) {
             int displayed = 0;
 
             for (int i = 0; i < inputInv.getSlots(); i++) {
-                MeltingSlot slot = inputInv.getSlot(i);
+                FoundryItemSlot slot = inputInv.getSlot(i);
                 ItemStack stackInSlot = slot.getStack();
                 if (stackInSlot.isEmpty())
                     continue;
@@ -145,7 +121,7 @@ public class FoundryData {
                 CMLang.text("")
                         .add(CreateLang.itemName(stackInSlot).style(ChatFormatting.GRAY))
                         .space()
-                        .add(duration > 0 ?
+                        .add(slot.processDuration >= 0 ?
                                 progressBarComponent(duration, slot.processingTime, 9) :
                                 CMLang.text("X").style(ChatFormatting.RED).style(ChatFormatting.BOLD).component())
                         .forGoggles(tooltip, 1);
@@ -155,8 +131,6 @@ public class FoundryData {
             if (displayed > 0)
                 tooltip.add(Component.empty());
         }
-
-        return true;
     }
 
     @NotNull

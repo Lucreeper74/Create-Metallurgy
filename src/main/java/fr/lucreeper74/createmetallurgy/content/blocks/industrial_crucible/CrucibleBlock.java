@@ -7,10 +7,11 @@ import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
-import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import fr.lucreeper74.createmetallurgy.registries.CMShapes;
 import fr.lucreeper74.createmetallurgy.utils.CMConnectivityHandler;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
+import fr.lucreeper74.createmetallurgy.utils.SideAttachment;
+import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,6 +23,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -67,7 +69,7 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
                 .setValue(WINDOW, false));
     }
 
-    public static boolean isLadle(BlockState state) {
+    public static boolean isCrucible(BlockState state) {
         return state.getBlock() instanceof CrucibleBlock;
     }
 
@@ -106,29 +108,32 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
             return InteractionResult.PASS;
 
         Level level = context.getLevel();
-        BlockPos clickedPos = context.getClickedPos();
+        BlockPos pos = context.getClickedPos();
 
-        level.setBlockAndUpdate(clickedPos, state.cycle(WINDOW));
-        level.playSound(null, clickedPos, SoundEvents.DEEPSLATE_PLACE, SoundSource.PLAYERS, 1f,
+        level.setBlockAndUpdate(pos, state.cycle(WINDOW));
+        level.playSound(null, pos, SoundEvents.DEEPSLATE_PLACE, SoundSource.PLAYERS, 1f,
                 .2f + RandomSource.create().nextFloat());
         return InteractionResult.SUCCESS;
     }
 
     @Override
     public InteractionResult onSneakWrenched(BlockState state, UseOnContext context) {
-        Level world = context.getLevel();
+        Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        if (world.getBlockEntity(pos) instanceof CrucibleBlockEntity ladleBE) {
-            CrucibleBlockEntity cBE = ladleBE.getControllerBE();
 
-            if (cBE != null && cBE.foundry.isActive()) {
-                world.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.PLAYERS, .2f,
-                        1f + RandomSource.create().nextFloat());
+        if (level.getBlockEntity(pos) instanceof CrucibleBlockEntity crucibleBE) {
+            Direction clickedSide = context.getClickedFace();
 
-                cBE.updateLadleState(false);
-                if (!context.getPlayer().isCreative())
-                    context.getPlayer().getInventory().placeItemBackInInventory(new ItemStack(CMItems.FOUNDRY_UNIT.get()));
+            SideAttachment removedAttachment = crucibleBE.getSideAttachment(clickedSide);
 
+            if (crucibleBE.setAttachment(clickedSide, SideAttachment.NONE, false)) {
+                removedAttachment.onRemove(context);
+
+                ItemStack removedItem = removedAttachment.getItem();
+                if (!removedItem.isEmpty()) {
+                    if (!context.getPlayer().isCreative())
+                        context.getPlayer().getInventory().placeItemBackInInventory(removedItem);
+                }
                 return InteractionResult.SUCCESS;
             }
         }
@@ -256,11 +261,20 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.hasBlockEntity() && (state.getBlock() != newState.getBlock() || !newState.hasBlockEntity())) {
             BlockEntity be = world.getBlockEntity(pos);
-            if (!(be instanceof CrucibleBlockEntity))
-                return;
-            CrucibleBlockEntity ladleBe = (CrucibleBlockEntity) be;
-            world.removeBlockEntity(pos);
-            CMConnectivityHandler.splitMulti(ladleBe);
+            if (be instanceof CrucibleBlockEntity crucibleBE) {
+                Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), crucibleBE.foundrySlot.removeStack());
+
+                // Drop Attachments
+                for (Direction side : Iterate.directions) {
+                    SideAttachment mode = crucibleBE.getSideAttachment(side);
+                    if (mode.equals(SideAttachment.NONE))
+                        continue;
+                    Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), mode.getItem());
+                }
+
+                world.removeBlockEntity(pos);
+                CMConnectivityHandler.splitMulti(crucibleBE);
+            }
         }
     }
 
@@ -273,14 +287,17 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
 
         if (entityIn instanceof ItemEntity itemEntity) {
             withBlockEntityDo(worldIn, entityIn.blockPosition(), be -> {
-                ItemStack insertItem = ItemHandlerHelper.insertItem(be.getControllerBE().foundry.inputInv, itemEntity.getItem()
-                        .copy(), false);
+                CrucibleBlockEntity controller = be.getControllerBE();
+                if (controller != null) {
+                    ItemStack insertItem = ItemHandlerHelper.insertItem(controller.foundryData.getInputInv(), itemEntity.getItem()
+                            .copy(), false);
 
-                if (insertItem.isEmpty()) {
-                    itemEntity.discard();
-                    return;
+                    if (insertItem.isEmpty()) {
+                        itemEntity.discard();
+                        return;
+                    }
+                    itemEntity.setItem(insertItem);
                 }
-                itemEntity.setItem(insertItem);
             });
         } else {
             withBlockEntityDo(worldIn, entityIn.blockPosition(), be -> {
@@ -343,7 +360,7 @@ public class CrucibleBlock extends Block implements IWrenchable, IBE<CrucibleBlo
                 if (!controller.getTank().isEmpty() && random.nextInt(200) == 0)
                     level.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.LAVA_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.7F + random.nextFloat() * 0.15F, false);
 
-                if (controller.foundry.getCurrentHeat() > 0 && random.nextInt(3) == 0) {
+                if (controller.foundryData.getCurrentHeat() > 0 && random.nextInt(3) == 0) {
                     float radius = controller.getWidth() / 2f;
                     Vec3 c = Vec3.atLowerCornerOf(controller.getBlockPos()).add(radius, controller.getHeight() * controller.getTank().getFillState(), radius);
                     Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, random, radius - 4 / 16f)

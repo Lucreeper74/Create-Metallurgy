@@ -7,7 +7,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.item.ItemHelper;
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.FoundryData;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryData;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.FoundryRecipe;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;

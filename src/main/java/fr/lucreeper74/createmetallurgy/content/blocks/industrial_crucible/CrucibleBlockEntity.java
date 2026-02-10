@@ -1,23 +1,27 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible;
 
 import com.simibubi.create.AllKeys;
+import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
-import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeConditions;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.CreateLang;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryData;
+import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryItemSlot;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryTank;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.EntityMeltingRecipe;
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.recipes.FoundryRecipe;
+import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMDamageTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import fr.lucreeper74.createmetallurgy.utils.CMConnectivityHandler;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
+import fr.lucreeper74.createmetallurgy.utils.SideAttachment;
+import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -27,6 +31,7 @@ import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -34,7 +39,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
@@ -44,19 +48,26 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
+import static fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlock.*;
 import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
 
 public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer {
     public static final int MAX_SIZE = 5;
     private static final int MAX_HEIGHT = 4;
-    private static final int CAPACITY_FACTOR = 1000;
+    private static final int CAPACITY_PER_BLOCK = 1000;
 
-    protected FoundryTank tankInventory;
+    protected Map<Direction, SideAttachment> attachmentMap = new EnumMap<>(Direction.class);
+
+    public FoundryTank tankInventory;
     protected LazyOptional<IFluidHandler> fluidCapability;
+
+    protected FoundryItemSlot foundrySlot;
     protected LazyOptional<IItemHandlerModifiable> itemCapability;
 
     protected boolean updateConnectivity;
@@ -67,7 +78,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
     protected int width;
     protected int height;
 
-    public FoundryData foundry;
+    public FoundryData foundryData;
 
     private static final int SYNC_RATE = 8;
     protected int syncCooldown;
@@ -75,16 +86,28 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
     public CrucibleBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        foundry = new FoundryData();
-        tankInventory = createTank();
-        foundry.createInventory(this, getMaxWidth() * getMaxWidth() * getMaxHeight());
+
+        for (Direction dir : Direction.values()) {
+            attachmentMap.put(dir, SideAttachment.NONE);
+        }
+
+        tankInventory = new FoundryTank(CAPACITY_PER_BLOCK, this::onFluidContentChanged);
         fluidCapability = LazyOptional.of(() -> tankInventory);
-        itemCapability = LazyOptional.of(() -> foundry.inputInv);
+
+        foundrySlot = new FoundryItemSlot(this::getControllerBE, () -> {
+            refreshCapability(false, true);
+            notifyUpdate();
+        });
+        itemCapability = LazyOptional.empty();
+
         updateConnectivity = false;
         updateCapability = false;
         height = 1;
         width = 1;
-        refreshCapability();
+
+        foundryData = new FoundryData(this);
+
+        refreshCapability(true, false);
     }
 
     @Override
@@ -93,10 +116,6 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
             return super.createRenderBoundingBox().expandTowards(width - 1, height - 1, width - 1);
         else
             return super.createRenderBoundingBox();
-    }
-
-    protected FoundryTank createTank() {
-        return new FoundryTank(this, CAPACITY_FACTOR, this::onFluidStackChanged);
     }
 
     @Override
@@ -126,23 +145,28 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         if (isController()) {
             width = compound.getInt("Size");
             height = compound.getInt("Height");
-            tankInventory.setCapacity(getTotalSize() * CAPACITY_FACTOR);
-            tankInventory.deserializeNBT(compound.getCompound("TankContent"));
-
-            foundry.inputInv.setFirstLimitedSlot(getTotalSize());
-            foundry.inputInv.deserializeNBT(compound.getCompound("MeltingInv"));
+            tankInventory.setCapacity(getTotalSize() * CAPACITY_PER_BLOCK);
+            tankInventory.deserializeNBT(compound.getCompound("TankContent"), clientPacket);
+            foundryData.read(compound.getCompound("FoundryData"), getWidth());
 
             if (tankInventory.getFillState() > 1)
-                tankInventory.drain(-(tankInventory.getCapacity() - tankInventory.getFillAmount()), IFluidHandler.FluidAction.EXECUTE);
+                tankInventory.drain(tankInventory.getFillAmount() - tankInventory.getCapacity(), IFluidHandler.FluidAction.EXECUTE);
         }
+
         if (luminosity != prevLum && hasLevel())
             level.getChunkSource()
                     .getLightEngine()
                     .checkBlock(worldPosition);
 
-        foundry.read(compound.getCompound("Ladle"));
-
         updateCapability = true;
+        foundrySlot.deserializeNBT(compound.getCompound("FoundrySlot"), clientPacket);
+
+        attachmentMap.clear();
+        CompoundTag modesTag = compound.getCompound("SideModes");
+        for (Direction dir : Direction.values()) {
+            String modeName = modesTag.getString(dir.getName());
+            attachmentMap.put(dir, SideAttachment.byName(modeName));
+        }
 
         if (!clientPacket)
             return;
@@ -151,10 +175,8 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         if (changeOfController || prevSize != width || prevHeight != height) {
             if (hasLevel())
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
-            if (isController()) {
-                tankInventory.setCapacity(CAPACITY_FACTOR * getTotalSize());
-                foundry.inputInv.setFirstLimitedSlot(getTotalSize());
-            }
+            if (isController())
+                tankInventory.setCapacity(CAPACITY_PER_BLOCK * getTotalSize());
             invalidateRenderBoundingBox();
         }
     }
@@ -163,33 +185,122 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
     public void write(CompoundTag compound, boolean clientPacket) {
         if (updateConnectivity)
             compound.putBoolean("Uninitialized", true);
-        compound.put("Ladle", foundry.write());
 
         if (lastKnownPos != null)
             compound.put("LastKnownPos", NbtUtils.writeBlockPos(lastKnownPos));
 
         if (isController()) {
             compound.put("TankContent", tankInventory.serializeNBT(new CompoundTag()));
-            compound.put("MeltingInv", foundry.inputInv.serializeNBT());
             compound.putInt("Size", width);
             compound.putInt("Height", height);
-        } else {
+            compound.put("FoundryData", foundryData.write());
+        } else
             compound.put("Controller", NbtUtils.writeBlockPos(controller));
-        }
+
+        compound.put("FoundrySlot", foundrySlot.serializeNBT());
+
         compound.putInt("Luminosity", luminosity);
+
+        CompoundTag modesTag = new CompoundTag();
+        for (Direction dir : Direction.values()) {
+            modesTag.putString(dir.getName(), attachmentMap.get(dir).getSerializedName());
+        }
+        compound.put("SideModes", modesTag);
+
         super.write(compound, clientPacket);
     }
+
+    public SideAttachment getSideAttachment(Direction side) {
+        return attachmentMap.getOrDefault(side, SideAttachment.NONE);
+    }
+
+    public boolean canSetAttachment(Direction side, SideAttachment attachment) {
+        BlockState blockState = level.getBlockState(getBlockPos());
+
+        if (attachment.equals(SideAttachment.NONE))
+            return true; // Cannot prevent from clearing a side attachment
+
+        if (blockState.getValue(SHAPE).equals(CrucibleBlock.Shape.INNER) && (!blockState.getValue(BOTTOM) || !side.equals(Direction.DOWN)))
+            return false; // Cannot place attachment on inner blocks (except bottom ones)
+
+        if (!attachmentMap.get(side).equals(SideAttachment.NONE))
+            return false; // Cannot swap between attachments, need to remove it first
+
+        if (!attachment.equals(SideAttachment.GAUGE) && attachmentMap.containsValue(attachment))
+            return false; // Cannot have the same attachment twice on the same block (except Gauges)
+
+        if (side.equals(Direction.UP))
+            return false; // Cannot have attachment on the top side
+
+        if (attachment.equals(SideAttachment.GAUGE) && side.equals(Direction.DOWN))
+            return false; // Cannot have gauges on the bottom side
+
+        return true;
+    }
+
+    public boolean setAttachment(Direction side, SideAttachment mode, boolean simulate) {
+        if (!canSetAttachment(side, mode))
+            return false;
+
+        if (!simulate) {
+            attachmentMap.put(side, mode);
+            setChanged();
+        }
+        return true;
+    }
+
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER)
+        refreshCapability(!fluidCapability.isPresent(), !itemCapability.isPresent());
+
+        if (isItemHandlerCap(cap)) //&& (getSideAttachment(side).equals(SideAttachment.ITEM_PORT) || side == null))
             return itemCapability.cast();
-        if (!fluidCapability.isPresent())
-            refreshCapability();
-        if (cap == ForgeCapabilities.FLUID_HANDLER)
+        if (isFluidHandlerCap(cap)) //&& (getSideAttachment(side).equals(SideAttachment.FLUID_PORT) || side == null))
             return fluidCapability.cast();
+
         return super.getCapability(cap, side);
+    }
+
+    private void refreshCapability(boolean fluidCap, boolean itemCap) {
+        if (fluidCap) {
+            LazyOptional<IFluidHandler> oldFluidCap = fluidCapability;
+            fluidCapability = LazyOptional.of(this::handlerForFluidCapability);
+            oldFluidCap.invalidate();
+        }
+
+        if (itemCap) {
+            if (!isController()) {
+                CrucibleBlockEntity controllerBE = getControllerBE();
+                if (controllerBE == null)
+                    return;
+                controllerBE.refreshCapability(true, true);
+                itemCapability = controllerBE.itemCapability;
+                return;
+            }
+
+            foundryData.getInputInv().clear();
+            for (int yOffset = 0; yOffset < height; yOffset++) {
+                for (int xOffset = 0; xOffset < width; xOffset++) {
+                    for (int zOffset = 0; zOffset < width; zOffset++) {
+                        BlockPos cruciblePos = this.worldPosition.offset(xOffset, yOffset, zOffset);
+
+                        CrucibleBlockEntity crucibleAt = ConnectivityHandler.partAt(CMBlockEntityTypes.INDUSTRIAL_CRUCIBLE.get(), level, cruciblePos);
+
+                        if (crucibleAt != null)
+                            foundryData.getInputInv().addSlot(crucibleAt.foundrySlot);
+                    }
+                }
+            }
+
+            itemCapability = LazyOptional.of(() -> foundryData.getInputInv());
+        }
+    }
+
+    private IFluidHandler handlerForFluidCapability() {
+        return isController() ? tankInventory
+                : getControllerBE() != null ? getControllerBE().handlerForFluidCapability() : new FluidTank(0);
     }
 
     protected void updateConnectivity() {
@@ -213,20 +324,23 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
         if (lastKnownPos == null)
             lastKnownPos = getBlockPos();
-        else if (!lastKnownPos.equals(worldPosition) && worldPosition != null) {
+        else if (!lastKnownPos.equals(worldPosition)) {
             onPositionChanged();
             return;
         }
 
         if (updateCapability) {
             updateCapability = false;
-            refreshCapability();
+            refreshCapability(true, true);
         }
         if (updateConnectivity)
             updateConnectivity();
 
         if (isController()) {
-            foundry.tick(this);
+            foundryData.tick();
+
+            if (level.isClientSide)
+                tankInventory.tick();
         }
     }
 
@@ -247,57 +361,83 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         syncCooldown = SYNC_RATE;
     }
 
-    public void updateState() {
-        for (int yOffset = 0; yOffset < height; yOffset++) {
-            for (int xOffset = 0; xOffset < width; xOffset++) {
-                for (int zOffset = 0; zOffset < width; zOffset++) {
+    public void updateBlockState() {
+        if (level == null)
+            return;
 
-                    BlockPos pos = this.worldPosition.offset(xOffset, yOffset, zOffset);
-                    BlockState blockState = level.getBlockState(pos);
-                    if (!CrucibleBlock.isLadle(blockState))
-                        continue;
+        BlockState blockState = getBlockState();
+        if (!CrucibleBlock.isCrucible(blockState))
+            return; // For safety
 
-                    CrucibleBlock.Shape shape = CrucibleBlock.Shape.PLAIN;
+        CrucibleBlock.Shape newShape = getShape();
 
-                    if (width == 1)
-                        shape = CrucibleBlock.Shape.PLAIN;
+        // Update block state values
+        blockState = blockState.setValue(CrucibleBlock.BOTTOM, getController().getY() == getBlockPos().getY());
+        blockState = blockState.setValue(TOP, getController().getY() + height - 1 == getBlockPos().getY());
+        blockState = blockState.setValue(CrucibleBlock.SHAPE, newShape);
 
-                    if (width != 1)
-                        shape = xOffset == 0 ? zOffset == 0 ? CrucibleBlock.Shape.NW :
-                                zOffset == width - 1 ? CrucibleBlock.Shape.SW : CrucibleBlock.Shape.WEST :
+        level.setBlockAndUpdate(getBlockPos(), blockState);
+        level.getChunkSource()
+                .getLightEngine()
+                .checkBlock(getBlockPos());
 
-                                xOffset == width - 1 ? zOffset == 0 ? CrucibleBlock.Shape.NE :
-                                        zOffset == width - 1 ? CrucibleBlock.Shape.SE : CrucibleBlock.Shape.EAST :
+        if (newShape.equals(CrucibleBlock.Shape.INNER)) {
+            // Drop Attachments
+            for (Direction side : Iterate.directions) {
+                SideAttachment mode = getSideAttachment(side);
+                if (mode.equals(SideAttachment.NONE))
+                    continue; // Avoid useless operations
 
-                                        zOffset == 0 ? CrucibleBlock.Shape.NORTH : zOffset == width - 1 ? CrucibleBlock.Shape.SOUTH : CrucibleBlock.Shape.INNER;
+                if (side.equals(Direction.DOWN) && blockState.getValue(BOTTOM))
+                    continue; // Keep bottom attachments
 
-                    level.setBlock(pos, blockState.setValue(CrucibleBlock.SHAPE, shape), 22);
-                    level.getChunkSource()
-                            .getLightEngine()
-                            .checkBlock(pos);
-                }
+                if (side.equals(Direction.UP) && blockState.getValue(TOP))
+                    continue; // Keep top attachments
+
+                if (setAttachment(side, SideAttachment.NONE, false))
+                    Containers.dropItemStack(level, getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(), mode.getItem());
             }
         }
     }
 
-    private void refreshCapability() {
-        LazyOptional<IFluidHandler> oldFCap = fluidCapability;
-        fluidCapability = LazyOptional.of(this::handlerForFluidCapability);
-        oldFCap.invalidate();
+    private CrucibleBlock.Shape getShape() {
+        CrucibleBlock.Shape shape = CrucibleBlock.Shape.PLAIN;
 
-        LazyOptional<IItemHandlerModifiable> oldICap = itemCapability;
-        itemCapability = LazyOptional.of(this::handlerForItemCapability);
-        oldICap.invalidate();
-    }
+        CrucibleBlockEntity controller = getControllerBE();
 
-    private IFluidHandler handlerForFluidCapability() {
-        return isController() ? tankInventory
-                : getControllerBE() != null ? getControllerBE().handlerForFluidCapability() : new FluidTank(0);
-    }
+        if (controller == null)
+            return shape;
 
-    private IItemHandlerModifiable handlerForItemCapability() {
-        return isController() ? foundry.inputInv
-                : getControllerBE() != null ? getControllerBE().handlerForItemCapability() : new SmartInventory(0, this, 0, false);
+        int xOffset = getBlockPos().getX() - controller.getBlockPos().getX();
+        int zOffset = getBlockPos().getZ() - controller.getBlockPos().getZ();
+
+        if (width != 1) {
+            if (xOffset == 0) {
+                if (zOffset == 0)
+                    return CrucibleBlock.Shape.NW;
+                else if (zOffset == (width - 1))
+                    return CrucibleBlock.Shape.SW;
+                else
+                    return CrucibleBlock.Shape.WEST;
+
+
+            } else if (xOffset == (width - 1)) {
+                if (zOffset == 0)
+                    return CrucibleBlock.Shape.NE;
+                else if (zOffset == (width - 1))
+                    return CrucibleBlock.Shape.SE;
+                else
+                    return CrucibleBlock.Shape.EAST;
+
+            } else if (zOffset == 0)
+                return CrucibleBlock.Shape.NORTH;
+            else if (zOffset == (width - 1))
+                return CrucibleBlock.Shape.SOUTH;
+            else
+                return CrucibleBlock.Shape.INNER;
+        }
+
+        return shape;
     }
 
     @Override
@@ -305,18 +445,22 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         return isController() ? worldPosition : controller;
     }
 
-    protected void onFluidStackChanged(FluidStack newFluidStack) {
+    protected void onFluidContentChanged() {
         if (!hasLevel())
             return;
 
-        FluidType attributes = newFluidStack.getFluid()
-                .getFluidType();
-        int luminosity = (int) (attributes.getLightLevel(newFluidStack) / 1.2f);
-        boolean reversed = attributes.isLighterThanAir();
-        int maxY = (int) ((tankInventory.getFillState() * height) + 1);
+        int luminosity = 0;
+        for (FluidStack fluid : getTank().getFluids()) {
+            FluidType type = fluid.getFluid().getFluidType();
+            int fluidLum = (int) (type.getLightLevel(fluid) / 1.2f);
 
+            if (fluidLum > luminosity)
+                luminosity = fluidLum;
+        }
+
+        int maxY = (int) ((tankInventory.getFillState() * height) + 1);
         for (int yOffset = 0; yOffset < height; yOffset++) {
-            boolean isBright = reversed ? (height - yOffset <= maxY) : (yOffset < maxY);
+            boolean isBright = (yOffset < maxY);
             int actualLuminosity = isBright ? luminosity : luminosity > 0 ? 1 : 0;
 
             for (int xOffset = 0; xOffset < width; xOffset++) {
@@ -334,10 +478,8 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
             }
         }
 
-        if (!level.isClientSide) {
-            setChanged();
-            sendData();
-        }
+        if (!level.isClientSide)
+            notifyUpdate();
     }
 
     protected void setLuminosity(int luminosity) {
@@ -355,14 +497,15 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         if (isController())
             return this;
         BlockEntity blockEntity = level.getBlockEntity(controller);
-        if (blockEntity instanceof CrucibleBlockEntity)
-            return (CrucibleBlockEntity) blockEntity;
+        if (blockEntity instanceof CrucibleBlockEntity crucibleBE)
+            return crucibleBE;
         return null;
     }
 
     public void applyFluidTankSize(int blocks) {
-        tankInventory.setCapacity(blocks * CAPACITY_FACTOR);
-        foundry.inputInv.setFirstLimitedSlot(blocks);
+        tankInventory.setCapacity(blocks * CAPACITY_PER_BLOCK);
+
+        // Handle Fluid overflow
         int overflow = tankInventory.getFillAmount() - tankInventory.getCapacity();
         if (overflow > 0)
             tankInventory.drain(overflow, IFluidHandler.FluidAction.EXECUTE);
@@ -388,14 +531,6 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         lastKnownPos = worldPosition;
     }
 
-    public void updateLadleState(boolean controlled) {
-        if (!isController())
-            return;
-
-        foundry.setActive(controlled);
-        notifyUpdate();
-    }
-
     @Override
     public void setController(BlockPos controller) {
         if (level.isClientSide && !isVirtual())
@@ -403,9 +538,8 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         if (controller.equals(this.controller))
             return;
         this.controller = controller;
-        refreshCapability();
-        setChanged();
-        sendData();
+        refreshCapability(true, true);
+        notifyUpdate();
     }
 
     @Override
@@ -418,14 +552,13 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         height = 1;
 
         BlockState state = getBlockState();
-        if (CrucibleBlock.isLadle(state)) {
+        if (CrucibleBlock.isCrucible(state)) {
             state = state.setValue(CrucibleBlock.SHAPE, CrucibleBlock.Shape.PLAIN);
             state = state.setValue(CrucibleBlock.BOTTOM, true);
-            state = state.setValue(CrucibleBlock.TOP, true);
+            state = state.setValue(TOP, true);
             getLevel().setBlock(worldPosition, state, 22);
         }
-        setChanged();
-        sendData();
+        notifyUpdate();
     }
 
     protected void processFallOnEntity(Entity entityIn) {
@@ -440,8 +573,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         Predicate<Recipe<?>> type = RecipeConditions.isOfType(CMRecipeTypes.ENTITY_MELTING.getType());
         List<Recipe<?>> recipes = RecipeFinder.get(EntityMeltingCacheKey, level, type).stream()
                 .filter(r -> r instanceof EntityMeltingRecipe entityRecipe
-                        && entityRecipe.matches(this, entityIn.getType())
-                        && FoundryRecipe.isEnoughHeated(this, entityRecipe))
+                        && entityRecipe.matches(this, entityIn.getType()))
                 .toList();
 
         if (!recipes.isEmpty())
@@ -449,7 +581,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
         boolean isFireImmune = entityIn.fireImmune();
 
-        if (!isFireImmune && foundry.getCurrentHeat() > 0)
+        if (!isFireImmune && foundryData.getCurrentHeat() > 0)
             entityIn.setSecondsOnFire(MOLTEN_FLUID_BURNING_TIME);
 
         if (recipe != null) {
@@ -458,8 +590,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
             if (!entityIn.isAlive())
                 applyRecipe(recipe);
-
-        } else if (!isFireImmune && foundry.getCurrentHeat() > 0)
+        } else if (!isFireImmune && foundryData.getCurrentHeat() > 0)
             entityIn.hurt(CMDamageTypes.foundry(level), 4.0F);
 
     }
@@ -495,15 +626,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
     @Override
     public void notifyMultiUpdated() {
-        BlockState state = this.getBlockState();
-        if (CrucibleBlock.isLadle(state)) { // safety
-            state = state.setValue(CrucibleBlock.BOTTOM, getController().getY() == getBlockPos().getY());
-            state = state.setValue(CrucibleBlock.TOP, getController().getY() + height - 1 == getBlockPos().getY());
-            level.setBlock(getBlockPos(), state, 6);
-        }
-        if (isController())
-            updateState();
-        updateLadleState(!foundry.isActive());
+        updateBlockState();
         setChanged();
     }
 
@@ -562,7 +685,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
     }
 
     public static int getCapacityFactor() {
-        return CAPACITY_FACTOR;
+        return CAPACITY_PER_BLOCK;
     }
 
     private static final Object EntityMeltingCacheKey = new Object();
@@ -570,12 +693,13 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         CrucibleBlockEntity controllerBE = getControllerBE();
-        if (controllerBE == null)
-            return false;
 
         CMLang.translate("crucible.title").forGoggles(tooltip);
 
-        controllerBE.foundry.addToGoggleTooltip(tooltip, isPlayerSneaking, controllerBE.getBaseSize());
+        if (controllerBE != null)
+            controllerBE.foundryData.addToGoggleTooltip(tooltip, attachmentMap.containsValue(SideAttachment.GAUGE), controllerBE.getBaseSize());
+        else
+            return false;
 
         CMLang.translate("crucible.capacity").style(ChatFormatting.GRAY).forGoggles(tooltip);
 
@@ -602,7 +726,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
             if (tank.isEmpty())
                 CMLang.translate("crucible.empty").style(ChatFormatting.DARK_GRAY).forGoggles(tooltip, 1);
             else
-                for (FluidStack fluid : tank.fluids) {
+                for (FluidStack fluid : tank.getFluids()) {
                     CMLang.text("")
                             .add(CMLang.fluidName(fluid)
                                     .add(CMLang.text(" "))

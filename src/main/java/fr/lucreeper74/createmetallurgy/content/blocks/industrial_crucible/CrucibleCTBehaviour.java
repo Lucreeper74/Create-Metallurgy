@@ -42,7 +42,9 @@ public class CrucibleCTBehaviour extends ConnectedTextureBehaviour.Base {
         boolean blockMatch = state.getBlock() == other.getBlock() && ConnectivityHandler.isConnected(reader, pos, otherPos);
 
         if (face.getAxis().isHorizontal())
-            return blockMatch && ((state.getValue(CrucibleBlock.WINDOW) == other.getValue(CrucibleBlock.WINDOW)) || ((!state.getValue(CrucibleBlock.WINDOW) && other.getValue(CrucibleBlock.WINDOW)) && (pos.relative(Direction.UP).equals(otherPos) || pos.relative(Direction.DOWN).equals(otherPos))));
+            return blockMatch && ((state.getValue(CrucibleBlock.WINDOW) == other.getValue(CrucibleBlock.WINDOW))
+                    || ((!state.getValue(CrucibleBlock.WINDOW) && other.getValue(CrucibleBlock.WINDOW)) && (pos.relative(Direction.UP).equals(otherPos)
+                    || pos.relative(Direction.DOWN).equals(otherPos))));
         else
             return blockMatch;
     }

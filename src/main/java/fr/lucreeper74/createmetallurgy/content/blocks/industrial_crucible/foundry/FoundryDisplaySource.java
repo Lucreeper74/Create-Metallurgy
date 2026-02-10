@@ -4,7 +4,6 @@ import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkContext;
 import com.simibubi.create.content.redstone.displayLink.target.DisplayTargetStats;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.FoundryData;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -57,11 +56,10 @@ public class FoundryDisplaySource extends DisplaySource {
         if (crucibleBE == null)
             return Stream.of(EMPTY);
 
-        FoundryData foundry = crucibleBE.foundry;
-        foundry.updateTemperature(crucibleBE);
+        crucibleBE.foundryData.updateTemperature();
 
         return Stream.of(List.of(CMLang.translateDirect("foundry.status").append(":")),
-                List.of(foundry.getHeatLevelComponent(crucibleBE.getBaseSize())));
+                List.of(crucibleBE.foundryData.getHeatLevelComponent(crucibleBE.getBaseSize())));
     }
 
     @Override
