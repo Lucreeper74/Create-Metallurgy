@@ -8,6 +8,7 @@ import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.Crucib
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
+import fr.lucreeper74.createmetallurgy.utils.SideAttachment;
 import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.PonderPalette;
 import net.createmod.ponder.api.element.ElementLink;
@@ -63,7 +64,7 @@ public class CrucibleScenes {
         scene.idle(90);
 
 
-        // Show windows configuration on small crucible
+        // Show window configuration on small crucible
         scene.overlay().showControls(util.vector().blockSurface(crucibleController, Direction.WEST), Pointing.LEFT, 15)
                 .rightClick().withItem(AllItems.WRENCH.asStack());
         for (int i = 0; i < 3; i++) {
@@ -130,18 +131,18 @@ public class CrucibleScenes {
 
         scene.overlay().showText(60)
                 .attachKeyFrame()
-                .text("Industrial Crucibles can also be used as Foundries...")
+                .text("Industrial Crucibles can also be used as bigger Foundry Basin")
                 .pointAt(util.vector().blockSurface(crucibleController, Direction.WEST))
                 .placeNearTarget();
         scene.idle(70);
 
         scene.overlay().showControls(util.vector().blockSurface(util.grid().at(3, 1, 2), Direction.NORTH), Pointing.RIGHT, 15).rightClick();
         scene.idle(7);
-        scene.world().modifyBlockEntity(crucibleController, CrucibleBlockEntity.class, be -> be.foundry.setActive(true));
+        scene.world().modifyBlockEntity(crucibleController.east(), CrucibleBlockEntity.class, be -> be.setAttachment(Direction.NORTH, SideAttachment.GAUGE, false));
 
         scene.overlay().showText(60)
                 .attachKeyFrame()
-                .text("...you can remove it any time using a Wrench")
+                .text("You can add or remove attachments like Gauges any time and anywhere using a Wrench")
                 .pointAt(util.vector().blockSurface(crucibleGauge.below(), Direction.NORTH))
                 .placeNearTarget();
         scene.idle(70);
@@ -164,7 +165,7 @@ public class CrucibleScenes {
         scene.overlay().showText(60)
                 .attachKeyFrame()
                 .colored(PonderPalette.OUTPUT)
-                .text("...Foundry can have a size up to 5x5 blocks in width to reach the maximum temperature")
+                .text("...Crucibles must have a base size of 5x5 blocks to reach the maximum temperature")
                 .pointAt(util.vector().blockSurface(crucibleGauge, Direction.NORTH))
                 .placeNearTarget();
         scene.idle(70);
@@ -174,14 +175,14 @@ public class CrucibleScenes {
         scene.idle(10);
         burners.forEach(blockPos -> scene.world().modifyBlock(blockPos, s -> s.setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.KINDLED), false));
         scene.world().modifyBlock(firstBurner, s -> s.setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.KINDLED), false);
-        scene.world().modifyBlockEntity(crucibleController, CrucibleBlockEntity.class, be -> be.foundry.updateTemperature(be));
+        scene.world().modifyBlockEntity(crucibleController, CrucibleBlockEntity.class, be -> be.foundryData.updateTemperature());
 
         scene.idle(10);
         scene.world().hideSection(util.select().position(firstBurner), Direction.NORTH);
         scene.overlay().showText(60)
                 .attachKeyFrame()
                 .colored(PonderPalette.RED)
-                .text("However, each base block without a burner below it will cool down the Foundry. Higher heat means faster melting")
+                .text("However, each base block without a burner below it will cool down the Crucible. Higher heat means faster melting!")
                 .pointAt(util.vector().centerOf(firstBurner))
                 .placeNearTarget();
         scene.idle(70);
@@ -192,7 +193,7 @@ public class CrucibleScenes {
         scene.overlay().showText(80)
                 .attachKeyFrame()
                 .colored(PonderPalette.INPUT)
-                .text("Unlike the Foundry Basin, this is large enough to melt down bigger items and several at once")
+                .text("Unlike Foundry Basins, Crucibles are large enough to melt down bigger items and several at once")
                 .pointAt(util.vector().blockSurface(util.grid().at(3, 3, 3), Direction.WEST))
                 .placeNearTarget();
         scene.idle(40);
@@ -202,7 +203,7 @@ public class CrucibleScenes {
             ElementLink<EntityElement> item = scene.world().createItemEntity(util.vector().centerOf(3, 4, 3), util.vector().of(0, 0, 0), stack);
             scene.idle(5);
             int index = i;
-            scene.world().modifyBlockEntity(crucibleController, CrucibleBlockEntity.class, be -> be.foundry.getInventory().insertItem(index, stack, false));
+            scene.world().modifyBlockEntity(crucibleController, CrucibleBlockEntity.class, be -> be.foundryData.getInputInv().insertItem(index, stack, false));
             scene.world().modifyEntity(item, Entity::discard);
         }
 
@@ -210,7 +211,7 @@ public class CrucibleScenes {
                 .withItem(AllItems.GOGGLES.asStack());
         scene.idle(6);
         scene.overlay().showText(60)
-                .text("The Foundry's current status can be inspected with Engineer's Goggles. The foundry's temperature is reported in Thermal Units (Tu)")
+                .text("The current heat of the Crucibles can be inspected with Engineer's Goggles and reported in Thermal Units (Tu)")
                 .attachKeyFrame()
                 .colored(PonderPalette.BLUE)
                 .pointAt(util.vector().blockSurface(crucibleGauge, Direction.NORTH))
@@ -235,14 +236,14 @@ public class CrucibleScenes {
         int itemNumber = 9;
         for (int i = 0; i < itemNumber; i++) {
             int index = i;
-            scene.world().modifyBlockEntity(crucibleController, CrucibleBlockEntity.class, be -> be.foundry.getInventory().setStackInSlot(index, ItemStack.EMPTY));
+            scene.world().modifyBlockEntity(crucibleController, CrucibleBlockEntity.class, be -> be.foundryData.getInputInv().setStackInSlot(index, ItemStack.EMPTY));
         }
         FluidStack fluid = new FluidStack(CMFluids.MOLTEN_OBDURIUM.get().getSource(), 810 * itemNumber);
         scene.world().modifyBlockEntity(crucibleController, CrucibleBlockEntity.class, be -> be.getTank().fill(fluid, IFluidHandler.FluidAction.EXECUTE));
         scene.idle(10);
         scene.overlay().showText(60)
                 .attachKeyFrame()
-                .text("Items can also be transferred on each side like an Item Vault")
+                .text("Items can also be transferred on each side like an Item Vault, same for fluids like a Fluid Tank")
                 .pointAt(util.vector().blockSurface(util.grid().at(0, 1, 3), Direction.UP))
                 .placeNearTarget();
         scene.idle(70);
@@ -250,7 +251,7 @@ public class CrucibleScenes {
         scene.overlay().showText(60)
                 .attachKeyFrame()
                 .colored(PonderPalette.FAST)
-                .text("Foundries can also perform other types of recipes, such as entity melting and alloying")
+                .text("Crucibles can also perform other types of recipes, such as entity melting and alloying")
                 .pointAt(util.vector().blockSurface(crucibleController.above(), Direction.WEST))
                 .placeNearTarget();
         scene.idle(70);
