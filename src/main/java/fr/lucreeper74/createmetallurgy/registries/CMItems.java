@@ -11,7 +11,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleStyles;
-import fr.lucreeper74.createmetallurgy.content.items.FoundryUnitItem;
+import fr.lucreeper74.createmetallurgy.content.items.AttachmentItem.*;
 import fr.lucreeper74.createmetallurgy.content.items.ladle_filter.LadleFilterItem;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import net.minecraft.tags.TagKey;
@@ -72,8 +72,10 @@ public class CMItems {
             .onRegister(i -> i.setBurnTime(2000))
             .register();
 
-    public static final ItemEntry<FoundryUnitItem> FOUNDRY_UNIT = REGISTRATE.item("foundry_unit", FoundryUnitItem::new)
-            .register();
+    public static final ItemEntry<GaugeAttachmentItem> GAUGE_ATTACHMENT = REGISTRATE.item("gauge_attachment", GaugeAttachmentItem::new).register();
+    public static final ItemEntry<ItemPortAttachmentItem> ITEM_PORT_ATTACHMENT = REGISTRATE.item("item_port_attachment", ItemPortAttachmentItem::new).register();
+    public static final ItemEntry<FluidPortAttachmentItem> FLUID_PORT_ATTACHMENT = REGISTRATE.item("fluid_port_attachment", FluidPortAttachmentItem::new).register();
+
 
     public static final ItemEntry<LadleFilterItem> LADLE_FILTER = REGISTRATE.item("ladle_filter", LadleFilterItem::new)
             .register();

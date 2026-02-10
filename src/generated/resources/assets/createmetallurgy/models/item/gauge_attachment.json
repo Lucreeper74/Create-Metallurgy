@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "createmetallurgy:item/foundry_unit"
+    "layer0": "createmetallurgy:item/gauge_attachment"
   }
 }
