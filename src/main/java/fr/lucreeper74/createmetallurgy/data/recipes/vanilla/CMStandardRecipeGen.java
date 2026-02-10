@@ -184,7 +184,7 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
                     .pattern("B")
                     .pattern("C")),
 
-    FOUNDRY_UNIT = create(CMItems.FOUNDRY_UNIT).unlockedByTag(T::steelIngot)
+    FOUNDRY_UNIT = create(CMItems.GAUGE_ATTACHMENT).unlockedByTag(T::steelIngot)
             .viaShaped(b -> b.define('S', T.steelIngot())
                     .define('C', Items.COMPASS)
                     .pattern("SCS")),
