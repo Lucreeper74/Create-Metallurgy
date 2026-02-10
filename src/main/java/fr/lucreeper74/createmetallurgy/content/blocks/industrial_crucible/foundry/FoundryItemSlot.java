@@ -141,7 +141,6 @@ public class FoundryItemSlot {
         if (recipe != null) {
             int duration = recipe.getProcessingDuration();
 
-            // Todo: only increasing for heating recipes!
             processingTime = (int) (duration / getSpeedFactor(recipe));
             processDuration = processingTime;
             currentRecipe = recipe;
@@ -151,13 +150,15 @@ public class FoundryItemSlot {
 
     public float getSpeedFactor(ProcessingRecipe<?> recipe) {
         int minHeat;
+        boolean heatingRecipe = true;
         if (recipe instanceof FoundryRecipe foundryRecipe) {
             minHeat = foundryRecipe.getMinHeat();
+            heatingRecipe = (foundryRecipe.getMaxHeat() - foundryRecipe.getMinHeat()) / 2 >= 0;
         } else
             minHeat = FoundryRecipe.getHeatRequirement(recipe.getRequiredHeat());
 
         // 1+(speedLimit-1) (1-ℯ^(k (Tmin-x))) Paste this in math curve tracer
-        return (float) (1f + (SPEED_LIMIT - 1f) * (1f - Math.exp(.14f * (minHeat - controller.get().foundryData.getCurrentHeat()))));
+        return (float) (1f + (SPEED_LIMIT - 1f) * (1f - Math.exp((heatingRecipe ? .14f : -.14f)  * (minHeat - controller.get().foundryData.getCurrentHeat()))));
     }
 
     private ProcessingRecipe<?> getMatchingRecipe() {
