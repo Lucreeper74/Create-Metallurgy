@@ -142,7 +142,7 @@ public class CMBlocks {
             .block("steel_block", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .transform(pickaxeOnly())
-            .tag(BlockTags.NEEDS_DIAMOND_TOOL)
+            .tag(BlockTags.NEEDS_IRON_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
             .transform(tagBlockAndItem(CMMetals.STEEL.storageBlocks))
             .tag(Tags.Items.STORAGE_BLOCKS)
@@ -154,6 +154,14 @@ public class CMBlocks {
             .block("refractory_mortar", Block::new)
             .initialProperties(() -> Blocks.CLAY)
             .tag(BlockTags.MINEABLE_WITH_SHOVEL)
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<Block> SLAG_BLOCK = REGISTRATE
+            .block("slag_block", Block::new)
+            .initialProperties(() -> Blocks.BASALT)
+            .transform(pickaxeOnly())
+            .tag(BlockTags.NEEDS_IRON_TOOL)
             .simpleItem()
             .register();
 

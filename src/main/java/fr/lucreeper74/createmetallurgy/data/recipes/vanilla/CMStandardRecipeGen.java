@@ -92,6 +92,17 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
                     .pattern("CCC")
                     .pattern("CCC")),
 
+    SLAG_FROM_BLOCK = create(CMItems.SLAG).withSuffix("_from_block")
+            .returns(9)
+            .unlockedBy(CMItems.SLAG::get)
+            .viaShapeless(b -> b.requires(CMBlocks.SLAG_BLOCK.get())),
+
+    SLAG_BLOCK = create(CMBlocks.SLAG_BLOCK).unlockedBy(CMItems.SLAG::get)
+            .viaShaped(b -> b.define('S', CMItems.SLAG.get())
+                    .pattern("SSS")
+                    .pattern("SSS")
+                    .pattern("SSS")),
+
     COKE_FROM_BLOCK = create(CMItems.COKE).withSuffix("_from_block")
             .returns(9)
             .unlockedBy(CMItems.COKE::get)
