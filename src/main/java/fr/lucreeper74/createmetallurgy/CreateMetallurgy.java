@@ -69,7 +69,7 @@ public class CreateMetallurgy {
     }
 
     public static void init(final FMLCommonSetupEvent event) {
-        AllFluids.registerFluidInteractions();
+        CMFluids.registerFluidInteractions();
         CreateNBTProcessors.register();
 
         event.enqueueWork(() -> {

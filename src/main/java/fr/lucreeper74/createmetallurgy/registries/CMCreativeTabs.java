@@ -102,7 +102,7 @@ public class CMCreativeTabs {
                     CMItems.INCOMPLETE_LADLE_FRAME
             );
 
-            List<TagDependentBucketItem> tagDependentExclusions = CMFluids.ALL_MODDED_FLUIDS.stream()
+            List<TagDependentBucketItem> tagDependentExclusions = CMFluids.ALL_MODDED_METALS.stream()
                     .map(entry -> (TagDependentBucketItem) entry.getBucket().get())
                     .toList();
 
