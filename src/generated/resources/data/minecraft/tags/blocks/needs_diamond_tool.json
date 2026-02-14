@@ -3,7 +3,6 @@
     "createmetallurgy:raw_wolframite_block",
     "createmetallurgy:tungsten_block",
     "createmetallurgy:obdurium_block",
-    "createmetallurgy:wolframite_ore",
-    "createmetallurgy:steel_block"
+    "createmetallurgy:wolframite_ore"
   ]
 }
