@@ -21,7 +21,7 @@ Create Metallurgy is a Create Mod Addon developped by Luc_Creeper74, introducing
 </p>
 
 ## Contribute
-Want to help with translation ? Please refer to language file in [`generated/lang/en_us.json`](https://github.com/Lucreeper74/Create-Metallurgy/blob/mc1.19.2/dev/src/generated/resources/assets/createmetallurgy/lang/en_us.json).
+Want to help with translation ? Please refer to instructions here [`main/resources/assets/createmetallurgy/lang`](https://github.com/Lucreeper74/Create-Metallurgy/tree/mc1.20.1/dev/src/main/resources/assets/createmetallurgy/lang).
 
 <br>
 
