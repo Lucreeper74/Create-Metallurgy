@@ -9,10 +9,19 @@ import fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidSource;
 import fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType;
 import fr.lucreeper74.createmetallurgy.content.fluids.TagDependentBucketItem;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.FluidTags;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.DispensibleContainerItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.SoundActions;
@@ -84,9 +93,11 @@ public class CMFluids {
                 .source(MoltenFluidSource::new);
 
         if (!metal.isStandard())
-            builder.bucket((content, props) -> new TagDependentBucketItem(content, props, metal.getItemTag(CMMetals.ItemType.INGOT))).build();
+            builder.bucket((content, props) -> new TagDependentBucketItem(content, props, metal.getItemTag(CMMetals.ItemType.INGOT)))
+                    .onRegister(CMFluids::registerFluidDispenseBehavior).build();
         else
-            builder.bucket().build();
+            builder.bucket()
+                    .onRegister(CMFluids::registerFluidDispenseBehavior).build();
 
         FluidEntry<ForgeFlowingFluid.Flowing> entry = builder.register();
 
@@ -114,6 +125,7 @@ public class CMFluids {
                 .tag(CMTags.CMFluidTags.MOLTEN_MATERIAL.tag, AllTags.AllFluidTags.BOTTOMLESS_DENY.tag)
                 .source(MoltenFluidSource::new)
                 .bucket()
+                .onRegister(CMFluids::registerFluidDispenseBehavior)
                 .build()
                 .register();
 
@@ -123,7 +135,7 @@ public class CMFluids {
 
     @Deprecated
     public static boolean isMoltenMaterial(Fluid fluid) {
-        return fluid.is(CMTags.CMFluidTags.MOLTEN_MATERIAL.tag) || fluid.is(FluidTags.LAVA);
+        return fluid.is(CMTags.CMFluidTags.MOLTEN_MATERIAL.tag);
     }
 
     public static void register() {
@@ -140,5 +152,23 @@ public class CMFluids {
                     }
             ));
         }
+    }
+
+    private static final DispenseItemBehavior DEFAULT = new DefaultDispenseItemBehavior();
+    private static final DispenseItemBehavior DISPENSE_FLUID = new DefaultDispenseItemBehavior() {
+        @Override
+        protected ItemStack execute(BlockSource pSource, ItemStack pStack) {
+            DispensibleContainerItem dispensibleContainerItem = (DispensibleContainerItem) pStack.getItem();
+            BlockPos pos = pSource.getPos().relative(pSource.getBlockState().getValue(DispenserBlock.FACING));
+            Level level = pSource.getLevel();
+            if (dispensibleContainerItem.emptyContents(null, level, pos, null, pStack)) {
+                return new ItemStack(Items.BUCKET);
+            }
+            return DEFAULT.dispense(pSource, pStack);
+        }
+    };
+
+    private static void registerFluidDispenseBehavior(BucketItem bucket) {
+        DispenserBlock.registerBehavior(bucket, DISPENSE_FLUID);
     }
 }
