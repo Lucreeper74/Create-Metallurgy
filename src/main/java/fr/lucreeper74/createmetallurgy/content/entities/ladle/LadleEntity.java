@@ -1,32 +1,36 @@
 package fr.lucreeper74.createmetallurgy.content.entities.ladle;
 
-import java.util.List;
-
-import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.content.logistics.chute.ChuteBlock;
 
 import fr.lucreeper74.createmetallurgy.mixins.accessors.PackageEntityAccessor;
 import fr.lucreeper74.createmetallurgy.registries.CMEntityTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
+import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
 
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.network.PlayMessages.SpawnEntity;
 
-public class LadleEntity extends PackageEntity implements IHaveGoggleInformation {
+public class LadleEntity extends PackageEntity {
 
     public LadleEntity(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
@@ -86,13 +90,32 @@ public class LadleEntity extends PackageEntity implements IHaveGoggleInformation
 
     @Override
     protected void onInsideBlock(BlockState state) {
-        // Survive to water unlike packages
-        // Todo: make the molten metal disappear when under water
+        if (!isAlive())
+            return;
+        if (state.getBlock() == Blocks.WATER || (state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED))) {
+            IFluidHandlerItem fluidHandler = FluidUtil.getFluidHandler(box).orElse(null);
+            if (fluidHandler != null) {
+                for (boolean simulate : Iterate.trueAndFalse) {
+                    IFluidHandler.FluidAction action = simulate ? IFluidHandler.FluidAction.SIMULATE : IFluidHandler.FluidAction.EXECUTE;
+
+                    FluidStack drained = fluidHandler.drain(LadleItem.LADLE_CAPACITY, action);
+                    Fluid fluid = drained.getFluid();
+                    if (!CMFluids.isHotFluid(fluid))
+                        return;
+
+                    if (!simulate) {
+                        float pitch = 1.8f - RandomSource.create().nextFloat() * .4f;
+                        level().playSound(null, blockPosition(),
+                                SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, .5f, pitch);
+                    }
+                }
+            }
+        }
     }
 
     @Override
     protected void dropAllDeathLoot(DamageSource pDamageSource) {
-        super.dropAllDeathLoot(pDamageSource); // Todo: check if that a problem (or make spill fluid if dead)
+        super.dropAllDeathLoot(pDamageSource);
     }
 
     public static LadleEntity spawn(SpawnEntity spawnEntity, Level world) {
@@ -117,11 +140,5 @@ public class LadleEntity extends PackageEntity implements IHaveGoggleInformation
 
         if (r.nextInt(8) == 0)
             level.addParticle(ParticleTypes.SMOKE, v.x, v.y, v.z, 0, 0, 0);
-    }
-
-    @Override
-    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        return containedFluidTooltip(tooltip, isPlayerSneaking, FluidUtil.getFluidHandler(box).cast());
-        // Todo: Fix this for fluid tooltip on entity
     }
 }
