@@ -259,7 +259,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
             }
 
             if (action.execute()) {
-                if (CMFluids.isMoltenMaterial(fluid) || fluid.is(FluidTags.LAVA)) {
+                if (CMFluids.isHotFluid(fluid)) {
                     if (!entity.fireImmune()) {
                         entity.setSecondsOnFire(MOLTEN_FLUID_BURNING_TIME);
                         if (entity.hurt(CMDamageTypes.moltenFluid(entity.level()), 4.0F))

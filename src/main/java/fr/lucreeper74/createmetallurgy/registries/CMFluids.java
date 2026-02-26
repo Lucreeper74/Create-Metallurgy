@@ -15,6 +15,7 @@ import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.DispensibleContainerItem;
 import net.minecraft.world.item.ItemStack;
@@ -136,6 +137,11 @@ public class CMFluids {
     @Deprecated
     public static boolean isMoltenMaterial(Fluid fluid) {
         return fluid.is(CMTags.CMFluidTags.MOLTEN_MATERIAL.tag);
+    }
+
+    @Deprecated
+    public static boolean isHotFluid(Fluid fluid) {
+        return isMoltenMaterial(fluid) || fluid.is(FluidTags.LAVA);
     }
 
     public static void register() {
