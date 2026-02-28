@@ -73,8 +73,8 @@ public class CMItems {
             .register();
 
     public static final ItemEntry<GaugeAttachmentItem> GAUGE_ATTACHMENT = REGISTRATE.item("gauge_attachment", GaugeAttachmentItem::new).register();
-    public static final ItemEntry<ItemPortAttachmentItem> ITEM_PORT_ATTACHMENT = REGISTRATE.item("item_port_attachment", ItemPortAttachmentItem::new).register();
-    public static final ItemEntry<FluidPortAttachmentItem> FLUID_PORT_ATTACHMENT = REGISTRATE.item("fluid_port_attachment", FluidPortAttachmentItem::new).register();
+    //public static final ItemEntry<ItemPortAttachmentItem> ITEM_PORT_ATTACHMENT = REGISTRATE.item("item_port_attachment", ItemPortAttachmentItem::new).register();
+    //public static final ItemEntry<FluidPortAttachmentItem> FLUID_PORT_ATTACHMENT = REGISTRATE.item("fluid_port_attachment", FluidPortAttachmentItem::new).register();
 
 
     public static final ItemEntry<LadleFilterItem> LADLE_FILTER = REGISTRATE.item("ladle_filter", LadleFilterItem::new)

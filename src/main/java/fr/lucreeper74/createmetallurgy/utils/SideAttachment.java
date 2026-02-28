@@ -14,8 +14,8 @@ import net.minecraft.world.level.ItemLike;
 
 public enum SideAttachment implements StringRepresentable {
     NONE,
-    ITEM_PORT(CMItems.ITEM_PORT_ATTACHMENT, SoundEvents.METAL_PLACE, SoundEvents.METAL_BREAK, .5f, 1.2f, CMPartialModels.ITEM_PORT),
-    FLUID_PORT(CMItems.ITEM_PORT_ATTACHMENT, SoundEvents.COPPER_PLACE, SoundEvents.COPPER_BREAK, .5f, 1.2f, CMPartialModels.FLUID_PORT),
+//    ITEM_PORT(CMItems.ITEM_PORT_ATTACHMENT, SoundEvents.METAL_PLACE, SoundEvents.METAL_BREAK, .5f, 1.2f, CMPartialModels.ITEM_PORT),
+//    FLUID_PORT(CMItems.ITEM_PORT_ATTACHMENT, SoundEvents.COPPER_PLACE, SoundEvents.COPPER_BREAK, .5f, 1.2f, CMPartialModels.FLUID_PORT),
     GAUGE(CMItems.GAUGE_ATTACHMENT, AllSoundEvents.WRENCH_ROTATE.getMainEvent(), SoundEvents.ITEM_FRAME_REMOVE_ITEM, .5f, 1f, CMPartialModels.THERMOMETER_GAUGE);
 
     private final ItemLike item;
