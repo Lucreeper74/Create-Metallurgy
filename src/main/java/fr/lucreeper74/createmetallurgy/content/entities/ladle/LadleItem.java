@@ -49,7 +49,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class LadleItem extends PackageItem {
-    public static final int LADLE_CAPACITY = 9000; // in mb
+    public static final int LADLE_CAPACITY = 4000; // in mb
 
     public LadleItem(Properties properties, PackageStyle style) {
         super(properties, style);
@@ -167,6 +167,8 @@ public class LadleItem extends PackageItem {
     public InteractionResultHolder<ItemStack> open(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack ladle = playerIn.getItemInHand(handIn);
         FluidTank fluidContainer = getFluidContents(ladle);
+
+        // todo: burn the player
 
         if (!fluidContainer.isEmpty()) {
             FluidStack drained = fluidContainer.drain(1000, IFluidHandler.FluidAction.EXECUTE);
