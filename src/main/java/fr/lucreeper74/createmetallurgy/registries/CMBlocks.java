@@ -68,6 +68,7 @@ import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movem
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
+import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.MOD_ID;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
 @SuppressWarnings("unused")
@@ -324,7 +325,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .blockstate(new FaucetGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
-            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.faucet"))
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block." + MOD_ID + ".faucet"))
             .item()
             .transform(customItemModel("faucet", "block"))
             .register();

@@ -220,6 +220,7 @@
   "item.createmetallurgy.incomplete_ladle_frame": "Incomplete Ladle Frame",
   "item.createmetallurgy.iron_dust": "Iron Dust",
   "item.createmetallurgy.ladle": "Transfer Ladle",
+  "item.createmetallurgy.ladle.tooltip.summary": "A new way to _carry molten fluids_ around! Can be used as a _bigger bucket_. Disclamer: Can burn if not safely handled!",
   "item.createmetallurgy.ladle_filter": "Ladle Filter",
   "item.createmetallurgy.molten_aluminum_bucket": "Molten Aluminum Bucket",
   "item.createmetallurgy.molten_brass_bucket": "Molten Brass Bucket",

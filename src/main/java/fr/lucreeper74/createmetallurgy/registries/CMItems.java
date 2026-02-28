@@ -4,6 +4,7 @@ import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.CombustibleItem;
+import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TagDependentIngredientItem;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.ProviderType;
@@ -14,11 +15,13 @@ import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleStyles;
 import fr.lucreeper74.createmetallurgy.content.items.AttachmentItem.*;
 import fr.lucreeper74.createmetallurgy.content.items.ladle_filter.LadleFilterItem;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 
 import static com.simibubi.create.AllTags.AllItemTags.*;
+import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.MOD_ID;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 import static fr.lucreeper74.createmetallurgy.registries.CMTags.CMItemTags.*;
 import static net.minecraftforge.common.Tags.Items.*;
@@ -105,7 +108,8 @@ public class CMItems {
                         else
                             p.withExistingParent(c.getName(), p.modLoc("item/ladle/" + style.type()));
                     })
-                    .lang((style.rare() ? "Rare " : "") + "Transfer Ladle");
+                    .lang((style.rare() ? "Rare " : "") + "Transfer Ladle")
+                    .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item." + MOD_ID + ".ladle"));
             if (rareCreated && style.rare() || normalCreated && !style.rare())
                 ladleItem.setData(ProviderType.LANG, NonNullBiConsumer.noop());
             rareCreated |= style.rare();
