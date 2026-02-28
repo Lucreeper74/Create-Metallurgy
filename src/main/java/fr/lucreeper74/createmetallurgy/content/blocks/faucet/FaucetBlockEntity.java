@@ -54,8 +54,9 @@ public class FaucetBlockEntity extends SmartBlockEntity {
     private LazyOptional<IFluidHandler> attachedTank;
     private LazyOptional<IFluidHandler> targetTank;
 
-    // Rendering purposes only
     private int fallingDistance;
+
+    // Rendering purposes only
     private FluidStack renderedFluid;
 
     public FaucetBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -94,17 +95,14 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         if (GenericItemFilling.getRequiredAmountForItem(level, transported.stack, getAttachedTank().getFluidInTank(0)) == -1)
             return PASS;
 
-        setFaucetOpen(true);
-        updateFallDistance(2);
-        notifyUpdate();
-        beltBehaviorOverride = true;
         return HOLD;
     }
 
     private BeltProcessingBehaviour.ProcessingResult whenItemHeld(TransportedItemStack transported, TransportedItemStackHandlerBehaviour handler) {
-        beltBehaviorOverride = true;
+        if (!beltBehaviorOverride)
+            beltBehaviorOverride = true;
 
-        if (!GenericItemFilling.canItemBeFilled(level, transported.stack)) {
+        if (!LadleItem.isLadle(transported.stack)) {
             reset();
             return PASS;
         }
@@ -114,13 +112,18 @@ public class FaucetBlockEntity extends SmartBlockEntity {
             return HOLD;
         }
         int requiredAmountForItem = FillingBySpout.getRequiredAmountForItem(level, transported.stack, fluid.copy());
-        if (requiredAmountForItem == -1)
+        if (requiredAmountForItem == -1) {
+            reset();
             return PASS;
+        }
+
         if (requiredAmountForItem > fluid.getAmount())
             return HOLD;
 
         FluidStack drained = getAttachedTank().drain(TRANSFER_RATE * 5, FluidAction.EXECUTE);
         updateRenderedFluid(drained.copy());
+        setFaucetOpen(true);
+        updateFallDistance(2);
 
         if (!drained.isEmpty())
             transported.stack = GenericItemFilling.fillItem(level, drained.getAmount(), transported.stack, drained);
@@ -129,7 +132,12 @@ public class FaucetBlockEntity extends SmartBlockEntity {
 
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
+
+        int oldFallDist = fallingDistance;
         fallingDistance = compound.getInt("FallingDistance");
+        if (oldFallDist != fallingDistance)
+            invalidateRenderBoundingBox();
+
         renderedFluid = FluidStack.loadFluidStackFromNBT(compound.getCompound("RenderedFluid"));
         super.read(compound, clientPacket);
     }
@@ -152,10 +160,8 @@ public class FaucetBlockEntity extends SmartBlockEntity {
                 return;
             }
 
-            if (beltBehaviorOverride) {
-                beltBehaviorOverride = false;
+            if (beltBehaviorOverride)
                 return;
-            }
 
             for (boolean simulate : Iterate.trueAndFalse) {
                 FluidAction action = simulate ? FluidAction.SIMULATE : FluidAction.EXECUTE;
@@ -186,6 +192,9 @@ public class FaucetBlockEntity extends SmartBlockEntity {
     }
 
     public void setFaucetOpen(boolean openState) {
+        if (getBlockState().getValue(FaucetBlock.OPEN).equals(openState))
+            return;
+
         BlockState state = getBlockState().setValue(FaucetBlock.OPEN, openState);
         getLevel().setBlockAndUpdate(getBlockPos(), state);
         FaucetBlock.playSound(null, getLevel(), getBlockPos(), openState);
@@ -290,7 +299,6 @@ public class FaucetBlockEntity extends SmartBlockEntity {
     protected void updateFallDistance(int fallDist) {
         if (fallDist != fallingDistance) {
             fallingDistance = fallDist;
-            invalidateRenderBoundingBox();
             notifyUpdate();
         }
     }
