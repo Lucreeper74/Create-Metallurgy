@@ -75,7 +75,9 @@ public class CMItems {
             .onRegister(i -> i.setBurnTime(2000))
             .register();
 
-    public static final ItemEntry<GaugeAttachmentItem> GAUGE_ATTACHMENT = REGISTRATE.item("gauge_attachment", GaugeAttachmentItem::new).register();
+    public static final ItemEntry<GaugeAttachmentItem> GAUGE_ATTACHMENT = REGISTRATE.item("gauge_attachment", GaugeAttachmentItem::new)
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item." + MOD_ID + ".gauge_attachment"))
+            .register();
     //public static final ItemEntry<ItemPortAttachmentItem> ITEM_PORT_ATTACHMENT = REGISTRATE.item("item_port_attachment", ItemPortAttachmentItem::new).register();
     //public static final ItemEntry<FluidPortAttachmentItem> FLUID_PORT_ATTACHMENT = REGISTRATE.item("fluid_port_attachment", FluidPortAttachmentItem::new).register();
 

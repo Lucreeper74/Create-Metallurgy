@@ -208,6 +208,7 @@
   "item.createmetallurgy.dirty_tungsten_dust": "Dirty Tungsten Dust",
   "item.createmetallurgy.dirty_zinc_dust": "Dirty Zinc Dust",
   "item.createmetallurgy.gauge_attachment": "Gauge Attachment",
+  "item.createmetallurgy.gauge_attachment.tooltip.summary": "A gauge that can be _placed_ on different machines to _give additionnal information_!",
   "item.createmetallurgy.gold_dust": "Gold Dust",
   "item.createmetallurgy.graphite": "Graphite",
   "item.createmetallurgy.graphite_blank_mold": "Graphite Blank Mold",
