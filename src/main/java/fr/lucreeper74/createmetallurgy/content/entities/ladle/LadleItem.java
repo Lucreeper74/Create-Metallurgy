@@ -1,7 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.entities.ladle;
 
 import com.simibubi.create.AllEntityTypes;
-import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.FluidFX;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
