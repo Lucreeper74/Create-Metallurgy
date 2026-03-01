@@ -8,6 +8,7 @@ import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
@@ -51,7 +52,7 @@ import java.util.function.Predicate;
 import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
 
 public class LadleItem extends PackageItem {
-    public static final int LADLE_CAPACITY = 4000; // in mb
+    public static final int LADLE_CAPACITY = CMMetals.ItemType.BLOCK.getFluidAmount() * 4; // in mb
 
     public LadleItem(Properties properties, PackageStyle style) {
         super(properties, style);
