@@ -3,6 +3,8 @@ package fr.lucreeper74.createmetallurgy.registries;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.api.stress.BlockStressValues;
+import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelBlockItem;
+import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelModel;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
 import com.simibubi.create.foundation.block.DyedBlockList;
@@ -27,6 +29,7 @@ import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTable
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_gauge.FoundryGaugeBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlock;
@@ -344,6 +347,21 @@ public class CMBlocks {
             .model(AssetLookup::customItemModel)
             .build()
             .register();
+
+//    public static final BlockEntry<FoundryGaugeBlock> FOUNDRY_GAUGE_BLOCK =
+//            REGISTRATE.block("foundry_gauge", FoundryGaugeBlock::new)
+//                    .addLayer(() -> RenderType::cutoutMipped)
+//                    .initialProperties(SharedProperties::copperMetal)
+//                    .properties(BlockBehaviour.Properties::noOcclusion)
+//                    .properties(BlockBehaviour.Properties::forceSolidOn)
+//                    .transform(pickaxeOnly())
+//                    .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
+//                    .onRegister(CreateRegistrate.blockModel(() -> FactoryPanelModel::new))
+//                    //.transform(displaySource(AllDisplaySources.GAUGE_STATUS))
+//                    .item(FactoryPanelBlockItem::new)
+//                    .model(AssetLookup::customItemModel)
+//                    .build()
+//                    .register();
 
     public static void register() {
     }

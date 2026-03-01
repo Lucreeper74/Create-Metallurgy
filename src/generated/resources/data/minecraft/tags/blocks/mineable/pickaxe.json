@@ -31,6 +31,7 @@
     "createmetallurgy:red_light_bulb",
     "createmetallurgy:black_light_bulb",
     "createmetallurgy:faucet",
-    "createmetallurgy:labelling_station"
+    "createmetallurgy:labelling_station",
+    "createmetallurgy:foundry_gauge"
   ]
 }

@@ -33,6 +33,7 @@
   "block.createmetallurgy.faucet": "Faucet",
   "block.createmetallurgy.faucet.tooltip.summary": "Use to vertically transport fluids up to _5 blocks_ down!",
   "block.createmetallurgy.foundry_basin": "Foundry Basin",
+  "block.createmetallurgy.foundry_gauge": "Foundry Gauge",
   "block.createmetallurgy.foundry_lid": "Foundry Lid",
   "block.createmetallurgy.foundry_mixer": "Foundry Mixer",
   "block.createmetallurgy.gray_light_bulb": "Gray Light Bulb",

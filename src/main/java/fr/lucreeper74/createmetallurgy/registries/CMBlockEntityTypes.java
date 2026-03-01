@@ -1,10 +1,12 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
+import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelRenderer;
 import com.simibubi.create.content.processing.basin.BasinRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_gauge.FoundryGaugeBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerRenderer;
@@ -88,5 +90,12 @@ public class CMBlockEntityTypes {
             .renderer(() -> LabellingStationRenderer::new)
             .register();
 
-    public static void register() {}
+//    public static final BlockEntityEntry<FoundryGaugeBlockEntity> FACTORY_GAUGE = REGISTRATE
+//            .blockEntity("foundry_gauge", FoundryGaugeBlockEntity::new)
+//            .validBlocks(CMBlocks.FOUNDRY_GAUGE_BLOCK)
+//            .renderer(() -> FactoryPanelRenderer::new)
+//            .register();
+
+    public static void register() {
+    }
 }
