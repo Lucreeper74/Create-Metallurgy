@@ -20,7 +20,6 @@ public class LadleItemHandler implements IItemHandlerModifiable {
         if (slot != 0)
             return;
         blockEntity.heldBox = stack;
-        blockEntity.notifyUpdate();
     }
 
     public void allowExtract() {
@@ -49,8 +48,8 @@ public class LadleItemHandler implements IItemHandlerModifiable {
             return stack;
 
         setStackInSlot(slot, stack.copy());
-        blockEntity.updateClipBoardAddresses();
-        blockEntity.attemptToSend();
+        blockEntity.boxArrived();
+        blockEntity.notifyUpdate();
 
         return ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - 1);
     }
@@ -58,7 +57,7 @@ public class LadleItemHandler implements IItemHandlerModifiable {
     @Override
     public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
         ItemStack ladle = blockEntity.heldBox;
-        if (blockEntity.animationTicks == 0 || !canExtract)
+        if (blockEntity.animationTicks != 0 || !canExtract)
             return ItemStack.EMPTY;
 
         if (!simulate) {

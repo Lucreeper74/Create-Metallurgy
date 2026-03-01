@@ -38,7 +38,7 @@ public class LabellingStationBlockEntity extends SmartBlockEntity {
     public ItemStack heldBox;
     private final LazyOptional<IItemHandler> ladleProvider;
 
-    public static final int CYCLE = 40;
+    public static final int CYCLE = 20;
     public int animationTicks;
     public boolean animationInward;
 
@@ -188,6 +188,8 @@ public class LabellingStationBlockEntity extends SmartBlockEntity {
         if (heldBox.isEmpty() || animationTicks != 0)
             return;
 
+        updateClipBoardAddresses();
+
         LadleItem.clearAddress(heldBox);
         LadleItem.clearRemainAddrs(heldBox);
 
@@ -206,9 +208,16 @@ public class LabellingStationBlockEntity extends SmartBlockEntity {
             return;
         }*/
 
+        AllSoundEvents.STOCK_TICKER_TRADE.playOnServer(level, getBlockPos());
+
+        animationInward = false;
+        animationTicks = 0;
+        ladleInv.allowExtract();
+    }
+
+    public void boxArrived() {
         animationInward = false;
         animationTicks = CYCLE;
-        ladleInv.allowExtract();
         notifyUpdate();
     }
 
