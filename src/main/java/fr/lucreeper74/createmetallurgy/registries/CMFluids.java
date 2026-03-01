@@ -68,6 +68,7 @@ public class CMFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_BRONZE = moltenMetalFluid(CMMetals.BRONZE, 1000, 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_CONSTANTAN = moltenMetalFluid(CMMetals.CONSTANTAN, 1221, 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_VOID_STEEL = moltenMetalFluid(CMMetals.VOID_STEEL, 3635, 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_NECROMIUM = moltenMetalFluid(CMMetals.NECROMIUM, 995, 2000, 1400, 10, 2, 25, 3, 100f);
 
     //Others
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_SLAG = moltenFluid("slag", 1203, 2500, 1400, 12, 2, 25, 3, 100f);

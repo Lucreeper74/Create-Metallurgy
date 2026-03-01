@@ -49,7 +49,10 @@ public enum CMMetals {
     ELECTRUM(() -> CMFluids.MOLTEN_ELECTRUM, MEK, TH, CADDITION),
     BRONZE(() -> CMFluids.MOLTEN_BRONZE, MEK, TH),
     CONSTANTAN(() -> CMFluids.MOLTEN_CONSTANTAN, TH, IE),
-    VOID_STEEL(() -> CMFluids.MOLTEN_VOID_STEEL, CUTILITIES);
+    VOID_STEEL(() -> CMFluids.MOLTEN_VOID_STEEL, CUTILITIES),
+    NECROMIUM(() -> CMFluids.MOLTEN_NECROMIUM, CAVERNS_N_CHASMS),
+
+    ;
 
     private final String name;
     private final String raw_name;

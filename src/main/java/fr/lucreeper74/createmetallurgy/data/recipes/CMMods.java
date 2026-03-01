@@ -8,6 +8,7 @@ public enum CMMods implements DatagenMod {
     TFMG("tfmg", false),
     CADDITION("createaddition", false),
     CUTILITIES("createutilities", false),
+    CAVERNS_N_CHASMS("caverns_and_chasms", false)
     ;
 
 
