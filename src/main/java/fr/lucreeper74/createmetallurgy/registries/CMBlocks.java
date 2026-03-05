@@ -3,8 +3,6 @@ package fr.lucreeper74.createmetallurgy.registries;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.api.stress.BlockStressValues;
-import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelBlockItem;
-import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelModel;
 import com.simibubi.create.content.processing.basin.BasinGenerator;
 import com.simibubi.create.content.processing.basin.BasinMovementBehaviour;
 import com.simibubi.create.foundation.block.DyedBlockList;
@@ -29,7 +27,6 @@ import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTable
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlock;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_gauge.FoundryGaugeBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlock;
@@ -37,8 +34,8 @@ import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.Crucib
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockItem;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleModel;
-import fr.lucreeper74.createmetallurgy.content.blocks.labelling_station.LabellingStationBlock;
-import fr.lucreeper74.createmetallurgy.content.blocks.labelling_station.LabellingStationGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMTags.CMBlockTags;
 import fr.lucreeper74.createmetallurgy.registries.CMTags.CMItemTags;
@@ -262,7 +259,7 @@ public class CMBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister((block) -> BlockStressValues.IMPACTS.register(block, () -> 6.0))
             .transform(axeOrPickaxe())
-            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.mechanical_grinder"))
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block." + MOD_ID + ".mechanical_grinder"))
             .item()
             .transform(customItemModel("mechanical_belt_grinder", "item"))
             .register();
@@ -333,16 +330,17 @@ public class CMBlocks {
             .transform(customItemModel("faucet", "block"))
             .register();
 
-    public static final BlockEntry<LabellingStationBlock> LABELLING_STATION_BLOCK = REGISTRATE
-            .block("labelling_station", LabellingStationBlock::new)
+    public static final BlockEntry<LabelingStationBlock> LABELING_STATION_BLOCK = REGISTRATE
+            .block("labeling_station", LabelingStationBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.noOcclusion())
             .properties(p -> p.isRedstoneConductor(($1, $2, $3) -> false))
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_BLUE)
                     .sound(SoundType.NETHERITE_BLOCK))
             .transform(pickaxeOnly())
-            .blockstate(new LabellingStationGenerator()::generate)
+            .blockstate(new LabelingStationGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block." + MOD_ID + ".labeling_station"))
             .item()
             .model(AssetLookup::customItemModel)
             .build()

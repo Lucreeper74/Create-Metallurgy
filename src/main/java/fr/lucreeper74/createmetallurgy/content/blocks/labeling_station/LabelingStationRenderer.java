@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.blocks.labelling_station;
+package fr.lucreeper74.createmetallurgy.content.blocks.labeling_station;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
@@ -20,21 +20,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class LabellingStationRenderer extends SmartBlockEntityRenderer<LabellingStationBlockEntity> {
+public class LabelingStationRenderer extends SmartBlockEntityRenderer<LabelingStationBlockEntity> {
 
-    public LabellingStationRenderer(BlockEntityRendererProvider.Context context) {
+    public LabelingStationRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    protected void renderSafe(LabellingStationBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+    protected void renderSafe(LabelingStationBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                               int light, int overlay) {
         super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
 
         ItemStack renderedBox = ItemStack.EMPTY;//be.getRenderedBox();
         float trayOffset = 0;//be.getTrayOffset(partialTicks);
         BlockState blockState = be.getBlockState();
-        Direction facing = blockState.getValue(LabellingStationBlock.FACING)
+        Direction facing = blockState.getValue(LabelingStationBlock.FACING)
                 .getOpposite();
 
         if (!VisualizationManager.supportsVisualization(be.getLevel())) {
@@ -74,16 +74,16 @@ public class LabellingStationRenderer extends SmartBlockEntityRenderer<Labelling
     }
 
    public static PartialModel getTrayModel(BlockState blockState) {
-        return CMBlocks.LABELLING_STATION_BLOCK.has(blockState) ? CMPartialModels.LABELLING_STATION_TRAY_REGULAR
+        return CMBlocks.LABELING_STATION_BLOCK.has(blockState) ? CMPartialModels.LABELLING_STATION_TRAY_REGULAR
                 : CMPartialModels.LABELLING_STATION_TRAY_DEFRAG;
     }
 
-    public static PartialModel getHatchModel(LabellingStationBlockEntity be) {
+    public static PartialModel getHatchModel(LabelingStationBlockEntity be) {
         return isHatchOpen(be) ? CMPartialModels.LABELLING_STATION_HATCH_OPEN : CMPartialModels.LABELLING_STATION_HATCH_CLOSED;
     }
 
-    public static boolean isHatchOpen(LabellingStationBlockEntity be) {
+    public static boolean isHatchOpen(LabelingStationBlockEntity be) {
         return be.animationTicks > (be.animationInward ? 1 : 5)
-                && be.animationTicks < LabellingStationBlockEntity.CYCLE - (be.animationInward ? 5 : 1);
+                && be.animationTicks < LabelingStationBlockEntity.CYCLE - (be.animationInward ? 5 : 1);
     }
 }

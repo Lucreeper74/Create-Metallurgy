@@ -1,12 +1,10 @@
 package fr.lucreeper74.createmetallurgy.registries;
 
-import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelRenderer;
 import com.simibubi.create.content.processing.basin.BasinRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetRenderer;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_gauge.FoundryGaugeBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerRenderer;
@@ -19,10 +17,10 @@ import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasin
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerVisual;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleRenderer;
-import fr.lucreeper74.createmetallurgy.content.blocks.labelling_station.LabellingStationBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbRenderer;
-import fr.lucreeper74.createmetallurgy.content.blocks.labelling_station.LabellingStationRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationRenderer;
 
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -83,11 +81,11 @@ public class CMBlockEntityTypes {
             .renderer(() -> FaucetRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<LabellingStationBlockEntity> LABELLING_STATION = REGISTRATE
-            .blockEntity("labelling_station", LabellingStationBlockEntity::new)
+    public static final BlockEntityEntry<LabelingStationBlockEntity> LABELLING_STATION = REGISTRATE
+            .blockEntity("labelling_station", LabelingStationBlockEntity::new)
             //.visual(() -> LabelingDepotVisual::new, true)
-            .validBlocks(CMBlocks.LABELLING_STATION_BLOCK)
-            .renderer(() -> LabellingStationRenderer::new)
+            .validBlocks(CMBlocks.LABELING_STATION_BLOCK)
+            .renderer(() -> LabelingStationRenderer::new)
             .register();
 
 //    public static final BlockEntityEntry<FoundryGaugeBlockEntity> FACTORY_GAUGE = REGISTRATE

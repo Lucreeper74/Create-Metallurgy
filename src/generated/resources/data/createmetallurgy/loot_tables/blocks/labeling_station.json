@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createmetallurgy:labelling_station"
+          "name": "createmetallurgy:labeling_station"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "createmetallurgy:blocks/labelling_station"
+  "random_sequence": "createmetallurgy:blocks/labeling_station"
 }

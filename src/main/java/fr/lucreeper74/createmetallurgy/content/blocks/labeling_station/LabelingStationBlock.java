@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.blocks.labelling_station;
+package fr.lucreeper74.createmetallurgy.content.blocks.labeling_station;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -9,7 +9,6 @@ import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -28,11 +27,11 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.items.IItemHandler;
 
-public class LabellingStationBlock extends WrenchableDirectionalBlock implements IBE<LabellingStationBlockEntity>, IWrenchable {
+public class LabelingStationBlock extends WrenchableDirectionalBlock implements IBE<LabelingStationBlockEntity>, IWrenchable {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LINKED = BooleanProperty.create("linked");
 
-    public LabellingStationBlock(Properties properties) {
+    public LabelingStationBlock(Properties properties) {
         super(properties);
         BlockState defaultBlockState = defaultBlockState();
         if (defaultBlockState.hasProperty(LINKED))
@@ -79,52 +78,6 @@ public class LabellingStationBlock extends WrenchableDirectionalBlock implements
                 .setValue(FACING, preferredFacing);
     }
 
-    /*@Override
-    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
-                                 BlockHitResult hit) {
-        if (player == null)
-            return InteractionResult.PASS;
-
-        ItemStack itemInHand = player.getItemInHand(handIn);
-        if (AllItems.WRENCH.isIn(itemInHand))
-            return InteractionResult.PASS;
-        if (AllBlocks.FACTORY_GAUGE.isIn(itemInHand))
-            return InteractionResult.PASS;
-        if (AllBlocks.STOCK_LINK.isIn(itemInHand) && !(state.hasProperty(LINKED) && state.getValue(LINKED)))
-            return InteractionResult.PASS;
-        if (AllBlocks.PACKAGE_FROGPORT.isIn(itemInHand))
-            return InteractionResult.PASS;
-
-        if (onBlockEntityUse(worldIn, pos, be -> {
-            if (be.containedLadle.isEmpty()) {
-                if (be.animationTicks > 0)
-                    return InteractionResult.SUCCESS;
-                if (LadleItem.isLadle(itemInHand)) {
-                    if (worldIn.isClientSide())
-                        return InteractionResult.SUCCESS;
-                    AllSoundEvents.DEPOT_PLOP.playOnServer(worldIn, pos);
-                    if (itemInHand.isEmpty())
-                        player.setItemInHand(handIn, ItemStack.EMPTY);
-                    return InteractionResult.SUCCESS;
-                }
-                return InteractionResult.SUCCESS;
-            }
-            if (be.animationTicks > 0)
-                return InteractionResult.SUCCESS;
-            if (!worldIn.isClientSide()) {
-                player.getInventory()
-                        .placeItemBackInInventory(be.containedLadle.copy());
-                AllSoundEvents.playItemPickup(player);
-                be.containedLadle = ItemStack.EMPTY;
-                be.notifyUpdate();
-            }
-            return InteractionResult.SUCCESS;
-        }))
-            return InteractionResult.SUCCESS;
-
-        return InteractionResult.SUCCESS;
-    }*/
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder.add(POWERED, LINKED));
@@ -139,13 +92,8 @@ public class LabellingStationBlock extends WrenchableDirectionalBlock implements
         if (previouslyPowered == worldIn.hasNeighborSignal(pos))
             return;
         worldIn.setBlock(pos, state.cycle(POWERED), 2);
-
-        if (state.getValue(POWERED)) {
-            onBlockEntityUse(worldIn, pos, be -> {
-                be.activate();
-                return InteractionResult.SUCCESS;
-            });
-        }
+        if (!previouslyPowered)
+            withBlockEntityDo(worldIn, pos, LabelingStationBlockEntity::activate);
     }
 
     @Override
@@ -160,12 +108,12 @@ public class LabellingStationBlock extends WrenchableDirectionalBlock implements
 
 
     @Override
-    public Class<LabellingStationBlockEntity> getBlockEntityClass() {
-        return LabellingStationBlockEntity.class;
+    public Class<LabelingStationBlockEntity> getBlockEntityClass() {
+        return LabelingStationBlockEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends LabellingStationBlockEntity> getBlockEntityType() {
+    public BlockEntityType<? extends LabelingStationBlockEntity> getBlockEntityType() {
         return CMBlockEntityTypes.LABELLING_STATION.get();
     }
 

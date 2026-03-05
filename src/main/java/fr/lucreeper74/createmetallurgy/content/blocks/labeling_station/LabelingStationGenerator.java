@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.blocks.labelling_station;
+package fr.lucreeper74.createmetallurgy.content.blocks.labeling_station;
 
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.ModelFile;
 
-public class LabellingStationGenerator extends SpecialBlockStateGen {
+public class LabelingStationGenerator extends SpecialBlockStateGen {
 
     @Override
     protected int getXRotation(BlockState state) {
@@ -18,15 +18,15 @@ public class LabellingStationGenerator extends SpecialBlockStateGen {
 
     @Override
     protected int getYRotation(BlockState state) {
-        return horizontalAngle(state.getValue(LabellingStationBlock.FACING));
+        return horizontalAngle(state.getValue(LabelingStationBlock.FACING));
     }
 
     @Override
     public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
                                                 BlockState state) {
-        String suffix = state.getOptionalValue(LabellingStationBlock.LINKED)
-                .orElse(false) ? "linked" : state.getValue(LabellingStationBlock.POWERED) ? "powered" : "";
-        return state.getValue(LabellingStationBlock.FACING)
+        String suffix = state.getOptionalValue(LabelingStationBlock.LINKED)
+                .orElse(false) ? "linked" : state.getValue(LabelingStationBlock.POWERED) ? "powered" : "";
+        return state.getValue(LabelingStationBlock.FACING)
                 .getAxis() == Direction.Axis.Y ? AssetLookup.partialBaseModel(ctx, prov, "vertical", suffix)
                 : AssetLookup.partialBaseModel(ctx, prov, suffix);
     }

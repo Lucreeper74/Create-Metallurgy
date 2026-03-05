@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.blocks.labelling_station;
+package fr.lucreeper74.createmetallurgy.content.blocks.labeling_station;
 
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.clipboard.ClipboardBlockEntity;
@@ -27,10 +27,9 @@ import net.minecraftforge.items.IItemHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LabellingStationBlockEntity extends SmartBlockEntity {
+public class LabelingStationBlockEntity extends SmartBlockEntity {
 
     public boolean redstonePowered;
-    public int buttonCooldown;
 
     public ArrayList<String> addressesList;
 
@@ -42,7 +41,7 @@ public class LabellingStationBlockEntity extends SmartBlockEntity {
     public int animationTicks;
     public boolean animationInward;
 
-    public LabellingStationBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
+    public LabelingStationBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
         addressesList = new ArrayList<>();
         ladleInv = new LadleItemHandler(this);
@@ -94,10 +93,6 @@ public class LabellingStationBlockEntity extends SmartBlockEntity {
     public void tick() {
         super.tick();
 
-        if (buttonCooldown > 0)
-            buttonCooldown--;
-
-
         if (level.isClientSide) {
             if (animationTicks == CYCLE - (animationInward ? 5 : 1))
                 AllSoundEvents.PACKAGER.playAt(level, worldPosition, 1, 1, true);
@@ -110,7 +105,7 @@ public class LabellingStationBlockEntity extends SmartBlockEntity {
             animationTicks--;
 
         if (animationTicks == 0 && !level.isClientSide()) {
-            if (!heldBox.isEmpty())
+            if (!heldBox.isEmpty() && !redstonePowered)
                 attemptToSend();
             setChanged();
         }
@@ -122,8 +117,9 @@ public class LabellingStationBlockEntity extends SmartBlockEntity {
             return;
         if (!redstonePowered)
             return;
-        redstonePowered = getBlockState().getOptionalValue(LabellingStationBlock.POWERED)
+        redstonePowered = getBlockState().getOptionalValue(LabelingStationBlock.POWERED)
                 .orElse(false);
+        setChanged();
         if (!redstoneModeActive())
             return;
         updateClipBoardAddresses();
@@ -137,24 +133,25 @@ public class LabellingStationBlockEntity extends SmartBlockEntity {
             return;
 
         updateClipBoardAddresses();
-        attemptToSend();
-
-        buttonCooldown = 20;
     }
 
     public boolean redstoneModeActive() {
-        return !getBlockState().getOptionalValue(LabellingStationBlock.LINKED)
+        return !getBlockState().getOptionalValue(LabelingStationBlock.LINKED)
                 .orElse(false);
     }
 
-    protected void updateClipBoardAddresses() {
+    protected boolean updateClipBoardAddresses() {
         addressesList.clear();
+        boolean clipboardAttached = false;
         for (Direction side : Iterate.directions) {
             ArrayList<String> addresses = getClipBoardAddresses(side);
-            if (addresses == null || addresses.isEmpty())
-                continue;
-            addressesList = addresses;
+            if (addresses != null) {
+                clipboardAttached = true;
+                if (!addresses.isEmpty())
+                    addressesList = addresses;
+            }
         }
+        return clipboardAttached;
     }
 
     protected ArrayList<String> getClipBoardAddresses(Direction side) {
@@ -162,11 +159,11 @@ public class LabellingStationBlockEntity extends SmartBlockEntity {
         if (!(blockEntity instanceof ClipboardBlockEntity cbe))
             return null;
 
+        ArrayList<String> addresses = new ArrayList<>();
         List<List<ClipboardEntry>> pages = ClipboardEntry.readAll(cbe.dataContainer);
         if (pages.isEmpty())
-            return null;
+            return addresses;
 
-        ArrayList<String> addresses = new ArrayList<>();
         pages.forEach(page -> page.forEach(entry -> {
             String string = entry.text.getString();
             if (entry.checked)
@@ -188,15 +185,19 @@ public class LabellingStationBlockEntity extends SmartBlockEntity {
         if (heldBox.isEmpty() || animationTicks != 0)
             return;
 
-        updateClipBoardAddresses();
+        boolean clipboardAttached = updateClipBoardAddresses();
 
-        LadleItem.clearAddress(heldBox);
-        LadleItem.clearRemainAddrs(heldBox);
-
-        ArrayList<String> addresses = addressesList;
-        if (!addresses.isEmpty()) {
-            LadleItem.addAddress(heldBox, addresses.remove(0));
-            LadleItem.addRemainAddrs(heldBox, addresses);
+        if (clipboardAttached) {
+            if (addressesList.isEmpty()) { // Blank clipboard -> Erase all addresses
+                LadleItem.clearAddress(heldBox);
+                LadleItem.clearRemainAddrs(heldBox);
+            } else { // Filled clipboard -> Set the address list
+                ArrayList<String> addresses = addressesList;
+                LadleItem.addAddress(heldBox, addresses.remove(0));
+                LadleItem.addRemainAddrs(heldBox, addresses);
+            }
+        } else { // When no clipboard attached -> Set the following address
+            LadleItem.setNextAddrs(heldBox);
         }
 
         //BlockPos linkPos = getLinkPos();

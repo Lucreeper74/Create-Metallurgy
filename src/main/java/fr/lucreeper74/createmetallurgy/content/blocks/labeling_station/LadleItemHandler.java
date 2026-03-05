@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.content.blocks.labelling_station;
+package fr.lucreeper74.createmetallurgy.content.blocks.labeling_station;
 
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import net.minecraft.world.item.ItemStack;
@@ -8,10 +8,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class LadleItemHandler implements IItemHandlerModifiable {
 
-    private LabellingStationBlockEntity blockEntity;
+    private LabelingStationBlockEntity blockEntity;
     private boolean canExtract;
 
-    public LadleItemHandler(LabellingStationBlockEntity blockEntity) {
+    public LadleItemHandler(LabelingStationBlockEntity blockEntity) {
         this.blockEntity = blockEntity;
         this.canExtract = false;
     }

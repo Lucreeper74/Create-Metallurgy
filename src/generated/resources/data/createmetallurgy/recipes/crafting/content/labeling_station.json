@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "tag": "forge:ingots/steel"
+    },
+    "T": {
+      "item": "minecraft:name_tag"
+    }
+  },
+  "pattern": [
+    " S ",
+    "STS",
+    "RSR"
+  ],
+  "result": {
+    "item": "createmetallurgy:labeling_station"
+  },
+  "show_notification": true
+}
