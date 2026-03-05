@@ -52,7 +52,7 @@ import java.util.function.Predicate;
 import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
 
 public class LadleItem extends PackageItem {
-    public static final int LADLE_CAPACITY = CMMetals.ItemType.BLOCK.getFluidAmount() * 4; // in mb
+    public static final int LADLE_CAPACITY = 4000; // in mb
 
     public LadleItem(Properties properties, PackageStyle style) {
         super(properties, style);
@@ -100,7 +100,8 @@ public class LadleItem extends PackageItem {
                     tag.putString("Address", list.getCompound(0).getString("Address"));
                     list.remove(0);
                     tag.put("RemainAddrs", list);
-                }
+                } else
+                    tag.remove("Address");
             }
         }
     }
