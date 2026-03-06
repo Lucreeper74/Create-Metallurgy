@@ -39,8 +39,15 @@ public class AlloyingRecipeGen extends CMProcessingRecipesGen {
             VOID_STEEL = create("void_steel", b -> b.require(Items.ENDER_PEARL)
                 .require(CMFluids.MOLTEN_NETHERITE.get(), 90)
                 .requiresHeat(HeatCondition.SUPERHEATED)
-                .output(CMFluids.MOLTEN_VOID_STEEL.get(), 90));
+                .output(CMFluids.MOLTEN_VOID_STEEL.get(), 90)),
 
+            NECROMIUM = create("necromium", b -> b.require(Items.NETHERITE_SCRAP)
+                    .require(Items.NETHERITE_SCRAP)
+                    .require(CMFluids.MOLTEN_SILVER.get(), 120)
+                    .requiresHeat(HeatCondition.SUPERHEATED)
+                    .output(CMFluids.MOLTEN_NETHERITE.get(), 45))
+
+    ;
     //
 
     /**
