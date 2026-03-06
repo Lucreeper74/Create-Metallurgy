@@ -60,15 +60,12 @@ public class FaucetBlock extends WrenchableDirectionalBlock implements IBE<Fauce
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        boolean currentState = state.getValue(OPEN);
         if (hand != InteractionHand.MAIN_HAND)
             return InteractionResult.PASS;
 
         withBlockEntityDo(level, pos, be -> {
-            if (be.tryFill() > 0) {
-                level.setBlock(pos, state.cycle(OPEN), 3);
-                playSound(player, level, pos, currentState);
-            }
+            if (be.canOpenFaucet())
+                be.setFaucetOpen(true);
         });
 
         return InteractionResult.sidedSuccess(level.isClientSide());
@@ -84,9 +81,8 @@ public class FaucetBlock extends WrenchableDirectionalBlock implements IBE<Fauce
             if (flag != state.getValue(OPEN))
                 playSound(null, level, pos, flag);
             level.setBlock(pos, state.setValue(POWERED, flag).setValue(OPEN, flag), 2);
-        } else {
+        } else
             level.setBlock(pos, state, 2);
-        }
     }
 
     @Override

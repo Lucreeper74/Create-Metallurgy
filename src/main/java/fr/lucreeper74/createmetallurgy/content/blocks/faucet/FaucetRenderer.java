@@ -3,7 +3,6 @@ package fr.lucreeper74.createmetallurgy.content.blocks.faucet;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import com.simibubi.create.foundation.fluid.FluidRenderer;
 import net.createmod.catnip.platform.ForgeCatnipServices;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -22,7 +21,7 @@ public class FaucetRenderer extends SafeBlockEntityRenderer<FaucetBlockEntity> {
     @Override
     protected void renderSafe(FaucetBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource bufferSource, int light, int overlay) {
         if (be.getBlockState().getValue(FaucetBlock.OPEN)) {
-            FluidStack fluidStack = be.getRenderFluid();
+            FluidStack fluidStack = be.getRenderedFluid();
 
             Direction facing = be.getBlockState().getValue(FaucetBlock.FACING);
             if (!fluidStack.isEmpty()) {

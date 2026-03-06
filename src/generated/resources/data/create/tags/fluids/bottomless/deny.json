@@ -42,6 +42,8 @@
     "createmetallurgy:molten_constantan",
     "createmetallurgy:flowing_molten_void_steel",
     "createmetallurgy:molten_void_steel",
+    "createmetallurgy:flowing_molten_necromium",
+    "createmetallurgy:molten_necromium",
     "createmetallurgy:flowing_molten_slag",
     "createmetallurgy:molten_slag"
   ]

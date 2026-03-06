@@ -154,6 +154,14 @@
     },
     {
       "type": "single",
+      "resource": "createmetallurgy:fluid/necromium/flowing"
+    },
+    {
+      "type": "single",
+      "resource": "createmetallurgy:fluid/necromium/still"
+    },
+    {
+      "type": "single",
       "resource": "createmetallurgy:fluid/obdurium/flowing"
     },
     {

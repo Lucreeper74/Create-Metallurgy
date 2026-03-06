@@ -34,8 +34,8 @@ import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.Crucib
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockItem;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleModel;
-import fr.lucreeper74.createmetallurgy.content.blocks.labelling_station.LabellingStationBlock;
-import fr.lucreeper74.createmetallurgy.content.blocks.labelling_station.LabellingStationGenerator;
+import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
 import fr.lucreeper74.createmetallurgy.registries.CMTags.CMBlockTags;
 import fr.lucreeper74.createmetallurgy.registries.CMTags.CMItemTags;
@@ -68,6 +68,7 @@ import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movem
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
+import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.MOD_ID;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
 @SuppressWarnings("unused")
@@ -258,7 +259,7 @@ public class CMBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .onRegister((block) -> BlockStressValues.IMPACTS.register(block, () -> 6.0))
             .transform(axeOrPickaxe())
-            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.mechanical_grinder"))
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block." + MOD_ID + ".mechanical_grinder"))
             .item()
             .transform(customItemModel("mechanical_belt_grinder", "item"))
             .register();
@@ -324,25 +325,41 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .blockstate(new FaucetGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
-            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block.createmetallurgy.faucet"))
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block." + MOD_ID + ".faucet"))
             .item()
             .transform(customItemModel("faucet", "block"))
             .register();
 
-    public static final BlockEntry<LabellingStationBlock> LABELLING_STATION_BLOCK = REGISTRATE
-            .block("labelling_station", LabellingStationBlock::new)
+    public static final BlockEntry<LabelingStationBlock> LABELING_STATION_BLOCK = REGISTRATE
+            .block("labeling_station", LabelingStationBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.noOcclusion())
             .properties(p -> p.isRedstoneConductor(($1, $2, $3) -> false))
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_BLUE)
                     .sound(SoundType.NETHERITE_BLOCK))
             .transform(pickaxeOnly())
-            .blockstate(new LabellingStationGenerator()::generate)
+            .blockstate(new LabelingStationGenerator()::generate)
             .addLayer(() -> RenderType::cutoutMipped)
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block." + MOD_ID + ".labeling_station"))
             .item()
             .model(AssetLookup::customItemModel)
             .build()
             .register();
+
+//    public static final BlockEntry<FoundryGaugeBlock> FOUNDRY_GAUGE_BLOCK =
+//            REGISTRATE.block("foundry_gauge", FoundryGaugeBlock::new)
+//                    .addLayer(() -> RenderType::cutoutMipped)
+//                    .initialProperties(SharedProperties::copperMetal)
+//                    .properties(BlockBehaviour.Properties::noOcclusion)
+//                    .properties(BlockBehaviour.Properties::forceSolidOn)
+//                    .transform(pickaxeOnly())
+//                    .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
+//                    .onRegister(CreateRegistrate.blockModel(() -> FactoryPanelModel::new))
+//                    //.transform(displaySource(AllDisplaySources.GAUGE_STATUS))
+//                    .item(FactoryPanelBlockItem::new)
+//                    .model(AssetLookup::customItemModel)
+//                    .build()
+//                    .register();
 
     public static void register() {
     }

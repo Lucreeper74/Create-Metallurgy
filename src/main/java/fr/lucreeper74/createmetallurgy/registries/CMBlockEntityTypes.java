@@ -17,10 +17,10 @@ import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasin
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerVisual;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleRenderer;
-import fr.lucreeper74.createmetallurgy.content.blocks.labelling_station.LabellingStationBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbRenderer;
-import fr.lucreeper74.createmetallurgy.content.blocks.labelling_station.LabellingStationRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationRenderer;
 
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -81,12 +81,19 @@ public class CMBlockEntityTypes {
             .renderer(() -> FaucetRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<LabellingStationBlockEntity> LABELLING_STATION = REGISTRATE
-            .blockEntity("labelling_station", LabellingStationBlockEntity::new)
+    public static final BlockEntityEntry<LabelingStationBlockEntity> LABELLING_STATION = REGISTRATE
+            .blockEntity("labelling_station", LabelingStationBlockEntity::new)
             //.visual(() -> LabelingDepotVisual::new, true)
-            .validBlocks(CMBlocks.LABELLING_STATION_BLOCK)
-            .renderer(() -> LabellingStationRenderer::new)
+            .validBlocks(CMBlocks.LABELING_STATION_BLOCK)
+            .renderer(() -> LabelingStationRenderer::new)
             .register();
 
-    public static void register() {}
+//    public static final BlockEntityEntry<FoundryGaugeBlockEntity> FACTORY_GAUGE = REGISTRATE
+//            .blockEntity("foundry_gauge", FoundryGaugeBlockEntity::new)
+//            .validBlocks(CMBlocks.FOUNDRY_GAUGE_BLOCK)
+//            .renderer(() -> FactoryPanelRenderer::new)
+//            .register();
+
+    public static void register() {
+    }
 }

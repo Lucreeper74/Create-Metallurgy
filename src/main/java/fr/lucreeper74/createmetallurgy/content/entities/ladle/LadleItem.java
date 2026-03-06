@@ -1,7 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.entities.ladle;
 
 import com.simibubi.create.AllEntityTypes;
-import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.FluidFX;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
@@ -9,6 +8,7 @@ import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
@@ -19,6 +19,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -48,8 +49,10 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
+
 public class LadleItem extends PackageItem {
-    public static final int LADLE_CAPACITY = 9000; // in mb
+    public static final int LADLE_CAPACITY = CMMetals.ItemType.BLOCK.getFluidAmount() * 4; // in mb
 
     public LadleItem(Properties properties, PackageStyle style) {
         super(properties, style);
@@ -168,6 +171,11 @@ public class LadleItem extends PackageItem {
         ItemStack ladle = playerIn.getItemInHand(handIn);
         FluidTank fluidContainer = getFluidContents(ladle);
 
+        RandomSource random = worldIn.getRandom();
+
+        if (!playerIn.fireImmune() && random.nextInt(10) == 0)
+            playerIn.setSecondsOnFire(MOLTEN_FLUID_BURNING_TIME);
+
         if (!fluidContainer.isEmpty()) {
             FluidStack drained = fluidContainer.drain(1000, IFluidHandler.FluidAction.EXECUTE);
 
@@ -177,10 +185,9 @@ public class LadleItem extends PackageItem {
 
                 ParticleOptions fluidParticle = FluidFX.getFluidParticle(drained);
                 Vec3 position = playerIn.position();
-                AllSoundEvents.STEAM.playOnServer(worldIn, playerIn.blockPosition()); // Todo: change the sound
                 if (worldIn.isClientSide()) {
                     for (int i = 0; i < 10; i++) {
-                        Vec3 motion = VecHelper.offsetRandomly(Vec3.ZERO, worldIn.getRandom(), .125f);
+                        Vec3 motion = VecHelper.offsetRandomly(Vec3.ZERO, random, .125f);
                         Vec3 pos = position.add(0, .5f, 0)
                                 .add(playerIn.getLookAngle()
                                         .scale(.5))

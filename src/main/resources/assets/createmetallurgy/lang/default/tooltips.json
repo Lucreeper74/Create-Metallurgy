@@ -1,5 +1,15 @@
 {
   "block.createmetallurgy.light_bulb.tooltip.summary": "Emits _light_ proportionally to the _redstone_ signal received, can be in _network_ with others bulbs.",
   "block.createmetallurgy.mechanical_grinder.tooltip.summary": "Use _Rotational Force_ to sand down anything above it, even _You_ and your _Armor_!",
-  "block.createmetallurgy.faucet.tooltip.summary": "Use to vertically transport fluids up to _5 blocks_ down!"
+  "block.createmetallurgy.faucet.tooltip.summary": "Use to vertically transport fluids up to _5 blocks_ down!",
+  "item.createmetallurgy.ladle.tooltip.summary": "A new way to _carry molten fluids_ around! Can be used as a _bigger bucket_. Disclaimer: Can burn if not safely handled!",
+  "item.createmetallurgy.gauge_attachment.tooltip.summary": "A gauge that can be _placed_ on different machines to _give additional information_!",
+
+  "block.createmetallurgy.labeling_station.tooltip.summary": "_WIP_ feature. Keep loosing track of your logistics? Beloved by engineers, it is used to _label_ incoming ladles.",
+  "block.createmetallurgy.labeling_station.tooltip.condition1": "When powered by redstone",
+  "block.createmetallurgy.labeling_station.tooltip.behaviour1": "_Holds back_ the incoming ladles.",
+  "block.createmetallurgy.labeling_station.tooltip.condition2": "When clipboard placed on it",
+  "block.createmetallurgy.labeling_station.tooltip.behaviour2": "_Write down_ all the _addresses_ in the clipboard starting with _'#'_ on the ladle. If _left blank, erase_ them all.",
+  "block.createmetallurgy.labeling_station.tooltip.condition3": "When no clipboard attached",
+  "block.createmetallurgy.labeling_station.tooltip.behaviour3": "_Overwrite_ the current address with the _next one_."
 }

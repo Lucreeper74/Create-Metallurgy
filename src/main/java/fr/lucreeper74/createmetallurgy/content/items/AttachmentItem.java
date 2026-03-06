@@ -39,27 +39,27 @@ public abstract class AttachmentItem extends Item {
     public abstract SideAttachment getSideAttachment();
 
 
-    public static class ItemPortAttachmentItem extends AttachmentItem {
-        public ItemPortAttachmentItem(Properties properties) {
-            super(properties);
-        }
+//    public static class ItemPortAttachmentItem extends AttachmentItem {
+//        public ItemPortAttachmentItem(Properties properties) {
+//            super(properties);
+//        }
+//
+//        @Override
+//        public SideAttachment getSideAttachment() {
+//            return SideAttachment.ITEM_PORT;
+//        }
+//    }
 
-        @Override
-        public SideAttachment getSideAttachment() {
-            return SideAttachment.ITEM_PORT;
-        }
-    }
-
-    public static class FluidPortAttachmentItem extends AttachmentItem {
-        public FluidPortAttachmentItem(Properties properties) {
-            super(properties);
-        }
-
-        @Override
-        public SideAttachment getSideAttachment() {
-            return SideAttachment.FLUID_PORT;
-        }
-    }
+//    public static class FluidPortAttachmentItem extends AttachmentItem {
+//        public FluidPortAttachmentItem(Properties properties) {
+//            super(properties);
+//        }
+//
+//        @Override
+//        public SideAttachment getSideAttachment() {
+//            return SideAttachment.FLUID_PORT;
+//        }
+//    }
 
 
     public static class GaugeAttachmentItem extends AttachmentItem {

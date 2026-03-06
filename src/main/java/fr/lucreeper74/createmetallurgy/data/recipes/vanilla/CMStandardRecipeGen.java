@@ -39,7 +39,7 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
 
     GeneratedRecipe
 
-    RAW_WOLFRAMITE = create(CMItems.RAW_WOLFRAMITE).returns(9)
+            RAW_WOLFRAMITE = create(CMItems.RAW_WOLFRAMITE).returns(9)
             .unlockedBy(CMBlocks.RAW_WOLFRAMITE_BLOCK::get)
             .viaShapeless(b -> b.requires(CMBlocks.RAW_WOLFRAMITE_BLOCK.get())),
 
@@ -155,7 +155,7 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
 
     GeneratedRecipe
 
-    BELT_GRINDER = create(CMBlocks.BELT_GRINDER_BLOCK).unlockedBy(T::sandpaperBelt)
+            BELT_GRINDER = create(CMBlocks.BELT_GRINDER_BLOCK).unlockedBy(T::sandpaperBelt)
             .viaShaped(b -> b.define('B', T.sandpaperBelt())
                     .define('C', T.andesiteCasing())
                     .define('I', T.shaft())
@@ -215,8 +215,15 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
     LADLE_FILTER = create(CMItems.LADLE_FILTER).unlockedByTag(T::steelIngot).returns(2)
             .viaShaped(b -> b.define('W', ItemTags.WOOL)
                     .define('S', T.steelIngot())
-                    .pattern("SW"))
-    ;
+                    .pattern("SW")),
+
+    LABELING_STATION = create(CMBlocks.LABELING_STATION_BLOCK).unlockedByTag(T::steelIngot)
+            .viaShaped(b -> b.define('T', Items.NAME_TAG)
+                    .define('S', T.steelIngot())
+                    .define('R', Items.REDSTONE)
+                    .pattern(" S ")
+                    .pattern("STS")
+                    .pattern("RSR"));
 
     //
 
@@ -240,7 +247,7 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
     }
 
     GeneratedRecipe createSpecial(Supplier<? extends SimpleCraftingRecipeSerializer<?>> serializer, String recipeType,
-                                                       String path) {
+                                  String path) {
         ResourceLocation location = CreateMetallurgy.genRL(recipeType + "/" + currentFolder + "/" + path);
         return register(consumer -> {
             SpecialRecipeBuilder b = SpecialRecipeBuilder.special(serializer.get());
@@ -423,7 +430,7 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
             }
 
             private GeneratedRecipe create(RecipeSerializer<? extends AbstractCookingRecipe> serializer,
-                                                                UnaryOperator<SimpleCookingRecipeBuilder> builder, float cookingTimeModifier) {
+                                           UnaryOperator<SimpleCookingRecipeBuilder> builder, float cookingTimeModifier) {
                 return register(consumer -> {
                     boolean isOtherMod = compatDatagenOutput != null;
 
