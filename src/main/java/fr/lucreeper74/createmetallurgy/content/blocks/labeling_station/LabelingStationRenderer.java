@@ -31,37 +31,24 @@ public class LabelingStationRenderer extends SmartBlockEntityRenderer<LabelingSt
                               int light, int overlay) {
         super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
 
-        ItemStack renderedBox = ItemStack.EMPTY;//be.getRenderedBox();
-        float trayOffset = 0;//be.getTrayOffset(partialTicks);
+        ItemStack renderedBox = be.getRenderedBox();
+        float ladleOffset = be.getLadleOffset(partialTicks);
         BlockState blockState = be.getBlockState();
-        Direction facing = blockState.getValue(LabelingStationBlock.FACING)
-                .getOpposite();
+        Direction facing = blockState.getValue(LabelingStationBlock.FACING);
 
-        if (!VisualizationManager.supportsVisualization(be.getLevel())) {
-            var hatchModel = getHatchModel(be);
-
-            SuperByteBuffer sbb = CachedBuffers.partial(hatchModel, blockState);
-            sbb.translate(Vec3.atLowerCornerOf(facing.getNormal())
-                            .scale(.49999f))
-                    .rotateYCenteredDegrees(AngleHelper.horizontalAngle(facing))
-                    .rotateXCenteredDegrees(AngleHelper.verticalAngle(facing))
-                    .light(light)
-                    .renderInto(ms, buffer.getBuffer(RenderType.solid()));
-
-            sbb = CachedBuffers.partial(getTrayModel(blockState), blockState);
-            sbb.translate(Vec3.atLowerCornerOf(facing.getNormal())
-                            .scale(trayOffset))
-                    .rotateYCenteredDegrees(facing.toYRot())
-                    .light(light)
-                    .renderInto(ms, buffer.getBuffer(RenderType.cutoutMipped()));
-        }
+        SuperByteBuffer sbb = CachedBuffers.partial(CMPartialModels.LABELLING_STATION_TRAY_REGULAR, blockState);
+        sbb.translate(Vec3.atLowerCornerOf(Direction.UP.getNormal())
+                        .scale(-ladleOffset*.5f))
+                .rotateYCenteredDegrees(facing.toYRot())
+                .light(light)
+                .renderInto(ms, buffer.getBuffer(RenderType.cutoutMipped()));
 
         if (!renderedBox.isEmpty()) {
             ms.pushPose();
             var msr = TransformStack.of(ms);
-            msr.translate(Vec3.atLowerCornerOf(facing.getNormal())
-                            .scale(trayOffset))
-                    .translate(.5f, .5f, .5f)
+//            msr.translate(Vec3.atLowerCornerOf(facing.getNormal())
+//                            .scale(ladleOffset))
+                    msr.translate(.5f, .5f, .5f)
                     .rotateYDegrees(facing.toYRot())
                     .translate(0, 2 / 16f, 0)
                     .scale(1.49f, 1.49f, 1.49f);
@@ -71,19 +58,5 @@ public class LabelingStationRenderer extends SmartBlockEntityRenderer<LabelingSt
                             overlay, 0);
             ms.popPose();
         }
-    }
-
-   public static PartialModel getTrayModel(BlockState blockState) {
-        return CMBlocks.LABELING_STATION_BLOCK.has(blockState) ? CMPartialModels.LABELLING_STATION_TRAY_REGULAR
-                : CMPartialModels.LABELLING_STATION_TRAY_DEFRAG;
-    }
-
-    public static PartialModel getHatchModel(LabelingStationBlockEntity be) {
-        return isHatchOpen(be) ? CMPartialModels.LABELLING_STATION_HATCH_OPEN : CMPartialModels.LABELLING_STATION_HATCH_CLOSED;
-    }
-
-    public static boolean isHatchOpen(LabelingStationBlockEntity be) {
-        return be.animationTicks > (be.animationInward ? 1 : 5)
-                && be.animationTicks < LabelingStationBlockEntity.CYCLE - (be.animationInward ? 5 : 1);
     }
 }
