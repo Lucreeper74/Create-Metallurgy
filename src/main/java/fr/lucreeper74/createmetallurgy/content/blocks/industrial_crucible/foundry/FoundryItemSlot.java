@@ -67,7 +67,8 @@ public class FoundryItemSlot {
     }
 
     protected void tick() {
-        if (!getController().getLevel().isClientSide) {
+        CrucibleBlockEntity controller = getController();
+        if (controller != null && !controller.getLevel().isClientSide) {
             if (contentsChanged) {
                 contentsChanged = false;
                 onContentChanged(true);
@@ -158,7 +159,7 @@ public class FoundryItemSlot {
             minHeat = FoundryRecipe.getHeatRequirement(recipe.getRequiredHeat());
 
         // 1+(speedLimit-1) (1-ℯ^(k (Tmin-x))) Paste this in math curve tracer
-        return (float) (1f + (SPEED_LIMIT - 1f) * (1f - Math.exp((heatingRecipe ? .14f : -.14f)  * (minHeat - controller.get().foundryData.getCurrentHeat()))));
+        return (float) (1f + (SPEED_LIMIT - 1f) * (1f - Math.exp((heatingRecipe ? .14f : -.14f) * (minHeat - controller.get().foundryData.getCurrentHeat()))));
     }
 
     private ProcessingRecipe<?> getMatchingRecipe() {
