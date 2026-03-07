@@ -75,6 +75,8 @@
   "advancement.createmetallurgy.industrial_crucible.desc": "Obtain an Industrial Crucible",
   "advancement.createmetallurgy.foundry": "Metallurgy Mastery",
   "advancement.createmetallurgy.foundry.desc": "Obtain a Foundry Unit",
+  "advancement.createmetallurgy.ladle":  "Molten Logistics",
+  "advancement.createmetallurgy.ladle.desc": "Craft a Transfer Ladle",
 
   "createmetallurgy.logistics.address": "Net Address",
   "createmetallurgy.casting.lock_mode": "Mold Locking Mode",
