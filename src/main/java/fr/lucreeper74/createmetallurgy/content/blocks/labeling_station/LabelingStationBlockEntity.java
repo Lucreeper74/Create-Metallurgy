@@ -15,6 +15,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -30,7 +31,6 @@ import java.util.List;
 public class LabelingStationBlockEntity extends SmartBlockEntity {
 
     public boolean redstonePowered;
-
     public ArrayList<String> addressesList;
 
     public LadleItemHandler ladleInv;
@@ -39,7 +39,6 @@ public class LabelingStationBlockEntity extends SmartBlockEntity {
 
     public static final int CYCLE = 20;
     public int animationTicks;
-    public boolean animationInward;
 
     public LabelingStationBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
@@ -94,9 +93,11 @@ public class LabelingStationBlockEntity extends SmartBlockEntity {
         super.tick();
 
         if (level.isClientSide) {
-            if (animationTicks == CYCLE - (animationInward ? 5 : 1))
+            if (animationTicks == CYCLE - 1)
                 AllSoundEvents.PACKAGER.playAt(level, worldPosition, 1, 1, true);
-            if (animationTicks == (animationInward ? 1 : 5))
+            if (animationTicks == 10)
+                AllSoundEvents.STOCK_TICKER_TRADE.playAt(level, worldPosition, .6f, 1, true);
+            if (animationTicks == 5)
                 level.playLocalSound(worldPosition, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundSource.BLOCKS, 0.25f, 0.75f,
                         true);
         }
@@ -209,17 +210,24 @@ public class LabelingStationBlockEntity extends SmartBlockEntity {
             return;
         }*/
 
-        AllSoundEvents.STOCK_TICKER_TRADE.playOnServer(level, getBlockPos());
-
-        animationInward = false;
         animationTicks = 0;
         ladleInv.allowExtract();
     }
 
     public void boxArrived() {
-        animationInward = false;
         animationTicks = CYCLE;
         notifyUpdate();
+    }
+
+    public float getLadleOffset(float partialTicks) {
+        float tickCycle = animationTicks - partialTicks;
+        float progress = Mth.clamp(tickCycle / (CYCLE - 5) * 2 - 1, -1, 1);
+        progress = 1 - progress * progress;
+        return progress * progress;
+    }
+
+    public ItemStack getRenderedBox() {
+        return animationTicks >= (CYCLE / 1.2f) ? ItemStack.EMPTY : heldBox;
     }
 
     @Override
@@ -230,8 +238,10 @@ public class LabelingStationBlockEntity extends SmartBlockEntity {
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+        Direction facing = getBlockState().getValue(LabelingStationBlock.FACING);
         if (cap == ForgeCapabilities.ITEM_HANDLER)
-            return ladleProvider.cast();
+            if (side != null && (side.equals(facing) || side.equals(facing.getOpposite())))
+                return ladleProvider.cast();
         return super.getCapability(cap, side);
     }
 
