@@ -8,7 +8,6 @@ import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
-import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
@@ -53,6 +52,7 @@ import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOL
 
 public class LadleItem extends PackageItem {
     public static final int LADLE_CAPACITY = 4000; // in mb
+    public static final int MAX_ADR_COUNT = 10;
 
     public LadleItem(Properties properties, PackageStyle style) {
         super(properties, style);
@@ -80,7 +80,8 @@ public class LadleItem extends PackageItem {
 
     public static void addRemainAddrs(ItemStack ladle, ArrayList<String> remainAddrs) {
         ListTag list = new ListTag();
-        for (String address : remainAddrs) {
+        for (int i = 0; i < Math.min(remainAddrs.size(), MAX_ADR_COUNT); i++) {
+            String address = remainAddrs.get(i);
             if (address != null) {
                 CompoundTag addressTag = new CompoundTag();
                 addressTag.putString("Address", address);
