@@ -63,6 +63,7 @@ public class LadleItemHandler implements IItemHandlerModifiable {
         if (!simulate) {
             setStackInSlot(slot, ItemStack.EMPTY);
             forbidExtract();
+            blockEntity.notifyUpdate();
         }
         return ladle;
     }
