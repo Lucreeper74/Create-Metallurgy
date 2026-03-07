@@ -67,8 +67,10 @@ public class FoundryItemSlot {
     }
 
     protected void tick() {
-        CrucibleBlockEntity controller = getController();
-        if (controller != null && !controller.getLevel().isClientSide) {
+        if (getController() == null)
+            return;
+
+        if (!getController().getLevel().isClientSide) {
             if (contentsChanged) {
                 contentsChanged = false;
                 onContentChanged(true);
