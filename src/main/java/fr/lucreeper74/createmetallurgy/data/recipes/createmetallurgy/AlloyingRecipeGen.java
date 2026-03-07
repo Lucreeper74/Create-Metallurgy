@@ -45,7 +45,7 @@ public class AlloyingRecipeGen extends CMProcessingRecipesGen {
                     .require(Items.NETHERITE_SCRAP)
                     .require(CMFluids.MOLTEN_SILVER.get(), 120)
                     .requiresHeat(HeatCondition.SUPERHEATED)
-                    .output(CMFluids.MOLTEN_NETHERITE.get(), 45))
+                    .output(CMFluids.MOLTEN_NECROMIUM.get(), 45))
 
     ;
     //
