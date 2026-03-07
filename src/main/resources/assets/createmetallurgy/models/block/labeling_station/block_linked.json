@@ -1,6 +1,8 @@
 {
-	"parent": "create:block/packager/block",
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "createmetallurgy:block/labeling_station/block",
 	"textures": {
-		"2": "create:block/packager_horizontal_linked"
+		"2": "createmetallurgy:block/labeling_station/labeling_station_horizontal_linked"
 	}
 }

@@ -21,17 +21,12 @@ public class CMPartialModels {
 
             THERMOMETER_GAUGE = block("attachments/gauge/thermometer"),
                 THERMOMETER_DIAL = block("attachments/gauge/dial"),
-                FLUID_PORT = block("attachments/fluid_port"),
-                ITEM_PORT = block("attachments/item_port"),
 
             GRINDER_BELT = block("mechanical_belt_grinder/belt"),
 
             BULB_INNER_GLOW = block("light_bulb/inner_glow"),
 
-            LABELLING_STATION_TRAY_REGULAR = block("labelling_station/tray"),
-                LABELLING_STATION_TRAY_DEFRAG = block("labelling_station/tray"),
-                LABELLING_STATION_HATCH_OPEN = block("labelling_station/hatch_open"),
-                LABELLING_STATION_HATCH_CLOSED = block("labelling_station/hatch_closed"),
+            LABELLING_STATION_TRAY_REGULAR = block("labeling_station/tray"),
 
 
     // JEI Gui models
