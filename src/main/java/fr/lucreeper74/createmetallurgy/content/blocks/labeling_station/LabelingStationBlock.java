@@ -1,33 +1,24 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.labeling_station;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
-import com.simibubi.create.foundation.block.WrenchableDirectionalBlock;
-import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SignalGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.items.IItemHandler;
 
-public class LabelingStationBlock extends WrenchableDirectionalBlock implements IBE<LabelingStationBlockEntity>, IWrenchable {
+public class LabelingStationBlock extends HorizontalDirectionalBlock implements IBE<LabelingStationBlockEntity>, IWrenchable {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LINKED = BooleanProperty.create("linked");
 
@@ -41,46 +32,16 @@ public class LabelingStationBlock extends WrenchableDirectionalBlock implements 
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Capability<IItemHandler> itemCap = ForgeCapabilities.ITEM_HANDLER;
-        Direction preferredFacing = null;
-        for (Direction face : context.getNearestLookingDirections()) {
-            BlockEntity be = context.getLevel()
-                    .getBlockEntity(context.getClickedPos()
-                            .relative(face));
-            if (be instanceof PackagerBlockEntity)
-                continue;
-            if (be != null && (be.getCapability(itemCap)
-                    .isPresent())) {
-                preferredFacing = face.getOpposite();
-                break;
-            }
+        if (context.getPlayer().isShiftKeyDown()) {
+            return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        } else {
+            return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
         }
-
-        Player player = context.getPlayer();
-        if (preferredFacing == null) {
-            Direction facing = context.getNearestLookingDirection();
-            preferredFacing = player != null && player
-                    .isShiftKeyDown() ? facing : facing.getOpposite();
-        }
-
-        if (player != null && !(player instanceof FakePlayer)) {
-            if (AllBlocks.PORTABLE_STORAGE_INTERFACE.has(context.getLevel()
-                    .getBlockState(context.getClickedPos()
-                            .relative(preferredFacing.getOpposite())))) {
-                CreateLang.translate("packager.no_portable_storage")
-                        .sendStatus(player);
-                return null;
-            }
-        }
-
-        return super.getStateForPlacement(context).setValue(POWERED, context.getLevel()
-                        .hasNeighborSignal(context.getClickedPos()))
-                .setValue(FACING, preferredFacing);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(POWERED, LINKED));
+        super.createBlockStateDefinition(builder.add(FACING, POWERED, LINKED));
     }
 
     @Override
