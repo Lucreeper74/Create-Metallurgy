@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ores/coal"
+            "items": [
+              "minecraft:coal"
+            ]
           }
         ]
       },

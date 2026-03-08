@@ -114,7 +114,7 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
                     .pattern("CCC")
                     .pattern("CCC")),
 
-    GRAPHITE = create(CMItems.GRAPHITE).unlockedByTag(T::coal)
+    GRAPHITE = create(CMItems.GRAPHITE).unlockedBy(T::coal)
             .viaShapeless(b -> b.requires(Items.CLAY_BALL)
                     .requires(Items.COAL, 8)),
 
@@ -135,7 +135,7 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
                     .pattern(" W ")),
 
     COKE = create(CMItems.COKE::get).withSuffix("_from_coal")
-            .viaCookingTag(T::coal)
+            .viaCooking(T::coal)
             .rewardXP(.5f)
             .forDuration(200)
             .inBlastFurnace(),
