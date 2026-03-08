@@ -27,7 +27,7 @@ If applicable, add screenshots to help explain your problem.
  - MC/Forge version
  - Create version
  - Create Metallurgy version
-- Others mods / modpacks, datapacks
+ - Others mods / modpacks, datapacks
 
 **Additional context**
-Add any other context or revelant details about the problem here.
+Add any other relevant context or details about the problem here.
