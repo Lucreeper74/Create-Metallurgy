@@ -1,6 +1,6 @@
 # Instructions for Translators
 
-The file that contains all the lang entries of Create: Metallurgy is located here [`generated/lang/en_us.json`](https://github.com/Lucreeper74/Create-Metallurgy/blob/mc1.19.2/dev/src/generated/resources/assets/createmetallurgy/lang/en_us.json).
+The file that contains all the lang entries of Create: Metallurgy is located here [`generated/lang/en_us.json`](https://github.com/Lucreeper74/Create-Metallurgy/blob/mc1.20.1/dev/src/generated/resources/assets/createmetallurgy/lang/en_us.json).
 
 > [!IMPORTANT]
 > ⚠️ **DO NOT** use the `src/generated` directory! ⚠️   
