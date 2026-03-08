@@ -106,7 +106,8 @@ public class CMItems {
                     .model((c, p) -> {
                         if (style.rare())
                             p.withExistingParent(c.getName(), p.modLoc("item/ladle/custom"))
-                                    .texture("2", p.modLoc("item/ladle/community/" + style.type()));
+                                    .texture("2", p.modLoc("item/ladle/community/" + style.type()))
+                                    .texture("particle", p.modLoc("item/ladle/community/" + style.type()));
                         else
                             p.withExistingParent(c.getName(), p.modLoc("item/ladle/" + style.type()));
                     })
