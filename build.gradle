@@ -7,8 +7,11 @@ plugins {
 }
 
 version = "${mod_version}-${mc_version}"
-group = 'fr.lucreeper74.createmetallurgy'
-archivesBaseName = 'createmetallurgy'
+group = "fr.lucreeper74.${mod_id}"
+
+base {
+    archivesName = "${mod_id}"
+}
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -183,10 +186,10 @@ jar {
                 "Specification-Vendor"    : "createmetallurgysareus",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
-                //"Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Version"  : project.version,
                 "Implementation-Vendor"   : "createmetallurgysareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'MixinConfigs': 'createmetallurgy.mixins.json'
+                'MixinConfigs'            : 'createmetallurgy.mixins.json'
         ])
     }
 }
