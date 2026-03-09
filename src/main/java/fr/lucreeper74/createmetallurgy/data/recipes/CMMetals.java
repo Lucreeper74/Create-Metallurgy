@@ -15,6 +15,7 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -31,7 +32,7 @@ public enum CMMetals {
     ZINC(() -> CMFluids.MOLTEN_ZINC, CREATE),
     BRASS(() -> CMFluids.MOLTEN_BRASS, CREATE),
 
-    TUNGSTEN(() -> CMFluids.MOLTEN_TUNGSTEN, "wolframite", CREATE_METALLURGY),
+    TUNGSTEN(() -> CMFluids.MOLTEN_TUNGSTEN, "Wolframite", CREATE_METALLURGY),
     OBDURIUM(() -> CMFluids.MOLTEN_OBDURIUM, CREATE_METALLURGY),
     STEEL(() -> CMFluids.MOLTEN_STEEL, CREATE_METALLURGY),
 
@@ -82,8 +83,12 @@ public enum CMMetals {
         return name;
     }
 
-    public String getRawName() {
-        return raw_name;
+    public String getRawName(boolean isDisplayName) {
+        if (isDisplayName)
+            return (raw_name.substring(0, 1).toUpperCase(Locale.ROOT)
+                    + raw_name.substring(1));
+        else
+            return raw_name;
     }
 
     public Set<DatagenMod> getMods() {
