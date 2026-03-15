@@ -47,9 +47,11 @@ public class LadleItemHandler implements IItemHandlerModifiable {
         if (!isItemValid(slot, stack))
             return stack;
 
-        setStackInSlot(slot, stack.copy());
-        blockEntity.boxArrived();
-        blockEntity.notifyUpdate();
+        if (!simulate) {
+            setStackInSlot(slot, stack.copy());
+            blockEntity.boxArrived();
+            blockEntity.notifyUpdate();
+        }
 
         return ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - 1);
     }
