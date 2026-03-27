@@ -5,12 +5,12 @@
         "languages_mapping": {
             "locale_with_underscore": {
             "de": "de_de",
-            "es": "es_es",
+            "es-ES": "es_es",
             "fr": "fr_fr",
             "hr": "hr_hr",
             "nl": "nl_nl",
             "ru": "ru_ru",
-            "zh": "zh_cn",
+            "zh-CN": "zh_cn",
             }
         }
     }
