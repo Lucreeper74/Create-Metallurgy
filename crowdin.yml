@@ -1,3 +1,17 @@
-files:
-  - source: /src/generated/resources/assets/createmetallurgy/lang/en_us.json
-    translation: /src/main/resources/assets/createmetallurgy/lang/%locale_with_underscore%.json
+"files": [
+    {
+        "source": "src/generated/resources/assets/createmetallurgy/lang/en_us.json",
+        "translation": "src/main/resources/assets/createmetallurgy/lang/%locale_with_underscore%.json",
+        "languages_mapping": {
+            "locale_with_underscore": {
+            "de": "de_de",
+            "es": "es_es",
+            "fr": "fr_fr",
+            "hr": "hr_hr",
+            "nl": "nl_nl",
+            "ru": "ru_ru",
+            "zh": "zh_cn",
+            }
+        }
+    }
+]
