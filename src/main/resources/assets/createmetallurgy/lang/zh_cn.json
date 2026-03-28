@@ -32,7 +32,7 @@
   "block.createmetallurgy.casting_table": "铸造台",
   "block.createmetallurgy.coke_block": "焦炭块",
   "block.createmetallurgy.cyan_light_bulb": "青色灯泡",
-  "block.createmetallurgy.faucet": "排液口",
+  "block.createmetallurgy.faucet": "流体龙头",
   "block.createmetallurgy.faucet.tooltip.summary": "用于垂直输送流体，最多可向下输送_5格_！",
   "block.createmetallurgy.foundry_basin": "熔铸盆",
   "block.createmetallurgy.foundry_lid": "熔铸盖",
