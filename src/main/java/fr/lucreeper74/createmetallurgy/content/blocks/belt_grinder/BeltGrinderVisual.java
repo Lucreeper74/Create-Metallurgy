@@ -28,8 +28,7 @@ public class BeltGrinderVisual extends KineticBlockEntityVisual<BeltGrinderBlock
 
     public static RotatingInstance shaft(InstancerProvider instancerProvider, BlockState state) {
         var facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-        var axis = facing
-                .getAxis();
+        var axis = facing.getAxis();
         // We could change this to return either an Oriented- or SingleAxisRotatingVisual
         if (axis.isHorizontal()) {
             Direction align = facing.getOpposite();

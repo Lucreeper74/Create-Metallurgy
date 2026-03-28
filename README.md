@@ -32,9 +32,9 @@ Want to help with translation ? Please refer to instructions here [`main/resourc
 - **Janko** (Artist -> Industrial Crucible textures)
 
 ### **Translation**
-- Zavdfer -> Russian localization
+- Zavdfer / Pricklen -> Russian localization
 - Tellurium -> Chinese localization
 - Albertosaurio65 -> Spanish localization
 - TinxLD -> German localization
-- BramVerkuijlen -> Dutch localization
+- restingphantom131 -> Dutch localization
 - Janko -> Croatian localization

@@ -87,6 +87,7 @@ public class CMBlocks {
             .transform(tagBlockAndItem(CMMetals.TUNGSTEN.rawStorageBlocks))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
+            .lang("Block of Raw Wolframite")
             .register();
 
     public static final BlockEntry<Block> TUNGSTEN_BLOCK = REGISTRATE
@@ -99,6 +100,7 @@ public class CMBlocks {
             .tag(Tags.Items.STORAGE_BLOCKS)
             .properties(Item.Properties::fireResistant)
             .build()
+            .lang("Block of Tungsten")
             .register();
 
     public static final BlockEntry<Block> OBDURIUM_BLOCK = REGISTRATE
@@ -111,6 +113,7 @@ public class CMBlocks {
             .tag(Tags.Items.STORAGE_BLOCKS)
             .properties(Item.Properties::fireResistant)
             .build()
+            .lang("Block of Obdurium")
             .register();
 
     public static final BlockEntry<Block> WOLFRAMITE_ORE = REGISTRATE
@@ -137,6 +140,7 @@ public class CMBlocks {
             .transform(TagGen.tagBlockAndItem(CMBlockTags.COKE_STORAGE_BLOCKS.tag, CMItemTags.COKE_STORAGE_BLOCKS.tag))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
+            .lang("Block of Coke")
             .register();
 
     public static final BlockEntry<Block> STEEL_BLOCK = REGISTRATE
@@ -148,6 +152,7 @@ public class CMBlocks {
             .transform(tagBlockAndItem(CMMetals.STEEL.storageBlocks))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
+            .lang("Block of Steel")
             .register();
 
 
@@ -164,6 +169,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_IRON_TOOL)
             .simpleItem()
+            .lang("Block of Slag")
             .register();
 
     public static final BlockEntry<FoundryBasinBlock> FOUNDRY_BASIN_BLOCK = REGISTRATE

@@ -3,6 +3,7 @@ package fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
+import com.simibubi.create.content.processing.basin.BasinBlock;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinInventory;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -30,7 +31,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.ArrayList;
@@ -173,6 +176,53 @@ public class FoundryBasinBlockEntity extends BasinBlockEntity {
             notifyChangeOfContents();
             sendData();
         }
+    }
+
+    public boolean acceptOutputs(List<ItemStack> outputItems, List<FluidStack> outputFluids, boolean simulate) {
+        outputInventory.allowInsertion();
+        outputTank.allowInsertion();
+        boolean acceptOutputsInner = acceptOutputsInner(outputItems, outputFluids, simulate);
+        outputInventory.forbidInsertion();
+        outputTank.forbidInsertion();
+        return acceptOutputsInner;
+    }
+
+    private boolean acceptOutputsInner(List<ItemStack> outputItems, List<FluidStack> outputFluids, boolean simulate) {
+        BlockState blockState = getBlockState();
+        if (!(blockState.getBlock() instanceof BasinBlock))
+            return false;
+
+        IItemHandler targetInv = outputInventory;
+        IFluidHandler targetTank = outputTank.getCapability().orElse(null);
+
+        if (targetInv == null && !outputItems.isEmpty())
+            return false;
+        if (!acceptItemOutputs(outputItems, simulate, targetInv))
+            return false;
+        if (outputFluids.isEmpty())
+            return true;
+        return acceptFluidOutputs(outputFluids, simulate, targetTank);
+    }
+
+    private boolean acceptFluidOutputs(List<FluidStack> outputFluids, boolean simulate, IFluidHandler targetTank) {
+        for (FluidStack fluidResult : outputFluids) {
+            IFluidHandler.FluidAction action = simulate ? IFluidHandler.FluidAction.SIMULATE : IFluidHandler.FluidAction.EXECUTE;
+            int fill = targetTank instanceof SmartFluidTankBehaviour.InternalFluidHandler
+                    ? ((SmartFluidTankBehaviour.InternalFluidHandler) targetTank).forceFill(fluidResult.copy(), action)
+                    : targetTank.fill(fluidResult.copy(), action);
+            if (fill != fluidResult.getAmount())
+                return false;
+        }
+        return true;
+    }
+
+    private boolean acceptItemOutputs(List<ItemStack> outputItems, boolean simulate, IItemHandler targetInv) {
+        for (ItemStack outputStack : outputItems) {
+            if (!ItemHandlerHelper.insertItemStacked(targetInv, outputStack.copy(), simulate)
+                    .isEmpty())
+                return false;
+        }
+        return true;
     }
 
     public SmartFluidTankBehaviour getOutputTank() {

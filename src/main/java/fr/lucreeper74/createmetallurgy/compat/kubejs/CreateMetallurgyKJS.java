@@ -12,11 +12,11 @@ import java.util.Map;
 public class CreateMetallurgyKJS extends KubeJSPlugin {
 
     private static final Map<CMRecipeTypes, RecipeSchema> recipeSchemas = Map.of(
-            CMRecipeTypes.CASTING_IN_BASIN, CastingRecipeJS.SCHEMA,
-            CMRecipeTypes.CASTING_IN_TABLE, CastingRecipeJS.SCHEMA,
-            CMRecipeTypes.GRINDING, ProcessingRecipeJS.BASIC,
-            CMRecipeTypes.ALLOYING, ProcessingRecipeJS.WITH_HEAT,
-            CMRecipeTypes.MELTING, ProcessingRecipeJS.WITH_HEAT
+            CMRecipeTypes.CASTING_IN_BASIN, CastingRecipeSchema.DEFAULT,
+            CMRecipeTypes.CASTING_IN_TABLE, CastingRecipeSchema.DEFAULT,
+            CMRecipeTypes.GRINDING, ProcessingRecipeSchema.PROCESSING_WITH_TIME,
+            CMRecipeTypes.ALLOYING, ProcessingRecipeSchema.PROCESSING_DEFAULT,
+            CMRecipeTypes.MELTING, ProcessingRecipeSchema.PROCESSING_DEFAULT
     );
 
     @Override

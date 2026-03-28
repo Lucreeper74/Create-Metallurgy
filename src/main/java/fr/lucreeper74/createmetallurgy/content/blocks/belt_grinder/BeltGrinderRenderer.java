@@ -24,7 +24,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 public class BeltGrinderRenderer extends SafeBlockEntityRenderer<BeltGrinderBlockEntity> {
     public BeltGrinderRenderer(BlockEntityRendererProvider.Context context) {
@@ -33,12 +32,14 @@ public class BeltGrinderRenderer extends SafeBlockEntityRenderer<BeltGrinderBloc
     @Override
     protected void renderSafe(BeltGrinderBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         renderShaft(be, ms, buffer, light, overlay);
-        renderBelt(be, ms, buffer, light);
-        renderItems(be, partialTicks, ms, buffer, light, overlay);
+
+        boolean alongZ = be.getBlockState().getValue(BeltGrinderBlock.HORIZONTAL_FACING).getAxis() == Direction.Axis.Z;
+        renderBelt(be, alongZ, ms, buffer, light);
+        renderItems(be, alongZ, partialTicks, ms, buffer, light, overlay);
         FilteringRenderer.renderOnBlockEntity(be, partialTicks, ms, buffer, light, overlay);
     }
 
-    protected void renderBelt(BeltGrinderBlockEntity be, PoseStack ms, MultiBufferSource buffer, int light) {
+    protected void renderBelt(BeltGrinderBlockEntity be, boolean alongZ, PoseStack ms, MultiBufferSource buffer, int light) {
         BlockState blockState = be.getBlockState();
         VertexConsumer vb = buffer.getBuffer(RenderType.solid());
         SpriteShiftEntry beltShift = CMSpriteShifts.SAND_PAPER_BELT;
@@ -56,7 +57,7 @@ public class BeltGrinderRenderer extends SafeBlockEntityRenderer<BeltGrinderBloc
         scroll = scroll * spriteSize * .5f;
 
         SuperByteBuffer rotatedCoil = CachedBuffers.partialFacing(CMPartialModels.GRINDER_BELT, blockState,
-                blockState.getValue(HORIZONTAL_FACING));
+                alongZ ? Direction.NORTH : Direction.WEST);
         rotatedCoil.light(light)
                 .renderInto(ms, vb);
 
@@ -65,10 +66,9 @@ public class BeltGrinderRenderer extends SafeBlockEntityRenderer<BeltGrinderBloc
                 .renderInto(ms, vb);
     }
 
-    protected void renderItems(BeltGrinderBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+    protected void renderItems(BeltGrinderBlockEntity be, boolean alongZ, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                                int light, int overlay) {
         if (!be.inv.isEmpty()) {
-            boolean alongZ = be.getBlockState().getValue(BeltGrinderBlock.HORIZONTAL_FACING).getAxis() == Direction.Axis.Z;
             ms.pushPose();
 
             float offset = getOffset(be, partialTicks, alongZ);
