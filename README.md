@@ -38,3 +38,4 @@ Want to help with translation ? Please refer to instructions here [`main/resourc
 - TinxLD -> German localization
 - restingphantom131 -> Dutch localization
 - Janko -> Croatian localization
+- CrazyBarkley -> Polish localization
