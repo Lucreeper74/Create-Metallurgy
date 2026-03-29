@@ -98,7 +98,6 @@
   "createmetallurgy.crucible.empty": "Fundición vacía...",
   "createmetallurgy.crucible.fluid_content": "Contenido de fluido",
   "createmetallurgy.crucible.hold_details": "Mantén [%1$s] para más detalles",
-  "createmetallurgy.crucible.title": "Información del crisol:",
   "createmetallurgy.display_source.foundry.for_foundry_status": "para estado de fundición",
   "createmetallurgy.display_source.foundry.not_enough_space": "Espacio insuficiente",
   "createmetallurgy.display_source.foundry_status": "Estado térmico de la fundición",
