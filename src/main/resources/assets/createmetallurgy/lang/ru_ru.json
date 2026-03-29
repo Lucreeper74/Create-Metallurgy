@@ -94,7 +94,6 @@
   "createmetallurgy.crucible.empty": "Пустой Литейный цех...",
   "createmetallurgy.crucible.fluid_content": "Содержимое хранилища",
   "createmetallurgy.crucible.hold_details": "Удерживайте [%1$s] для получения более подробной информации",
-  "createmetallurgy.crucible.title": "Информация о тигеле:",
   "createmetallurgy.display_source.foundry.for_foundry_status": "Информация о статусе литейного создания",
   "createmetallurgy.display_source.foundry.not_enough_space": "Недостаточно места",
   "createmetallurgy.display_source.foundry_status": "Уровень нагрева литейного цеха",
