@@ -107,14 +107,6 @@
   "createmetallurgy.foundry.overheating": "¡Sobrecalentando!",
   "createmetallurgy.foundry.stable": "Estable",
   "createmetallurgy.foundry.status": "Estado térmico",
-  "createmetallurgy.generic.icon.down": "↓",
-  "createmetallurgy.generic.icon.heart": "❤",
-  "createmetallurgy.generic.icon.up": "↑",
-  "createmetallurgy.generic.symbol.equal": "=",
-  "createmetallurgy.generic.symbol.greater": ">",
-  "createmetallurgy.generic.symbol.greater_eq": "≥",
-  "createmetallurgy.generic.symbol.less": "<",
-  "createmetallurgy.generic.symbol.less_eq": "≤",
   "createmetallurgy.generic.unit.thermal": "Ut",
   "createmetallurgy.gui.goggles.castingbasin_contents": "Contenido de la cubeta de fundición",
   "createmetallurgy.gui.goggles.castingtable_contents": "Contenido de la mesa de fundición",
@@ -175,7 +167,6 @@
   "createmetallurgy.recipe.casting_in_table": "Fundir en mesa",
   "createmetallurgy.recipe.entity_melting": "Fusión de entidades",
   "createmetallurgy.recipe.foundry.heat_requirement.text": "Requisitos térmicos:",
-  "createmetallurgy.recipe.foundry.min_size": "%1$sx%2$s",
   "createmetallurgy.recipe.foundry.min_size.text": "¡Tamaño mínimo de fundición requerido!",
   "createmetallurgy.recipe.grinding": "Lijado",
   "createmetallurgy.recipe.melting": "Fusión en fundición",
@@ -272,6 +263,5 @@
   "item.createmetallurgy.tungsten_sheet": "Lámina de tungsteno",
   "item.createmetallurgy.tungsten_wire": "Cable de tungsteno",
   "item.createmetallurgy.tungsten_wire_spool": "Carrete de cable de tungsteno",
-  "item.createmetallurgy.zinc_dust": "Polvo de zinc",
-  "itemGroup.createmetallurgy.main_group": "Create: Metallurgy"
+  "item.createmetallurgy.zinc_dust": "Polvo de zinc"
 }
