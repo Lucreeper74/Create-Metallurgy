@@ -24,7 +24,7 @@
   "createmetallurgy.gui.ladle_filter.filled_amount_hint": "Scroll down below 0 to disable it",
   "createmetallurgy.gui.ladle_filter.comparator": "Comparator selection:",
 
-  "createmetallurgy.crucible.title": "Crucible Informations:",
+  "createmetallurgy.crucible.title": "Crucible Information:",
   "createmetallurgy.crucible.fluid_content": "Fluid Contents",
   "createmetallurgy.crucible.capacity": "Remaining Capacity",
   "createmetallurgy.crucible.hold_details": "Hold [%1$s] for details",
