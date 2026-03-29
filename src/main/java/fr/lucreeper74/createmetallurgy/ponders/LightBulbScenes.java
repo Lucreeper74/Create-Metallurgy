@@ -58,7 +58,7 @@ public class LightBulbScenes {
         //Turn on first bulb
         scene.overlay().showText(80)
                 .attachKeyFrame()
-                .text("They emit light proportionally to the strength of the redstone signal received")
+                .text("They emit light proportionally to the strength of the Redstone signal received")
                 .pointAt(whiteBulbVec)
                 .placeNearTarget();
         scene.overlay().showControls(leverVec, Pointing.DOWN, 40).rightClick();

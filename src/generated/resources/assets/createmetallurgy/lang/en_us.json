@@ -162,7 +162,7 @@
   "createmetallurgy.ponder.industrial_crucible.text_3": "Crucibles can also store multiple fluids at the same time!",
   "createmetallurgy.ponder.light_bulbs.header": "Using Light Bulbs",
   "createmetallurgy.ponder.light_bulbs.text_1": "Light Bulbs are an alternative light source to the Redstone Lamp",
-  "createmetallurgy.ponder.light_bulbs.text_2": "They emit light proportionally to the strength of the redstone signal received",
+  "createmetallurgy.ponder.light_bulbs.text_2": "They emit light proportionally to the strength of the Redstone signal received",
   "createmetallurgy.ponder.light_bulbs.text_3": "Light Bulbs are available in all colors",
   "createmetallurgy.ponder.light_bulbs.text_4": "Placing items in Address slot can connect others light bulbs in a Network",
   "createmetallurgy.ponder.tag.metalwork": "Metalwork",
