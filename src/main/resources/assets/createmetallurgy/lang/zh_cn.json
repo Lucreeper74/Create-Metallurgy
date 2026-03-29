@@ -97,7 +97,6 @@
   "createmetallurgy.crucible.empty": "熔铸炉空……",
   "createmetallurgy.crucible.fluid_content": "包含流体",
   "createmetallurgy.crucible.hold_details": "按住[%1$s]显示详细信息",
-  "createmetallurgy.crucible.title": "坩埚信息：",
   "createmetallurgy.display_source.foundry.for_foundry_status": "熔铸炉状态",
   "createmetallurgy.display_source.foundry.not_enough_space": "没有足够的空间",
   "createmetallurgy.display_source.foundry_status": "熔铸炉热能状态",
