@@ -96,7 +96,6 @@
   "createmetallurgy.crucible.empty": "Industrietiegel Leer...",
   "createmetallurgy.crucible.fluid_content": "Flüssigkeitsinhalt",
   "createmetallurgy.crucible.hold_details": "Halte [%1$s] für Details",
-  "createmetallurgy.crucible.title": "Schmelztiegel Informationen:",
   "createmetallurgy.display_source.foundry.for_foundry_status": "für Gießereistatus",
   "createmetallurgy.display_source.foundry.not_enough_space": "Nicht genug Platz ",
   "createmetallurgy.display_source.foundry_status": "Gießerei Thermischer Status",
