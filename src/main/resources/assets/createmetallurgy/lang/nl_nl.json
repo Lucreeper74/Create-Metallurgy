@@ -94,7 +94,6 @@
   "createmetallurgy.crucible.empty": "Smelterij leeg...",
   "createmetallurgy.crucible.fluid_content": "Vloeibare inhoud",
   "createmetallurgy.crucible.hold_details": "Houd [%1$s] ingedrukt voor meer informatie",
-  "createmetallurgy.crucible.title": "Smeltkroes-informatie:",
   "createmetallurgy.display_source.foundry.for_foundry_status": "voor Smelterijstatus",
   "createmetallurgy.display_source.foundry.not_enough_space": "Niet genoeg ruimte ",
   "createmetallurgy.display_source.foundry_status": "Thermische status van de Smelterij",
