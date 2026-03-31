@@ -1,3 +1,23 @@
 {
-  "createmetallurgy.crucible.title": "Smeltkroes-informatie:"
+  "advancement.createmetallurgy.industrial_crucible": "Lekker! Broodje metaal",
+  "advancement.createmetallurgy.industrial_crucible.desc": "Schaf een industriële smeltkroes aan",
+  "block.createmetallurgy.industrial_crucible": "Industriële Smeltkroes",
+  "createmetallurgy.crucible.capacity": "Resterende capaciteit",
+  "createmetallurgy.crucible.empty": "Smelterij leeg...",
+  "createmetallurgy.crucible.fluid_content": "Vloeibare inhoud",
+  "createmetallurgy.crucible.hold_details": "Houd [%1$s] ingedrukt voor meer informatie",
+  "createmetallurgy.crucible.title": "Smeltkroes-informatie:",
+  "createmetallurgy.ponder.foundry.text_1": "Industriële Smeltkroezen kunnen ook als grotere Smelterij-kom worden gebruikt",
+  "createmetallurgy.ponder.foundry.text_4": "...Smeltkroezen moeten een basis van 5x5 blokken hebben om de maximale temperatuur te bereiken",
+  "createmetallurgy.ponder.foundry.text_5": "Elk basisblok zonder brander eronder koelt echter de Smeltkroes af. Meer warmte betekent sneller smelten!",
+  "createmetallurgy.ponder.foundry.text_6": "In tegenstelling tot Smelterij-kommen zijn Smeltkroezen groot genoeg om grotere voorwerpen of meerdere tegelijk te smelten",
+  "createmetallurgy.ponder.foundry.text_7": "De huidige hitte van de Smeltkroezen kan worden gecontroleerd met Ingenieursbril en wordt weergegeven in Thermische Eenheden (Tu)",
+  "createmetallurgy.ponder.foundry.text_9": "Smeltkroezen kunnen ook andere soorten recepten uitvoeren, zoals het smelten van entiteiten en het maken van legeringen",
+  "createmetallurgy.ponder.industrial_crucible.header": "Industriële Smeltkroes Bouwen",
+  "createmetallurgy.ponder.industrial_crucible.text_1": "Industriële Smeltkroezen kunnen worden gebruikt om gesmolten metalen op te slaan",
+  "createmetallurgy.ponder.industrial_crucible.text_2": "Je kunt ramen toevoegen met een Moersleutel!",
+  "createmetallurgy.ponder.industrial_crucible.text_3": "Smeltkroezen kunnen ook meerdere vloeistoffen tegelijk opslaan!",
+  "death.attack.createmetallurgy.crucible": "%1$s Ontdek wat een écht geweldige hoogoven was...",
+  "death.attack.createmetallurgy.crucible.player": "%2$s geloofde dat %1$s een goede legering zou vormen",
+  "item.createmetallurgy.incomplete_industrial_crucible": "Incompleet Industriële Smeltkroes"
 }
