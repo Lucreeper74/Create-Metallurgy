@@ -141,6 +141,7 @@ public enum CMMetals {
 
         // Impure
         RAW_MATERIAL(90, 45, 1f, false),
+        RAW_CRUSHED(90, 45, .80f, false),
         RAW_BLOCK(810, 405, 8f, false),
         DIRTY_DUST(90, 30, .75f, false),
         ;

@@ -1,0 +1,20 @@
+{
+  "type": "createmetallurgy:melting",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_zinc"
+    }
+  ],
+  "processingTime": 48,
+  "results": [
+    {
+      "amount": 90,
+      "fluid": "createmetallurgy:molten_zinc"
+    },
+    {
+      "amount": 45,
+      "fluid": "createmetallurgy:molten_slag"
+    }
+  ]
+}
