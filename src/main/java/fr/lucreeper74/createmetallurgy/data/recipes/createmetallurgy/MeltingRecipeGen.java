@@ -11,12 +11,9 @@ import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
