@@ -7,7 +7,7 @@ issueTrackerURL="https://github.com/Lucreeper74/Create-Metallurgy/issues"
 modId="createmetallurgy"
 # The Implementation-Version property in the jar's MANIFEST.MF file will be used as the mod version at runtime
 version="${file.jarVersion}"
-displayName="${mod_name}"
+displayName="Create: Metallurgy" #"${mod_name}"
 displayURL="https://modrinth.com/mod/create-metallurgy"
 logoFile="createmetallurgy.png"
 #credits=""
