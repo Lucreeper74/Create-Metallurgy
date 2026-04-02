@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
-@Mixin(BasinOperatingBlockEntity.class)
+@Mixin(value = BasinOperatingBlockEntity.class, remap = false)
 public abstract class FoundryBasinCheckMixin extends KineticBlockEntity {
 
     public FoundryBasinCheckMixin(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {

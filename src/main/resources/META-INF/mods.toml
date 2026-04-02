@@ -5,6 +5,7 @@ issueTrackerURL="https://github.com/Lucreeper74/Create-Metallurgy/issues"
 
 [[mods]]
 modId="createmetallurgy"
+# The Implementation-Version property in the jar's MANIFEST.MF file will be used as the mod version at runtime
 version="${file.jarVersion}"
 displayName="Create Metallurgy"
 displayURL="https://modrinth.com/mod/create-metallurgy"
@@ -12,7 +13,7 @@ logoFile="createmetallurgy.png"
 #credits=""
 authors="Luc_Creeper74"
 description='''
-Create Metallurgy is a Create Mod Addon developped by Luc_Creeper74, that allow to melt minerals wich make your ore processing factory more efficient and stylish.
+Create Metallurgy is an addon for Create that expands ore processing with advanced metallurgy and stylish automation systems.
 '''
 
 [[dependencies.createmetallurgy]]
