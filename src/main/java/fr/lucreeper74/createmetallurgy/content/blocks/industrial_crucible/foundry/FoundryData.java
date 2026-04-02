@@ -46,8 +46,10 @@ public class FoundryData {
             return;
         }
 
-        if (updateTemperature())
+        if (updateTemperature()) {
             be.notifyUpdate();
+            inputInv.updateMeltingRecipies();
+        }
     }
 
     public boolean updateTemperature() {

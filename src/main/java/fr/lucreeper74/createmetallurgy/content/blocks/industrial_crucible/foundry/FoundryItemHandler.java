@@ -46,6 +46,11 @@ public class FoundryItemHandler implements IItemHandlerModifiable {
         return slots.get(slot);
     }
 
+    public void updateMeltingRecipies() {
+        for (int i = 0; i < getSlots(); i++)
+            getSlot(i).updateMeltingRecipe();
+    }
+
     @Override
     public @NotNull ItemStack getStackInSlot(int slot) {
         return getSlot(slot).getStack().copy();
