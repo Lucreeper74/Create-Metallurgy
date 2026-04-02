@@ -24,7 +24,7 @@
   "createmetallurgy.gui.ladle_filter.filled_amount_hint": "Scroll down below 0 to disable it",
   "createmetallurgy.gui.ladle_filter.comparator": "Comparator selection:",
 
-  "createmetallurgy.crucible.title": "Crucible Informations:",
+  "createmetallurgy.crucible.title": "Crucible Information:",
   "createmetallurgy.crucible.fluid_content": "Fluid Contents",
   "createmetallurgy.crucible.capacity": "Remaining Capacity",
   "createmetallurgy.crucible.hold_details": "Hold [%1$s] for details",
@@ -73,8 +73,8 @@
   "advancement.createmetallurgy.belt_grinder.desc": "Obtain a Mechanical Belt Grinder",
   "advancement.createmetallurgy.industrial_crucible": "Yummy! Fluids Sandwich!!",
   "advancement.createmetallurgy.industrial_crucible.desc": "Obtain an Industrial Crucible",
-  "advancement.createmetallurgy.foundry": "Metallurgy Mastery",
-  "advancement.createmetallurgy.foundry.desc": "Obtain a Foundry Unit",
+  "advancement.createmetallurgy.gauge": "Metallurgy Nerd",
+  "advancement.createmetallurgy.gauge.desc": "Obtain a Gauge Attachment",
   "advancement.createmetallurgy.ladle":  "Molten Logistics",
   "advancement.createmetallurgy.ladle.desc": "Craft a Transfer Ladle",
 

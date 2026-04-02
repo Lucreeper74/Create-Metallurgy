@@ -1,0 +1,7 @@
+{
+  "type": "remove_elements",
+  "target": {
+    "entity": "createmetallurgy:ladle"
+  },
+  "tag": "minecraft:entity_health"
+}

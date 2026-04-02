@@ -37,8 +37,8 @@ public class CMItems {
     public static final ItemEntry<Item> OBDURIUM_INGOT = taggedIngredientFireResistant("obdurium_ingot", CMMetals.OBDURIUM.getItemTag(CMMetals.ItemType.INGOT), Tags.Items.INGOTS),
             OBDURIUM_SHEET = taggedIngredientFireResistant("obdurium_sheet", CMMetals.OBDURIUM.getItemTag(CMMetals.ItemType.PLATE), PLATES.tag);
 
-    public static final ItemEntry<Item> RAW_WOLFRAMITE = taggedIngredient("raw_tungsten", CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.RAW_MATERIAL), RAW_MATERIALS),
-            CRUSHED_RAW_WOLFRAMITE = taggedIngredient("crushed_raw_tungsten", CRUSHED_RAW_MATERIALS.tag);
+    public static final ItemEntry<Item> RAW_WOLFRAMITE = taggedIngredientWithName("raw_tungsten", "Raw Wolframite", CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.RAW_MATERIAL), RAW_MATERIALS),
+            CRUSHED_RAW_WOLFRAMITE = taggedIngredientWithName("crushed_raw_tungsten", "Crushed Raw Wolframite", CRUSHED_RAW_MATERIALS.tag);
 
     public static final ItemEntry<Item> TUNGSTEN_INGOT = taggedIngredientFireResistant("tungsten_ingot", CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.INGOT), Tags.Items.INGOTS),
             TUNGSTEN_SHEET = taggedIngredientFireResistant("tungsten_sheet", CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.PLATE), PLATES.tag),
@@ -132,36 +132,44 @@ public class CMItems {
                 .tag(metal.getItemTag(dustType));
 
         switch (dustType) {
-            case DIRTY_DUST -> itemEntry.tag(DIRTY_DUSTS.tag);
-            case DUST -> itemEntry.tag(DUSTS);
+            case DIRTY_DUST -> itemEntry.tag(DIRTY_DUSTS.tag).lang("Dirty " + metal.getRawName(true) + " Dust");
+            case DUST -> itemEntry.tag(DUSTS).lang(metal.getRawName(true) + " Dust");
         }
 
         return itemEntry.register();
     }
 
     @SafeVarargs
-    private static ItemEntry<Item> taggedIngredient(String name, TagKey<Item>... tags) {
-        return REGISTRATE.item(name, Item::new)
+    private static ItemEntry<Item> taggedIngredient(String id, TagKey<Item>... tags) {
+        return REGISTRATE.item(id, Item::new)
                 .tag(tags)
                 .register();
     }
 
     @SafeVarargs
-    private static ItemEntry<Item> taggedIngredientFireResistant(String name, TagKey<Item>... tags) {
-        return REGISTRATE.item(name, Item::new)
+    private static ItemEntry<Item> taggedIngredientWithName(String id, String name, TagKey<Item>... tags) {
+        return REGISTRATE.item(id, Item::new)
+                .tag(tags)
+                .lang(name)
+                .register();
+    }
+
+    @SafeVarargs
+    private static ItemEntry<Item> taggedIngredientFireResistant(String id, TagKey<Item>... tags) {
+        return REGISTRATE.item(id, Item::new)
                 .tag(tags)
                 .properties(Item.Properties::fireResistant)
                 .register();
     }
 
-    private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name) {
-        return REGISTRATE.item(name, SequencedAssemblyItem::new)
+    private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String id) {
+        return REGISTRATE.item(id, SequencedAssemblyItem::new)
                 .register();
     }
 
     @SafeVarargs
-    private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name, TagKey<Item>... tags) {
-        return REGISTRATE.item(name, SequencedAssemblyItem::new)
+    private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String id, TagKey<Item>... tags) {
+        return REGISTRATE.item(id, SequencedAssemblyItem::new)
                 .tag(tags)
                 .register();
     }

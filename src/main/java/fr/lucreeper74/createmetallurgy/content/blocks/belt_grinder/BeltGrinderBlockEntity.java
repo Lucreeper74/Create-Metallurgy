@@ -105,8 +105,9 @@ public class BeltGrinderBlockEntity extends KineticBlockEntity {
     public void tick() {
         super.tick();
 
-        if (getSpeed() == 0)
+        if (getSpeed() == 0 || !isSpeedRequirementFulfilled())
             return;
+
         if (inv.remainingTime == -1) {
             if (!inv.isEmpty() && !inv.appliedRecipe)
                 start(inv.getStackInSlot(0));

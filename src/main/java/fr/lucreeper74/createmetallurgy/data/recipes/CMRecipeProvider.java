@@ -12,8 +12,8 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.Tags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +51,10 @@ public abstract class CMRecipeProvider extends RecipeProvider {
 
     // Shortcut for tags & items
     public static class T {
+
         /* Vanilla tags / Items */
-        public static TagKey<Item> coal() {
-            return Tags.Items.ORES_COAL;
+        public static ItemLike coal() {
+            return Items.COAL;
         }
 
         /* Create tags / Items */
@@ -84,7 +85,6 @@ public abstract class CMRecipeProvider extends RecipeProvider {
         public static ItemLike cog() {
             return AllBlocks.COGWHEEL.get();
         }
-
 
         /* Create Metallurgy tags / Items */
         public static ItemLike sandpaperBelt() {
