@@ -124,11 +124,14 @@ public class FoundryItemSlot {
 
     private void onContentChanged(boolean notifyController) {
         updateMeltingRecipe();
-
         updateCallback.run();
 
         if (notifyController)
             getController().notifyUpdate();
+    }
+
+    public void notifyChangeOfContents() {
+        contentsChanged = true;
     }
 
     public void updateMeltingRecipe() {

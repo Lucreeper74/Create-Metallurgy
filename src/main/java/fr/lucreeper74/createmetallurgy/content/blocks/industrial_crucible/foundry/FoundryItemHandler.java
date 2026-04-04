@@ -89,6 +89,11 @@ public class FoundryItemHandler implements IItemHandlerModifiable {
         }
     }
 
+    public void notifyChangeOfContent() {
+        for (FoundryItemSlot slot : slots)
+            slot.notifyChangeOfContents();
+    }
+
     @Override
     public int getSlotLimit(int slot) {
         return 1; // Always one for melting recipes

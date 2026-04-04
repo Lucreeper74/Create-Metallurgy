@@ -25,7 +25,10 @@ public class FoundryData {
 
     private final CrucibleBlockEntity be;
     protected FoundryItemHandler inputInv;
+
+    // Heat management
     private int currentHeat;
+    public boolean needsHeatLevelUpdate;
 
     // For rendering purposes only
     public LerpedFloat gauge = LerpedFloat.linear();
@@ -46,13 +49,16 @@ public class FoundryData {
             return;
         }
 
-        if (updateTemperature())
+        if (needsHeatLevelUpdate && updateTemperature()) {
             be.notifyUpdate();
+            inputInv.notifyChangeOfContent();
+        }
     }
 
     public boolean updateTemperature() {
         BlockPos controllerPos = be.getBlockPos();
         Level level = be.getLevel();
+        needsHeatLevelUpdate = false;
 
         int prevActive = currentHeat;
         currentHeat = 0;
@@ -71,11 +77,13 @@ public class FoundryData {
     public CompoundTag write() {
         CompoundTag nbt = new CompoundTag();
         nbt.putInt("CurrentHeat", currentHeat);
+        nbt.putBoolean("HeatUpdate", needsHeatLevelUpdate);
         return nbt;
     }
 
     public void read(CompoundTag nbt, int base_width) {
         currentHeat = nbt.getInt("CurrentHeat");
+        needsHeatLevelUpdate = nbt.getBoolean("HeatUpdate");
         gauge.chase(getHeatGaugeValue(base_width), .125f, LerpedFloat.Chaser.EXP);
     }
 

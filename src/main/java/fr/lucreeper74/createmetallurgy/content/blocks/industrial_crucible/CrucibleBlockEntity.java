@@ -344,6 +344,12 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         }
     }
 
+    public void updateFoundryTemperature() {
+        CrucibleBlockEntity be = getControllerBE();
+        if (be == null)
+            return;
+        be.foundryData.needsHeatLevelUpdate = true;
+    }
 
     @Override
     public BlockPos getLastKnownPos() {
