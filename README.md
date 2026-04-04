@@ -4,7 +4,8 @@
 	<a href="https://github.com/Lucreeper74/Create-Metallurgy/blob/mc1.19.2/dev/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Lucreeper74/Create-Metallurgy?style=flat&color=900c3f"></a>
 	<a href="https://discord.gg/KGQr5a2qc9"><img alt="Discord" src="https://img.shields.io/discord/996022627430846464?style=flat&logo=Discord&label=Discord&color=5865f2"></a>
 	<a href="https://www.curseforge.com/minecraft/mc-mods/create-metallurgy"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/1007404?style=flat&logo=curseforge&logoColor=1c1c1c&label=%20&labelColor=f16436&color=242629"></a>
-  <a href="https://modrinth.com/mod/create-metallurgy"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/Soft45xC?style=flat&logo=modrinth&logoColor=1c1c1c&label=%20&labelColor=5ca424&color=242629"></a>
+    <a href="https://modrinth.com/mod/create-metallurgy"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/Soft45xC?style=flat&logo=modrinth&logoColor=1c1c1c&label=%20&labelColor=5ca424&color=242629"></a>
+	<a title="Crowdin" target="_blank" href="https://crowdin.com/project/create-metallurgy"><img src="https://badges.crowdin.net/create-metallurgy/localized.svg"></a>
   <br><br>
 </h1>
 
