@@ -22,7 +22,9 @@ Create Metallurgy is a Create Mod Addon developped by Luc_Creeper74, introducing
 </p>
 
 ## Contribute
-Want to help with translation ? Please refer to instructions here [`main/resources/assets/createmetallurgy/lang`](https://github.com/Lucreeper74/Create-Metallurgy/tree/mc1.20.1/dev/src/main/resources/assets/createmetallurgy/lang).
+Want to help with translations ? Please refer to the Crowdin Project page here [`crowdin.com/project/create-metallurgy`](https://crowdin.com/project/create-metallurgy).
+> [!TIP]
+> If you have never used Crowdin, please refer to their [documentation](https://support.crowdin.com/for-translators/#working-in-the-editor) or ask for help on Discord.
 
 <br>
 
