@@ -29,8 +29,8 @@ public class FoundryRecipeGen extends CMRecipeProvider {
 
     GeneratedRecipe
 
-    /* Bulk Melting Recipes */
-    ALL_METALS = allMetals(),
+            /* Bulk Melting Recipes */
+            ALL_METALS = allMetals(),
 
     /* Entity Melting Recipes */
     IRON_GOLEM = meltingEntity("iron_golem", EntityType.IRON_GOLEM, 6, CMFluids.MOLTEN_IRON, 135, 9),
@@ -42,13 +42,12 @@ public class FoundryRecipeGen extends CMRecipeProvider {
             .requireEntity(EntityType.WITHER_SKELETON, 4)
             .requiresMinHeat(9)
             .require(CMFluids.MOLTEN_IRON.get(), 270)
-                .output(CMFluids.MOLTEN_STEEL.get(), 270));
+            .output(CMFluids.MOLTEN_STEEL.get(), 270));
 
     protected GeneratedRecipe allMetals() {
         for (CMMetals metal : CMMetals.values()) {
-            CMMetals.ItemType block = CMMetals.ItemType.BLOCK;
-            //Block
-            meltingTag(metal.getName() + "/block", metal.getItemTag(block), metal.getFluid(), block.getFluidAmount(), getMetalHeat(metal), (int) (CMRecipeProvider.MELTING_DURATION * block.getDurationFactor() * .7f));
+            metal(metal, CMMetals.ItemType.BLOCK); // Blocks
+            metal(metal, CMMetals.ItemType.RAW_BLOCK); // Raw Blocks
         }
         return null;
     }
@@ -59,7 +58,30 @@ public class FoundryRecipeGen extends CMRecipeProvider {
      * Recipe heat condition for metal based on metal fluid temp
      */
     protected int getMetalHeat(CMMetals metal) {
-        return (int) (((float) DEFAULT_MAX_HEAT / (HEAT_CONDITION_THRESHOLD*5)) * metal.getMeltingPoint());
+        return (int) (((float) DEFAULT_MAX_HEAT / (HEAT_CONDITION_THRESHOLD * 5)) * metal.getMeltingPoint());
+    }
+
+    /**
+     * Recipes with CMMetals :
+     *
+     * @param metal    metal
+     * @param itemType metal item Type
+     */
+    protected GeneratedRecipe metal(CMMetals metal, CMMetals.ItemType itemType) {
+        TagKey<Item> inputTag = metal.getItemTag(itemType);
+
+        return create(metal.getName() + "/" + itemType.getName(), CMRecipeTypes.BULK_MELTING.getSerializer(), b -> {
+            b.requiresMinHeat(getMetalHeat(metal))
+                    .withCondition(new NotCondition(new TagEmptyCondition(inputTag.location())))
+                    .require(inputTag)
+                    .duration((int) (CMRecipeProvider.MELTING_DURATION * itemType.getDurationFactor() * .7f))
+                    .output(metal.getFluid().get(), itemType.getFluidAmount());
+
+            if (itemType.isImpure())
+                b.output(CMFluids.MOLTEN_SLAG.get(), itemType.getImpurity());
+
+            return b;
+        });
     }
 
     /**

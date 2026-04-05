@@ -1,0 +1,30 @@
+{
+  "type": "createmetallurgy:bulk_melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:storage_blocks/raw_iron"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/raw_iron"
+    }
+  ],
+  "maxHeatRequirement": 50,
+  "minHeatRequirement": 7,
+  "processingTime": 224,
+  "results": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_iron"
+    },
+    {
+      "amount": 405,
+      "fluid": "createmetallurgy:molten_slag"
+    }
+  ]
+}

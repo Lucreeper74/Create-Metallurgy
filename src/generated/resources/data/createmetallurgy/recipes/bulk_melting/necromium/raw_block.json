@@ -1,0 +1,30 @@
+{
+  "type": "createmetallurgy:bulk_melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:storage_blocks/raw_necromium"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/raw_necromium"
+    }
+  ],
+  "maxHeatRequirement": 50,
+  "minHeatRequirement": 14,
+  "processingTime": 224,
+  "results": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_necromium"
+    },
+    {
+      "amount": 405,
+      "fluid": "createmetallurgy:molten_slag"
+    }
+  ]
+}

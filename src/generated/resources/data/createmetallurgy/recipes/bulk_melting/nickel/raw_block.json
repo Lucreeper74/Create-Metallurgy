@@ -1,0 +1,30 @@
+{
+  "type": "createmetallurgy:bulk_melting",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:storage_blocks/raw_nickel"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/raw_nickel"
+    }
+  ],
+  "maxHeatRequirement": 50,
+  "minHeatRequirement": 7,
+  "processingTime": 224,
+  "results": [
+    {
+      "amount": 810,
+      "fluid": "createmetallurgy:molten_nickel"
+    },
+    {
+      "amount": 405,
+      "fluid": "createmetallurgy:molten_slag"
+    }
+  ]
+}
