@@ -98,7 +98,7 @@
   "createmetallurgy.crucible.empty": "Fonderie vide...",
   "createmetallurgy.crucible.fluid_content": "Contenu des fluides",
   "createmetallurgy.crucible.hold_details": "Maintenez [%1$s] pour plus de details",
-  "createmetallurgy.crucible.title": "Crucible Informations:",
+  "createmetallurgy.crucible.title": "Information du Creuset:",
   "createmetallurgy.display_source.foundry.for_foundry_status": "pour l'état de la fonderie",
   "createmetallurgy.display_source.foundry.not_enough_space": "Pas assez d'espace ",
   "createmetallurgy.display_source.foundry_status": "Etat Thermique de la fonderie",
