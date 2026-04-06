@@ -107,14 +107,6 @@
   "createmetallurgy.foundry.overheating": "Przegrzewanie!",
   "createmetallurgy.foundry.stable": "Stabilny",
   "createmetallurgy.foundry.status": "Status termiczny",
-  "createmetallurgy.generic.icon.down": "↓",
-  "createmetallurgy.generic.icon.heart": "❤",
-  "createmetallurgy.generic.icon.up": "↑",
-  "createmetallurgy.generic.symbol.equal": "=",
-  "createmetallurgy.generic.symbol.greater": ">",
-  "createmetallurgy.generic.symbol.greater_eq": "≥",
-  "createmetallurgy.generic.symbol.less": "<",
-  "createmetallurgy.generic.symbol.less_eq": "≤",
   "createmetallurgy.generic.unit.thermal": "Jt",
   "createmetallurgy.gui.goggles.castingbasin_contents": "Zawartość misy odlewniczej",
   "createmetallurgy.gui.goggles.castingtable_contents": "Zawartość stołu odlewniczego",
@@ -175,7 +167,6 @@
   "createmetallurgy.recipe.casting_in_table": "Odlewanie na stole",
   "createmetallurgy.recipe.entity_melting": "Topienie bytów",
   "createmetallurgy.recipe.foundry.heat_requirement.text": "Wymagania termiczne:",
-  "createmetallurgy.recipe.foundry.min_size": "%1$sx%2$s",
   "createmetallurgy.recipe.foundry.min_size.text": "Wymagany minimalny rozmiar huty!",
   "createmetallurgy.recipe.grinding": "Szlifowanie",
   "createmetallurgy.recipe.melting": "Topienie hutnicze",
@@ -272,6 +263,5 @@
   "item.createmetallurgy.tungsten_sheet": "Blacha wolframowa",
   "item.createmetallurgy.tungsten_wire": "Drut wolframowy",
   "item.createmetallurgy.tungsten_wire_spool": "Szpula drutu wolframowego",
-  "item.createmetallurgy.zinc_dust": "Pył cynku",
-  "itemGroup.createmetallurgy.main_group": "Create: Metallurgy"
+  "item.createmetallurgy.zinc_dust": "Pył cynku"
 }
