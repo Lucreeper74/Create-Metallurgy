@@ -1,0 +1,38 @@
+{
+  "parent": "createmetallurgy:tungsten_age",
+  "criteria": {
+    "have_foundry_mixer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:foundry_mixer"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createmetallurgy.foundry_mixer.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "createmetallurgy:foundry_mixer"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createmetallurgy.foundry_mixer"
+    }
+  },
+  "requirements": [
+    [
+      "have_foundry_mixer"
+    ]
+  ]
+}

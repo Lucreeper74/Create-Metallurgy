@@ -1,0 +1,18 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_iron"
+    }
+  ],
+  "processing_time": 150,
+  "results": [
+    {
+      "id": "createmetallurgy:dirty_iron_dust"
+    },
+    {
+      "chance": 0.25,
+      "id": "createmetallurgy:dirty_iron_dust"
+    }
+  ]
+}

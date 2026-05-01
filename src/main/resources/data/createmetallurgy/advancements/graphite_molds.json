@@ -1,0 +1,41 @@
+{
+  "parent": "createmetallurgy:graphite",
+  "criteria": {
+    "have_graphite_molds": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:graphite_blank_mold",
+              "createmetallurgy:graphite_ingot_mold",
+              "createmetallurgy:graphite_plate_mold",
+              "createmetallurgy:graphite_nugget_mold"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createmetallurgy.graphite_molds.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "createmetallurgy:graphite_ingot_mold"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createmetallurgy.graphite_molds"
+    }
+  },
+  "requirements": [
+    [
+      "have_graphite_molds"
+    ]
+  ]
+}

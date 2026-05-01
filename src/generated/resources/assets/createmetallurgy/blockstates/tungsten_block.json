@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createmetallurgy:block/tungsten_block"
+    }
+  }
+}

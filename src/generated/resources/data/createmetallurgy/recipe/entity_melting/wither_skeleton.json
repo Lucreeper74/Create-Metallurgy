@@ -1,0 +1,20 @@
+{
+  "type": "createmetallurgy:entity_melting",
+  "entity": {
+    "type": "minecraft:wither_skeleton",
+    "damage": 4
+  },
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 270,
+      "fluid": "createmetallurgy:molten_iron"
+    }
+  ],
+  "results": [
+    {
+      "amount": 270,
+      "id": "createmetallurgy:molten_steel"
+    }
+  ]
+}

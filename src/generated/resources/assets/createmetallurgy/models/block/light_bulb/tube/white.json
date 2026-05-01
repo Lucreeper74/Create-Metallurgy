@@ -1,0 +1,6 @@
+{
+  "parent": "createmetallurgy:block/light_bulb/tube",
+  "textures": {
+    "0": "createmetallurgy:block/light_bulb/white"
+  }
+}

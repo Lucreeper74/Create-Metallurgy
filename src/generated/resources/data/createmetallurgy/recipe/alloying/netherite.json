@@ -1,0 +1,23 @@
+{
+  "type": "createmetallurgy:alloying",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 120,
+      "fluid": "createmetallurgy:molten_gold"
+    }
+  ],
+  "results": [
+    {
+      "amount": 45,
+      "id": "createmetallurgy:molten_netherite"
+    }
+  ]
+}

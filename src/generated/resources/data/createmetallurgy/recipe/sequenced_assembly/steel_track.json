@@ -1,0 +1,62 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "create:sleepers"
+  },
+  "results": [
+    {
+      "count": 12,
+      "id": "create:track"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create:incomplete_track"
+        },
+        {
+          "tag": "c:ingots/steel"
+        }
+      ],
+      "results": [
+        {
+          "id": "create:incomplete_track"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create:incomplete_track"
+        },
+        {
+          "tag": "c:ingots/steel"
+        }
+      ],
+      "results": [
+        {
+          "id": "create:incomplete_track"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "create:incomplete_track"
+        }
+      ],
+      "results": [
+        {
+          "id": "create:incomplete_track"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "create:incomplete_track"
+  }
+}

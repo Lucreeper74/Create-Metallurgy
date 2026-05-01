@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "G": {
+      "item": "minecraft:yellow_stained_glass"
+    },
+    "S": {
+      "item": "create:iron_sheet"
+    },
+    "T": {
+      "item": "createmetallurgy:tungsten_wire_spool"
+    }
+  },
+  "pattern": [
+    " G ",
+    " T ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "createmetallurgy:yellow_light_bulb"
+  }
+}

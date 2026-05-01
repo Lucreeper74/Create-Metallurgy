@@ -1,0 +1,21 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 90,
+      "fluid": "createmetallurgy:flowing_molten_brass"
+    },
+    {
+      "tag": "c:stripped_logs"
+    }
+  ],
+  "mold_consumed": true,
+  "processing_time": 70,
+  "result": {
+    "item": {
+      "count": 1,
+      "id": "create:brass_casing"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "parent": "createmetallurgy:tungsten_age",
+  "criteria": {
+    "have_light_bulb": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:black_light_bulb",
+              "createmetallurgy:blue_light_bulb",
+              "createmetallurgy:brown_light_bulb",
+              "createmetallurgy:cyan_light_bulb",
+              "createmetallurgy:gray_light_bulb",
+              "createmetallurgy:green_light_bulb",
+              "createmetallurgy:light_blue_light_bulb",
+              "createmetallurgy:light_gray_light_bulb",
+              "createmetallurgy:lime_light_bulb",
+              "createmetallurgy:magenta_light_bulb",
+              "createmetallurgy:orange_light_bulb",
+              "createmetallurgy:pink_light_bulb",
+              "createmetallurgy:purple_light_bulb",
+              "createmetallurgy:red_light_bulb",
+              "createmetallurgy:white_light_bulb",
+              "createmetallurgy:yellow_light_bulb"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createmetallurgy.light_bulb.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "createmetallurgy:white_light_bulb"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createmetallurgy.light_bulb"
+    }
+  },
+  "requirements": [
+    [
+      "have_light_bulb"
+    ]
+  ]
+}

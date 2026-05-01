@@ -1,0 +1,17 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 90,
+      "fluid": "createmetallurgy:flowing_molten_slag"
+    }
+  ],
+  "processing_time": 60,
+  "result": {
+    "item": {
+      "count": 1,
+      "id": "createmetallurgy:slag"
+    }
+  }
+}

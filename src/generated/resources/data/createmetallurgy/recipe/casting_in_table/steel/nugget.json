@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/steel"
+      }
+    }
+  ],
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 10,
+      "fluid": "createmetallurgy:flowing_molten_steel"
+    },
+    {
+      "item": "createmetallurgy:graphite_nugget_mold"
+    }
+  ],
+  "processing_time": 6,
+  "result": {
+    "tag": "c:nuggets/steel"
+  }
+}

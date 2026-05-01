@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "createmetallurgy:graphite_blank_mold"
+  },
+  "result": "createmetallurgy:graphite_nugget_mold"
+}

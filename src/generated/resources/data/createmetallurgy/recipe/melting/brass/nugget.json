@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/brass"
+      }
+    }
+  ],
+  "type": "createmetallurgy:melting",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "tag": "c:nuggets/brass"
+    }
+  ],
+  "processing_time": 4,
+  "results": [
+    {
+      "amount": 10,
+      "id": "createmetallurgy:molten_brass"
+    }
+  ]
+}

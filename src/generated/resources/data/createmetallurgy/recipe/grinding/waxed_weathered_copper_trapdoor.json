@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:grinding",
+  "ingredients": [
+    {
+      "item": "minecraft:waxed_weathered_copper_trapdoor"
+    }
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "id": "minecraft:weathered_copper_trapdoor"
+    }
+  ]
+}

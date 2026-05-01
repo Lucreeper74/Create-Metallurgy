@@ -1,0 +1,18 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_zinc"
+    }
+  ],
+  "processing_time": 150,
+  "results": [
+    {
+      "id": "createmetallurgy:dirty_zinc_dust"
+    },
+    {
+      "chance": 0.25,
+      "id": "createmetallurgy:dirty_zinc_dust"
+    }
+  ]
+}

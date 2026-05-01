@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:plates/nickel"
+      }
+    }
+  ],
+  "type": "createmetallurgy:melting",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "tag": "c:plates/nickel"
+    }
+  ],
+  "processing_time": 40,
+  "results": [
+    {
+      "amount": 90,
+      "id": "createmetallurgy:molten_nickel"
+    }
+  ]
+}

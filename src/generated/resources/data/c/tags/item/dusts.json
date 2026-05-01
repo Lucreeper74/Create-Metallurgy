@@ -1,0 +1,9 @@
+{
+  "values": [
+    "createmetallurgy:tungsten_dust",
+    "createmetallurgy:gold_dust",
+    "createmetallurgy:iron_dust",
+    "createmetallurgy:copper_dust",
+    "createmetallurgy:zinc_dust"
+  ]
+}

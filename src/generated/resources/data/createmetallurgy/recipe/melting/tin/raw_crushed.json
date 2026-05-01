@@ -1,0 +1,20 @@
+{
+  "type": "createmetallurgy:melting",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_tin"
+    }
+  ],
+  "processing_time": 48,
+  "results": [
+    {
+      "amount": 90,
+      "id": "createmetallurgy:molten_tin"
+    },
+    {
+      "amount": 45,
+      "id": "createmetallurgy:molten_slag"
+    }
+  ]
+}

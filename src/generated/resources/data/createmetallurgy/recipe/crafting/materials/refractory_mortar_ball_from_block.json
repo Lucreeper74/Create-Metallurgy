@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:refractory_mortar"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "createmetallurgy:refractory_mortar_ball"
+  }
+}

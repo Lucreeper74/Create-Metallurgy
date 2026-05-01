@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/zinc"
+      }
+    }
+  ],
+  "type": "createmetallurgy:melting",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "tag": "c:gears/zinc"
+    }
+  ],
+  "processing_time": 160,
+  "results": [
+    {
+      "amount": 360,
+      "id": "createmetallurgy:molten_zinc"
+    }
+  ]
+}

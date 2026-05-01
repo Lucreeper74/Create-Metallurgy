@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/silver"
+      }
+    }
+  ],
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 90,
+      "fluid": "createmetallurgy:flowing_molten_silver"
+    },
+    {
+      "item": "createmetallurgy:graphite_ingot_mold"
+    }
+  ],
+  "processing_time": 60,
+  "result": {
+    "tag": "c:ingots/silver"
+  }
+}

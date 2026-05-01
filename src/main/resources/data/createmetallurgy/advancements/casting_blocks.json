@@ -1,0 +1,39 @@
+{
+  "parent": "createmetallurgy:foundry_basin",
+  "criteria": {
+    "have_casting_blocks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:casting_basin",
+              "createmetallurgy:casting_table"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createmetallurgy.casting_blocks.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "createmetallurgy:casting_table"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createmetallurgy.casting_blocks"
+    }
+  },
+  "requirements": [
+    [
+      "have_casting_blocks"
+    ]
+  ]
+}

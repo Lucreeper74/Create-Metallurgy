@@ -1,0 +1,38 @@
+{
+  "parent": "createmetallurgy:foundry_basin",
+  "criteria": {
+    "have_crucible": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createmetallurgy:industrial_crucible"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createmetallurgy.industrial_crucible.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "createmetallurgy:industrial_crucible"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createmetallurgy.industrial_crucible"
+    }
+  },
+  "requirements": [
+    [
+      "have_crucible"
+    ]
+  ]
+}

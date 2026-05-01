@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/aluminum"
+      }
+    }
+  ],
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 810,
+      "fluid": "createmetallurgy:flowing_molten_aluminum"
+    }
+  ],
+  "processing_time": 480,
+  "result": {
+    "tag": "c:storage_blocks/aluminum"
+  }
+}

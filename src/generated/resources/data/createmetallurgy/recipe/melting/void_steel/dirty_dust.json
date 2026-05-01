@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:dirty_dusts/void_steel"
+      }
+    }
+  ],
+  "type": "createmetallurgy:melting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:dirty_dusts/void_steel"
+    }
+  ],
+  "processing_time": 30,
+  "results": [
+    {
+      "amount": 90,
+      "id": "createmetallurgy:molten_void_steel"
+    },
+    {
+      "amount": 30,
+      "id": "createmetallurgy:molten_slag"
+    }
+  ]
+}

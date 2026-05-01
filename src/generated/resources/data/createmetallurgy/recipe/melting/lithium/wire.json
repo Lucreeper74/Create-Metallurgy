@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:wires/lithium"
+      }
+    }
+  ],
+  "type": "createmetallurgy:melting",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "tag": "c:wires/lithium"
+    }
+  ],
+  "processing_time": 16,
+  "results": [
+    {
+      "amount": 45,
+      "id": "createmetallurgy:molten_lithium"
+    }
+  ]
+}

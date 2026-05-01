@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:grinding",
+  "ingredients": [
+    {
+      "item": "minecraft:waxed_copper_block"
+    }
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "id": "minecraft:copper_block"
+    }
+  ]
+}

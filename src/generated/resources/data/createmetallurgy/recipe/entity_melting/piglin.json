@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:entity_melting",
+  "entity": {
+    "type": "minecraft:piglin",
+    "damage": 4
+  },
+  "ingredients": [],
+  "results": [
+    {
+      "amount": 10,
+      "id": "createmetallurgy:molten_gold"
+    }
+  ]
+}

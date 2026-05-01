@@ -1,0 +1,17 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:dirty_tungsten_dust"
+    }
+  ],
+  "results": [
+    {
+      "id": "createmetallurgy:tungsten_dust"
+    },
+    {
+      "chance": 0.5,
+      "id": "minecraft:gold_nugget"
+    }
+  ]
+}

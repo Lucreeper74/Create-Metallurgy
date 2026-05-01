@@ -1,0 +1,21 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 90,
+      "fluid": "createmetallurgy:flowing_molten_zinc"
+    },
+    {
+      "item": "minecraft:andesite"
+    }
+  ],
+  "mold_consumed": true,
+  "processing_time": 360,
+  "result": {
+    "item": {
+      "count": 1,
+      "id": "create:andesite_alloy_block"
+    }
+  }
+}

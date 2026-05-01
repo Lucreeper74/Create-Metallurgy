@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:grinding",
+  "ingredients": [
+    {
+      "item": "minecraft:weathered_cut_copper"
+    }
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "id": "minecraft:exposed_cut_copper"
+    }
+  ]
+}

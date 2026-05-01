@@ -1,0 +1,28 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:slag"
+    },
+    {
+      "item": "createmetallurgy:slag"
+    },
+    {
+      "item": "createmetallurgy:slag"
+    },
+    {
+      "item": "createmetallurgy:slag"
+    },
+    {
+      "item": "minecraft:gravel"
+    },
+    {
+      "item": "minecraft:cobblestone"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:tuff"
+    }
+  ]
+}

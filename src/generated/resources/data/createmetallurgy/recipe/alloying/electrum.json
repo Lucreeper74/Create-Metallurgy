@@ -1,0 +1,23 @@
+{
+  "type": "createmetallurgy:alloying",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 10,
+      "fluid": "createmetallurgy:molten_gold"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 10,
+      "fluid": "createmetallurgy:molten_silver"
+    }
+  ],
+  "processing_time": 40,
+  "results": [
+    {
+      "amount": 30,
+      "id": "createmetallurgy:molten_electrum"
+    }
+  ]
+}

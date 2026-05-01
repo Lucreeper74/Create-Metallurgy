@@ -1,0 +1,20 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 10,
+      "fluid": "createmetallurgy:flowing_molten_tungsten"
+    },
+    {
+      "item": "createmetallurgy:graphite_nugget_mold"
+    }
+  ],
+  "processing_time": 6,
+  "result": {
+    "item": {
+      "count": 1,
+      "id": "createmetallurgy:tungsten_nugget"
+    }
+  }
+}

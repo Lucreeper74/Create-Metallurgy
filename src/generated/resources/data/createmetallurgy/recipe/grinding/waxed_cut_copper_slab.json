@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:grinding",
+  "ingredients": [
+    {
+      "item": "minecraft:waxed_cut_copper_slab"
+    }
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "id": "minecraft:cut_copper_slab"
+    }
+  ]
+}

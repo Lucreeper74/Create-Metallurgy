@@ -1,0 +1,20 @@
+{
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 90,
+      "fluid": "createmetallurgy:flowing_molten_iron"
+    },
+    {
+      "item": "createmetallurgy:graphite_ingot_mold"
+    }
+  ],
+  "processing_time": 60,
+  "result": {
+    "item": {
+      "count": 1,
+      "id": "minecraft:iron_ingot"
+    }
+  }
+}

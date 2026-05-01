@@ -1,0 +1,130 @@
+package fr.lucreeper74.createmetallurgy.content.blocks.light_bulb;
+
+import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.block.WrenchableDirectionalBlock;
+import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
+import fr.lucreeper74.createmetallurgy.registries.CMShapes;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+public class LightBulbBlock extends WrenchableDirectionalBlock implements IBE<LightBulbBlockEntity>, SimpleWaterloggedBlock {
+
+    public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
+    protected final DyeColor color;
+
+    public LightBulbBlock(Properties pProperties, DyeColor color) {
+        super(pProperties);
+        this.color = color;
+        registerDefaultState(super.defaultBlockState()
+                .setValue(LEVEL, 0)
+                .setValue(WATERLOGGED, false));
+    }
+
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        Level level = pContext.getLevel();
+        FluidState fluidstate = level.getFluidState(pContext.getClickedPos());
+        boolean flag = fluidstate.getType() == Fluids.WATER;
+
+        int signal = level.getBestNeighborSignal(pContext.getClickedPos());
+
+        return this.defaultBlockState()
+                .setValue(FACING, pContext.getClickedFace())
+                .setValue(WATERLOGGED, flag)
+                .setValue(LEVEL, signal);
+    }
+
+
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(LEVEL, WATERLOGGED);
+        super.createBlockStateDefinition(builder);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return CMShapes.LIGHT_BULB.get(state.getValue(FACING));
+    }
+
+    @Override
+    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
+        if (pState.getValue(WATERLOGGED)) {
+            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+        }
+
+        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState pState) {
+        return pState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(pState);
+    }
+
+    @Override
+    public boolean isSignalSource(BlockState state) {
+        return false;
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
+        if (worldIn.isClientSide())
+            return;
+
+        if (state.getValue(LEVEL) == worldIn.getBestNeighborSignal(pos))
+            return;
+        transmit(worldIn, pos);
+    }
+
+    public void transmit(Level worldIn, BlockPos pos) {
+        if (worldIn.isClientSide)
+            return;
+
+        int signal = worldIn.getBestNeighborSignal(pos);
+
+        withBlockEntityDo(worldIn, pos,
+                be -> be.transmit(signal));
+    }
+
+
+    @Override
+    public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, Direction side) {
+        return true;
+    }
+
+    @Override
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
+        return false;
+    }
+
+    public DyeColor getColor() {
+        return color;
+    }
+
+    @Override
+    public Class<LightBulbBlockEntity> getBlockEntityClass() {
+        return LightBulbBlockEntity.class;
+    }
+
+    @Override
+    public BlockEntityType<? extends LightBulbBlockEntity> getBlockEntityType() {
+        return CMBlockEntityTypes.LIGHT_BULB.get();
+    }
+}

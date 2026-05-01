@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:raw_materials/invar"
+      }
+    }
+  ],
+  "type": "createmetallurgy:melting",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "tag": "c:raw_materials/invar"
+    }
+  ],
+  "processing_time": 40,
+  "results": [
+    {
+      "amount": 90,
+      "id": "createmetallurgy:molten_invar"
+    },
+    {
+      "amount": 45,
+      "id": "createmetallurgy:molten_slag"
+    }
+  ]
+}

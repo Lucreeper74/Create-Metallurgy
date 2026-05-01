@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createmetallurgy:block/foundry_mixer/block"
+    }
+  }
+}

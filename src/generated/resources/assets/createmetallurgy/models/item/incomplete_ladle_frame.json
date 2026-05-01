@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createmetallurgy:item/incomplete_ladle_frame"
+  }
+}

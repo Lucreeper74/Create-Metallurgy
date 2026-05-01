@@ -1,0 +1,7 @@
+{
+  "values": {
+    "createmetallurgy:coke": {
+      "burn_time": 2000
+    }
+  }
+}

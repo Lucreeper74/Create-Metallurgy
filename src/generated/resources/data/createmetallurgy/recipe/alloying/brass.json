@@ -1,0 +1,23 @@
+{
+  "type": "createmetallurgy:alloying",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 10,
+      "fluid": "createmetallurgy:molten_copper"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 10,
+      "fluid": "createmetallurgy:molten_zinc"
+    }
+  ],
+  "processing_time": 40,
+  "results": [
+    {
+      "amount": 20,
+      "id": "createmetallurgy:molten_brass"
+    }
+  ]
+}

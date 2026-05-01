@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/raw_aluminum"
+      }
+    }
+  ],
+  "type": "createmetallurgy:bulk_melting",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/raw_aluminum"
+    }
+  ],
+  "min_heat_req": 3,
+  "processing_time": 224,
+  "results": [
+    {
+      "amount": 810,
+      "id": "createmetallurgy:molten_aluminum"
+    },
+    {
+      "amount": 405,
+      "id": "createmetallurgy:molten_slag"
+    }
+  ]
+}

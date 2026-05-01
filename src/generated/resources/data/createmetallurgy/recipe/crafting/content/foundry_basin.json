@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "create:andesite_alloy"
+    },
+    "P": {
+      "item": "createmetallurgy:refractory_mortar"
+    }
+  },
+  "pattern": [
+    "A A",
+    "APA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "createmetallurgy:foundry_basin"
+  }
+}

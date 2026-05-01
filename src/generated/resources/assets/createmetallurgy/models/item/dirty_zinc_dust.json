@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createmetallurgy:item/dirty_zinc_dust"
+  }
+}

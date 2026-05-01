@@ -1,0 +1,17 @@
+{
+  "type": "createmetallurgy:casting_in_basin",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 810,
+      "fluid": "createmetallurgy:flowing_molten_tungsten"
+    }
+  ],
+  "processing_time": 480,
+  "result": {
+    "item": {
+      "count": 1,
+      "id": "createmetallurgy:tungsten_block"
+    }
+  }
+}

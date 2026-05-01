@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/osmium"
+      }
+    }
+  ],
+  "type": "createmetallurgy:melting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:gears/osmium"
+    }
+  ],
+  "processing_time": 160,
+  "results": [
+    {
+      "amount": 360,
+      "id": "createmetallurgy:molten_osmium"
+    }
+  ]
+}

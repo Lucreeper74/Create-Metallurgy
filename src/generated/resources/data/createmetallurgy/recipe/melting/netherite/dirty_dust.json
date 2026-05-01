@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:dirty_dusts/netherite"
+      }
+    }
+  ],
+  "type": "createmetallurgy:melting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:dirty_dusts/netherite"
+    }
+  ],
+  "processing_time": 30,
+  "results": [
+    {
+      "amount": 90,
+      "id": "createmetallurgy:molten_netherite"
+    },
+    {
+      "amount": 30,
+      "id": "createmetallurgy:molten_slag"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:raw_wolframite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "createmetallurgy:raw_tungsten"
+  }
+}

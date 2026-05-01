@@ -1,0 +1,14 @@
+{
+  "type": "createmetallurgy:entity_melting",
+  "entity": {
+    "type": "minecraft:iron_golem",
+    "damage": 6
+  },
+  "ingredients": [],
+  "results": [
+    {
+      "amount": 135,
+      "id": "createmetallurgy:molten_iron"
+    }
+  ]
+}

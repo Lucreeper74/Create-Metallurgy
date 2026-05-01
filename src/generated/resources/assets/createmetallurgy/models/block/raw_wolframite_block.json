@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "createmetallurgy:block/raw_wolframite_block"
+  }
+}

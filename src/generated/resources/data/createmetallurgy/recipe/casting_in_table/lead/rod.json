@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:rods/lead"
+      }
+    }
+  ],
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 45,
+      "fluid": "createmetallurgy:flowing_molten_lead"
+    },
+    {
+      "item": "createmetallurgy:graphite_rod_mold"
+    }
+  ],
+  "processing_time": 30,
+  "result": {
+    "tag": "c:rods/lead"
+  }
+}

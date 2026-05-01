@@ -1,0 +1,21 @@
+{
+  "type": "createmetallurgy:alloying",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "tag": "c:coal_coke"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 270,
+      "fluid": "createmetallurgy:molten_iron"
+    }
+  ],
+  "processing_time": 40,
+  "results": [
+    {
+      "amount": 270,
+      "id": "createmetallurgy:molten_steel"
+    }
+  ]
+}

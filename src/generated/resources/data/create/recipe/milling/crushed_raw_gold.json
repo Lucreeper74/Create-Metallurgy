@@ -1,0 +1,18 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_gold"
+    }
+  ],
+  "processing_time": 150,
+  "results": [
+    {
+      "id": "createmetallurgy:dirty_gold_dust"
+    },
+    {
+      "chance": 0.25,
+      "id": "createmetallurgy:dirty_gold_dust"
+    }
+  ]
+}
