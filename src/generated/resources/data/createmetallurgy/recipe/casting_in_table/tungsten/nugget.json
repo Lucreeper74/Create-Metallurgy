@@ -4,7 +4,7 @@
     {
       "type": "neoforge:single",
       "amount": 10,
-      "fluid": "createmetallurgy:flowing_molten_tungsten"
+      "fluid": "createmetallurgy:molten_tungsten"
     },
     {
       "item": "createmetallurgy:graphite_nugget_mold"

@@ -13,7 +13,7 @@
     {
       "type": "neoforge:single",
       "amount": 360,
-      "fluid": "createmetallurgy:flowing_molten_steel"
+      "fluid": "createmetallurgy:molten_steel"
     },
     {
       "item": "createmetallurgy:graphite_gear_mold"

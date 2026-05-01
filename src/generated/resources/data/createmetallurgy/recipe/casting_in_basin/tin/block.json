@@ -13,7 +13,7 @@
     {
       "type": "neoforge:single",
       "amount": 810,
-      "fluid": "createmetallurgy:flowing_molten_tin"
+      "fluid": "createmetallurgy:molten_tin"
     }
   ],
   "processing_time": 480,

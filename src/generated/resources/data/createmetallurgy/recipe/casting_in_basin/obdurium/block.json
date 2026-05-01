@@ -4,7 +4,7 @@
     {
       "type": "neoforge:single",
       "amount": 810,
-      "fluid": "createmetallurgy:flowing_molten_obdurium"
+      "fluid": "createmetallurgy:molten_obdurium"
     }
   ],
   "processing_time": 480,

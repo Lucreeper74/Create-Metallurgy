@@ -13,7 +13,7 @@
     {
       "type": "neoforge:single",
       "amount": 810,
-      "fluid": "createmetallurgy:flowing_molten_aluminum"
+      "fluid": "createmetallurgy:molten_aluminum"
     }
   ],
   "processing_time": 480,

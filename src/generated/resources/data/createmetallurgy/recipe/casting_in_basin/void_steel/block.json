@@ -13,7 +13,7 @@
     {
       "type": "neoforge:single",
       "amount": 810,
-      "fluid": "createmetallurgy:flowing_molten_void_steel"
+      "fluid": "createmetallurgy:molten_void_steel"
     }
   ],
   "processing_time": 480,

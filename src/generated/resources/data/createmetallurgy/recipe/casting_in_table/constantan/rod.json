@@ -13,7 +13,7 @@
     {
       "type": "neoforge:single",
       "amount": 45,
-      "fluid": "createmetallurgy:flowing_molten_constantan"
+      "fluid": "createmetallurgy:molten_constantan"
     },
     {
       "item": "createmetallurgy:graphite_rod_mold"

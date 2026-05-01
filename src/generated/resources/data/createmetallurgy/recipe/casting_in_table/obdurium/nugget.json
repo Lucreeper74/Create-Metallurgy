@@ -13,7 +13,7 @@
     {
       "type": "neoforge:single",
       "amount": 10,
-      "fluid": "createmetallurgy:flowing_molten_obdurium"
+      "fluid": "createmetallurgy:molten_obdurium"
     },
     {
       "item": "createmetallurgy:graphite_nugget_mold"

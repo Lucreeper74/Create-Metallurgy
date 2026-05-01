@@ -13,7 +13,7 @@
     {
       "type": "neoforge:single",
       "amount": 360,
-      "fluid": "createmetallurgy:flowing_molten_osmium"
+      "fluid": "createmetallurgy:molten_osmium"
     },
     {
       "item": "createmetallurgy:graphite_gear_mold"

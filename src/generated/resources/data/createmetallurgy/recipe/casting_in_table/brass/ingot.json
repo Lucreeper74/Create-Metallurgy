@@ -4,7 +4,7 @@
     {
       "type": "neoforge:single",
       "amount": 90,
-      "fluid": "createmetallurgy:flowing_molten_brass"
+      "fluid": "createmetallurgy:molten_brass"
     },
     {
       "item": "createmetallurgy:graphite_ingot_mold"

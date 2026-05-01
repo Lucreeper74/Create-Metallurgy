@@ -4,7 +4,7 @@
     {
       "type": "neoforge:single",
       "amount": 90,
-      "fluid": "createmetallurgy:flowing_molten_obdurium"
+      "fluid": "createmetallurgy:molten_obdurium"
     },
     {
       "item": "createmetallurgy:graphite_plate_mold"

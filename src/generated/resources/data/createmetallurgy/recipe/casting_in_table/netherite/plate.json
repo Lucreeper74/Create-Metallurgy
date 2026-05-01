@@ -13,7 +13,7 @@
     {
       "type": "neoforge:single",
       "amount": 90,
-      "fluid": "createmetallurgy:flowing_molten_netherite"
+      "fluid": "createmetallurgy:molten_netherite"
     },
     {
       "item": "createmetallurgy:graphite_plate_mold"

@@ -13,7 +13,7 @@
     {
       "type": "neoforge:single",
       "amount": 810,
-      "fluid": "createmetallurgy:flowing_molten_electrum"
+      "fluid": "createmetallurgy:molten_electrum"
     }
   ],
   "processing_time": 480,

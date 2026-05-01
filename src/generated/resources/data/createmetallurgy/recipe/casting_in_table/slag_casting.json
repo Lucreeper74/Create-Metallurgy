@@ -4,7 +4,7 @@
     {
       "type": "neoforge:single",
       "amount": 90,
-      "fluid": "createmetallurgy:flowing_molten_slag"
+      "fluid": "createmetallurgy:molten_slag"
     }
   ],
   "processing_time": 60,

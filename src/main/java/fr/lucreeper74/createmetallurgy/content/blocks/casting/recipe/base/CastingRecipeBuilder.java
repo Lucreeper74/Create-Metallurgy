@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
@@ -59,8 +60,8 @@ public class CastingRecipeBuilder {
         return this;
     }
 
-    public CastingRecipeBuilder require(Fluid fluid, int amount) {
-        return require(SizedFluidIngredient.of(fluid, amount));
+    public CastingRecipeBuilder require(FlowingFluid fluid, int amount) {
+        return require(SizedFluidIngredient.of(fluid.getSource(), amount));
     }
 
     public CastingRecipeBuilder require(TagKey<Fluid> fluidTag, int amount) {

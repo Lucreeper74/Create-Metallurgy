@@ -13,7 +13,7 @@
     {
       "type": "neoforge:single",
       "amount": 90,
-      "fluid": "createmetallurgy:flowing_molten_tin"
+      "fluid": "createmetallurgy:molten_tin"
     },
     {
       "item": "createmetallurgy:graphite_ingot_mold"

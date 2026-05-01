@@ -4,7 +4,7 @@
     {
       "type": "neoforge:single",
       "amount": 810,
-      "fluid": "createmetallurgy:flowing_molten_iron"
+      "fluid": "createmetallurgy:molten_iron"
     }
   ],
   "processing_time": 480,
