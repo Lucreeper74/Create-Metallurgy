@@ -79,7 +79,7 @@ public abstract class FoundryRecipe<P extends FoundryRecipeParams> extends Proce
             for (SizedFluidIngredient fluidIngredient : fluidIngredients) {
 
                 for (FluidStack fluid : be.getTank().getFluids()) {
-                    if (fluidIngredient.test(fluid) && fluidIngredient.amount() <= fluid.getAmount())
+                    if (fluidIngredient.test(fluid))
                         continue FluidIngredient;
                 }
                 // No matching fluid

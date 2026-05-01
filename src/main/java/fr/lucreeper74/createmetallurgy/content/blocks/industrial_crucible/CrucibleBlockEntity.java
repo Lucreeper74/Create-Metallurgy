@@ -614,7 +614,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
                 FluidStack availableFluid = getTank().getFluidInTank(i).copy();
                 int availableAmount = availableFluid.getAmount();
 
-                if (fluidIngredient.test(availableFluid) && fluidIngredient.amount() <= availableAmount) {
+                if (fluidIngredient.test(availableFluid)) {
                     availableFluid.setAmount(Math.min(amountRequired, availableAmount));
                     getTank().drain(availableFluid, IFluidHandler.FluidAction.EXECUTE);
                     continue Ingredient;

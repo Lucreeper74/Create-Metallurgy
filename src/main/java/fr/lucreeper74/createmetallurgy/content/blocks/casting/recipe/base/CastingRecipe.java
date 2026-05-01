@@ -51,9 +51,9 @@ public abstract class CastingRecipe implements Recipe<RecipeWrapper> {
         if (recipe instanceof CastingRecipe castingRecipe) {
 
             SizedFluidIngredient fluidIngredient = castingRecipe.getFluidIngredient();
-            boolean fluidMatches = fluidIngredient.test(testedFluid);
-            if (!ignoreFluidAmount)
-                fluidMatches &= testedFluid.getAmount() >= fluidIngredient.amount();
+            boolean fluidMatches = ignoreFluidAmount
+                    ? fluidIngredient.ingredient().test(testedFluid)
+                    : fluidIngredient.test(testedFluid);
 
             ItemStack mold = be.moldInv.getStackInSlot(0);
             Ingredient ingredient = castingRecipe.getIngredient();
