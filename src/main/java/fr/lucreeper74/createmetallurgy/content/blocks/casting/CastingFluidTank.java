@@ -102,11 +102,12 @@ public class CastingFluidTank extends FluidTank {
 
         // Fill when empty
         if (fluid.isEmpty()) {
+            int amount = Math.min(capacity, resource.getAmount());
             if (action.execute()) {
-                fluid = resource.copyWithAmount(Math.min(capacity, resource.getAmount()));
+                fluid = resource.copyWithAmount(amount);
                 onContentsChanged();
             }
-            return fluid.getAmount();
+            return amount;
         }
         // Safety (should never false)
         if (!FluidStack.isSameFluidSameComponents(fluid, resource)) {
