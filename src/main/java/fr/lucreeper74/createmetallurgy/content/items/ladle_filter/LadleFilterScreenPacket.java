@@ -1,6 +1,6 @@
 package fr.lucreeper74.createmetallurgy.content.items.ladle_filter;
 
-import com.simibubi.create.AllPackets;
+import fr.lucreeper74.createmetallurgy.registries.CMPackets;
 import io.netty.buffer.ByteBuf;
 import net.createmod.catnip.codecs.stream.CatnipStreamCodecBuilders;
 import net.createmod.catnip.net.base.ServerboundPacketPayload;
@@ -22,7 +22,7 @@ public record LadleFilterScreenPacket(Option option, @Nullable CompoundTag data)
 
     @Override
     public PacketTypeProvider getTypeProvider() {
-        return AllPackets.CONFIGURE_FILTER;
+        return CMPackets.CONFIGURE_LADLE_FILTER;
     }
 
     @Override
@@ -39,7 +39,7 @@ public record LadleFilterScreenPacket(Option option, @Nullable CompoundTag data)
                     menu.comparator = tag.getInt("Comparator");
                     break;
                 case UPDATE_FLUID:
-                    menu.fluidFilter = FluidStack.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("FluidFilter")).result().orElse(FluidStack.EMPTY);
+                    menu.fluidFilter = FluidStack.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("FluidFilter")).result().orElse(FluidStack.EMPTY).getFluid();
                     break;
             }
         }

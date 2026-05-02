@@ -3,11 +3,12 @@ package fr.lucreeper74.createmetallurgy.registries;
 import com.mojang.serialization.Codec;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -32,9 +33,9 @@ public class CMDataComponents {
             builder -> builder.persistent(Codec.STRING.listOf()).networkSynchronized(ByteBufCodecs.collection(ArrayList::new, ByteBufCodecs.STRING_UTF8))
     );
 
-    public static final DataComponentType<FluidStack> LADLE_FILTER_FLUID = register(
+    public static final DataComponentType<Fluid> LADLE_FILTER_FLUID = register(
             "ladle_filter_fluid",
-            builder -> builder.persistent(FluidStack.CODEC).networkSynchronized(FluidStack.STREAM_CODEC)
+            builder -> builder.persistent(BuiltInRegistries.FLUID.byNameCodec()).networkSynchronized(ByteBufCodecs.fromCodecWithRegistries(BuiltInRegistries.FLUID.byNameCodec()))
     );
 
     public static final DataComponentType<Integer> LADLE_FILTER_FLUID_AMOUNT = register(

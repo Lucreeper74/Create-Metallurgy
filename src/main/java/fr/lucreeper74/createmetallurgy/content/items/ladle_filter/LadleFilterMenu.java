@@ -10,14 +10,15 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class LadleFilterMenu extends AbstractFilterMenu {
 
     String address;
-    FluidStack fluidFilter;
+    Fluid fluidFilter;
     int filledAmount;
     int comparator;
 
@@ -51,7 +52,8 @@ public class LadleFilterMenu extends AbstractFilterMenu {
     @Override
     protected void init(Inventory inv, ItemStack contentHolderIn) {
         super.init(inv, contentHolderIn);
-        ghostInventory.setStackInSlot(0, fluidFilter.getFluid().getBucket().getDefaultInstance());
+        if (fluidFilter != null)
+            ghostInventory.setStackInSlot(0, fluidFilter.getBucket().getDefaultInstance());
     }
 
     @Override
@@ -62,7 +64,7 @@ public class LadleFilterMenu extends AbstractFilterMenu {
     @Override
     public void clearContents() {
         address = "*";
-        fluidFilter = FluidStack.EMPTY;
+        fluidFilter = Fluids.EMPTY;
         filledAmount = -1;
         comparator = 0;
         ghostInventory.setStackInSlot(0, ItemStack.EMPTY);
@@ -73,7 +75,7 @@ public class LadleFilterMenu extends AbstractFilterMenu {
         super.initAndReadInventory(filterItem);
 
         address = LadleItem.getAddress(filterItem);
-        fluidFilter = filterItem.get(CMDataComponents.LADLE_FILTER_FLUID);
+        fluidFilter = filterItem.getOrDefault(CMDataComponents.LADLE_FILTER_FLUID, Fluids.EMPTY);
         filledAmount = filterItem.getOrDefault(CMDataComponents.LADLE_FILTER_FLUID_AMOUNT, -1);
         comparator = filterItem.getOrDefault(CMDataComponents.LADLE_FILTER_COMPARATOR, 0);
     }

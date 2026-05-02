@@ -26,6 +26,8 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
@@ -44,13 +46,7 @@ public class LadleFilterScreen extends AbstractFilterScreen<LadleFilterMenu> {
     private MutableComponent filledAmountHint = CMLang.translateDirect(PREFIX + "filled_amount_hint");
     private MutableComponent comparatorTitle = CMLang.translateDirect(PREFIX + "comparator");
 
-    private List<MutableComponent> comparatorsList = List.of(
-            CMLang.translateDirect("generic.symbol.equal"),
-            CMLang.translateDirect("generic.symbol.greater"),
-            CMLang.translateDirect("generic.symbol.greater_eq"),
-            CMLang.translateDirect("generic.symbol.less"),
-            CMLang.translateDirect("generic.symbol.less_eq")
-    );
+    private List<MutableComponent> comparatorsList = List.of(CMLang.translateDirect("generic.symbol.equal"), CMLang.translateDirect("generic.symbol.greater"), CMLang.translateDirect("generic.symbol.greater_eq"), CMLang.translateDirect("generic.symbol.less"), CMLang.translateDirect("generic.symbol.less_eq"));
 
     private ScrollInput filledAmount;
     private SelectionScrollInput comparator;
@@ -59,7 +55,7 @@ public class LadleFilterScreen extends AbstractFilterScreen<LadleFilterMenu> {
     private boolean deferFocus;
 
     ItemStack lastFluidFilterItem = ItemStack.EMPTY;
-    FluidStack fluidFilter = FluidStack.EMPTY;
+    Fluid fluidFilter = Fluids.EMPTY;
 
     public LadleFilterScreen(LadleFilterMenu menu, Inventory inv, Component title) {
         super(menu, inv, title, AllGuiTextures.PACKAGE_FILTER);
@@ -80,10 +76,7 @@ public class LadleFilterScreen extends AbstractFilterScreen<LadleFilterMenu> {
         graphics.blit(BACKGROUND_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         graphics.drawString(font, title, x + (background.getWidth() - 8) / 2 - font.width(title) / 2, y + 4, 0x3D3C48, false);
-        GuiGameElement.of(menu.contentHolder).<GuiGameElement
-                        .GuiRenderBuilder>at(x + background.getWidth() + 8, y + background.getHeight() - 52, -200)
-                .scale(4)
-                .render(graphics);
+        GuiGameElement.of(menu.contentHolder).<GuiGameElement.GuiRenderBuilder>at(x + background.getWidth() + 8, y + background.getHeight() - 52, -200).scale(4).render(graphics);
     }
 
     @Override
@@ -121,22 +114,10 @@ public class LadleFilterScreen extends AbstractFilterScreen<LadleFilterMenu> {
         addressBox.setResponder(this::sendAddress);
         addRenderableWidget(addressBox);
 
-        filledAmount = new ScrollInput(x + 55, y + 55, 46, 18)
-                .titled(filledAmountTitle)
-                .addHint(filledAmountHint)
-                .withRange(-1, LadleItem.LADLE_CAPACITY + 1)
-                .calling(state -> sendScrollInputs())
-                .withStepFunction(sc ->
-                        filledAmount.getState() < 0 ? 1 :
-                                sc.shift ? 500 : 50)
-                .setState(menu.filledAmount);
+        filledAmount = new ScrollInput(x + 55, y + 55, 46, 18).titled(filledAmountTitle).addHint(filledAmountHint).withRange(-1, LadleItem.LADLE_CAPACITY + 1).calling(state -> sendScrollInputs()).withStepFunction(sc -> filledAmount.getState() < 0 ? 1 : sc.shift ? 500 : 50).setState(menu.filledAmount);
         addRenderableWidgets(filledAmount);
 
-        comparator = (SelectionScrollInput) new SelectionScrollInput(x + 38, y + 55, 16, 18)
-                .forOptions(comparatorsList)
-                .titled(comparatorTitle)
-                .calling(state -> sendScrollInputs())
-                .setState(menu.comparator);
+        comparator = (SelectionScrollInput) new SelectionScrollInput(x + 38, y + 55, 16, 18).forOptions(comparatorsList).titled(comparatorTitle).calling(state -> sendScrollInputs()).setState(menu.comparator);
         addRenderableWidgets(comparator);
 
         fluidFilterChanged(menu.ghostInventory.getStackInSlot(0));
@@ -153,36 +134,31 @@ public class LadleFilterScreen extends AbstractFilterScreen<LadleFilterMenu> {
 
         int filledAmount = menu.filledAmount;
         boolean isDisabled = filledAmount < 0;
-        graphics.drawString(font,
-                Component.literal(isDisabled ? "0" : String.valueOf(filledAmount))
-                        .append(CreateLang.translateDirect("generic.unit.millibuckets")),
-                x + 60, y + 60, isDisabled ? ChatFormatting.GRAY.getColor() : 0xFFFFFFFF, true);
+        graphics.drawString(font, Component.literal(isDisabled ? "0" : String.valueOf(filledAmount)).append(CreateLang.translateDirect("generic.unit.millibuckets")), x + 60, y + 60, isDisabled ? ChatFormatting.GRAY.getColor() : 0xFFFFFFFF, true);
 
-        graphics.drawString(font,
-                comparatorsList.get(menu.comparator),
-                x + 44, y + 60, isDisabled ? ChatFormatting.GRAY.getColor() : 0xFFFFFFFF, true);
+        graphics.drawString(font, comparatorsList.get(menu.comparator), x + 44, y + 60, isDisabled ? ChatFormatting.GRAY.getColor() : 0xFFFFFFFF, true);
 
 
         PoseStack ms = graphics.pose();
         ms.pushPose();
         ms.translate(leftPos + 16, topPos + 23, 0);
-        GuiGameElement.of(LadleStyles.getDefault())
-                .render(graphics);
+        GuiGameElement.of(LadleStyles.getDefault()).render(graphics);
         ms.popPose();
     }
 
     private void fluidFilterChanged(ItemStack stack) {
         lastFluidFilterItem = stack;
+        Fluid lastFluidFilter = fluidFilter;
 
-        if (stack.isEmpty()) {
-            fluidFilter = FluidStack.EMPTY;
-            return;
-        }
+        if (stack.isEmpty())
+            fluidFilter = Fluids.EMPTY;
 
         IFluidHandlerItem fluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
         if (fluidHandler != null)
-            fluidFilter = fluidHandler.getFluidInTank(0);
-        sendFluidFilter();
+            fluidFilter = fluidHandler.getFluidInTank(0).getFluid();
+
+        if (!lastFluidFilter.isSame(fluidFilter))
+            sendFluidFilter();
     }
 
     @Override
@@ -234,9 +210,10 @@ public class LadleFilterScreen extends AbstractFilterScreen<LadleFilterMenu> {
 
     public void sendFluidFilter() {
         menu.fluidFilter = fluidFilter;
-        menu.ghostInventory.setStackInSlot(0, fluidFilter.getFluid().getBucket().getDefaultInstance());
+        menu.ghostInventory.setStackInSlot(0, fluidFilter.getBucket().getDefaultInstance());
         CompoundTag tag = new CompoundTag();
-        tag.put("FluidFilter", fluidFilter.saveOptional(Minecraft.getInstance().level.registryAccess()));
+        if (fluidFilter != null)
+            tag.put("FluidFilter", new FluidStack(fluidFilter, 1).saveOptional(Minecraft.getInstance().level.registryAccess()));
         CatnipServices.NETWORK.sendToServer(new LadleFilterScreenPacket(Option.UPDATE_FLUID, tag));
     }
 }
