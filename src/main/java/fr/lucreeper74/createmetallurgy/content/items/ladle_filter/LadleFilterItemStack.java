@@ -6,6 +6,7 @@ import fr.lucreeper74.createmetallurgy.registries.CMDataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
@@ -21,7 +22,7 @@ public class LadleFilterItemStack extends FilterItemStack {
         super(filter);
 
         AddressFilter = LadleItem.getAddress(filter);
-        fluidFilter = filter.get(CMDataComponents.LADLE_FILTER_FLUID);
+        fluidFilter = filter.getOrDefault(CMDataComponents.LADLE_FILTER_FLUID, Fluids.EMPTY);
         filledAmount = filter.getOrDefault(CMDataComponents.LADLE_FILTER_FLUID_AMOUNT, -1);
         comparator = filter.getOrDefault(CMDataComponents.LADLE_FILTER_COMPARATOR, 0);
     }
@@ -38,7 +39,7 @@ public class LadleFilterItemStack extends FilterItemStack {
             if (fluidHandler == null)
                 return true;
 
-            boolean fluid_match = fluidFilter == null || fluidFilter.isSame(fluidHandler.getFluidInTank(0).getFluid());
+            boolean fluid_match = fluidFilter == null || fluidFilter.equals(Fluids.EMPTY) || fluidFilter.isSame(fluidHandler.getFluidInTank(0).getFluid());
             boolean filled_match = true;
 
             if (filledAmount >= 0) {

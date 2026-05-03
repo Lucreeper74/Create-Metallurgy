@@ -5,6 +5,10 @@
   "item.createmetallurgy.ladle.tooltip.summary": "A new way to _carry molten fluids_ around! Can be used as a _bigger bucket_. Disclaimer: Can burn if not safely handled!",
   "item.createmetallurgy.gauge_attachment.tooltip.summary": "A gauge that can be _placed_ on different machines to _give additional information_!",
 
+  "item.createmetallurgy.ladle_filter.tooltip.summary": "_Matches ladle items_ by their targeted _address_ and _fluids_ content. Can be used in _Filter Slots_ of Create's Components",
+  "item.createmetallurgy.ladle_filter.tooltip.condition1": "When R-Clicked",
+  "item.createmetallurgy.ladle_filter.tooltip.behaviour1": "Opens the _configuration interface_.",
+
   "block.createmetallurgy.labeling_station.tooltip.summary": "_WIP_ feature. Keep loosing track of your logistics? Beloved by engineers, it is used to _label_ incoming ladles.",
   "block.createmetallurgy.labeling_station.tooltip.condition1": "When powered by Redstone",
   "block.createmetallurgy.labeling_station.tooltip.behaviour1": "_Holds back_ the incoming ladles.",

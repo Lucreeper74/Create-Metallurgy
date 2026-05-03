@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.content.entities.ladle;
 
-import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.AllEntityTypes;
 import com.simibubi.create.content.fluids.FluidFX;
 import com.simibubi.create.content.logistics.box.PackageItem;
@@ -61,14 +60,6 @@ public class LadleItem extends PackageItem {
 
     public static boolean isLadle(ItemStack stack) {
         return stack.getItem() instanceof LadleItem;
-    }
-
-    public static void clearAddress(ItemStack ladle) {
-        ladle.remove(AllDataComponents.PACKAGE_ADDRESS);
-    }
-
-    public static void addAddress(ItemStack ladle, String address) {
-        ladle.set(AllDataComponents.PACKAGE_ADDRESS, address);
     }
 
     public static void clearRemainAddrs(ItemStack ladle) {

@@ -81,6 +81,7 @@ public class CMItems {
 
 
     public static final ItemEntry<LadleFilterItem> LADLE_FILTER = REGISTRATE.item("ladle_filter", LadleFilterItem::new)
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item." + MOD_ID + ".ladle_filter"))
             .register();
 
     public static final ItemEntry<Item> GRAPHITE = taggedIngredient("graphite", CMTags.CMItemTags.GRAPHITE.tag),

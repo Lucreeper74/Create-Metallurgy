@@ -84,7 +84,7 @@ public class LadleFilterMenu extends AbstractFilterMenu {
     protected void saveData(ItemStack filterItem) {
         super.saveData(filterItem);
         if (address.isBlank())
-            filterItem.set(AllDataComponents.PACKAGE_ADDRESS, "");
+            filterItem.remove(AllDataComponents.PACKAGE_ADDRESS);
         else
             filterItem.set(AllDataComponents.PACKAGE_ADDRESS, address);
 

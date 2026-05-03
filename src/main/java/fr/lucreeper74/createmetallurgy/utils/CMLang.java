@@ -6,6 +6,7 @@ import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.catnip.lang.LangNumberFormat;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.Locale;
@@ -26,6 +27,11 @@ public class CMLang extends Lang {
 
     public static LangBuilder fluidName(FluidStack stack) {
         return builder().add(stack.getHoverName()
+                .copy());
+    }
+
+    public static LangBuilder fluidName(Fluid fluid) {
+        return builder().add(fluid.getFluidType().getDescription()
                 .copy());
     }
 
