@@ -109,17 +109,15 @@ public class BeltGrinderBlock extends HorizontalKineticBlock implements IBE<Belt
             Level level = entityIn.level();
             if (entityIn instanceof LivingEntity livingEntity) {
                 for (ItemStack armor : livingEntity.getArmorAndBodyArmorSlots()) {
-                    EquipmentSlot slot = armor.getEquipmentSlot();
+                    EquipmentSlot slot = livingEntity.getEquipmentSlotForItem(armor);
 
-                    if (slot == null || (!slot.equals(EquipmentSlot.FEET) && !slot.equals(EquipmentSlot.BODY)))
-                        return; // Skip if not feet or animal body armor
-
-                    if (armor.isEmpty() || !armor.isDamageableItem() || armor.getDamageValue() >= armor.getMaxDamage())
+                    boolean isArmorEquipped = slot.equals(EquipmentSlot.FEET) || slot.equals(EquipmentSlot.BODY);
+                    if (!isArmorEquipped || !armor.isDamageableItem() || armor.getDamageValue() >= armor.getMaxDamage())
                         entityIn.hurt(CMDamageTypes.grinder(level), (float) DrillBlock.getDamage(speed));
 
                     // Hurt armor every 10 ticks at max speed to every 90 ticks at lower speed -> f(x)= (-10/32) * x + 90
                     if (AnimationTickHolder.getTicks() % Math.round((-10f * speed) / 32f + 90) == 0)
-                        armor.hurtAndBreak(1, livingEntity, armor.getEquipmentSlot());
+                        armor.hurtAndBreak(1, livingEntity, slot);
 
                     if (!armor.isEmpty()) {
                         float pitch = (speed / 256f) + .8f;
