@@ -1,6 +1,8 @@
 package fr.lucreeper74.createmetallurgy.compat.jade.providers;
 
 import fr.lucreeper74.createmetallurgy.compat.jade.CreateMetallurgyJade;
+import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleEntity;
+import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
@@ -9,6 +11,7 @@ import snownee.jade.api.view.*;
 import snownee.jade.util.CommonProxy;
 
 import java.util.List;
+import java.util.function.Function;
 
 public enum LadleProvider implements IServerExtensionProvider<CompoundTag>, IClientExtensionProvider<CompoundTag, FluidView> {
     INSTANCE;

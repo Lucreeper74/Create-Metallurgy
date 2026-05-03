@@ -6,8 +6,10 @@ import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTable
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleEntity;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import fr.lucreeper74.createmetallurgy.registries.CMDataComponents;
+import fr.lucreeper74.createmetallurgy.registries.CMEntityTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -33,5 +35,12 @@ public class CMCommonEvents {
                 event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) ->
                         new FluidHandlerItemStack(CMDataComponents.LADLE_FLUID_CONTENT, stack, LadleItem.LADLE_CAPACITY), item);
         }
+
+        // Entity
+        event.registerEntity(Capabilities.FluidHandler.ENTITY, CMEntityTypes.LADLE.get(), (entity, ctx) -> {
+            if (entity instanceof LadleEntity ladleEntity)
+                return new FluidHandlerItemStack(CMDataComponents.LADLE_FLUID_CONTENT, ladleEntity.box, LadleItem.LADLE_CAPACITY);
+            return null;
+        });
     }
 }
