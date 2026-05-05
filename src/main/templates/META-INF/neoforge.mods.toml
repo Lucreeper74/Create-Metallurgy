@@ -12,6 +12,9 @@ logoFile="createmetallurgy.png"
 authors = "${mod_author}"
 description = '''${mod_description}'''
 
+[[mixins]]
+config="${mod_id}.mixins.json"
+
 [[dependencies.${mod_id}]]
     modId="neoforge"
     type="required"

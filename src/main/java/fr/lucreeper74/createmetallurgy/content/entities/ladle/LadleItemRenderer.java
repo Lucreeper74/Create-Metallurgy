@@ -27,7 +27,8 @@ public class LadleItemRenderer extends CustomRenderedItemModelRenderer {
     public static void renderFluidContents(ItemStack box, float yaw, PoseStack ms, MultiBufferSource buffer, int light) {
         Optional<FluidStack> containedFluid = FluidUtil.getFluidContained(box);
 
-        if (containedFluid.isEmpty() || containedFluid.get().isEmpty()) return;
+        if (containedFluid.isEmpty() || containedFluid.get().isEmpty())
+            return;
 
         float fluidLevel = containedFluid.get().getAmount();
 
