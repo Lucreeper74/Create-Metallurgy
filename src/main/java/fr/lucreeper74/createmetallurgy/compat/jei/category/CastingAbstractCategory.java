@@ -39,7 +39,7 @@ public abstract class CastingAbstractCategory<T extends CastingRecipe> extends C
         builder
                 .addSlot(RecipeIngredientRole.OUTPUT, 139, 27)
                 .setBackground(getRenderedSlot(), -1, -1)
-                .addItemStack(getResultItem(recipe));
+                .addItemStacks(recipe.getResult().getStacks());
     }
 
     protected void drawCastingTime(T recipe, GuiGraphics graphics, int y) {

@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.util.NeoForgeExtraCodecs;
 
-import java.util.Iterator;
+import java.util.List;
 
 public abstract class CastingOutput {
 
@@ -58,7 +58,10 @@ public abstract class CastingOutput {
         }
     };
 
-    public abstract ItemStack getStack();
+    public ItemStack getStack() {
+        return getStacks().getFirst();
+    }
+    public abstract List<ItemStack> getStacks();
 
     public static CastingOutput fromStack(ItemStack stack) {
         if (stack.isEmpty()) {
@@ -74,7 +77,7 @@ public abstract class CastingOutput {
     /**
      * Class for CastingOutput from an ItemStack
      */
-    private static class StackOutput extends CastingOutput {
+    public static class StackOutput extends CastingOutput {
         public static final MapCodec<StackOutput> CODEC = ItemStack.CODEC
                 .xmap(StackOutput::new, s -> s.stack).fieldOf("item");
 
@@ -85,8 +88,8 @@ public abstract class CastingOutput {
         }
 
         @Override
-        public ItemStack getStack() {
-            return stack;
+        public List<ItemStack> getStacks() {
+            return List.of(stack);
         }
     }
 
@@ -94,7 +97,7 @@ public abstract class CastingOutput {
     /**
      * Class for CastingOutput from a Tag
      */
-    private static class TagOutput extends CastingOutput {
+    public static class TagOutput extends CastingOutput {
         public static final MapCodec<TagOutput> CODEC = RecordCodecBuilder.mapCodec(instance ->
                 instance.group(
                         TagKey.codec(Registries.ITEM).fieldOf("tag").forGetter(s -> s.tag),
@@ -102,8 +105,8 @@ public abstract class CastingOutput {
                 ).apply(instance, TagOutput::new)
         );
 
-        private final TagKey<Item> tag;
-        private final int count;
+        public final TagKey<Item> tag;
+        public final int count;
 
         private TagOutput(TagKey<Item> tag, int count) {
             this.tag = tag;
@@ -111,17 +114,18 @@ public abstract class CastingOutput {
         }
 
         @Override
-        public ItemStack getStack() {
-            Iterator<Item> items = BuiltInRegistries.ITEM.getTag(tag)
+        public List<ItemStack> getStacks() {
+            List<ItemStack> stacks = BuiltInRegistries.ITEM.getTag(tag)
                     .stream()
                     .flatMap(HolderSet::stream)
-                    .map(Holder::value).iterator();
-            if (items.hasNext())
-                return new ItemStack(items.next(), count);
+                    .map(Holder::value).map(item -> new ItemStack(item, count))
+                    .toList();
+            if (!stacks.isEmpty())
+                return stacks;
             else {
                 ItemStack stack = new ItemStack(Blocks.BARRIER);
                 stack.set(DataComponents.CUSTOM_NAME, Component.literal("Empty Tag: " + this.tag.location()));
-                return stack;
+                return List.of(stack);
             }
         }
     }
