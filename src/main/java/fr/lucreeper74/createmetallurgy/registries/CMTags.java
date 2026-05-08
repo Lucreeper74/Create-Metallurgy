@@ -99,7 +99,7 @@ public class CMTags {
 
     public enum CMFluidTags {
 
-        MOLTEN_MATERIAL(COMMON),
+        MOLTEN_MATERIAL(CREATE_METALLURGY),
         ;
 
         public final TagKey<Fluid> tag;
