@@ -1,1 +1,1 @@
-fr.lucreeper74.createmetallurgy.compat.kubejs.CreateMetallurgyKJS
+fr.lucreeper74.createmetallurgy.compat.kubejs.CreateMetallurgyKJS createmetallurgy

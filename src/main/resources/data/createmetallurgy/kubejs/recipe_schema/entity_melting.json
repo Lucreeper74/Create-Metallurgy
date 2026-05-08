@@ -1,0 +1,32 @@
+{
+  "keys": [
+    {
+      "name": "entity",
+      "role": "input",
+      "type": "createmetallurgy:entity_ingredient"
+    },
+    {
+      "name": "result",
+      "role": "output",
+      "type": "item_stack"
+    },
+    {
+      "name": "damage",
+      "role": "input",
+      "type": {
+        "type": "int",
+        "min": 0
+      },
+      "optional": 1
+    }
+  ],
+  "constructors": [
+    {
+      "keys": ["result", "entity"]
+    },
+    {
+      "keys": ["result", "entity", "damage"]
+    }
+  ],
+  "unique": ["result"]
+}

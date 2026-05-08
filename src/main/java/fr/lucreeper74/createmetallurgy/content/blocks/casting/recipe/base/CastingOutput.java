@@ -61,6 +61,7 @@ public abstract class CastingOutput {
     public ItemStack getStack() {
         return getStacks().getFirst();
     }
+
     public abstract List<ItemStack> getStacks();
 
     public static CastingOutput fromStack(ItemStack stack) {

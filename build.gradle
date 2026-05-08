@@ -52,7 +52,8 @@ neoForge {
                     "--mod", "${mod_id}",
                     "--all",
                     "--output", file("src/generated/resources/").getAbsolutePath(),
-                    "--existing", file("src/main/resources/").getAbsolutePath()
+                    "--existing", file("src/main/resources/").getAbsolutePath(),
+                    "--existing-mod", "kubejs"
             )
         }
 
@@ -94,12 +95,9 @@ dependencies {
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${mc_version}:${flywheel_version}")
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
-    // Mixin stuff
-    annotationProcessor("org.spongepowered:mixin:${mixin_version}:processor")
-    implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:${mixin_extras_version}"))
-
     // KubeJS stuff
     api("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
+    api("dev.latvian.mods:kubejs-create-neoforge:${createjs_version}")
 
     // Jei stuff
     compileOnly("mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}")
