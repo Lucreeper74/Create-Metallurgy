@@ -28,7 +28,7 @@ public class CMPonders implements PonderPlugin {
         // (!) Added entries require re-launch
         // (!) Modifications inside storyboard methods only require re-opening the ui
 
-        HELPER.forComponents(CMBlocks.FOUNDRY_BASIN_BLOCK)
+        HELPER.forComponents(CMBlocks.FOUNDRY_BASIN_BLOCK, CMBlocks.FOUNDRY_LID_BLOCK)
                 .addStoryBoard("foundry_basin", FoundryScenes::foundryBasin, CMPonderTags.METALWORK)
                 .addStoryBoard("foundry_mixer", FoundryScenes::alloying, CMPonderTags.METALWORK);
 
