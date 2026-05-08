@@ -69,6 +69,7 @@ import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movem
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
+import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.MOD_ID;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -85,7 +86,10 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .transform(tagBlockAndItem(CMMetals.TUNGSTEN.rawStorageBlocks))
+            .transform(tagBlockAndItem(Map.of(
+                    CMMetals.TUNGSTEN.rawStorageBlocks.blocks(), CMMetals.TUNGSTEN.rawStorageBlocks.items(),
+                    Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK
+            )))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
             .lang("Block of Raw Wolframite")
@@ -97,7 +101,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .transform(tagBlockAndItem(CMMetals.TUNGSTEN.storageBlocks))
+            .transform(metalTagBlockAndItem(CMMetals.TUNGSTEN.storageBlocks))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .properties(Item.Properties::fireResistant)
             .build()
@@ -110,7 +114,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .transform(tagBlockAndItem(CMMetals.OBDURIUM.storageBlocks))
+            .transform(metalTagBlockAndItem(CMMetals.OBDURIUM.storageBlocks))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .properties(Item.Properties::fireResistant)
             .build()
@@ -131,7 +135,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.ORES)
-            .transform(tagBlockAndItem(CMMetals.TUNGSTEN.ores))
+            .transform(metalTagBlockAndItem(CMMetals.TUNGSTEN.ores))
             .tag(Tags.Items.ORES)
             .build()
             .register();
@@ -154,7 +158,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_IRON_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .transform(tagBlockAndItem(CMMetals.STEEL.storageBlocks))
+            .transform(metalTagBlockAndItem(CMMetals.STEEL.storageBlocks))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
             .lang("Block of Steel")
@@ -375,8 +379,8 @@ public class CMBlocks {
     public static void register() {
     }
 
-    public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, ItemBuilder<BlockItem, BlockBuilder<T, P>>> tagBlockAndItem(
+    public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, ItemBuilder<BlockItem, BlockBuilder<T, P>>> metalTagBlockAndItem(
             CMMetals.ItemLikeTag tag) {
-        return TagGen.tagBlockAndItem(Map.of(tag.blocks(), tag.items()));
+        return tagBlockAndItem(Map.of(tag.blocks(), tag.items()));
     }
 }
