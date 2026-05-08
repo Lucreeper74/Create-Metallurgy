@@ -14,7 +14,7 @@
       "tag": "c:storage_blocks/raw_nickel"
     }
   ],
-  "min_heat_req": 7,
+  "minHeatRequirement": 7,
   "processing_time": 224,
   "results": [
     {

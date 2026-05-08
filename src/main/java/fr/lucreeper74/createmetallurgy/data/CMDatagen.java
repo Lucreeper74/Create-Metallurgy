@@ -9,6 +9,7 @@ import fr.lucreeper74.createmetallurgy.data.recipes.CMRecipeProvider;
 import fr.lucreeper74.createmetallurgy.data.recipes.create.CMSequencedAssemblyRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.casting.CMCastingRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.foundry.CMBulkMeltingRecipeGen;
+import fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.foundry.CMMobMeltingRecipeGen;
 import fr.lucreeper74.createmetallurgy.data.recipes.vanilla.CMStandardRecipeGen;
 import fr.lucreeper74.createmetallurgy.ponders.CMPonders;
 import net.createmod.ponder.foundation.PonderIndex;
@@ -43,6 +44,7 @@ public class CMDatagen {
         gen.addProvider(event.includeServer(), new CMStandardRecipeGen(output, lookupProvider));
         gen.addProvider(true, new CMCastingRecipeGen(output, lookupProvider));
         gen.addProvider(true, new CMBulkMeltingRecipeGen(output, lookupProvider));
+        gen.addProvider(true, new CMMobMeltingRecipeGen(output, lookupProvider));
         gen.addProvider(true, new CMSequencedAssemblyRecipeGen(output, lookupProvider));
 
         if (event.includeServer()) {

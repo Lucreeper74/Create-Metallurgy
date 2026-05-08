@@ -14,7 +14,7 @@
       "tag": "c:storage_blocks/aluminum"
     }
   ],
-  "min_heat_req": 3,
+  "minHeatRequirement": 3,
   "processing_time": 224,
   "results": [
     {

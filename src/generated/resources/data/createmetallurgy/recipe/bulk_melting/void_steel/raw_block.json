@@ -14,7 +14,7 @@
       "tag": "c:storage_blocks/raw_void_steel"
     }
   ],
-  "min_heat_req": 18,
+  "minHeatRequirement": 18,
   "processing_time": 224,
   "results": [
     {

@@ -14,7 +14,7 @@
       "tag": "c:storage_blocks/lithium"
     }
   ],
-  "min_heat_req": 0,
+  "minHeatRequirement": 0,
   "processing_time": 224,
   "results": [
     {

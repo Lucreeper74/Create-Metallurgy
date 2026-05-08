@@ -14,7 +14,7 @@
       "tag": "c:storage_blocks/raw_osmium"
     }
   ],
-  "min_heat_req": 15,
+  "minHeatRequirement": 15,
   "processing_time": 224,
   "results": [
     {

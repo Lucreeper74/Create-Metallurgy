@@ -5,6 +5,7 @@
     "damage": 4
   },
   "ingredients": [],
+  "minHeatRequirement": 6,
   "results": [
     {
       "amount": 20,

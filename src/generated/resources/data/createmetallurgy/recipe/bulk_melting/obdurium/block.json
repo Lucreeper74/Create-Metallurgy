@@ -14,7 +14,7 @@
       "tag": "c:storage_blocks/obdurium"
     }
   ],
-  "min_heat_req": 17,
+  "minHeatRequirement": 17,
   "processing_time": 224,
   "results": [
     {

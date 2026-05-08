@@ -14,7 +14,7 @@
       "tag": "c:storage_blocks/raw_electrum"
     }
   ],
-  "min_heat_req": 4,
+  "minHeatRequirement": 4,
   "processing_time": 224,
   "results": [
     {

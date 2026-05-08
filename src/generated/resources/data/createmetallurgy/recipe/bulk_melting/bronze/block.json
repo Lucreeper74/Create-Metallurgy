@@ -14,7 +14,7 @@
       "tag": "c:storage_blocks/bronze"
     }
   ],
-  "min_heat_req": 5,
+  "minHeatRequirement": 5,
   "processing_time": 224,
   "results": [
     {

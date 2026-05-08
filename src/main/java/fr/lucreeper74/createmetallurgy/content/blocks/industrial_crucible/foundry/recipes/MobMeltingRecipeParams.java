@@ -12,7 +12,7 @@ import java.util.function.Function;
 public class MobMeltingRecipeParams extends FoundryRecipeParams {
 
     public static MapCodec<MobMeltingRecipeParams> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            codec(MobMeltingRecipeParams::new).forGetter(Function.identity()),
+            foundryCodec(MobMeltingRecipeParams::new).forGetter(Function.identity()),
             DamagedEntityIngredient.CODEC.fieldOf("entity").forGetter(MobMeltingRecipeParams::getEntityIngredient)
     ).apply(instance, (params, entityIngredient) -> {
         params.entityIngredient = entityIngredient;

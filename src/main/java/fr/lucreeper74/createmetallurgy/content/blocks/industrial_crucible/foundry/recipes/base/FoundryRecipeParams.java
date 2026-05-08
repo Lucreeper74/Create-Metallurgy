@@ -9,21 +9,14 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class FoundryRecipeParams extends ProcessingRecipeParams {
 
     public static final int DEFAULT_MIN_HEAT = -25;
     public static final int DEFAULT_MAX_HEAT = 50;
 
-    public static MapCodec<FoundryRecipeParams> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            codec(FoundryRecipeParams::new).forGetter(Function.identity()),
-            Codec.INT.optionalFieldOf("min_heat_req", DEFAULT_MIN_HEAT).forGetter(FoundryRecipeParams::getMinHeatRequirement),
-            Codec.INT.optionalFieldOf("max_heat_req", DEFAULT_MAX_HEAT).forGetter(FoundryRecipeParams::getMaxHeatRequirement)
-    ).apply(instance, (params, minHeatRequirement, maxHeatRequirement) -> {
-        params.minHeatRequirement = minHeatRequirement;
-        params.maxHeatRequirement = maxHeatRequirement;
-        return params;
-    }));
+    public static MapCodec<FoundryRecipeParams> CODEC = foundryCodec(FoundryRecipeParams::new);
     public static StreamCodec<RegistryFriendlyByteBuf, FoundryRecipeParams> STREAM_CODEC = streamCodec(FoundryRecipeParams::new);
 
     protected int minHeatRequirement;
@@ -33,6 +26,18 @@ public class FoundryRecipeParams extends ProcessingRecipeParams {
         super();
         minHeatRequirement = DEFAULT_MIN_HEAT;
         maxHeatRequirement = DEFAULT_MAX_HEAT;
+    }
+
+    protected static <P extends FoundryRecipeParams> MapCodec<P> foundryCodec(Supplier<P> factory) {
+        return RecordCodecBuilder.mapCodec(instance -> instance.group(
+                ProcessingRecipeParams.codec(factory).forGetter(Function.identity()),
+                Codec.INT.optionalFieldOf("minHeatRequirement", DEFAULT_MIN_HEAT).forGetter(FoundryRecipeParams::getMinHeatRequirement),
+                Codec.INT.optionalFieldOf("maxHeatRequirement", DEFAULT_MAX_HEAT).forGetter(FoundryRecipeParams::getMaxHeatRequirement)
+        ).apply(instance, (params, minHeatRequirement, maxHeatRequirement) -> {
+            params.minHeatRequirement = minHeatRequirement;
+            params.maxHeatRequirement = maxHeatRequirement;
+            return params;
+        }));
     }
 
     protected int getMinHeatRequirement() {

@@ -14,7 +14,7 @@
       "tag": "c:storage_blocks/raw_necromium"
     }
   ],
-  "min_heat_req": 14,
+  "minHeatRequirement": 14,
   "processing_time": 224,
   "results": [
     {
