@@ -67,9 +67,7 @@ import java.util.Map;
 import static com.simibubi.create.api.behaviour.display.DisplaySource.displaySource;
 import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movementBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
-import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
-import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
-import static com.simibubi.create.foundation.data.TagGen.tagBlockAndItem;
+import static com.simibubi.create.foundation.data.TagGen.*;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.MOD_ID;
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -86,10 +84,7 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .transform(tagBlockAndItem(Map.of(
-                    CMMetals.TUNGSTEN.rawStorageBlocks.blocks(), CMMetals.TUNGSTEN.rawStorageBlocks.items(),
-                    Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK
-            )))
+            .transform(metalTagBlockAndItem(CMMetals.TUNGSTEN.rawStorageBlocks))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .build()
             .lang("Block of Raw Wolframite")
@@ -135,7 +130,10 @@ public class CMBlocks {
             .transform(pickaxeOnly())
             .tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .tag(Tags.Blocks.ORES)
-            .transform(metalTagBlockAndItem(CMMetals.TUNGSTEN.ores))
+            .transform(tagBlockAndItem(Map.of(
+                    CMMetals.TUNGSTEN.ores.blocks(), CMMetals.TUNGSTEN.ores.items(),
+                    Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK
+            )))
             .tag(Tags.Items.ORES)
             .build()
             .register();
