@@ -273,5 +273,12 @@
   "item.createmetallurgy.tungsten_wire": "Fil de tungsten",
   "item.createmetallurgy.tungsten_wire_spool": "Bobine de fil de Tungsten",
   "item.createmetallurgy.zinc_dust": "Poudre de zinc",
-  "itemGroup.createmetallurgy.main_group": "Create: Metallurgy"
+  "itemGroup.createmetallurgy.main_group": "Create: Metallurgy",
+  "createmetallurgy.gui.ladle_filter.any_address": "N'importe quelles adresses",
+  "createmetallurgy.gui.ladle_filter.any_fluid": "N'importe quels fluides",
+  "createmetallurgy.gui.ladle_filter.blank_address": "Uniquement vierge",
+  "createmetallurgy.gui.ladle_filter.empty_fluid": "Uniquement vide",
+  "item.createmetallurgy.ladle_filter.tooltip.behaviour1": "Ouvre l'_interface de configuration_.",
+  "item.createmetallurgy.ladle_filter.tooltip.condition1": "Clic droit",
+  "item.createmetallurgy.ladle_filter.tooltip.summary": "_Regroupe les louches_ en fonction de leur _adresse_ et de leur contenu _liquides_. Peut être utilisé dans les _emplacements de filtre_ des composants de Create"
 }
