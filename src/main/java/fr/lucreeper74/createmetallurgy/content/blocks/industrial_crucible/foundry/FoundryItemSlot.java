@@ -113,15 +113,24 @@ public class FoundryItemSlot {
         if (currentRecipe == null)
             return;
 
+        boolean shouldReset = false;
         IFluidHandler fluidHandler = getController().getTank();
-
         for (FluidStack output : currentRecipe.getFluidResults()) {
             if (fluidHandler.fill(output.copy(), IFluidHandler.FluidAction.SIMULATE) >= output.getAmount()) {
                 fluidHandler.fill(output.copy(), IFluidHandler.FluidAction.EXECUTE);
                 setStack(ItemStack.EMPTY);
-                reset();
+                shouldReset = true;
             }
         }
+
+        ItemStack result = currentRecipe.rollResults(getController().getLevel().getRandom()).getFirst();
+        if (!result.isEmpty()) {
+            setStack(result.copy());
+            shouldReset = true;
+        }
+
+        if (shouldReset)
+            reset();
     }
 
     private void onContentChanged(boolean notifyController) {

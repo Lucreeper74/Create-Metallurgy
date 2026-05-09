@@ -34,6 +34,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -48,6 +49,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -313,7 +315,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
             return;
         if (!isController())
             return;
-        CMConnectivityHandler.formMulti(this);
+        CMConnectivityHandler.formMulti(this); // TODO: Update heat here
     }
 
     @Override
@@ -606,6 +608,8 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
     }
 
     private void applyRecipe(MobMeltingRecipe recipe) {
+        // TODO: prevent the recipe from process if cannot apply like BasinRecipe
+
         Ingredient:
         for (SizedFluidIngredient fluidIngredient : recipe.getFluidIngredients()) {
             int amountRequired = fluidIngredient.amount();
@@ -623,9 +627,18 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
             return; // Not enough fluid or fluid not match
         }
 
+        // Apply fluids results
         for (FluidStack output : recipe.getFluidResults()) {
             if (getTank().fill(output.copy(), IFluidHandler.FluidAction.SIMULATE) == output.getAmount())
                 getTank().fill(output.copy(), IFluidHandler.FluidAction.EXECUTE);
+        }
+
+        // Apply results
+        for (ItemStack result : recipe.rollResults(getLevel().getRandom())) {
+            if (result.isEmpty())
+                continue;
+
+            ItemHandlerHelper.insertItemStacked(itemCapability, result.copy(), false);
         }
     }
 

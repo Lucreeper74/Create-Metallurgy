@@ -36,8 +36,8 @@ public abstract class FoundryRecipe<P extends FoundryRecipeParams> extends Proce
     public List<String> validate() {
         List<String> errors = new ArrayList<>(super.validate());
 
-        if (!fluidIngredients.isEmpty() && !ingredients.isEmpty())
-            errors.add("Recipe cannot have input items & fluids at the same time!");
+//        if (!fluidIngredients.isEmpty() && !ingredients.isEmpty())
+//            errors.add("Recipe cannot have input items & fluids at the same time!");
 
         if (minHeat > maxHeat)
             errors.add("Recipe specified a minimum heat value greater than the maximum value.");
