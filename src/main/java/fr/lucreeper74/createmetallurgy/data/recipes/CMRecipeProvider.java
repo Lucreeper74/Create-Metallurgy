@@ -21,6 +21,7 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -144,6 +145,10 @@ public class CMRecipeProvider extends RecipeProvider {
 
         public static TagKey<Item> coke() {
             return CMItemTags.COAL_COKE.tag;
+        }
+
+        public static TagKey<Item> coals() {
+            return ItemTags.COALS;
         }
 
         public static TagKey<Item> tungstenIngot() {
