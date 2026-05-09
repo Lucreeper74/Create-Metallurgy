@@ -82,6 +82,10 @@ public abstract class EntityIngredient implements Predicate<EntityType<?>> {
             this.entityType = type;
         }
 
+        public EntityType<?> getEntityType() {
+            return entityType;
+        }
+
         @Override
         public boolean testInternal(EntityType<?> entityType) {
             return this.entityType.equals(entityType);
@@ -101,6 +105,10 @@ public abstract class EntityIngredient implements Predicate<EntityType<?>> {
 
         public EntityTagIngredient(TagKey<EntityType<?>> tag) {
             this.tag = tag;
+        }
+
+        public TagKey<EntityType<?>> getTag() {
+            return tag;
         }
 
         @Override

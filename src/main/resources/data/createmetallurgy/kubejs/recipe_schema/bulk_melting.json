@@ -1,0 +1,15 @@
+{
+  "parent": "createmetallurgy:base/foundry",
+  "merge": {
+    "keys": true
+  },
+  "keys": [
+    {
+      "name": "processing_time",
+      "role": "input",
+      "type": "ticks",
+      "optional": 100,
+      "always_write": true
+    }
+  ]
+}

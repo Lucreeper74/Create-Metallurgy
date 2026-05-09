@@ -64,9 +64,9 @@ public class CastingOutputComponent extends SimpleRecipeComponent<CastingOutput>
     @Override
     public void buildUniqueId(UniqueIdBuilder builder, CastingOutput value) {
         if (value instanceof CastingOutput.TagOutput output) {
-            builder.append(output.tag.location());
+            builder.append(output.getTag().location());
         } else if (!isEmpty(value)) {
-            builder.append(BuiltInRegistries.ITEM.getKey(value.getStack().getItem()));
+            builder.append(BuiltInRegistries.ITEM.getKey(value.getStack().getItem()).getPath());
         }
     }
 }

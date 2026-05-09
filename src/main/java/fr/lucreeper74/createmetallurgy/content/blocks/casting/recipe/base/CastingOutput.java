@@ -106,12 +106,20 @@ public abstract class CastingOutput {
                 ).apply(instance, TagOutput::new)
         );
 
-        public final TagKey<Item> tag;
-        public final int count;
+        private final TagKey<Item> tag;
+        private final int count;
 
         private TagOutput(TagKey<Item> tag, int count) {
             this.tag = tag;
             this.count = count;
+        }
+
+        public TagKey<Item> getTag() {
+            return tag;
+        }
+
+        public int getCount() {
+            return count;
         }
 
         @Override

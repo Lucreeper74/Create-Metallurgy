@@ -40,7 +40,7 @@ public class FoundryRecipeParams extends ProcessingRecipeParams {
         }));
     }
 
-    protected int getMinHeatRequirement() {
+    public int getMinHeatRequirement() {
         return minHeatRequirement;
     }
 
