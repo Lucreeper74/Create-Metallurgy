@@ -9,6 +9,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.utility.CreateLang;
+import com.xiaohunao.create_heat_js.common.utils.CategoryHelper;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -19,12 +20,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.apache.commons.lang3.mutable.MutableInt;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.HEATJS_LOADED;
 
 public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecipe> {
 
@@ -87,6 +91,11 @@ public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecip
             i++;
         }
 
+        if (HEATJS_LOADED) {
+            if (CategoryHelper.setCustomHeatSourceRecipe(builder, recipe))
+                return;
+        }
+
         HeatCondition requiredHeat = recipe.getRequiredHeat();
         if (!requiredHeat.testBlazeBurner(BlazeBurnerBlock.HeatLevel.NONE)) {
             builder
@@ -113,6 +122,11 @@ public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecip
 
         AllGuiTextures shadow = noHeat ? AllGuiTextures.JEI_SHADOW : AllGuiTextures.JEI_LIGHT;
         shadow.render(graphics, 81, 58 + (noHeat ? 10 : 30));
+
+        if (HEATJS_LOADED) {
+            CategoryHelper.drawCustomHeatSource(graphics, recipeSlotsView, recipe,
+                    background.getWidth() / 2 + 3, 55, background.getWidth(), background.getHeight(), mouseX, mouseY);
+        }
 
         if (!needsHeating)
             return;

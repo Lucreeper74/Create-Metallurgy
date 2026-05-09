@@ -85,6 +85,9 @@ repositories {
     // For KubeJS
     maven { url = "https://maven.latvian.dev/releases"; content {includeGroup "dev.latvian.mods"; includeGroup "dev.latvian.apps"}}
     maven { url = "https://jitpack.io"; content {includeGroup "com.github.rtyley"}}
+
+    // For CurseForge project
+    maven { url = "https://cursemaven.com"; content { includeGroup "curse.maven" }}
 }
 
 dependencies {
@@ -98,6 +101,8 @@ dependencies {
     // KubeJS stuff
     api("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
     api("dev.latvian.mods:kubejs-create-neoforge:${createjs_version}")
+    compileOnly("curse.maven:create-heat-js-${heatjs_id}:${heatjs_file}")
+    runtimeOnly("curse.maven:create-heat-js-${heatjs_id}:${heatjs_file}")
 
     // Jei stuff
     compileOnly("mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}")

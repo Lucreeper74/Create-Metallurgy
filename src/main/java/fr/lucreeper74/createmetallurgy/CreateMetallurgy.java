@@ -18,6 +18,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
@@ -27,6 +28,8 @@ import org.slf4j.Logger;
 public class CreateMetallurgy {
 
     public static final String MOD_ID = "createmetallurgy";
+
+    public static final boolean HEATJS_LOADED = ModList.get().isLoaded("create_heat_js");
 
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
     public static final Logger LOGGER = LogUtils.getLogger();
