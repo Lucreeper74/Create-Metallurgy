@@ -9,7 +9,7 @@
   <br><br>
 </h1>
 
-Create Metallurgy is a Create Mod Addon developped by Luc_Creeper74, introducing new way of refining ores or create alloys by melting them using a new raw ore processing system wich can duplicate your ores up to x2.33 *(for now :P)*. Enough to make your factory stylish!
+Create Metallurgy is an addon for Create that expands ore processing with advanced metallurgy and stylish automation systems.
 
 ```
 💡 Feel free to share your ideas in Forum section of the Discord !
@@ -29,16 +29,10 @@ Want to help with translations ? Please refer to the Crowdin Project page here [
 <br>
 
 ## Credits
-- **MrGhastien** (Contributors)
+- **MrGhastien** (Contributor)
 - **lev** (Artist -> Logo)
 - **FracturedGradient** (Artist -> Some items textures)
 - **Janko** (Artist -> Industrial Crucible textures)
 
 ### **Translation**
-- Zavdfer / Priklen -> Russian localization
-- Tellurium -> Chinese localization
-- Albertosaurio65 -> Spanish localization
-- TinxLD -> German localization
-- restingphantom131 -> Dutch localization
-- Janko -> Croatian localization
-- CrazyBarkley -> Polish localization
+- See here for [Crowdin project members](https://crowdin.com/project/create-metallurgy/members)
