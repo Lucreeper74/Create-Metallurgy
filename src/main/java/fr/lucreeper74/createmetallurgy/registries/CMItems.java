@@ -7,6 +7,7 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TagDependentIngredientItem;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.ProviderType;
+import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
@@ -15,6 +16,7 @@ import fr.lucreeper74.createmetallurgy.content.items.AttachmentItem.GaugeAttachm
 import fr.lucreeper74.createmetallurgy.content.items.ladle_filter.LadleFilterItem;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.Tags;
@@ -43,12 +45,12 @@ public class CMItems {
             TUNGSTEN_NUGGET = taggedIngredientFireResistant("tungsten_nugget", CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.NUGGET), NUGGETS),
             TUNGSTEN_WIRE = taggedIngredientFireResistant("tungsten_wire", CMMetals.TUNGSTEN.getItemTag(CMMetals.ItemType.WIRE), WIRES.tag);
 
-    public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = taggedIngredient("graphite_blank_mold", GRAPHITE_MOLDS.tag),
-            GRAPHITE_INGOT_MOLD = taggedIngredient("graphite_ingot_mold", GRAPHITE_MOLDS.tag),
-            GRAPHITE_NUGGET_MOLD = taggedIngredient("graphite_nugget_mold", GRAPHITE_MOLDS.tag),
-            GRAPHITE_PLATE_MOLD = taggedIngredient("graphite_plate_mold", GRAPHITE_MOLDS.tag),
-            GRAPHITE_ROD_MOLD = taggedIngredient("graphite_rod_mold", GRAPHITE_MOLDS.tag),
-            GRAPHITE_GEAR_MOLD = taggedIngredient("graphite_gear_mold", GRAPHITE_MOLDS.tag);
+    public static final ItemEntry<Item> GRAPHITE_BLANK_MOLD = graphiteMold("graphite_blank_mold"),
+            GRAPHITE_INGOT_MOLD = graphiteMold("graphite_ingot_mold"),
+            GRAPHITE_NUGGET_MOLD = graphiteMold("graphite_nugget_mold"),
+            GRAPHITE_PLATE_MOLD = graphiteMold("graphite_plate_mold"),
+            GRAPHITE_ROD_MOLD = graphiteMold("graphite_rod_mold"),
+            GRAPHITE_GEAR_MOLD = graphiteMold("graphite_gear_mold");
 
     // Metal Dust
     public static final ItemEntry<TagDependentIngredientItem> WOLFRAMITE_DUST = compatDust(CMMetals.TUNGSTEN, CMMetals.ItemType.DUST),
@@ -137,6 +139,14 @@ public class CMItems {
         }
 
         return itemEntry.register();
+    }
+
+    private static ItemEntry<Item> graphiteMold(String id) {
+        return REGISTRATE.item(id, Item::new)
+                .tag(GRAPHITE_MOLDS.tag)
+                .recipe((c, p) ->
+                        p.stonecutting(DataIngredient.tag(GRAPHITE_MOLDS.tag), RecipeCategory.MISC, c))
+                .register();
     }
 
     @SafeVarargs
