@@ -98,7 +98,8 @@ public class CMCastingRecipeGen extends CastingRecipeGen {
     COPPER_CASING = basinWithMoldTag(Tags.Items.STRIPPED_LOGS, true, CMFluids.MOLTEN_COPPER, 90, AllBlocks.COPPER_CASING.get(), 70),
             BRASS_CASING = basinWithMoldTag(Tags.Items.STRIPPED_LOGS, true, CMFluids.MOLTEN_BRASS, 90, AllBlocks.BRASS_CASING.get(), 70),
 
-    SLAG = table("slag_casting", CMFluids.MOLTEN_SLAG, 90, CMItems.SLAG.get(), 60);
+    SLAG = table("slag_casting", CMFluids.MOLTEN_SLAG, 90, CMItems.SLAG.get(), 60),
+    SLAG_BLOCK = basin("slag_block_casting", CMFluids.MOLTEN_SLAG, 810, CMBlocks.SLAG_BLOCK.get(), 480);
 
     //
 

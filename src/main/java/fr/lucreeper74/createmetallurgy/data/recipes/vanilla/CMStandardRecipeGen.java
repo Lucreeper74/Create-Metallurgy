@@ -129,9 +129,9 @@ public class CMStandardRecipeGen extends CMRecipeProvider {
                     .pattern("CCC")
                     .pattern("CCC")),
 
-    GRAPHITE = create(CMItems.GRAPHITE).unlockedBy(T::coal)
+    GRAPHITE = create(CMItems.GRAPHITE).unlockedByTag(() -> ItemTags.COALS)
             .viaShapeless(b -> b.requires(Items.CLAY_BALL)
-                    .requires(Items.COAL, 8)),
+                    .requires(Ingredient.of(ItemTags.COALS), 8)),
 
     SANDPAPER_BELT = create(CMItems.SANDPAPER_BELT).unlockedByTag(T::sandpaper)
             .viaShaped(b -> b.define('D', T.sandpaper())
