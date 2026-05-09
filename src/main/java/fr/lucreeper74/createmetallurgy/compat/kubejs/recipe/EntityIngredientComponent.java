@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.compat.kubejs.recipe;
 
-import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import dev.latvian.mods.kubejs.recipe.RecipeScriptContext;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponentType;
 import dev.latvian.mods.kubejs.recipe.component.SimpleRecipeComponent;
