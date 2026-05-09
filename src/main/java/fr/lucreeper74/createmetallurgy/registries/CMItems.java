@@ -17,6 +17,7 @@ import fr.lucreeper74.createmetallurgy.content.items.ladle_filter.LadleFilterIte
 import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.Tags;
@@ -72,6 +73,7 @@ public class CMItems {
 
     public static final ItemEntry<Item> COKE = REGISTRATE.item("coke", Item::new)
             .tag(COAL_COKE.tag)
+            .tag(ItemTags.COALS)
             .burnTime(2000)
             .register();
 
