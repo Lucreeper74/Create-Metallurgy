@@ -40,7 +40,9 @@ public class CMFluids {
     public static final List<FluidEntry<BaseFlowingFluid.Flowing>> ALL_MOLTEN_FLUIDS = new ArrayList<>();
     public static final List<FluidEntry<BaseFlowingFluid.Flowing>> ALL_MODDED_METALS = new ArrayList<>();
 
-    //Simple Metals
+    // TODO: Only register compat fluids if mod present (or maybe just hide recipes and stuff in tabs???)
+
+    // Simple Metals
     public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_IRON = moltenMetalFluid(CMMetals.IRON, 1538, 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_GOLD = moltenMetalFluid(CMMetals.GOLD, 1064, 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_COPPER = moltenMetalFluid(CMMetals.COPPER, 1085, 2000, 1400, 10, 2, 25, 3, 100f);
@@ -59,7 +61,7 @@ public class CMFluids {
     public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_TIN = moltenMetalFluid(CMMetals.TIN, 231, 2000, 1400, 10, 2, 25, 3, 100f);
     public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_LITHIUM = moltenMetalFluid(CMMetals.LITHIUM, 181, 2000, 1400, 10, 2, 25, 3, 100f);
 
-    //Alloys
+    // Alloys
     public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_OBDURIUM = moltenMetalFluid(CMMetals.OBDURIUM, 3480, 2400, 1400, 10, 2, 25, 3, 100f);
 
     // Modded Alloys

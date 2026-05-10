@@ -6,7 +6,6 @@ import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import fr.lucreeper74.createmetallurgy.utils.CMLang;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -14,17 +13,17 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
 import static com.simibubi.create.foundation.data.recipe.Mods.*;
 import static fr.lucreeper74.createmetallurgy.data.recipes.CMMods.*;
 
 public enum CMMetals {
+
     // Simple metals
     IRON(() -> CMFluids.MOLTEN_IRON, VANILLA),
     COPPER(() -> CMFluids.MOLTEN_COPPER, VANILLA),
@@ -56,6 +55,8 @@ public enum CMMetals {
     NECROMIUM(() -> CMFluids.MOLTEN_NECROMIUM, CAVERNS_N_CHASMS),
 
     ;
+
+    public static final List<CMMetals> ALL_LOADED_METALS = new ArrayList<>();
 
     private final String name;
     private final String raw_name;
@@ -95,6 +96,10 @@ public enum CMMetals {
 
     public Set<DatagenMod> getMods() {
         return mods;
+    }
+
+    public boolean isPresent() {
+        return getMods().stream().anyMatch(mod -> ModList.get().isLoaded(mod.getId()));
     }
 
     public int getMeltingPoint() {
@@ -221,6 +226,13 @@ public enum CMMetals {
         public ItemLike getItem(TagKey<Item> tag) {
             Iterator<Holder<Item>> items = BuiltInRegistries.ITEM.getOrCreateTag(tag).iterator();
             return items.hasNext() ? items.next().value() : null;
+        }
+    }
+
+    public static void init() {
+        for (CMMetals metal : values()) {
+            if (metal.isPresent())
+                ALL_LOADED_METALS.add(metal);
         }
     }
 }

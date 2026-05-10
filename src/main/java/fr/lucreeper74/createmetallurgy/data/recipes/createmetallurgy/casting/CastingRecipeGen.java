@@ -170,6 +170,7 @@ public class CastingRecipeGen extends BaseRecipeProvider {
     protected GeneratedRecipe basinWithMoldTag(TagKey<Item> moldTag, boolean moldConsumed, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, ItemLike result, int duration) {
         ResourceLocation location = moldTag.location();
         create(CMRecipeTypes.CASTING_IN_BASIN, result, b -> b.duration(duration)
+                .withCondition(new NotCondition(new TagEmptyCondition(location)))
                 .require(moldTag)
                 .require(fluid.get(), amount)
                 .withMoldConsumed(moldConsumed)

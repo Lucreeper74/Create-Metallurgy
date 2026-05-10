@@ -74,6 +74,7 @@ public class CMCreativeTabs {
                 CMItems.INCOMPLETE_LADLE_FRAME
         );
 
+        // TODO: remove that if handled at registration
         List<TagDependentBucketItem> tagDependentExclusions = CMFluids.ALL_MODDED_METALS.stream()
                 .map(entry -> (TagDependentBucketItem) entry.getBucket().get())
                 .toList();

@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.item.TooltipModifier;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingWithSpout;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.network.NetworkHandler;
 import fr.lucreeper74.createmetallurgy.data.CMDatagen;
+import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import fr.lucreeper74.createmetallurgy.registries.*;
 import net.createmod.catnip.lang.FontHelper;
 import net.createmod.catnip.platform.CatnipServices;
@@ -59,6 +60,8 @@ public class CreateMetallurgy {
         CMRecipeTypes.register(eventBus);
         CMDataComponents.register(eventBus);
         CMPackets.register();
+
+        CMMetals.init(); // Init ALL_LOADED_METALS list
 
         CatnipServices.PLATFORM.executeOnClientOnly(() -> () -> CreateMetallurgyClient.loadClient(eventBus));
 
