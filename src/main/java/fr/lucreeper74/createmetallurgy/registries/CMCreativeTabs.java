@@ -5,6 +5,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
+import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleStyles;
 import fr.lucreeper74.createmetallurgy.content.fluids.TagDependentBucketItem;
 import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
@@ -86,6 +87,8 @@ public class CMCreativeTabs {
                 exclusions.add(bucketItem);
             }
         }
+
+        exclusions.addAll(LadleStyles.RARE_LADLES);
 
         return exclusions::contains;
     }
