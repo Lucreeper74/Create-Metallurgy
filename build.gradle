@@ -127,6 +127,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             "neo_version"           : neo_version,
             "minecraft_version"            : mc_version,
             "minecraft_version_range"      : mc_version_range,
+            "create_version_range"         : create_version_range,
     ]
     inputs.properties(replaceProperties)
     expand(replaceProperties)
