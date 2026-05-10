@@ -315,7 +315,8 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
             return;
         if (!isController())
             return;
-        CMConnectivityHandler.formMulti(this); // TODO: Update heat here
+        updateFoundryTemperature();
+        CMConnectivityHandler.formMulti(this);
     }
 
     @Override
