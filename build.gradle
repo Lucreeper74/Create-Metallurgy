@@ -102,7 +102,8 @@ dependencies {
     api("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
     api("dev.latvian.mods:kubejs-create-neoforge:${createjs_version}")
     compileOnly("curse.maven:create-heat-js-${heatjs_id}:${heatjs_file}")
-    runtimeOnly("curse.maven:create-heat-js-${heatjs_id}:${heatjs_file}")
+    // ADD IT ONLY WHEN NEEDED IN-GAME (Mixin code will make uppercase in recipe heat condition in datagen)
+    //runtimeOnly("curse.maven:create-heat-js-${heatjs_id}:${heatjs_file}")
 
     // Jei stuff
     compileOnly("mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}")
