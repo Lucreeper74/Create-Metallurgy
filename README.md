@@ -36,4 +36,4 @@ Want to help with translations ? Please refer to the Crowdin Project page here [
 - **Janko** (Artist -> Industrial Crucible textures)
 
 ### **Translation**
-- See here for [Crowdin project members](https://crowdin.com/project/create-metallurgy/activity-stream)
+- See here for [Crowdin project contributors](https://crowdin.com/project/create-metallurgy/activity-stream)
