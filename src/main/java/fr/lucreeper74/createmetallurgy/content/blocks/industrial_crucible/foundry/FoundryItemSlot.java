@@ -123,9 +123,9 @@ public class FoundryItemSlot {
             }
         }
 
-        ItemStack result = currentRecipe.rollResults(getController().getLevel().getRandom()).getFirst();
-        if (!result.isEmpty()) {
-            setStack(result.copy());
+        List<ItemStack> results = currentRecipe.rollResults(getController().getLevel().getRandom());
+        if (!results.isEmpty()) {
+            setStack(results.getFirst().copy());
             shouldReset = true;
         }
 
