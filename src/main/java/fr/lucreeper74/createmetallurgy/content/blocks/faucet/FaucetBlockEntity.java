@@ -27,7 +27,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -225,14 +224,13 @@ public class FaucetBlockEntity extends SmartBlockEntity {
                 break;
             }
         }
+        updateFallDistance(fallDist);
 
         IFluidHandler targetTank = getLevel().getCapability(Capabilities.FluidHandler.BLOCK, targetPos, Direction.UP.getOpposite());
         if (targetTank == null)
             return null;
 
-        updateFallDistance(fallDist);
         notifyUpdate();
-
         return targetTank;
     }
 
@@ -240,7 +238,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         if (getLevel() == null)
             return;
 
-        List<Entity> entities = getLevel().getEntities(null, getRenderBoundingBox()); // Blacklist entities in the parameter
+        List<Entity> entities = getLevel().getEntities(null, getFluidArea()); // Blacklist entities in the parameter
 
         if (drained.isEmpty())
             return;
@@ -338,8 +336,13 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         }
     }
 
+    private AABB getFluidArea() {
+        return new AABB(worldPosition)
+                .expandTowards(0, -getFallingDistance(), 0);
+    }
+
     @Override
     protected AABB createRenderBoundingBox() {
-        return super.createRenderBoundingBox().expandTowards(0, -(getFallingDistance()), 0);
+        return getFluidArea();
     }
 }
