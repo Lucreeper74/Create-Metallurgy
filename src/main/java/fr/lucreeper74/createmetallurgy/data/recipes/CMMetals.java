@@ -48,7 +48,7 @@ public enum CMMetals {
 
     // Alloys
     INVAR(() -> CMFluids.MOLTEN_INVAR, TH),
-    ELECTRUM(() -> CMFluids.MOLTEN_ELECTRUM, MEK, TH, CADDITION),
+    ELECTRUM(() -> CMFluids.MOLTEN_ELECTRUM, TH, CADDITION),
     BRONZE(() -> CMFluids.MOLTEN_BRONZE, MEK, TH),
     CONSTANTAN(() -> CMFluids.MOLTEN_CONSTANTAN, TH, IE),
     VOID_STEEL(() -> CMFluids.MOLTEN_VOID_STEEL, CUTILITIES),

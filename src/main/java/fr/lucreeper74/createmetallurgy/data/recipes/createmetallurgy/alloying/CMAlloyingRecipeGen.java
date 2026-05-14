@@ -23,7 +23,7 @@ public class CMAlloyingRecipeGen extends AlloyingRecipeGen {
             STEEL = basicAlloy("steel", CMFluids.MOLTEN_IRON, 270, T.coke(), CMFluids.MOLTEN_STEEL, 270, HeatCondition.HEATED, 40),
             BRASS = basicAlloy("brass", CMFluids.MOLTEN_COPPER, 10, CMFluids.MOLTEN_ZINC, 10, CMFluids.MOLTEN_BRASS, 20, HeatCondition.HEATED, 40),
             INVAR = basicAlloy("invar", CMFluids.MOLTEN_IRON, 20, CMFluids.MOLTEN_NICKEL, 10, CMFluids.MOLTEN_INVAR, 30, HeatCondition.HEATED, 40),
-            ELECTRUM = basicAlloy("electrum", CMFluids.MOLTEN_GOLD, 10, CMFluids.MOLTEN_SILVER, 10, CMFluids.MOLTEN_ELECTRUM, 30, HeatCondition.HEATED, 40),
+            ELECTRUM = basicAlloy("electrum", CMFluids.MOLTEN_GOLD, 10, CMFluids.MOLTEN_SILVER, 10, CMFluids.MOLTEN_ELECTRUM, 20, HeatCondition.HEATED, 40),
             BRONZE = basicAlloy("bronze", CMFluids.MOLTEN_COPPER, 30, CMFluids.MOLTEN_TIN, 10, CMFluids.MOLTEN_BRONZE, 40, HeatCondition.HEATED, 40),
             CONSTANTAN = basicAlloy("constantan", CMFluids.MOLTEN_COPPER, 10, CMFluids.MOLTEN_NICKEL, 10, CMFluids.MOLTEN_CONSTANTAN, 20, HeatCondition.HEATED, 40),
 
