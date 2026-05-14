@@ -20,7 +20,7 @@ public class AlloyingCategory extends FoundryBasinCategory {
         super.draw(recipe, iRecipeSlotsView, graphics, mouseX, mouseY);
 
         HeatCondition requiredHeat = recipe.getRequiredHeat();
-        if (requiredHeat != HeatCondition.NONE)
+        if (requiredHeat != HeatCondition.NONE && !customHeatSource)
             heater.withHeat(requiredHeat.visualizeAsBlazeBurner())
                     .draw(graphics, getBackground().getWidth() / 2 + 3, 55);
         mixer.draw(graphics, getBackground().getWidth() / 2 + 3, 34);

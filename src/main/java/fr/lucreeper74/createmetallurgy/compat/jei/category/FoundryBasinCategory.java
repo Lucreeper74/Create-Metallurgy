@@ -32,6 +32,7 @@ import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.HEATJS_LOADED;
 public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecipe> {
 
     private final boolean needsHeating;
+    protected boolean customHeatSource = false;
 
     public FoundryBasinCategory(Info<FoundryBasinRecipe> info, boolean needsHeating) {
         super(info);
@@ -122,9 +123,9 @@ public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecip
         AllGuiTextures shadow = noHeat ? AllGuiTextures.JEI_SHADOW : AllGuiTextures.JEI_LIGHT;
         shadow.render(graphics, 81, 58 + (noHeat ? 10 : 30));
 
+        customHeatSource = false;
         if (HEATJS_LOADED) {
-            // TODO: need to prevent blaze burner from drawing if this is active to avoid overlapping
-            CategoryHelper.drawCustomHeatSource(graphics, recipeSlotsView, recipe,
+            customHeatSource = CategoryHelper.drawCustomHeatSource(graphics, recipeSlotsView, recipe,
                     background.getWidth() / 2 + 3, 55, background.getWidth(), background.getHeight(), mouseX, mouseY);
         }
 

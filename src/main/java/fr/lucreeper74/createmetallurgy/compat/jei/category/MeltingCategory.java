@@ -26,7 +26,7 @@ public class MeltingCategory extends FoundryBasinCategory {
         drawProcessTime(recipe, graphics, 55);
 
         HeatCondition requiredHeat = recipe.getRequiredHeat();
-        if (requiredHeat != HeatCondition.NONE)
+        if (requiredHeat != HeatCondition.NONE && !customHeatSource)
             heater.withHeat(requiredHeat.visualizeAsBlazeBurner())
                     .draw(graphics, getBackground().getWidth() / 2 + 3, 55);
         castingtop.draw(graphics, getBackground().getWidth() / 2 + 3, 34);
