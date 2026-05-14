@@ -1,0 +1,20 @@
+{
+  "type": "createmetallurgy:melting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "createmetallurgy:crushed_raw_tungsten"
+    }
+  ],
+  "processing_time": 48,
+  "results": [
+    {
+      "amount": 90,
+      "id": "createmetallurgy:molten_tungsten"
+    },
+    {
+      "amount": 45,
+      "id": "createmetallurgy:molten_slag"
+    }
+  ]
+}

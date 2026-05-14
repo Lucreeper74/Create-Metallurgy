@@ -3,6 +3,7 @@ package fr.lucreeper74.createmetallurgy.data.recipes.createmetallurgy.melting;
 import com.simibubi.create.AllItems;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
+import fr.lucreeper74.createmetallurgy.registries.CMItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 
@@ -30,7 +31,8 @@ public class CMMeltingRecipeGen extends MeltingRecipeGen {
                     Map.entry(CMMetals.NICKEL, AllItems.CRUSHED_NICKEL),
                     Map.entry(CMMetals.OSMIUM, AllItems.CRUSHED_OSMIUM),
                     Map.entry(CMMetals.SILVER, AllItems.CRUSHED_SILVER),
-                    Map.entry(CMMetals.TIN, AllItems.CRUSHED_TIN)
+                    Map.entry(CMMetals.TIN, AllItems.CRUSHED_TIN),
+                    Map.entry(CMMetals.TUNGSTEN, CMItems.CRUSHED_RAW_WOLFRAMITE)
                     ))
 
             ;
