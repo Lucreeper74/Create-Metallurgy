@@ -32,7 +32,7 @@ import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.HEATJS_LOADED;
 public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecipe> {
 
     private final boolean needsHeating;
-    protected boolean customHeatSource = false;
+    protected boolean customHeatSource;
 
     public FoundryBasinCategory(Info<FoundryBasinRecipe> info, boolean needsHeating) {
         super(info);
