@@ -107,9 +107,10 @@ public abstract class FoundryRecipe<P extends FoundryRecipeParams> extends Proce
 
     public static int getHeatRequirement(HeatCondition heatCondition) {
         return switch (heatCondition) {
-            case NONE -> 0;
             case HEATED -> 2;
             case SUPERHEATED -> 3;
+            default -> 0;
+            // TODO: see if possible to register Tu value for HeatJS heat condition
         };
     }
 
