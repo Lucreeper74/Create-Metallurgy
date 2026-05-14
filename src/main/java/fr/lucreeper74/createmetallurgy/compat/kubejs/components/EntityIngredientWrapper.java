@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.compat.kubejs.recipe;
+package fr.lucreeper74.createmetallurgy.compat.kubejs.components;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.serialization.DataResult;

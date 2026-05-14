@@ -28,6 +28,7 @@ public class FoundryRecipeParams extends ProcessingRecipeParams {
         maxHeatRequirement = DEFAULT_MAX_HEAT;
     }
 
+    // TODO: change camel case to snake case heat req
     protected static <P extends FoundryRecipeParams> MapCodec<P> foundryCodec(Supplier<P> factory) {
         return RecordCodecBuilder.mapCodec(instance -> instance.group(
                 ProcessingRecipeParams.codec(factory).forGetter(Function.identity()),

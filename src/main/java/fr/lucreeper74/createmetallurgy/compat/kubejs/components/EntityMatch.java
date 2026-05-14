@@ -1,4 +1,4 @@
-package fr.lucreeper74.createmetallurgy.compat.kubejs.recipe;
+package fr.lucreeper74.createmetallurgy.compat.kubejs.components;
 
 import dev.latvian.mods.kubejs.recipe.filter.RecipeMatchContext;
 import dev.latvian.mods.kubejs.recipe.match.ReplacementMatch;

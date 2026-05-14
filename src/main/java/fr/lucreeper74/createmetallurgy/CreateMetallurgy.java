@@ -31,6 +31,8 @@ public class CreateMetallurgy {
     public static final String MOD_ID = "createmetallurgy";
 
     public static final boolean HEATJS_LOADED = ModList.get().isLoaded("create_heat_js");
+    public static final boolean KUBEJS_LOADED = ModList.get().isLoaded("kubejs");
+    public static final boolean CREATEJS_LOADED = ModList.get().isLoaded("kubejs_create");
 
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
     public static final Logger LOGGER = LogUtils.getLogger();
