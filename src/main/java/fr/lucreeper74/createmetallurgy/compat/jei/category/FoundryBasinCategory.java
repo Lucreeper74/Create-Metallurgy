@@ -122,12 +122,6 @@ public class FoundryBasinCategory extends CreateRecipeCategory<FoundryBasinRecip
         AllGuiTextures shadow = noHeat ? AllGuiTextures.JEI_SHADOW : AllGuiTextures.JEI_LIGHT;
         shadow.render(graphics, 81, 58 + (noHeat ? 10 : 30));
 
-        if (HEATJS_LOADED) {
-            // TODO: need to prevent blaze burner from drawing if this is active to avoid overlapping
-            CategoryHelper.drawCustomHeatSource(graphics, recipeSlotsView, recipe,
-                    background.getWidth() / 2 + 3, 55, background.getWidth(), background.getHeight(), mouseX, mouseY);
-        }
-
         if (!needsHeating)
             return;
 
