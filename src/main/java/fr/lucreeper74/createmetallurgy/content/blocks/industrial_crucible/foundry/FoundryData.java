@@ -130,7 +130,7 @@ public class FoundryData {
                 CMLang.text("")
                         .add(CreateLang.itemName(stackInSlot).style(ChatFormatting.GRAY))
                         .space()
-                        .add(slot.processDuration >= 0 ?
+                        .add(slot.processDuration > 0 ?
                                 progressBarComponent(duration, slot.processingTime, 9) :
                                 CMLang.text("X").style(ChatFormatting.RED).style(ChatFormatting.BOLD).component())
                         .forGoggles(tooltip, 1);
