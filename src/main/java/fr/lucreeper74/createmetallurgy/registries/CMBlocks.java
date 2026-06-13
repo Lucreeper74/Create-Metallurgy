@@ -118,7 +118,8 @@ public class CMBlocks {
 
     public static final BlockEntry<Block> WOLFRAMITE_ORE = REGISTRATE
             .block("wolframite_ore", Block::new)
-            .initialProperties(() -> Blocks.COPPER_ORE)
+            .initialProperties(() -> Blocks.NETHERRACK)
+            .properties(p -> p.sound(SoundType.NETHERRACK))
             .loot((lt, b) -> {
                 HolderLookup.RegistryLookup<Enchantment> enchantmentRegistryLookup = lt.getRegistries().lookupOrThrow(Registries.ENCHANTMENT);
 
