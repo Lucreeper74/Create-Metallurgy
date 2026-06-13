@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create_enchantment_industry"
+    }
+  ],
+  "type": "createmetallurgy:casting_in_table",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "create_enchantment_industry:experience",
+      "amount": 3
+    },
+    {
+      "item": "createmetallurgy:graphite_nugget_mold"
+    }
+  ],
+  "processingTime": 60,
+  "result": {
+    "item": {
+      "count": 1,
+      "id": "create:experience_nugget"
+    }
+  }
+}
