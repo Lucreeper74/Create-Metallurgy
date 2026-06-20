@@ -20,7 +20,21 @@ import java.util.List;
 
 import static net.minecraft.client.gui.screens.inventory.InventoryScreen.renderEntityInInventory;
 
-public record EntityIngredientRenderer(int scale) implements IIngredientRenderer<DamagedEntityIngredient.EntityStack> {
+public record EntityIngredientRenderer(boolean large) implements IIngredientRenderer<DamagedEntityIngredient.EntityStack> {
+
+    @Override
+    public int getHeight() {
+        if (large)
+            return 32;
+        return IIngredientRenderer.super.getHeight();
+    }
+
+    @Override
+    public int getWidth() {
+        if (large)
+            return 32;
+        return IIngredientRenderer.super.getWidth();
+    }
 
     @Override
     public void render(GuiGraphics graphics, @NotNull DamagedEntityIngredient.EntityStack entityInput) {
@@ -34,18 +48,19 @@ public record EntityIngredientRenderer(int scale) implements IIngredientRenderer
         if (!(entity instanceof LivingEntity living))
             return; // No recipes with Non-living entity anyway
 
-        float size = entity.getBbHeight() + entity.getBbWidth();
-        float entityScale = scale / Math.max(1.0f, size);
+        float height = living.getBbHeight();
+        float width = living.getBbWidth();
+        float size = Math.max(height, width);
 
-//                PoseStack modelView = RenderSystem.getModelViewStack();
-//                modelView.pushPose();
-//                modelView.mulPose(matrixStack.last().pose());
+        int slotSize = getHeight() - 2;
+        float entityScale = slotSize / Math.max(1.0f, size);
+
+        int posX = getWidth() / 2;
+        int posY = (int) (((float) getHeight() / 2) + (height * entityScale / 2));
+
         Quaternionf angle = (new Quaternionf()).rotationXYZ(0, ((float) Math.PI / 180f) * 160f, (float) Math.PI);
         living.setYHeadRot(0);
-        renderEntityInInventory(graphics, -15, 25, entityScale, new Vector3f(), angle, null, living);
-//                modelView.popPose();
-//                RenderSystem.applyModelViewMatrix();
-
+        renderEntityInInventory(graphics, posX, posY, entityScale, new Vector3f(), angle, null, living);
     }
 
     @Override

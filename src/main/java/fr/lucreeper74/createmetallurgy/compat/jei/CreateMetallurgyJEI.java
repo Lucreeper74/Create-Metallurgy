@@ -26,10 +26,15 @@ import mezz.jei.api.registration.IModIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -125,10 +130,16 @@ public class CreateMetallurgyJEI implements IModPlugin {
     public void registerIngredients(IModIngredientRegistration registration) {
         List<DamagedEntityIngredient.EntityStack> entities =
                 BuiltInRegistries.ENTITY_TYPE.stream()
+                        .filter(entityType -> {
+                            Level level = Minecraft.getInstance().level;
+                            if (level == null)
+                                return false;
+                            return entityType.create(level) instanceof LivingEntity;
+                        })
                         .map(DamagedEntityIngredient.EntityStack::new)
                         .toList();
 
-        registration.register(CMJeiTypes.ENTITY_STACK, entities, new EntityIngredientHelper(), new EntityIngredientRenderer(1), DamagedEntityIngredient.EntityStack.CODEC);
+        registration.register(CMJeiTypes.ENTITY_STACK, entities, new EntityIngredientHelper(), new EntityIngredientRenderer(false), DamagedEntityIngredient.EntityStack.CODEC);
     }
 
     @Override

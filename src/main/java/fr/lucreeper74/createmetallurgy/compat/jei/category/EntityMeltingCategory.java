@@ -28,15 +28,13 @@ public class EntityMeltingCategory extends FoundryAbstractCategory<MobMeltingRec
         super.setRecipe(builder, recipe, focuses);
 
         DamagedEntityIngredient entityIngredient = recipe.getEntityIngredient();
-        IIngredientRenderer<DamagedEntityIngredient.EntityStack> renderer = new EntityIngredientRenderer(45);
+        IIngredientRenderer<DamagedEntityIngredient.EntityStack> renderer = new EntityIngredientRenderer(true);
 
         boolean hasIngredients = !recipe.getIngredients().isEmpty() || !recipe.getFluidIngredients().isEmpty();
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 50, hasIngredients ? 10 : 30)
+        builder.addSlot(RecipeIngredientRole.INPUT, 20, hasIngredients ? 5 : 25)
                 .setCustomRenderer(CMJeiTypes.ENTITY_STACK, renderer)
-                .addIngredients(CMJeiTypes.ENTITY_STACK, entityIngredient.getDisplay())
-                .setBackground(asDrawable(AllGuiTextures.JEI_QUESTION_MARK), 2, 1);
-
+                .addIngredients(CMJeiTypes.ENTITY_STACK, entityIngredient.getDisplay());
     }
 
     @Override
