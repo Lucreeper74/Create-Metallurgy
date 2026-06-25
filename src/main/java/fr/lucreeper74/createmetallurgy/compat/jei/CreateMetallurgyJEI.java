@@ -9,6 +9,7 @@ import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.*;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.entity.EntityIngredientHelper;
 import fr.lucreeper74.createmetallurgy.compat.jei.category.entity.EntityIngredientRenderer;
+import fr.lucreeper74.createmetallurgy.config.CMConfig;
 import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.GrindingRecipe;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingBasinRecipe;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.CastingTableRecipe;
@@ -137,7 +138,8 @@ public class CreateMetallurgyJEI implements IModPlugin {
                         .map(DamagedEntityIngredient.EntityStack::new)
                         .toList();
 
-        registration.register(CMJeiTypes.ENTITY_STACK, entities, new EntityIngredientHelper(), new EntityIngredientRenderer(false), DamagedEntityIngredient.EntityStack.CODEC);
+        registration.register(CMJeiTypes.ENTITY_STACK, CMConfig.client().showEntities.get() ? entities : List.of(),
+                new EntityIngredientHelper(), new EntityIngredientRenderer(false), DamagedEntityIngredient.EntityStack.CODEC);
     }
 
     @Override
