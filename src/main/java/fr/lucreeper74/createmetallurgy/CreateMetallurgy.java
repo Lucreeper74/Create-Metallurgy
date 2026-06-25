@@ -6,6 +6,8 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
+import com.simibubi.create.infrastructure.config.AllConfigs;
+import fr.lucreeper74.createmetallurgy.config.CMConfig;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingWithSpout;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.network.NetworkHandler;
 import fr.lucreeper74.createmetallurgy.data.CMDatagen;
@@ -20,6 +22,7 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
@@ -62,6 +65,8 @@ public class CreateMetallurgy {
         CMRecipeTypes.register(eventBus);
         CMDataComponents.register(eventBus);
         CMPackets.register();
+
+        CMConfig.register(ModLoadingContext.get(), container);
 
         CMMetals.init(); // Init ALL_LOADED_METALS list
 
