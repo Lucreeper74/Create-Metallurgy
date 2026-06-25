@@ -7,6 +7,7 @@ import com.simibubi.create.content.logistics.box.PackageStyles;
 import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle;
 import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.CreateMetallurgy;
+import fr.lucreeper74.createmetallurgy.config.CMConfig;
 import fr.lucreeper74.createmetallurgy.registries.CMDataComponents;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.ChatFormatting;
@@ -40,8 +41,6 @@ import java.util.List;
 import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
 
 public class LadleItem extends PackageItem {
-    public static final int LADLE_CAPACITY = 4000; // in mb
-    public static final int MAX_ADR_COUNT = 10;
 
     public LadleItem(Properties properties, PackageStyle style) {
         super(properties, style);
@@ -58,6 +57,14 @@ public class LadleItem extends PackageItem {
         }
     }
 
+    public static int getLadleCapacity() {
+        return CMConfig.server().ladleCapacity.get();
+    }
+
+    public static int getMaxAddrCount() {
+        return CMConfig.server().ladleMaxAddr.get();
+    }
+
     public static boolean isLadle(ItemStack stack) {
         return stack.getItem() instanceof LadleItem;
     }
@@ -67,7 +74,7 @@ public class LadleItem extends PackageItem {
     }
 
     public static void addRemainAddrs(ItemStack ladle, List<String> remainAddrs) {
-        List<String> addresses = remainAddrs.subList(0, Math.min(remainAddrs.size(), MAX_ADR_COUNT));
+        List<String> addresses = remainAddrs.subList(0, Math.min(remainAddrs.size(), getMaxAddrCount()));
 
         if (!addresses.isEmpty()) ladle.set(CMDataComponents.LADLE_REMAIN_ADDRESSES, addresses);
     }

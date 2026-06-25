@@ -33,13 +33,13 @@ public class CMCommonEvents {
         for (Item item : BuiltInRegistries.ITEM) {
             if (item.getClass() == LadleItem.class)
                 event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) ->
-                        new FluidHandlerItemStack(CMDataComponents.LADLE_FLUID_CONTENT, stack, LadleItem.LADLE_CAPACITY), item);
+                        new FluidHandlerItemStack(CMDataComponents.LADLE_FLUID_CONTENT, stack, LadleItem.getLadleCapacity()), item);
         }
 
         // Entity
         event.registerEntity(Capabilities.FluidHandler.ENTITY, CMEntityTypes.LADLE.get(), (entity, ctx) -> {
             if (entity instanceof LadleEntity ladleEntity)
-                return new FluidHandlerItemStack(CMDataComponents.LADLE_FLUID_CONTENT, ladleEntity.box, LadleItem.LADLE_CAPACITY);
+                return new FluidHandlerItemStack(CMDataComponents.LADLE_FLUID_CONTENT, ladleEntity.box, LadleItem.getLadleCapacity());
             return null;
         });
     }

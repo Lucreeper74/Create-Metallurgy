@@ -112,7 +112,7 @@ public class LadleVisualChainConveyorMixin {
         if (buf == rigBuffer || buf == boxBuffer)
             return original.call(instance);
 
-        CM$ladleFluidVisual.render(fluid.get(), LadleItem.LADLE_CAPACITY, buf, 8f / 16);
+        CM$ladleFluidVisual.render(fluid.get(), LadleItem.getLadleCapacity(), buf, 8f / 16);
 
         return instance;
     }

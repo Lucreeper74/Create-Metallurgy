@@ -93,7 +93,7 @@ public class LadleEntity extends PackageEntity {
                 for (boolean simulate : Iterate.trueAndFalse) {
                     IFluidHandler.FluidAction action = simulate ? IFluidHandler.FluidAction.SIMULATE : IFluidHandler.FluidAction.EXECUTE;
 
-                    FluidStack drained = fluidHandler.drain(LadleItem.LADLE_CAPACITY, action);
+                    FluidStack drained = fluidHandler.drain(LadleItem.getLadleCapacity(), action);
                     Fluid fluid = drained.getFluid();
                     if (!CMFluids.isHotFluid(fluid))
                         return;

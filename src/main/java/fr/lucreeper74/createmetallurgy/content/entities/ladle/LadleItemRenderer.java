@@ -38,7 +38,7 @@ public class LadleItemRenderer extends CustomRenderedItemModelRenderer {
         float totalHeight = maxHeight - minPuddleHeight;
         float tankWidth = .5f;
 
-        float level = (fluidLevel / LadleItem.LADLE_CAPACITY) * totalHeight;
+        float level = (fluidLevel / LadleItem.getLadleCapacity()) * totalHeight;
 
         if (level == 0) return;
 

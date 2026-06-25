@@ -123,7 +123,7 @@ public class LadleFilterScreen extends AbstractFilterScreen<LadleFilterMenu> {
         filledAmount = new ScrollInput(x + 55, y + 55, 46, 18)
                 .titled(filledAmountTitle)
                 .addHint(filledAmountHint)
-                .withRange(-1, LadleItem.LADLE_CAPACITY + 1)
+                .withRange(-1, LadleItem.getLadleCapacity() + 1)
                 .calling(state -> sendScrollInputs())
                 .withStepFunction(sc ->
                         filledAmount.getState() < 0 ? 1 :
