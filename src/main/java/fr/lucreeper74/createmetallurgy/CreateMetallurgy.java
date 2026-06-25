@@ -6,7 +6,6 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
-import com.simibubi.create.infrastructure.config.AllConfigs;
 import fr.lucreeper74.createmetallurgy.config.CMConfig;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingWithSpout;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.network.NetworkHandler;
