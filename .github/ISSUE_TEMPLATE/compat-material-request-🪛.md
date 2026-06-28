@@ -1,7 +1,7 @@
 ---
 name: "Compat Material Request \U0001FA9B"
 about: Suggest a new material compatibility for this project
-title: ''
+title: "[‼️ MATERIAL NAME HERE ‼️]"
 labels: "compat request \U0001FA9B"
 assignees: ''
 
@@ -9,7 +9,7 @@ assignees: ''
 
 ### ⚠️ The item must have at least the following tag `c:ingots/metal_id`! ⚠️
 
-**Metal ID :** [metal id here]
+**Metal ID :** `[metal id here]`
 
 **Metal Type :** [Metal, Alloy, Misc (gem, slimeball ect)]
 
