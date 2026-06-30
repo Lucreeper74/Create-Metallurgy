@@ -8,6 +8,7 @@ import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.Crucib
 import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleEntity;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
+import fr.lucreeper74.createmetallurgy.content.fluids.TagDependentBucketItem;
 import fr.lucreeper74.createmetallurgy.registries.CMDataComponents;
 import fr.lucreeper74.createmetallurgy.registries.CMEntityTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,6 +17,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
+import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 
 @EventBusSubscriber
 public class CMCommonEvents {
@@ -34,6 +36,8 @@ public class CMCommonEvents {
             if (item.getClass() == LadleItem.class)
                 event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) ->
                         new FluidHandlerItemStack(CMDataComponents.LADLE_FLUID_CONTENT, stack, LadleItem.getLadleCapacity()), item);
+            if (item.getClass() == TagDependentBucketItem.class)
+                event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), item);
         }
 
         // Entity
