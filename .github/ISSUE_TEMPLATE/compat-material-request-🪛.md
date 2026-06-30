@@ -3,11 +3,13 @@ name: "Compat Material Request \U0001FA9B"
 about: Suggest a new material compatibility for this project
 title: "[‼️ MATERIAL NAME HERE ‼️]"
 labels: "compat request \U0001FA9B"
-assignees: ''
+assignees: Lucreeper74
 
 ---
 
 ### ⚠️ The item must have at least the following tag `c:ingots/metal_id`! ⚠️
+> [!IMPORTANT]
+> Remove brackets with the asked content!
 
 **Metal ID :** `[metal id here]`
 
