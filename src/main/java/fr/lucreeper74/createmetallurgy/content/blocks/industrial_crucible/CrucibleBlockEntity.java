@@ -10,6 +10,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.recipe.RecipeConditions;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.CreateLang;
+import fr.lucreeper74.createmetallurgy.config.CMConfig;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryData;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryItemSlot;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.foundry.FoundryTank;
@@ -61,10 +62,6 @@ import static fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible
 import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
 
 public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer {
-    public static final int MAX_SIZE = 5;
-    private static final int MAX_HEIGHT = 4;
-    private static final int CAPACITY_PER_BLOCK = 1000;
-
     protected Map<Direction, SideAttachment> attachmentMap = new EnumMap<>(Direction.class);
 
     public FoundryTank tankInventory;
@@ -94,7 +91,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
             attachmentMap.put(dir, SideAttachment.NONE);
         }
 
-        tankInventory = new FoundryTank(CAPACITY_PER_BLOCK, this::onFluidContentChanged);
+        tankInventory = new FoundryTank(getCapacityPerBlock(), this::onFluidContentChanged);
 
         foundrySlot = new FoundryItemSlot(this::getControllerBE, () -> {
             refreshCapability(false, true);
@@ -166,7 +163,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
         if (isController()) {
             width = compound.getInt("Size");
             height = compound.getInt("Height");
-            tankInventory.setCapacity(getTotalSize() * CAPACITY_PER_BLOCK);
+            tankInventory.setCapacity(getTotalSize() * getCapacityPerBlock());
             tankInventory.deserializeNBT(registries, compound.getCompound("TankContent"), clientPacket);
             foundryData.read(compound.getCompound("FoundryData"), getWidth());
 
@@ -197,7 +194,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
             if (hasLevel())
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
             if (isController())
-                tankInventory.setCapacity(CAPACITY_PER_BLOCK * getTotalSize());
+                tankInventory.setCapacity(getCapacityPerBlock() * getTotalSize());
             invalidateRenderBoundingBox();
         }
     }
@@ -516,7 +513,7 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
     }
 
     public void applyFluidTankSize(int blocks) {
-        tankInventory.setCapacity(blocks * CAPACITY_PER_BLOCK);
+        tankInventory.setCapacity(blocks * CMConfig.server().crucibleCapacity.get() * 1000);
 
         // Handle Fluid overflow
         int overflow = tankInventory.getFillAmount() - tankInventory.getCapacity();
@@ -672,12 +669,12 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
     @Override
     public int getMaxWidth() {
-        return MAX_SIZE;
+        return CMConfig.server().crucibleMaxWidth.get();
     }
 
 
     public int getMaxHeight() {
-        return MAX_HEIGHT;
+        return CMConfig.server().crucibleMaxHeight.get();
     }
 
     @Override
@@ -709,7 +706,11 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
     }
 
     public static int getCapacityFactor() {
-        return CAPACITY_PER_BLOCK;
+        return CMConfig.server().crucibleCapacity.get();
+    }
+
+    public static int getCapacityPerBlock() {
+        return getCapacityFactor() * 1000;
     }
 
     private static final Object EntityMeltingCacheKey = new Object();
