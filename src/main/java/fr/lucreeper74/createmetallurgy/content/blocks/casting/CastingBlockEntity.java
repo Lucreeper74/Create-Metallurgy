@@ -28,6 +28,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -47,7 +48,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class CastingBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
+public abstract class CastingBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation, Clearable {
 
     protected ScrollOptionBehaviour<LockMode> lockSelect;
 
@@ -307,6 +308,12 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
             default -> {
             }
         }
+    }
+
+    @Override
+    public void clearContent() {
+        inv.clearContent();
+        moldInv.clearContent();
     }
 
     protected abstract void playProcessSound();

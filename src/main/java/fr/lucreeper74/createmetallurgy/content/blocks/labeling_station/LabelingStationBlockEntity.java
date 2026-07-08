@@ -19,6 +19,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -31,7 +32,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LabelingStationBlockEntity extends SmartBlockEntity {
+public class LabelingStationBlockEntity extends SmartBlockEntity implements Clearable {
 
     public boolean redstonePowered;
     public ArrayList<String> addressesList;
@@ -255,5 +256,10 @@ public class LabelingStationBlockEntity extends SmartBlockEntity {
     public void destroy() {
         super.destroy();
         ItemHelper.dropContents(level, worldPosition, ladleInv);
+    }
+
+    @Override
+    public void clearContent() {
+        ladleInv.clearContent();
     }
 }

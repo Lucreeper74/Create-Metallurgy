@@ -33,6 +33,7 @@ import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -61,7 +62,7 @@ import java.util.function.Predicate;
 import static fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlock.*;
 import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
 
-public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer {
+public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer, Clearable {
     protected Map<Direction, SideAttachment> attachmentMap = new EnumMap<>(Direction.class);
 
     public FoundryTank tankInventory;
@@ -649,6 +650,12 @@ public class CrucibleBlockEntity extends SmartBlockEntity implements IHaveGoggle
     public void notifyMultiUpdated() {
         updateBlockState();
         setChanged();
+    }
+
+    @Override
+    public void clearContent() {
+        foundrySlot.removeStack();
+        attachmentMap.clear();
     }
 
     @Override

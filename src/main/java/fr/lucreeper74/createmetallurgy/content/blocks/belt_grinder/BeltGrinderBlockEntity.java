@@ -27,6 +27,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -47,7 +48,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class BeltGrinderBlockEntity extends KineticBlockEntity {
+public class BeltGrinderBlockEntity extends KineticBlockEntity implements Clearable {
 
     private static final Object grindingRecipesKey = new Object();
     public ProcessingInventory inv;
@@ -335,5 +336,11 @@ public class BeltGrinderBlockEntity extends KineticBlockEntity {
             offset -= .5f;
         level.addParticle(particleData, pos.x() + -vec.x * offset, pos.y() + .45f, pos.z() + -vec.z * offset,
                 -vec.x * speed, r.nextFloat() * speed, -vec.z * speed);
+    }
+
+    @Override
+    public void clearContent() {
+        inv.clear();
+        filtering.setFilter(ItemStack.EMPTY);
     }
 }

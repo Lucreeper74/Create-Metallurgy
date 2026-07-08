@@ -1,6 +1,5 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.casting.basin;
 
-import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockEntity;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMRecipeTypes;
@@ -16,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
-public class CastingBasinBlockEntity extends CastingBlockEntity implements IHaveGoggleInformation {
+public class CastingBasinBlockEntity extends CastingBlockEntity {
 
     public CastingBasinBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);

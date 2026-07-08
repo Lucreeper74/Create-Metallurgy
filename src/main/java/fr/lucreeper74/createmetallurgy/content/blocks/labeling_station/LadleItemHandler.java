@@ -22,6 +22,10 @@ public class LadleItemHandler implements IItemHandlerModifiable {
         blockEntity.heldBox = stack;
     }
 
+    public void clearContent() {
+        blockEntity.heldBox = ItemStack.EMPTY;
+    }
+
     public void allowExtract() {
         canExtract = true;
     }
