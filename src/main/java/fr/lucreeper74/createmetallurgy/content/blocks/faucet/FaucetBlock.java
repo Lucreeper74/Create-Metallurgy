@@ -14,7 +14,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,8 +29,8 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import javax.annotation.Nullable;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class FaucetBlock extends WrenchableDirectionalBlock implements IBE<FaucetBlockEntity> {
 
@@ -46,17 +50,40 @@ public class FaucetBlock extends WrenchableDirectionalBlock implements IBE<Fauce
     }
 
     @Override
+    public boolean canSurvive(BlockState state, LevelReader readerLevel, BlockPos pos) {
+        Direction direction = state.getValue(FACING);
+        BlockPos attachedPos = pos.relative(direction.getOpposite());
+
+        if (readerLevel instanceof Level level) {
+            BlockEntity blockEntity = level.getBlockEntity(attachedPos);
+            if (blockEntity == null)
+                return false;
+
+            IFluidHandler capability = level.getCapability(Capabilities.FluidHandler.BLOCK, attachedPos, direction);
+            if (capability != null && capability.getTanks() > 0)
+                return true;
+
+            capability = level.getCapability(Capabilities.FluidHandler.BLOCK, attachedPos, null);
+            return (capability != null && capability.getTanks() > 0);
+        }
+
+        return false;
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (!canSurvive(state, level, pos))
+            return Blocks.AIR.defaultBlockState();
+        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+    }
+
+    @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         Direction facing = state.getValue(FACING);
         if (facing.getAxis().isHorizontal())
             return CMShapes.FAUCET.get(facing);
         else
             return CMShapes.FAUCET_DOWN;
-    }
-
-    protected static void playSound(@Nullable Player pPlayer, Level pLevel, BlockPos pPos, boolean pIsOpened) {
-        pLevel.playSound(pPlayer, pPos, pIsOpened ? BlockSetType.IRON.trapdoorOpen() : BlockSetType.IRON.trapdoorClose(), SoundSource.BLOCKS, 1.0F, pLevel.getRandom().nextFloat() * 0.1F + 0.9F);
-        pLevel.gameEvent(pPlayer, pIsOpened ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pPos);
     }
 
     @Override
@@ -66,9 +93,8 @@ public class FaucetBlock extends WrenchableDirectionalBlock implements IBE<Fauce
 
         withBlockEntityDo(level, pos, be -> {
             if (be.canOpenFaucet())
-                be.setFaucetOpen(true);
+                toggleFaucet(state, level, pos);
         });
-
         return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }
 
@@ -77,7 +103,7 @@ public class FaucetBlock extends WrenchableDirectionalBlock implements IBE<Fauce
         boolean flag = level.hasNeighborSignal(pos);
         if (flag != state.getValue(POWERED)) {
             if (flag != state.getValue(OPEN))
-                playSound(null, level, pos, flag);
+                playSound(level, pos, flag);
             level.setBlock(pos, state.setValue(POWERED, flag).setValue(OPEN, flag), 2);
         } else
             level.setBlock(pos, state, 2);
@@ -89,6 +115,16 @@ public class FaucetBlock extends WrenchableDirectionalBlock implements IBE<Fauce
         super.createBlockStateDefinition(builder);
     }
 
+    public static void toggleFaucet(BlockState state, Level level, BlockPos pos) {
+        boolean newState = !state.getValue(OPEN);
+        level.setBlockAndUpdate(pos, state.setValue(OPEN, newState));
+        playSound(level, pos, newState);
+    }
+
+    private static void playSound(Level level, BlockPos pos, boolean isOpen) {
+        level.playSound(null, pos, isOpen ? BlockSetType.IRON.trapdoorOpen() : BlockSetType.IRON.trapdoorClose(), SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
+        level.gameEvent(null, isOpen ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
+    }
 
     @Override
     public Class<FaucetBlockEntity> getBlockEntityClass() {
