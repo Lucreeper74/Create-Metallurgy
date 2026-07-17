@@ -11,6 +11,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.CapManipulationBehaviourBase;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.TankManipulationBehaviour;
+import fr.lucreeper74.createmetallurgy.config.CMConfig;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import fr.lucreeper74.createmetallurgy.registries.CMDamageTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
@@ -41,9 +42,6 @@ import static com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessing
 import static fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType.MOLTEN_FLUID_BURNING_TIME;
 
 public class FaucetBlockEntity extends SmartBlockEntity {
-    private static final int MAX_HEIGHT = 5;
-    public static final int TRANSFER_RATE = 10;
-
     protected BeltProcessingBehaviour beltProcessing;
     protected boolean beltBehaviorOverride;
 
@@ -120,9 +118,11 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         if (requiredAmountForItem > fluid.getAmount())
             return HOLD;
 
-        FluidStack drained = fluidTank.drain(TRANSFER_RATE * 5, FluidAction.EXECUTE);
+        FluidStack drained = fluidTank.drain(CMConfig.server().faucetFlowRate.get() * 5, FluidAction.EXECUTE);
+        BlockState state = getBlockState();
+        if (!state.getValue(FaucetBlock.OPEN))
+            FaucetBlock.toggleFaucet(getBlockState(), getLevel(), getBlockPos());
         updateRenderedFluid(drained.copy());
-        setFaucetOpen(true);
         updateFallDistance(2);
 
         if (!drained.isEmpty())
@@ -156,7 +156,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         if (getBlockState().getValue(FaucetBlock.OPEN)) {
             if (level.isClientSide()) {
                 if (!renderedFluid.isEmpty())
-                    createFluidParticles(renderedFluid);
+                    createFlowParticles(renderedFluid);
                 return;
             }
 
@@ -169,7 +169,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
 
             for (boolean simulate : Iterate.trueAndFalse) {
                 FluidAction action = simulate ? FluidAction.SIMULATE : FluidAction.EXECUTE;
-                FluidStack drained = fluidTank.drain(TRANSFER_RATE, action);
+                FluidStack drained = fluidTank.drain(CMConfig.server().faucetFlowRate.get(), action);
 
                 if (!simulate)
                     updateRenderedFluid(drained);
@@ -181,8 +181,9 @@ public class FaucetBlockEntity extends SmartBlockEntity {
                     filled = tryFill(drained, action);
 
                 if (filled <= 0 && simulate) {
-                    if (!getBlockState().getValue(FaucetBlock.POWERED)) {
-                        setFaucetOpen(false);
+                    BlockState state = getBlockState();
+                    if (!state.getValue(FaucetBlock.POWERED) && getLevel() != null) {
+                        FaucetBlock.toggleFaucet(state, getLevel(), getBlockPos());
                         break;
                     }
                 }
@@ -196,18 +197,8 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         if (fluidTank == null)
             return false;
 
-        return tryFill(fluidTank.drain(TRANSFER_RATE, action), action) > 0;
+        return tryFill(fluidTank.drain(CMConfig.server().faucetFlowRate.get(), action), action) > 0;
     }
-
-    public void setFaucetOpen(boolean openState) {
-        if (getBlockState().getValue(FaucetBlock.OPEN).equals(openState))
-            return;
-
-        BlockState state = getBlockState().setValue(FaucetBlock.OPEN, openState);
-        getLevel().setBlockAndUpdate(getBlockPos(), state);
-        FaucetBlock.playSound(null, getLevel(), getBlockPos(), openState);
-    }
-
 
     public IFluidHandler getTargetTank() {
         Level level = getLevel();
@@ -217,7 +208,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         // Fetch the targeted tank each time needed
         int fallDist = 0;
         BlockPos targetPos = worldPosition;
-        for (int i = 0; i < MAX_HEIGHT; i++) {
+        for (int i = 0; i < CMConfig.server().faucetMaxHeight.get(); i++) {
             targetPos = targetPos.below();
             if (!level.getBlockState(targetPos).isAir()) {
                 fallDist = i + 1;
@@ -303,7 +294,6 @@ public class FaucetBlockEntity extends SmartBlockEntity {
 
     protected void reset() {
         updateRenderedFluid(FluidStack.EMPTY);
-        setFaucetOpen(false);
         beltBehaviorOverride = false;
         updateFallDistance(0);
         notifyUpdate();
@@ -317,7 +307,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         return fallingDistance;
     }
 
-    private void createFluidParticles(FluidStack fluid) {
+    private void createFlowParticles(FluidStack fluid) {
         BlockState blockState = getBlockState();
         if (!(blockState.getBlock() instanceof FaucetBlock))
             return;
@@ -331,7 +321,26 @@ public class FaucetBlockEntity extends SmartBlockEntity {
 
         for (int i = 0; i < 2; i++) {
             ParticleOptions fluidParticle = FluidFX.getFluidParticle(fluid);
-            Vec3 m = VecHelper.offsetRandomly(outMotion, RandomSource.create(), 1 / 64f);
+            Vec3 m = VecHelper.offsetRandomly(outMotion, RandomSource.create(), 1 / 32f);
+            level.addAlwaysVisibleParticle(fluidParticle, outVec.x, outVec.y, outVec.z, m.x, m.y, m.z);
+        }
+    }
+
+    private void createLeakingParticles(FluidStack fluid) {
+        BlockState blockState = getBlockState();
+        if (!(blockState.getBlock() instanceof FaucetBlock))
+            return;
+        Direction direction = blockState.getValue(FaucetBlock.FACING);
+        Vec3 directionVec = Vec3.atLowerCornerOf(direction.getNormal());
+        Vec3 outVec = VecHelper.getCenterOf(worldPosition)
+                .add(directionVec.scale(.65)
+                        .subtract(directionVec.normalize().scale(10 / 16f)));
+        Vec3 outMotion = directionVec.scale(1 / 96f)
+                .add(0, -1 / 16f, 0);
+
+        for (int i = 0; i < 2; i++) {
+            ParticleOptions fluidParticle = FluidFX.getFluidParticle(fluid);
+            Vec3 m = VecHelper.offsetRandomly(outMotion, RandomSource.create(), 1 / 32f);
             level.addAlwaysVisibleParticle(fluidParticle, outVec.x, outVec.y, outVec.z, m.x, m.y, m.z);
         }
     }

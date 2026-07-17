@@ -13,6 +13,9 @@ public class CMServerConfig extends ConfigBase {
     public final ConfigInt crucibleMaxWidth = i(5, 1, "crucibleMaxWidth",  Comments.block, Comments.crucibleMaxWidth);
     public final ConfigInt crucibleCapacity = i(1, 1, "crucibleCapacity",  Comments.bucket, Comments.crucibleCapacity);
 
+    public final ConfigGroup faucet = group(0, "faucet", Comments.faucet);
+    public final ConfigInt faucetMaxHeight = i(5, 1, "faucetMaxHeight", Comments.block, Comments.faucetMaxHeight);
+    public final ConfigInt faucetFlowRate = i(10, 1, "faucetFlowRate",  Comments.mB, Comments.faucetFlowRate);
     // ---
 
     @Override
@@ -33,5 +36,9 @@ public class CMServerConfig extends ConfigBase {
         static String crucibleMaxHeight = "The maximum height a crucible can reach.";
         static String crucibleMaxWidth = "The maximum width a crucible can reach.";
         static String crucibleCapacity = "The amount of liquid a crucible can hold per block.";
+
+        static String faucet = "Faucet related configuration";
+        static String faucetMaxHeight = "The maximum height a faucet fluid can be poured.";
+        static String faucetFlowRate = "The flow rate the faucet can output.";
     }
 }
