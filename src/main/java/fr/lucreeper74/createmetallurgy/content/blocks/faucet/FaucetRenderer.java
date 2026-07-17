@@ -44,8 +44,8 @@ public class FaucetRenderer extends SafeBlockEntityRenderer<FaucetBlockEntity> {
                 if (!shape.isEmpty())
                     maxY = shape.bounds().maxY;
 
-                float radius = 2f;
-                AABB bb = new AABB(.5f, 9/16f, .5f, .5f, -be.getFallingDistance() + maxY, .5f).inflate(radius / 32f);
+                AABB bb = new AABB(11/16f, 10/16f, 8/16f,
+                        5/16f, maxY - (be.getFallingDistance() + .5f), 6/16f);
                 NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack, (float) bb.minX, (float) bb.minY, (float) bb.minZ,
                         (float) bb.maxX, (float) bb.maxY, (float) bb.maxZ, bufferSource, ms, light, true, true);
 
