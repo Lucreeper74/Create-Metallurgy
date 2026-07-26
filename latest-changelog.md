@@ -13,6 +13,10 @@
 - Adjusted faucet fluid stream width
 - Faucet can no longer float in the air
 
+### Art Changes
+- Lower the Faucet model by one pixel to be centered
+- Faucet fluid texture is now flowing instead of still
+
 ### API Changes
 
 ### Compatibility/Dependencies

@@ -3,6 +3,7 @@ package fr.lucreeper74.createmetallurgy.content.blocks.faucet;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
+import fr.lucreeper74.createmetallurgy.utils.CMFluidRenderHelper;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -46,7 +47,7 @@ public class FaucetRenderer extends SafeBlockEntityRenderer<FaucetBlockEntity> {
 
                 AABB bb = new AABB(11/16f, 10/16f, 8/16f,
                         5/16f, maxY - (be.getFallingDistance() + .5f), 6/16f);
-                NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack, (float) bb.minX, (float) bb.minY, (float) bb.minZ,
+                CMFluidRenderHelper.renderFlowingFluidBox(fluidStack, (float) bb.minX, (float) bb.minY, (float) bb.minZ,
                         (float) bb.maxX, (float) bb.maxY, (float) bb.maxZ, bufferSource, ms, light, true, true);
 
                 ms.popPose();
