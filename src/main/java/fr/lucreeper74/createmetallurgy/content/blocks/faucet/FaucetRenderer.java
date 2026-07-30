@@ -46,7 +46,7 @@ public class FaucetRenderer extends SafeBlockEntityRenderer<FaucetBlockEntity> {
                     maxY = shape.bounds().maxY;
 
                 AABB bb = new AABB(11/16f, 10/16f, 8/16f,
-                        5/16f, maxY - (be.getFallingDistance() + .5f), 6/16f);
+                        5/16f, maxY - (be.getFallingDistance() + 10/16f), 6/16f);
                 CMFluidRenderHelper.renderFlowingFluidBox(fluidStack, (float) bb.minX, (float) bb.minY, (float) bb.minZ,
                         (float) bb.maxX, (float) bb.maxY, (float) bb.maxZ, bufferSource, ms, light, true, true);
 
