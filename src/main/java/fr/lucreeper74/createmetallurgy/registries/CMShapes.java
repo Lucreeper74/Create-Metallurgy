@@ -20,8 +20,17 @@ public class CMShapes {
             CRUCIBLE_CORNER_BOTTOM = shape(0, 0, 0, 16, 16, 16).erase(0, 0, 3, 13, 16, 16).add(0, 0, 0, 16, 4, 16).forHorizontal(NORTH),
             CRUCIBLE_WALL_BOTTOM = shape(0, 0, 0, 16, 16, 3).add(0, 0, 0, 16, 4, 16).forHorizontal(NORTH),
 
-    TUNDISH = shape(3, 0, 0, 13, 3, 16).add(2, 3, 0, 14, 6, 16).add(1, 6, 0, 15, 8, 16)
-                .add(0, 8, 0, 16, 13, 16).forHorizontalAxis();
+    TUNDISH_SINGLE = shape(3, 0, 0, 13, 3, 16).add(2, 3, 0, 14, 6, 16).add(1, 6, 0, 15, 8, 16)
+                .add(0, 8, 0, 16, 13, 16).erase(2, 9, 2, 14, 16, 14).erase(3, 6, 2, 13, 9, 14).erase(4, 3, 2, 12, 6, 14).forHorizontalAxis(),
+
+            TUNDISH_MIDDLE = shape(3, 0, 0, 13, 3, 16).add(2, 3, 0, 14, 6, 16).add(1, 6, 0, 15, 8, 16)
+                    .add(0, 8, 0, 16, 13, 16).erase(2, 9, 0, 14, 16, 16).erase(3, 6, 0, 13, 9, 16).erase(4, 3, 0, 12, 6, 16).forHorizontalAxis(),
+
+            TUNDISH_FRONT = shape(3, 0, 0, 13, 3, 16).add(2, 3, 0, 14, 6, 16).add(1, 6, 0, 15, 8, 16)
+                    .add(0, 8, 0, 16, 13, 16).erase(2, 9, 2, 14, 16, 16).erase(3, 6, 2, 13, 9, 16).erase(4, 3, 2, 12, 6, 16).forHorizontalAxis(),
+
+            TUNDISH_REAR = shape(3, 0, 0, 13, 3, 16).add(2, 3, 0, 14, 6, 16).add(1, 6, 0, 15, 8, 16)
+                    .add(0, 8, 0, 16, 13, 16).erase(2, 9, 0, 14, 16, 14).erase(3, 6, 0, 13, 9, 14).erase(4, 3, 0, 12, 6, 14).forHorizontalAxis();
 
     // Static Block Shapes
     public static final VoxelShape

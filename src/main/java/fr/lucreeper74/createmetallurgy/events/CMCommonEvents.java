@@ -6,6 +6,7 @@ import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTable
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.tundish.TundishBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleEntity;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
 import fr.lucreeper74.createmetallurgy.content.fluids.TagDependentBucketItem;
@@ -30,6 +31,7 @@ public class CMCommonEvents {
         CastingBasinBlockEntity.registerCapabilities(event);
         CastingTableBlockEntity.registerCapabilities(event);
         BeltGrinderBlockEntity.registerCapabilities(event);
+        TundishBlockEntity.registerCapabilities(event);
 
         // Items
         for (Item item : BuiltInRegistries.ITEM) {

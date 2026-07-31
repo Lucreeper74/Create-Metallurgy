@@ -16,6 +16,10 @@ public class CMServerConfig extends ConfigBase {
     public final ConfigGroup faucet = group(0, "faucet", Comments.faucet);
     public final ConfigInt faucetMaxHeight = i(5, 1, "faucetMaxHeight", Comments.block, Comments.faucetMaxHeight);
     public final ConfigInt faucetFlowRate = i(10, 1, "faucetFlowRate",  Comments.mB, Comments.faucetFlowRate);
+
+    public final ConfigGroup tundish = group(0, "tundish", Comments.tundish);
+    public final ConfigInt tundishMaxLength = i(6, 1, "tundishMaxLength", Comments.block, Comments.tundishMaxLength);
+    public final ConfigInt tundishPrecipitationAmount = i(10, 1, "tundishPrecipitationAmount", Comments.mB, Comments.tundishPrecipitationAmount);
     // ---
 
     @Override
@@ -40,5 +44,9 @@ public class CMServerConfig extends ConfigBase {
         static String faucet = "Faucet related configuration";
         static String faucetMaxHeight = "The maximum height a faucet fluid can be poured.";
         static String faucetFlowRate = "The flow rate the faucet can output.";
+
+        static String tundish = "Tundish related configuration";
+        static String tundishMaxLength = "The maximum length a tundish.";
+        static String tundishPrecipitationAmount = "The amount of fluid filled each precipitation tick.";
     }
 }

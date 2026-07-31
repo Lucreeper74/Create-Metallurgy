@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "along_z_axis=false,front=false,rear=false": {
+      "model": "createmetallurgy:block/tundish/single",
+      "y": 270
+    },
+    "along_z_axis=false,front=false,rear=true": {
+      "model": "createmetallurgy:block/tundish/end",
+      "y": 270
+    },
+    "along_z_axis=false,front=true,rear=false": {
+      "model": "createmetallurgy:block/tundish/start",
+      "y": 270
+    },
+    "along_z_axis=false,front=true,rear=true": {
+      "model": "createmetallurgy:block/tundish/middle",
+      "y": 270
+    },
+    "along_z_axis=true,front=false,rear=false": {
+      "model": "createmetallurgy:block/tundish/single"
+    },
+    "along_z_axis=true,front=false,rear=true": {
+      "model": "createmetallurgy:block/tundish/end"
+    },
+    "along_z_axis=true,front=true,rear=false": {
+      "model": "createmetallurgy:block/tundish/start"
+    },
+    "along_z_axis=true,front=true,rear=true": {
+      "model": "createmetallurgy:block/tundish/middle"
+    }
+  }
+}

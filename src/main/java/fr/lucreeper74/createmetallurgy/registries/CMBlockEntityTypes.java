@@ -2,25 +2,27 @@ package fr.lucreeper74.createmetallurgy.registries;
 
 import com.simibubi.create.content.processing.basin.BasinRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderVisual;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.CastingBlockRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.basin.CastingBasinBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTableBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.faucet.FaucetRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_lid.FoundryLidBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerRenderer;
-import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderVisual;
-import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderRenderer;
-import fr.lucreeper74.createmetallurgy.content.blocks.casting.basin.CastingBasinBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTableBlockEntity;
-import fr.lucreeper74.createmetallurgy.content.blocks.foundry_basin.FoundryBasinBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.foundry_mixer.FoundryMixerVisual;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.CrucibleRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlockEntity;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbRenderer;
-import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationRenderer;
+import fr.lucreeper74.createmetallurgy.content.blocks.tundish.TundishBlockEntity;
+import fr.lucreeper74.createmetallurgy.content.blocks.tundish.TundishRenderer;
 
 import static fr.lucreeper74.createmetallurgy.CreateMetallurgy.REGISTRATE;
 
@@ -79,6 +81,12 @@ public class CMBlockEntityTypes {
             .blockEntity("faucet", FaucetBlockEntity::new)
             .validBlocks(CMBlocks.FAUCET_BLOCK)
             .renderer(() -> FaucetRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<TundishBlockEntity> TUNDISH = REGISTRATE
+            .blockEntity("tundish", TundishBlockEntity::new)
+            .validBlocks(CMBlocks.TUNDISH_BLOCK)
+            .renderer(() -> TundishRenderer::new)
             .register();
 
     public static final BlockEntityEntry<LabelingStationBlockEntity> LABELLING_STATION = REGISTRATE

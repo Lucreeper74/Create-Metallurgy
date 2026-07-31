@@ -36,6 +36,8 @@ import fr.lucreeper74.createmetallurgy.content.blocks.industrial_crucible.Crucib
 import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationBlock;
 import fr.lucreeper74.createmetallurgy.content.blocks.labeling_station.LabelingStationGenerator;
 import fr.lucreeper74.createmetallurgy.content.blocks.light_bulb.LightBulbBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.tundish.TundishBlock;
+import fr.lucreeper74.createmetallurgy.content.blocks.tundish.TundishGenerator;
 import fr.lucreeper74.createmetallurgy.data.recipes.CMMetals;
 import fr.lucreeper74.createmetallurgy.registries.CMTags.CMBlockTags;
 import fr.lucreeper74.createmetallurgy.registries.CMTags.CMItemTags;
@@ -342,6 +344,17 @@ public class CMBlocks {
             .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "block." + MOD_ID + ".faucet"))
             .item()
             .transform(customItemModel("faucet", "block"))
+            .register();
+
+    public static final BlockEntry<TundishBlock> TUNDISH_BLOCK = REGISTRATE.block("tundish", TundishBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY))
+            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
+            .transform(pickaxeOnly())
+            .addLayer(() -> RenderType::cutoutMipped)
+            .blockstate(new TundishGenerator()::generate)
+            .item()
+            .transform(customItemModel("tundish", "single"))
             .register();
 
     public static final BlockEntry<LabelingStationBlock> LABELING_STATION_BLOCK = REGISTRATE
