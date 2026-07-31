@@ -43,41 +43,41 @@ public class CMFluids {
     // TODO: Only register compat fluids if mod present (or maybe just hide recipes and stuff in tabs???)
 
     // Simple Metals
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_IRON = moltenMetalFluid(CMMetals.IRON, 1538, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_GOLD = moltenMetalFluid(CMMetals.GOLD, 1064, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_COPPER = moltenMetalFluid(CMMetals.COPPER, 1085, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_ZINC = moltenMetalFluid(CMMetals.ZINC, 419, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_BRASS = moltenMetalFluid(CMMetals.BRASS, 932, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_TUNGSTEN = moltenMetalFluid(CMMetals.TUNGSTEN, 3422, 2200, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_STEEL = moltenMetalFluid(CMMetals.STEEL, 1538, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_NETHERITE = moltenMetalFluid(CMMetals.NETHERITE, 3524, 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_IRON = moltenMetalFluid(CMMetals.IRON, 1538, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_GOLD = moltenMetalFluid(CMMetals.GOLD, 1064, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_COPPER = moltenMetalFluid(CMMetals.COPPER, 1085, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_ZINC = moltenMetalFluid(CMMetals.ZINC, 419, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_BRASS = moltenMetalFluid(CMMetals.BRASS, 932, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_TUNGSTEN = moltenMetalFluid(CMMetals.TUNGSTEN, 3422, 2200, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_STEEL = moltenMetalFluid(CMMetals.STEEL, 1538, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_NETHERITE = moltenMetalFluid(CMMetals.NETHERITE, 3524, 2000, 1400, 10, 2, 3, 100f);
 
     // Modded Metals
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_ALUMINUM = moltenMetalFluid(CMMetals.ALUMINUM, 660, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_LEAD = moltenMetalFluid(CMMetals.LEAD, 327, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_NICKEL = moltenMetalFluid(CMMetals.NICKEL, 1455, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_OSMIUM = moltenMetalFluid(CMMetals.OSMIUM, 3033, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_SILVER = moltenMetalFluid(CMMetals.SILVER, 961, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_TIN = moltenMetalFluid(CMMetals.TIN, 231, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_LITHIUM = moltenMetalFluid(CMMetals.LITHIUM, 181, 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_ALUMINUM = moltenMetalFluid(CMMetals.ALUMINUM, 660, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_LEAD = moltenMetalFluid(CMMetals.LEAD, 327, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_NICKEL = moltenMetalFluid(CMMetals.NICKEL, 1455, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_OSMIUM = moltenMetalFluid(CMMetals.OSMIUM, 3033, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_SILVER = moltenMetalFluid(CMMetals.SILVER, 961, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_TIN = moltenMetalFluid(CMMetals.TIN, 231, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_LITHIUM = moltenMetalFluid(CMMetals.LITHIUM, 181, 2000, 1400, 10, 2, 3, 100f);
 
     // Alloys
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_OBDURIUM = moltenMetalFluid(CMMetals.OBDURIUM, 3480, 2400, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_OBDURIUM = moltenMetalFluid(CMMetals.OBDURIUM, 3480, 2400, 1400, 10, 2, 3, 100f);
 
     // Modded Alloys
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_INVAR = moltenMetalFluid(CMMetals.INVAR, 1425, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_ELECTRUM = moltenMetalFluid(CMMetals.ELECTRUM, 996, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_BRONZE = moltenMetalFluid(CMMetals.BRONZE, 1000, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_CONSTANTAN = moltenMetalFluid(CMMetals.CONSTANTAN, 1221, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_VOID_STEEL = moltenMetalFluid(CMMetals.VOID_STEEL, 3635, 2000, 1400, 10, 2, 25, 3, 100f);
-    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_NECROMIUM = moltenMetalFluid(CMMetals.NECROMIUM, 2830, 2000, 1400, 10, 2, 25, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_INVAR = moltenMetalFluid(CMMetals.INVAR, 1425, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_ELECTRUM = moltenMetalFluid(CMMetals.ELECTRUM, 996, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_BRONZE = moltenMetalFluid(CMMetals.BRONZE, 1000, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_CONSTANTAN = moltenMetalFluid(CMMetals.CONSTANTAN, 1221, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_VOID_STEEL = moltenMetalFluid(CMMetals.VOID_STEEL, 3635, 2000, 1400, 10, 2, 3, 100f);
+    public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_NECROMIUM = moltenMetalFluid(CMMetals.NECROMIUM, 2830, 2000, 1400, 10, 2, 3, 100f);
 
     //Others
     public static final FluidEntry<BaseFlowingFluid.Flowing> MOLTEN_SLAG = moltenFluid("slag", 1203, 2500, 1400, 12, 2, 25, 3, 100f);
 
     //
 
-    private static FluidEntry<BaseFlowingFluid.Flowing> moltenMetalFluid(CMMetals metal, int temperature, int viscosity, int density, int lightLevel, int levelDecrease, int tickRate, int slopeDistance, float explosionResistance) {
+    private static FluidEntry<BaseFlowingFluid.Flowing> moltenMetalFluid(CMMetals metal, int temperature, int viscosity, int density, int lightLevel, int levelDecrease, int slopeDistance, float explosionResistance) {
         String name = metal.getName();
         ResourceLocation STILL_RL = CreateMetallurgy.asResource("fluid/" + name + "/still");
         ResourceLocation FLOW_RL = CreateMetallurgy.asResource("fluid/" + name + "/flowing");
@@ -90,8 +90,7 @@ public class CMFluids {
                         .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
                         .canHydrate(false).canDrown(false).canSwim(false))
                 .fluidProperties(p -> p.levelDecreasePerBlock(levelDecrease)
-                        .tickRate(tickRate)
-                        .slopeFindDistance(slopeDistance)
+                        //.slopeFindDistance(slopeDistance)
                         .explosionResistance(explosionResistance))
                 .tag(CMTags.CMFluidTags.MOLTEN_MATERIAL.tag, AllTags.AllFluidTags.BOTTOMLESS_DENY.tag)
                 .source(MoltenFluidSource::new);
