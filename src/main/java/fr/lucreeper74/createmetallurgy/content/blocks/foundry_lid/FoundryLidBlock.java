@@ -59,7 +59,6 @@ public class FoundryLidBlock extends HorizontalDirectionalBlock implements IBE<F
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return CMShapes.FOUNDRY_LID;
-
     }
 
     protected void playSound(@Nullable Player pPlayer, Level pLevel, BlockPos pPos, boolean pIsOpened) {
