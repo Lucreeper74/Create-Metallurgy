@@ -112,39 +112,6 @@ public class TundishRenderer extends SmartBlockEntityRenderer<TundishBlockEntity
             // Top face
             CMFluidRenderHelper.quad(builder, ms, top00, top01, top11, top10, color, stillTexture, light);
             ms.popPose();
-
-//            if (yOffset >= yOffsetMax) {
-//                ms.pushPose();
-//                ms.translate(0, Math.min(yOffset, yOffsetMax), 0);
-//                NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack, min, yMin - yOffset, min, max, yMin,
-//                        max, buffer, ms, light, false, false);
-//                ms.popPose();
-//            }
-
-//            ms.pushPose();
-//            ms.translate(0, Math.min(yOffset, yTrapezoidOffsetMax), 0);
-//            NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack, xMin_top, yMin - yOffset, zMin_top, xMax_top, yMin,
-//                    zMax_top, buffer, ms, light, false, false);
-//            ms.popPose();
-
-//            FluidRenderHelper.renderStillTiledFace(side, xMin, yMin, xMax, yMax, positive ? zMax : zMin,
-//                    builder, ms, light, color, fluidTexture);
-
-//            renderTopFluidLayer(fluidStack, yOffset, yTrapezoidOffsetMax, topMin, topMax, ms, buffer, light);
-        }
-    }
-
-
-    private void renderTopFluidLayer(FluidStack fluidStack, float yOffset, float yMin, float min, float max,
-                                     PoseStack ms, MultiBufferSource buffer, int light) {
-        if (yOffset >= yMin) {
-            float yLayerOffset = yOffset - yMin;
-
-            ms.pushPose();
-            ms.translate(0, yMin - 3/16f, 0);
-            NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack, min, yMin - yLayerOffset, min, max, yMin,
-                    max, buffer, ms, light, false, false);
-            ms.popPose();
         }
     }
 }
