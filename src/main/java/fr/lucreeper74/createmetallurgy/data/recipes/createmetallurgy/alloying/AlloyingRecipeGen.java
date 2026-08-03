@@ -10,7 +10,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
 import java.util.concurrent.CompletableFuture;
 
