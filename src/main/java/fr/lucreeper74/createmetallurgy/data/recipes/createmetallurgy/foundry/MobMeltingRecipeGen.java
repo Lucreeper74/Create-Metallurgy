@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
 import java.util.concurrent.CompletableFuture;
@@ -29,7 +30,7 @@ public class MobMeltingRecipeGen extends FoundryRecipeGen<MobMeltingRecipeParams
      * @param amount     Fluid amount
      * @param minHeat    Minimum Heat condition
      */
-    protected GeneratedRecipe meltingEntity(String recipeId, EntityType<?> entityType, int damage, FluidEntry<BaseFlowingFluid.Flowing> result, int amount, int minHeat) {
+    protected GeneratedRecipe meltingEntity(String recipeId, EntityType<?> entityType, int damage, FluidEntry<? extends FlowingFluid> result, int amount, int minHeat) {
         return create(recipeId, b -> b
                 .requireEntityType(entityType, damage)
                 .requireMinHeat(minHeat)

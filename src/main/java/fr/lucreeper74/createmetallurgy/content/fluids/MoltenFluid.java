@@ -11,12 +11,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
-public class MoltenFluidSource extends BaseFlowingFluid.Source {
-    public MoltenFluidSource(Properties properties) {
+public abstract class MoltenFluid extends BaseFlowingFluid {
+
+    public MoltenFluid(Properties properties) {
         super(properties);
     }
 
@@ -95,5 +98,52 @@ public class MoltenFluidSource extends BaseFlowingFluid.Source {
 
     protected boolean isRandomlyTicking() {
         return true;
+    }
+
+    @Override
+    protected int getSlopeFindDistance(LevelReader pLevel) {
+        return pLevel.dimensionType().ultraWarm() ? 4 : 2;
+    }
+
+    @Override
+    public int getTickDelay(LevelReader pLevel) {
+        return pLevel.dimensionType().ultraWarm() ? 8 : 25;
+    }
+
+    public int getDropOff(LevelReader level) {
+        return level.dimensionType().ultraWarm() ? 1 : 2;
+    }
+
+    public static class Flowing extends MoltenFluid {
+        public Flowing(Properties properties) {
+            super(properties);
+        }
+
+        protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
+            super.createFluidStateDefinition(builder);
+            builder.add(LEVEL);
+        }
+
+        public int getAmount(FluidState state) {
+            return state.getValue(LEVEL);
+        }
+
+        public boolean isSource(FluidState state) {
+            return false;
+        }
+    }
+
+    public static class Source extends MoltenFluid {
+        public Source(Properties properties) {
+            super(properties);
+        }
+
+        public int getAmount(FluidState state) {
+            return 8;
+        }
+
+        public boolean isSource(FluidState state) {
+            return true;
+        }
     }
 }

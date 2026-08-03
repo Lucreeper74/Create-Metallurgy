@@ -13,8 +13,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -61,17 +61,17 @@ public enum CMMetals {
     private final String name;
     private final String raw_name;
     private final Set<DatagenMod> mods;
-    private final Supplier<FluidEntry<BaseFlowingFluid.Flowing>> fluidSup;
+    private final Supplier<FluidEntry<? extends FlowingFluid>> fluidSup;
 
     public final ItemLikeTag ores;
     public final ItemLikeTag rawStorageBlocks;
     public final ItemLikeTag storageBlocks;
 
-    CMMetals(Supplier<FluidEntry<BaseFlowingFluid.Flowing>> fluidSup, DatagenMod... mods) {
+    CMMetals(Supplier<FluidEntry<? extends FlowingFluid>> fluidSup, DatagenMod... mods) {
         this(fluidSup, "", mods);
     }
 
-    CMMetals(Supplier<FluidEntry<BaseFlowingFluid.Flowing>> fluidSup, String raw_name, DatagenMod... mods) {
+    CMMetals(Supplier<FluidEntry<? extends FlowingFluid>> fluidSup, String raw_name, DatagenMod... mods) {
         this.name = CMLang.asId(name());
         this.raw_name = raw_name.isEmpty() ? name : raw_name;
         this.fluidSup = fluidSup;
@@ -110,7 +110,7 @@ public enum CMMetals {
         return (mods.contains(VANILLA) || mods.contains(CREATE) || mods.contains(CREATE_METALLURGY));
     }
 
-    public FluidEntry<BaseFlowingFluid.Flowing> getFluid() {
+    public FluidEntry<? extends FlowingFluid> getFluid() {
         return fluidSup.get();
     }
 

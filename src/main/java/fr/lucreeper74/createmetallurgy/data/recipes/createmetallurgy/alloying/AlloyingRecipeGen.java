@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
 import java.util.concurrent.CompletableFuture;
@@ -31,7 +32,7 @@ public class AlloyingRecipeGen extends StandardProcessingRecipeGen<AlloyingRecip
      * @param amountResult Result amount
      * @param duration     Processing time
      */
-    protected GeneratedRecipe basicAlloy(String recipeId, FluidEntry<BaseFlowingFluid.Flowing> fluid1, int amount1, FluidEntry<BaseFlowingFluid.Flowing> fluid2, int amount2, FluidEntry<BaseFlowingFluid.Flowing> result, int amountResult, HeatCondition heatCondition, int duration) {
+    protected GeneratedRecipe basicAlloy(String recipeId, FluidEntry<? extends FlowingFluid> fluid1, int amount1, FluidEntry<? extends FlowingFluid> fluid2, int amount2, FluidEntry<? extends FlowingFluid> result, int amountResult, HeatCondition heatCondition, int duration) {
         return create(recipeId, b -> b.duration(duration)
                 .require(fluid1.get(), amount1)
                 .require(fluid2.get(), amount2)
@@ -50,7 +51,7 @@ public class AlloyingRecipeGen extends StandardProcessingRecipeGen<AlloyingRecip
      * @param amountResult Result amount
      * @param duration     Processing time
      */
-    protected GeneratedRecipe basicAlloy(String recipeId, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, TagKey<Item> itemTag, FluidEntry<BaseFlowingFluid.Flowing> result, int amountResult, HeatCondition heatCondition, int duration) {
+    protected GeneratedRecipe basicAlloy(String recipeId, FluidEntry<? extends FlowingFluid> fluid, int amount, TagKey<Item> itemTag, FluidEntry<? extends FlowingFluid> result, int amountResult, HeatCondition heatCondition, int duration) {
         return create(recipeId, b -> b.duration(duration)
                 .require(fluid.get(), amount)
                 .require(itemTag)

@@ -12,9 +12,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.neoforged.neoforge.common.conditions.NotCondition;
 import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
-import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.UnaryOperator;
@@ -62,23 +62,23 @@ public class CastingRecipeGen extends BaseRecipeProvider {
      * @param resultTag Output from tag
      * @param duration  Processing time
      */
-    protected GeneratedRecipe tableTag(String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, TagKey<Item> resultTag, int duration) {
+    protected GeneratedRecipe tableTag(String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<? extends FlowingFluid> fluid, int amount, TagKey<Item> resultTag, int duration) {
         return castingTagWithMold(CMRecipeTypes.CASTING_IN_TABLE, recipeId, mold, moldConsumed, fluid, amount, resultTag, duration);
     }
 
-    protected GeneratedRecipe tableTag(String recipeId, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, TagKey<Item> resultTag, int duration) {
+    protected GeneratedRecipe tableTag(String recipeId, FluidEntry<? extends FlowingFluid> fluid, int amount, TagKey<Item> resultTag, int duration) {
         return castingTag(CMRecipeTypes.CASTING_IN_TABLE, recipeId, fluid, amount, resultTag, duration);
     }
 
-    protected GeneratedRecipe basinTag(String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, TagKey<Item> resultTag, int duration) {
+    protected GeneratedRecipe basinTag(String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<? extends FlowingFluid> fluid, int amount, TagKey<Item> resultTag, int duration) {
         return castingTagWithMold(CMRecipeTypes.CASTING_IN_BASIN, recipeId, mold, moldConsumed, fluid, amount, resultTag, duration);
     }
 
-    protected GeneratedRecipe basinTag(String recipeId, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, TagKey<Item> resultTag, int duration) {
+    protected GeneratedRecipe basinTag(String recipeId, FluidEntry<? extends FlowingFluid> fluid, int amount, TagKey<Item> resultTag, int duration) {
         return castingTag(CMRecipeTypes.CASTING_IN_BASIN, recipeId, fluid, amount, resultTag, duration);
     }
 
-    protected GeneratedRecipe castingTagWithMold(CMRecipeTypes recipeType, String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, TagKey<Item> resultTag, int duration) {
+    protected GeneratedRecipe castingTagWithMold(CMRecipeTypes recipeType, String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<? extends FlowingFluid> fluid, int amount, TagKey<Item> resultTag, int duration) {
         ResourceLocation location = resultTag.location();
         create(recipeType, recipeId, b -> b.duration(duration)
                 .withCondition(new NotCondition(new TagEmptyCondition(location)))
@@ -90,7 +90,7 @@ public class CastingRecipeGen extends BaseRecipeProvider {
         return null;
     }
 
-    protected GeneratedRecipe castingTag(CMRecipeTypes recipeType, String recipeId, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, TagKey<Item> resultTag, int duration) {
+    protected GeneratedRecipe castingTag(CMRecipeTypes recipeType, String recipeId, FluidEntry<? extends FlowingFluid> fluid, int amount, TagKey<Item> resultTag, int duration) {
         ResourceLocation location = resultTag.location();
         create(recipeType, recipeId, b -> b.duration(duration)
                 .withCondition(new NotCondition(new TagEmptyCondition(location)))
@@ -110,23 +110,23 @@ public class CastingRecipeGen extends BaseRecipeProvider {
      * @param result   Output from Item
      * @param duration Processing time
      */
-    protected GeneratedRecipe table(String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, ItemLike result, int duration) {
+    protected GeneratedRecipe table(String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<? extends FlowingFluid> fluid, int amount, ItemLike result, int duration) {
         return castingWithMold(CMRecipeTypes.CASTING_IN_TABLE, recipeId, mold, moldConsumed, fluid, amount, result, duration);
     }
 
-    protected GeneratedRecipe table(String recipeId, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, ItemLike result, int duration) {
+    protected GeneratedRecipe table(String recipeId, FluidEntry<? extends FlowingFluid> fluid, int amount, ItemLike result, int duration) {
         return casting(CMRecipeTypes.CASTING_IN_TABLE, recipeId, fluid, amount, result, duration);
     }
 
-    protected GeneratedRecipe basin(String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, ItemLike result, int duration) {
+    protected GeneratedRecipe basin(String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<? extends FlowingFluid> fluid, int amount, ItemLike result, int duration) {
         return castingWithMold(CMRecipeTypes.CASTING_IN_BASIN, recipeId, mold, moldConsumed, fluid, amount, result, duration);
     }
 
-    protected GeneratedRecipe basin(String recipeId, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, ItemLike result, int duration) {
+    protected GeneratedRecipe basin(String recipeId, FluidEntry<? extends FlowingFluid> fluid, int amount, ItemLike result, int duration) {
         return casting(CMRecipeTypes.CASTING_IN_BASIN, recipeId, fluid, amount, result, duration);
     }
 
-    protected GeneratedRecipe castingWithMold(CMRecipeTypes recipeType, String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, ItemLike result, int duration) {
+    protected GeneratedRecipe castingWithMold(CMRecipeTypes recipeType, String recipeId, ItemLike mold, boolean moldConsumed, FluidEntry<? extends FlowingFluid> fluid, int amount, ItemLike result, int duration) {
         create(recipeType, recipeId, b -> b.duration(duration)
                 .require(mold)
                 .require(fluid.get(), amount)
@@ -136,7 +136,7 @@ public class CastingRecipeGen extends BaseRecipeProvider {
         return null;
     }
 
-    protected GeneratedRecipe casting(CMRecipeTypes recipeType, String recipeId, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, ItemLike result, int duration) {
+    protected GeneratedRecipe casting(CMRecipeTypes recipeType, String recipeId, FluidEntry<? extends FlowingFluid> fluid, int amount, ItemLike result, int duration) {
         create(recipeType, recipeId, b -> b.duration(duration)
                 .require(fluid.get(), amount)
                 .output(result));
@@ -155,7 +155,7 @@ public class CastingRecipeGen extends BaseRecipeProvider {
      * @param duration Processing time
      */
 
-    protected GeneratedRecipe tableWithMoldTag(TagKey<Item> moldTag, boolean moldConsumed, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, ItemLike result, int duration) {
+    protected GeneratedRecipe tableWithMoldTag(TagKey<Item> moldTag, boolean moldConsumed, FluidEntry<? extends FlowingFluid> fluid, int amount, ItemLike result, int duration) {
         ResourceLocation location = moldTag.location();
         create(CMRecipeTypes.CASTING_IN_TABLE, result, b -> b.duration(duration)
                 .withCondition(new NotCondition(new TagEmptyCondition(location)))
@@ -167,7 +167,7 @@ public class CastingRecipeGen extends BaseRecipeProvider {
         return null;
     }
 
-    protected GeneratedRecipe basinWithMoldTag(TagKey<Item> moldTag, boolean moldConsumed, FluidEntry<BaseFlowingFluid.Flowing> fluid, int amount, ItemLike result, int duration) {
+    protected GeneratedRecipe basinWithMoldTag(TagKey<Item> moldTag, boolean moldConsumed, FluidEntry<? extends FlowingFluid> fluid, int amount, ItemLike result, int duration) {
         ResourceLocation location = moldTag.location();
         create(CMRecipeTypes.CASTING_IN_BASIN, result, b -> b.duration(duration)
                 .withCondition(new NotCondition(new TagEmptyCondition(location)))
