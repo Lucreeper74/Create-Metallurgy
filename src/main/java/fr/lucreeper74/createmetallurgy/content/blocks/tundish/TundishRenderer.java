@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.Direction;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -46,7 +47,7 @@ public class TundishRenderer extends SmartBlockEntityRenderer<TundishBlockEntity
             float yOffset = (8 / 16f) * level;
 
             BlockState state = be.getBlockState();
-            boolean alongZaxis = state.getValue(TundishBlock.ALONG_Z_AXIS);
+            boolean alongZaxis = state.getValue(TundishBlock.AXIS).equals(Direction.Axis.Z);
             boolean front = state.getValue(TundishBlock.FRONT);
             boolean rear = state.getValue(TundishBlock.REAR);
 

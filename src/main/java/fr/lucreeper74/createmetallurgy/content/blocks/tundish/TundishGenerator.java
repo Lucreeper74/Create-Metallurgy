@@ -3,6 +3,7 @@ package fr.lucreeper74.createmetallurgy.content.blocks.tundish;
 import com.simibubi.create.foundation.data.SpecialBlockStateGen;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,7 +18,7 @@ public class TundishGenerator extends SpecialBlockStateGen {
 
     @Override
     protected int getYRotation(BlockState state) {
-        return state.getValue(TundishBlock.ALONG_Z_AXIS) ? 0 : -90;
+        return state.getValue(TundishBlock.AXIS).equals(Direction.Axis.Z) ? 0 : -90;
     }
 
     @Override

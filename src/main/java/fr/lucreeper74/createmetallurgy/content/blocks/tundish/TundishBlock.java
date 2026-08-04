@@ -1,15 +1,17 @@
 package fr.lucreeper74.createmetallurgy.content.blocks.tundish;
 
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
-import com.simibubi.create.content.fluids.transfer.GenericItemFilling;
 import com.simibubi.create.foundation.block.IBE;
-import com.simibubi.create.foundation.fluid.FluidHelper;
+import com.simibubi.create.foundation.placement.PoleHelper;
 import fr.lucreeper74.createmetallurgy.config.CMConfig;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMShapes;
 import net.createmod.catnip.math.VoxelShaper;
+import net.createmod.catnip.placement.IPlacementHelper;
+import net.createmod.catnip.placement.PlacementHelpers;
+import net.createmod.catnip.placement.PlacementOffset;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -17,18 +19,20 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -37,20 +41,27 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Predicate;
+
 public class TundishBlock extends Block implements IWrenchable, IBE<TundishBlockEntity> {
 
-    public static final BooleanProperty ALONG_Z_AXIS = BooleanProperty.create("along_z_axis");
+    public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     public static final BooleanProperty FRONT = BooleanProperty.create("front");
     public static final BooleanProperty REAR = BooleanProperty.create("rear");
 
+    public static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
+
     public TundishBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(FRONT, false).setValue(REAR, false));
+        registerDefaultState(defaultBlockState()
+                .setValue(FRONT, false)
+                .setValue(REAR, false)
+                .setValue(AXIS, Direction.Axis.X));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(ALONG_Z_AXIS, FRONT, REAR);
+        builder.add(AXIS, FRONT, REAR);
         super.createBlockStateDefinition(builder);
     }
 
@@ -66,13 +77,13 @@ public class TundishBlock extends Block implements IWrenchable, IBE<TundishBlock
             case 3 -> CMShapes.TUNDISH_MIDDLE;
             default -> CMShapes.TUNDISH_SINGLE;
         };
-        return shape.get(state.getValue(ALONG_Z_AXIS) ? Direction.Axis.Z : Direction.Axis.X);
+        return shape.get(state.getValue(AXIS));
     }
 
     @Override
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        boolean alongZAxis = state.getValue(ALONG_Z_AXIS);
-        Direction.Axis axis = alongZAxis ? Direction.Axis.Z : Direction.Axis.X;
+        Direction.Axis axis = state.getValue(AXIS);
+        boolean alongZAxis = axis.equals(Direction.Axis.Z);
         if (neighborState.is(CMBlocks.TUNDISH_BLOCK)) {
             BlockPos relativePos = pos.subtract(neighborPos);
             if ((alongZAxis && relativePos.getZ() == 0) || (!alongZAxis && relativePos.getX() == 0))
@@ -82,12 +93,12 @@ public class TundishBlock extends Block implements IWrenchable, IBE<TundishBlock
 
         Direction frontDir = getFacingDirection(state);
         BlockState frontState = level.getBlockState(pos.relative(frontDir));
-        boolean frontValid = frontState.is(CMBlocks.TUNDISH_BLOCK) && frontState.getValue(ALONG_Z_AXIS).equals(alongZAxis);
+        boolean frontValid = frontState.is(CMBlocks.TUNDISH_BLOCK) && frontState.getValue(AXIS).equals(axis);
         int frontLength = getLength(level, state, pos, frontDir);
 
         Direction rearDir = getFacingDirection(state).getOpposite();
         BlockState rearState = level.getBlockState(pos.relative(rearDir));
-        boolean rearValid = rearState.is(CMBlocks.TUNDISH_BLOCK) && rearState.getValue(ALONG_Z_AXIS).equals(alongZAxis);
+        boolean rearValid = rearState.is(CMBlocks.TUNDISH_BLOCK) && rearState.getValue(AXIS).equals(axis);
         int rearLength = getLength(level, state, pos, rearDir);
 
         int totalLength = (frontLength + rearLength) - 1; // Avoid counting twice the current block
@@ -110,19 +121,28 @@ public class TundishBlock extends Block implements IWrenchable, IBE<TundishBlock
     }
 
     @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        withBlockEntityDo(level, pos, TundishBlockEntity::randomTick);
+    }
+
+    @Override
+    protected boolean isRandomlyTicking(BlockState state) {
+        return true;
+    }
+
+    @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        Direction contextDir = context.getHorizontalDirection();
-        Direction.Axis axis = contextDir.getAxis();
+        Direction ctxDir = context.getHorizontalDirection();
+        Direction.Axis ctxAxis = ctxDir.getAxis();
 
-        boolean alongZAxis = axis.equals(Direction.Axis.Z);
-        boolean towardFront = contextDir.equals(Direction.get(Direction.AxisDirection.POSITIVE, axis));
+        boolean towardFront = ctxDir.equals(Direction.get(Direction.AxisDirection.POSITIVE, ctxAxis));
 
-        BlockState dirState = level.getBlockState(pos.relative(contextDir));
-        boolean isValid = dirState.is(CMBlocks.TUNDISH_BLOCK) && dirState.getValue(ALONG_Z_AXIS).equals(alongZAxis);
+        BlockState dirState = level.getBlockState(pos.relative(ctxDir));
+        boolean isValid = dirState.is(CMBlocks.TUNDISH_BLOCK) && dirState.getValue(AXIS).equals(ctxAxis);
 
-        return this.defaultBlockState().setValue(ALONG_Z_AXIS, alongZAxis)
+        return this.defaultBlockState().setValue(AXIS, ctxAxis)
                 .setValue(FRONT, towardFront && isValid).setValue(REAR, !towardFront && isValid);
     }
 
@@ -150,12 +170,16 @@ public class TundishBlock extends Block implements IWrenchable, IBE<TundishBlock
     }
 
     public static Direction getFacingDirection(BlockState state) {
-        Direction.Axis axis = state.getValue(TundishBlock.ALONG_Z_AXIS) ? Direction.Axis.Z : Direction.Axis.X;
-        return Direction.get(Direction.AxisDirection.POSITIVE, axis);
+        return Direction.get(Direction.AxisDirection.POSITIVE, state.getValue(TundishBlock.AXIS));
     }
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        IPlacementHelper helper = PlacementHelpers.get(placementHelperId);
+        if (helper.matchesItem(stack))
+            return helper.getOffset(player, level, state, pos, hitResult)
+                    .placeInWorld(level, (BlockItem) stack.getItem(), player, hand, hitResult);
+
         return onBlockEntityUseItemOn(level, pos, be -> {
             if (!stack.isEmpty()) {
                 if (stack.getItem().equals(Items.SPONGE)) {
@@ -181,5 +205,40 @@ public class TundishBlock extends Block implements IWrenchable, IBE<TundishBlock
     @Override
     public BlockEntityType<? extends TundishBlockEntity> getBlockEntityType() {
         return CMBlockEntityTypes.TUNDISH.get();
+    }
+
+    @MethodsReturnNonnullByDefault
+    private static class PlacementHelper extends PoleHelper<Direction.Axis> {
+
+        public PlacementHelper() {
+            super(
+                    state -> state.is(CMBlocks.TUNDISH_BLOCK),
+                    state -> state.getValue(AXIS),
+                    AXIS
+            );
+        }
+
+        @Override
+        public Predicate<ItemStack> getItemPredicate() {
+            return CMBlocks.TUNDISH_BLOCK::isIn;
+        }
+
+        @Override
+        public Predicate<BlockState> getStatePredicate() {
+            return state -> state.is(CMBlocks.TUNDISH_BLOCK);
+        }
+
+        @Override
+        public PlacementOffset getOffset(Player player, Level world, BlockState state,
+                                         BlockPos pos, BlockHitResult ray) {
+            PlacementOffset offset = super.getOffset(player, world, state, pos, ray);
+            if (offset.isSuccessful()) {
+                offset.withTransform(s -> s.setValue(
+                        AXIS,
+                        state.getValue(AXIS)
+                ));
+            }
+            return offset;
+        }
     }
 }
