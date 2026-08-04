@@ -19,7 +19,9 @@ public class CMServerConfig extends ConfigBase {
 
     public final ConfigGroup tundish = group(0, "tundish", Comments.tundish);
     public final ConfigInt tundishMaxLength = i(6, 1, "tundishMaxLength", Comments.block, Comments.tundishMaxLength);
+    public final ConfigInt tundishCapacity = i(4000, 1, "tundishCapacity", Comments.mB, Comments.tundishCapacity);
     public final ConfigInt tundishPrecipitationAmount = i(10, 1, "tundishPrecipitationAmount", Comments.mB, Comments.tundishPrecipitationAmount);
+    public final ConfigInt tundishDripAmount = i(50, 1, "tundishDripAmount", Comments.mB, Comments.tundishDripAmount);
     // ---
 
     @Override
@@ -47,6 +49,8 @@ public class CMServerConfig extends ConfigBase {
 
         static String tundish = "Tundish related configuration";
         static String tundishMaxLength = "The maximum length a tundish.";
+        static String tundishCapacity = "The amount of liquid a Ladle can hold.";
         static String tundishPrecipitationAmount = "The amount of fluid filled each precipitation tick.";
+        static String tundishDripAmount = "The amount of fluid filled each stalactite drip.";
     }
 }

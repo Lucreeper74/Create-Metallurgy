@@ -14,14 +14,20 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
@@ -54,7 +60,7 @@ public class TundishBlockEntity extends SmartBlockEntity implements IHaveGoggleI
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        behaviours.add(internalTank = SmartFluidTankBehaviour.single(this, 4000)
+        behaviours.add(internalTank = SmartFluidTankBehaviour.single(this, CMConfig.server().tundishCapacity.get())
                 .allowExtraction()
                 .allowInsertion()
                 .whenFluidUpdates(this::onFluidUpdate));
@@ -86,34 +92,13 @@ public class TundishBlockEntity extends SmartBlockEntity implements IHaveGoggleI
     @Override
     public void tick() {
         super.tick();
+        if (getLevel() == null)
+            return;
+
         if (getLevel().isClientSide())
             return;
 
         handleFluidSpread();
-    }
-
-    @Override
-    public void lazyTick() {
-        super.lazyTick(); // Each 10 ticks
-
-        // Not overriding TundishBlock.handlePrecipitation()
-        // because it's too slow for smooth water collection
-        if (getLevel() == null)
-            return;
-
-        if (!getLevel().isRaining())
-            return;
-
-        BlockPos heightMapPos = getLevel().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos());
-        BlockPos surfacePos = heightMapPos.below();
-        if (!surfacePos.equals(getBlockPos()))
-            return; // rain blocked
-
-        int randomTickSpeed = getLevel().getGameRules().getInt(GameRules.RULE_RANDOMTICKING);
-        for (int i = 0; i < randomTickSpeed; ++i) {
-            if (getLevel().getRandom().nextInt(220) == 0)
-                handlePrecipitation(getLevel().getBiome(getBlockPos()).value().getPrecipitationAt(getBlockPos()));
-        }
     }
 
     private void handleFluidSpread() {
@@ -127,7 +112,7 @@ public class TundishBlockEntity extends SmartBlockEntity implements IHaveGoggleI
 
         boolean front = getBlockState().getValue(TundishBlock.FRONT);
         boolean rear = getBlockState().getValue(TundishBlock.REAR);
-        Direction.Axis axis = getBlockState().getValue(TundishBlock.ALONG_Z_AXIS) ? Direction.Axis.Z : Direction.Axis.X;
+        Direction.Axis axis = getBlockState().getValue(TundishBlock.AXIS);
 
         if (front)
             trySpreadFluid(Direction.get(Direction.AxisDirection.POSITIVE, axis));
@@ -164,10 +149,52 @@ public class TundishBlockEntity extends SmartBlockEntity implements IHaveGoggleI
         }
     }
 
-    protected void handlePrecipitation(Biome.Precipitation precipitation) {
-        if (precipitation == Biome.Precipitation.RAIN) {
-            internalTank.getPrimaryHandler().fill(new FluidStack(Fluids.WATER, CMConfig.server().tundishPrecipitationAmount.get()),
-                    FluidAction.EXECUTE);
+    public void randomTick() {
+        // Not overriding TundishBlock.handlePrecipitation()
+        // because it's too slow for smooth water collection
+        if (getLevel().isRaining())
+            handlePrecipitation();
+
+        handleStalactiteDrip();
+    }
+
+    protected void handlePrecipitation() {
+        BlockPos heightMapPos = getLevel().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos());
+        BlockPos surfacePos = heightMapPos.below();
+        if (!surfacePos.equals(getBlockPos()))
+            return; // rain blocked
+
+        Biome.Precipitation precipitation = getLevel().getBiome(getBlockPos()).value().getPrecipitationAt(getBlockPos());
+        if (precipitation == Biome.Precipitation.RAIN && getLevel().getRandom().nextFloat() < .6f)
+            internalTank.getPrimaryHandler().fill(new FluidStack(Fluids.WATER,
+                    CMConfig.server().tundishPrecipitationAmount.get()), FluidAction.EXECUTE);
+    }
+
+    public void handleStalactiteDrip() {
+        BlockPos dripTip = PointedDripstoneBlock.findStalactiteTipAboveCauldron(getLevel(), getBlockPos());
+        if (dripTip == null)
+            return;
+
+        Fluid fluid = PointedDripstoneBlock.getCauldronFillFluidType((ServerLevel) getLevel(), dripTip);
+        if (fluid != Fluids.EMPTY && fluid instanceof FlowingFluid flowing) {
+
+            if (!fluid.isSource(flowing.getSource(false)))
+                return;
+
+            FluidType fluidType = fluid.getFluidType();
+            FluidType.DripstoneDripInfo dripInfo = fluidType.getDripInfo();
+            SoundEvent dripSound = fluidType.getSound(null, getLevel(), getBlockPos(), SoundActions.CAULDRON_DRIP);
+
+            if (dripInfo == null)
+                return;
+
+            for (int i = 0; i < 5; i++) {
+                if (getLevel().getRandom().nextFloat() < dripInfo.chance() * 3) {
+                    level.playSound(null, getBlockPos(), dripSound, SoundSource.BLOCKS, 2f, level.getRandom().nextFloat() * .1f + .9f);
+                    internalTank.getPrimaryHandler().fill(new FluidStack(fluid, CMConfig.server().tundishDripAmount.get()),
+                            FluidAction.EXECUTE);
+                }
+            }
         }
     }
 
