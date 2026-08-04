@@ -193,6 +193,14 @@ public class TundishBlock extends Block implements IWrenchable, IBE<TundishBlock
                 }
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
+
+            ItemStack heldItemStack = be.getHeldItemStack();
+            if (heldItemStack != null && !level.isClientSide()) {
+                player.getInventory().placeItemBackInInventory(heldItemStack);
+                be.heldItem = null;
+                be.notifyUpdate();
+            }
+
             return ItemInteractionResult.SUCCESS;
         });
     }
