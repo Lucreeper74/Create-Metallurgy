@@ -77,7 +77,7 @@ public class LadleChainConveyorBEMixin {
 
         FluidStack containedFluid = FluidUtil.getFluidContained(box.item).orElse(FluidStack.EMPTY);
 
-        if (!CMFluids.isMoltenMaterial(containedFluid.getFluid()))
+        if (!CMFluids.isHotFluid(containedFluid.getFluid()))
             return;
 
         LadleEntity.spawnParticles(level, box.worldPosition.subtract(0, (1.3f + MINY_LADLE), 0));

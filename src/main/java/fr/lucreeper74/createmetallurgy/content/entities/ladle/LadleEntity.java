@@ -74,13 +74,11 @@ public class LadleEntity extends PackageEntity {
                 return;
 
             FluidStack containedFluid = FluidUtil.getFluidContained(box).orElse(FluidStack.EMPTY);
-            if (!CMFluids.isMoltenMaterial(containedFluid.getFluid()))
+            if (!CMFluids.isHotFluid(containedFluid.getFluid()))
                 return;
 
             spawnParticles(level(), getEyePosition());
         }
-
-
     }
 
     @Override
