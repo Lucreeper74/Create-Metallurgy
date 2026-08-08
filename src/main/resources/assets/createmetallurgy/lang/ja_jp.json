@@ -134,7 +134,6 @@
   "createmetallurgy.ponder.foundry.text_5": "底にバーナーが少ないほど産業用るつぼは冷えていきますが、温度が高いほど金属は早く溶けます！",
   "createmetallurgy.ponder.foundry.text_6": "鋳造鉢とは異なり、るつぼはより大型のアイテムを複数同時に溶解することができます",
   "createmetallurgy.ponder.foundry.text_7": "現在の温度は熱単位(Tu)としてエンジニアゴーグルで見ることができます1",
-  "createmetallurgy.ponder.foundry.text_8": "側面からアイテムや液体を出し入れすることが可能です",
   "createmetallurgy.ponder.foundry.text_9": "アイテムを溶かすだけでなく、エンティティの溶解や、合金化も可能です",
   "createmetallurgy.ponder.foundry_basin.header": "鋳造鉢で金属を溶解する",
   "createmetallurgy.ponder.foundry_basin.text_1": "鋳造鉢は通常の鉢に似ていますが...",
