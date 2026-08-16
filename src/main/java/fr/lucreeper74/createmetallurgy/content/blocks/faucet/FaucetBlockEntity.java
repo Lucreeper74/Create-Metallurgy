@@ -13,6 +13,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.inventory.CapManipul
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.TankManipulationBehaviour;
 import fr.lucreeper74.createmetallurgy.config.CMConfig;
 import fr.lucreeper74.createmetallurgy.content.entities.ladle.LadleItem;
+import fr.lucreeper74.createmetallurgy.content.fluids.particle.MetalDropParticleData;
 import fr.lucreeper74.createmetallurgy.registries.CMDamageTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import net.createmod.catnip.data.Iterate;
@@ -288,6 +289,7 @@ public class FaucetBlockEntity extends SmartBlockEntity {
     protected void updateFallDistance(int fallDist) {
         if (fallDist != fallingDistance) {
             fallingDistance = fallDist;
+            invalidateRenderBoundingBox();
             notifyUpdate();
         }
     }
@@ -319,30 +321,16 @@ public class FaucetBlockEntity extends SmartBlockEntity {
         Vec3 outMotion = directionVec.scale(1 / 96f)
                 .add(0, -1 / 16f, 0);
 
+        // Fluid particles
         for (int i = 0; i < 2; i++) {
             ParticleOptions fluidParticle = FluidFX.getFluidParticle(fluid);
             Vec3 m = VecHelper.offsetRandomly(outMotion, RandomSource.create(), 1 / 32f);
             level.addAlwaysVisibleParticle(fluidParticle, outVec.x, outVec.y, outVec.z, m.x, m.y, m.z);
         }
-    }
 
-    private void createLeakingParticles(FluidStack fluid) {
-        BlockState blockState = getBlockState();
-        if (!(blockState.getBlock() instanceof FaucetBlock))
-            return;
-        Direction direction = blockState.getValue(FaucetBlock.FACING);
-        Vec3 directionVec = Vec3.atLowerCornerOf(direction.getNormal());
-        Vec3 outVec = VecHelper.getCenterOf(worldPosition)
-                .add(directionVec.scale(.65)
-                        .subtract(directionVec.normalize().scale(10 / 16f)));
-        Vec3 outMotion = directionVec.scale(1 / 96f)
-                .add(0, -1 / 16f, 0);
-
-        for (int i = 0; i < 2; i++) {
-            ParticleOptions fluidParticle = FluidFX.getFluidParticle(fluid);
-            Vec3 m = VecHelper.offsetRandomly(outMotion, RandomSource.create(), 1 / 32f);
-            level.addAlwaysVisibleParticle(fluidParticle, outVec.x, outVec.y, outVec.z, m.x, m.y, m.z);
-        }
+        if (level.getRandom().nextFloat() > .5f)
+            // Sparks
+            level.addAlwaysVisibleParticle(new MetalDropParticleData(), outVec.x, outVec.y - getFallingDistance(), outVec.z, 1, 1, 1);
     }
 
     private AABB getFluidArea() {
