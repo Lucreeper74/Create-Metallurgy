@@ -62,6 +62,7 @@ public class CreateMetallurgy {
         CMSpriteShifts.init();
         CMBlockEntityTypes.register();
         CMRecipeTypes.register(eventBus);
+        CMParticleTypes.register(eventBus);
         CMDataComponents.register(eventBus);
         CMPackets.register();
 
