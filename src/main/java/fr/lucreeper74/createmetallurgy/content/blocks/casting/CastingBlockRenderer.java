@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.table.CastingTableBlockEntity;
+import fr.lucreeper74.createmetallurgy.utils.CMFluidRenderHelper;
 import fr.lucreeper74.createmetallurgy.utils.CastingItemRenderTypeBuffer;
-import fr.lucreeper74.createmetallurgy.utils.ColoredFluidRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -56,9 +56,9 @@ public class CastingBlockRenderer extends SmartBlockEntityRenderer<CastingBlockE
                 if (opacity > 3 * 255)
                     fluidOpacity = (4 * 255) - opacity;
             }
-            ColoredFluidRenderer.renderFluidBox(fluidStack,
+            CMFluidRenderHelper.renderFluidBox(fluidStack,
                     2f / 16f, min - yOffset, 2f / 16f,
-                    14f / 16f, min, 14f / 16f, buffer, ms, light, ColoredFluidRenderer.RGBAtoColor(255, 255, 255, fluidOpacity), false);
+                    14f / 16f, min, 14f / 16f, buffer, ms, light, CMFluidRenderHelper.RGBAtoColor(255, 255, 255, fluidOpacity), false);
 
             ms.popPose();
         }
