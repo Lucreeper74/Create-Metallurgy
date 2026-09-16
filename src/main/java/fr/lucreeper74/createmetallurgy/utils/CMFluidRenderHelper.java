@@ -189,7 +189,7 @@ public class CMFluidRenderHelper {
             } else
                 FluidRenderHelper.renderTiledFace(side, xMin, zMin, xMax, zMax, positive ? yMax : yMin, builder, ms, light, color,
                         fluidTexture, 1f);
-            ms.popPose();
         }
+        ms.popPose();
     }
 }
