@@ -6,11 +6,13 @@ import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.INamedIconOptions;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
 import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.item.SmartInventory;
+import com.simibubi.create.foundation.recipe.RecipeConditions;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import com.simibubi.create.foundation.utility.CreateLang;
 import fr.lucreeper74.createmetallurgy.content.blocks.casting.recipe.base.CastingRecipe;
@@ -62,6 +64,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
     protected CastingRecipe currentRecipe;
     public int processingTick;
     public boolean running;
+    private FilteringBehaviour filtering;
 
     // For rendering purposes :
     public int totalRecipeTime;
@@ -85,8 +88,11 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         behaviours.add(new DirectBeltInputBehaviour(this));
 
+        filtering = new FilteringBehaviour(this, new CastingBlockSlots.FilterSlot()).forRecipes();
+        behaviours.add(filtering);
+
         lockSelect = new ScrollOptionBehaviour<>(LockMode.class,
-                CMLang.translateDirect("casting.lock_mode"), this, new CastingBlockLockSlot());
+                CMLang.translateDirect("casting.lock_mode"), this, new CastingBlockSlots.LockSlot());
         behaviours.add(lockSelect);
 
         lockSelect.withCallback(setting -> updateMoldInvLock());
@@ -273,6 +279,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
     public List<RecipeHolder<? extends Recipe<?>>> getMatchingRecipes(FluidStack testedFluid, boolean ignoreFluidAmount) {
         List<RecipeHolder<? extends Recipe<?>>> list = RecipeFinder.get(getRecipeCacheKey(), getLevel(), this::matchStaticFilters);
         return list.stream()
+                .filter(RecipeConditions.outputMatchesFilter(filtering))
                 .filter(recipe -> matchCastingRecipe(recipe.value(), testedFluid, ignoreFluidAmount))
                 .sorted(Comparator.comparingInt(r -> r.value().getIngredients()
                         .size()))
@@ -314,6 +321,7 @@ public abstract class CastingBlockEntity extends SmartBlockEntity implements IHa
     public void clearContent() {
         inv.clearContent();
         moldInv.clearContent();
+        filtering.setFilter(ItemStack.EMPTY);
     }
 
     protected abstract void playProcessSound();
