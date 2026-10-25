@@ -12,7 +12,7 @@ import com.simibubi.create.foundation.utility.BlockHelper;
 import fr.lucreeper74.createmetallurgy.config.CMConfig;
 import fr.lucreeper74.createmetallurgy.registries.CMBlockEntityTypes;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
-import fr.lucreeper74.createmetallurgy.utils.LargeItemEmptying;
+import fr.lucreeper74.createmetallurgy.utils.AdvancedItemEmptying;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.data.Pair;
 import net.createmod.catnip.math.VecHelper;
@@ -41,6 +41,7 @@ import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -48,7 +49,7 @@ import java.util.Map;
 
 public class TundishBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
-    public static final int PROCESSING_TIME = 10;
+    public static final int PROCESSING_TIME = 40;
 
     FluidType lastFluidType;
     SmartFluidTankBehaviour internalTank;
@@ -102,18 +103,28 @@ public class TundishBlockEntity extends SmartBlockEntity implements IHaveGoggleI
     @Override
     protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         compound.putInt("spreadCooldown", spreadCooldown);
+        compound.putInt("ProcessingTicks", processingTicks);
+        if (heldItem != null)
+            compound.put("HeldItem", heldItem.serializeNBT(registries));
         super.write(compound, registries, clientPacket);
     }
 
     @Override
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        heldItem = null;
         spreadCooldown = compound.getInt("spreadCoolodwn");
+        processingTicks = compound.getInt("ProcessingTicks");
+        if (compound.contains("HeldItem"))
+            heldItem = TransportedItemStack.read(compound.getCompound("HeldItem"), registries);
         super.read(compound, registries, clientPacket);
     }
 
     private ItemStack tryInsertingFromSide(TransportedItemStack transportedStack, Direction side, boolean simulate) {
         ItemStack inserted = transportedStack.stack;
         ItemStack returned = ItemStack.EMPTY;
+
+        if (side.getAxis() == getBlockState().getValue(TundishBlock.AXIS))
+            return inserted;
 
         if (!getHeldItemStack().isEmpty())
             return inserted;
@@ -128,8 +139,7 @@ public class TundishBlockEntity extends SmartBlockEntity implements IHaveGoggleI
 
         transportedStack = transportedStack.copy();
         transportedStack.stack = inserted.copy();
-        transportedStack.beltPosition = side.getAxis()
-                .isVertical() ? .5f : 0;
+        transportedStack.beltPosition = side.getAxis().isVertical() ? .5f : 0;
         transportedStack.prevSideOffset = transportedStack.sideOffset;
         transportedStack.prevBeltPosition = transportedStack.beltPosition;
         setHeldItem(transportedStack, side);
@@ -167,8 +177,10 @@ public class TundishBlockEntity extends SmartBlockEntity implements IHaveGoggleI
         if (processingTicks > 0) {
             heldItem.prevBeltPosition = .5f;
             boolean wasAtBeginning = processingTicks == PROCESSING_TIME;
+
             if (!onClient || processingTicks < PROCESSING_TIME)
                 processingTicks--;
+
             if (!continueProcessing()) {
                 processingTicks = 0;
                 notifyUpdate();
@@ -267,41 +279,80 @@ public class TundishBlockEntity extends SmartBlockEntity implements IHaveGoggleI
     protected boolean continueProcessing() {
         if (level.isClientSide && !isVirtual())
             return true;
-        if (processingTicks < 5)
-            return true;
+
         if (!GenericItemEmptying.canItemBeEmptied(level, heldItem.stack))
             return false;
 
-        int drainAmount = internalTank.getPrimaryHandler().getTankCapacity(0);
+        boolean partialEmptying = AdvancedItemEmptying.canBePartiallyEmptied(
+                level, heldItem.stack.copy());
 
-        Pair<FluidStack, ItemStack> emptyItem = LargeItemEmptying.emptyItem(level, heldItem.stack, drainAmount, true);
-        FluidStack fluidFromItem = emptyItem.getFirst();
+        if (!partialEmptying && processingTicks < 5)
+            return true;
 
-        if (processingTicks > 5) {
-            if (internalTank.getPrimaryHandler()
-                    .fill(fluidFromItem, FluidAction.SIMULATE) != fluidFromItem.getAmount()) {
-                processingTicks = PROCESSING_TIME;
-                return true;
-            }
+        IFluidHandlerItem itemCap =
+                heldItem.stack.getCapability(Capabilities.FluidHandler.ITEM);
+
+        if (itemCap == null)
+            return false;
+
+        // Simulate the drain
+        FluidStack fluidInItem = itemCap.drain(
+                Integer.MAX_VALUE, FluidAction.SIMULATE);
+
+        if (fluidInItem.isEmpty())
+            return false;
+
+        // verify tundish space
+        if (internalTank.getPrimaryHandler().fill(
+                fluidInItem, FluidAction.SIMULATE) != fluidInItem.getAmount()) {
+            processingTicks = PROCESSING_TIME;
             return true;
         }
 
-        emptyItem = LargeItemEmptying.emptyItem(level, heldItem.stack.copy(), drainAmount, false);
+        int drainAmount = partialEmptying
+                ? Math.max(1, fluidInItem.getAmount() / processingTicks)
+                : 1000;
 
-        // Process finished
+        if (!partialEmptying && processingTicks > 5)
+            return true;
+
+        FluidStack fluidToDrain = itemCap.drain(drainAmount, FluidAction.SIMULATE);
+        if (fluidToDrain.isEmpty())
+            return false;
+
+        // wait if not enough space
+        if (internalTank.getPrimaryHandler().fill(
+                fluidToDrain, FluidAction.SIMULATE) != fluidToDrain.getAmount()) {
+            processingTicks = 0;
+            return true;
+        }
+
+        // emptying
+        Pair<FluidStack, ItemStack> emptyItem =
+                AdvancedItemEmptying.emptyItem(
+                        level, heldItem.stack.copy(), drainAmount, false);
+
+        FluidStack drainedFluid = emptyItem.getFirst();
         ItemStack out = emptyItem.getSecond();
+
+        if (drainedFluid.isEmpty())
+            return false;
+
+        if (internalTank.getPrimaryHandler().fill(
+                drainedFluid, FluidAction.EXECUTE) != drainedFluid.getAmount())
+            return false;
+
         if (!out.isEmpty())
             heldItem.stack = out;
         else
             heldItem = null;
-        internalTank.getPrimaryHandler()
-                .fill(fluidFromItem, FluidAction.EXECUTE);
+
         notifyUpdate();
         return true;
     }
 
     private float itemMovementPerTick() {
-        return 1 / 8f;
+        return 1 / 20f;
     }
 
     private void handleFluidSpread() {

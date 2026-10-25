@@ -17,7 +17,8 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import java.util.List;
 import java.util.Optional;
 
-public class LargeItemEmptying {
+public class AdvancedItemEmptying {
+
     public static Pair<FluidStack, ItemStack> emptyItem(Level level, ItemStack stack, int maxAmount, boolean simulate) {
         FluidStack resultingFluid = FluidStack.EMPTY;
         ItemStack resultingItem = ItemStack.EMPTY;
@@ -42,11 +43,21 @@ public class LargeItemEmptying {
         if (capability == null)
             return Pair.of(resultingFluid, resultingItem);
         resultingFluid = capability.drain(maxAmount, simulate ? IFluidHandler.FluidAction.SIMULATE : IFluidHandler.FluidAction.EXECUTE);
-        resultingItem = capability.getContainer()
-                .copy();
+        resultingItem = capability.getContainer().copy();
         if (!simulate)
             stack.shrink(1);
 
         return Pair.of(resultingFluid, resultingItem);
+    }
+
+    public static boolean canBePartiallyEmptied(Level level, ItemStack stack) {
+        if (PotionFluidHandler.isPotionItem(stack))
+            return false;
+
+        IFluidHandlerItem capability = stack.getCapability(Capabilities.FluidHandler.ITEM);
+        if (capability == null)
+            return false;
+
+        return emptyItem(level, stack, 1, false).getFirst().getAmount() > 0;
     }
 }
