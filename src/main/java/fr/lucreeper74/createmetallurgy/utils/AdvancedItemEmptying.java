@@ -32,7 +32,7 @@ public class AdvancedItemEmptying {
             List<ItemStack> results = emptyingRecipe.rollResults(level.random);
             if (!simulate)
                 stack.shrink(1);
-            resultingItem = results.isEmpty() ? ItemStack.EMPTY : results.get(0);
+            resultingItem = results.isEmpty() ? ItemStack.EMPTY : results.getFirst();
             resultingFluid = emptyingRecipe.getResultingFluid();
             return Pair.of(resultingFluid, resultingItem);
         }
