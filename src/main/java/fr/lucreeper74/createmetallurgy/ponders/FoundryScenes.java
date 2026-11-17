@@ -88,12 +88,15 @@ public class FoundryScenes {
         scene.world().moveSection(depotLink, util.vector().of(-1, 0, 0), 0);
         scene.idle(10);
         scene.world().modifyBlock(basinPos, s -> s.setValue(BasinBlock.FACING, Direction.NORTH), false);
+
+        scene.overlay().showControls(util.vector().blockSurface(basinPos, Direction.NORTH), Pointing.RIGHT, 15)
+                .rightClick().withItem(AllItems.WRENCH.asStack());
         scene.idle(10);
         Vec3 faucet = basinSide.add(0.15, 0, -0.5);
         scene.overlay().showText(80)
                 .attachKeyFrame()
                 .colored(PonderPalette.GREEN)
-                .text("Like the Basin, a Faucet can extract recipes Items...")
+                .text("Like the Basin, a spout tip can extract recipes Items...")
                 .pointAt(faucet)
                 .placeNearTarget();
         scene.idle(90);

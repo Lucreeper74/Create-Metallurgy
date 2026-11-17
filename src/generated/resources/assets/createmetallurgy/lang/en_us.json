@@ -149,7 +149,7 @@
   "createmetallurgy.ponder.foundry_basin.text_1": "The Foundry Basin is comparable to a classic Basin...",
   "createmetallurgy.ponder.foundry_basin.text_2": "...However, it can only hold 9 Items of the same type",
   "createmetallurgy.ponder.foundry_basin.text_3": "Put a Foundry Lid on top, and your Foundry is now ready!",
-  "createmetallurgy.ponder.foundry_basin.text_4": "Like the Basin, a Faucet can extract recipes Items...",
+  "createmetallurgy.ponder.foundry_basin.text_4": "Like the Basin, a spout tip can extract recipes Items...",
   "createmetallurgy.ponder.foundry_basin.text_5": "...and Fluids with a Item Drain",
   "createmetallurgy.ponder.foundry_basin.text_6": "Make sure to close the Foundry Top else the recipe won't start",
   "createmetallurgy.ponder.foundry_mixer.header": "Making Alloys with Foundry Mixer",
