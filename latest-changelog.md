@@ -15,7 +15,8 @@
 
 ### Gameplay Changes
 - Adjusted faucet fluid stream width
-- Faucet can no longer float in the air
+- Faucet can no longer float in the air 
+- Adjusted Foundry ponder scene
 
 ### Art Changes
 - Lower the Faucet model by one pixel to be centered
