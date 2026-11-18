@@ -26,6 +26,7 @@ public class LightBulbBlockEntity extends SmartBlockEntity {
 
     public LightBulbBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
+        transmittedSignal = pBlockState.getValue(LightBulbBlock.LEVEL);
         colorProvider = ResetableLazy.of(() -> {
             BlockState blockState = getBlockState();
             if (blockState.getBlock() instanceof LightBulbBlock)
@@ -105,6 +106,7 @@ public class LightBulbBlockEntity extends SmartBlockEntity {
         if(level.isClientSide) {
             glow.tickChaser();
             glow.chase(lightLevel, .2f, LerpedFloat.Chaser.EXP);
+            return;
         }
 
         if (receivedSignal != lightLevel) {

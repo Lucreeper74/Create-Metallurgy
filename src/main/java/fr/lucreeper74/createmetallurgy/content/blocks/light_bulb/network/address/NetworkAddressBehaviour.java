@@ -61,9 +61,9 @@ public class NetworkAddressBehaviour extends BlockEntityBehaviour implements INe
         stack.setCount(1);
         boolean changed = !ItemStack.isSameItem(stack, address.getStack());
 
-        if (changed) {
-            getHandler().getNetOf(getWorld(), this).removeNode(this);
-        } else return;
+        if (!changed) return;
+
+        getHandler().getNetOf(getWorld(), this).removeNode(this);
 
         address = Address.of(stack);
         blockEntity.sendData();

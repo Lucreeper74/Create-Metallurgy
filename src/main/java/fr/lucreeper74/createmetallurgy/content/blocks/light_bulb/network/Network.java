@@ -16,12 +16,14 @@ public class Network {
 
     public void addNode(INetworkNode actor) {
         nodes.add(actor);
+        transmit(actor);
     }
 
     public void removeNode(INetworkNode actor) {
         nodes.remove(actor);
         if (nodes.isEmpty())
             CreateMetallurgy.NETWORK_HANDLER.networkList.remove(actor.getAddress());
+        transmit(null);
     }
 
     public void transmit(INetworkNode actor) {
